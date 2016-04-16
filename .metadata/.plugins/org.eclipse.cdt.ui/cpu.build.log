@@ -1,0 +1,22 @@
+22:39:31 **** Build of configuration Debug for project cpu ****
+make all 
+make: Atención: El archivo «/home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so» tiene una hora de modificación 4,8e+02 en el futuro
+Building file: ../src/cpu.c
+Invoking: GCC C Compiler
+gcc -I"/home/utnso/tp-2016-1c-Better-call-pointer/parser" -I"/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas" -I"/home/utnso/tp-2016-1c-Better-call-pointer/commons" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/cpu.d" -MT"src/cpu.d" -o "src/cpu.o" "../src/cpu.c"
+Finished building: ../src/cpu.c
+ 
+Building file: ../src/mainCpu.c
+Invoking: GCC C Compiler
+gcc -I"/home/utnso/tp-2016-1c-Better-call-pointer/parser" -I"/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas" -I"/home/utnso/tp-2016-1c-Better-call-pointer/commons" -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/mainCpu.d" -MT"src/mainCpu.d" -o "src/mainCpu.o" "../src/mainCpu.c"
+Finished building: ../src/mainCpu.c
+ 
+Building target: cpu
+Invoking: GCC C Linker
+gcc -L"/home/utnso/tp-2016-1c-Better-call-pointer/parser/Debug" -L"/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug" -L"/home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug" -o "cpu"  ./src/cpu.o ./src/mainCpu.o   -lparser -llibreriasCompartidas -lcommons
+Finished building target: cpu
+ 
+make: atención: Se ha detectado una desviación en el reloj. La construcción podría estar incompleta.
+
+22:39:39 Build Finished (took 7s.825ms)
+

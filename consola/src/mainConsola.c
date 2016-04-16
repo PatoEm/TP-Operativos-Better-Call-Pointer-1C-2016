@@ -8,10 +8,16 @@
  ============================================================================
  */
 #include "consola.h"
+
+
+
+
 int main(void) {
 
+    void leerArchivoDeConfiguracion();
 
-	int fdSocketConsola = crearCliente("127.0.0.1", "6666");
+
+	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
 	printf("%d",fdSocketConsola);
 
 

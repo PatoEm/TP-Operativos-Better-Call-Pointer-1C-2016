@@ -61,6 +61,22 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<folderInfo id="cdt.managedbuild.config.gnu.exe.debug.18421771.869027545" name="/" resourcePath="Debug">
+						<toolChain id="cdt.managedbuild.toolchain.gnu.exe.debug.1650876155" name="Linux GCC" superClass="cdt.managedbuild.toolchain.gnu.exe.debug" unusedChildren="">
+							<targetPlatform id="cdt.managedbuild.target.gnu.platform.exe.debug" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.debug"/>
+							<tool id="cdt.managedbuild.tool.gnu.archiver.base.1390480097" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base.1238877001"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.2034221856" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.debug.476842809"/>
+							<tool id="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.2135603057" name="GCC C Compiler" superClass="cdt.managedbuild.tool.gnu.c.compiler.exe.debug.1893839101">
+								<option id="gnu.c.compiler.option.misc.pic.384703505" name="Position Independent Code (-fPIC)" superClass="gnu.c.compiler.option.misc.pic" value="true" valueType="boolean"/>
+								<inputType id="cdt.managedbuild.tool.gnu.c.compiler.input.1682887853" superClass="cdt.managedbuild.tool.gnu.c.compiler.input"/>
+							</tool>
+							<tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.987842417" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug.138304036"/>
+							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1756184022" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1931039057"/>
+							<tool id="cdt.managedbuild.tool.gnu.assembler.exe.debug.452561055" name="GCC Assembler" superClass="cdt.managedbuild.tool.gnu.assembler.exe.debug.1375620137">
+								<inputType id="cdt.managedbuild.tool.gnu.assembler.input.1883321747" superClass="cdt.managedbuild.tool.gnu.assembler.input"/>
+							</tool>
+						</toolChain>
+					</folderInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>

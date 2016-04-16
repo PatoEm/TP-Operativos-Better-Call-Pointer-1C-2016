@@ -1,0 +1,30 @@
+/*
+ ============================================================================
+ Name        : consola.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+#include "consola.h"
+
+
+char* ipNucleo;
+char* nucleolPort;
+
+int main(void) {
+
+
+	void setearValores(t_config * archivoConfig) {
+		ipNucleo = config_get_string_value(configuration, "IP_NUCLEO");
+		nucleolPort= config_get_int_value(archivoConfig, "PUERTO_NUCLEO");
+
+
+	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
+	printf("%d",fdSocketConsola);
+
+
+
+	return EXIT_SUCCESS;
+}

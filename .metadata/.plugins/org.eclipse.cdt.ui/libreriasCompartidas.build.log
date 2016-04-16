@@ -1,0 +1,8 @@
+22:04:04 **** Incremental Build of configuration Debug for project libreriasCompartidas ****
+make all 
+make: Atención: El archivo «libreriasCompartidas/socket.d» tiene una hora de modificación 2,4e+03 en el futuro
+make: No se hace nada para «all».
+make: atención: Se ha detectado una desviación en el reloj. La construcción podría estar incompleta.
+
+22:04:04 Build Finished (took 397ms)
+

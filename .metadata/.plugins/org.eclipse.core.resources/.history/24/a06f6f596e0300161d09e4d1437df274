@@ -1,0 +1,25 @@
+/*
+ ============================================================================
+ Name        : consola.c
+ Author      : 
+ Version     :
+ Copyright   : Your copyright notice
+ Description : Hello World in C, Ansi-style
+ ============================================================================
+ */
+#include "consola.h"
+
+
+char* ipKernel;
+char* kernelPort;
+
+int main(void) {
+
+
+	int fdSocketConsola = crearCliente(ipKernel,kernelPort );
+	printf("%d",fdSocketConsola);
+
+
+
+	return EXIT_SUCCESS;
+}

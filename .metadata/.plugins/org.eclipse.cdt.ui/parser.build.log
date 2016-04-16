@@ -1,0 +1,8 @@
+22:04:02 **** Incremental Build of configuration Debug for project parser ****
+make all 
+make: Atención: El archivo «parser/parser.d» tiene una hora de modificación 3,6e+02 en el futuro
+make: No se hace nada para «all».
+make: atención: Se ha detectado una desviación en el reloj. La construcción podría estar incompleta.
+
+22:04:03 Build Finished (took 562ms)
+

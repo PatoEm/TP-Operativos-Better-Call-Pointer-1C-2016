@@ -1,0 +1,8 @@
+22:02:10 **** Incremental Build of configuration Debug for project consola ****
+make all 
+make: Atención: El archivo «src/mainConsola.d» tiene una hora de modificación 2,5e+03 en el futuro
+make: No se hace nada para «all».
+make: atención: Se ha detectado una desviación en el reloj. La construcción podría estar incompleta.
+
+22:02:10 Build Finished (took 423ms)
+
