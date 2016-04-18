@@ -1,0 +1,15 @@
+22:42:37 **** Build of configuration Debug for project aad ****
+make all 
+Building file: ../src/aad.c
+Invoking: Cross GCC Compiler
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/aad.d" -MT"src/aad.d" -o "src/aad.o" "../src/aad.c"
+Finished building: ../src/aad.c
+ 
+Building target: aad
+Invoking: Cross GCC Linker
+gcc  -o "aad"  ./src/aad.o   
+Finished building target: aad
+ 
+
+22:42:37 Build Finished (took 630ms)
+
