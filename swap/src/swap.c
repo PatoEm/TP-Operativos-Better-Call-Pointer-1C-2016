@@ -9,6 +9,6 @@
 #include <stdlib.h>
 
 int main(void) {
-	puts("Esto es el ESWAP"); /* prints !!!Hello World!!! */
+	puts("PATO PUTO");
 	return 0;
 }
