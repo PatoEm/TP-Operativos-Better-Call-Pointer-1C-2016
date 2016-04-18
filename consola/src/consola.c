@@ -4,4 +4,14 @@
  *  Created on: 17/4/2016
  *      Author: utnso
  */
- /*Soy una consola*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void) {
+	puts("Esto es la puta consola"); /* prints !!!Hello World!!! */
+	return 0;
+}
+
+

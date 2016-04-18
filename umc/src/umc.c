@@ -5,5 +5,10 @@
  *      Author: utnso
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 
-/*Soy un umc*/
+int main(void) {
+	puts("Esto es la UMC WACHINNNNDNKjnkNKSAJ"); /* prints !!!Hello World!!! */
+	return 0;
+}

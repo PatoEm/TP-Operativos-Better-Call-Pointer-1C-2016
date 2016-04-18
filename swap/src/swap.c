@@ -5,5 +5,10 @@
  *      Author: utnso
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 
-/*"Soy un ESWAP"*/
+int main(void) {
+	puts("Esto es el ESWAP"); /* prints !!!Hello World!!! */
+	return 0;
+}

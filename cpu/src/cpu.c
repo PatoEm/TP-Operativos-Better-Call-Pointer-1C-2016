@@ -5,5 +5,10 @@
  *      Author: utnso
  */
 
+#include <stdio.h>
+#include <stdlib.h>
 
-/*Soy un cpu*/
+int main(void) {
+	puts("Esto es la hija de puta de la cpu"); /* prints !!!Hello World!!! */
+	return 0;
+}
