@@ -80,6 +80,7 @@ listen(listenningSocket, BACKLOG); // IMPORTANTE: listen() es una syscall BLOQUE
 * En este ejemplo nos dedicamos unicamente a trabajar con el cliente y no escuchamos mas conexiones.
 *
 */
+printf("Esperando clientes...\n");
 struct sockaddr_in addr; // Esta estructura contendra los datos de la conexion del cliente. IP, puerto, etc.
 socklen_t addrlen = sizeof(addr);
 int socketCliente = accept(listenningSocket, (struct sockaddr *) &addr, &addrlen);
