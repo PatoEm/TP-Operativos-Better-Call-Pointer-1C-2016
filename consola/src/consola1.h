@@ -16,9 +16,31 @@
 #include <sys/socket.h>
 #include <netdb.h>
 #include <unistd.h>
+#include <commons/config.h>
 #define IP "127.0.0.1"
-#define PUERTO "6667"
+#define PUERTO
 #define PACKAGESIZE 1024	// Define cual va a ser el size maximo del paquete a enviar
+
+
+
+void leerArchivoDeConfiguracion(char * configPath) {
+	t_config * archivoConfig;
+
+	//if (verificarExistenciaDeArchivo(configPath) == FAIL){
+		//manejarError("[ERROR] Archivo de configuracion no encontrado");
+	//}
+	archivoConfig = config_create(configPath);
+	//setearValores(archivoConfig);
+	config_destroy(archivoConfig);
+}
+
+
+void setearValores(t_config * archivoConfig){
+
+
+		int prueba = config_get_int_value(archivoConfig, "PUERTO");
+		printf(prueba);
+	}
 
 
 
