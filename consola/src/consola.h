@@ -5,8 +5,8 @@
  *      Author: utnso
  */
 
-#ifndef CONSOLA1_H_
-#define CONSOLA1_H_
+#ifndef CONSOLA_H_
+#define CONSOLA_H_
 
 
 #include <stdio.h>
@@ -18,10 +18,10 @@
 #include <unistd.h>
 #include <commons/config.h>
 #define IP "127.0.0.1"
-#define PUERTO
+#define PUERTO 6667
 #define PACKAGESIZE 1024	// Define cual va a ser el size maximo del paquete a enviar
 
-
+/*
 
 void leerArchivoDeConfiguracion(char * configPath) {
 	t_config * archivoConfig;
@@ -39,10 +39,10 @@ void setearValores(t_config * archivoConfig){
 
 
 		int prueba = config_get_int_value(archivoConfig, "PUERTO");
-		printf(prueba);
+
 	}
 
-
+*/
 
 int socketCliente(){/*
  * ¿Quien soy? ¿Donde estoy? ¿Existo?
@@ -111,4 +111,4 @@ int socketCliente(){/*
 
 
 
-#endif /* CONSOLA1_H_ */
+#endif /* CONSOLA_H_ */

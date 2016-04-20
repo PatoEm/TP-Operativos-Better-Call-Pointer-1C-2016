@@ -3,6 +3,8 @@
 // *******************************
 // *           Servidor			 *
 // *******************************
+
+/*
 int newSocket() {
 	int fileDescriptor = socket(AF_INET, SOCK_STREAM, 0);
 		if (fileDescriptor == FAIL) manejaError("[ERROR] Funcion socket");
@@ -21,14 +23,47 @@ struct sockaddr_in asociarSocket(int sockfd, int puerto) {
 	int estaEnUso = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char*) &enUso, sizeof(enUso));
 		if (estaEnUso == FAIL)	manejaError("[ERROR] No es posible reutilizar el socket");
 	
+
+
+
 	// Funcion bind
 	int funcionBind = bind(sockfd, (struct sockaddr *) &miDireccion,sizeof(struct sockaddr));
 		if ( funcionBind == FAIL) manejaError("[ERROR] Funcion BIND: No se pudo asociar con el puerto");
 
 	return miDireccion;
 }
+*/
+
+int crearSocketServidor(int puerto, int ip){
+
+
+	struct addrinfo hints;
+	struct addrinfo *serverInfo;
+	memset(&hints, 0, sizeof(hints));
+	hints.ai_family = AF_UNSPEC; // No importa si uso IPv4 o IPv6
+	hints.ai_flags = AI_PASSIVE; // Asigna el address del localhost: 127.0.0.1 //tambien podria usarse la variable ip
+	hints.ai_socktype = SOCK_STREAM; // Indica que usaremos el protocolo TCP
+	getaddrinfo(NULL, puerto, &hints, &serverInfo); // Notar que le pasamos NULL como IP, ya que le indicamos que use localhost en AI_PASSIVE podria ir si no la variable ip tambien
+	int sockfd = socket(serverInfo->ai_family, serverInfo->ai_socktype, serverInfo->ai_protocol);
+
+
+	// Si el puerto esta en uso, lanzamos error
+		int enUso = 1;
+		int estaEnUso = setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, (char*) &enUso, sizeof(enUso));
+			if (estaEnUso == FAIL)	manejaError("[ERROR] No es posible reutilizar el socket");
+
+			// Funcion bind
+				int funBind = bind(sockfd,serverInfo->ai_addr, serverInfo->ai_addrlen);
+					if ( funBind == FAIL) manejaError("[ERROR] Funcion BIND: No se pudo asociar con el puerto");
+
+
+
+	return (socket(serverInfo->ai_family, serverInfo->ai_socktype, serverInfo->ai_protocol));
+}
+
 
 void escucharSocket(int sockfd, int conexionesEntrantesPermitidas) {
+	printf("Estoy escuchando...");
 	int funcionListen = listen(sockfd, conexionesEntrantesPermitidas);
 		if ( funcionListen == FAIL) manejaError("[ERROR] Funcion listen");
 }

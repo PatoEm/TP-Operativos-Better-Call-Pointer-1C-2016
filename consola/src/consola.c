@@ -5,12 +5,12 @@
  *      Author: utnso
  */
 
-#include "consola1.h"
+#include "consola.h"
+#include "/home/utnso/tp-2016-1c-Better-Call-pointer/CosasGenerales/sockets.h"
 
-int main(){
+int main() {
 
-	socketCliente();//otro socket. By Dr.Mengueche
 
+return 0;
 }
-
 
