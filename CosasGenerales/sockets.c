@@ -1,4 +1,8 @@
 #include "sockets.h"
+#include <string.h>
+
+#define IP "127.0.0.1"
+#define PUERTO "6667"
 
 // *******************************
 // *           Servidor			 *
@@ -43,7 +47,7 @@ int crearSocketServidor(int puerto, int ip){
 	hints.ai_family = AF_UNSPEC; // No importa si uso IPv4 o IPv6
 	hints.ai_flags = AI_PASSIVE; // Asigna el address del localhost: 127.0.0.1 //tambien podria usarse la variable ip
 	hints.ai_socktype = SOCK_STREAM; // Indica que usaremos el protocolo TCP
-	getaddrinfo(NULL, puerto, &hints, &serverInfo); // Notar que le pasamos NULL como IP, ya que le indicamos que use localhost en AI_PASSIVE podria ir si no la variable ip tambien
+	getaddrinfo(NULL, PUERTO, &hints, &serverInfo); // Notar que le pasamos NULL como IP, ya que le indicamos que use localhost en AI_PASSIVE podria ir si no la variable ip tambien
 	int sockfd = socket(serverInfo->ai_family, serverInfo->ai_socktype, serverInfo->ai_protocol);
 
 
@@ -58,7 +62,7 @@ int crearSocketServidor(int puerto, int ip){
 
 
 
-	return (socket(serverInfo->ai_family, serverInfo->ai_socktype, serverInfo->ai_protocol));
+	return sockfd;
 }
 
 
@@ -81,6 +85,29 @@ int aceptarConexionSocket(int sockfd) {
 // *******************************
 // *           Cliente			 *
 // *******************************
+
+
+int crearSocketCliente(int fdServidor, int puerto, int ip)
+{
+
+	 struct addrinfo hints;
+	 struct addrinfo *serverInfo;
+	 memset(&hints, 0, sizeof(hints));
+	 hints.ai_family = AF_UNSPEC; // Permite que la maquina se encargue de verificar si usamos IPv4 o IPv6
+	 hints.ai_socktype = SOCK_STREAM; // Indica que usaremos el protocolo TCP
+	 getaddrinfo(IP, PUERTO, &hints, &serverInfo); // Carga en serverInfo los datos de la conexion
+
+	 int serverSocket;
+	 serverSocket = socket(serverInfo->ai_family, serverInfo->ai_socktype, serverInfo->ai_protocol);
+
+	// connect(serverSocket, serverInfo->ai_addr, serverInfo->ai_addrlen);
+	 //freeaddrinfo(serverInfo);
+
+return serverSocket;
+
+}
+
+
 int conectarSocket(int sockfd, const char * ipDestino, int puerto){
 	struct sockaddr_in datosServidor;
 
