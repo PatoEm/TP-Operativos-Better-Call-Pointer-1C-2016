@@ -9,7 +9,6 @@
 
 int main(void) {
 
-	socketCliente();//otro socket. By Dr.Mengueche
 
 }
 
