@@ -36,8 +36,8 @@ struct sockaddr_in asociarSocket(int sockfd, int puerto) {
 
 	return miDireccion;
 }
-*/
 
+*/
 int crearSocketServidor(int puerto, int ip){
 
 

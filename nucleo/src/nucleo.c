@@ -10,19 +10,19 @@
 #include "nucleo1.h"
 #include <unistd.h>
 #define IP "127.0.0.1"
-#define PUERTO "6667"
+#define PUERTO "7100"
 
 int main(){
-
+	int nuevoCliente=0;
 	int socketNucleo = crearSocketServidor(PUERTO, IP);
 
+	while(nuevoCliente==0){
 	escucharSocket(socketNucleo,1);
+	nuevoCliente=aceptarConexionSocket(socketNucleo);
 
-	printf("Tiene 10 segundos para conectarse");
-	sleep(10000);
+	}
 
-	int prueba = aceptarConexionSocket(socketNucleo);
-	printf("%d",prueba);
+	printf("%d",nuevoCliente);
 
 	cerrarSocket(socketNucleo);
 
