@@ -5,7 +5,7 @@
  *      Author: PatoEm
  */
 
-#include "/home/utnso/tp-2016-1c-Better-Call-pointer/CosasGenerales/sockets.c"
+#include "/home/utnso/tp-2016-1c-Better-call-pointer/CosasGenerales/sockets.c"
 
 #include "nucleo1.h"
 #include <unistd.h>
@@ -24,6 +24,7 @@ int main(){
 	int prueba = aceptarConexionSocket(socketNucleo);
 	printf("%d",prueba);
 
+	cerrarSocket(socketNucleo);
 
 return 0;
 }

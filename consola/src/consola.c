@@ -6,7 +6,7 @@
  */
 
 #include "consola.h"
-#include "/home/utnso/tp-2016-1c-Better-Call-pointer/CosasGenerales/sockets.c"
+#include "/home/utnso/tp-2016-1c-Better-call-pointer/CosasGenerales/sockets.c"
 #define IP "127.0.0.1"
 #define PUERTO "6667"
 
