@@ -22,7 +22,7 @@
 #include <netinet/in.h>
 #include <fcntl.h> //fcntl
 
-
+#define ERRORPUTO -1
 
 
 
