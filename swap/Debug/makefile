@@ -26,12 +26,13 @@ all: swap
 
 dependents:
 	-cd /home/utnso/workspace/commons/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/shared-library/Debug && $(MAKE) all
 
 # Tool invocations
-swap: $(OBJS) $(USER_OBJS) /home/utnso/workspace/commons/Debug/libcommons.so
+swap: $(OBJS) $(USER_OBJS) /home/utnso/workspace/commons/Debug/libcommons.so /home/utnso/workspace/shared-library/Debug/libshared-library.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -L"/home/utnso/workspace/commons/Debug" -o "swap" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -L"/home/utnso/workspace/shared-library/Debug" -L"/home/utnso/workspace/commons/Debug" -o "swap" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -43,5 +44,6 @@ clean:
 .PHONY: all clean dependents
 .SECONDARY:
 /home/utnso/workspace/commons/Debug/libcommons.so:
+/home/utnso/workspace/shared-library/Debug/libshared-library.so:
 
 -include ../makefile.targets
