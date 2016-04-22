@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../mainSwap.c \
 ../swap.c 
 
 OBJS += \
+./mainSwap.o \
 ./swap.o 
 
 C_DEPS += \
+./mainSwap.d \
 ./swap.d 
 
 

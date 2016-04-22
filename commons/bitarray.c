@@ -27,21 +27,21 @@ t_bitarray *bitarray_create(char *bitarray, size_t size) {
 }
 
 bool bitarray_test_bit(t_bitarray *self, off_t bit_index) {
-	return((self->bitarray[BIT_CHAR(bit_index)] & BIT_IN_CHAR(bit_index)) != 0);
+	return ((self->bitarray[BIT_CHAR(bit_index)] & BIT_IN_CHAR(bit_index)) != 0);
 }
 
 void bitarray_set_bit(t_bitarray *self, off_t bit_index) {
 	self->bitarray[BIT_CHAR(bit_index)] |= BIT_IN_CHAR(bit_index);
 }
 
-void bitarray_clean_bit(t_bitarray *self, off_t bit_index){
-    unsigned char mask;
+void bitarray_clean_bit(t_bitarray *self, off_t bit_index) {
+	unsigned char mask;
 
-    /* create a mask to zero out desired bit */
-    mask =  BIT_IN_CHAR(bit_index);
-    mask = ~mask;
+	/* create a mask to zero out desired bit */
+	mask = BIT_IN_CHAR(bit_index);
+	mask = ~mask;
 
-    self->bitarray[BIT_CHAR(bit_index)] &= mask;
+	self->bitarray[BIT_CHAR(bit_index)] &= mask;
 }
 
 size_t bitarray_get_max_bit(t_bitarray *self) {

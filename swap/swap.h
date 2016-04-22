@@ -8,6 +8,6 @@
 #ifndef SWAP_H_
 #define SWAP_H_
 
-
+#include <shared-library/socket.h>
 
 #endif /* SWAP_H_ */

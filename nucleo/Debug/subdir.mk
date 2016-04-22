@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../mainNucleo.c \
 ../nucleo.c 
 
 OBJS += \
+./mainNucleo.o \
 ./nucleo.o 
 
 C_DEPS += \
+./mainNucleo.d \
 ./nucleo.d 
 
 

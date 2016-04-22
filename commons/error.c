@@ -23,7 +23,6 @@
 
 #include "string.h"
 
-
 void error_show(char *message, ...) {
 	va_list arguments;
 	va_start(arguments, message);

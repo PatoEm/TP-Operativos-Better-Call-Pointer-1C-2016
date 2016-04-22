@@ -17,7 +17,6 @@
 #include <stdlib.h>
 #include "queue.h"
 
-
 t_queue *queue_create() {
 	t_queue* queue = malloc(sizeof(t_queue));
 	t_list* elements = list_create();
@@ -29,7 +28,8 @@ void queue_clean(t_queue *self) {
 	list_clean(self->elements);
 }
 
-void queue_clean_and_destroy_elements(t_queue *self, void(*element_destroyer)(void*)) {
+void queue_clean_and_destroy_elements(t_queue *self,
+		void (*element_destroyer)(void*)) {
 	list_clean_and_destroy_elements(self->elements, element_destroyer);
 }
 
@@ -38,7 +38,8 @@ void queue_destroy(t_queue *self) {
 	free(self);
 }
 
-void queue_destroy_and_destroy_elements(t_queue *self, void(*element_destroyer)(void*)) {
+void queue_destroy_and_destroy_elements(t_queue *self,
+		void (*element_destroyer)(void*)) {
 	list_destroy_and_destroy_elements(self->elements, element_destroyer);
 	free(self);
 }

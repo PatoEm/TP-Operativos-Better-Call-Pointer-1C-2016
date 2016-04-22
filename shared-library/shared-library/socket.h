@@ -8,7 +8,6 @@
 #ifndef SOCKET_H_
 #define SOCKET_H_
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>     //memset
@@ -24,6 +23,19 @@
 
 #define ERRORPUTO -1
 
+//#define PUERTO "6667"
+//#define PUERTO2 "6668"
 
+#define BACKLOG 5			// Define cuantas conexiones vamos a mantener pendientes al mismo tiempo
+#define PACKAGESIZE 1024
+
+int crearCliente(const char * ipServidor, int puertoServidor[]);
+
+void enviarMensaje(int fdSocketCliente, const void * message,
+		int tamanioPaquete);
+
+void recibirMensaje(int fdSocketCliente, void * buffer, int tamanioPaquete);
+
+void cerrarSocket(int fdSocket);
 
 #endif /* SOCKET_H_ */

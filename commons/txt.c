@@ -18,7 +18,6 @@
 
 #include <stdio.h>
 
-
 FILE* txt_open_for_append(char* path) {
 	return fopen(path, "a");
 }

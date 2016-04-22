@@ -25,9 +25,9 @@
 static void _string_do(char *text, void (*closure)(char*));
 static void _string_lower_element(char* ch);
 static void _string_upper_element(char* ch);
-void _string_append_with_format_list(const char* format, char** original, va_list arguments);
-char** _string_split(char* text, char* separator, bool(*condition)(char*, int));
-
+void _string_append_with_format_list(const char* format, char** original,
+		va_list arguments);
+char** _string_split(char* text, char* separator, bool (*condition)(char*, int));
 
 char *string_repeat(char character, int count) {
 	char *text = calloc(count + 1, 1);
@@ -43,7 +43,8 @@ char* string_duplicate(char* original) {
 }
 
 void string_append(char** original, char* string_to_add) {
-	*original = realloc(*original, strlen(*original) + strlen(string_to_add) + 1);
+	*original = realloc(*original,
+			strlen(*original) + strlen(string_to_add) + 1);
 	strcat(*original, string_to_add);
 }
 
@@ -67,7 +68,7 @@ char* string_from_vformat(const char* format, va_list arguments) {
 }
 
 char* string_itoa(int number) {
-    return string_from_format("%d", number);
+	return string_from_format("%d", number);
 }
 
 void string_append_with_format(char **original, const char *format, ...) {
@@ -88,7 +89,7 @@ void string_to_lower(char *text) {
 void string_capitalized(char *text) {
 	if (!string_is_empty(text)) {
 		_string_upper_element(text);
-		if (strlen(text) >= 2){
+		if (strlen(text) >= 2) {
 			string_to_lower(&text[1]);
 		}
 	}
@@ -115,7 +116,7 @@ void string_trim_left(char** text) {
 void string_trim_right(char** text) {
 	char *string_without_blank = *text;
 	int i = strlen(*text) - 1;
-	while (i >= 0 && isspace(string_without_blank[i])){
+	while (i >= 0 && isspace(string_without_blank[i])) {
 		string_without_blank[i] = '\0';
 		i--;
 	}
@@ -126,7 +127,7 @@ bool string_is_empty(char *text) {
 	return strlen(text) == 0;
 }
 
-bool string_starts_with(char *text, char *begin){
+bool string_starts_with(char *text, char *begin) {
 	return strncmp(text, begin, strlen(begin)) == 0;
 }
 
@@ -157,22 +158,22 @@ char** string_n_split(char *text, int n, char* separator) {
 	return _string_split(text, separator, _is_last_token);
 }
 
-char**  string_get_string_as_array(char* text) {
-    int length_value = strlen(text) - 2;
-    char* value_without_brackets = string_substring(text, 1, length_value);
-    char **array_values = string_split(value_without_brackets, ",");
+char** string_get_string_as_array(char* text) {
+	int length_value = strlen(text) - 2;
+	char* value_without_brackets = string_substring(text, 1, length_value);
+	char **array_values = string_split(value_without_brackets, ",");
 
-    int i = 0;
-    while (array_values[i] != NULL) {
-	    string_trim(&(array_values[i]));
-	    i++;
-    }
+	int i = 0;
+	while (array_values[i] != NULL) {
+		string_trim(&(array_values[i]));
+		i++;
+	}
 
-    free(value_without_brackets);
-    return array_values;
+	free(value_without_brackets);
+	return array_values;
 }
 
-char*   string_substring(char* text, int start, int length) {
+char* string_substring(char* text, int start, int length) {
 	char* new_string = calloc(1, length + 1);
 	strncpy(new_string, text + start, length);
 	return new_string;
@@ -198,16 +199,16 @@ int string_length(char* text) {
 }
 
 char* string_reverse(char* palabra) {
-    char* resultado = calloc(1, string_length(palabra) + 1);
+	char* resultado = calloc(1, string_length(palabra) + 1);
 
-    int i = string_length(palabra) - 1, j = 0;
-    while (i >= 0){
-        resultado[j] = palabra[i];
-        i--;
-        j++;
-    }
+	int i = string_length(palabra) - 1, j = 0;
+	while (i >= 0) {
+		resultado[j] = palabra[i];
+		i--;
+		j++;
+	}
 
-    return resultado;
+	return resultado;
 }
 
 /** PRIVATE FUNCTIONS **/
@@ -220,7 +221,7 @@ static void _string_lower_element(char* ch) {
 	*ch = tolower(*ch);
 }
 
-static void _string_do(char *text, void (*closure)(char* c)){
+static void _string_do(char *text, void (*closure)(char* c)) {
 	int i = 0;
 	while (text[i] != '\0') {
 		closure(&text[i]);
@@ -228,8 +229,8 @@ static void _string_do(char *text, void (*closure)(char* c)){
 	}
 }
 
-
-void _string_append_with_format_list(const char* format, char** original, va_list arguments) {
+void _string_append_with_format_list(const char* format, char** original,
+		va_list arguments) {
 	va_list copy_arguments;
 	va_copy(copy_arguments, arguments);
 	size_t buffer_size = vsnprintf(NULL, 0, format, copy_arguments) + 1;
@@ -243,7 +244,7 @@ void _string_append_with_format_list(const char* format, char** original, va_lis
 	free(temporal);
 }
 
-char** _string_split(char* text, char* separator, bool(*condition)(char*, int)) {
+char** _string_split(char* text, char* separator, bool (*condition)(char*, int)) {
 	char **substrings = NULL;
 	int size = 0;
 
@@ -252,7 +253,7 @@ char** _string_split(char* text, char* separator, bool(*condition)(char*, int)) 
 	char *next = text_to_iterate;
 	char *str = text_to_iterate;
 
-	while(condition(next, size)) {
+	while (condition(next, size)) {
 		char* token = strtok_r(str, separator, &next);
 		str = NULL;
 		size++;

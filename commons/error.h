@@ -16,13 +16,12 @@
 #ifndef ERROR_H_
 #define ERROR_H_
 
-
-	/**
-	* @NAME: error_show
-	* @DESC: imprime un mensaje con el siguiente formato
-	*
-	* 	[[ERROR]] MESSAGE
-	*/
-	void error_show(char *message, ...);
+/**
+ * @NAME: error_show
+ * @DESC: imprime un mensaje con el siguiente formato
+ *
+ * 	[[ERROR]] MESSAGE
+ */
+void error_show(char *message, ...);
 
 #endif /* ERROR_H_ */

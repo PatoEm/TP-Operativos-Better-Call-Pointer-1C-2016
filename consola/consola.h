@@ -10,8 +10,4 @@
 
 #include <shared-library/socket.h>
 
-
-
-
-
 #endif /* CONSOLA_H_ */

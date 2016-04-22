@@ -1,8 +1,8 @@
-cpu.d: ../cpu.c ../cpu.h \
+mainNucleo.d: ../mainNucleo.c ../nucleo.h \
  /home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/shared-library/socket.h \
  /home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h
 
-../cpu.h:
+../nucleo.h:
 
 /home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/shared-library/socket.h:
 

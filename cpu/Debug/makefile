@@ -25,8 +25,8 @@ endif
 all: cpu
 
 dependents:
-	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/commons/Debug && $(MAKE) all
-	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/Debug && $(MAKE) all
+	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/commons/Debug && $(MAKE) clean all
+	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/Debug && $(MAKE) clean all
 
 # Tool invocations
 cpu: $(OBJS) $(USER_OBJS) /home/utnso/tp-2016-1c-Better-Call-pointer/commons/Debug/libcommons.so /home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/Debug/libshared-library.so
