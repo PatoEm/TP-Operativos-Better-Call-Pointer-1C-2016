@@ -24,11 +24,14 @@ endif
 # All Target
 all: umc
 
+dependents:
+	-cd /home/utnso/workspace/commons/Debug && $(MAKE) all
+
 # Tool invocations
-umc: $(OBJS) $(USER_OBJS)
+umc: $(OBJS) $(USER_OBJS) /home/utnso/workspace/commons/Debug/libcommons.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc  -o "umc" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -L"/home/utnso/workspace/commons/Debug" -o "umc" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -39,5 +42,6 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
+/home/utnso/workspace/commons/Debug/libcommons.so:
 
 -include ../makefile.targets
