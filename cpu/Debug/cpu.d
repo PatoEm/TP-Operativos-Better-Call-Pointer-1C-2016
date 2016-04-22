@@ -1,3 +1,4 @@
-cpu.d: ../cpu.c /home/utnso/workspace/commons/string.h
+cpu.d: ../cpu.c \
+ /home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h
 
-/home/utnso/workspace/commons/string.h:
+/home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h:

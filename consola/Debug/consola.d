@@ -1,3 +1,9 @@
-consola.d: ../consola.c /home/utnso/workspace/commons/string.h
+consola.d: ../consola.c ../consola.h \
+ /home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/shared-library/socket.h \
+ /home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h
 
-/home/utnso/workspace/commons/string.h:
+../consola.h:
+
+/home/utnso/tp-2016-1c-Better-Call-pointer/shared-library/shared-library/socket.h:
+
+/home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h:

@@ -10,13 +10,7 @@
  * 	No se contemplan el manejo de errores en el sistema por una cuestion didactica. Tener en cuenta esto al desarrollar.
  */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <netdb.h>
-#include <unistd.h>
+#include "consola.h"
 
 #define IP "127.0.0.1"
 #define PUERTO "6667"
@@ -24,14 +18,7 @@
 
 int main(){
 
-	/*
-	 *  ¿Quien soy? ¿Donde estoy? ¿Existo?
-	 *
-	 *  Estas y otras preguntas existenciales son resueltas getaddrinfo();
-	 *
-	 *  Obtiene los datos de la direccion de red y lo guarda en serverInfo.
-	 *
-	 */
+
 	struct addrinfo hints;
 	struct addrinfo *serverInfo;
 
@@ -41,13 +28,6 @@ int main(){
 
 	getaddrinfo(IP, PUERTO, &hints, &serverInfo);	// Carga en serverInfo los datos de la conexion
 
-	/*
-	 * 	Ya se quien y a donde me tengo que conectar... ¿Y ahora?
-	 *	Tengo que encontrar una forma por la que conectarme al server... Ya se! Un socket!
-	 *
-	 * 	Obtiene un socket (un file descriptor -todo en linux es un archivo-), utilizando la estructura serverInfo que generamos antes.
-	 *
-	 */
 	int serverSocket;
 	serverSocket = socket(serverInfo->ai_family, serverInfo->ai_socktype, serverInfo->ai_protocol);
 
@@ -59,18 +39,7 @@ int main(){
 	connect(serverSocket, serverInfo->ai_addr, serverInfo->ai_addrlen);
 	freeaddrinfo(serverInfo);	// No lo necesitamos mas
 
-	//YA ESTA CONECTADO
-	/*
-	 *	Estoy conectado! Ya solo me queda una cosa:
-	 *
-	 *	Enviar datos!
-	 *
-	 *	Vamos a crear un paquete (en este caso solo un conjunto de caracteres) de size PACKAGESIZE, que le enviare al servidor.
-	 *
-	 *	Aprovechando el standard immput/output, guardamos en el paquete las cosas que ingrese el usuario en la consola.
-	 *	Ademas, contamos con la verificacion de que el usuario escriba "exit" para dejar de transmitir.
-	 *
-	 */
+
 
 	int enviar = 1;
 	char message[PACKAGESIZE];
@@ -91,17 +60,10 @@ int main(){
 	recv(serverSocket, (void*) message, strlen("Puta")+1, 0);
 
 	printf("%s",message);
-	/*
-	 *	Listo! Cree un medio de comunicacion con el servidor, me conecte con y le envie cosas...
-	 *
-	 *	...Pero me aburri. Era de esperarse, ¿No?
-	 *
-	 *	Asique ahora solo me queda cerrar la conexion con un close();
-	 */
+
 
 	close(serverSocket);
 	return 0;
 
-	/* ADIO'! */
 }
 

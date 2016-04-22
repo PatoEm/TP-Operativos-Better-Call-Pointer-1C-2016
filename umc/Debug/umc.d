@@ -1,3 +1,4 @@
-umc.d: ../umc.c /home/utnso/workspace/commons/string.h
+umc.d: ../umc.c \
+ /home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h
 
-/home/utnso/workspace/commons/string.h:
+/home/utnso/tp-2016-1c-Better-Call-pointer/commons/string.h:
