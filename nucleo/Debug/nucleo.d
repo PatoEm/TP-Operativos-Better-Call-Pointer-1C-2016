@@ -1,0 +1,1 @@
+nucleo.d: ../nucleo.c
