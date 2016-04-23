@@ -5,6 +5,7 @@
 	<projects>
 		<project>commons</project>
 		<project>libreriasCompartidas</project>
+		<project>parser</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

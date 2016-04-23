@@ -9,5 +9,9 @@
 #define NUCLEO_H_
 
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <commons/temporal.h>
+#include <libreriasCompartidas/socket.h>
 
 #endif /* NUCLEO_H_ */

@@ -1,7 +1,9 @@
-src/mainConsola.d: ../src/mainConsola.c \
- /home/utnso/workspace/commons/commons/temporal.h \
- /home/utnso/workspace/libreriasCompartidas/libreriasCompartidas/socket.h
+src/mainConsola.d: ../src/mainConsola.c ../src/consola.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h
 
-/home/utnso/workspace/commons/commons/temporal.h:
+../src/consola.h:
 
-/home/utnso/workspace/libreriasCompartidas/libreriasCompartidas/socket.h:
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h:

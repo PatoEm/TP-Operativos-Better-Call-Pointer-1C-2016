@@ -8,10 +8,12 @@
  ============================================================================
  */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "nucleo.h"
+
 
 int main(void) {
-	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+	puts("Inicio Nucleo"); /* prints !!!Hello World!!! */
+	int fdSocket = crearSocketServidor(6666);
+
 	return EXIT_SUCCESS;
 }

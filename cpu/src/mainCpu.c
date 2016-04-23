@@ -7,9 +7,7 @@
  Description : Hello World in C, Ansi-style
  ============================================================================
  */
-
-#include <stdio.h>
-#include <stdlib.h>
+#include "cpu.h"
 
 int main(void) {
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
