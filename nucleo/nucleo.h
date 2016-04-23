@@ -8,6 +8,6 @@
 #ifndef NUCLEO_H_
 #define NUCLEO_H_
 
-#include <shared-library/socket.h>
+//#include <shared-library/socket.h>
 
 #endif /* NUCLEO_H_ */

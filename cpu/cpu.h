@@ -8,6 +8,6 @@
 #ifndef CPU_H_
 #define CPU_H_
 
-#include <shared-library/socket.h>
+//#include <shared-library/socket.h>
 
 #endif /* CPU_H_ */

@@ -8,6 +8,6 @@
 #ifndef CONSOLA_H_
 #define CONSOLA_H_
 
-#include <shared-library/socket.h>
+//#include <shared-library/socket.h>
 
 #endif /* CONSOLA_H_ */
