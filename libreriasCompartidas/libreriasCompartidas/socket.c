@@ -9,7 +9,7 @@
 
 //Cliente MotherFucker
 
-int crearCliente(const char * ipServidor, int puertoServidor[]) //Creo un socket y le paso la ip y puerto del servidor así sabe a donde conectarse
+int crearCliente(const char * ipServidor, const char * puertoServidor) //Creo un socket y le paso la ip y puerto del servidor así sabe a donde conectarse
 {
 
 	struct addrinfo hints;
@@ -24,13 +24,13 @@ int crearCliente(const char * ipServidor, int puertoServidor[]) //Creo un socket
 	int serverSocket;
 	serverSocket = socket(serverInfo->ai_family, serverInfo->ai_socktype,
 			serverInfo->ai_protocol);
-
+	puts("Intentando conectarse...");
 	int conexion = connect(serverSocket, serverInfo->ai_addr,
 			serverInfo->ai_addrlen);
 	if (conexion == ERRORPUTO) {
-
+		puts("Error al conectarse");
 	} else {
-		printf("Conectado al servidor \n");
+		puts("Conectado al servidor");
 	}
 
 	freeaddrinfo(serverInfo);	// No lo necesitamos mas
@@ -40,7 +40,7 @@ int crearCliente(const char * ipServidor, int puertoServidor[]) //Creo un socket
 
 //Servidor
 
-int crearSocketServidor(int puerto) {
+int crearSocketServidor(const char * puerto) {
 
 	struct addrinfo hints;
 	struct addrinfo *serverInfo;
@@ -49,25 +49,22 @@ int crearSocketServidor(int puerto) {
 	hints.ai_family = AF_UNSPEC;		// No importa si uso IPv4 o IPv6
 	hints.ai_flags = AI_PASSIVE;// Asigna el address del localhost: 127.0.0.1
 	hints.ai_socktype = SOCK_STREAM;	// Indica que usaremos el protocolo TCP
-
+	puts("1");
 	getaddrinfo(NULL, puerto, &hints, &serverInfo); // Notar que le pasamos NULL como IP, ya que le indicamos que use localhost en AI_PASSIVE
-
+	puts("2");
 	int listenningSocket;
 	listenningSocket = socket(serverInfo->ai_family, serverInfo->ai_socktype,
 			serverInfo->ai_protocol);
-
+	puts("3");
 	int pruebabind = bind(listenningSocket, serverInfo->ai_addr,
 			serverInfo->ai_addrlen);
+	puts("4");
 	if (pruebabind == ERRORPUTO) {
-		printf("Fallo el bind");
+		puts("Fallo el bind");
 	} else {
-		printf("Bind Ok");
+		puts("Bind Ok");
 	}
-	if (pruebabind == ERRORPUTO) {
-		printf("Fallo el bind");
-	} else {
-		printf("Bind Ok");
-	}
+
 	freeaddrinfo(serverInfo); // Ya no lo vamos a necesitar
 
 	return listenningSocket;
@@ -77,9 +74,9 @@ int crearSocketServidor(int puerto) {
 void escucharSocket(int fdSocketServidor, int conexionesPermitidas) {
 	int pruebalisten = listen(fdSocketServidor, conexionesPermitidas);// IMPORTANTE: listen() es una syscall BLOQUEANTE.
 	if (pruebalisten == ERRORPUTO) {
-		printf("Fallo el listen");
+		puts("Fallo el listen");
 	} else {
-		printf("Listen Ok");
+		puts("Listen Ok");
 	}
 
 }
@@ -92,9 +89,9 @@ int aceptarConexiones(int fdSocketServidor) {
 	int fdSocketCliente = accept(fdSocketServidor, (struct sockaddr *) &addr,
 			&addrlen);
 	if (fdSocketCliente == ERRORPUTO) {
-		printf("Fallo el accept");
+		puts("Fallo el accept");
 	} else {
-		printf("Cliente aceptado");
+		puts("Cliente aceptado");
 	}
 
 	return fdSocketCliente;
@@ -107,21 +104,21 @@ void enviarMensaje(int fdSocketCliente, const void * message,
 
 	int bytes_enviados = send(fdSocketCliente, message, tamanioPaquete, 0);
 	if (bytes_enviados == ERRORPUTO) {
-		printf("Fallo el send");
+		puts("Fallo el send");
 	} else {
-		printf("Mensaje enviado \n");
+		puts("Mensaje enviado \n");
 	}
 
-	printf("Envie el mensaje: %s \n", message);
+	//printf("Envie el mensaje: %s \n", message);
 
 }
 void recibirMensaje(int fdSocketCliente, void * buffer, int tamanioPaquete) {
 
 	int bytes_recibidos = recv(fdSocketCliente, buffer, tamanioPaquete, 0);
 	if (bytes_recibidos == ERRORPUTO) {
-		printf("Fallo el recv");
+		puts("Fallo el recv");
 	} else {
-		printf("Mensaje recibido \n");
+		puts("Mensaje recibido \n");
 	}
 
 }
@@ -131,9 +128,9 @@ void recibirMensaje(int fdSocketCliente, void * buffer, int tamanioPaquete) {
 void cerrarSocket(int fdSocket) {
 	int cerrar = close(fdSocket);
 	if (cerrar == ERRORPUTO) {
-		printf("Fallo el close");
+		puts("Fallo el close");
 	} else {
-		printf("Socket cerrado \n");
+		puts("Socket cerrado \n");
 	}
 }
 

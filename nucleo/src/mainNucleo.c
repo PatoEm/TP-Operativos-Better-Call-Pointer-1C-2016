@@ -13,7 +13,10 @@
 
 int main(void) {
 	puts("Inicio Nucleo"); /* prints !!!Hello World!!! */
-	int fdSocket = crearSocketServidor(6666);
+	int fdSocketNucleo = crearSocketServidor("6666");
+	escucharSocket(fdSocketNucleo,5);
+	int fdSocketCliente1= aceptarConexiones(fdSocketNucleo);
 
+	printf("%d",fdSocketNucleo);
 	return EXIT_SUCCESS;
 }

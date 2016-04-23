@@ -29,7 +29,9 @@
 #define BACKLOG 5			// Define cuantas conexiones vamos a mantener pendientes al mismo tiempo
 #define PACKAGESIZE 1024
 
-int crearCliente(const char * ipServidor, int puertoServidor[]);
+int crearCliente(const char * ipServidor, const char * puertoServidor);
+
+int crearSocketServidor(const char * puerto);
 
 void enviarMensaje(int fdSocketCliente, const void * message,
 		int tamanioPaquete);
