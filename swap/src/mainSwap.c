@@ -5,7 +5,7 @@ int main(void) {
     void leerArchivoDeConfiguracion();
 
 
-	int fdSocketSwap = crearCliente(ipUMC,umcPort );/*va UMC o van variables de SWAP?*/
+	int fdSocketSwap = crearCliente(ipUMC,umcPort );
 	printf("%d",fdSocketSwap);
 
 
