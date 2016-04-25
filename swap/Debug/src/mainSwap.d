@@ -1,3 +1,18 @@
-src/mainSwap.d: ../src/mainSwap.c ../src/swap.h
+src/mainSwap.d: ../src/mainSwap.c ../src/swap.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/config.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/dictionary.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/node.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/log.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h
 
 ../src/swap.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/config.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/dictionary.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/node.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/log.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h:

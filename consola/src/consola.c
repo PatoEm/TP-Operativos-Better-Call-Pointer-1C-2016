@@ -8,7 +8,6 @@
 #define manejarError(msg) {perror(msg); abort();}
 
 
-
 void leerArchivoDeConfiguracion() {
 
              t_config* archivoDeConfiguracion;

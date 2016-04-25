@@ -4,9 +4,9 @@
  *  Created on: 23/4/2016
  *      Author: utnso
  */
-
 #include "umc.h"
 #define manejarError(msg) {perror(msg); abort();}
+
 
 void leerArchivoDeConfiguracion() {
 
@@ -18,8 +18,8 @@ void leerArchivoDeConfiguracion() {
 
 
              archivoDeConfiguracion = config_create(configPath);
-             setearValores( archivoDeConfiguracion);
-	         config_destroy( archivoDeConfiguracion);
+             setearValores(archivoDeConfiguracion);
+	         config_destroy(archivoDeConfiguracion);
 
 }
 
@@ -33,7 +33,7 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 }
 
 void setearValores(t_config * archivoConfig) {
-		puertoTCP = config_get_string_value(archivoConfig, "PUERTO_TCP");
+		puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
 		ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
 		puerto_Swap = config_get_int_value(archivoConfig, "PUERTO_SWAP");
 		marcos = config_get_int_value(archivoConfig, "MARCOS");
