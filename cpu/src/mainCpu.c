@@ -11,4 +11,13 @@
 
 int main(void) {
 
+	void leerArchivoDeConfiguracion();
+
+
+		int fdSocketCPU = crearCliente(ipUMC,umcPort );/*lo mismo que con el SWAP:
+		va UMC o van variables de CPU? posta no lo entiendo :/ */
+		printf("%d",fdSocketCPU);
+
+		return EXIT_SUCCESS;
+
 }

@@ -1,15 +1,14 @@
-/*
- ============================================================================
- Name        : swap.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
- ============================================================================
- */
 #include "swap.h"
-
 
 int main(void) {
 
+    void leerArchivoDeConfiguracion();
+
+
+	int fdSocketSwap = crearCliente(ipUMC,umcPort );/*va UMC o van variables de SWAP?*/
+	printf("%d",fdSocketSwap);
+
+
+
+	return EXIT_SUCCESS;
 }

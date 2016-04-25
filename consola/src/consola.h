@@ -20,7 +20,7 @@
 
 //variables
 char* ipNucleo;
-char* nucleolPort;
+char* nucleoPort;
 
 //prototipos
 void leerArchivoDeConfiguracion();

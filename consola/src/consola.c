@@ -35,5 +35,5 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 
 void setearValores(t_config * archivoConfig) {
 		ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
-		nucleolPort= config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
+		nucleoPort= config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
 }
