@@ -20,6 +20,8 @@
 //variables
 char* ipUMC;
 char* umcPort;
+char* nucleoPort;
+char* ipNucleo;
 
 //prototipos
 void leerArchivoDeConfiguracion();

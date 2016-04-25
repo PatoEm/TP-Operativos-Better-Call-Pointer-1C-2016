@@ -13,11 +13,19 @@ int main(void) {
 
 	void leerArchivoDeConfiguracion();
 
+	/*Conecto con el núcleo primero que nada Author: Dr.Mengueche*/
 
-		int fdSocketCPU = crearCliente(ipUMC,umcPort );/*lo mismo que con el SWAP:
-		va UMC o van variables de CPU? posta no lo entiendo :/ */
-		printf("%d",fdSocketCPU);
+	int clienteNucleo=crearCliente(nucleoPort,nucleoPort);
 
-		return EXIT_SUCCESS;
+	/*Conecto con el cpu. Author: Dr.Mengueche*/
+
+	int clienteUMC=crearCliente(ipUMC,umcPort);
+
+
+	/*Imprimo al cliente. Author: Dr.Mengueche*/
+
+	printf("mi número de cliente es: %i", clienteNucleo);
+
+	return EXIT_SUCCESS;
 
 }

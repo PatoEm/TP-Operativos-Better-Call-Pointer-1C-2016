@@ -34,6 +34,8 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 
 void setearValores(t_config * archivoConfig) {
 		puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
+		puertoNucleo = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
+		puertoCPU = config_get_string_value(archivoConfig, "PUERTO_CPU");
 		ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
 		puerto_Swap = config_get_int_value(archivoConfig, "PUERTO_SWAP");
 		marcos = config_get_int_value(archivoConfig, "MARCOS");

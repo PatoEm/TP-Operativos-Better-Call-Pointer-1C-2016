@@ -31,6 +31,8 @@
    char**  idIO;
    char** retardoIO;
    char** idVariableCompartida;
+   char* ipUMC;
+   char* UMCPort;
 
 //protoripos
 void leerArchivoDeConfiguracion();

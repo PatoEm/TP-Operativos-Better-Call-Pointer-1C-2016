@@ -36,4 +36,7 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 void setearValores(t_config * archivoConfig) {
 		ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
 		umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
+		ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
+		nucleoPort = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
+
 }

@@ -35,6 +35,8 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 void setearValores(t_config * archivoConfig) {
 		progPort = config_get_string_value(archivoConfig, "PUERTO_PROG");
 		cpuPort= config_get_string_value(archivoConfig, "PUERTO_CPU");
+		ipUMC= config_get_string_value(archivoConfig, "IP_UMC");
+		UMCPort=config_get_string_value(archivoConfig, "PUERTO_UMC");
 		quantum= config_get_int_value(archivoConfig, "QUANTUM");
 		quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
 		idSemaforos = config_get_array_value(archivoConfig,"SEM_IDS");

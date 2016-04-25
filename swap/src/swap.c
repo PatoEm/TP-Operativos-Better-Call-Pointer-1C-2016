@@ -36,12 +36,10 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 }
 
 void setearValores(t_config * archivoConfig) {
-		ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
 		umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
-		puerto_Escucha = config_get_string_value(archivoConfig, "PUERTO_ESCUCHA");
 		nombreSwap = config_get_string_value(archivoConfig, "NOMBRE_SWAP");
 		paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
-		tamPagina = config_get_string_value(archivoConfig, "TAMAÑO_PAGINA");
+		tamPagina = config_get_string_value(archivoConfig, "TAMANO_PAGINA");
 		retCompactacion = config_get_string_value(archivoConfig, "RETARDO_COMPACTACION");
 
 }

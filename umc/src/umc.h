@@ -26,6 +26,8 @@ char* marco_Size;
 char* marco_x_proc;
 char* entradas_TLB;
 char* espera;
+char* puertoNucleo;
+char* puertoCPU;
 
 //prototipos
 void leerArchivoDeConfiguracion();

@@ -23,8 +23,6 @@
 
 #define ERRORPUTO -1
 
-//#define PUERTO "6667"
-//#define PUERTO2 "6668"
 
 #define BACKLOG 5			// Define cuantas conexiones vamos a mantener pendientes al mismo tiempo
 #define PACKAGESIZE 1024
@@ -35,6 +33,10 @@ int crearSocketServidor(const char * puerto);
 
 void enviarMensaje(int fdSocketCliente, const void * message,
 		int tamanioPaquete);
+
+void escucharSocket(int fdSocketServidor, int conexionesPermitidas);
+
+int aceptarConexiones(int fdSocketServidor);
 
 void recibirMensaje(int fdSocketCliente, void * buffer, int tamanioPaquete);
 
