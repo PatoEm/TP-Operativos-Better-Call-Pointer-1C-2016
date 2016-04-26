@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../libreriasCompartidas/conexiones.c \
 ../libreriasCompartidas/socket.c 
 
 OBJS += \
+./libreriasCompartidas/conexiones.o \
 ./libreriasCompartidas/socket.o 
 
 C_DEPS += \
+./libreriasCompartidas/conexiones.d \
 ./libreriasCompartidas/socket.d 
 
 

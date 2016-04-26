@@ -16,6 +16,7 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/conexiones.h>
 
 #define FAIL -1
 
@@ -34,10 +35,7 @@
    char* ipUMC;
    char* UMCPort;
 
-//protoripos
-void leerArchivoDeConfiguracion();
-int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
-void setearValores(t_config * archivoConfig);
+
 
 
 #endif /* NUCLEO_H_ */

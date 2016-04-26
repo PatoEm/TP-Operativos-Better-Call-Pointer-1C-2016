@@ -15,7 +15,7 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/socket.h>
-
+#include <libreriasCompartidas/conexiones.h>
 #define FAIL -1
 
 //variables
@@ -23,8 +23,8 @@ char* ipNucleo;
 char* nucleoPort;
 
 //prototipos
-void leerArchivoDeConfiguracion();
-int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
-void setearValores(t_config * archivoConfig);
+//void leerArchivoDeConfiguracion();
+//int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
+//void setearValores(t_config * archivoConfig);
 
 #endif /* CONSOLA_H_ */
