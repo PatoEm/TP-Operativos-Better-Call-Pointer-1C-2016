@@ -9,17 +9,17 @@
 
 
 void setearValores(t_config * archivoConfig) {
-		puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
+		//puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
 		puertoNucleo = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
 		puertoCPU = config_get_string_value(archivoConfig, "PUERTO_CPU");
 		ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
 		puerto_Swap = config_get_int_value(archivoConfig, "PUERTO_SWAP");
 		marcos = config_get_int_value(archivoConfig, "MARCOS");
-		marco_Size = config_get_array_value(archivoConfig,"MARCO_SIZE");
-		marco_x_proc = config_get_array_value(archivoConfig,"MARCO_X_PROC");
-		entradas_TLB = config_get_array_value(archivoConfig,"ENTRADAS_TLB");
-		espera = config_get_array_value(archivoConfig,"RETARDO");
-		puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
+		marco_Size = config_get_int_value(archivoConfig,"MARCO_SIZE");
+		marco_x_proc = config_get_int_value(archivoConfig,"MARCO_X_PROC");
+		entradas_TLB = config_get_int_value(archivoConfig,"ENTRADAS_TLB");
+		espera = config_get_int_value(archivoConfig,"RETARDO");
+		//puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
 }
 
 
