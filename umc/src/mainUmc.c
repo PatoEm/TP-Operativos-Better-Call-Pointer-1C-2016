@@ -30,11 +30,13 @@ int main(void) {
 
 
 
+	/*Socket funcionando en la primera, falla el bind en la segunda. Testeado by Dr.Mengueche*/
 
 	int fdSocketNucleo= crearSocketServidor(puertoNucleo);
 	escucharSocket(fdSocketNucleo,1);
 	int aceptarNucleo=aceptarConexiones(fdSocketNucleo);
 
+	printf("número de cliente %d",fdSocketUMC);
 
 
 	//printf("el socket de la umc es:%d y el del nucleo es: %d",fdSocketUMC, aceptarNucleo);

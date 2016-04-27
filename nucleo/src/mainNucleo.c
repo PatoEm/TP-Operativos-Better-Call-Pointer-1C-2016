@@ -16,7 +16,7 @@ int main(void) {
 	 leerArchivoDeConfiguracion("confignucleo");
 
 	/*Se conecta con la memoria. Author: Dr.Mengueche*/
-
+	 /* Socket UMC testeado by Dr.Mengueche*/
 	int fdSocketUMC=crearCliente(ipUMC,UMCPort);
 
 	/*lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS*/
