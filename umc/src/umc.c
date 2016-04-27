@@ -19,5 +19,7 @@ void setearValores(t_config * archivoConfig) {
 		marco_x_proc = config_get_array_value(archivoConfig,"MARCO_X_PROC");
 		entradas_TLB = config_get_array_value(archivoConfig,"ENTRADAS_TLB");
 		espera = config_get_array_value(archivoConfig,"RETARDO");
-
+		puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
 }
+
+

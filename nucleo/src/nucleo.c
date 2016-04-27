@@ -23,3 +23,4 @@ void setearValores(t_config * archivoConfig) {
 		idVariableCompartida = config_get_array_value(archivoConfig,"SHARED_VARS");
 
 }
+

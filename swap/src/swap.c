@@ -18,3 +18,4 @@ void setearValores(t_config * archivoConfig) {
 		retCompactacion = config_get_string_value(archivoConfig, "RETARDO_COMPACTACION");
 
 }
+

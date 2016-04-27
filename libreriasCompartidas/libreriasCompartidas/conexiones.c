@@ -12,7 +12,7 @@ void leerArchivoDeConfiguracion(const char * direccionArchivo) {
              char*configPath = direccionArchivo;
 
             if (verificarExistenciaDeArchivo(configPath) == FAIL)
-		manejarError("[ERROR] Archivo de configuracion no encontrado");
+		puts("[ERROR] Archivo de configuracion no encontrado");
 
 
              archivoDeConfiguracion = config_create(configPath);
