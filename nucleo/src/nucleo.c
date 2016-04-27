@@ -10,7 +10,7 @@
 
 
 void setearValores(t_config * archivoConfig) {
-		progPort = config_get_string_value(archivoConfig, "PUERTO_PROG");
+		puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
 		cpuPort= config_get_string_value(archivoConfig, "PUERTO_CPU");
 		ipUMC= config_get_string_value(archivoConfig, "IP_UMC");
 		UMCPort=config_get_string_value(archivoConfig, "PUERTO_UMC");

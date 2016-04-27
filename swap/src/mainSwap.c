@@ -2,7 +2,7 @@
 
 int main(void) {
 
-    leerArchivoDeConfiguracion("swap/swapconfig");
+    leerArchivoDeConfiguracion("swapconfig");
 
 
     /*Se conecta a la UMC con el swap. LOCO COMENTEN!!!*/

@@ -17,7 +17,7 @@ void leerArchivoDeConfiguracion(const char * direccionArchivo) {
 
              archivoDeConfiguracion = config_create(configPath);
              setearValores(archivoDeConfiguracion);
-	         config_destroy(archivoDeConfiguracion);
+	         //config_destroy(archivoDeConfiguracion); ESTA MIERDA ERA
 
 }
 

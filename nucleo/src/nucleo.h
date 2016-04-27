@@ -23,7 +23,7 @@
 //variables
 
 
-   char*  progPort;
+   char*  puertoPropio;
    char*  cpuPort;
    int  quantum;
    int  quantumSleep;

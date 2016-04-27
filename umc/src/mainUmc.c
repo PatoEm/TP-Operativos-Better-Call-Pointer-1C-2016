@@ -13,7 +13,7 @@ int main(void) {
 
 
 
-	leerArchivoDeConfiguracion("umc/configumc");
+	leerArchivoDeConfiguracion("configumc");
 
 	/*no tengo idea para que sirve esto, lo puedo romper? COMENTEMOS QUE HACEMOS*/
 

@@ -11,7 +11,7 @@
 
 int main(void) {
 
-	leerArchivoDeConfiguracion("cpu/configcpu");
+	leerArchivoDeConfiguracion("configcpu");
 
 	/*Conecto con el núcleo primero que nada Author: Dr.Mengueche*/
 
