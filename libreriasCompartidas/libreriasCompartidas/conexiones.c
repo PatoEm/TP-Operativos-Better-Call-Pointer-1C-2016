@@ -6,10 +6,10 @@
  */
 #include "conexiones.h"
 
-void leerArchivoDeConfiguracion() {
+void leerArchivoDeConfiguracion(const char * direccionArchivo) {
 
              t_config* archivoDeConfiguracion;
-             char*configPath = "consola/configconsola";
+             char*configPath = direccionArchivo;
 
             if (verificarExistenciaDeArchivo(configPath) == FAIL)
 		manejarError("[ERROR] Archivo de configuracion no encontrado");

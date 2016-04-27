@@ -17,7 +17,7 @@
 #include <commons/config.h>
 #define FAIL -1
 
-void leerArchivoDeConfiguracion();
+void leerArchivoDeConfiguracion(const char * direccionArchivo);
 
 int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
 

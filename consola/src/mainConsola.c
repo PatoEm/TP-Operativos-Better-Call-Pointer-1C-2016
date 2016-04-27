@@ -16,7 +16,7 @@ int main(void) {
 
 
 	/*lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS*/
-    void leerArchivoDeConfiguracion();
+    leerArchivoDeConfiguracion("consola/configconsola");
 
 
 	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );

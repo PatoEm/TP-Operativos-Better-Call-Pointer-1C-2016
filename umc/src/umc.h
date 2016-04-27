@@ -14,7 +14,7 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/socket.h>
-
+#include <libreriasCompartidas/conexiones.h>
 #define FAIL -1
 
 //parametros
@@ -29,10 +29,6 @@ char* espera;
 char* puertoNucleo;
 char* puertoCPU;
 
-//prototipos
-void leerArchivoDeConfiguracion();
-int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
-void setearValores(t_config * archivoConfig);
 
 
 

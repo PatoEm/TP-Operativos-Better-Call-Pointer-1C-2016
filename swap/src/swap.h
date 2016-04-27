@@ -15,7 +15,7 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/socket.h>
-
+#include <libreriasCompartidas/conexiones.h>
 #define FAIL -1
 
 //variables
@@ -27,8 +27,5 @@ char* paginas;
 char* tamPagina;
 char* retCompactacion;
 
-//prototipos
-void leerArchivoDeConfiguracion();
-int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
-void setearValores(t_config * archivoConfig);
+
 #endif /* SWAP_H_ */
