@@ -55,14 +55,16 @@ int crearSocketServidor(const char * puerto) {
 	int listenningSocket;
 	listenningSocket = socket(serverInfo->ai_family, serverInfo->ai_socktype,
 			serverInfo->ai_protocol);
+
 	puts("3");
 	int pruebabind = bind(listenningSocket, serverInfo->ai_addr,
 			serverInfo->ai_addrlen);
 	puts("4");
 	if (pruebabind == ERRORPUTO) {
-		puts("Fallo el bind");
+		puts("Fallo el bind, pero puede ser que fallar esté bien");
 	} else {
 		puts("Bind Ok");
+
 	}
 
 	freeaddrinfo(serverInfo); // Ya no lo vamos a necesitar
@@ -135,4 +137,6 @@ void cerrarSocket(int fdSocket) {
 }
 
 //Select
+
+
 

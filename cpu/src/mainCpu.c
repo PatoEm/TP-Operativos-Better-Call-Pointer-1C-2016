@@ -16,15 +16,23 @@ int main(void) {
 	/*Conecto con el núcleo primero que nada Author: Dr.Mengueche*/
 
 	int clienteNucleo=crearCliente(nucleoPort,nucleoPort);
+	char* mensaje;
+	mensaje=(char*)malloc(12*sizeof(char));
+	if(mensaje==NULL){
+		printf("falló al reservar la memoria");
+		return -1;
+	}
+	recibirMensaje(clienteNucleo,mensaje,12*sizeof(char));
+	printf("%s",mensaje);
 
 	/*Conecto con el cpu. Author: Dr.Mengueche*/
 
 	int clienteUMC=crearCliente(ipUMC,umcPort);
+	enviarMensaje(clienteUMC,mensaje,12*sizeof(char));
 
 
 	/*Imprimo al cliente. Author: Dr.Mengueche*/
 
-	printf("mi número de cliente es: %i", clienteNucleo);
 
 	return EXIT_SUCCESS;
 

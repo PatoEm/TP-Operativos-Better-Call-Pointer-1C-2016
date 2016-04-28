@@ -19,16 +19,17 @@ int main(void) {
 
 	puts("Inicio UMC");
 
-
-	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
-
-
-
 	int fdSocketCPU= crearSocketServidor(puertoCPU);
 	escucharSocket(fdSocketCPU,5);
 	int conexionCPU = aceptarConexiones(fdSocketCPU);
-
-
+	char* mensaje;
+	mensaje=(char*)malloc(12*sizeof(char));
+	if(mensaje==NULL){
+		printf("falló al reservar la memoria");
+		return -1;
+	}
+	recibirMensaje(conexionCPU,mensaje,12*sizeof(char));
+	printf("%s",mensaje);
 
 	/*Socket funcionando en la primera, falla el bind en la segunda. Testeado by Dr.Mengueche*/
 
@@ -36,10 +37,13 @@ int main(void) {
 	escucharSocket(fdSocketNucleo,1);
 	int aceptarNucleo=aceptarConexiones(fdSocketNucleo);
 
-	printf("número de cliente %d",fdSocketUMC);
+
+	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
+	enviarMensaje(fdSocketUMC,mensaje,12*sizeof(char));
 
 
 	//printf("el socket de la umc es:%d y el del nucleo es: %d",fdSocketUMC, aceptarNucleo);
+
 	return EXIT_SUCCESS;
 
 }
