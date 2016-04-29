@@ -15,7 +15,7 @@ int main(void) {
 
 	/*Conecto con el núcleo primero que nada Author: Dr.Mengueche*/
 
-	int clienteNucleo=crearCliente(nucleoPort,nucleoPort);
+	int clienteNucleo=crearCliente(ipNucleo,nucleoPort);
 	char* mensaje;
 	mensaje=(char*)malloc(12*sizeof(char));
 	if(mensaje==NULL){

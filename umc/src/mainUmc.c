@@ -15,9 +15,16 @@ int main(void) {
 
 	leerArchivoDeConfiguracion("configumc");
 
+	puts("Inicio UMC");
+
+	/*Socket funcionando en la primera, falla el bind en la segunda. Testeado by Dr.Mengueche*/
+
+	int fdSocketNucleo= crearSocketServidor(puertoNucleo);
+	escucharSocket(fdSocketNucleo,1);
+	int aceptarNucleo=aceptarConexiones(fdSocketNucleo);
+
 	/*no tengo idea para que sirve esto, lo puedo romper? COMENTEMOS QUE HACEMOS*/
 
-	puts("Inicio UMC");
 
 	int fdSocketCPU= crearSocketServidor(puertoCPU);
 	escucharSocket(fdSocketCPU,5);
@@ -31,15 +38,10 @@ int main(void) {
 	recibirMensaje(conexionCPU,mensaje,12*sizeof(char));
 	printf("%s",mensaje);
 
-	/*Socket funcionando en la primera, falla el bind en la segunda. Testeado by Dr.Mengueche*/
-
-	int fdSocketNucleo= crearSocketServidor(puertoNucleo);
-	escucharSocket(fdSocketNucleo,1);
-	int aceptarNucleo=aceptarConexiones(fdSocketNucleo);
-
-
 	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
 	enviarMensaje(fdSocketUMC,mensaje,12*sizeof(char));
+
+
 
 
 	//printf("el socket de la umc es:%d y el del nucleo es: %d",fdSocketUMC, aceptarNucleo);
