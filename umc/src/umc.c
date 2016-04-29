@@ -13,7 +13,7 @@ void setearValores(t_config * archivoConfig) {
 		puertoNucleo = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
 		puertoCPU = config_get_string_value(archivoConfig, "PUERTO_CPU");
 		ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
-		puerto_Swap = config_get_int_value(archivoConfig, "PUERTO_SWAP");
+		puerto_Swap = config_get_string_value(archivoConfig, "PUERTO_SWAP");
 		marcos = config_get_int_value(archivoConfig, "MARCOS");
 		marco_Size = config_get_int_value(archivoConfig,"MARCO_SIZE");
 		marco_x_proc = config_get_int_value(archivoConfig,"MARCO_X_PROC");

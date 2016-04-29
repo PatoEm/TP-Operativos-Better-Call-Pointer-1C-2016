@@ -13,7 +13,7 @@ int main(void) {
     char* mensaje;
     mensaje=(char*)malloc(12*sizeof(char));
     if(mensaje==NULL){
-    	printf("falló al reservar la memoria");
+    	puts("falló al reservar la memoria");
     	return -1;
     }
     recibirMensaje(fdSocketCliente,mensaje,12*sizeof(char));

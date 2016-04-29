@@ -61,7 +61,7 @@ int crearSocketServidor(const char * puerto) {
 			serverInfo->ai_addrlen);
 	puts("4");
 	if (pruebabind == ERRORPUTO) {
-		puts("Fallo el bind, pero puede ser que fallar esté bien");
+		puts("Fallo el bind, o ya habia sido realizado");
 	} else {
 		puts("Bind Ok");
 
