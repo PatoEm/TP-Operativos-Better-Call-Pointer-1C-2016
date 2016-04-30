@@ -30,12 +30,12 @@ int main(void) {
 	int fdSocketCliente1= aceptarConexiones(fdSocketConsola);
 
 	char* mensaje;
-	mensaje=(char*)malloc(12*sizeof(char));
+	mensaje=(char*)malloc(11*sizeof(char));
 	if(mensaje==NULL){
 		puts("falló al reservar la memoria");
 		return -1;
 	}
-	recibirMensaje(fdSocketCliente1,mensaje,12*sizeof(char));
+	recibirMensaje(fdSocketCliente1,mensaje,11*sizeof(char));
 	puts(mensaje);
 
 	// creo el servidor para el cpu y lo acepto. Author: Dr.Mengueche
@@ -45,7 +45,7 @@ int main(void) {
 	int fdSocketClienteCpu1=aceptarConexiones(fdSocketCpu);
 
 
-	enviarMensaje(fdSocketClienteCpu1,mensaje,12*sizeof(char));
+	enviarMensaje(fdSocketClienteCpu1,mensaje,11*sizeof(char));
 
 
 	//Se conecta con la memoria. Author: Dr.Mengueche

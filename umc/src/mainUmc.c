@@ -32,12 +32,12 @@ int main(void) {
 	escucharSocket(fdSocketCPU,5);
 	int conexionCPU = aceptarConexiones(fdSocketCPU);
 	char* mensaje;
-	mensaje=(char*)malloc(12*sizeof(char));
+	mensaje=(char*)malloc(11*sizeof(char));
 	if(mensaje==NULL){
 		puts("falló al reservar la memoria");
 		return -1;
 	}
-	recibirMensaje(conexionCPU,mensaje,12*sizeof(char));
+	recibirMensaje(conexionCPU,mensaje,11*sizeof(char));
 	puts(mensaje);
 
 
@@ -46,7 +46,7 @@ int main(void) {
 
 
 	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
-	enviarMensaje(fdSocketUMC,mensaje,12*sizeof(char));
+	enviarMensaje(fdSocketUMC,mensaje,11*sizeof(char));
 
 
 

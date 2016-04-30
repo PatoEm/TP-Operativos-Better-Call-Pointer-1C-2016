@@ -21,7 +21,7 @@ int main(void) {
 
 	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
 	//int fdSocketConsola = crearCliente("127.0.0.1","6002" );
-	enviarMensaje(fdSocketConsola,"Consola Ok",12*sizeof(char));
+	enviarMensaje(fdSocketConsola,"Consola Ok",11*sizeof(char));
 
 
 
