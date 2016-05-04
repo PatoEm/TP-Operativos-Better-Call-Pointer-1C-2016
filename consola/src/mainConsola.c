@@ -26,7 +26,7 @@ int main(void) {
 
 
 */
-	char * programa =leerProgramaAnsisop("facil.ansisop");
+		leerProgramaAnsisop("programasEjemplo/completo.ansisop");
 		puts("hola");
 
 
