@@ -4,14 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/archivosAnsisop.c \
 ../src/consola.c \
 ../src/mainConsola.c 
 
 OBJS += \
+./src/archivosAnsisop.o \
 ./src/consola.o \
 ./src/mainConsola.o 
 
 C_DEPS += \
+./src/archivosAnsisop.d \
 ./src/consola.d \
 ./src/mainConsola.d 
 

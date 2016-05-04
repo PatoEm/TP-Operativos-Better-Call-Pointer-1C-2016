@@ -9,13 +9,14 @@
  */
 #include "consola.h"
 
-
+#include "archivosAnsisop.h"
 
 
 int main(void) {
 
+	/*
 
-	/*lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS*/
+	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
     leerArchivoDeConfiguracion("configconsola");
 
 
@@ -24,7 +25,9 @@ int main(void) {
 	enviarMensaje(fdSocketConsola,"Consola Ok",11*sizeof(char));
 
 
-
+*/
+	char * programa =leerProgramaAnsisop("facil.ansisop");
+		puts("hola");
 
 
 

@@ -8,15 +8,14 @@
  ============================================================================
  */
 
+
 #include "nucleo.h"
-
-
 int main(void) {
 
 	 leerArchivoDeConfiguracion("confignucleo");
 
 
-	/*lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS*/
+	//lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS
 
 
 
@@ -51,6 +50,8 @@ int main(void) {
 	//Se conecta con la memoria. Author: Dr.Mengueche
 	//Socket UMC testeado by Dr.Mengueche
 	int fdSocketUMC=crearCliente(ipUMC,UMCPort);
+
+
 
 
 	return EXIT_SUCCESS;
