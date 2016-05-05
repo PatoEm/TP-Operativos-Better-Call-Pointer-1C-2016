@@ -12,7 +12,7 @@
 
 int main(void) {
 
-	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
+		//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
 	 leerArchivoDeConfiguracion("configconsola");
 	 
 
@@ -21,25 +21,47 @@ int main(void) {
 	enviarMensaje(fdSocketConsola,"Consola Ok",11*sizeof(char));
 
 
-	//Pido  direccion de archivo ANSISOP
 
-	char* direccionDeArchivo;
-	printf("Ingrese archivo: ");
-    	scanf("%s",direccionDeArchivo);
 
-    	//Obtengo el tamaño y contenido del archivo
-    	leerProgramaAnsisop(direccionDeArchivo);
-		//puts("hola");
+	//Reservo memoria y Pido  direccion de archivo ANSISOP
+
+
+	char* direccionDeArchivo = (char *) malloc(1000);
+	if(direccionDeArchivo==NULL){
+						printf("no se pudo reservar memoria para la ruta del Archivo");
+						return-1;
+		              }
+	direccionDeArchivo= "programasEjemplo/completo.ansisop" ; // se los dejo como prueba
+
+
+
+
+	//printf("Ingrese archivo: ");
+    	//scanf("%s",direccionDeArchivo);
+
+
+       //Obtengo el tamaño
+         tamanioArchivo(direccionDeArchivo);
+
+         //Obtengo el contenido del archivo
+         leerProgramaAnsisop(direccionDeArchivo);
+
+         //puts("hola");
 
 
 	//Envio la longitud del archivo
-	enviarMensaje(fdSocketConsola, tamanio, sizeof(long), 0);
+	enviarMensaje(fdSocketConsola, tamanio, sizeof(long));
 
 
 	//Envio el contenido del archivo
     	enviarMensaje(fdSocketConsola, buffer, tamanio+1);
 
 
+    	return 0;
+ }
+
+    	/*
+}
 	int operacionId;
 	int exit = false;
 	while(!exit){
@@ -54,7 +76,7 @@ int main(void) {
 		switch(operacionId){
 		int estadoOpe;
 
-		/*case IMPRIMIR: ;
+		case IMPRIMIR: ;
 
 			char* variable;
 			int valorDeVariable;
@@ -65,7 +87,7 @@ int main(void) {
 			for(int i =0; i< ; i++){
 				if(estadoOpe) printf("VARIABLE: %d \n%d \n"", variable,valorDeLaVariable);
 			}
-		break; */ //ESTO NOSE MUY BIEN COMO SE HACE
+		break;
 		case IMPRIMIRTEXTO: ;
 
 			long longitudDelTexto;
@@ -87,6 +109,6 @@ int main(void) {
 
 return EXIT_SUCCESS;
 }
-
+*/ //Hasta que no sepa el protolo no puedo hacerlo
 
 

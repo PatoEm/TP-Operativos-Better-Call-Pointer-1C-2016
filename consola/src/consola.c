@@ -13,9 +13,23 @@ void setearValores(t_config * archivoConfig) {
 		ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
 		nucleoPort= config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
 }
-char * leerProgramaAnsisop(char * direccionArchivo) {
+long tamanioArchivo(char * direccionArchivo) {
 
-   tamanio = tamanioArchivo(direccionArchivo);
+	FILE * fp;
+
+     fp = fopen(direccionArchivo, "r");
+	if (fp == NULL)
+		puts("Error al abrir archivo");
+	else {
+		fseek(fp, 0, SEEK_END);
+		tamanio = ftell(fp);
+		fclose(fp);
+		printf("El tamaño de %s es: %ld bytes.\n\n", direccionArchivo, tamanio);
+	}
+
+	return tamanio;
+}
+ char * leerProgramaAnsisop(char * direccionArchivo) {
 
 	FILE * fp;
 
@@ -42,21 +56,8 @@ char * leerProgramaAnsisop(char * direccionArchivo) {
 
 	}
 	return "";
+
 }
 
-long tamanioArchivo(char * direccionArchivo) {
 
-	FILE * fp;
 
-     fp = fopen(direccionArchivo, "r");
-	if (fp == NULL)
-		puts("Error al abrir archivo");
-	else {
-		fseek(fp, 0, SEEK_END);
-		tamanio = ftell(fp);
-		fclose(fp);
-		printf("El tamaño de %s es: %ld bytes.\n\n", direccionArchivo, tamanio);
-	}
-
-	return tamanio;
-}

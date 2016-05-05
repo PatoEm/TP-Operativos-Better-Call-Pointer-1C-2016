@@ -28,9 +28,12 @@ char* nucleoPort;
 long tamanio;
 char* buffer;
 
+
 //prototipos
 //void leerArchivoDeConfiguracion();
 //int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
 //void setearValores(t_config * archivoConfig);
+long tamanioArchivo(char * direccionArchivo);
+char * leerProgramaAnsisop(char * direccionArchivo);
 
 #endif /* CONSOLA_H_ */
