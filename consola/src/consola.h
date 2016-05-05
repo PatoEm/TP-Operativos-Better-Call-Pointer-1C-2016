@@ -16,11 +16,17 @@
 #include <commons/log.h>
 #include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/conexiones.h>
+
+// define
 #define FAIL -1
+#define IMPRIMIR 3
+#define IMPRIMIRTEXTO 4
 
 //variables
 char* ipNucleo;
 char* nucleoPort;
+long tamanio;
+char* buffer;
 
 //prototipos
 //void leerArchivoDeConfiguracion();
