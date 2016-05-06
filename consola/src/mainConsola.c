@@ -14,6 +14,9 @@
 
 int main(void) {
 
+	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
+	 leerArchivoDeConfiguracion("configconsola");
+	 
 	char* contenidoArchivo;
 	
 	contenidoArchivo=(char*)malloc(sizeof(char*));
@@ -22,8 +25,7 @@ int main(void) {
 		return-1;
 	}
 	
-	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
-	 leerArchivoDeConfiguracion("configconsola");
+
 
 
 	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
@@ -32,8 +34,8 @@ int main(void) {
 
 
 
-		leerProgramaAnsisop("programasEjemplo/completo.ansisop");
-		puts("hola");
+	leerProgramaAnsisop("programasEjemplo/completo.ansisop");
+	puts("hola");
 
 
 
