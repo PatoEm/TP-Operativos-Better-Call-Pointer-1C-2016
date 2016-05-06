@@ -14,10 +14,16 @@
 
 int main(void) {
 
-	/*
-
+	char* contenidoArchivo;
+	
+	contenidoArchivo=(char*)malloc(sizeof(char*));
+	if(contenidoArchivo==NULL){
+		printf("no se pudo reservar memoria para el archivo");
+		return-1;
+	}
+	
 	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
-    leerArchivoDeConfiguracion("configconsola");
+	 leerArchivoDeConfiguracion("configconsola");
 
 
 	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
@@ -25,7 +31,7 @@ int main(void) {
 	enviarMensaje(fdSocketConsola,"Consola Ok",11*sizeof(char));
 
 
-*/
+
 		leerProgramaAnsisop("programasEjemplo/completo.ansisop");
 		puts("hola");
 
