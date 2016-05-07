@@ -26,7 +26,7 @@ int main(void) {
 	//Reservo memoria y Pido  direccion de archivo ANSISOP
 
 
-	char* direccionDeArchivo = (char *) malloc(1000);
+	char* direccionDeArchivo = (char *) malloc(150);
 	if(direccionDeArchivo==NULL){
 						printf("no se pudo reservar memoria para la ruta del Archivo");
 						return-1;
@@ -43,7 +43,7 @@ int main(void) {
        //Obtengo el tamaño
          tamanioArchivo(direccionDeArchivo);
 
-         //Obtengo el contenido del archivo
+         //Obtengo el contMienido del archivo
          leerProgramaAnsisop(direccionDeArchivo);
 
          //puts("hola");
@@ -110,5 +110,3 @@ int main(void) {
 return EXIT_SUCCESS;
 }
 */ //Hasta que no sepa el protolo no puedo hacerlo
-
-
