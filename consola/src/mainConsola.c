@@ -12,8 +12,8 @@
 
 int main(void) {
 
-		//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
-	 leerArchivoDeConfiguracion("configconsola");
+	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
+	leerArchivoDeConfiguracion("configconsola");
 	 
 
 	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
@@ -25,39 +25,30 @@ int main(void) {
 
 	//Reservo memoria y Pido  direccion de archivo ANSISOP
 
-
+	char* paqueteAEnviar;
 	char* direccionDeArchivo = (char *) malloc(150);
-	if(direccionDeArchivo==NULL){
-						printf("no se pudo reservar memoria para la ruta del Archivo");
-						return-1;
-		              }
-	direccionDeArchivo= "programasEjemplo/completo.ansisop" ; // se los dejo como prueba
+	verificarMemoria(direccionDeArchivo);
+
+	printf("Ingrese archivo: ");
+    scanf("%s",direccionDeArchivo);
 
 
+    //Obtengo el tamaño
+    tamArchivo(direccionDeArchivo);
+
+    //Obtengo el contMienido del archivo
+    leerProgramaAnSISOP(direccionDeArchivo);
+    paqueteAEnviar=(char* )malloc(tamanio+sizeof(char)*6);
+    verificarMemoria(paqueteAEnviar);
+    string_append(&paqueteAEnviar,"00");
+    string_append(&paqueteAEnviar,string_itoa(tamanio));
+    string_append(&paqueteAEnviar,buffer);
+
+	enviarMensaje(fdSocketConsola,paqueteAEnviar, tamanio+sizeof(char)*7);
+	free(paqueteAEnviar);
 
 
-	//printf("Ingrese archivo: ");
-    	//scanf("%s",direccionDeArchivo);
-
-
-       //Obtengo el tamaño
-         tamanioArchivo(direccionDeArchivo);
-
-         //Obtengo el contMienido del archivo
-         leerProgramaAnsisop(direccionDeArchivo);
-
-         //puts("hola");
-
-
-	//Envio la longitud del archivo
-	enviarMensaje(fdSocketConsola, tamanio, sizeof(long));
-
-
-	//Envio el contenido del archivo
-    	enviarMensaje(fdSocketConsola, buffer, tamanio+1);
-
-
-    	return 0;
+    return 0;
  }
 
     	/*

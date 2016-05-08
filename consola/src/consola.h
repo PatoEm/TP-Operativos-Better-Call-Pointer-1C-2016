@@ -12,7 +12,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/config.h>
-#include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/conexiones.h>
@@ -25,7 +24,7 @@
 //variables
 char* ipNucleo;
 char* nucleoPort;
-long tamanio;
+int tamanio;
 char* buffer;
 
 
@@ -33,7 +32,7 @@ char* buffer;
 //void leerArchivoDeConfiguracion();
 //int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
 //void setearValores(t_config * archivoConfig);
-long tamanioArchivo(char * direccionArchivo);
-char * leerProgramaAnsisop(char * direccionArchivo);
+int tamArchivo(char* direccionArchivo);
+char* leerProgramaAnSISOP(char* direccionArchivo);
 
 #endif /* CONSOLA_H_ */

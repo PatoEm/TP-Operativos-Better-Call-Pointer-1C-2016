@@ -6,6 +6,15 @@
  */
 #include "conexiones.h"
 
+
+int verificarMemoria(void*algo){
+	if(algo==NULL){
+							printf("no se pudo reservar memoria para la ruta del Archivo");
+							return-1;
+			              }
+	return 0;
+}
+
 void leerArchivoDeConfiguracion(const char * direccionArchivo) {
 
              t_config* archivoDeConfiguracion;

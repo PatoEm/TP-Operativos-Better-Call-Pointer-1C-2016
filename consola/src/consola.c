@@ -13,7 +13,8 @@ void setearValores(t_config * archivoConfig) {
 		ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
 		nucleoPort= config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
 }
-long tamanioArchivo(char * direccionArchivo) {
+
+int tamArchivo(char * direccionArchivo) {
 
 	FILE * fp;
 
@@ -24,12 +25,13 @@ long tamanioArchivo(char * direccionArchivo) {
 		fseek(fp, 0, SEEK_END);
 		tamanio = ftell(fp);
 		fclose(fp);
-		printf("El tamaño de %s es: %ld bytes.\n\n", direccionArchivo, tamanio);
+		printf("El tamaño de %s es: %d bytes.\n\n", direccionArchivo, tamanio);
 	}
 
 	return tamanio;
 }
- char * leerProgramaAnsisop(char * direccionArchivo) {
+
+ char * leerProgramaAnSISOP(char * direccionArchivo) {
 
 	FILE * fp;
 
