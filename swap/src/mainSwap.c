@@ -7,16 +7,28 @@ int main(void) {
 
     /*Se conecta a la UMC con el swap. LOCO COMENTEN!!!*/
     /*Funciona una vez. Falla el bind en la segunda. Testeado by Dr.Mengueche*/
+    int codigoDeMensaje;
     int fdSocketUMC = crearSocketServidor(umcPort);
     escucharSocket(fdSocketUMC, 1);
     int fdSocketCliente= aceptarConexiones(fdSocketUMC);
     char* mensaje;
-    mensaje=(char*)malloc(11*sizeof(char));
-    if(mensaje==NULL){
-    	puts("falló al reservar la memoria");
-    	return -1;
+    mensaje=(char*)malloc(3*sizeof(char));
+    verificarMemoria(mensaje);
+    recibirMensaje(fdSocketCliente,mensaje,2*sizeof(char));
+    mensaje[2]=20;//Centinela en c
+    codigoDeMensaje=atoi(mensaje);
+    free(mensaje);
+    switch(codigoDeMensaje){
+    	case RECIBIRTAMANIO;//recibo tamaño de mi memoria y la inicializo
+    		char* tamanioSwap= (char*)malloc(8*sizeof(char));
+    		recibirMensaje(fdSocketCliente, tamanioSwap, 7*sizeof(char));
+    		verificarMemoria(tamanioSwap);
+    		tamanioSwap[7]=20;//centinela de c
+
+
     }
-    recibirMensaje(fdSocketCliente,mensaje,11*sizeof(char));
+
+
     printf("%s",mensaje);
 
 	printf("%d",fdSocketCliente);

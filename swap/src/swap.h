@@ -17,6 +17,7 @@
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
 #define FAIL -1
+#define RECIBIRTAMANIO 1
 
 //variables
 char* ipUMC;
