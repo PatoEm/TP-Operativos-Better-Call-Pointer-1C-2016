@@ -1,12 +1,6 @@
-/*
- * conexiones.h
- *
- *  Created on: 26/4/2016
- *      Author: utnso
- */
 
-#ifndef LIBRERIASCOMPARTIDAS_CONEXIONES_H_
-#define LIBRERIASCOMPARTIDAS_CONEXIONES_H_
+#ifndef LIBRERIASCOMPARTIDAS_ARCHIVOSYLOGSYMAS_H_
+#define LIBRERIASCOMPARTIDAS_ARCHIVOSYLOGSYMAS_H_
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,6 +11,8 @@
 #include <commons/config.h>
 #define FAIL -1
 
+t_log * logger;
+
 int verificarMemoria(void*algo);
 
 void leerArchivoDeConfiguracion(const char * direccionArchivo);
@@ -25,4 +21,6 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
 
 void setearValores(t_config * archivoConfig);
 
-#endif /* LIBRERIASCOMPARTIDAS_CONEXIONES_H_ */
+void crearLogger(int );
+
+#endif /* LIBRERIASCOMPARTIDAS_ARCHIVOSYLOGSYMAS_H_ */

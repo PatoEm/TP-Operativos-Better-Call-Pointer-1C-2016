@@ -11,13 +11,12 @@
 
 int main(void) {
 
-
-
 	leerArchivoDeConfiguracion("configumc");
+	crearLogger(1);
 
 	puts("Inicio UMC");
 
-
+	char * memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 
 	//Socket funcionando en la primera, falla el bind en la segunda. Testeado by Dr.Mengueche
 
@@ -41,10 +40,6 @@ int main(void) {
 	puts(mensaje);
 
 
-
-
-
-
 	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
 	enviarMensaje(fdSocketUMC,mensaje,11*sizeof(char));
 
@@ -52,6 +47,8 @@ int main(void) {
 
 
 	//printf("el socket de la umc es:%d y el del nucleo es: %d",fdSocketUMC, aceptarNucleo);
+
+	liberarMemoria(memoriaReal); //Una vez terminado, libero toda mi memoria real
 
 	return EXIT_SUCCESS;
 

@@ -13,8 +13,8 @@
 #include <stdlib.h>
 #include <commons/config.h>
 #include <commons/log.h>
+#include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
-#include <libreriasCompartidas/conexiones.h>
 
 // define
 #define FAIL -1

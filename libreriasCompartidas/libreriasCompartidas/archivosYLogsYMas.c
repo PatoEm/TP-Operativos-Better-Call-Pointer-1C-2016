@@ -4,7 +4,7 @@
  *  Created on: 26/4/2016
  *      Author: utnso
  */
-#include "conexiones.h"
+#include "archivosYLogsYMas.h"
 
 
 int verificarMemoria(void*algo){
@@ -38,4 +38,22 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 	}
 	return FAIL;
 }
+
+void crearLogger(int pantalla) //recibe 0 para log solo por archivo y recibe 1 para log por archivo y por pantalla
+{
+	if (pantalla)
+		logger = log_create("log.txt", "Cache13",true, LOG_LEVEL_INFO);
+	else
+		logger = log_create("log.txt", "Cache13",false, LOG_LEVEL_INFO);
+
+    /*
+     * FUNCIONES UTILIZABLES PARA EL LOGGEO, EJEMPLOS:
+    log_trace(logger, "LOG A NIVEL %s", "TRACE");
+    log_debug(logger, "LOG A NIVEL %s", "DEBUG");
+    log_info(logger, "LOG A NIVEL %s", "INFO");
+    log_warning(logger, "LOG A NIVEL %s", "WARNING");
+    log_error(logger, "LOG A NIVEL %s", "ERROR");
+	*/
+
+} //Probado, anda piola
 
