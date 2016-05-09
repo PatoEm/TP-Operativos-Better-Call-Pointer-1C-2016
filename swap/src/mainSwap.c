@@ -24,8 +24,21 @@ int main(void) {
     		recibirMensaje(fdSocketCliente, tamanioSwap, 7*sizeof(char));
     		verificarMemoria(tamanioSwap);
     		tamanioSwap[7]=20;//centinela de c
-
-
+    		int swap_tamanio;
+    		swap_tamanio=atoi (tamanioSwap);
+    		free(tamanioSwap);
+    		FILE *pf;
+    		pf = fopen ("archivoSwap.txt", "wb+");
+    		if (pf != NULL){
+    			printf ("\nEl archivo Swap se ha creado correctamente");
+       			else {
+       				("\nNo se pudo crear el archivo Swap"); // es solo para verificar si el archivo se creo
+       			}
+    		}
+    		for(int i=1, swap_tamanio, i++){
+    			fwrite ("/0",sizeof[char],1,fp);
+    		}
+    		
     }
 
 
