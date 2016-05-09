@@ -42,9 +42,9 @@ int verificarExistenciaDeArchivo(char* rutaArchivoConfig) {
 void crearLogger(int pantalla) //recibe 0 para log solo por archivo y recibe 1 para log por archivo y por pantalla
 {
 	if (pantalla)
-		logger = log_create("log.txt", "Cache13",true, LOG_LEVEL_INFO);
+		logger = log_create("log.txt", "Elestac",true, LOG_LEVEL_INFO);
 	else
-		logger = log_create("log.txt", "Cache13",false, LOG_LEVEL_INFO);
+		logger = log_create("log.txt", "Elestac",false, LOG_LEVEL_INFO);
 
     /*
      * FUNCIONES UTILIZABLES PARA EL LOGGEO, EJEMPLOS:
