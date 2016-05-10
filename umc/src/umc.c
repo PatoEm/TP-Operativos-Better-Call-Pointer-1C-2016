@@ -40,7 +40,6 @@ void liberarMemoria(char * memoria_para_liberar)
 
 //******************************************************************************
 
-/*
 int escuchoMuchasConexiones()
 {
     fd_set master;      // maestro es el conjunto de file descriptors que están actualmente conectados
@@ -63,7 +62,7 @@ int escuchoMuchasConexiones()
 
     myaddr.sin_family = AF_INET;
     myaddr.sin_addr.s_addr = INADDR_ANY;
-    myaddr.sin_port = htons();
+    myaddr.sin_port = htons(puertoCPU);
     memset(&(myaddr.sin_zero), '\0', 8);
 
     // obtener socket a la escucha
@@ -150,4 +149,3 @@ int escuchoMuchasConexiones()
 
     return 0;
 }
-*/
