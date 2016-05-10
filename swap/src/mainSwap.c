@@ -19,7 +19,7 @@ int main(void) {
     codigoDeMensaje=atoi(mensaje);
     free(mensaje);
     switch(codigoDeMensaje){
-    	case RECIBIRTAMANIO;//recibo tamaño de mi memoria y la inicializo
+    	case RECIBIRTAMANIO :{//recibo tamaño de mi memoria y la inicializo
     		char* tamanioSwap= (char*)malloc(8*sizeof(char));
     		recibirMensaje(fdSocketCliente, tamanioSwap, 7*sizeof(char));
     		verificarMemoria(tamanioSwap);
@@ -27,17 +27,10 @@ int main(void) {
     		int swap_tamanio;
     		swap_tamanio=atoi (tamanioSwap);
     		free(tamanioSwap);
-    		FILE *pf;
-    		pf = fopen ("archivoSwap.txt", "wb+");
-    		if (pf != NULL){
-    			printf ("\nEl archivo Swap se ha creado correctamente");
-       			else {
-       				("\nNo se pudo crear el archivo Swap"); // es solo para verificar si el archivo se creo
-       			}
-    		}
-    		for(int i=1, swap_tamanio, i++){
-    			fwrite ("/0",sizeof[char],1,fp);
-    		}
+    		system("dd if=/dev/zero of=miSwap bs= count=1");
+    		break;
+    	}
+
     		
     }
 
