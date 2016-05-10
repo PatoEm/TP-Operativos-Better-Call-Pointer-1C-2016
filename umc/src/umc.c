@@ -40,7 +40,7 @@ void liberarMemoria(char * memoria_para_liberar)
 
 //******************************************************************************
 
-int escuchoMuchasConexiones()
+void escuchoMuchasConexiones()
 {
     fd_set master;      // maestro es el conjunto de file descriptors que están actualmente conectados
     fd_set read_fds;    // conjunto temporal de descriptores de fichero para select()
