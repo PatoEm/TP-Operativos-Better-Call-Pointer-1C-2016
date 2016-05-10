@@ -146,6 +146,4 @@ int escuchoMuchasConexiones()
             }
         }
     }
-
-    return 0;
 }
