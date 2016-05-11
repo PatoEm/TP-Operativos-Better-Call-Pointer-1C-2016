@@ -17,6 +17,41 @@ int main(void) {
 }
 
 
+//Creo espacioLibre
+    espacioLibre * crearEspacioLibre (int inicio, int tamanio) {
+    	espacioLibre * nuevoEspacioLibre = malloc(sizeof(espacioLibre));
+    	nuevoEspacioLibre->inicio = inicio;
+    	nuevoEspacioLibre->tamanio= tamanio;
+    	return nuevoEspacioLibre;
+    }
+
+    void agregarEspacioLibre(int inicio, int swap_tamanio) {
+    	espacioLibre * nuevoEspacioLibre = crearEspacioLibre (inicio, swap_tamanio);
+    	list_add(listaEspacioLibre , nuevoEspacioLibre);
+    }
+
+  //Creo espacioAsignado
+  espacioAsignado * crearEspacioAsignado (bool bitMap,int numDePag,int posicionDePag, int inicio, int tamanio, int pid) { //teoricamente tiene que estar el pid, lo que no creo es que este bien utilizado acá
+
+  	espacioAsignado  * espacio = malloc(sizeof(espacioAsignado ));
+
+  	espacio->bitMap= bitMap;
+  	espacio->inicio = inicio;
+  	espacio->tamanio= tamanio;
+  	espacio->pid = pid;
+    	espacio->numDePag= numDePag;
+     	espacio->posicionDePag= posicionDePag;
+
+     	return espacio;
+    }
+
+  void agregarEspacioAsigando(bool bitMap,int numDePag,int posicionDePag, int inicio, int tamanio, int pid) {
+           	espacioAsignado * nuevoEspacioAsignado = crearEspacioLibre(bitMap,numDePag,posicionDePag,inicio,tamanio,pid);
+           	list_add(listaEspacioLibre , nuevoEspacioAsignado);
+           }
+
+/*  int  verificarSiHayEspacio(int tamanio){
+                   }
 /*
 
     //Creo listas de espacio libre y espacio asignado

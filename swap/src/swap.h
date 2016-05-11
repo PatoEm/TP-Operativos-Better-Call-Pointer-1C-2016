@@ -60,13 +60,17 @@ void* mappearArchivo(char* );
 
  typedef struct{
   	int inicio;
-  	int swap_tamanio;
+  	int tamanio;
   }espacioLibre;
 
   typedef struct{
   	int pid;
   	int inicio;
-  	int swap_tamanio;
+  	int tamanio;
+  	bool bitMap;
+  	int numDePag;
+  	int posicionDePag;
+
   }espacioAsignado;
 
 
