@@ -5,13 +5,11 @@
  *      Author: utnso
  */
 #include "umc.h"
-#define manejarError(msg) {perror(msg); abort();}
+//#define manejarError(msg) {perror(msg); abort();} Quien garcha hizo esto?
 
 
 void setearValores(t_config * archivoConfig) {
-		//puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
-		puertoNucleo = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
-		puertoCPU = config_get_string_value(archivoConfig, "PUERTO_CPU");
+		puertoEscucha = config_get_string_value(archivoConfig, "PUERTO");
 		ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
 		puerto_Swap = config_get_string_value(archivoConfig, "PUERTO_SWAP");
 		marcos = config_get_int_value(archivoConfig, "MARCOS");
@@ -19,7 +17,6 @@ void setearValores(t_config * archivoConfig) {
 		marco_x_proc = config_get_int_value(archivoConfig,"MARCO_X_PROC");
 		entradas_TLB = config_get_int_value(archivoConfig,"ENTRADAS_TLB");
 		espera = config_get_int_value(archivoConfig,"RETARDO");
-		//puertoTCP = config_get_string_value(archivoConfig, "PUERTO");
 }
 
 char * reservarMemoria(int cantidadFrames, int capacidadFrames)
@@ -30,15 +27,12 @@ char * reservarMemoria(int cantidadFrames, int capacidadFrames)
 	return memory;
 }
 
-//********************************************************SI, SEPARO LAS FUNCIONES ASI, AL QUE NO LE GUSTE ME LO COMO EN UN PATY
 
 void liberarMemoria(char * memoria_para_liberar)
 {
 	free(memoria_para_liberar);
 	puts("Memoria liberada");
 }
-
-//******************************************************************************
 
 void escuchoMuchasConexiones()
 {
@@ -52,7 +46,7 @@ void escuchoMuchasConexiones()
     int fdmax;        // número máximo de file descriptors
     int listener;     // descriptor de socket a la escucha
     int newfd;        // descriptor de socket de nueva conexión aceptada
-    char buf[256];    // buffer para datos del cliente
+    char buf[256];    // buffer para datos del cliente ESTO VA A TENER EL TAMAÑO DE LO QUE MANDEMOS
     int nbytes;
     int yes=1;        // para setsockopt() SO_REUSEADDR, más abajo
     int addrlen;
@@ -62,7 +56,7 @@ void escuchoMuchasConexiones()
 
     myaddr.sin_family = AF_INET;
     myaddr.sin_addr.s_addr = INADDR_ANY;
-    myaddr.sin_port = htons(puertoCPU);
+    myaddr.sin_port = htons(puertoEscucha);
     memset(&(myaddr.sin_zero), '\0', 8);
 
     // obtener socket a la escucha
@@ -147,3 +141,4 @@ void escuchoMuchasConexiones()
         }
     }
 }
+

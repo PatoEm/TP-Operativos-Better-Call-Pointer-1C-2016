@@ -18,16 +18,18 @@ int main(void) {
 
 	char * memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 
-	//Socket funcionando en la primera, falla el bind en la segunda. Testeado by Dr.Mengueche
 
-	int fdSocketNucleo= crearSocketServidor(puertoNucleo);
+	escuchoMuchasConexiones();
+
+/*
+	int fdSocketNucleo= crearSocketServidor(puertoEscucha);
 	escucharSocket(fdSocketNucleo,1);
 	int aceptarNucleo=aceptarConexiones(fdSocketNucleo);
-
+*/
 	//no tengo idea para que sirve esto, lo puedo romper? COMENTEMOS QUE HACEMOS
 
 
-	int fdSocketCPU= crearSocketServidor(puertoCPU);
+	int fdSocketCPU= crearSocketServidor(puertoEscucha);
 	escucharSocket(fdSocketCPU,5);
 	int conexionCPU = aceptarConexiones(fdSocketCPU);
 	char* mensaje;

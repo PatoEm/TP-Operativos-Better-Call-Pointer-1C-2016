@@ -15,10 +15,11 @@
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <pthread.h>
 #define FAIL -1
 
 //parametros
-char* puertoTCP;
+char* puertoEscucha;
 char* ip_Swap;
 char* puerto_Swap;
 char* marcos;
@@ -26,10 +27,10 @@ char* marco_Size;
 char* marco_x_proc;
 char* entradas_TLB;
 char* espera;
-char* puertoNucleo;
-char* puertoCPU;
 
+//Prototipos
 char * reservarMemoria(int , int );
 void liberarMemoria(char * );
+void escuchoMuchasConexiones();
 
 #endif /* UMC_H_ */

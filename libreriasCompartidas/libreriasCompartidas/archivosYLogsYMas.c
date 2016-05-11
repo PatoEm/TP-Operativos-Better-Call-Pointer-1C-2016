@@ -57,3 +57,5 @@ void crearLogger(int pantalla) //recibe 0 para log solo por archivo y recibe 1 p
 
 } //Probado, anda piola
 
+
+

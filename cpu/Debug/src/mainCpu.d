@@ -3,9 +3,9 @@ src/mainCpu.d: ../src/mainCpu.c ../src/cpu.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/dictionary.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/node.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/log.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/conexiones.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h
 
 ../src/cpu.h:
 
@@ -17,8 +17,8 @@ src/mainCpu.d: ../src/mainCpu.c ../src/cpu.h \
 
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/log.h:
 
-/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h:
-
-/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/conexiones.h:
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h:
