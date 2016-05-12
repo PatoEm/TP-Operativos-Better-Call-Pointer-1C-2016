@@ -17,7 +17,7 @@ void setearValores(t_config * archivoConfig) {
 int tamArchivo(char * direccionArchivo) {
 
 	FILE * fp;
-
+	int tamanio;
      fp = fopen(direccionArchivo, "r");
 	if (fp == NULL)
 		puts("Error al abrir archivo");
@@ -33,6 +33,8 @@ int tamArchivo(char * direccionArchivo) {
 
  char * leerProgramaAnSISOP(char * direccionArchivo) {
 
+	int tamanio=tamArchivo(direccionArchivo);
+
 	FILE * fp;
 
 	fp = fopen(direccionArchivo, "r");
@@ -40,7 +42,7 @@ int tamArchivo(char * direccionArchivo) {
 	if (fp == NULL)
 		puts("Error al abrir archivo");
 	else {
-		 buffer = (char *) malloc(tamanio);
+		char* buffer = (char *) malloc(tamanio);
 			if(buffer==NULL){
 				printf("no se pudo reservar memoria para el archivo");
 				return-1;

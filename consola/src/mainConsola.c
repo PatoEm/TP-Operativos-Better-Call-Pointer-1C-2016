@@ -17,12 +17,6 @@ int main(void) {
 	 
 
 	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
-	//int fdSocketConsola = crearCliente("127.0.0.1","6002" );
-	enviarMensaje(fdSocketConsola,"Consola Ok",11*sizeof(char));
-
-
-
-
 	//Reservo memoria y Pido  direccion de archivo ANSISOP
 
 	char* paqueteAEnviar;
@@ -34,19 +28,19 @@ int main(void) {
 
 
     //Obtengo el tamaño
-    tamArchivo(direccionDeArchivo);
+    int elTamanio=tamArchivo(direccionDeArchivo);
 
     //Obtengo el contMienido del archivo
-    leerProgramaAnSISOP(direccionDeArchivo);
-    paqueteAEnviar=(char* )malloc(tamanio+sizeof(char)*6);
-    verificarMemoria(paqueteAEnviar);
-    string_append(&paqueteAEnviar,"00");
-    string_append(&paqueteAEnviar,string_itoa(tamanio));
-    string_append(&paqueteAEnviar,buffer);
-
-	enviarMensaje(fdSocketConsola,paqueteAEnviar, tamanio+sizeof(char)*7);
-	free(paqueteAEnviar);
-
+    char* buffer=leerProgramaAnSISOP(direccionDeArchivo);
+    char protocolo[3]="00";
+    paqueteAEnviar=(char* )malloc(elTamanio+sizeof(char)*2+sizeof(int));
+    memcpy(paqueteAEnviar,&protocolo,sizeof(char)*2);
+    memcpy(paqueteAEnviar[2],&elTamanio,4);
+    memcpy(paqueteAEnviar[5],buffer,elTamanio);
+    enviarMensaje(fdSocketConsola,paqueteAEnviar,elTamanio+sizeof(char)*2+sizeof(int));
+    free(paqueteAEnviar);
+    free(protocolo);
+    free(buffer);
 
     return 0;
  }

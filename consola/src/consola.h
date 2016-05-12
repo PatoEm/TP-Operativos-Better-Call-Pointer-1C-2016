@@ -24,8 +24,6 @@
 //variables
 char* ipNucleo;
 char* nucleoPort;
-int tamanio;
-char* buffer;
 
 
 //prototipos

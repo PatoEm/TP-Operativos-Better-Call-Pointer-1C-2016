@@ -18,3 +18,28 @@ void setearValores(t_config * archivoConfig) {
 		nucleoPort = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
 
 }
+
+t_puntero definirVariable(t_nombre_variable variable){
+
+	printf("defino una variable");
+
+}
+
+t_puntero obtenerPosicionvariable(t_nombre_variable variable){
+
+	printf("devuelvo la posición de una variable");
+
+}
+
+t_valor_variable dereferenciar(t_nombre_variable variable){
+
+	printf("dereferencio una variable");
+
+}
+
+void asignar(t_puntero puntero, t_valor_variable variable){
+
+	printf("asigno una variable");
+
+}
+

@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <commons/config.h>
 #include <commons/config.h>
+#include <parser/parser.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
