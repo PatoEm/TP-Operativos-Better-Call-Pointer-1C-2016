@@ -43,3 +43,13 @@ void asignar(t_puntero puntero, t_valor_variable variable){
 
 }
 
+t_valor_variable obtenerValorCompartida(t_nombre_compartida variable){
+
+	printf("devuelvo el valor de una variable compartida");
+
+}
+
+t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_variable valor){
+
+	printf("asigno una valorcito");
+}
