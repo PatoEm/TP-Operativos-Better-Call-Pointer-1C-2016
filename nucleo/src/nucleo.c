@@ -9,15 +9,20 @@
 #include <pthread.h>
 #define manejarError(msg) {perror(msg); abort();}
 
+t_size tamanioIndiceCodigo;
 
 typedef struct{
 	int id;
+	int tamanio;
 	t_puntero_instruccion programCounter;
 	int paginasDeCodigo;
+	int indiceDeCodigo[300][2];
 	int indiceDeEtiquetas;
 	int indiceDelStack;
-	t_medatada_program metaProgram;
-}pcb;
+	t_medatada_program* metaProgram;
+
+
+}pcb ;
 
 
 void setearValores(t_config * archivoConfig) {
@@ -32,24 +37,51 @@ void setearValores(t_config * archivoConfig) {
 		idIO = config_get_array_value(archivoConfig,"IO_IDS");
 		retardoIO = config_get_array_value(archivoConfig,"IO_SLEEP");
 		idVariableCompartida = config_get_array_value(archivoConfig,"SHARED_VARS");
+		tamanioPaginas=config_get_int_value(archivoConfig, "MARCO_SIZE");
 
 }
 
-pcb crearNuevoPcb(char * programaAnsisop)
+pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 {
+
+	t_medatada_program* metaNuevoPrograma = metadata_desde_literal(programaAnsisop);
+
+	t_intructions* instrucciones = metaNuevoPrograma->instrucciones_serializado;
+
+	t_size cantidadInstrucciones = metaNuevoPrograma->instrucciones_size;
+
+	tamanioIndiceCodigo=cantidadInstrucciones;
 	pcb pcbNuevoPrograma;
 	idProgramas=idProgramas+1;
 	pcbNuevoPrograma.id = idProgramas;
 
-	t_medatada_program metaNuevoPrograma = metadata_desde_literal(programaAnsisop);
-
 	pcbNuevoPrograma.metaProgram = metaNuevoPrograma;
 
-	pcbNuevoPrograma.programCounter = metaNuevoPrograma.instruccion_inicio;
+	pcbNuevoPrograma.programCounter = metaNuevoPrograma->instruccion_inicio;
+
+	pcbNuevoPrograma.paginasDeCodigo = cantidadPaginas(tamanioPaginas, tamanioArchivo);
+
+	pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones,instrucciones);
+
 
 	return  pcbNuevoPrograma;
 }
 
+
+int crearIndiceCodigo(t_size cantidad , t_intructions* instrucciones){
+
+	int indice[cantidad][2];
+
+	int i;
+	for ( i = 0;   i < cantidad;  i++)
+	{
+	indice[i][0]=instrucciones[i].start;
+	indice[i][1]=(instrucciones[i].offset);
+	}
+
+
+return indice;
+}
 
 void escuchoMuchasConexiones()
 {

@@ -57,5 +57,13 @@ void crearLogger(int pantalla) //recibe 0 para log solo por archivo y recibe 1 p
 
 } //Probado, anda piola
 
+int cantidadPaginas (int tamanioArchivo, int tamanioPagina){
 
+	if ((tamanioArchivo%tamanioPagina)==0){
+		return (tamanioArchivo/tamanioPagina);
+	}
+	else{
+		return ((tamanioArchivo/tamanioPagina)+1);
+	}
+}
 

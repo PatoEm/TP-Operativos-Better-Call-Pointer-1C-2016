@@ -38,7 +38,7 @@ int main(void) {
 	recibirMensaje(fdSocketCliente1,mensaje,11*sizeof(char));
 	puts(mensaje);
 
-	t_metadata_program programa1 = metadata_desde_literal(mensaje);
+	//t_metadata_program programa1 = metadata_desde_literal(mensaje);
 
 
 

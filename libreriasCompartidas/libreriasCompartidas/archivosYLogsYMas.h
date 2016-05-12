@@ -23,4 +23,6 @@ void setearValores(t_config * archivoConfig);
 
 void crearLogger(int );
 
+int cantidadPaginas (int tamanioArchivo, int tamanioPagina);
+
 #endif /* LIBRERIASCOMPARTIDAS_ARCHIVOSYLOGSYMAS_H_ */

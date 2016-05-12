@@ -35,7 +35,7 @@
    char** idVariableCompartida;
    char* ipUMC;
    char* UMCPort;
-
+   int tamanioPaginas;
    int idProgramas;
 
 
