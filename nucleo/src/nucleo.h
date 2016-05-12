@@ -17,7 +17,8 @@
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
-
+#include <parser/metadata_program.h>
+#include <parser/parser.h>
 #define FAIL -1
 
 //variables
@@ -35,7 +36,7 @@
    char* ipUMC;
    char* UMCPort;
 
-
+   int idProgramas;
 
 
 #endif /* NUCLEO_H_ */

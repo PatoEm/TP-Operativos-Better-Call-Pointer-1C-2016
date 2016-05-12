@@ -12,6 +12,7 @@
 #include "nucleo.h"
 int main(void) {
 
+	idProgramas=0;
 	 leerArchivoDeConfiguracion("confignucleo");
 
 
@@ -37,6 +38,13 @@ int main(void) {
 	recibirMensaje(fdSocketCliente1,mensaje,11*sizeof(char));
 	puts(mensaje);
 
+	t_metadata_program programa1 = metadata_desde_literal(mensaje);
+
+
+
+
+
+
 	// creo el servidor para el cpu y lo acepto. Author: Dr.Mengueche
 
 	int fdSocketCpu= crearSocketServidor(cpuPort);
@@ -44,7 +52,13 @@ int main(void) {
 	int fdSocketClienteCpu1=aceptarConexiones(fdSocketCpu);
 
 
+
+
+
 	enviarMensaje(fdSocketClienteCpu1,mensaje,11*sizeof(char));
+
+
+
 
 
 	//Se conecta con la memoria. Author: Dr.Mengueche
