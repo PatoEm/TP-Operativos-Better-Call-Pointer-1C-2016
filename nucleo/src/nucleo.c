@@ -7,16 +7,17 @@
 
 #include "nucleo.h"
 #include <pthread.h>
-#define manejarError(msg) {perror(msg); abort();}
+//#define manejarError(msg) {perror(msg); abort();}
 
-t_size tamanioIndiceCodigo;
+
+int tamanioIndiceCodigo;
 
 typedef struct{
 	int id;
 	int tamanio;
 	t_puntero_instruccion programCounter;
 	int paginasDeCodigo;
-	int indiceDeCodigo[300][2];
+	int * indiceDeCodigo[2];
 	int indiceDeEtiquetas;
 	int indiceDelStack;
 	t_medatada_program* metaProgram;
@@ -68,9 +69,9 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 }
 
 
-int crearIndiceCodigo(t_size cantidad , t_intructions* instrucciones){
+int** crearIndiceCodigo(t_size cantidad , t_intructions* instrucciones){
 
-	int indice[cantidad][2];
+	int * indice[2]=(int )malloc(cantidad);
 
 	int i;
 	for ( i = 0;   i < cantidad;  i++)
@@ -171,12 +172,11 @@ void escuchoMuchasConexiones()
                         close(i); // chau gil
                         FD_CLR(i, &master); // elimino del conjunto maestro
                     } else {
+                    		//pthread_t hilo1;
+                        	//int a = pthread_create(&hilo1,NULL,*funcionQueHaceElHIlo, argumentos);
                         // tenemos datos de algún cliente
                         for(j = 0; j <= fdmax; j++) {
                             // le envio a tooodo el mundo
-                        	//pthread_t hilo1;
-                        	//int a = pthread_create(&hilo1,NULL,*funcionQueHaceElHIlo, argumentos);
-
                             if (FD_ISSET(j, &master)) {
                                 // excepto al listener y a nosotros mismos
                                 if (j != listener && j != i) {
