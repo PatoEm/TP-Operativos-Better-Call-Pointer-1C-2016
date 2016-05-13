@@ -28,5 +28,22 @@ char* paginas;
 char* tamPagina;
 char* retCompactacion;
 
+/*
+ *
+ * typedef struct espacioLibre{
+ * 	int inicio;
+ * 	int swap_tamanio;
+ * };
+ *
+ * typedef struct espacioAsignado[
+ * 	int pid;
+ * 	int inicio;
+ * 	int swap_tamanio;
+ * };
+ *
+ * t_lista * listaEspacioLibre;
+ * t_lista * listaEspacioAsignado;
+ */
+
 
 #endif /* SWAP_H_ */
