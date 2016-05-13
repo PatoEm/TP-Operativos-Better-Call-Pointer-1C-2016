@@ -17,7 +17,7 @@ typedef struct{
 	int tamanio;
 	t_puntero_instruccion programCounter;
 	int paginasDeCodigo;
-	int * indiceDeCodigo[2];
+	int ** indiceDeCodigo;
 	int indiceDeEtiquetas;
 	int indiceDelStack;
 	t_medatada_program* metaProgram;
@@ -62,7 +62,7 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	pcbNuevoPrograma.paginasDeCodigo = cantidadPaginas(tamanioPaginas, tamanioArchivo);
 
-	pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones,instrucciones);
+	//pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones,instrucciones);
 
 
 	return  pcbNuevoPrograma;
@@ -71,8 +71,11 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 int** crearIndiceCodigo(t_size cantidad , t_intructions* instrucciones){
 
-	int * indice[2]=(int )malloc(cantidad);
+	//int * indice[2]=(int )malloc(cantidad);
+	int indice[cantidad][2];
+	//int indice;
 
+	//int ** indice = crearArrayBiDimensional(cantidad, 2);
 	int i;
 	for ( i = 0;   i < cantidad;  i++)
 	{
@@ -83,6 +86,29 @@ int** crearIndiceCodigo(t_size cantidad , t_intructions* instrucciones){
 
 return indice;
 }
+
+int **crearArrayBiDimensional(int Filas, int Columnas)
+{
+	int **array=(int **)malloc(Filas * sizeof(int*));
+	int fila;
+	for(fila=0;fila<Filas;fila++)
+	{
+		array[fila]=(int *)malloc(Columnas*sizeof(int));
+
+	}
+	return array;
+
+}
+
+void liberarArrayBidimensional(int **array, int Filas)
+{
+	int fila;
+	for (fila = 0; fila < Filas; ++fila) {
+		free(array[fila]);
+	}
+	free(array);
+}
+
 
 void escuchoMuchasConexiones()
 {
