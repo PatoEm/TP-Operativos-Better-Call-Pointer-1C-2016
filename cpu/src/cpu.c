@@ -7,7 +7,7 @@
 #include "cpu.h"
 #define manejarError(msg) {perror(msg); abort();}
 
-
+//Creo structs necesarias para el parser BY DRMENGUECHE
 AnSISOP_funciones funciones = {
 		.AnSISOP_definirVariable		= definirVariable,
 		.AnSISOP_obtenerPosicionVariable= obtenerPosicionVariable,
@@ -91,14 +91,27 @@ t_puntero_instruccion retornar(t_valor_variable retorno){
 
 }
 
+// ya implementada ByDRMENGUECHE
 int imprimir(t_valor_variable valor_mostrar){
 
-	printf("se imprime una variable");
+	char* mensaje=string_new();
+	char protocolo[3]="01";
+	memcpy(mensaje,&protocolo,2);
+	memcpy(mensaje[2],&valor_mostrar,4);
+	enviarMensaje(clienteNucleo,mensaje,6);
+
 }
 
+// ya casi implementada ByDRMENGUECHE
 int imprimirTexto(char* texto){
 
 	printf("se imprime un texto");
+	char* mensaje=string_new();
+	char protocolo[3]="02";
+	memcpy(mensaje,&protocolo,2);
+	memcpy(mensaje[2],&string_length(texto),4);
+	memcpy(mensaje[6],texto,string_length(texto));
+	enviarMensaje(clienteNucleo,mensaje,6+string_length(texto));
 
 }
 

@@ -23,7 +23,7 @@ char* ipUMC;
 char* umcPort;
 char* nucleoPort;
 char* ipNucleo;
-
+int clienteNucleo;
 
 
 #endif /* CPU_H_ */
