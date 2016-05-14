@@ -15,7 +15,7 @@ int main(void) {
 
 	//Conecto con el núcleo primero que nada Author: Dr.Mengueche
 
-	int clienteNucleo=crearCliente(ipNucleo,nucleoPort);
+	clienteNucleo=crearCliente(ipNucleo,nucleoPort);
 
 	//Conecto con el cpu. Author: Dr.Mengueche
 
