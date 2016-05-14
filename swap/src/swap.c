@@ -7,7 +7,7 @@
 
 #include "swap.h"
 
-#define manejarError(msg) {perror(msg); abort();}
+//#define manejarError(msg) {perror(msg); abort();}
 
 
 //Genero mi archivo de Swap y lo devuelvo mappeado en memoria DRMENGUECHE

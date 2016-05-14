@@ -50,6 +50,10 @@ char* retCompactacion;
 char* tamArchivo;
 char* archivoMappeado;
 
+char* crearArchivo(char* ,char* );
+
+void* mappearArchivo(char* );
+
 /*
  *
  * typedef struct espacioLibre{
