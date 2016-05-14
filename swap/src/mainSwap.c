@@ -12,6 +12,7 @@ int main(void) {
     archivoMappeado=crearArchivo(tamArchivo,nombreSwap);
 
 
+
 	return EXIT_SUCCESS;
 }
 

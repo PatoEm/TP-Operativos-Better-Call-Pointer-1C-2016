@@ -25,9 +25,11 @@ int main(void) {
 		estado=atoi(protocolo);
 		switch(estado){
 			case IMPRIMIR:{
+				char* nombre=string_new();
 				int variable;
 				recibirMensaje(fdSocketConsola,&variable,4);
-				printf("%d \n",variable);
+				recibirMensaje(fdSocketConsola,nombre,1);
+				printf("la variable %s vale: %d \n",nombre,variable);
 				break;
 			}
 			case IMPRIMIRTEXTO:{
@@ -35,7 +37,7 @@ int main(void) {
 				char* textoAImprimir=string_new();
 				recibirMensaje(fdSocketConsola,&tamanioTexto,4);
 				recibirMensaje(fdSocketConsola,textoAImprimir,tamanioTexto);
-				printf("%s",textoAImprimir);
+				printf("%s \n",textoAImprimir);
 				free(textoAImprimir);
 				break;
 

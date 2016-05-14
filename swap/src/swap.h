@@ -11,7 +11,9 @@
 #include <sys/mman.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <commons/string.h>
 #include <commons/config.h>
+#include <commons/collections/list.h>
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
@@ -54,22 +56,23 @@ char* crearArchivo(char* ,char* );
 
 void* mappearArchivo(char* );
 
-/*
- *
- * typedef struct espacioLibre{
- * 	int inicio;
- * 	int swap_tamanio;
- * };
- *
- * typedef struct espacioAsignado[
- * 	int pid;
- * 	int inicio;
- * 	int swap_tamanio;
- * };
- *
- * t_lista * listaEspacioLibre;
- * t_lista * listaEspacioAsignado;
- */
+
+
+ typedef struct{
+  	int inicio;
+  	int swap_tamanio;
+  }espacioLibre;
+
+  typedef struct{
+  	int pid;
+  	int inicio;
+  	int swap_tamanio;
+  }espacioAsignado;
+
+
+ t_list * listaEspacioLibre;
+ t_list * listaEspacioAsignado;
+
 
 
 #endif /* SWAP_H_ */
