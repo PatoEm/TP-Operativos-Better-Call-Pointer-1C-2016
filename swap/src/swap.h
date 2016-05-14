@@ -8,7 +8,7 @@
 #ifndef SWAP_H_
 #define SWAP_H_
 
-
+#include <sys/mman.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/config.h>
@@ -27,6 +27,8 @@ char* nombreSwap;
 char* paginas;
 char* tamPagina;
 char* retCompactacion;
+char* tamArchivo;
+char* archivoMappeado;
 
 /*
  *

@@ -4,50 +4,70 @@ int main(void) {
 
     leerArchivoDeConfiguracion("swapconfig");
 
-
     /*Se conecta a la UMC con el swap. LOCO COMENTEN!!!*/
     /*Funciona una vez. Falla el bind en la segunda. Testeado by Dr.Mengueche*/
-    int codigoDeMensaje;
     int fdSocketUMC = crearSocketServidor(umcPort);
     escucharSocket(fdSocketUMC, 1);
     int fdSocketCliente= aceptarConexiones(fdSocketUMC);
-    char* mensaje;
-    mensaje=(char*)malloc(3*sizeof(char));
-    verificarMemoria(mensaje);
-    recibirMensaje(fdSocketCliente,mensaje,2*sizeof(char));
-    mensaje[2]=20;//Centinela en c
-    codigoDeMensaje=atoi(mensaje);
-    free(mensaje);
-    switch(codigoDeMensaje){
-    	case RECIBIRTAMANIO :{//recibo tamaño de mi memoria y la inicializo
-    		char* tamanioSwap= (char*)malloc(8*sizeof(char));
-    		recibirMensaje(fdSocketCliente, tamanioSwap, 7*sizeof(char));
-    		verificarMemoria(tamanioSwap);
-    		tamanioSwap[7]=20;//centinela de c
-    		int swap_tamanio;
-    		swap_tamanio=atoi (tamanioSwap);
-    		free(tamanioSwap);
-    		system("dd if=/dev/zero of=miSwap bs= count=1");
-    		break;
-    	}
+    archivoMappeado=crearArchivo(tamArchivo,nombreSwap);
 
-    		
-    }
 
-    /*
+	return EXIT_SUCCESS;
+}
+
+//Genero mi archivo de Swap y lo devuelvo mappeado en memoria DRMENGUECHE
+char* crearArchivo(char* tamanio,char* nombre){
+
+	char* paraSistema=string_new();
+	string_append(&paraSistema,"dd if=/dev/zero of=");
+	string_append(&paraSistema,nombre);
+	string_append(&paraSistema," bs=");
+	string_append(&paraSistema,tamanio);
+	string_append(&paraSistema," count=1");
+	system(paraSistema);
+	return mappearArchivo(nombre);
+
+}
+
+// mappear el archivoo DRMENGUECHE
+
+void* mappearArchivo(char* filename) {
+
+	char *addr;
+	int fd;
+	struct stat sb;
+	size_t length;
+
+	fd = open(filename, O_RDWR);
+	if (fd == -1)
+		handle_error("open");
+
+	if (fstat(fd, &sb) == -1)
+		handle_error("fstat");
+
+	length = sb.st_size;
+	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,MAP_SHARED | MAP_NORESERVE, fd, 0);
+	if (addr == MAP_FAILED)
+		handle_error("mmap");
+	return addr;
+
+}
+
+
+/*
 
     //Creo listas de espacio libre y espacio asignado
      *
      * void crearListas () {
      * 		listaEspacioLibre = list_create ();
      * 		listaEspacioAsignado = list_create ();
-     * 	};
+     * 	}
      //Libero las listas
      * int espacio; //DUDO Y MUCHO QUE ESTE BIEN DEFINIDA
      * void borrarListaEspacioLibre (){
      * 		void liberarEspacioLibre (espacioLibre * espacio){
      * 				free(espacio);
-     * 		};
+     * 		}
      * 		list_destroy_and_destroy_elements(listaEspacioLibre*, void(*borrarListaEspacioLibre)(void*)); //es funcion de las commons de sisop
      * 		listaEspacioLibre = NULL;
      * 	}
@@ -104,15 +124,3 @@ int main(void) {
        * 	return FAIL;
        * }
      */
-
-
-
-
-    printf("%s",mensaje);
-
-	printf("%d",fdSocketCliente);
-
-
-
-	return EXIT_SUCCESS;
-}

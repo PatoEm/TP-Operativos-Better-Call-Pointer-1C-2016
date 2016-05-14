@@ -16,6 +16,6 @@ void setearValores(t_config * archivoConfig) {
 		paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
 		tamPagina = config_get_string_value(archivoConfig, "TAMANO_PAGINA");
 		retCompactacion = config_get_string_value(archivoConfig, "RETARDO_COMPACTACION");
-
+		tamArchivo=config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
 }
 
