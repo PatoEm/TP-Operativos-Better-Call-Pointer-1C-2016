@@ -16,34 +16,44 @@ int main(void) {
 	leerArchivoDeConfiguracion("configconsola");
 	 
 
-	int fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
-	//Reservo memoria y Pido  direccion de archivo ANSISOP
+	fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
+	recibirArchivo();//Se encarga de recibir el archivo y mandarselo al nucleo
+	int estado;
+	do{
+		char* protocolo=string_new();
+		recibirMensaje(fdSocketConsola,protocolo,2);
+		estado=atoi(protocolo);
+		switch(estado){
+			case IMPRIMIR:{
+				int variable;
+				recibirMensaje(fdSocketConsola,&variable,4);
+				printf("%d \n",variable);
+				break;
+			}
+			case IMPRIMIRTEXTO:{
+				int tamanioTexto;
+				char* textoAImprimir=string_new();
+				recibirMensaje(fdSocketConsola,&tamanioTexto,4);
+				recibirMensaje(fdSocketConsola,textoAImprimir,tamanioTexto);
+				printf("%s",textoAImprimir);
+				free(textoAImprimir);
+				break;
 
-	char* paqueteAEnviar;
-	char* direccionDeArchivo = (char *) malloc(150);
-	verificarMemoria(direccionDeArchivo);
+			}
+			case CERRARCONSOLA:{
+				printf("el procesamiento de su archivo ha finalizado.Buen día");
+				cerrarSocket(fdSocketConsola);
 
-	printf("Ingrese archivo: ");
-    scanf("%s",direccionDeArchivo);
+			}
 
 
-    //Obtengo el tamaño
-    int elTamanio=tamArchivo(direccionDeArchivo);
+		}
 
-    //Obtengo el contMienido del archivo
-    char* buffer=leerProgramaAnSISOP(direccionDeArchivo);
-    char protocolo[3]="00";
-    paqueteAEnviar=(char* )malloc(elTamanio+sizeof(char)*2+sizeof(int));
-    memcpy(paqueteAEnviar,&protocolo,sizeof(char)*2);
-    memcpy(paqueteAEnviar[2],&elTamanio,4);
-    memcpy(paqueteAEnviar[5],buffer,elTamanio);
-    enviarMensaje(fdSocketConsola,paqueteAEnviar,elTamanio+sizeof(char)*2+sizeof(int));
-    free(paqueteAEnviar);
-    free(protocolo);
-    free(buffer);
+	}while(estado!=5);
 
     return 0;
  }
+
 
     	/*
 }

@@ -20,10 +20,12 @@
 #define FAIL -1
 #define IMPRIMIR 3
 #define IMPRIMIRTEXTO 4
+#define CERRARCONSOLA 5
 
 //variables
 char* ipNucleo;
 char* nucleoPort;
+int   fdSocketConsola;
 
 
 //prototipos

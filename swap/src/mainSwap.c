@@ -15,44 +15,6 @@ int main(void) {
 	return EXIT_SUCCESS;
 }
 
-//Genero mi archivo de Swap y lo devuelvo mappeado en memoria DRMENGUECHE
-char* crearArchivo(char* tamanio,char* nombre){
-
-	char* paraSistema=string_new();
-	string_append(&paraSistema,"dd if=/dev/zero of=");
-	string_append(&paraSistema,nombre);
-	string_append(&paraSistema," bs=");
-	string_append(&paraSistema,tamanio);
-	string_append(&paraSistema," count=1");
-	system(paraSistema);
-	return mappearArchivo(nombre);
-
-}
-
-// mappear el archivoo DRMENGUECHE
-
-void* mappearArchivo(char* filename) {
-
-	char *addr;
-	int fd;
-	struct stat sb;
-	size_t length;
-
-	fd = open(filename, O_RDWR);
-	if (fd == -1)
-		handle_error("open");
-
-	if (fstat(fd, &sb) == -1)
-		handle_error("fstat");
-
-	length = sb.st_size;
-	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,MAP_SHARED | MAP_NORESERVE, fd, 0);
-	if (addr == MAP_FAILED)
-		handle_error("mmap");
-	return addr;
-
-}
-
 
 /*
 

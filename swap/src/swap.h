@@ -16,6 +16,26 @@
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+#include <stdint.h>
+#include <string.h>
+#include <stdarg.h>
+#include <netdb.h>
+#include <unistd.h>
+#include <sys/sendfile.h>
+#include <sys/time.h>
+#include <sys/stat.h>
+#include <sys/mman.h>
+#include <sys/ioctl.h>
+#include <fcntl.h>
+#include <net/if.h>
+#include <wait.h>
+#include <errno.h>          /* errno, ECHILD            */
 #define FAIL -1
 #define RECIBIRTAMANIO 1
 
