@@ -10,6 +10,8 @@
 
 
 #include "nucleo.h"
+
+char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
 	idProgramas=0;
@@ -22,7 +24,7 @@ int main(void) {
 
 	puts("Inicio Nucleo");
 
-
+/*
 
  	int fdSocketConsola = crearSocketServidor(puertoPropio);
 	//int fdSocketConsola = crearSocketServidor("6002");
@@ -65,8 +67,97 @@ int main(void) {
 	//Socket UMC testeado by Dr.Mengueche
 	int fdSocketUMC=crearCliente(ipUMC,UMCPort);
 
+*/
+	char * mensajito = leerProgramaAnSISOP1("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
+	t_metadata_program * programa1=metadata_desde_literal(mensajito);
+
+	char * probando = programa1->etiquetas;
+	//puts(probando);
+	t_size tamanioLoco;
+	int i=0;
+	int j=0;
+	tamanioLoco = programa1->etiquetas_size;
+	int cantFunciones = programa1->cantidad_de_funciones;
+	int cantEtiquetas = programa1->cantidad_de_etiquetas;
+	int totalCant=cantEtiquetas+cantFunciones;
+
+	char * palabras[totalCant];
+	int contPalabras=0;
+
+	while(i<tamanioLoco)
+	{
+			palabras[contPalabras]=&probando[i];
+			printf("%s \n",palabras[contPalabras]);
+			i +=(strlen(&probando[i]))+5;
+			contPalabras++;
 
 
 
+	}
+	/*
+	while(i<tamanioLoco)
+	{
+		printf("%s \n",&probando[i]);
+		i++;
+	}
+
+	*/
+
+
+	puts("hola");
 	return EXIT_SUCCESS;
 }
+
+
+int tamArchivo(char * direccionArchivo) {
+
+	FILE * fp;
+	int tamanio;
+     fp = fopen(direccionArchivo, "r");
+	if (fp == NULL)
+		puts("Error al abrir archivo");
+	else {
+		fseek(fp, 0, SEEK_END);
+		tamanio = ftell(fp);
+		fclose(fp);
+		printf("El tamaño de %s es: %d bytes.\n\n", direccionArchivo, tamanio);
+	}
+
+	return tamanio;
+}
+
+char * leerProgramaAnSISOP1(char * direccionArchivo) {
+
+	int tamanio=tamArchivo(direccionArchivo);
+
+	FILE * fp;
+
+	fp = fopen(direccionArchivo, "r");
+
+	if (fp == NULL)
+		puts("Error al abrir archivo");
+	else {
+		char* buffer = (char *) malloc(tamanio);
+			if(buffer==NULL){
+				printf("no se pudo reservar memoria para el archivo");
+				return-1;
+			}
+		 fseek(fp, 0, 0);
+		int n = 0;
+		while (!feof(fp)) {
+			buffer[n] = getc(fp);
+			n++;
+		}
+		buffer[n - 1] = '\0';
+		fclose(fp);
+		printf("%s", buffer);
+		return buffer;
+
+	}
+	return "";
+
+}
+
+
+
+

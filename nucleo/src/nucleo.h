@@ -39,4 +39,36 @@
    int idProgramas;
 
 
+
+
+
+   typedef struct{
+
+   	int comienzo;
+   	int longitud;
+   }arrayBidimensional;
+
+   typedef struct{
+   	t_puntero_instruccion direccion;
+   	char etiqueta;
+
+   }etiquetaLoca;
+
+   typedef struct{
+   	int id;
+   	int tamanio;
+   	t_puntero_instruccion programCounter;
+   	int paginasDeCodigo;
+   	arrayBidimensional * indiceDeCodigo;
+   	int indiceDeEtiquetas;
+   	int indiceDelStack;
+   	t_medatada_program* metaProgram;
+
+
+   }pcb ;
+
+
+   pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
+   void crearIndiceEtiquetas(t_medatada_program* metadata);
+
 #endif /* NUCLEO_H_ */

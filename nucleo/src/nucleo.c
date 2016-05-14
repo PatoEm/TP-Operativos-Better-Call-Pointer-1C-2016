@@ -10,21 +10,6 @@
 //#define manejarError(msg) {perror(msg); abort();}
 
 
-int tamanioIndiceCodigo;
-
-typedef struct{
-	int id;
-	int tamanio;
-	t_puntero_instruccion programCounter;
-	int paginasDeCodigo;
-	int ** indiceDeCodigo;
-	int indiceDeEtiquetas;
-	int indiceDelStack;
-	t_medatada_program* metaProgram;
-
-
-}pcb ;
-
 
 void setearValores(t_config * archivoConfig) {
 		puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
@@ -51,9 +36,10 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	t_size cantidadInstrucciones = metaNuevoPrograma->instrucciones_size;
 
-	tamanioIndiceCodigo=cantidadInstrucciones;
+
 	pcb pcbNuevoPrograma;
 	idProgramas=idProgramas+1;
+
 	pcbNuevoPrograma.id = idProgramas;
 
 	pcbNuevoPrograma.metaProgram = metaNuevoPrograma;
@@ -62,29 +48,28 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	pcbNuevoPrograma.paginasDeCodigo = cantidadPaginas(tamanioPaginas, tamanioArchivo);
 
-	//pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones,instrucciones);
+	//pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones, instrucciones);
+
+	arrayBidimensional * array=(arrayBidimensional*)malloc(cantidadInstrucciones*sizeof(arrayBidimensional));
+	int i=0;
+	for ( i = 0;   i < cantidadInstrucciones;  i++)
+		{
+		array[i].comienzo=instrucciones[i].start;
+		array[i].longitud=(instrucciones[i].offset);
+		}
+
+	pcbNuevoPrograma.indiceDeCodigo=array;
+
 
 
 	return  pcbNuevoPrograma;
 }
 
 
-int** crearIndiceCodigo(t_size cantidad , t_intructions* instrucciones){
+void crearIndiceEtiquetas(t_medatada_program* metadata){
 
-	//int * indice[2]=(int )malloc(cantidad);
-	int indice[cantidad][2];
-	//int indice;
+	char *prueba = metadata->etiquetas;
 
-	//int ** indice = crearArrayBiDimensional(cantidad, 2);
-	int i;
-	for ( i = 0;   i < cantidad;  i++)
-	{
-	indice[i][0]=instrucciones[i].start;
-	indice[i][1]=(instrucciones[i].offset);
-	}
-
-
-return indice;
 }
 
 int **crearArrayBiDimensional(int Filas, int Columnas)
@@ -100,14 +85,6 @@ int **crearArrayBiDimensional(int Filas, int Columnas)
 
 }
 
-void liberarArrayBidimensional(int **array, int Filas)
-{
-	int fila;
-	for (fila = 0; fila < Filas; ++fila) {
-		free(array[fila]);
-	}
-	free(array);
-}
 
 
 void escuchoMuchasConexiones()
