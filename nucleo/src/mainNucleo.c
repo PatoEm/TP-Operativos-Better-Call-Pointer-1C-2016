@@ -73,13 +73,15 @@ int main(void) {
 	//Socket UMC testeado by Dr.Mengueche
 	int fdSocketUMC=crearCliente(ipUMC,UMCPort);
 
-*/
+*/	puts("hola");
 	char * mensajito = leerProgramaAnSISOP1("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
-	t_metadata_program * programa1=metadata_desde_literal(mensajito);
+	//t_metadata_program * programa1=metadata_desde_literal(mensajito);
+	puts("hola1");
+	int tamanio= tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
+	puts("hola2");
+	pcb hola = crearNuevoPcb(mensajito,tamanio);
 
-
-
-	puts("hola");
+	puts("hola3");
 	return EXIT_SUCCESS;
 }
 

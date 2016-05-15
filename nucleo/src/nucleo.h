@@ -21,6 +21,7 @@
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/pcb.h>
 #define FAIL -1
 
 //Variables Globales
@@ -49,59 +50,19 @@
    t_queue *colaExit;
 
    //Estructuras PCB
-   typedef struct{
-   	int comienzo;
-   	int longitud;
-   }arrayBidimensional;
-
-   typedef struct {
- 	   int id;
- 	   int pag;
- 	   int off;
- 	   int size;
-    }variables;
-    typedef struct{
- 	   int pag;
- 	   int off;
- 	   int size;
-    }argumentos;
-
-    typedef struct {
- 	   int pos;
- 	   argumentos args;
- 	   variables vars;
- 	   int retPos;
- 	   variables retVars;
-
-    }indiceDeStack;
-
-   typedef enum {
-        NEW=0,
-        READY=1,
-        EXEC=2,
-		BLOCK=3,
-        EXIT=4
-    }estadoPrograma;
 
 
-   typedef struct{
-   	int id;
-   	int tamanio;
-   	t_puntero_instruccion programCounter;
-   	int paginasDeCodigo;
-   	arrayBidimensional * indiceDeCodigo;
-   	char * indiceDeEtiquetas;
-   	indiceDeStack * indiceDelStack;
-   	t_medatada_program* metaProgram;
-   	estadoPrograma estado;
-
-   }pcb ;
 
    //Prototipos
 
    void setearValores(t_config * archivoConfig);
    void escuchoMuchasConexiones();
-   pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
 
+
+   pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
+   void moverAColaReady(pcb * programa);
+   void moverAColaBlock(pcb* programa);
+   void moverAColaExit(pcb* programa);
+   void finalizarProcesosColaExit();
 
 #endif /* NUCLEO_H_ */

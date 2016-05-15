@@ -6,7 +6,6 @@
  */
 
 #include "nucleo.h"
-
 //#define manejarError(msg) {perror(msg); abort();}
 
 
@@ -37,10 +36,12 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 	t_size cantidadInstrucciones = metaNuevoPrograma->instrucciones_size;
 
 
-	pcb pcbNuevoPrograma;
+	pcb  pcbNuevoPrograma;
 	idProgramas=idProgramas+1;
 
 	pcbNuevoPrograma.id = idProgramas;
+
+	pcbNuevoPrograma.tamanioArchivoOriginal=tamanioArchivo;
 
 	pcbNuevoPrograma.metaProgram = metaNuevoPrograma;
 
@@ -87,14 +88,12 @@ void moverAColaBlock(pcb* programa){
 	queue_push(colaBlock,programa);
 
 }
-
 void moverAColaExit(pcb* programa)
 {
 		queue_pop(colaExec);
 		programa->estado=EXIT;
 		queue_push(colaExit,programa);
 }
-
 void finalizarProcesosColaExit()
 {
 	//ACA DEBO ENVIAR MENSAJE A LA CONSOLA DE QUE FINALIZARON SUS PROGRAMAS
