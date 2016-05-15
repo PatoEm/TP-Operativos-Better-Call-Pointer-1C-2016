@@ -50,8 +50,46 @@ int main(void) {
            	list_add(listaEspacioLibre , nuevoEspacioAsignado);
            }
 
-/*  int  verificarSiHayEspacio(int tamanio){
-                   }
+
+    int  verificarSiHayEspacio(int tamanio){
+         int posicion;
+         int totalDeEspacioLibre;
+
+
+         for(posicion=0;posicion<list_size(listaEspacioLibre);posicion++){
+
+        	 espacioLibre* espacio=(espacioLibre*)list_get(listaEspacioLibre,posicion);
+
+
+		    if(espacio->tamanio >= tamanio) return posicion;
+
+           totalDeEspacioLibre=+ espacio->tamanio;
+         }
+         if (totalDeEspacioLibre>= tamanio)return FRAGMENTACION_EXTERNA;
+
+    return FAIL;
+    }
+
+    int recibirNuevoPrograma(int pid,int tamanio){
+    	int espacioLibre=verificarSiHayEspacio(tamanio);
+    	if(espacioLibre>=0){
+    		return guardarPrograma(espacioLibre,pid, tamanio);
+    	}
+    	if (espacioLibre == FRAGMENTACION_EXTERNA ){
+    		compactarEspacioLibre();
+    		return 0;
+    	}
+    	if(espacioLibre == FAIL) return FAIL;
+
+    	return 0;
+    }
+
+  int  guardarPrograma(posicion,pid,tamanio){
+  espacioLibre* espacio = (espacioLibre)*list_get(listaEspacioLibre,posicion);
+
+  return 0;
+    }
+
 /*
 
     //Creo listas de espacio libre y espacio asignado

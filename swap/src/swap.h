@@ -38,8 +38,11 @@
 #include <net/if.h>
 #include <wait.h>
 #include <errno.h>          /* errno, ECHILD            */
+
+//define
 #define FAIL -1
 #define RECIBIRTAMANIO 1
+#define FRAGMENTACION_EXTERNA -2
 
 //variables
 char* ipUMC;
