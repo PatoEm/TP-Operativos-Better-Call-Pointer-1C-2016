@@ -16,58 +16,75 @@ int main(void) {
 	return EXIT_SUCCESS;
 }
 
+	int calcularIDPagina(inicio){
 
+		if(inicio==0)return 0;
+		else{
+			return (inicio/(atoi(tamPagina)));
+		}
+
+	}
 //Creo espacioLibre
-    espacioLibre * crearEspacioLibre (int inicio, int tamanio) {
+    espacioLibre * crearEspacioLibre (int inicio) {
     	espacioLibre * nuevoEspacioLibre = malloc(sizeof(espacioLibre));
     	nuevoEspacioLibre->inicio = inicio;
-    	nuevoEspacioLibre->tamanio= tamanio;
+    	nuevoEspacioLibre->tamanio= atoi(tamPagina);
+    	nuevoEspacioLibre->IDPaginaInterno=calcularIDPagina(inicio);
     	return nuevoEspacioLibre;
     }
 
-    void agregarEspacioLibre(int inicio, int swap_tamanio) {
-    	espacioLibre * nuevoEspacioLibre = crearEspacioLibre (inicio, swap_tamanio);
+    void agregarEspacioLibre(int inicio) {
+    	espacioLibre * nuevoEspacioLibre = crearEspacioLibre (inicio);
     	list_add(listaEspacioLibre , nuevoEspacioLibre);
     }
 
   //Creo espacioAsignado
-  espacioAsignado * crearEspacioAsignado (bool bitMap,int numDePag,int posicionDePag, int inicio, int tamanio, int pid) { //teoricamente tiene que estar el pid, lo que no creo es que este bien utilizado acá
+  espacioAsignado * crearEspacioAsignado (bool bitMap,int numDePag,int posicionDePag, int pid) { //teoricamente tiene que estar el pid, lo que no creo es que este bien utilizado acá
 
   	espacioAsignado  * espacio = malloc(sizeof(espacioAsignado ));
 
-  	espacio->bitMap= bitMap;
-  	espacio->inicio = inicio;
-  	espacio->tamanio= tamanio;
-  	espacio->pid = pid;
-    	espacio->numDePag= numDePag;
-     	espacio->posicionDePag= posicionDePag;
 
-     	return espacio;
+  	espacio->bitMap= bitMap;
+  	espacio->tamanio= atoi(tamPagina);
+  	espacio->IDPaginaInterno=calcularIDPagina(posicionDePag);
+  	espacio->pid = pid;
+    espacio->numDePag= numDePag;
+    espacio->posicionDePag= posicionDePag;
+
+    return espacio;
     }
 
-  void agregarEspacioAsigando(bool bitMap,int numDePag,int posicionDePag, int inicio, int tamanio, int pid) {
-           	espacioAsignado * nuevoEspacioAsignado = crearEspacioLibre(bitMap,numDePag,posicionDePag,inicio,tamanio,pid);
+  void agregarEspacioAsigando(bool bitMap,int numDePag,int posicionDePag, int tamanio, int pid) {
+           	espacioAsignado * nuevoEspacioAsignado = crearEspacioAsignado(bitMap,numDePag,posicionDePag,pid);
            	list_add(listaEspacioLibre , nuevoEspacioAsignado);
            }
 
 
-    int  verificarSiHayEspacio(int tamanio){
-         int posicion;
-         int totalDeEspacioLibre;
+    bool  verificarSiHayEspacio(int cantidadDePaginas){
+       if(cantidadDePaginas < list_size(listaEspacioLibre))return TRUE;
+       else return FALSE;
+    }
 
 
-         for(posicion=0;posicion<list_size(listaEspacioLibre);posicion++){
-
-        	 espacioLibre* espacio=(espacioLibre*)list_get(listaEspacioLibre,posicion);
-
-
-		    if(espacio->tamanio >= tamanio) return posicion;
-
-           totalDeEspacioLibre=+ espacio->tamanio;
-         }
-         if (totalDeEspacioLibre>= tamanio)return FRAGMENTACION_EXTERNA;
-
-    return FAIL;
+    //me dice si tengo que compactar. True= si false= no
+    bool hayQueCompactar(int cantidadDePaginas){
+    		int contadorDePaginasSeguidas=1;
+    		int miPaginaLibre=-1;
+    		int paginaActual=0;
+    		espacioLibre* nodoActual;
+    		while((paginaActual<list_size(listaEspacioLibre))||(cantidadDePaginas==contadorDePaginasSeguidas)){
+    			nodoActual=list_get(listaEspacioLibre,paginaActual);
+    			if(miPaginaLibre+1==nodoActual->IDPaginaInterno){
+    				contadorDePaginasSeguidas++;
+    			}
+    			else{
+    				contadorDePaginasSeguidas=1;
+    			}
+    		miPaginaLibre=nodoActual->IDPaginaInterno;
+    		paginaActual++;
+    		}
+    		if(cantidadDePaginas==contadorDePaginasSeguidas)return TRUE;
+    		else return FALSE;
     }
 
     int recibirNuevoPrograma(int pid,int tamanio){
@@ -76,7 +93,7 @@ int main(void) {
     		return guardarPrograma(espacioLibre,pid, tamanio);
     	}
     	if (espacioLibre == FRAGMENTACION_EXTERNA ){
-    		compactarEspacioLibre();
+    		//compactarEspacioLibre();
     		return 0;
     	}
     	if(espacioLibre == FAIL) return FAIL;
@@ -85,7 +102,7 @@ int main(void) {
     }
 
   int  guardarPrograma(posicion,pid,tamanio){
-  espacioLibre* espacio = (espacioLibre)*list_get(listaEspacioLibre,posicion);
+  //espacioLibre* espacio = (espacioLibre)*list_get(listaEspacioLibre,posicion);
 
   return 0;
     }

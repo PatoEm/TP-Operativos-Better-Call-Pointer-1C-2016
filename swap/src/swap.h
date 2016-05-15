@@ -1,4 +1,6 @@
 /*
+
+/*
  * swap.h
  *
  *  Created on: 23/4/2016
@@ -43,6 +45,8 @@
 #define FAIL -1
 #define RECIBIRTAMANIO 1
 #define FRAGMENTACION_EXTERNA -2
+#define TRUE 1
+#define FALSE 0
 
 //variables
 char* ipUMC;
@@ -62,13 +66,14 @@ void* mappearArchivo(char* );
 
 
  typedef struct{
+	int IDPaginaInterno;
   	int inicio;
   	int tamanio;
   }espacioLibre;
 
   typedef struct{
+	int IDPaginaInterno;
   	int pid;
-  	int inicio;
   	int tamanio;
   	bool bitMap;
   	int numDePag;

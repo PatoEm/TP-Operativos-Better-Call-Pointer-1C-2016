@@ -1,5 +1,5 @@
 /*
- * swap.c
+* swap.c
  *
  *  Created on: 23/4/2016
  *      Author: utnso
@@ -51,4 +51,3 @@ void setearValores(t_config * archivoConfig) {
 		retCompactacion = config_get_string_value(archivoConfig, "RETARDO_COMPACTACION");
 		tamArchivo=config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
 }
-
