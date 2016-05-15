@@ -51,6 +51,7 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 	//pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones, instrucciones);
 
 	arrayBidimensional * array=(arrayBidimensional*)malloc(cantidadInstrucciones*sizeof(arrayBidimensional));
+
 	int i=0;
 	for ( i = 0;   i < cantidadInstrucciones;  i++)
 		{
@@ -60,7 +61,7 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	pcbNuevoPrograma.indiceDeCodigo=array;
 
-
+	pcbNuevoPrograma.indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
 	return  pcbNuevoPrograma;
 }

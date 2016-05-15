@@ -71,37 +71,6 @@ int main(void) {
 	char * mensajito = leerProgramaAnSISOP1("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
 	t_metadata_program * programa1=metadata_desde_literal(mensajito);
 
-	char * probando = programa1->etiquetas;
-	//puts(probando);
-	t_size tamanioLoco;
-	int i=0;
-	int j=0;
-	tamanioLoco = programa1->etiquetas_size;
-	int cantFunciones = programa1->cantidad_de_funciones;
-	int cantEtiquetas = programa1->cantidad_de_etiquetas;
-	int totalCant=cantEtiquetas+cantFunciones;
-
-	char * palabras[totalCant];
-	int contPalabras=0;
-
-	while(i<tamanioLoco)
-	{
-			palabras[contPalabras]=&probando[i];
-			printf("%s \n",palabras[contPalabras]);
-			i +=(strlen(&probando[i]))+5;
-			contPalabras++;
-
-
-
-	}
-	/*
-	while(i<tamanioLoco)
-	{
-		printf("%s \n",&probando[i]);
-		i++;
-	}
-
-	*/
 
 
 	puts("hola");

@@ -38,21 +38,31 @@
    int tamanioPaginas;
    int idProgramas;
 
-
-
-
-
    typedef struct{
-
    	int comienzo;
    	int longitud;
    }arrayBidimensional;
 
-   typedef struct{
-   	t_puntero_instruccion direccion;
-   	char etiqueta;
+   typedef struct {
+ 	   int id;
+ 	   int pag;
+ 	   int off;
+ 	   int size;
+    }variables;
+    typedef struct{
+ 	   int pag;
+ 	   int off;
+ 	   int size;
+    }argumentos;
 
-   }etiquetaLoca;
+    typedef struct {
+ 	   int pos;
+ 	   argumentos args;
+ 	   variables vars;
+ 	   int retPos;
+ 	   variables retVars;
+
+    }indiceDeStack;
 
    typedef struct{
    	int id;
@@ -60,12 +70,13 @@
    	t_puntero_instruccion programCounter;
    	int paginasDeCodigo;
    	arrayBidimensional * indiceDeCodigo;
-   	int indiceDeEtiquetas;
-   	int indiceDelStack;
+   	char * indiceDeEtiquetas;
+   	indiceDeStack * indiceDelStack;
    	t_medatada_program* metaProgram;
 
 
    }pcb ;
+
 
 
    pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
