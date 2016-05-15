@@ -14,8 +14,14 @@
 char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
+	//Inicio el Contador de programas en 0 y creo las Colas
 	idProgramas=0;
-	 leerArchivoDeConfiguracion("confignucleo");
+	colaNew = queue_create();
+	colaReady= queue_create();
+	colaExec= queue_create();
+	colaBlock= queue_create();
+	colaExit= queue_create();
+	leerArchivoDeConfiguracion("confignucleo");
 
 
 	//lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS

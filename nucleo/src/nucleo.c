@@ -6,7 +6,7 @@
  */
 
 #include "nucleo.h"
-#include <pthread.h>
+
 //#define manejarError(msg) {perror(msg); abort();}
 
 
@@ -63,30 +63,47 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	pcbNuevoPrograma.indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
+	//El indice de stack no lo toco cuando creo?
+
+	pcbNuevoPrograma.estado=NEW;
+
 	return  pcbNuevoPrograma;
 }
 
+void moverAColaReady(pcb * programa){
 
-void crearIndiceEtiquetas(t_medatada_program* metadata){
+	  switch(programa->estado) {
+	    case NEW: queue_pop(colaNew); break;
+	    case EXEC: queue_pop(colaExec); break;
+	    case BLOCK:  queue_pop(colaBlock); break;
+	  }
 
-	char *prueba = metadata->etiquetas;
+	programa->estado=READY;
+	queue_push(colaReady,programa);
+}
+void moverAColaBlock(pcb* programa){
+	queue_pop(colaExec);
+	programa->estado=BLOCK;
+	queue_push(colaBlock,programa);
 
 }
 
-int **crearArrayBiDimensional(int Filas, int Columnas)
+void moverAColaExit(pcb* programa)
 {
-	int **array=(int **)malloc(Filas * sizeof(int*));
-	int fila;
-	for(fila=0;fila<Filas;fila++)
-	{
-		array[fila]=(int *)malloc(Columnas*sizeof(int));
-
-	}
-	return array;
-
+		queue_pop(colaExec);
+		programa->estado=EXIT;
+		queue_push(colaExit,programa);
 }
 
+void finalizarProcesosColaExit()
+{
+	//ACA DEBO ENVIAR MENSAJE A LA CONSOLA DE QUE FINALIZARON SUS PROGRAMAS
 
+	//COMO LO HAGO?
+
+	//LUEGO BORRO ABSOLUTAMENTE Y DESTRUYO TODO
+	queue_clean_and_destroy_elements(colaExit,NULL); //ESTO NO SE SI ESTA BIEN
+}
 
 void escuchoMuchasConexiones()
 {
@@ -196,6 +213,7 @@ void escuchoMuchasConexiones()
         }
     }
 }
+
 
 
 

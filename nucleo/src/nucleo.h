@@ -8,22 +8,24 @@
 #ifndef NUCLEO_H_
 #define NUCLEO_H_
 
-
+//Includes
 #include <stdio.h>
 #include <stdlib.h>
+#include <pthread.h>
 #include <commons/temporal.h>
 #include <commons/config.h>
 #include <commons/config.h>
 #include <commons/log.h>
-#include <libreriasCompartidas/archivosYLogsYMas.h>
-#include <libreriasCompartidas/socket.h>
+#include <commons/collections/queue.h>
 #include <parser/metadata_program.h>
 #include <parser/parser.h>
+#include <libreriasCompartidas/archivosYLogsYMas.h>
+#include <libreriasCompartidas/socket.h>
 #define FAIL -1
 
-//variables
+//Variables Globales
 
-
+	//Variables de lectura de archivo
    char*  puertoPropio;
    char*  cpuPort;
    int  quantum;
@@ -36,8 +38,17 @@
    char* ipUMC;
    char* UMCPort;
    int tamanioPaginas;
+
    int idProgramas;
 
+   //Colas
+   t_queue *colaNew;
+   t_queue *colaReady;
+   t_queue *colaExec;
+   t_queue *colaBlock;
+   t_queue *colaExit;
+
+   //Estructuras PCB
    typedef struct{
    	int comienzo;
    	int longitud;
@@ -64,6 +75,15 @@
 
     }indiceDeStack;
 
+   typedef enum {
+        NEW=0,
+        READY=1,
+        EXEC=2,
+		BLOCK=3,
+        EXIT=4
+    }estadoPrograma;
+
+
    typedef struct{
    	int id;
    	int tamanio;
@@ -73,13 +93,15 @@
    	char * indiceDeEtiquetas;
    	indiceDeStack * indiceDelStack;
    	t_medatada_program* metaProgram;
-
+   	estadoPrograma estado;
 
    }pcb ;
 
+   //Prototipos
 
-
+   void setearValores(t_config * archivoConfig);
+   void escuchoMuchasConexiones();
    pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
-   void crearIndiceEtiquetas(t_medatada_program* metadata);
+
 
 #endif /* NUCLEO_H_ */
