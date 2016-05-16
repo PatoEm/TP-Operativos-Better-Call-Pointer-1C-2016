@@ -150,6 +150,7 @@ bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
   		listaEspacioLibre = list_create ();
   		listaEspacioAsignado = list_create ();
  }
+
   void compactarSwap(){
 
 	  int paginasContiguas=0;
@@ -189,5 +190,5 @@ bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
 		  list_add(listaEspacioLibre,nodoLibre);
 
 	  }
-
+usleep(1000*atoi(retCompactacion));
   }

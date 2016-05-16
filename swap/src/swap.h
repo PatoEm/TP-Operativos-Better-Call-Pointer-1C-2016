@@ -1,6 +1,5 @@
 /*
 
-/*
  * swap.h
  *
  *  Created on: 23/4/2016
@@ -59,12 +58,7 @@ char* retCompactacion;
 char* tamArchivo;
 char* archivoMappeado;
 
-char* crearArchivo(char* ,char* );
-
-void* mappearArchivo(char* );
-
-
-
+//estructuras
  typedef struct{
 	int IDPaginaInterno;
   	int inicio;
@@ -84,6 +78,35 @@ void* mappearArchivo(char* );
 
 t_list * listaEspacioLibre;
 t_list * listaEspacioAsignado;
+
+
+//prototipos
+char* crearArchivo(char* ,char* );
+
+void* mappearArchivo(char* );
+
+void setearValores(t_config *);
+
+int calcularIDPagina(int);
+
+espacioLibre* crearEspacioLibre (int );
+
+void agregarEspacioLibre(int );
+
+espacioAsignado* crearEspacioAsignado(bool,int ,int , int);
+
+void agregarEspacioAsigando(bool,int ,int , int , int );
+
+bool  verificarSiHayEspacio(int );
+
+int paginasContiguasDeSwap(int);
+
+bool recibirNuevoPrograma(int ,int );
+
+void crearListas () ;
+
+void compactarSwap();
+
 
 
 
