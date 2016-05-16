@@ -61,18 +61,18 @@ int main(void) {
 
 
     bool  verificarSiHayEspacio(int cantidadDePaginas){
-       if(cantidadDePaginas < list_size(listaEspacioLibre))return TRUE;
+       if(cantidadDePaginas <= list_size(listaEspacioLibre))return TRUE;
        else return FALSE;
     }
 
 
-    //me dice si tengo que compactar. True= si false= no
-    bool hayQueCompactar(int cantidadDePaginas){
+    //me dice si tengo que compactar. -1 hay que compactar, siino devuelve a partir de que pagina puedo usar
+    int paginasContiguasDeSwap(int cantidadDePaginas){
     		int contadorDePaginasSeguidas=1;
     		int miPaginaLibre=-1;
     		int paginaActual=0;
     		espacioLibre* nodoActual;
-    		while((paginaActual<list_size(listaEspacioLibre))||(cantidadDePaginas==contadorDePaginasSeguidas)){
+    		while((paginaActual<=list_size(listaEspacioLibre))||(cantidadDePaginas==contadorDePaginasSeguidas)){
     			nodoActual=list_get(listaEspacioLibre,paginaActual);
     			if(miPaginaLibre+1==nodoActual->IDPaginaInterno){
     				contadorDePaginasSeguidas++;
@@ -83,29 +83,30 @@ int main(void) {
     		miPaginaLibre=nodoActual->IDPaginaInterno;
     		paginaActual++;
     		}
-    		if(cantidadDePaginas==contadorDePaginasSeguidas)return TRUE;
-    		else return FALSE;
+    		if(cantidadDePaginas==contadorDePaginasSeguidas)return (miPaginaLibre-cantidadDePaginas);
+    		else return -1;
     }
 
-    int recibirNuevoPrograma(int pid,int tamanio){
-    	int espacioLibre=verificarSiHayEspacio(tamanio);
-    	if(espacioLibre>=0){
-    		return guardarPrograma(espacioLibre,pid, tamanio);
+    void guardarPrograma(paginaDeComienzo,pid,cantidadDePaginas){
+     //espacioLibre* espacio = (espacioLibre)*list_get(listaEspacioLibre,posicion);
+       }
+
+    //Recibe un nuevo programa. 1 si lo puede recibir, 0 si no
+    bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
+    	if(verificarSiHayEspacio(cantidadDePaginasAGuardar)){
+    		if(paginasContiguasDeSwap(cantidadDePaginasAGuardar)==-1){
+    			//compactarSwap();
+    			return TRUE;
+    		}
+    		else{
+    			guardarPrograma(paginasContiguasDeSwap(cantidadDePaginasAGuardar),pid,cantidadDePaginasAGuardar);
+    			return TRUE;
+    		}
     	}
-    	if (espacioLibre == FRAGMENTACION_EXTERNA ){
-    		//compactarEspacioLibre();
-    		return 0;
-    	}
-    	if(espacioLibre == FAIL) return FAIL;
-
-    	return 0;
+    	else {return FALSE;}
     }
 
-  int  guardarPrograma(posicion,pid,tamanio){
-  //espacioLibre* espacio = (espacioLibre)*list_get(listaEspacioLibre,posicion);
 
-  return 0;
-    }
 
 /*
 
