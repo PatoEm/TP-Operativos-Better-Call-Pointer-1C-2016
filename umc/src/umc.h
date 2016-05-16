@@ -28,9 +28,25 @@ char* marco_x_proc;
 char* entradas_TLB;
 char* espera;
 
+//estructuras para los hilos de CPU y nucleo
+
+typedef struct{
+	//en estos campos van las cosas que recibe el hilo para laburar con el nucleo
+}t_nucleo;
+
+typedef struct{
+	//en estos campos van las cosas que recibe el hilo para laburar con el CPU
+}t_CPU;
+
 //Prototipos
 char * reservarMemoria(int , int );
+
 void liberarMemoria(char * );
+
 void escuchoMuchasConexiones();
+
+void meHablaKernel ();
+
+void meHablaCPU ();
 
 #endif /* UMC_H_ */

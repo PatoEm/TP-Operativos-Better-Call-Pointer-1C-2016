@@ -18,7 +18,6 @@ int main(void) {
 
 	char * memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 
-
 	escuchoMuchasConexiones();
 
 /*
@@ -28,7 +27,7 @@ int main(void) {
 */
 	//no tengo idea para que sirve esto, lo puedo romper? COMENTEMOS QUE HACEMOS
 
-
+/*
 	int fdSocketCPU= crearSocketServidor(puertoEscucha);
 	escucharSocket(fdSocketCPU,5);
 	int conexionCPU = aceptarConexiones(fdSocketCPU);
@@ -40,10 +39,10 @@ int main(void) {
 	}
 	recibirMensaje(conexionCPU,mensaje,11*sizeof(char));
 	puts(mensaje);
-
+*/
 
 	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
-	enviarMensaje(fdSocketUMC,mensaje,11*sizeof(char));
+	//enviarMensaje(fdSocketUMC,mensaje,11*sizeof(char));
 
 
 
