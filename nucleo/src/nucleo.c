@@ -215,14 +215,20 @@ void escuchoMuchasConexiones()
 
 void verificarModificacionesArchivoConfig()
 {
+	for(;;){
+
 	char buffer[BUF_LEN];
 	// Al inicializar inotify este nos devuelve un descriptor de archivo
 	int file_descriptor = inotify_init();
 	if (file_descriptor < 0) {
 	perror("inotify_init");
 	}
+	int watch_descriptor;
+
+
+
 	// Creamos un monitor sobre un path indicando que eventos queremos escuchar
-	int watch_descriptor = inotify_add_watch(file_descriptor, "confignucleo", IN_MODIFY | IN_CREATE | IN_DELETE | IN_CLOSE_WRITE);
+	watch_descriptor = inotify_add_watch(file_descriptor, "confignucleo", IN_MODIFY);
 	// El file descriptor creado por inotify, es el que recibe la información sobre los eventos ocurridos
 	// para leer esta información el descriptor se lee como si fuera un archivo comun y corriente pero
 	// la diferencia esta en que lo que leemos no es el contenido de un archivo sino la información
@@ -240,45 +246,27 @@ void verificarModificacionesArchivoConfig()
 	// a sizeof( struct inotify_event ) + 24.
 	struct inotify_event *event = (struct inotify_event *) &buffer[offset];
 	// El campo "len" nos indica la longitud del tamaño del nombre
-	if (event->len) {
+	if ((event->len)==0) {
 	// Dentro de "mask" tenemos el evento que ocurrio y sobre donde ocurrio
 	// sea un archivo o un directorio
-	if (event->mask & IN_CREATE) {
-	if (event->mask & IN_ISDIR) {
-	printf("The directory %s was created.\n", event->name);
-	} else {
-	printf("The file %s was created.\n", event->name);
-	}
-	} else if (event->mask & IN_DELETE) {
-	if (event->mask & IN_ISDIR) {
-	printf("The directory %s was deleted.\n", event->name);
-	} else {
-	printf("The file %s was deleted.\n", event->name);
-	}
-	}
-	 else if (event->mask & IN_CLOSE_WRITE) {
-		if (event->mask & IN_ISDIR) {
-		printf("The directory %s was deleted.\n", event->name);
-		} else {
-		printf("The file %s was deleted.\n", event->name);
-		}
-		}
-	else if (event->mask & IN_MODIFY) {
+
+	 if (event->mask & IN_MODIFY) {
 	if (event->mask & IN_ISDIR) {
 	printf("The directory %s was modified.\n", event->name);
 	} else {
-	printf("The file %s was modified.\n", event->name);
+	printf("El archivo de configuracion fue modificado.\n");
 	}
 	}
+
 	}
 	offset += sizeof (struct inotify_event) + event->len;
 	}
 	inotify_rm_watch(file_descriptor, watch_descriptor);
 	close(file_descriptor);
 
+	usleep(1);
 
-
-
+	}
 
 }
 
