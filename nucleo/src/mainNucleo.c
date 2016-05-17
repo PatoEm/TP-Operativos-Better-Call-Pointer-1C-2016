@@ -24,11 +24,16 @@ int main(void) {
 	leerArchivoDeConfiguracion("confignucleo");
 
 
+
 	//lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS
 
 
 
 	puts("Inicio Nucleo");
+
+	verificarModificacionesArchivoConfig();
+
+	puts("fin nucleo");
 
 /*
 
@@ -73,7 +78,9 @@ int main(void) {
 	//Socket UMC testeado by Dr.Mengueche
 	int fdSocketUMC=crearCliente(ipUMC,UMCPort);
 
-*/	puts("hola");
+*/
+
+	/*puts("hola");
 	char * mensajito = leerProgramaAnSISOP1("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
 	//t_metadata_program * programa1=metadata_desde_literal(mensajito);
 	puts("hola1");
@@ -82,6 +89,9 @@ int main(void) {
 	pcb hola = crearNuevoPcb(mensajito,tamanio);
 
 	puts("hola3");
+	*/
+
+
 	return EXIT_SUCCESS;
 }
 

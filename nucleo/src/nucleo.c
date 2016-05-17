@@ -222,7 +222,7 @@ void verificarModificacionesArchivoConfig()
 	perror("inotify_init");
 	}
 	// Creamos un monitor sobre un path indicando que eventos queremos escuchar
-	int watch_descriptor = inotify_add_watch(file_descriptor, "confignucleo", IN_MODIFY);
+	int watch_descriptor = inotify_add_watch(file_descriptor, "confignucleo", IN_MODIFY | IN_CREATE | IN_DELETE | IN_CLOSE_WRITE);
 	// El file descriptor creado por inotify, es el que recibe la información sobre los eventos ocurridos
 	// para leer esta información el descriptor se lee como si fuera un archivo comun y corriente pero
 	// la diferencia esta en que lo que leemos no es el contenido de un archivo sino la información
@@ -243,9 +243,27 @@ void verificarModificacionesArchivoConfig()
 	if (event->len) {
 	// Dentro de "mask" tenemos el evento que ocurrio y sobre donde ocurrio
 	// sea un archivo o un directorio
-
-
-	if (event->mask & IN_MODIFY) {
+	if (event->mask & IN_CREATE) {
+	if (event->mask & IN_ISDIR) {
+	printf("The directory %s was created.\n", event->name);
+	} else {
+	printf("The file %s was created.\n", event->name);
+	}
+	} else if (event->mask & IN_DELETE) {
+	if (event->mask & IN_ISDIR) {
+	printf("The directory %s was deleted.\n", event->name);
+	} else {
+	printf("The file %s was deleted.\n", event->name);
+	}
+	}
+	 else if (event->mask & IN_CLOSE_WRITE) {
+		if (event->mask & IN_ISDIR) {
+		printf("The directory %s was deleted.\n", event->name);
+		} else {
+		printf("The file %s was deleted.\n", event->name);
+		}
+		}
+	else if (event->mask & IN_MODIFY) {
 	if (event->mask & IN_ISDIR) {
 	printf("The directory %s was modified.\n", event->name);
 	} else {
