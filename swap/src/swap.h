@@ -82,8 +82,8 @@ void* mappearArchivo(char* );
   }espacioAsignado;
 
 
- t_list * listaEspacioLibre;
- t_list * listaEspacioAsignado;
+t_list * listaEspacioLibre;
+t_list * listaEspacioAsignado;
 
 
 
