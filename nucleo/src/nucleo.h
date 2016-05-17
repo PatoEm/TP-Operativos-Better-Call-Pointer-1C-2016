@@ -117,5 +117,7 @@
    void moverAColaBlock(pcb* programa);
    void moverAColaExit(pcb* programa);
    void finalizarProcesosColaExit();
+   void verificarModificacionesArchivoConfig();
+
 
 #endif /* NUCLEO_H_ */

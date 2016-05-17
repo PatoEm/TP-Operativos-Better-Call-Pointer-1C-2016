@@ -8,25 +8,6 @@
 #define manejarError(msg) {perror(msg); abort();}
 
 //Creo structs necesarias para el parser BY DRMENGUECHE
-AnSISOP_funciones funciones = {
-		.AnSISOP_definirVariable		= definirVariable,
-		.AnSISOP_obtenerPosicionVariable= obtenerPosicionVariable,
-		.AnSISOP_dereferenciar			= dereferenciar,
-		.AnSISOP_asignar				= asignar,
-		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
-		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
-		.AnSISOP_irAlLabel				= irAlLabel,
-		.AnSISOP_llamarConRetorno		= llamarFuncion,
-		.AnSISOP_retornar				= retornar,
-		.AnSISOP_entradaSalida			= entradaSalida,
-		.AnSISOP_imprimir				= imprimir,
-		.AnSISOP_imprimirTexto			= imprimirTexto,
-
-};
-AnSISOP_kernel funcionesDeKernel= {
-		.AnSISOP_wait			= wait,
-		.AnSISOP_signal			= signal,
-};
 
 
 void setearValores(t_config * archivoConfig) {
@@ -108,8 +89,9 @@ int imprimirTexto(char* texto){
 	printf("se imprime un texto");
 	char* mensaje=string_new();
 	char protocolo[3]="02";
+	int tamanioDelTexto = (string_length(texto));
 	memcpy(mensaje,&protocolo,2);
-	memcpy(mensaje[2],&string_length(texto),4);
+	memcpy(mensaje[2],&tamanioDelTexto,4);
 	memcpy(mensaje[6],texto,string_length(texto));
 	enviarMensaje(clienteNucleo,mensaje,6+string_length(texto));
 
@@ -123,7 +105,7 @@ int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo){
 
 int wait(t_nombre_semaforo identificador_semaforo){
 
-	printf("operación privilegiada wait")
+	printf("operación privilegiada wait");
 
 }
 
@@ -131,4 +113,24 @@ int signal(t_nombre_semaforo identificador_semaforo){
 
 	printf("operación privilegiada signal");
 }
+
+AnSISOP_funciones funciones = {
+		.AnSISOP_definirVariable		= definirVariable,
+		.AnSISOP_obtenerPosicionVariable= obtenerPosicionVariable,
+		.AnSISOP_dereferenciar			= dereferenciar,
+		.AnSISOP_asignar				= asignar,
+		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
+		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
+		.AnSISOP_irAlLabel				= irAlLabel,
+		.AnSISOP_llamarConRetorno		= llamarFuncion,
+		.AnSISOP_retornar				= retornar,
+		.AnSISOP_entradaSalida			= entradaSalida,
+		.AnSISOP_imprimir				= imprimir,
+		.AnSISOP_imprimirTexto			= imprimirTexto,
+
+};
+AnSISOP_kernel funcionesDeKernel= {
+		.AnSISOP_wait			= wait,
+		.AnSISOP_signal			= signal,
+};
 
