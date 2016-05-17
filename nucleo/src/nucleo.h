@@ -21,8 +21,16 @@
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
-#define FAIL -1
 
+
+#include <unistd.h>
+#include <errno.h>
+#include <sys/types.h>
+#include <sys/inotify.h>
+
+#define FAIL -1
+#define EVENT_SIZE ( sizeof (struct inotify_event) + 24 )
+#define BUF_LEN ( 1024 * EVENT_SIZE )
 //Variables Globales
 
 	//Variables de lectura de archivo

@@ -66,7 +66,7 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	//El indice de stack no lo toco cuando creo?
 
-	pcbNuevoPrograma.estado=NEW;
+	pcbNuevoPrograma.estado=0; //NEW
 
 	return  pcbNuevoPrograma;
 }
@@ -74,24 +74,24 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 void moverAColaReady(pcb * programa){
 
 	  switch(programa->estado) {
-	    case NEW: queue_pop(colaNew); break;
-	    case EXEC: queue_pop(colaExec); break;
-	    case BLOCK:  queue_pop(colaBlock); break;
+	    case 0: queue_pop(colaNew); break; //0 NEW
+	    case 2: queue_pop(colaExec); break; //2 EXEC
+	    case 3:  queue_pop(colaBlock); break; //3 BLOCK
 	  }
 
-	programa->estado=READY;
+	programa->estado=1; //1 READY
 	queue_push(colaReady,programa);
 }
 void moverAColaBlock(pcb* programa){
 	queue_pop(colaExec);
-	programa->estado=BLOCK;
+	programa->estado=3;//3 BLOCK
 	queue_push(colaBlock,programa);
 
 }
 void moverAColaExit(pcb* programa)
 {
 		queue_pop(colaExec);
-		programa->estado=EXIT;
+		programa->estado=4; // 4 EXIT
 		queue_push(colaExit,programa);
 }
 void finalizarProcesosColaExit()
@@ -213,6 +213,55 @@ void escuchoMuchasConexiones()
     }
 }
 
+void verificarModificacionesArchivoConfig()
+{
+	char buffer[BUF_LEN];
+	// Al inicializar inotify este nos devuelve un descriptor de archivo
+	int file_descriptor = inotify_init();
+	if (file_descriptor < 0) {
+	perror("inotify_init");
+	}
+	// Creamos un monitor sobre un path indicando que eventos queremos escuchar
+	int watch_descriptor = inotify_add_watch(file_descriptor, "confignucleo", IN_MODIFY);
+	// El file descriptor creado por inotify, es el que recibe la información sobre los eventos ocurridos
+	// para leer esta información el descriptor se lee como si fuera un archivo comun y corriente pero
+	// la diferencia esta en que lo que leemos no es el contenido de un archivo sino la información
+	// referente a los eventos ocurridos
+	int length = read(file_descriptor, buffer, BUF_LEN);
+	if (length < 0) {
+	perror("read");
+	}
+	int offset = 0;
+	// Luego del read buffer es un array de n posiciones donde cada posición contiene
+	// un eventos ( inotify_event ) junto con el nombre de este.
+	while (offset < length) {
+	// El buffer es de tipo array de char, o array de bytes. Esto es porque como los
+	// nombres pueden tener nombres mas cortos que 24 caracteres el tamaño va a ser menor
+	// a sizeof( struct inotify_event ) + 24.
+	struct inotify_event *event = (struct inotify_event *) &buffer[offset];
+	// El campo "len" nos indica la longitud del tamaño del nombre
+	if (event->len) {
+	// Dentro de "mask" tenemos el evento que ocurrio y sobre donde ocurrio
+	// sea un archivo o un directorio
 
+
+	if (event->mask & IN_MODIFY) {
+	if (event->mask & IN_ISDIR) {
+	printf("The directory %s was modified.\n", event->name);
+	} else {
+	printf("The file %s was modified.\n", event->name);
+	}
+	}
+	}
+	offset += sizeof (struct inotify_event) + event->len;
+	}
+	inotify_rm_watch(file_descriptor, watch_descriptor);
+	close(file_descriptor);
+
+
+
+
+
+}
 
 

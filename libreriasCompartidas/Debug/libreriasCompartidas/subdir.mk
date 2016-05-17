@@ -5,17 +5,14 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../libreriasCompartidas/archivosYLogsYMas.c \
-../libreriasCompartidas/pcb.c \
 ../libreriasCompartidas/socket.c 
 
 OBJS += \
 ./libreriasCompartidas/archivosYLogsYMas.o \
-./libreriasCompartidas/pcb.o \
 ./libreriasCompartidas/socket.o 
 
 C_DEPS += \
 ./libreriasCompartidas/archivosYLogsYMas.d \
-./libreriasCompartidas/pcb.d \
 ./libreriasCompartidas/socket.d 
 
 
