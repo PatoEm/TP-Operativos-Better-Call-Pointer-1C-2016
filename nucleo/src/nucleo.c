@@ -255,6 +255,7 @@ void verificarModificacionesArchivoConfig()
 	printf("The directory %s was modified.\n", event->name);
 	} else {
 	printf("El archivo de configuracion fue modificado.\n");
+	leerArchivoDeConfiguracion("confignucleo");
 	}
 	}
 
