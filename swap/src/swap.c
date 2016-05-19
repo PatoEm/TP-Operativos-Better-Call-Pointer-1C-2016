@@ -105,27 +105,38 @@ bool  verificarSiHayEspacio(int cantidadDePaginas){
 
 //me dice si tengo que compactar. -1 hay que compactar, siino devuelve a partir de que pagina puedo usar
 int paginasContiguasDeSwap(int cantidadDePaginas){
-		int contadorDePaginasSeguidas=1;
-		int miPaginaLibre=-1;
-		int paginaActual=0;
-		espacioLibre* nodoActual;
+		int contadorDePaginasSeguidas=1;//tiene que ser igual a cantidadDePaginas para devolver una página determinada
+		int miPaginaLibre=0;//me da el ID de la página libre actual
+		int paginaActual=0;//me dice en que página estoy actualmente
+		espacioLibre* nodoActual;//el nodo que voy a ir iterando
 		while((paginaActual<=list_size(listaEspacioLibre))||(cantidadDePaginas==contadorDePaginasSeguidas)){
-			nodoActual=list_get(listaEspacioLibre,paginaActual);
+			nodoActual=list_get(listaEspacioLibre,paginaActual);// si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
 			if(miPaginaLibre+1==nodoActual->IDPaginaInterno){
-				contadorDePaginasSeguidas++;
+				contadorDePaginasSeguidas++;//si consigo paginas seguidas sumo una
 			}
 			else{
-				contadorDePaginasSeguidas=1;
+				contadorDePaginasSeguidas=1;//sino vuelvo a 0
+				miPaginaLibre=nodoActual->IDPaginaInterno;//reasigno la página para que sea la correcta
 			}
-		miPaginaLibre=nodoActual->IDPaginaInterno;
 		paginaActual++;
 		}
-		if(cantidadDePaginas==contadorDePaginasSeguidas)return (miPaginaLibre-cantidadDePaginas);
+		if(cantidadDePaginas==contadorDePaginasSeguidas)return (miPaginaLibre);
 		else return -1;
 }
 
-void guardarPrograma(paginaDeComienzo,pid,cantidadDePaginas){
- //espacioLibre* espacio = (espacioLibre)*list_get(listaEspacioLibre,posicion);
+void reservarPaginas(paginaDeComienzo,pid,cantidadDePaginas){
+	 int paginaActual=paginaDeComienzo;// en donde empieza todo
+	 int contadorDePaginas=0;//cuento para el while
+	 espacioAsignado* paginasAReservar;//nodo para agarrar cosas
+	 espacioAsignado unNodoPiola;
+	 paginasAReservar=(&unNodoPiola);
+	 (paginasAReservar->pid)=pid;
+	 (paginasAReservar->bitMap)=0;
+	 while(contadorDePaginas<cantidadDePaginas){
+		 //ver este while con ideas más claras mañana
+
+	 }
+
    }
 
 //Recibe un nuevo programa. 1 si lo puede recibir, 0 si no
@@ -133,10 +144,12 @@ bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
 	if(verificarSiHayEspacio(cantidadDePaginasAGuardar)){
 		if(paginasContiguasDeSwap(cantidadDePaginasAGuardar)==-1){
 			compactarSwap();//Tengo que seguir desde acá DR Mengueche
+
+			//reservarPaginas();
 			return TRUE;
 		}
 		else{
-			guardarPrograma(paginasContiguasDeSwap(cantidadDePaginasAGuardar),pid,cantidadDePaginasAGuardar);
+			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),pid,cantidadDePaginasAGuardar);
 			return TRUE;
 		}
 	}
