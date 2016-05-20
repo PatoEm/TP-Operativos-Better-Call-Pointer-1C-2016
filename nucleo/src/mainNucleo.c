@@ -22,7 +22,7 @@ int main(void) {
 	colaBlock= queue_create();
 	colaExit= queue_create();
 	leerArchivoDeConfiguracion("confignucleo");
-
+	puts("hola");
 
 
 	//lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS

@@ -11,7 +11,7 @@ int main(void) {
     int fdSocketUMC = crearSocketServidor(umcPort);
     escucharSocket(fdSocketUMC, 1);
     int fdSocketCliente= aceptarConexiones(fdSocketUMC);
-
+    puts("hola");
     /*Recibo el primer protocolo*/
 
 

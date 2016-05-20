@@ -15,7 +15,7 @@ int main(void) {
 	//lee archivo de configuración y se conecta al nucleo. COMENTEMOS QUE HACEMOS
 	leerArchivoDeConfiguracion("configconsola");
 	 
-
+	puts("hola");
 	fdSocketConsola = crearCliente(ipNucleo,nucleoPort );
 	recibirArchivo();//Se encarga de recibir el archivo y mandarselo al nucleo
 	int estado;

@@ -20,6 +20,7 @@ char* crearArchivo(char* tamanio,char* nombre){
 	string_append(&paraSistema," count=1");
 	system(paraSistema);
 	return mappearArchivo(nombre);
+	puts("hola");
 
 }
 

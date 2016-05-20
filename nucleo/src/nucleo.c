@@ -38,7 +38,7 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 
 	pcb  pcbNuevoPrograma;
 	idProgramas=idProgramas+1;
-
+	puts("hola");
 	pcbNuevoPrograma.id = idProgramas;
 
 	pcbNuevoPrograma.tamanioArchivoOriginal=tamanioArchivo;

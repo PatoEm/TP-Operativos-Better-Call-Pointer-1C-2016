@@ -11,7 +11,7 @@
 void enviarArchivoANucleo(char*direccion){
 
 	char* paqueteAEnviar;
-
+	puts("hola");
 	//Obtengo el tamaño
 	int elTamanio=tamArchivo(direccion);
 

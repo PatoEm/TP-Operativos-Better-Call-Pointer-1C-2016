@@ -18,7 +18,7 @@ int main(void) {
 	clienteNucleo=crearCliente(ipNucleo,nucleoPort);
 
 	//Conecto con el cpu. Author: Dr.Mengueche
-
+	puts("hola");
 	int clienteUMC=crearCliente(ipUMC,umcPort);
 
 	//Imprimo al cliente. Author: Dr.Mengueche

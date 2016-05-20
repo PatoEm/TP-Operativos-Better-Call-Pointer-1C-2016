@@ -24,7 +24,9 @@ char * reservarMemoria(int cantidadFrames, int capacidadFrames)
 	// Si lo hago con calloc me la llena de \0 papa
 	char * memory = calloc(cantidadFrames, capacidadFrames);
 	printf ("Memoria real reservada OK.\n\n");
+	puts("hola");
 	return memory;
+
 }
 
 
