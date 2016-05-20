@@ -52,6 +52,9 @@ void setearValores(t_config * archivoConfig) {
 		tamArchivo=config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
 }
 
+char* darUnaPagina(pid,numeroDePagina){
+	//tengo que modificar el nodo que este con cosas y devolver un char
+}
 
 int calcularIDPagina(inicio){
 
@@ -125,16 +128,40 @@ int paginasContiguasDeSwap(int cantidadDePaginas){
 }
 
 void reservarPaginas(paginaDeComienzo,pid,cantidadDePaginas){
-	 int paginaActual=paginaDeComienzo;// en donde empieza todo
+	 int paginaActual=paginaDeComienzo;// en donde empieza todo.
+	 int lugarEnDondeDeboColocarMiNodo=0;// aca se en donde tengo que meter esto
+	 int nodosQueDeboReventar=0; // los nodos que quiero fusilar en donde empiezan
 	 int contadorDePaginas=0;//cuento para el while
 	 espacioAsignado* paginasAReservar;//nodo para agarrar cosas
-	 espacioAsignado unNodoPiola;
-	 paginasAReservar=(&unNodoPiola);
+	 espacioLibre* paginaAMatar;
+	 paginasAReservar=list_get(listaEspacioAsignado,lugarEnDondeDeboColocarMiNodo);
+	 while((paginasAReservar->IDPaginaInterno)<paginaDeComienzo){
+		 lugarEnDondeDeboColocarMiNodo++;
+		 paginasAReservar=list_get(listaEspacioAsignado,lugarEnDondeDeboColocarMiNodo);
+	 }
+	 paginaAMatar=list_get(listaEspacioLibre,nodosQueDeboReventar);
+	 while((paginaAMatar->IDPaginaInterno)!=paginaDeComienzo){
+
+		 nodosQueDeboReventar++;
+		 paginaAMatar=list_get(listaEspacioLibre,nodosQueDeboReventar);
+
+	 }
+
 	 (paginasAReservar->pid)=pid;
 	 (paginasAReservar->bitMap)=0;
-	 while(contadorDePaginas<cantidadDePaginas){
-		 //ver este while con ideas más claras mañana
+	 (paginasAReservar->tamanio)=atoi(tamPagina);
 
+	 while(contadorDePaginas<cantidadDePaginas){
+
+		 (paginasAReservar->IDPaginaInterno)=paginaActual;
+		 (paginasAReservar->numDePag)=contadorDePaginas;
+		 (paginasAReservar->posicionDePag)=paginaActual*atoi(tamPagina);
+		 list_add_in_index(listaEspacioAsignado,lugarEnDondeDeboColocarMiNodo,paginasAReservar);
+		 free(list_remove(listaEspacioLibre,nodosQueDeboReventar));
+		 nodosQueDeboReventar++;
+		 contadorDePaginas++;
+		 paginaActual++;
+		 lugarEnDondeDeboColocarMiNodo++;
 	 }
 
    }
@@ -144,8 +171,7 @@ bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
 	if(verificarSiHayEspacio(cantidadDePaginasAGuardar)){
 		if(paginasContiguasDeSwap(cantidadDePaginasAGuardar)==-1){
 			compactarSwap();//Tengo que seguir desde acá DR Mengueche
-
-			//reservarPaginas();
+			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),pid,cantidadDePaginasAGuardar);
 			return TRUE;
 		}
 		else{
@@ -170,7 +196,8 @@ bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
 	  espacioAsignado* nodoActual;
 	  int contadorParaCadenaActual;
 	  int contadorParaCadenaVieja;
-	  espacioLibre* nodoLibre;
+	  espacioLibre unNodoPiola;
+	  espacioLibre* nodoLibre=(&unNodoPiola);
 	  nodoActual=list_get(listaEspacioAsignado,paginasContiguas);
 	  do{
 		  if((nodoActual ->IDPaginaInterno)!= paginasContiguas){
