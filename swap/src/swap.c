@@ -1,5 +1,5 @@
 /*
-* swap.c
+ * swap.c
  *
  *  Created on: 23/4/2016
  *      Author: utnso
@@ -9,15 +9,14 @@
 
 //#define manejarError(msg) {perror(msg); abort();}
 
-
 //Genero mi archivo de Swap y lo devuelvo mappeado en memoria DRMENGUECHE
-char* crearArchivo(char* tamanio,char* nombre){
-	char* paraSistema=string_new();
-	string_append(&paraSistema,"dd if=/dev/zero of=");
-	string_append(&paraSistema,nombre);
-	string_append(&paraSistema," bs=");
-	string_append(&paraSistema,tamanio);
-	string_append(&paraSistema," count=1");
+char* crearArchivo(char* tamanio, char* nombre) {
+	char* paraSistema = string_new();
+	string_append(&paraSistema, "dd if=/dev/zero of=");
+	string_append(&paraSistema, nombre);
+	string_append(&paraSistema, " bs=");
+	string_append(&paraSistema, tamanio);
+	string_append(&paraSistema, " count=1");
 	system(paraSistema);
 	return mappearArchivo(nombre);
 	puts("hola");
@@ -36,200 +35,235 @@ void* mappearArchivo(char* filename) {
 	fd = open(filename, O_RDWR);
 
 	length = sb.st_size;
-	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,MAP_SHARED | MAP_NORESERVE, fd, 0);
+	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,
+			MAP_SHARED | MAP_NORESERVE, fd, 0);
 
 	return addr;
 
 }
 
-
-
 void setearValores(t_config * archivoConfig) {
-		umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
-		nombreSwap = config_get_string_value(archivoConfig, "NOMBRE_SWAP");
-		paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
-		tamPagina = config_get_string_value(archivoConfig, "TAMANO_PAGINA");
-		retCompactacion = config_get_string_value(archivoConfig, "RETARDO_COMPACTACION");
-		tamArchivo=config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
+	umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
+	nombreSwap = config_get_string_value(archivoConfig, "NOMBRE_SWAP");
+	paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
+	tamPagina = config_get_string_value(archivoConfig, "TAMANO_PAGINA");
+	retCompactacion = config_get_string_value(archivoConfig,
+			"RETARDO_COMPACTACION");
+	tamArchivo = config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
 }
 
-char* darUnaPagina(pid,numeroDePagina){
-	//tengo que modificar el nodo que este con cosas y devolver un char
-}
-
-int calcularIDPagina(inicio){
-
-	if(inicio==0)return 0;
+char* leerUnaPagina(int pid, int numeroDePagina) {
+	char paginaLeida[5]="-2";
+	char*punteroAPaginaLeida=(&paginaLeida[0]);
+	espacioAsignado* nodoALeer;
+	int posicionActualDeNodo = 0;
+	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != numeroDePagina)) {
+		posicionActualDeNodo++;
+		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	}
+	if((nodoALeer->bitMap)==1){
+		return (punteroAPaginaLeida);
+	}
 	else{
-		return (inicio/(atoi(tamPagina)));
+		int lugarDeLaCadena=0;
+		nodoALeer->bitMap=1;
+		free(list_replace(listaEspacioAsignado,posicionActualDeNodo,nodoALeer));
+		char paginaADevolver[atoi(tamPagina)];
+		char*punteroADevolver=(&paginaADevolver[0]);
+		int posicionDeChar=(nodoALeer->posicionDePag);
+		while(posicionDeChar<(nodoALeer->posicionDePag)+atoi(tamPagina)){
+			paginaADevolver[lugarDeLaCadena]=archivoMappeado[posicionDeChar];
+			posicionDeChar++;
+			lugarDeLaCadena++;
+		}
+	return (punteroADevolver);
+	}
+}
+
+int calcularIDPagina( inicio) {
+
+	if (inicio == 0)
+		return 0;
+	else {
+		return (inicio / (atoi(tamPagina)));
 	}
 
 }
 //Creo espacioLibre
-espacioLibre * crearEspacioLibre (int inicio) {
+espacioLibre * crearEspacioLibre(int inicio) {
 	espacioLibre * nuevoEspacioLibre = malloc(sizeof(espacioLibre));
 	nuevoEspacioLibre->inicio = inicio;
-	nuevoEspacioLibre->tamanio= atoi(tamPagina);
-	nuevoEspacioLibre->IDPaginaInterno=calcularIDPagina(inicio);
+	nuevoEspacioLibre->tamanio = atoi(tamPagina);
+	nuevoEspacioLibre->IDPaginaInterno = calcularIDPagina(inicio);
 	return nuevoEspacioLibre;
 }
 
 void agregarEspacioLibre(int inicio) {
-	espacioLibre * nuevoEspacioLibre = crearEspacioLibre (inicio);
-	list_add(listaEspacioLibre , nuevoEspacioLibre);
+	espacioLibre * nuevoEspacioLibre = crearEspacioLibre(inicio);
+	list_add(listaEspacioLibre, nuevoEspacioLibre);
 }
 
 //Creo espacioAsignado
-espacioAsignado * crearEspacioAsignado (bool bitMap,int numDePag,int posicionDePag, int pid) { //teoricamente tiene que estar el pid, lo que no creo es que este bien utilizado acá
+espacioAsignado * crearEspacioAsignado(bool bitMap, int numDePag,
+		int posicionDePag, int pid) { //teoricamente tiene que estar el pid, lo que no creo es que este bien utilizado acá
 
-	espacioAsignado  * espacio = malloc(sizeof(espacioAsignado ));
+	espacioAsignado * espacio = malloc(sizeof(espacioAsignado));
 
-
-	espacio->bitMap= bitMap;
-	espacio->tamanio= atoi(tamPagina);
-	espacio->IDPaginaInterno=calcularIDPagina(posicionDePag);// nro de página en el swap
+	espacio->bitMap = bitMap;//1 sucio 0 limpia
+	espacio->tamanio = atoi(tamPagina);
+	espacio->IDPaginaInterno = calcularIDPagina(posicionDePag); // nro de página en el swap
 	espacio->pid = pid;
-	espacio->numDePag= numDePag;//número de página en el programa
-	espacio->posicionDePag= posicionDePag;// donde comienza mi página en el swap
+	espacio->numDePag = numDePag; //número de página en el programa
+	espacio->posicionDePag = posicionDePag; // donde comienza mi página en el swap
 
 	return espacio;
 }
 
-void agregarEspacioAsigando(bool bitMap,int numDePag,int posicionDePag, int tamanio, int pid) {
-       	espacioAsignado * nuevoEspacioAsignado = crearEspacioAsignado(bitMap,numDePag,posicionDePag,pid);
-       	list_add(listaEspacioLibre , nuevoEspacioAsignado);
-       }
-
-
-bool  verificarSiHayEspacio(int cantidadDePaginas){
-   if(cantidadDePaginas <= list_size(listaEspacioLibre))return TRUE;
-   else return FALSE;
+void agregarEspacioAsigando(bool bitMap, int numDePag, int posicionDePag,
+		int tamanio, int pid) {
+	espacioAsignado * nuevoEspacioAsignado = crearEspacioAsignado(bitMap,
+			numDePag, posicionDePag, pid);
+	list_add(listaEspacioLibre, nuevoEspacioAsignado);
 }
 
+bool verificarSiHayEspacio(int cantidadDePaginas) {
+	if (cantidadDePaginas <= list_size(listaEspacioLibre))
+		return TRUE;
+	else
+		return FALSE;
+}
 
 //me dice si tengo que compactar. -1 hay que compactar, siino devuelve a partir de que pagina puedo usar
-int paginasContiguasDeSwap(int cantidadDePaginas){
-		int contadorDePaginasSeguidas=1;//tiene que ser igual a cantidadDePaginas para devolver una página determinada
-		int miPaginaLibre=0;//me da el ID de la página libre actual
-		int paginaActual=0;//me dice en que página estoy actualmente
-		espacioLibre* nodoActual;//el nodo que voy a ir iterando
-		while((paginaActual<=list_size(listaEspacioLibre))||(cantidadDePaginas==contadorDePaginasSeguidas)){
-			nodoActual=list_get(listaEspacioLibre,paginaActual);// si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
-			if(miPaginaLibre+1==nodoActual->IDPaginaInterno){
-				contadorDePaginasSeguidas++;//si consigo paginas seguidas sumo una
-			}
-			else{
-				contadorDePaginasSeguidas=1;//sino vuelvo a 0
-				miPaginaLibre=nodoActual->IDPaginaInterno;//reasigno la página para que sea la correcta
-			}
-		paginaActual++;
+int paginasContiguasDeSwap(int cantidadDePaginas) {
+	int contadorDePaginasSeguidas = 1; //tiene que ser igual a cantidadDePaginas para devolver una página determinada
+	int miPaginaLibre = 0; //me da el ID de la página libre actual
+	int paginaActual = 0; //me dice en que página estoy actualmente
+	espacioLibre* nodoActual; //el nodo que voy a ir iterando
+	while ((paginaActual <= list_size(listaEspacioLibre))
+			|| (cantidadDePaginas == contadorDePaginasSeguidas)) {
+		nodoActual = list_get(listaEspacioLibre, paginaActual); // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
+		if (miPaginaLibre + 1 == nodoActual->IDPaginaInterno) {
+			contadorDePaginasSeguidas++; //si consigo paginas seguidas sumo una
+		} else {
+			contadorDePaginasSeguidas = 1; //sino vuelvo a 0
+			miPaginaLibre = nodoActual->IDPaginaInterno; //reasigno la página para que sea la correcta
 		}
-		if(cantidadDePaginas==contadorDePaginasSeguidas)return (miPaginaLibre);
-		else return -1;
+		paginaActual++;
+	}
+	if (cantidadDePaginas == contadorDePaginasSeguidas)
+		return (miPaginaLibre);
+	else
+		return -1;
 }
 
-void reservarPaginas(paginaDeComienzo,pid,cantidadDePaginas){
-	 int paginaActual=paginaDeComienzo;// en donde empieza todo.
-	 int lugarEnDondeDeboColocarMiNodo=0;// aca se en donde tengo que meter esto
-	 int nodosQueDeboReventar=0; // los nodos que quiero fusilar en donde empiezan
-	 int contadorDePaginas=0;//cuento para el while
-	 espacioAsignado* paginasAReservar;//nodo para agarrar cosas
-	 espacioLibre* paginaAMatar;
-	 paginasAReservar=list_get(listaEspacioAsignado,lugarEnDondeDeboColocarMiNodo);
-	 while((paginasAReservar->IDPaginaInterno)<paginaDeComienzo){
-		 lugarEnDondeDeboColocarMiNodo++;
-		 paginasAReservar=list_get(listaEspacioAsignado,lugarEnDondeDeboColocarMiNodo);
-	 }
-	 paginaAMatar=list_get(listaEspacioLibre,nodosQueDeboReventar);
-	 while((paginaAMatar->IDPaginaInterno)!=paginaDeComienzo){
+void reservarPaginas( paginaDeComienzo, pid, cantidadDePaginas) {
+	int paginaActual = paginaDeComienzo; // en donde empieza todo.
+	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
+	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
+	int contadorDePaginas = 0; //cuento para el while
+	espacioAsignado* paginasAReservar; //nodo para agarrar cosas
+	espacioLibre* paginaAMatar;
+	paginasAReservar = list_get(listaEspacioAsignado,
+			lugarEnDondeDeboColocarMiNodo);
+	while ((paginasAReservar->IDPaginaInterno) < paginaDeComienzo) {
+		lugarEnDondeDeboColocarMiNodo++;
+		paginasAReservar = list_get(listaEspacioAsignado,
+				lugarEnDondeDeboColocarMiNodo);
+	}
+	paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
+	while ((paginaAMatar->IDPaginaInterno) != paginaDeComienzo) {
 
-		 nodosQueDeboReventar++;
-		 paginaAMatar=list_get(listaEspacioLibre,nodosQueDeboReventar);
+		nodosQueDeboReventar++;
+		paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
 
-	 }
+	}
 
-	 (paginasAReservar->pid)=pid;
-	 (paginasAReservar->bitMap)=0;
-	 (paginasAReservar->tamanio)=atoi(tamPagina);
+	(paginasAReservar->pid) = pid;
+	(paginasAReservar->bitMap) = 0;
+	(paginasAReservar->tamanio) = atoi(tamPagina);
 
-	 while(contadorDePaginas<cantidadDePaginas){
+	while (contadorDePaginas < cantidadDePaginas) {
 
-		 (paginasAReservar->IDPaginaInterno)=paginaActual;
-		 (paginasAReservar->numDePag)=contadorDePaginas;
-		 (paginasAReservar->posicionDePag)=paginaActual*atoi(tamPagina);
-		 list_add_in_index(listaEspacioAsignado,lugarEnDondeDeboColocarMiNodo,paginasAReservar);
-		 free(list_remove(listaEspacioLibre,nodosQueDeboReventar));
-		 nodosQueDeboReventar++;
-		 contadorDePaginas++;
-		 paginaActual++;
-		 lugarEnDondeDeboColocarMiNodo++;
-	 }
+		(paginasAReservar->IDPaginaInterno) = paginaActual;
+		(paginasAReservar->numDePag) = contadorDePaginas;
+		(paginasAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
+		list_add_in_index(listaEspacioAsignado, lugarEnDondeDeboColocarMiNodo,
+				paginasAReservar);
+		free(list_remove(listaEspacioLibre, nodosQueDeboReventar));
+		nodosQueDeboReventar++;
+		contadorDePaginas++;
+		paginaActual++;
+		lugarEnDondeDeboColocarMiNodo++;
+	}
 
-   }
+}
 
 //Recibe un nuevo programa. 1 si lo puede recibir, 0 si no
-bool recibirNuevoPrograma(int pid,int cantidadDePaginasAGuardar){
-	if(verificarSiHayEspacio(cantidadDePaginasAGuardar)){
-		if(paginasContiguasDeSwap(cantidadDePaginasAGuardar)==-1){
-			compactarSwap();//Tengo que seguir desde acá DR Mengueche
-			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),pid,cantidadDePaginasAGuardar);
+bool recibirNuevoPrograma(int pid, int cantidadDePaginasAGuardar) {
+	if (verificarSiHayEspacio(cantidadDePaginasAGuardar)) {
+		if (paginasContiguasDeSwap(cantidadDePaginasAGuardar) == -1) {
+			compactarSwap(); //Tengo que seguir desde acá DR Mengueche
+			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),
+					pid, cantidadDePaginasAGuardar);
+			return TRUE;
+		} else {
+			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),
+					pid, cantidadDePaginasAGuardar);
 			return TRUE;
 		}
-		else{
-			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),pid,cantidadDePaginasAGuardar);
-			return TRUE;
-		}
-	}
-	else return FALSE;
+	} else
+		return FALSE;
 }
-
 
 //Creo listas de espacio libre y espacio asignado
 
-  void crearListas () {
-  		listaEspacioLibre = list_create ();
-  		listaEspacioAsignado = list_create ();
- }
+void crearListas() {
+	listaEspacioLibre = list_create();
+	listaEspacioAsignado = list_create();
+}
 
-  void compactarSwap(){
+void compactarSwap() {
 
-	  int paginasContiguas=0;
-	  espacioAsignado* nodoActual;
-	  int contadorParaCadenaActual;
-	  int contadorParaCadenaVieja;
-	  espacioLibre unNodoPiola;
-	  espacioLibre* nodoLibre=(&unNodoPiola);
-	  nodoActual=list_get(listaEspacioAsignado,paginasContiguas);
-	  do{
-		  if((nodoActual ->IDPaginaInterno)!= paginasContiguas){
-			  contadorParaCadenaActual=paginasContiguas*atoi(tamPagina);
-			  contadorParaCadenaVieja= paginasContiguas*(atoi(tamPagina)+1);
-			  while(contadorParaCadenaActual<paginasContiguas*(atoi(tamPagina)+1)){
-				  archivoMappeado[contadorParaCadenaActual]=archivoMappeado[contadorParaCadenaVieja];
-				  archivoMappeado[contadorParaCadenaVieja]='\0';
-				  contadorParaCadenaActual++;
-				  contadorParaCadenaVieja++;
-			  }
-			 (nodoActual->IDPaginaInterno)= paginasContiguas;
-			 (nodoActual->posicionDePag )= paginasContiguas*atoi(tamPagina);
-		  }
-		  paginasContiguas++;
-		  nodoActual=list_get(listaEspacioAsignado,paginasContiguas);
+	int paginasContiguas = 0;
+	espacioAsignado* nodoActual;
+	int contadorParaCadenaActual;
+	int contadorParaCadenaVieja;
+	espacioLibre unNodoPiola;
+	espacioLibre* nodoLibre = (&unNodoPiola);
+	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
+	do {
+		if ((nodoActual->IDPaginaInterno) != paginasContiguas) {
+			contadorParaCadenaActual = paginasContiguas * atoi(tamPagina);
+			contadorParaCadenaVieja = paginasContiguas * (atoi(tamPagina) + 1);
+			while (contadorParaCadenaActual
+					< paginasContiguas * (atoi(tamPagina) + 1)) {
+				archivoMappeado[contadorParaCadenaActual] =
+						archivoMappeado[contadorParaCadenaVieja];
+				archivoMappeado[contadorParaCadenaVieja] = '\0';
+				contadorParaCadenaActual++;
+				contadorParaCadenaVieja++;
+			}
+			(nodoActual->IDPaginaInterno) = paginasContiguas;
+			(nodoActual->posicionDePag) = paginasContiguas * atoi(tamPagina);
+		}
+		paginasContiguas++;
+		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
 
-	  }while(paginasContiguas<=list_size(listaEspacioAsignado));
-	  list_clean(listaEspacioLibre);
-	  paginasContiguas--;
-	  nodoActual=list_get(listaEspacioAsignado,paginasContiguas);
-	  (nodoLibre->inicio)=(nodoActual->posicionDePag)+atoi(tamPagina);
-	  (nodoLibre->tamanio)=atoi(tamPagina);
-	  (nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
-	  list_add(listaEspacioLibre,nodoLibre);
-	  while((nodoLibre->IDPaginaInterno )!= atoi(paginas)){
+	} while (paginasContiguas <= list_size(listaEspacioAsignado));
+	list_clean(listaEspacioLibre);
+	paginasContiguas--;
+	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
+	(nodoLibre->inicio) = (nodoActual->posicionDePag) + atoi(tamPagina);
+	(nodoLibre->tamanio) = atoi(tamPagina);
+	(nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
+	list_add(listaEspacioLibre, nodoLibre);
+	while ((nodoLibre->IDPaginaInterno) != atoi(paginas)) {
 
-		  (nodoLibre->IDPaginaInterno)=((nodoLibre->IDPaginaInterno)+1);
-		  (nodoLibre->inicio)=atoi(tamPagina)*(nodoLibre->IDPaginaInterno);
-		  list_add(listaEspacioLibre,nodoLibre);
+		(nodoLibre->IDPaginaInterno) = ((nodoLibre->IDPaginaInterno) + 1);
+		(nodoLibre->inicio) = atoi(tamPagina) * (nodoLibre->IDPaginaInterno);
+		list_add(listaEspacioLibre, nodoLibre);
 
-	  }
-usleep(1000*atoi(retCompactacion));
-  }
+	}
+	usleep(1000 * atoi(retCompactacion));
+}

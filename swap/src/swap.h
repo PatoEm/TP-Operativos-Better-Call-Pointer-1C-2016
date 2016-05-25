@@ -103,7 +103,6 @@ int paginasContiguasDeSwap(int);
 
 bool recibirNuevoPrograma(int ,int );
 
-void reservarPaginas(paginaDeComienzo,pid,cantidadDePaginas);
 
 void crearListas () ;
 
