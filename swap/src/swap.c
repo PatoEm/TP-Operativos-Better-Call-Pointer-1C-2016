@@ -36,7 +36,7 @@ void* mappearArchivo(char* filename) {
 
 	length = sb.st_size;
 	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,
-			MAP_SHARED | MAP_NORESERVE, fd, 0);
+	MAP_SHARED | MAP_NORESERVE, fd, 0);
 
 	return addr;
 
@@ -52,9 +52,7 @@ void setearValores(t_config * archivoConfig) {
 	tamArchivo = config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
 }
 
-char* leerUnaPagina(int pid, int numeroDePagina) {
-	char paginaLeida[5]="-2";
-	char*punteroAPaginaLeida=(&paginaLeida[0]);
+bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -62,22 +60,45 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if((nodoALeer->bitMap)==1){
-		return (punteroAPaginaLeida);
+	nodoALeer->bitMap = 0;
+	free(list_replace(listaEspacioAsignado, posicionActualDeNodo,nodoALeer));
+	int dondeEscribo=nodoALeer->posicionDePag;
+	int enDondeEstoyDeLoQueMeMandaron=0;
+	while(enDondeEstoyDeLoQueMeMandaron<atoi(tamPagina)){
+		archivoMappeado[dondeEscribo]=pagina[enDondeEstoyDeLoQueMeMandaron];
+		dondeEscribo++;
+		enDondeEstoyDeLoQueMeMandaron++;
 	}
-	else{
-		int lugarDeLaCadena=0;
-		nodoALeer->bitMap=1;
-		free(list_replace(listaEspacioAsignado,posicionActualDeNodo,nodoALeer));
+	return TRUE;
+}
+
+char* leerUnaPagina(int pid, int numeroDePagina) {
+	char paginaLeida[5] = "-2";
+	char*punteroAPaginaLeida = (&paginaLeida[0]);
+	espacioAsignado* nodoALeer;
+	int posicionActualDeNodo = 0;
+	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != numeroDePagina)) {
+		posicionActualDeNodo++;
+		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	}
+	if ((nodoALeer->bitMap) == 1) {
+		return (punteroAPaginaLeida);
+	} else {
+		int lugarDeLaCadena = 0;
+		nodoALeer->bitMap = 1;
+		free(
+				list_replace(listaEspacioAsignado, posicionActualDeNodo,
+						nodoALeer));
 		char paginaADevolver[atoi(tamPagina)];
-		char*punteroADevolver=(&paginaADevolver[0]);
-		int posicionDeChar=(nodoALeer->posicionDePag);
-		while(posicionDeChar<(nodoALeer->posicionDePag)+atoi(tamPagina)){
-			paginaADevolver[lugarDeLaCadena]=archivoMappeado[posicionDeChar];
+		char*punteroADevolver = (&paginaADevolver[0]);
+		int posicionDeChar = (nodoALeer->posicionDePag);
+		while (posicionDeChar < (nodoALeer->posicionDePag) + atoi(tamPagina)) {
+			paginaADevolver[lugarDeLaCadena] = archivoMappeado[posicionDeChar];
 			posicionDeChar++;
 			lugarDeLaCadena++;
 		}
-	return (punteroADevolver);
+		return (punteroADevolver);
 	}
 }
 
@@ -110,7 +131,7 @@ espacioAsignado * crearEspacioAsignado(bool bitMap, int numDePag,
 
 	espacioAsignado * espacio = malloc(sizeof(espacioAsignado));
 
-	espacio->bitMap = bitMap;//1 sucio 0 limpia
+	espacio->bitMap = bitMap; //1 sucio 0 limpia
 	espacio->tamanio = atoi(tamPagina);
 	espacio->IDPaginaInterno = calcularIDPagina(posicionDePag); // nro de página en el swap
 	espacio->pid = pid;
