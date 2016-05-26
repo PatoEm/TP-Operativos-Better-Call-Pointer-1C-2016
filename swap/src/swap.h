@@ -87,6 +87,12 @@ void* mappearArchivo(char* );
 
 void setearValores(t_config *);
 
+bool escribirPagina(int pid, int numeroDePagina, char*pagina);
+
+char* leerUnaPagina(int pid, int numeroDePagina);
+
+
+
 int calcularIDPagina(int);
 
 espacioLibre* crearEspacioLibre (int );
@@ -100,6 +106,10 @@ void agregarEspacioAsigando(bool,int ,int , int , int );
 bool  verificarSiHayEspacio(int );
 
 int paginasContiguasDeSwap(int);
+
+void eliminarProceso(int pid);
+
+void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) ;
 
 bool recibirNuevoPrograma(int ,int );
 

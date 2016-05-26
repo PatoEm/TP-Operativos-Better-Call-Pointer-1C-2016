@@ -61,11 +61,11 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
 	nodoALeer->bitMap = 0;
-	free(list_replace(listaEspacioAsignado, posicionActualDeNodo,nodoALeer));
-	int dondeEscribo=nodoALeer->posicionDePag;
-	int enDondeEstoyDeLoQueMeMandaron=0;
-	while(enDondeEstoyDeLoQueMeMandaron<atoi(tamPagina)){
-		archivoMappeado[dondeEscribo]=pagina[enDondeEstoyDeLoQueMeMandaron];
+	free(list_replace(listaEspacioAsignado, posicionActualDeNodo, nodoALeer));
+	int dondeEscribo = nodoALeer->posicionDePag;
+	int enDondeEstoyDeLoQueMeMandaron = 0;
+	while (enDondeEstoyDeLoQueMeMandaron < atoi(tamPagina)) {
+		archivoMappeado[dondeEscribo] = pagina[enDondeEstoyDeLoQueMeMandaron];
 		dondeEscribo++;
 		enDondeEstoyDeLoQueMeMandaron++;
 	}
@@ -102,7 +102,7 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 	}
 }
 
-int calcularIDPagina( inicio) {
+int calcularIDPagina(int inicio) {
 
 	if (inicio == 0)
 		return 0;
@@ -178,7 +178,35 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 		return -1;
 }
 
-void reservarPaginas( paginaDeComienzo, pid, cantidadDePaginas) {
+void eliminarProceso(int pid) {
+	espacioAsignado*nodoAReventar;
+	espacioLibre nodoAAgregar;
+	espacioLibre*nodoLibre;
+	int enDondeAgregarEspacio = 0;
+	int nodoActualAReventar = 0;
+	nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
+	while ((nodoAReventar->pid) != pid) {
+		nodoActualAReventar++;
+		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
+	}
+	nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
+	nodoLibre = list_get(listaEspacioLibre, enDondeAgregarEspacio);
+	while (nodoLibre->IDPaginaInterno < nodoAReventar->IDPaginaInterno) {
+		enDondeAgregarEspacio++;
+		nodoLibre = list_get(listaEspacioLibre, enDondeAgregarEspacio);
+	}
+	while ((nodoAReventar->pid) == pid) {
+		nodoAAgregar.IDPaginaInterno = nodoAReventar->IDPaginaInterno;
+		nodoAAgregar.inicio = nodoAReventar->posicionDePag;
+		nodoAAgregar.tamanio = nodoAReventar->tamanio;
+		list_add_in_index(listaEspacioLibre, enDondeAgregarEspacio,
+				(&nodoAAgregar));
+		enDondeAgregarEspacio++;
+		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
+	}
+}
+
+void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 	int paginaActual = paginaDeComienzo; // en donde empieza todo.
 	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
