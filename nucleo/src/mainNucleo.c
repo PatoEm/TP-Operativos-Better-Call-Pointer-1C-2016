@@ -22,6 +22,16 @@ int main(void) {
 	        return -1;
 	    }
 
+	  //Leo el archivo de configuracion
+	  leerArchivoDeConfiguracion("confignucleo");
+
+	  //Creacion de Hilos
+
+	  pthread_t hiloQuamtum;
+	 // pthread_create(&hiloQuamtum, NULL, &verificarModificacionesArchivoConfig, NULL);
+
+
+
 	//Inicio el Contador de programas en 0 y creo las Colas
 	idProgramas=0;
 	colaNew = queue_create();
@@ -29,19 +39,10 @@ int main(void) {
 	colaExec= queue_create();
 	colaBlock= queue_create();
 	colaExit= queue_create();
-	leerArchivoDeConfiguracion("confignucleo");
 	puts("hola");
 
 
-	//lee archivo de configuración y se conecta a la consola. COMENTEMOS QUE HACEMOS
-
-
-
-	puts("Inicio Nucleo");
-
-	verificarModificacionesArchivoConfig();
-
-	puts("fin nucleo");
+	//Se conecta a la consola. COMENTEMOS QUE HACEMOS
 
 /*
 
@@ -59,28 +60,12 @@ int main(void) {
 	recibirMensaje(fdSocketCliente1,mensaje,11*sizeof(char));
 	puts(mensaje);
 
-	//t_metadata_program programa1 = metadata_desde_literal(mensaje);
-
-
-
-
-
-
 	// creo el servidor para el cpu y lo acepto. Author: Dr.Mengueche
 
 	int fdSocketCpu= crearSocketServidor(cpuPort);
 	escucharSocket(fdSocketCpu,5);
 	int fdSocketClienteCpu1=aceptarConexiones(fdSocketCpu);
-
-
-
-
-
 	enviarMensaje(fdSocketClienteCpu1,mensaje,11*sizeof(char));
-
-
-
-
 
 	//Se conecta con la memoria. Author: Dr.Mengueche
 	//Socket UMC testeado by Dr.Mengueche
@@ -88,14 +73,14 @@ int main(void) {
 
 */
 
-	/*puts("hola");
+	/*
+	puts("hola");
 	char * mensajito = leerProgramaAnSISOP1("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
 	//t_metadata_program * programa1=metadata_desde_literal(mensajito);
 	puts("hola1");
 	int tamanio= tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
 	puts("hola2");
 	pcb hola = crearNuevoPcb(mensajito,tamanio);
-
 	puts("hola3");
 	*/
 
