@@ -14,6 +14,14 @@
 char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
+	//Inicio Semaforos de Sincro
+
+	  if (pthread_mutex_init(&mutexQuamtum, NULL) != 0)
+	    {
+	        printf("\n init mutexQuamtum fallo\n");
+	        return -1;
+	    }
+
 	//Inicio el Contador de programas en 0 y creo las Colas
 	idProgramas=0;
 	colaNew = queue_create();
@@ -91,7 +99,8 @@ int main(void) {
 	puts("hola3");
 	*/
 
-
+	//Destruyo semaforos sincro
+		pthread_mutex_destroy(&mutexQuamtum);
 	return EXIT_SUCCESS;
 }
 
@@ -127,7 +136,7 @@ char * leerProgramaAnSISOP1(char * direccionArchivo) {
 		char* buffer = (char *) malloc(tamanio);
 			if(buffer==NULL){
 				printf("no se pudo reservar memoria para el archivo");
-				return-1;
+				return -1;
 			}
 		 fseek(fp, 0, 0);
 		int n = 0;
@@ -142,6 +151,10 @@ char * leerProgramaAnSISOP1(char * direccionArchivo) {
 
 	}
 	return "";
+
+
+
+
 
 }
 

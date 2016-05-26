@@ -15,8 +15,9 @@ void setearValores(t_config * archivoConfig) {
 		cpuPort= config_get_string_value(archivoConfig, "PUERTO_CPU");
 		ipUMC= config_get_string_value(archivoConfig, "IP_UMC");
 		UMCPort=config_get_string_value(archivoConfig, "PUERTO_UMC");
-		quantum= config_get_int_value(archivoConfig, "QUANTUM");
-		quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
+
+		cambioQuamtum(archivoConfig);
+
 		idSemaforos = config_get_array_value(archivoConfig,"SEM_IDS");
 		viSemaforos = config_get_array_value(archivoConfig,"SEM_INIT");
 		idIO = config_get_array_value(archivoConfig,"IO_IDS");
@@ -25,6 +26,16 @@ void setearValores(t_config * archivoConfig) {
 		tamanioPaginas=config_get_int_value(archivoConfig, "MARCO_SIZE");
 
 }
+
+
+void cambioQuamtum(t_config * archivoConfig){
+
+	pthread_mutex_lock(&mutexQuamtum);
+	quantum= config_get_int_value(archivoConfig, "QUANTUM");
+	quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
+	pthread_mutex_unlock(&mutexQuamtum);
+}
+
 
 pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo)
 {
@@ -75,8 +86,10 @@ void moverAColaReady(pcb * programa){
 
 	  switch(programa->estado) {
 	    case 0: queue_pop(colaNew); break; //0 NEW
+	    case 1: break;
 	    case 2: queue_pop(colaExec); break; //2 EXEC
-	    case 3:  queue_pop(colaBlock); break; //3 BLOCK
+	    case 3: queue_pop(colaBlock); break; //3 BLOCK
+	    case 4: break;
 	  }
 
 	programa->estado=1; //1 READY
@@ -106,6 +119,9 @@ void finalizarProcesosColaExit()
 
 void escuchoMuchasConexiones()
 {
+
+
+
     fd_set master;      // maestro es el conjunto de file descriptors que están actualmente conectados
     fd_set read_fds;    // conjunto temporal de descriptores de fichero para select()
     struct sockaddr_in myaddr;       // dirección del servidor

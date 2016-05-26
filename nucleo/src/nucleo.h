@@ -47,7 +47,11 @@
    char* UMCPort;
    int tamanioPaginas;
 
-   int idProgramas;
+   //Otras Variables
+   int idProgramas; //Contador de programa
+
+   //Sincronizacion
+   pthread_mutex_t mutexQuamtum;
 
    //Colas
    t_queue *colaNew;
@@ -109,6 +113,7 @@
    //Prototipos
 
    void setearValores(t_config * archivoConfig);
+   void cambioQuamtum(t_config * archivoConfig);
    void escuchoMuchasConexiones();
 
 
