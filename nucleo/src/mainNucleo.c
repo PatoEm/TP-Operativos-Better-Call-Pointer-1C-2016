@@ -16,7 +16,7 @@ int main(void) {
 
 	//Inicio Semaforos de Sincro
 
-	  if (pthread_mutex_init(&mutexQuamtum, NULL) != 0)
+	  if (pthread_mutex_init(&mutexQuantum, NULL) != 0)
 	    {
 	        printf("\n init mutexQuamtum fallo\n");
 	        return -1;
@@ -27,19 +27,30 @@ int main(void) {
 
 	  //Creacion de Hilos
 
-	  pthread_t hiloQuamtum;
-	 // pthread_create(&hiloQuamtum, NULL, &verificarModificacionesArchivoConfig, NULL);
+	 pthread_t hiloQuantum;
+	 pthread_create(&hiloQuantum, NULL, &funcionHiloQuantum, NULL);
+	  puts("emiputo");
+	  //funcionHiloQuamtum();
 
 
+	  for(;;){
+
+
+	  }
+
+	 puts("hola Nico");
 
 	//Inicio el Contador de programas en 0 y creo las Colas
 	idProgramas=0;
+
+
 	colaNew = queue_create();
 	colaReady= queue_create();
 	colaExec= queue_create();
 	colaBlock= queue_create();
 	colaExit= queue_create();
 	puts("hola");
+
 
 
 	//Se conecta a la consola. COMENTEMOS QUE HACEMOS
@@ -85,7 +96,7 @@ int main(void) {
 	*/
 
 	//Destruyo semaforos sincro
-		pthread_mutex_destroy(&mutexQuamtum);
+		pthread_mutex_destroy(&mutexQuantum);
 	return EXIT_SUCCESS;
 }
 
@@ -121,7 +132,7 @@ char * leerProgramaAnSISOP1(char * direccionArchivo) {
 		char* buffer = (char *) malloc(tamanio);
 			if(buffer==NULL){
 				printf("no se pudo reservar memoria para el archivo");
-				return -1;
+				//return -1;
 			}
 		 fseek(fp, 0, 0);
 		int n = 0;

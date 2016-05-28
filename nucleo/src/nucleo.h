@@ -29,11 +29,14 @@
 #include <sys/inotify.h>
 
 #define FAIL -1
-#define EVENT_SIZE ( sizeof (struct inotify_event) + 24 )
-#define BUF_LEN ( 1024 * EVENT_SIZE )
+#define EVENT_SIZE  ( sizeof (struct inotify_event) )
+#define EVENT_BUF_LEN ( 1024 * EVENT_SIZE )
 //Variables Globales
 
 	//Variables de lectura de archivo
+
+
+
    char*  puertoPropio;
    char*  cpuPort;
    int  quantum;
@@ -51,7 +54,7 @@
    int idProgramas; //Contador de programa
 
    //Sincronizacion
-   pthread_mutex_t mutexQuamtum;
+   pthread_mutex_t mutexQuantum;
 
    //Colas
    t_queue *colaNew;
@@ -123,6 +126,7 @@
    void moverAColaExit(pcb* programa);
    void finalizarProcesosColaExit();
    void verificarModificacionesArchivoConfig();
+   void funcionHiloQuantum();
 
 
 

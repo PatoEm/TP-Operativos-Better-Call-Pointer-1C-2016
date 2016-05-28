@@ -16,17 +16,13 @@ int verificarMemoria(void*algo){
 }
 
 void leerArchivoDeConfiguracion(const char * direccionArchivo) {
-
              t_config* archivoDeConfiguracion;
              char*configPath = direccionArchivo;
-
             if (verificarExistenciaDeArchivo(configPath) == FAIL)
-		puts("[ERROR] Archivo de configuracion no encontrado");
-
-
+            puts("[ERROR] Archivo de configuracion no encontrado");
              archivoDeConfiguracion = config_create(configPath);
              setearValores(archivoDeConfiguracion);
-	         //config_destroy(archivoDeConfiguracion); ESTA MIERDA ERA
+	        // config_destroy(archivoDeConfiguracion); //ESTA MIERDA ERA
 
 }
 
