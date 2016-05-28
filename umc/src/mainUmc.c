@@ -18,6 +18,17 @@ int main(void) {
 
 	char * memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 
+	pthread_t hiloComandos;
+
+	pthread_attr_t attrhiloComandos;
+
+	pthread_attr_init(&attrhiloComandos);
+
+	pthread_attr_setdetachstate(&attrhiloComandos, PTHREAD_CREATE_DETACHED);
+	int hiloParaComandos = pthread_create (&hiloComandos, &attrhiloComandos, (void *)comandosUMC, NULL);
+
+
+	pthread_attr_destroy(&attrhiloComandos);
 	escuchoMuchasConexiones();
 
 /*

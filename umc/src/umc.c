@@ -302,3 +302,76 @@ void meHablaKernelPrueba() {
 
 	printf("Hola soy el Nucleo\n");
 }
+
+
+void comandosUMC (){
+
+	int opcionPrincipal;
+	int opcionmemoryoTLB;
+	int retardo;
+
+	while (1){
+		puts("Opcion 1: Retardo\n");
+		puts("Opcion 2: Dump\n");
+		puts("Opcion 3: Flush\n");
+
+		scanf("%d", &opcionPrincipal);
+
+		switch (opcionPrincipal){
+		case 1:
+			puts("Ingresar retardo\n");
+			scanf("%d", &retardo);
+			retardoUMC(retardo);
+			break;
+
+		case 2:
+			dump();
+			break;
+
+		case 3:
+			puts("Opcion 1: TLB\n");
+			puts("Opcion 2: Memory\n");
+			scanf ("%d", &opcionmemoryoTLB);
+
+			switch (opcionmemoryoTLB){
+			case 1:
+				flushTLB();
+				break;
+
+			case 2:
+				flushMemory();
+				break;
+
+			default:
+
+				break;
+			}
+			break;
+
+		default:
+
+			break;
+		}
+	}
+}
+
+
+void retardoUMC (int retardo){
+
+}
+
+void dump () {
+
+
+}
+
+void flushTLB () {
+
+
+}
+
+void flushMemory () {
+
+
+}
+

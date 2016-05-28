@@ -71,6 +71,16 @@ bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) 
 
 char * reservarMemoria(int , int );
 
+void comandosUMC ();
+
+void retardoUMC (int);
+
+void dump ();
+
+void flushTLB ();
+
+void flushMemory ();
+
 void liberarMemoria(char * );
 
 void escuchoMuchasConexiones();
