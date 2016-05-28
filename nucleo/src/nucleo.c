@@ -11,7 +11,7 @@
 void setearValores(t_config * archivoConfig) {
 	puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
 	cpuPort = config_get_string_value(archivoConfig, "PUERTO_CPU");
-	ipUMC =config_get_string_value(archivoConfig, "IP_UMC");
+	ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
 	UMCPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
 	pthread_mutex_lock(&mutexQuantum);
 	quantum = config_get_int_value(archivoConfig, "QUANTUM");
@@ -22,11 +22,11 @@ void setearValores(t_config * archivoConfig) {
 	idIO = config_get_array_value(archivoConfig, "IO_IDS");
 	retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
 	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
+	variableCompartidaValor = config_get_array_value(archivoConfig,
+			"SHARED_VALOR");
 	tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
 
 }
-
-
 
 pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
@@ -280,34 +280,72 @@ void verificarModificacionesArchivoConfig() {
 
 }
 
-void entrada_salida(char * identificador, int cantidad){
+void entrada_salida(char * identificador, int cantidad) {
 
-
-	int contloco;
-
+	int i;
+	int abortar = 0;
 	int retardoPeriferico;
-
 	int totalRetardo;
-	  for(contloco=0;(idIO[contloco]!='\0');contloco++){
+	for (i = 0; (idIO[i] != '\0'); i++) {
 
-		  if((strcmp(idIO[contloco], identificador))==0){
+		if ((strcmp(idIO[i], identificador)) == 0) {
 
-			  retardoPeriferico=(int)retardoIO[contloco];
+			retardoPeriferico = (int) retardoIO[i];
+			abortar++;
+			usleep(5 * 1000);
+		}
 
-			  usleep(5*1000);
-		  }
+	}
 
-		  //puts(idIO[contloco]);
-	  }
+	if(abortar==0){
 
-	  totalRetardo = retardoPeriferico * cantidad;
 
-	  usleep(totalRetardo*1000);
+	}
 
-	  //printf("%d",contloco);
+totalRetardo = retardoPeriferico * cantidad;
+
+usleep(totalRetardo*1000);
 
 
 }
 
+int obtener_valor(char* identificador) {
+
+int i;
+int abortar = 0; //SI es 0 Aborta.
+for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
+
+	if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
+		return( (int) variableCompartidaValor[i]);
+		abortar++;
+
+	}
+
+}
+if (abortar == 0) {
+
+}
+return FAIL;
+
+}
+
+void grabar_valor(char* identificador, int valor){
+	int i;
+	int abortar = 0; //SI es 0 Aborta.
+	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
+
+		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
+
+			variableCompartidaValor[i]=(char*)valor;
+
+			abortar++;
+
+		}
+
+	}
+	if (abortar == 0) {
+
+	}
 
 
+}

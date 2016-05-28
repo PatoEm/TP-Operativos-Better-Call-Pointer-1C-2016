@@ -46,6 +46,7 @@
    char**  idIO;
    char** retardoIO;
    char** idVariableCompartida;
+   char** variableCompartidaValor;
    char* ipUMC;
    char* UMCPort;
    int tamanioPaginas;
