@@ -1,9 +1,3 @@
-/*
- * umc.c
- *
- *  Created on: 23/4/2016
- *      Author: utnso
- */
 #include "umc.h"
 //#define manejarError(msg) {perror(msg); abort();} Quien garcha hizo esto?
 
@@ -24,9 +18,7 @@ char * reservarMemoria(int cantidadFrames, int capacidadFrames)
 	// Si lo hago con calloc me la llena de \0 papa
 	char * memory = calloc(cantidadFrames, capacidadFrames);
 	printf ("Memoria real reservada OK.\n\n");
-	puts("hola");
 	return memory;
-
 }
 
 
@@ -40,7 +32,6 @@ void escuchoMuchasConexiones(void)
 {
 
 		//ACA ME TENGO QUE HACER CLIENTE DEL SWAP
-;
 	    fd_set master;      // maestro es el conjunto de file descriptors que están actualmente conectados
 	    fd_set read_fds;    // conjunto temporal de descriptores de fichero para select()
 
@@ -155,13 +146,13 @@ void escuchoMuchasConexiones(void)
 
 							if(buf[0]=='0'){ //Aca vendria el protocolo con el nucleo en la condicion del if uso esto para probar
 
-								hilo1 = pthread_create(&hiloNucleo, NULL, (void *)meHablaKernel, (void *)argumentoNucleo);
+								hilo1 = pthread_create(&hiloNucleo, NULL, (void *)meHablaKernelPrueba, (void *)argumentoNucleo);
 
 								hilo1 = pthread_join(hiloNucleo, NULL);
 							}
 							else if(buf[0]=='1'){ //Aca vendria el protocolo con el cpu en la condicion del if uso esto para probar
 
-								hilo2 = pthread_create(&hiloCPU, NULL, (void *)meHablaCPU, (void *)argumentoCPU);
+								hilo2 = pthread_create(&hiloCPU, NULL, (void *)meHablaCPUPrueba, (void *)argumentoCPU);
 
 								hilo2 = pthread_join(hiloCPU, NULL);
 							}
@@ -189,13 +180,13 @@ void escuchoMuchasConexiones(void)
 	    }
 	}
 
-void meHablaCPU (){
+void meHablaCPUPrueba (){
 
 	printf("Hola soy el CPU\n");
 
 }
 
-void meHablaKernel (){
+void meHablaKernelPrueba (){
 
 	printf("Hola soy el Nucleo\n");
 }

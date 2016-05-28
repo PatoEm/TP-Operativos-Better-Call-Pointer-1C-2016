@@ -1,9 +1,3 @@
-/*
- * umc.h
- *
- *  Created on: 23/4/2016
- *      Author: utnso
- */
 
 #ifndef UMC_H_
 #define UMC_H_
@@ -45,8 +39,12 @@ void liberarMemoria(char * );
 
 void escuchoMuchasConexiones();
 
-void meHablaKernel ();
+void meHablaKernel();
 
-void meHablaCPU ();
+void meHablaCPU();
+
+void meHablaKernelPrueba ();
+
+void meHablaCPUPrueba ();
 
 #endif /* UMC_H_ */
