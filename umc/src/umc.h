@@ -1,9 +1,3 @@
-/*
- * umc.h
- *
- *  Created on: 23/4/2016
- *      Author: utnso
- */
 
 #ifndef UMC_H_
 #define UMC_H_
@@ -16,17 +10,38 @@
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
 #include <pthread.h>
+#include <commons/collections/list.h>
 #define FAIL -1
+#define PROGRAMA_NO_INICIADO -2
 
 //parametros
 char* puertoEscucha;
 char* ip_Swap;
 char* puerto_Swap;
-char* marcos;
-char* marco_Size;
-char* marco_x_proc;
-char* entradas_TLB;
-char* espera;
+int marcos;
+int marco_Size;
+int marco_x_proc;
+int entradas_TLB;
+int espera;
+
+//estructuras para el manejo de memoria DR Mengueche
+ typedef struct{
+	int IDFrame;
+  	int inicio;
+  }espacioLibre;
+
+  typedef struct{
+	int IDFrame;
+  	int pid;
+  	int frameDelPrograma;
+  	int posicionDePag;
+  }espacioAsignado;
+
+
+t_list * listaEspacioLibre;
+t_list * listaEspacioAsignado;
+
+
 
 //estructuras para los hilos de CPU y nucleo
 
@@ -39,14 +54,33 @@ typedef struct{
 }t_CPU;
 
 //Prototipos
+
+espacioLibre * crearEspacioLibre(int inicio) ;
+
+void agregarEspacioLibre(int inicio);
+
+int calcularIDPagina(int inicio);
+
+void iniciarEstructuras();
+
+bool hayMemoriaSuficiente(int paginas);
+
+int paginasContiguasDeMemoria(int cantidadDePaginas);
+
+bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) ;
+
 char * reservarMemoria(int , int );
 
 void liberarMemoria(char * );
 
 void escuchoMuchasConexiones();
 
-void meHablaKernel ();
+void meHablaKernel();
 
-void meHablaCPU ();
+void meHablaCPU();
+
+void meHablaKernelPrueba ();
+
+void meHablaCPUPrueba ();
 
 #endif /* UMC_H_ */

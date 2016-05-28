@@ -107,7 +107,7 @@ int calcularIDPagina(int inicio) {
 	if (inicio == 0)
 		return 0;
 	else {
-		return (inicio / (atoi(tamPagina)));
+		return (inicio / atoi(tamPagina));
 	}
 
 }
@@ -211,23 +211,24 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
 	int contadorDePaginas = 0; //cuento para el while
-	espacioAsignado* paginasAReservar; //nodo para agarrar cosas
+	espacioAsignado* paginasAReservar = malloc(sizeof(espacioAsignado)); //nodo para agarrar cosas
 	espacioLibre* paginaAMatar;
-	paginasAReservar = list_get(listaEspacioAsignado,
-			lugarEnDondeDeboColocarMiNodo);
-	while ((paginasAReservar->IDPaginaInterno) < paginaDeComienzo) {
-		lugarEnDondeDeboColocarMiNodo++;
+	if (list_size(listaEspacioAsignado) != 0) {
 		paginasAReservar = list_get(listaEspacioAsignado,
 				lugarEnDondeDeboColocarMiNodo);
-	}
-	paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
-	while ((paginaAMatar->IDPaginaInterno) != paginaDeComienzo) {
-
-		nodosQueDeboReventar++;
+		while ((paginasAReservar->IDPaginaInterno) < paginaDeComienzo) {
+			lugarEnDondeDeboColocarMiNodo++;
+			paginasAReservar = list_get(listaEspacioAsignado,
+					lugarEnDondeDeboColocarMiNodo);
+		}
 		paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
+		while ((paginaAMatar->IDPaginaInterno) != paginaDeComienzo) {
 
+			nodosQueDeboReventar++;
+			paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
+
+		}
 	}
-
 	(paginasAReservar->pid) = pid;
 	(paginasAReservar->bitMap) = 0;
 	(paginasAReservar->tamanio) = atoi(tamPagina);

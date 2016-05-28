@@ -17,7 +17,7 @@ int main(void) {
 	puts("Inicio UMC");
 
 	char * memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
-	puts("hola");
+
 	escuchoMuchasConexiones();
 
 /*
