@@ -285,9 +285,9 @@ void compactarSwap() {
 	do {
 		if ((nodoActual->IDPaginaInterno) != paginasContiguas) {
 			contadorParaCadenaActual = paginasContiguas * atoi(tamPagina);
-			contadorParaCadenaVieja = paginasContiguas * (atoi(tamPagina) + 1);
+			contadorParaCadenaVieja = (nodoActual->posicionDePag);
 			while (contadorParaCadenaActual
-					< paginasContiguas * (atoi(tamPagina) + 1)) {
+					< (paginasContiguas+1) * (atoi(tamPagina))) {
 				archivoMappeado[contadorParaCadenaActual] =
 						archivoMappeado[contadorParaCadenaVieja];
 				archivoMappeado[contadorParaCadenaVieja] = '\0';
@@ -308,11 +308,14 @@ void compactarSwap() {
 	(nodoLibre->tamanio) = atoi(tamPagina);
 	(nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
 	list_add(listaEspacioLibre, nodoLibre);
-	while ((nodoLibre->IDPaginaInterno) != atoi(paginas)) {
+	int iDActual=((nodoLibre->IDPaginaInterno)+1);
+	while ((nodoLibre->IDPaginaInterno) <= atoi(paginas)) {
 
-		(nodoLibre->IDPaginaInterno) = ((nodoLibre->IDPaginaInterno) + 1);
+		nodoLibre++;
+		(nodoLibre->IDPaginaInterno) = iDActual;
 		(nodoLibre->inicio) = atoi(tamPagina) * (nodoLibre->IDPaginaInterno);
 		list_add(listaEspacioLibre, nodoLibre);
+		iDActual++;
 
 	}
 	usleep(1000 * atoi(retCompactacion));
