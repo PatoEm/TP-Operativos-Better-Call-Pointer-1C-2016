@@ -18,7 +18,7 @@ int main(void) {
 
 	log_info(logger, "Inicio Log UMC", NULL);
 
-	char * memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
+	memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 	pthread_t hiloComandos;
 
 	pthread_attr_t attrhiloComandos;

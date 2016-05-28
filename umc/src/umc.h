@@ -15,6 +15,7 @@
 #define PROGRAMA_NO_INICIADO -2
 
 //parametros
+char* memoriaReal;
 char* puertoEscucha;
 char* ip_Swap;
 char* puerto_Swap;
