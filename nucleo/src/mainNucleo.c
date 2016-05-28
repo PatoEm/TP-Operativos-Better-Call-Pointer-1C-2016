@@ -28,7 +28,11 @@ int main(void) {
 	  //Creacion de Hilos
 
 	 pthread_t hiloQuantum;
-	 pthread_create(&hiloQuantum, NULL, &funcionHiloQuantum, NULL);
+	 pthread_attr_t attrHiloQuantum;
+	 pthread_attr_init(&attrHiloQuantum);
+	 pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
+	 pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
+	 pthread_attr_destroy(&attrHiloQuantum);
 	  puts("emiputo");
 	  //funcionHiloQuamtum();
 
