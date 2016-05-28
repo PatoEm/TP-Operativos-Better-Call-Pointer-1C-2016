@@ -69,7 +69,7 @@ int paginasContiguasDeMemoria(int cantidadDePaginas) {
 }
 
 //inserta al nodo ordenado por su idFrame
-
+/*
 bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) {
 	espacioAsignado*nodoLeidoActual = malloc(sizeof(espacioAsignado));
 	espacioAsignado nodoAAgregar = malloc(sizeof(espacioAsignado));
@@ -111,7 +111,7 @@ int iniciarPrograma(int iDPrograma, int paginasRequeridas, char* codigo) {
 		return PROGRAMA_NO_INICIADO;
 
 }
-
+*/
 void setearValores(t_config * archivoConfig) {
 	puertoEscucha = config_get_string_value(archivoConfig, "PUERTO");
 	ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
@@ -126,6 +126,7 @@ void setearValores(t_config * archivoConfig) {
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	// Si lo hago con calloc me la llena de \0 papa
 	char * memory = calloc(cantidadFrames, capacidadFrames);
+	log_info(logger, "Memoria real reservada", NULL);
 	printf("Memoria real reservada OK.\n\n");
 	return memory;
 }

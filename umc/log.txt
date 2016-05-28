@@ -1,0 +1,2 @@
+[INFO] 15:29:16:922 Elestac/(3807:3807): Inicio Log UMC
+[INFO] 15:29:16:922 Elestac/(3807:3807): Memoria real reservada
