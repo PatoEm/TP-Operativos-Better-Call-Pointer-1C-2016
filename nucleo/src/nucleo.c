@@ -349,3 +349,5 @@ void grabar_valor(char* identificador, int valor){
 
 
 }
+
+
