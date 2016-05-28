@@ -37,10 +37,6 @@ int main(void) {
 	  //funcionHiloQuamtum();
 
 
-	  for(;;){
-
-
-	  }
 
 	 puts("hola Nico");
 
@@ -55,7 +51,7 @@ int main(void) {
 	colaExit= queue_create();
 	puts("hola");
 
-
+	while(1){}
 
 	//Se conecta a la consola. COMENTEMOS QUE HACEMOS
 

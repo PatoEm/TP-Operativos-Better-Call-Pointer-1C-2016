@@ -127,6 +127,7 @@
    void finalizarProcesosColaExit();
    void verificarModificacionesArchivoConfig();
    void funcionHiloQuantum();
+   void entrada_salida(char * identificador, int cantidad);
 
 
 

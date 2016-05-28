@@ -280,3 +280,34 @@ void verificarModificacionesArchivoConfig() {
 
 }
 
+void entrada_salida(char * identificador, int cantidad){
+
+
+	int contloco;
+
+	int retardoPeriferico;
+
+	int totalRetardo;
+	  for(contloco=0;(idIO[contloco]!='\0');contloco++){
+
+		  if((strcmp(idIO[contloco], identificador))==0){
+
+			  retardoPeriferico=(int)retardoIO[contloco];
+
+			  usleep(5*1000);
+		  }
+
+		  //puts(idIO[contloco]);
+	  }
+
+	  totalRetardo = retardoPeriferico * cantidad;
+
+	  usleep(totalRetardo*1000);
+
+	  //printf("%d",contloco);
+
+
+}
+
+
+
