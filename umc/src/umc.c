@@ -69,7 +69,7 @@ int paginasContiguasDeMemoria(int cantidadDePaginas) {
 }
 
 //inserta al nodo ordenado por su idFrame
-
+/*
 bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) {
 	espacioAsignado*nodoLeidoActual = malloc(sizeof(espacioAsignado));
 	espacioAsignado nodoAAgregar = malloc(sizeof(espacioAsignado));
@@ -111,7 +111,7 @@ int iniciarPrograma(int iDPrograma, int paginasRequeridas, char* codigo) {
 		return PROGRAMA_NO_INICIADO;
 
 }
-
+*/
 void setearValores(t_config * archivoConfig) {
 	puertoEscucha = config_get_string_value(archivoConfig, "PUERTO");
 	ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
@@ -126,6 +126,7 @@ void setearValores(t_config * archivoConfig) {
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	// Si lo hago con calloc me la llena de \0 papa
 	char * memory = calloc(cantidadFrames, capacidadFrames);
+	log_info(logger, "Memoria real reservada", NULL);
 	printf("Memoria real reservada OK.\n\n");
 	return memory;
 }
@@ -302,3 +303,76 @@ void meHablaKernelPrueba() {
 
 	printf("Hola soy el Nucleo\n");
 }
+
+
+void comandosUMC (){
+
+	int opcionPrincipal;
+	int opcionmemoryoTLB;
+	int retardo;
+
+	while (1){
+		puts("Opcion 1: Retardo\n");
+		puts("Opcion 2: Dump\n");
+		puts("Opcion 3: Flush\n");
+
+		scanf("%d", &opcionPrincipal);
+
+		switch (opcionPrincipal){
+		case 1:
+			puts("Ingresar retardo\n");
+			scanf("%d", &retardo);
+			retardoUMC(retardo);
+			break;
+
+		case 2:
+			dump();
+			break;
+
+		case 3:
+			puts("Opcion 1: TLB\n");
+			puts("Opcion 2: Memory\n");
+			scanf ("%d", &opcionmemoryoTLB);
+
+			switch (opcionmemoryoTLB){
+			case 1:
+				flushTLB();
+				break;
+
+			case 2:
+				flushMemory();
+				break;
+
+			default:
+
+				break;
+			}
+			break;
+
+		default:
+
+			break;
+		}
+	}
+}
+
+
+void retardoUMC (int retardo){
+
+}
+
+void dump () {
+
+
+}
+
+void flushTLB () {
+
+
+}
+
+void flushMemory () {
+
+
+}
+
