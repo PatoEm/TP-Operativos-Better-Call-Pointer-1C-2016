@@ -151,13 +151,18 @@ void compactarMemoria() {
 	(nodoLibre->IDFrame) = calcularIDPagina(nodoLibre->inicio);
 	list_add(listaEspacioLibre, nodoLibre);
 	int iDActual=((nodoLibre->IDFrame)+1);
-	while ((nodoLibre->IDFrame) <= marcos) {
+	while ((nodoLibre->IDFrame) != marcos) {
 		nodoLibre++;
 		(nodoLibre->IDFrame) = iDActual;
 		(nodoLibre->inicio) = marco_Size * (nodoLibre->IDFrame);
 		list_add(listaEspacioLibre, nodoLibre);
 		iDActual++;
 	}
+
+}
+
+
+char* solicitudDeBytes(int pagina,int offset, int tamanio){
 
 }
 

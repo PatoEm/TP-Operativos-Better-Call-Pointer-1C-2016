@@ -309,7 +309,7 @@ void compactarSwap() {
 	(nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
 	list_add(listaEspacioLibre, nodoLibre);
 	int iDActual=((nodoLibre->IDPaginaInterno)+1);
-	while ((nodoLibre->IDPaginaInterno) <= atoi(paginas)) {
+	while ((nodoLibre->IDPaginaInterno) != atoi(paginas)) {
 
 		nodoLibre++;
 		(nodoLibre->IDPaginaInterno) = iDActual;
