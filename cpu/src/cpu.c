@@ -11,6 +11,7 @@
 #include "cpu.h"
 #include <commons/collections/dictionary.h>
 #define manejarError(msg) {perror(msg); abort();}
+//======================================================
 
 /*******************************************************
  * CONSTANTES
@@ -143,79 +144,110 @@ void setearValores(t_config * archivoConfig) {
 		puts("hola");
 }
 
-
 /*******************************************************
  * FUNCIONES AnSISOP
  *******************************************************/
 
-t_puntero definirVariable(t_nombre_variable variable){
-
-	printf("defino una variable");
+/*
+ * definirVariable
+ */
+t_puntero definirVariable(t_nombre_variable identificador_variable){
+	printf("Operacion definir variable");
 	return 0;
 }
 
-t_puntero obtenerPosicionVariable(t_nombre_variable variable){
-
-	printf("devuelvo la posición de una variable");
+/*
+ * obtenerPosicionVariable
+ */
+t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable){
+	printf("Operacion obtener posicion variable");
 	return 0;
 }
 
-t_valor_variable dereferenciar(t_nombre_variable variable){
-
-	printf("dereferencio una variable");
+/*
+ * dereferenciar
+ */
+t_valor_variable dereferenciar(t_puntero direccion_variable){
+	printf("Operacion dereferenciar");
 	return 0;
 }
 
-void asignar(t_puntero puntero, t_valor_variable variable){
-
-	printf("asigno una variable");
+/*
+ * asignar
+ */
+void asignar(t_puntero direccion_variable, t_valor_variable valor){
+	printf("Operacion asignar");
 }
 
+/*
+ * obtenerValorCompartida
+ */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable){
-
-	printf("devuelvo el valor de una variable compartida");
+	printf("Operacion obtener valor variable compartida");
 	return 0;
 }
 
+/*
+ * 	asignarValorCompartida
+ */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_variable valor){
-
-	printf("asigno una valorcito");
+	printf("Operacion asignar valor variable compartida");
 	return 0;
 }
 
+/*
+ * 	irAlLabel
+ */
 t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta){
-
-	printf("Voy al label");
+	printf("Operacion ir al label");
 	return 0;
 }
 
-t_puntero_instruccion llamarFuncion(t_nombre_etiqueta etiqueta, t_puntero donde_retornar,
-t_puntero_instruccion linea_en_ejecuccion){
-
-	printf("llamaron a una instrucción");
-	return 0;
+/*
+ * llamarSinRetorno
+ */
+void llamarSinRetorno(t_nombre_etiqueta etiqueta){
+	printf("Operacion llamar sin retorno");
 }
 
+/*
+ * llamarConRetorno
+ */
+void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar){
+	printf("Operacion llamar con retorno");
+}
+
+/*
+ * finalizar
+ */
+void finalizar(void){
+
+}
+
+/*
+ * retornar
+ *
+ */
 t_puntero_instruccion retornar(t_valor_variable retorno){
-
-	printf("retorno un estado");
+	printf("Operacion de retorno");
 	return 0;
 }
 
-// ya implementada ByDRMENGUECHE
+/*
+ * imprimir
+ */
 int imprimir(t_valor_variable valor_mostrar){
-
 	char* mensaje=string_new();
 	char protocolo[3]="01";
 	memcpy(mensaje,&protocolo,2);
 	memcpy(mensaje[2],&valor_mostrar,4);
 	enviarMensaje(clienteNucleo,mensaje,6);
-
 }
 
-// ya casi implementada ByDRMENGUECHE
+/*
+ * imprimirTexto
+ */
 int imprimirTexto(char* texto){
-
 	printf("se imprime un texto");
 	char* mensaje=string_new();
 	char protocolo[3]="02";
@@ -227,39 +259,46 @@ int imprimirTexto(char* texto){
 	return 0;
 }
 
+/*
+ * entradaSalida
+ */
 int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo){
-
-	printf("operación de entrada y salida");
+	printf("Operacion de entrada y salida");
 	return 0;
 }
 
+/*
+ * wait
+ */
 int wait(t_nombre_semaforo identificador_semaforo){
-
-	printf("operación privilegiada wait");
+	printf("Operacion privilegiada wait");
 	return 0;
 }
 
+/*
+ * signal
+ */
 int signal(t_nombre_semaforo identificador_semaforo){
-
-	printf("operación privilegiada signal");
+	printf("Operacion privilegiada signal");
 	return 0;
 }
+
 
 AnSISOP_funciones funciones = {
-		.AnSISOP_definirVariable		= definirVariable,
-		.AnSISOP_obtenerPosicionVariable= obtenerPosicionVariable,
-		.AnSISOP_dereferenciar			= dereferenciar,
-		.AnSISOP_asignar				= asignar,
-		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
-		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
-		.AnSISOP_irAlLabel				= irAlLabel,
-		.AnSISOP_llamarConRetorno		= llamarFuncion,
-		.AnSISOP_retornar				= retornar,
-		.AnSISOP_entradaSalida			= entradaSalida,
-		.AnSISOP_imprimir				= imprimir,
-		.AnSISOP_imprimirTexto			= imprimirTexto,
-
+		.AnSISOP_definirVariable			= definirVariable,
+		.AnSISOP_obtenerPosicionVariable	= obtenerPosicionVariable,
+		.AnSISOP_dereferenciar				= dereferenciar,
+		.AnSISOP_asignar					= asignar,
+		.AnSISOP_obtenerValorCompartida 	= obtenerValorCompartida,
+		.AnSISOP_asignarValorCompartida 	= asignarValorCompartida,
+		.AnSISOP_irAlLabel					= irAlLabel,
+		.AnSISOP_llamarConRetorno			= llamarConRetorno,
+		.AnSISOP_retornar					= retornar,
+		.AnSISOP_entradaSalida				= entradaSalida,
+		.AnSISOP_imprimir					= imprimir,
+		.AnSISOP_imprimirTexto				= imprimirTexto,
 };
+
 AnSISOP_kernel funcionesDeKernel= {
 		.AnSISOP_wait			= wait,
 		.AnSISOP_signal			= signal,

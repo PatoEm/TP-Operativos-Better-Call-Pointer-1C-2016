@@ -44,7 +44,7 @@ typedef struct function {
 
 typedef struct functionParameters {
 	char param[1];
-	void* (*func)(void*, void*);
+	void (*func)(void*, void*);
 } FunctionParameters;
 //======================================================
 
