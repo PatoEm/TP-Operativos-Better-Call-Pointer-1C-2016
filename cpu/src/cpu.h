@@ -20,7 +20,7 @@
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
 #define FAIL -1
-
+//======================================================
 
 /*******************************************************
  * VARIABLES GLOBALES
@@ -30,16 +30,23 @@ char* umcPort;
 char* nucleoPort;
 char* ipNucleo;
 int clienteNucleo;
-
+//======================================================
 
 /*******************************************************
  * TIPOS DE DATOS
  *******************************************************/
-typedef struct functionOperators {
-	char op[2];
-	void* (*func)(void*, void*);
-} FunctionOperators;
+typedef void* Parameter;
 
+typedef struct function {
+	char* name;
+	Parameter param[1];
+} Function;
+
+typedef struct functionParameters {
+	char param[1];
+	void* (*func)(void*, void*);
+} FunctionParameters;
+//======================================================
 
 /*******************************************************
  * FUNCIONES AnSISOP
@@ -116,4 +123,5 @@ int wait(t_nombre_semaforo identificador_semaforo);
  */
 int signal(t_nombre_semaforo identificador_semaforo);
 
+//======================================================
 #endif /* CPU_H_ */

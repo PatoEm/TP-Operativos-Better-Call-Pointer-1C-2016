@@ -4,8 +4,133 @@
  *  Created on: 23/4/2016
  *      Author: utnso
  */
+
+/*******************************************************
+ * DEPENDENCIAS
+ *******************************************************/
 #include "cpu.h"
+#include <commons/collections/dictionary.h>
 #define manejarError(msg) {perror(msg); abort();}
+
+/*******************************************************
+ * CONSTANTES
+ *******************************************************/
+#define NONE -1
+#define T_NOMBRE_VARIABLE 0
+#define T_PUNTERO 1
+#define T_VALOR_VARIABLE 2
+#define T_NOMBRE_COMPARTIDA 3
+#define T_NOMBRE_ETIQUETA 4
+#define T_NOMBRE_DISPOSITIVO 5
+#define T_NOMBRE_SEMAFORO 6
+#define CHAR_AST 7
+#define INT 8
+//======================================================
+
+bool loadFunctionDictionary(t_dictionary** functionParameters) {
+
+	*functionParameters = dictionary_create();
+
+	//01
+	FunctionParameters* fparamDefinirVariable = malloc(sizeof(FunctionParameters));
+	fparamDefinirVariable->param[0] = T_NOMBRE_VARIABLE;
+	fparamDefinirVariable->param[1] = NONE;
+	fparamDefinirVariable->func = definirVariable;
+	dictionary_put(*functionParameters, "DEFINIR_VARIABLE", fparamDefinirVariable);
+
+	//02
+	FunctionParameters* fparamObtenerPosicionVariable = malloc(sizeof(FunctionParameters));
+	fparamObtenerPosicionVariable->param[0] = T_NOMBRE_VARIABLE;
+	fparamObtenerPosicionVariable->param[1] = NONE;
+	fparamObtenerPosicionVariable->func = obtenerPosicionVariable;
+	dictionary_put(*functionParameters, "OBTENER_POSICION_VARIABLE", fparamObtenerPosicionVariable);
+
+	//03
+	FunctionParameters* fparamDereferenciar = malloc(sizeof(FunctionParameters));
+	fparamDereferenciar->param[0] = T_PUNTERO;
+	fparamDereferenciar->param[1] = NONE;
+	fparamDereferenciar->func = dereferenciar;
+	dictionary_put(*functionParameters, "DEREFERENCIAR", fparamDereferenciar);
+
+	//04
+	FunctionParameters* fparamAsignar = malloc(sizeof(FunctionParameters));
+	fparamAsignar->param[0] = T_PUNTERO;
+	fparamAsignar->param[1] = T_VALOR_VARIABLE;
+	fparamAsignar->func = asignar;
+	dictionary_put(*functionParameters, "ASIGNAR", fparamAsignar);
+
+	//05
+	FunctionParameters* fparamObtenerValorCompartida = malloc(sizeof(FunctionParameters));
+	fparamObtenerValorCompartida->param[0] = T_NOMBRE_COMPARTIDA;
+	fparamObtenerValorCompartida->param[1] = NONE;
+	fparamObtenerValorCompartida->func = obtenerValorCompartida;
+	dictionary_put(*functionParameters, "OBTENER_VALOR_COMPARTIDA", fparamObtenerValorCompartida);
+
+	//06
+	FunctionParameters* fparamAsignarValorCompartida = malloc(sizeof(FunctionParameters));
+	fparamAsignarValorCompartida->param[0] = T_NOMBRE_COMPARTIDA;
+	fparamAsignarValorCompartida->param[1] = T_VALOR_VARIABLE;
+	fparamAsignarValorCompartida->func = asignarValorCompartida;
+	dictionary_put(*functionParameters, "ASIGNAR_VALOR_COMPARTIDA", fparamAsignarValorCompartida);
+
+	//07
+	FunctionParameters* fparamIrAlLabel = malloc(sizeof(FunctionParameters));
+	fparamIrAlLabel->param[0] = T_NOMBRE_ETIQUETA;
+	fparamIrAlLabel->param[1] = NONE;
+	fparamIrAlLabel->func = irAlLabel;
+	dictionary_put(*functionParameters, "IR_A_LABEL", fparamIrAlLabel);
+
+	//08
+	FunctionParameters* fparamLlamarConRetorno = malloc(sizeof(FunctionParameters));
+	fparamLlamarConRetorno->param[0] = T_NOMBRE_ETIQUETA;
+	fparamLlamarConRetorno->param[1] = T_PUNTERO;
+	fparamLlamarConRetorno->func = llamarConRetorno;
+	dictionary_put(*functionParameters, "LLAMAR_CON_RETORNO", fparamLlamarConRetorno);
+
+	//09
+	FunctionParameters* fparamRetornar = malloc(sizeof(FunctionParameters));
+	fparamRetornar->param[0] = T_VALOR_VARIABLE;
+	fparamRetornar->param[1] = NONE;
+	fparamRetornar->func = retornar;
+	dictionary_put(*functionParameters, "RETORNAR", fparamRetornar);
+
+	//10
+	FunctionParameters* fparamImprimir = malloc(sizeof(FunctionParameters));
+	fparamImprimir->param[0] = T_VALOR_VARIABLE;
+	fparamImprimir->param[1] = NONE;
+	fparamImprimir->func = imprimir;
+	dictionary_put(*functionParameters, "IMPRIMIR", fparamImprimir);
+
+	//11
+	FunctionParameters* fparamImprimirTexto = malloc(sizeof(FunctionParameters));
+	fparamImprimirTexto->param[0] = CHAR_AST;
+	fparamImprimirTexto->param[1] = NONE;
+	fparamImprimirTexto->func = imprimirTexto;
+	dictionary_put(*functionParameters, "IMPRIMIR_TEXTO", fparamImprimirTexto);
+
+	//12
+	FunctionParameters* fparamEntradaSalida = malloc(sizeof(FunctionParameters));
+	fparamEntradaSalida->param[0] = T_NOMBRE_DISPOSITIVO;
+	fparamEntradaSalida->param[1] = INT;
+	fparamEntradaSalida->func = entradaSalida;
+	dictionary_put(*functionParameters, "ENTRADA_SALIDA", fparamEntradaSalida);
+
+	//13
+	FunctionParameters* fparamWait = malloc(sizeof(FunctionParameters));
+	fparamWait->param[0] = T_NOMBRE_SEMAFORO;
+	fparamWait->param[1] = NONE;
+	fparamWait->func = wait;
+	dictionary_put(*functionParameters, "WAIT", fparamWait);
+
+	//14
+	FunctionParameters* fparamSignal = malloc(sizeof(FunctionParameters));
+	fparamSignal->param[0] = T_NOMBRE_SEMAFORO;
+	fparamSignal->param[1] = NONE;
+	fparamSignal->func = signal;
+	dictionary_put(*functionParameters, "SIGNAL", fparamSignal);
+
+	return true;
+}
 
 //Creo structs necesarias para el parser BY DRMENGUECHE
 
@@ -18,58 +143,63 @@ void setearValores(t_config * archivoConfig) {
 		puts("hola");
 }
 
+
+/*******************************************************
+ * FUNCIONES AnSISOP
+ *******************************************************/
+
 t_puntero definirVariable(t_nombre_variable variable){
 
 	printf("defino una variable");
-
+	return 0;
 }
 
 t_puntero obtenerPosicionVariable(t_nombre_variable variable){
 
 	printf("devuelvo la posición de una variable");
-
+	return 0;
 }
 
 t_valor_variable dereferenciar(t_nombre_variable variable){
 
 	printf("dereferencio una variable");
-
+	return 0;
 }
 
 void asignar(t_puntero puntero, t_valor_variable variable){
 
 	printf("asigno una variable");
-
 }
 
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable){
 
 	printf("devuelvo el valor de una variable compartida");
-
+	return 0;
 }
 
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_variable valor){
 
 	printf("asigno una valorcito");
+	return 0;
 }
 
 t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta){
 
 	printf("Voy al label");
-
+	return 0;
 }
 
 t_puntero_instruccion llamarFuncion(t_nombre_etiqueta etiqueta, t_puntero donde_retornar,
 t_puntero_instruccion linea_en_ejecuccion){
 
 	printf("llamaron a una instrucción");
-
+	return 0;
 }
 
 t_puntero_instruccion retornar(t_valor_variable retorno){
 
 	printf("retorno un estado");
-
+	return 0;
 }
 
 // ya implementada ByDRMENGUECHE
@@ -94,24 +224,25 @@ int imprimirTexto(char* texto){
 	memcpy(mensaje[2],&tamanioDelTexto,4);
 	memcpy(mensaje[6],texto,string_length(texto));
 	enviarMensaje(clienteNucleo,mensaje,6+string_length(texto));
-
+	return 0;
 }
 
 int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo){
 
 	printf("operación de entrada y salida");
-
+	return 0;
 }
 
 int wait(t_nombre_semaforo identificador_semaforo){
 
 	printf("operación privilegiada wait");
-
+	return 0;
 }
 
 int signal(t_nombre_semaforo identificador_semaforo){
 
 	printf("operación privilegiada signal");
+	return 0;
 }
 
 AnSISOP_funciones funciones = {
