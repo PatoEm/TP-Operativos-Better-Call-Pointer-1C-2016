@@ -45,6 +45,7 @@
    char**  viSemaforos;
    char**  idIO;
    char** retardoIO;
+   char** peticionesPendientesIO;
    char** idVariableCompartida;
    char** variableCompartidaValor;
    char* ipUMC;
@@ -56,6 +57,9 @@
 
    //Sincronizacion
    pthread_mutex_t mutexQuantum;
+   pthread_mutex_t mutexVariablesCompartidas;
+   pthread_mutex_t mutexSemaforosCompartidos;
+   pthread_mutex_t mutexIOCompartidos;
 
    //Colas
    t_queue *colaNew;

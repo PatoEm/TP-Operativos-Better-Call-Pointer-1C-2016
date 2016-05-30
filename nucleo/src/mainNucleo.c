@@ -22,6 +22,22 @@ int main(void) {
 	        return -1;
 	    }
 
+	  if (pthread_mutex_init(&mutexVariablesCompartidas, NULL) != 0)
+	 	    {
+	 	        printf("\n init mutexVariablesCompartidas fallo\n");
+	 	        return -1;
+	 	    }
+	  if (pthread_mutex_init(&mutexSemaforosCompartidos, NULL) != 0)
+		 	    {
+		 	        printf("\n init mutexVaremaforosCompartidos fallo\n");
+		 	        return -1;
+		 	    }
+	  if (pthread_mutex_init(&mutexIOCompartidos, NULL) != 0)
+	 		 	    {
+	 		 	        printf("\n init mutexIOCompartidos fallo\n");
+	 		 	        return -1;
+	 		 	    }
+
 	  //Leo el archivo de configuracion
 	  leerArchivoDeConfiguracion("confignucleo");
 

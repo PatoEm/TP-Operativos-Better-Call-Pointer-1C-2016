@@ -17,13 +17,18 @@ void setearValores(t_config * archivoConfig) {
 	quantum = config_get_int_value(archivoConfig, "QUANTUM");
 	quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
 	pthread_mutex_unlock(&mutexQuantum);
+	pthread_mutex_lock(&mutexSemaforosCompartidos);
 	idSemaforos = config_get_array_value(archivoConfig, "SEM_IDS");
 	viSemaforos = config_get_array_value(archivoConfig, "SEM_INIT");
+	pthread_mutex_unlock(&mutexSemaforosCompartidos);
 	idIO = config_get_array_value(archivoConfig, "IO_IDS");
 	retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
+	peticionesPendientesIO =config_get_array_value(archivoConfig, "IO_PETICIONES_PENDIENTES");
+	pthread_mutex_lock(&mutexVariablesCompartidas);
 	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
 	variableCompartidaValor = config_get_array_value(archivoConfig,
 			"SHARED_VALOR");
+	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
 
 }
@@ -283,16 +288,20 @@ void verificarModificacionesArchivoConfig() {
 void entrada_salida(char * identificador, int cantidad) {
 
 	int i;
+	int j;
 	int abortar = 0;
 	int retardoPeriferico;
 	int totalRetardo;
 	for (i = 0; (idIO[i] != '\0'); i++) {
 
 		if ((strcmp(idIO[i], identificador)) == 0) {
+			j=i;
 
 			retardoPeriferico = (int) retardoIO[i];
+			pthread_mutex_lock(&mutexIOCompartidos);
+			peticionesPendientesIO[i]=(char*)((int)peticionesPendientesIO[i]+1);
+			pthread_mutex_unlock(&mutexIOCompartidos);
 			abortar++;
-			usleep(5 * 1000);
 		}
 
 	}
@@ -301,16 +310,33 @@ void entrada_salida(char * identificador, int cantidad) {
 
 
 	}
+	totalRetardo = retardoPeriferico * cantidad;
+	int vuelta=0;
+	LOOP:do{
+	if((int)peticionesPendientesIO[j]==1){
+		usleep(totalRetardo*1000);
+		pthread_mutex_lock(&mutexIOCompartidos);
+		peticionesPendientesIO[i]=(char*)((int)peticionesPendientesIO[i]-1);
+		pthread_mutex_unlock(&mutexIOCompartidos);
+		break;
+	}
+	else{
 
-totalRetardo = retardoPeriferico * cantidad;
-
-usleep(totalRetardo*1000);
-
+		if(vuelta==0){
+			pthread_mutex_lock(&mutexIOCompartidos);
+			peticionesPendientesIO[j]= (char*)((int)peticionesPendientesIO[j] +1);
+			pthread_mutex_unlock(&mutexIOCompartidos);
+			vuelta++;
+		}
+		goto LOOP;
+	}
+	}while(1);
 
 }
 
 int obtener_valor(char* identificador) {
 
+pthread_mutex_lock(&mutexVariablesCompartidas);
 int i;
 int abortar = 0; //SI es 0 Aborta.
 for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
@@ -322,6 +348,7 @@ for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 	}
 
 }
+pthread_mutex_unlock(&mutexVariablesCompartidas);
 if (abortar == 0) {
 
 }
@@ -330,6 +357,7 @@ return FAIL;
 }
 
 void grabar_valor(char* identificador, int valor){
+	pthread_mutex_lock(&mutexVariablesCompartidas);
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
@@ -343,6 +371,7 @@ void grabar_valor(char* identificador, int valor){
 		}
 
 	}
+	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	if (abortar == 0) {
 
 	}
@@ -350,4 +379,47 @@ void grabar_valor(char* identificador, int valor){
 
 }
 
+void wait(char * identificador){
+	pthread_mutex_lock(&mutexSemaforosCompartidos);
+	int i;
+		int abortar = 0; //SI es 0 Aborta.
+		for (i = 0; (idSemaforos[i] != '\0'); i++) {
 
+			if ((strcmp(idSemaforos[i], identificador)) == 0) {
+
+				viSemaforos[i]= (char*)((int)viSemaforos[i]-1);
+
+				abortar++;
+
+			}
+
+		}
+		pthread_mutex_unlock(&mutexSemaforosCompartidos);
+		if (abortar == 0) {
+
+		}
+
+}
+
+void signal(char* identificador){
+	pthread_mutex_lock(&mutexSemaforosCompartidos);
+	int i;
+		int abortar = 0; //SI es 0 Aborta.
+		for (i = 0; (idSemaforos[i] != '\0'); i++) {
+
+			if ((strcmp(idSemaforos[i], identificador)) == 0) {
+
+				viSemaforos[i]= (char*)((int)viSemaforos[i]+1);
+
+				abortar++;
+
+			}
+
+		}
+		pthread_mutex_unlock(&mutexSemaforosCompartidos);
+		if (abortar == 0) {
+
+		}
+
+
+}
