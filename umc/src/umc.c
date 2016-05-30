@@ -29,7 +29,7 @@ int calcularIDPagina(int inicio) {
 void iniciarEstructuras() {
 	int contadorDePaginasAniadidas = 0;
 	int inicioDePagina = 0;
-	while (contadorDePaginasAniadidas <= marcos) {
+	while (contadorDePaginasAniadidas != marcos) {
 		agregarEspacioLibre(inicioDePagina);
 		contadorDePaginasAniadidas++;
 		inicioDePagina = inicioDePagina + marco_Size;
@@ -43,6 +43,69 @@ bool hayMemoriaSuficiente(int paginas) {
 		return 1;
 	else
 		return 0;
+}
+
+void finalizarProceso(int pid) {
+	//pedirle al swap que destruya todo
+	espacioAsignado*nodoActual;
+	int contadorDeNodos = 0;
+	nodoActual = list_get(listaEspacioAsignado, contadorDeNodos);
+	while ((nodoActual->pid) != pid) {
+		contadorDeNodos++;
+		nodoActual = list_get(listaEspacioAsignado, contadorDeNodos);
+	}
+	while ((nodoActual->pid) == pid) {
+		int inicioActual = nodoActual->posicionDePag;
+		insertarNodoOrdenadoLibre(nodoActual->posicionDePag, 1,
+				nodoActual->IDFrame);
+		eliminarFramesOcupadosContiguos(1, nodoActual->IDFrame);
+		while (inicioActual != (nodoActual->posicionDePag) - 1) {
+			memoriaReal[inicioActual] = '\0';
+			inicioActual++;
+		}
+		contadorDeNodos++;
+		nodoActual = list_get(listaEspacioAsignado, contadorDeNodos);
+	}
+
+}
+
+//Inserta ordenado segun el frame
+void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame) {
+	espacioLibre*nodoLibre;
+	int contador = 0;
+	int paginasAgregadas = 0;
+	int inicioActual = inicio;
+	int id = IDFrame;
+	nodoLibre = list_get(listaEspacioLibre, contador);
+	while ((nodoLibre->IDFrame) < IDFrame) {
+		contador++;
+		nodoLibre = list_get(listaEspacioLibre, contador);
+	}
+	while (paginasAgregadas != cantidad) {
+		nodoLibre->IDFrame = id;
+		nodoLibre->inicio = inicioActual;
+		list_add_in_index(listaEspacioLibre, contador, nodoLibre);
+		id++;
+		contador++;
+		inicioActual = inicioActual + marco_Size;
+		paginasAgregadas++;
+	}
+}
+
+//Funcion básica del tp
+void cambioDeProcesoActivo(int pid, int fd) {
+	espacioAsignado*espacio;
+	int contador = 0;
+	espacio = list_get(listaEspacioLibre, contador);
+	while (pid != (espacio->pid)) {
+		contador++;
+		espacio = list_get(listaEspacioLibre, contador);
+	}
+	while (pid == (espacio->pid)) {
+		espacio->socket = fd;
+		contador++;
+		espacio = list_get(listaEspacioLibre, contador);
+	}
 }
 
 // me devuelve un nro de dónde empiezo a asignar páginas, -1 no tengo esa cantidad contigua
@@ -95,6 +158,22 @@ bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) 
 	return 1;
 }
 
+void eliminarFramesOcupadosContiguos(int cantidad, int frame) {
+
+	int posicion = 0;
+	int contadorDeReventados = 0;
+	espacioAsignado*lugarActual = list_get(listaEspacioAsignado, posicion);
+	while (lugarActual->IDFrame != frame) {
+		posicion++;
+		espacioAsignado*lugarActual = list_get(listaEspacioAsignado, posicion);
+	}
+	while (contadorDeReventados < cantidad) {
+		free(list_remove(listaEspacioAsignado, posicion));
+		posicion++;
+		contadorDeReventados++;
+
+	}
+}
 void eliminarFramesLibresContiguos(int cantidad, int frame) {
 	int posicion = 0;
 	int contadorDeReventados = 0;
@@ -150,7 +229,7 @@ void compactarMemoria() {
 	(nodoLibre->inicio) = (nodoActual->posicionDePag) + marco_Size;
 	(nodoLibre->IDFrame) = calcularIDPagina(nodoLibre->inicio);
 	list_add(listaEspacioLibre, nodoLibre);
-	int iDActual=((nodoLibre->IDFrame)+1);
+	int iDActual = ((nodoLibre->IDFrame) + 1);
 	while ((nodoLibre->IDFrame) != marcos) {
 		nodoLibre++;
 		(nodoLibre->IDFrame) = iDActual;
@@ -161,8 +240,7 @@ void compactarMemoria() {
 
 }
 
-
-char* solicitudDeBytes(int pagina,int offset, int tamanio){
+char* solicitudDeBytes(int pagina, int offset, int tamanio) {
 
 }
 

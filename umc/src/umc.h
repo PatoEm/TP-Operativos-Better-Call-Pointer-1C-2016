@@ -32,6 +32,7 @@ int espera;
   }espacioLibre;
 
   typedef struct{
+	int socket;
 	int IDFrame;
   	int pid;
   	int frameDelPrograma;
@@ -55,6 +56,9 @@ typedef struct{
 }t_CPU;
 
 //Prototipos
+void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame);
+
+void eliminarFramesOcupadosContiguos(int cantidad, int frame);
 
 espacioLibre * crearEspacioLibre(int inicio) ;
 
