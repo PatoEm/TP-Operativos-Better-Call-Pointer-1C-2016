@@ -298,38 +298,51 @@ void entrada_salida(char * identificador, int cantidad) {
 			j=i;
 
 			retardoPeriferico = (int) retardoIO[i];
-			pthread_mutex_lock(&mutexIOCompartidos);
-			peticionesPendientesIO[i]=(char*)((int)peticionesPendientesIO[i]+1);
-			pthread_mutex_unlock(&mutexIOCompartidos);
 			abortar++;
 		}
 
 	}
 
 	if(abortar==0){
-
+		//ACA PARA MATAR todo
 
 	}
-	totalRetardo = retardoPeriferico * cantidad;
-	int vuelta=0;
+	totalRetardo = retardoPeriferico * cantidad*1000;
+	//usleep(totalRetardo*1000);
+
+	estructuraIO nuevaIO;
+
+	nuevaIO.posicionDispostivo=j;
+	nuevaIO.retardo=totalRetardo;
+
+	t_queue (colasIO[j], nuevaIO);
+
+	vaciarColasIO(nuevaIO);
+
+
+}
+
+void vaciarColasIO(estructuraIO solicitudIO){
+
+	t_queue * cola = colasIO[solicitudIO.posicionDispostivo];
+	int posicion= solicitudIO.posicionDispostivo;
+	estructuraIO* nueva;
 	for(;;){
-	if((int)peticionesPendientesIO[j]==1){
-		usleep(totalRetardo*1000);
-		pthread_mutex_lock(&mutexIOCompartidos);
-		peticionesPendientesIO[i]=(char*)((int)peticionesPendientesIO[i]-1);
-		pthread_mutex_unlock(&mutexIOCompartidos);
-		break;
-	}
-	else{
+		pthread_mutex_lock(&mutexIO[posicion]);
+		 if((queue_size(cola))==0){
+			 pthread_mutex_unlock(&mutexIO[posicion]);
+			 break;
+		 }
+		 else{
+			pthread_mutex_lock(&mutexIO[posicion]);
+			nueva=queue_peek(cola);
+			queue_pop(cola);
+			pthread_mutex_unlock(&mutexIO[posicion]);
+			usleep(nueva->retardo);
 
-		if(vuelta==0){
-			pthread_mutex_lock(&mutexIOCompartidos);
-			peticionesPendientesIO[j]= (char*)((int)peticionesPendientesIO[j] +1);
-			pthread_mutex_unlock(&mutexIOCompartidos);
-			vuelta++;
-		}
+		 }
 	}
-	}
+
 
 }
 
@@ -421,4 +434,10 @@ void signal(char* identificador){
 		}
 
 
+}
+
+void iniciarColasSemIO(){
+
+	colasIO=(t_queue**)malloc(sizeof(t_queue*)*cantidadPalabrasEnArrayDeStrings(idIO));
+	colasSemaforos=(t_queue**)malloc(((sizeof(t_queue*))*(cantidadPalabrasEnArrayDeStrings(idSemaforos))));
 }

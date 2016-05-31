@@ -41,6 +41,8 @@ int main(void) {
 	  //Leo el archivo de configuracion
 	  leerArchivoDeConfiguracion("confignucleo");
 
+	  //InicioLasColas
+	  iniciarColasSemIO();
 	  //Creacion de Hilos
 
 	 pthread_t hiloQuantum;

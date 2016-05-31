@@ -58,6 +58,7 @@
    int idProgramas; //Contador de programa
 
    //Sincronizacion
+   pthread_mutex_t* mutexIO;
    pthread_mutex_t mutexQuantum;
    pthread_mutex_t mutexVariablesCompartidas;
    pthread_mutex_t mutexSemaforosCompartidos;
@@ -120,6 +121,14 @@
 
    }pcb ;
 
+
+   //Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
+typedef struct {
+	int retardo;
+	int posicionDispostivo;
+
+}estructuraIO;
+
    //Prototipos
 
    void setearValores(t_config * archivoConfig);
@@ -135,7 +144,8 @@
    void verificarModificacionesArchivoConfig();
    void funcionHiloQuantum();
    void entrada_salida(char * identificador, int cantidad);
-
+   void vaciarColasIO(estructuraIO solicitudIO);
+   void iniciarColasSemIO();
 
 
 
