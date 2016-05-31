@@ -32,7 +32,6 @@ int espera;
   }espacioLibre;
 
   typedef struct{
-	int socket;
 	int IDFrame;
   	int pid;
   	int frameDelPrograma;

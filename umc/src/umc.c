@@ -93,20 +93,20 @@ void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame) {
 }
 
 //Funcion básica del tp
-void cambioDeProcesoActivo(int pid, int fd) {
-	espacioAsignado*espacio;
-	int contador = 0;
-	espacio = list_get(listaEspacioLibre, contador);
-	while (pid != (espacio->pid)) {
-		contador++;
-		espacio = list_get(listaEspacioLibre, contador);
-	}
-	while (pid == (espacio->pid)) {
-		espacio->socket = fd;
-		contador++;
-		espacio = list_get(listaEspacioLibre, contador);
-	}
-}
+//void cambioDeProcesoActivo(int pid, int fd) {
+//	espacioAsignado*espacio;
+//	int contador = 0;
+//	espacio = list_get(listaEspacioLibre, contador);
+//	while (pid != (espacio->pid)) {
+//		contador++;
+//		espacio = list_get(listaEspacioLibre, contador);
+//	}
+//	while (pid == (espacio->pid)) {
+//		espacio->socket = fd;
+//		contador++;
+//		espacio = list_get(listaEspacioLibre, contador);
+//	}
+//}
 
 // me devuelve un nro de dónde empiezo a asignar páginas, -1 no tengo esa cantidad contigua
 int paginasContiguasDeMemoria(int cantidadDePaginas) {
@@ -240,8 +240,41 @@ void compactarMemoria() {
 
 }
 
-char* solicitudDeBytes(int pagina, int offset, int tamanio) {
+//Función básica para solicitar bytes. el pid lo poseo como variable local cuando cambio de proceso
 
+char* solicitudDeBytes(int pagina, int offset, int tamanio, int pid) {
+	char*cadenaADevolver = malloc(sizeof(char) * (tamanio + 1));
+	espacioAsignado*nodoAUbicar;
+	int recorredor = 0;
+	int desplazamiento = offset;
+	nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
+	while ((nodoAUbicar->pid != pid)
+			|| (recorredor < list_size(listaEspacioLibre))) {
+		recorredor++;
+		nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
+	}
+	if (recorredor == list_size(listaEspacioLibre)) {
+		//llamar al swap y retornar eso todo
+	}
+	if (nodoAUbicar->pid == pid) {
+		while (((nodoAUbicar->frameDelPrograma) != pagina)
+				&& (nodoAUbicar->pid == pid)) {
+			recorredor++;
+			nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
+		}
+		if (nodoAUbicar->pid != pid) {
+			//llamar al swap para buscar lo que necesito todo
+		} else {
+			desplazamiento = desplazamiento + (nodoAUbicar->posicionDePag);
+			int counter = 0;
+			while (counter < tamanio) {
+				cadenaADevolver[counter] = memoriaReal[desplazamiento];
+				counter++;
+			}
+			cadenaADevolver[counter] = '\0';
+			return cadenaADevolver;
+		}
+	}
 }
 
 //1 si se inició piola, -2 si no DR Mengueche
