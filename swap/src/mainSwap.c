@@ -2,21 +2,14 @@
 
 int main(void) {
 
-    leerArchivoDeConfiguracion("swapconfig");
-    /*Creo mi archivo de swap*/
+	leerArchivoDeConfiguracion("swapconfig");
+
     archivoMappeado=crearArchivo(tamArchivo,nombreSwap);
 
-    /*Se conecta a la UMC con el swap. LOCO COMENTEN!!!*/
-    /*Funciona una vez. Falla el bind en la segunda. Testeado by Dr.Mengueche*/
-    int fdSocketUMC = crearSocketServidor(umcPort);
-    escucharSocket(fdSocketUMC, 1);
-    int fdSocketCliente= aceptarConexiones(fdSocketUMC);
-    puts("hola");
-    /*Recibo el primer protocolo*/
+    iniciarEstructurasSwap();
 
+    recibirNuevoPrograma(1,1);
 
-
-	return EXIT_SUCCESS;
 }
 
    /*

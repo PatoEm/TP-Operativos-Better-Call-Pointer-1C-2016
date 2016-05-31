@@ -16,7 +16,7 @@ char* crearArchivo(char* tamanio, char* nombre) {
 	string_append(&paraSistema, nombre);
 	string_append(&paraSistema, " bs=");
 	string_append(&paraSistema, tamanio);
-	string_append(&paraSistema, " count=1");
+	string_append(&paraSistema, " count=1 \n");
 	system(paraSistema);
 	return mappearArchivo(nombre);
 	puts("hola");
@@ -33,11 +33,17 @@ void* mappearArchivo(char* filename) {
 	size_t length;
 
 	fd = open(filename, O_RDWR);
+	if (fd == -1)
+		printf("error 3"); //acá van errores
+
+	if (fstat(fd, &sb) == -1) /* To obtain file size */
+		printf("error 3"); //acá van errores
 
 	length = sb.st_size;
 	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,
 	MAP_SHARED | MAP_NORESERVE, fd, 0);
-
+	if (addr == MAP_FAILED)
+		printf("error 3"); //acá van errores
 	return addr;
 
 }
@@ -111,6 +117,20 @@ int calcularIDPagina(int inicio) {
 	}
 
 }
+
+//después de crear archivo de configuración
+void iniciarEstructurasSwap() {
+	int counter = 0;
+	int inicio = 0;
+	crearListas();
+	while (counter != atoi(paginas)) {
+		agregarEspacioLibre(inicio);
+		counter++;
+		inicio = inicio + atoi(tamPagina);
+	}
+
+}
+
 //Creo espacioLibre
 espacioLibre * crearEspacioLibre(int inicio) {
 	espacioLibre * nuevoEspacioLibre = malloc(sizeof(espacioLibre));
@@ -161,21 +181,20 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 	int miPaginaLibre = 0; //me da el ID de la página libre actual
 	int paginaActual = 0; //me dice en que página estoy actualmente
 	espacioLibre* nodoActual; //el nodo que voy a ir iterando
-	while ((paginaActual <= list_size(listaEspacioLibre))
-			|| (cantidadDePaginas == contadorDePaginasSeguidas)) {
-		nodoActual = list_get(listaEspacioLibre, paginaActual); // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
+	nodoActual = list_get(listaEspacioLibre, paginaActual);
+	while ((paginaActual <= list_size(listaEspacioLibre))) { // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
+		if (cantidadDePaginas == contadorDePaginasSeguidas)
+			return (miPaginaLibre);
+		paginaActual++;
+		nodoActual = list_get(listaEspacioLibre, paginaActual);
 		if (miPaginaLibre + 1 == nodoActual->IDPaginaInterno) {
 			contadorDePaginasSeguidas++; //si consigo paginas seguidas sumo una
 		} else {
 			contadorDePaginasSeguidas = 1; //sino vuelvo a 0
 			miPaginaLibre = nodoActual->IDPaginaInterno; //reasigno la página para que sea la correcta
 		}
-		paginaActual++;
 	}
-	if (cantidadDePaginas == contadorDePaginasSeguidas)
-		return (miPaginaLibre);
-	else
-		return -1;
+	return -1;
 }
 
 void eliminarProceso(int pid) {
@@ -287,7 +306,7 @@ void compactarSwap() {
 			contadorParaCadenaActual = paginasContiguas * atoi(tamPagina);
 			contadorParaCadenaVieja = (nodoActual->posicionDePag);
 			while (contadorParaCadenaActual
-					< (paginasContiguas+1) * (atoi(tamPagina))) {
+					< (paginasContiguas + 1) * (atoi(tamPagina))) {
 				archivoMappeado[contadorParaCadenaActual] =
 						archivoMappeado[contadorParaCadenaVieja];
 				archivoMappeado[contadorParaCadenaVieja] = '\0';
@@ -308,7 +327,7 @@ void compactarSwap() {
 	(nodoLibre->tamanio) = atoi(tamPagina);
 	(nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
 	list_add(listaEspacioLibre, nodoLibre);
-	int iDActual=((nodoLibre->IDPaginaInterno)+1);
+	int iDActual = ((nodoLibre->IDPaginaInterno) + 1);
 	while ((nodoLibre->IDPaginaInterno) != atoi(paginas)) {
 
 		nodoLibre++;
