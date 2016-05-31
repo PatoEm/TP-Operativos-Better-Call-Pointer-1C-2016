@@ -91,7 +91,7 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina);
 
 char* leerUnaPagina(int pid, int numeroDePagina);
 
-
+void iniciarEstructurasSwap();
 
 int calcularIDPagina(int);
 

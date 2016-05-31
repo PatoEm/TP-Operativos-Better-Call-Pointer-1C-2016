@@ -7,6 +7,7 @@
 #include "archivosYLogsYMas.h"
 
 
+
 int verificarMemoria(void*algo){
 	if(algo==NULL){
 							printf("no se pudo reservar memoria para la ruta del Archivo");
@@ -18,7 +19,7 @@ int verificarMemoria(void*algo){
 void leerArchivoDeConfiguracion(const char * direccionArchivo) {
              t_config* archivoDeConfiguracion;
              char*configPath = direccionArchivo;
-            if (verificarExistenciaDeArchivo(configPath) == FAIL)
+           if (verificarExistenciaDeArchivo(configPath) == FAIL)
             puts("[ERROR] Archivo de configuracion no encontrado");
              archivoDeConfiguracion = config_create(configPath);
              setearValores(archivoDeConfiguracion);
