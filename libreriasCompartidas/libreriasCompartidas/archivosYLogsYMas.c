@@ -63,3 +63,14 @@ int cantidadPaginas (int tamanioArchivo, int tamanioPagina){
 	}
 }
 
+int cantidadPalabrasEnArrayDeStrings(char** array){
+
+	int i;
+	int contador=0;;
+	for (i = 0; (array[i] != '\0'); i++) {
+
+		contador++;
+	}
+
+	return contador;
+}

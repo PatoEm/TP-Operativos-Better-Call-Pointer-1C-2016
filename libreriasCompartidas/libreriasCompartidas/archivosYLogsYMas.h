@@ -25,4 +25,6 @@ void crearLogger(int );
 
 int cantidadPaginas (int tamanioArchivo, int tamanioPagina);
 
+int cantidadPalabrasEnArrayDeStrings(char** array);
+
 #endif /* LIBRERIASCOMPARTIDAS_ARCHIVOSYLOGSYMAS_H_ */

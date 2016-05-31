@@ -312,7 +312,7 @@ void entrada_salida(char * identificador, int cantidad) {
 	}
 	totalRetardo = retardoPeriferico * cantidad;
 	int vuelta=0;
-	LOOP:do{
+	for(;;){
 	if((int)peticionesPendientesIO[j]==1){
 		usleep(totalRetardo*1000);
 		pthread_mutex_lock(&mutexIOCompartidos);
@@ -328,9 +328,8 @@ void entrada_salida(char * identificador, int cantidad) {
 			pthread_mutex_unlock(&mutexIOCompartidos);
 			vuelta++;
 		}
-		goto LOOP;
 	}
-	}while(1);
+	}
 
 }
 

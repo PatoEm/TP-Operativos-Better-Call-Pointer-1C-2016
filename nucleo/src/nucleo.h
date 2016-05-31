@@ -43,9 +43,11 @@
    int  quantumSleep;
    char**   idSemaforos;
    char**  viSemaforos;
+   t_queue **colasSemaforos; //Estas no necesitan captura por archivo de config
    char**  idIO;
    char** retardoIO;
    char** peticionesPendientesIO;
+   t_queue **colasIO;		//Estas no necesitan captura por archivo de config
    char** idVariableCompartida;
    char** variableCompartidaValor;
    char* ipUMC;
