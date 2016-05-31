@@ -23,7 +23,6 @@ void setearValores(t_config * archivoConfig) {
 	pthread_mutex_unlock(&mutexSemaforosCompartidos);
 	idIO = config_get_array_value(archivoConfig, "IO_IDS");
 	retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
-	peticionesPendientesIO =config_get_array_value(archivoConfig, "IO_PETICIONES_PENDIENTES");
 	pthread_mutex_lock(&mutexVariablesCompartidas);
 	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
 	variableCompartidaValor = config_get_array_value(archivoConfig,
@@ -245,7 +244,7 @@ void funcionHiloQuantum() {
 
 void verificarModificacionesArchivoConfig() {
 
-	int length, i = 0;
+	int length;
 	int fd;
 	int wd;
 	char buffer[EVENT_BUF_LEN];
@@ -312,10 +311,13 @@ void entrada_salida(char * identificador, int cantidad) {
 
 	estructuraIO nuevaIO;
 
+
 	nuevaIO.posicionDispostivo=j;
 	nuevaIO.retardo=totalRetardo;
 
-	t_queue (colasIO[j], nuevaIO);
+	pthread_mutex_lock(&mutexIO[j]);
+	queue_push(colasIO[j], &nuevaIO);
+	pthread_mutex_unlock(&mutexIO[j]);
 
 	vaciarColasIO(nuevaIO);
 
@@ -436,8 +438,67 @@ void signal(char* identificador){
 
 }
 
-void iniciarColasSemIO(){
+int inicializarVariables(){
 
-	colasIO=(t_queue**)malloc(sizeof(t_queue*)*cantidadPalabrasEnArrayDeStrings(idIO));
-	colasSemaforos=(t_queue**)malloc(((sizeof(t_queue*))*(cantidadPalabrasEnArrayDeStrings(idSemaforos))));
+	//inicio cantIO
+
+	cantIO=cantidadPalabrasEnArrayDeStrings(idIO);
+
+	int i;
+	//Inicio Colas IO
+	for (i = 0; i < cantIO; i++) {
+
+		colasIO[i]=queue_create();
+	}
+
+	//Inicio Colas Semaforos
+	cantSemaforos=cantidadPalabrasEnArrayDeStrings(idSemaforos);
+
+	for (i = 0; i < cantSemaforos; i++) {
+
+			colasSemaforos[i]=queue_create();
+		}
+
+
+	//Inicio Semaforos de Sincro
+
+	for (i = 0; i < cantIO; i++) {
+
+		 if (pthread_mutex_init(&mutexIO[i], NULL) != 0)
+			    {
+			        printf("\n init mutexIO %d fallo\n", i);
+			        return -1;
+			    }
+			}
+
+
+	  if (pthread_mutex_init(&mutexQuantum, NULL) != 0)
+	    {
+	        printf("\n init mutexQuamtum fallo\n");
+	        return -1;
+	    }
+
+	  if (pthread_mutex_init(&mutexVariablesCompartidas, NULL) != 0)
+	 	    {
+	 	        printf("\n init mutexVariablesCompartidas fallo\n");
+	 	        return -1;
+	 	    }
+	  if (pthread_mutex_init(&mutexSemaforosCompartidos, NULL) != 0)
+		 	    {
+		 	        printf("\n init mutexVaremaforosCompartidos fallo\n");
+		 	        return -1;
+		 	    }
+	  if (pthread_mutex_init(&mutexIOCompartidos, NULL) != 0)
+	 		 	    {
+	 		 	        printf("\n init mutexIOCompartidos fallo\n");
+	 		 	        return -1;
+	 		 	    }
+
+	  //Leo el archivo de configuracion
+	  leerArchivoDeConfiguracion("confignucleo");
+
+	  //InicioLasColas
+	  iniciarColasSemIO();
+
+return 0;
 }

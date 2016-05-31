@@ -6,7 +6,6 @@ QUANTUM=7
 QUANTUM_SLEEP=2
 IO_IDS=[Disco, Impresora, Scanner]
 IO_SLEEP=[1000, 2000, 1040]
-IO_PETICIONES_PENDIENTES=[0,0,0]
 SEM_IDS=[SEM1, SEM2, SEM3]
 SEM_INIT=[0, 0, 5]
 SHARED_VARS=[!Global, !UnaVar, !tiempo3, !colas]

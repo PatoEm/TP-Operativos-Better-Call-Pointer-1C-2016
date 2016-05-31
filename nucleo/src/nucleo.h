@@ -43,10 +43,11 @@
    int  quantumSleep;
    char**   idSemaforos;
    char**  viSemaforos;
+   int cantSemaforos;
    t_queue **colasSemaforos; //Estas no necesitan captura por archivo de config
    char**  idIO;
    char** retardoIO;
-   char** peticionesPendientesIO;
+   int cantIO;	//No se lee por config
    t_queue **colasIO;		//Estas no necesitan captura por archivo de config
    char** idVariableCompartida;
    char** variableCompartidaValor;
@@ -62,7 +63,6 @@
    pthread_mutex_t mutexQuantum;
    pthread_mutex_t mutexVariablesCompartidas;
    pthread_mutex_t mutexSemaforosCompartidos;
-   pthread_mutex_t mutexIOCompartidos;
 
    //Colas
    t_queue *colaNew;
@@ -147,6 +147,6 @@ typedef struct {
    void vaciarColasIO(estructuraIO solicitudIO);
    void iniciarColasSemIO();
 
-
+   int inicializarVariables();
 
 #endif /* NUCLEO_H_ */
