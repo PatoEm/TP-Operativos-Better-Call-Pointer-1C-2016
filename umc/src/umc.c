@@ -542,7 +542,7 @@ void comandosUMC() {
 }
 
 void retardoUMC(int retardo) {
-
+	espera = retardo;
 }
 
 void dump() {
