@@ -58,5 +58,13 @@ typedef float Float32;
 //VALOR FLOTANTE 64-BITS
 typedef double Float64;
 //================================================================================================
+typedef struct tcb {
+	Int32U pid;
+	Int32U tid;
+	Boolean kernelMode;
+	Int8U csLength;
+} Tcb;
+
+
 
 #endif /* LIBRERIASCOMPARTIDAS_POINTERTIPOS_H_ */
