@@ -190,4 +190,9 @@ SocketBuffer* unserializeUmcCpu(Stream);
 //SocketBuffer* unserializeUmcSwa(Stream);
 /***********************************************/
 
+/***********************************************/
+/* Para Handshake
+/***********************************************/
+Char getStreamId(Stream);
+
 #endif /* LIBRERIASCOMPARTIDAS_POINTERSTREAM_H_ */
