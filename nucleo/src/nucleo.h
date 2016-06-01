@@ -43,14 +43,15 @@
    int  quantumSleep;
    char**   idSemaforos;
    char**  viSemaforos;
-   int cantSemaforos;
+   int cantSemaforos; //No se lee por config
    t_queue **colasSemaforos; //Estas no necesitan captura por archivo de config
    char**  idIO;
    char** retardoIO;
    int cantIO;	//No se lee por config
    t_queue **colasIO;		//Estas no necesitan captura por archivo de config
    char** idVariableCompartida;
-   char** variableCompartidaValor;
+   int cantVarCompartidas;
+   int* variableCompartidaValor;
    char* ipUMC;
    char* UMCPort;
    int tamanioPaginas;
@@ -60,6 +61,7 @@
 
    //Sincronizacion
    pthread_mutex_t* mutexIO;
+   pthread_mutex_t* mutexVariables;
    pthread_mutex_t mutexQuantum;
    pthread_mutex_t mutexVariablesCompartidas;
    pthread_mutex_t mutexSemaforosCompartidos;

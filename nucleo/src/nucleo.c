@@ -25,8 +25,6 @@ void setearValores(t_config * archivoConfig) {
 	retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
 	pthread_mutex_lock(&mutexVariablesCompartidas);
 	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
-	variableCompartidaValor = config_get_array_value(archivoConfig,
-			"SHARED_VALOR");
 	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
 
@@ -114,7 +112,7 @@ void finalizarProcesosColaExit() {
 
 	//COMO LO HAGO?
 
-	//LUEGO BORRO ABSOLUTAMENTE Y DESTRUYO TODO
+	//todo LUEGO BORRO ABSOLUTAMENTE Y DESTRUYO
 	queue_clean_and_destroy_elements(colaExit, NULL); //ESTO NO SE SI ESTA BIEN
 }
 
@@ -356,7 +354,7 @@ int abortar = 0; //SI es 0 Aborta.
 for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 	if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
-		return( (int) variableCompartidaValor[i]);
+		return( variableCompartidaValor[i]);
 		abortar++;
 
 	}
@@ -364,7 +362,7 @@ for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 }
 pthread_mutex_unlock(&mutexVariablesCompartidas);
 if (abortar == 0) {
-
+ //todo MATAR
 }
 return FAIL;
 
@@ -378,7 +376,7 @@ void grabar_valor(char* identificador, int valor){
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 
-			variableCompartidaValor[i]=(char*)valor;
+			variableCompartidaValor[i]=valor;
 
 			abortar++;
 
@@ -387,7 +385,7 @@ void grabar_valor(char* identificador, int valor){
 	}
 	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	if (abortar == 0) {
-
+		//todo MATAR
 	}
 
 
@@ -410,7 +408,7 @@ void wait(char * identificador){
 		}
 		pthread_mutex_unlock(&mutexSemaforosCompartidos);
 		if (abortar == 0) {
-
+			//todo MATAR
 		}
 
 }
@@ -432,7 +430,7 @@ void signal(char* identificador){
 		}
 		pthread_mutex_unlock(&mutexSemaforosCompartidos);
 		if (abortar == 0) {
-
+				// TODO MATAR
 		}
 
 
@@ -440,11 +438,24 @@ void signal(char* identificador){
 
 int inicializarVariables(){
 
+	int i;
+	  //Leo el archivo de configuracion
+		  leerArchivoDeConfiguracion("confignucleo");
+
+	//inicio cantVarsCompartidas
+		  cantVarCompartidas=cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
+
+		  variableCompartidaValor = (int*)malloc(sizeof(int)*cantVarCompartidas);
+
+		  for ( i= 0; i < cantVarCompartidas; i++) {
+			  variableCompartidaValor[i]=0;
+		}
+
 	//inicio cantIO
 
 	cantIO=cantidadPalabrasEnArrayDeStrings(idIO);
 
-	int i;
+
 	//Inicio Colas IO
 	for (i = 0; i < cantIO; i++) {
 
@@ -488,17 +499,13 @@ int inicializarVariables(){
 		 	        printf("\n init mutexVaremaforosCompartidos fallo\n");
 		 	        return -1;
 		 	    }
-	  if (pthread_mutex_init(&mutexIOCompartidos, NULL) != 0)
-	 		 	    {
-	 		 	        printf("\n init mutexIOCompartidos fallo\n");
-	 		 	        return -1;
-	 		 	    }
+
 
 	  //Leo el archivo de configuracion
 	  leerArchivoDeConfiguracion("confignucleo");
 
 	  //InicioLasColas
-	  iniciarColasSemIO();
+
 
 return 0;
 }

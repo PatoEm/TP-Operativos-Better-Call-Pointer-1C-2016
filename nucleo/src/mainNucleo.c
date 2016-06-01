@@ -14,35 +14,8 @@
 char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
-	//Inicio Semaforos de Sincro
 
-	  if (pthread_mutex_init(&mutexQuantum, NULL) != 0)
-	    {
-	        printf("\n init mutexQuamtum fallo\n");
-	        return -1;
-	    }
 
-	  if (pthread_mutex_init(&mutexVariablesCompartidas, NULL) != 0)
-	 	    {
-	 	        printf("\n init mutexVariablesCompartidas fallo\n");
-	 	        return -1;
-	 	    }
-	  if (pthread_mutex_init(&mutexSemaforosCompartidos, NULL) != 0)
-		 	    {
-		 	        printf("\n init mutexVaremaforosCompartidos fallo\n");
-		 	        return -1;
-		 	    }
-	  if (pthread_mutex_init(&mutexIOCompartidos, NULL) != 0)
-	 		 	    {
-	 		 	        printf("\n init mutexIOCompartidos fallo\n");
-	 		 	        return -1;
-	 		 	    }
-
-	  //Leo el archivo de configuracion
-	  leerArchivoDeConfiguracion("confignucleo");
-
-	  //InicioLasColas
-	  iniciarColasSemIO();
 	  //Creacion de Hilos
 
 	 pthread_t hiloQuantum;
@@ -51,8 +24,7 @@ int main(void) {
 	 pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
 	 pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
 	 pthread_attr_destroy(&attrHiloQuantum);
-	  puts("emiputo");
-	  //funcionHiloQuamtum();
+
 
 
 
