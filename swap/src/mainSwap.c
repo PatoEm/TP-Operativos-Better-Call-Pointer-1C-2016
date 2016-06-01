@@ -1,6 +1,7 @@
 #include "swap.h"
 
 int main(void) {
+	char*paginaLeida;
 
 	leerArchivoDeConfiguracion("swapconfig");
 
@@ -9,6 +10,18 @@ int main(void) {
     iniciarEstructurasSwap();
 
     recibirNuevoPrograma(1,1);
+
+    recibirNuevoPrograma(2,1);
+
+    paginaLeida=leerUnaPagina(1,0);
+
+    strcpy(paginaLeida,"hola");
+
+    escribirPagina(1,0,paginaLeida);
+
+    eliminarProceso(1);
+
+    recibirNuevoPrograma(3,2);
 
 }
 
