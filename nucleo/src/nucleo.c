@@ -73,8 +73,6 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	pcbNuevoPrograma.indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
-	//El indice de stack no lo toco cuando creo?
-
 	pcbNuevoPrograma.estado = 0; //NEW
 
 	pcbNuevoPrograma.indiceDelStack =(paginaDeStack*)malloc(sizeof(paginaDeStack)*stackSize);
@@ -330,6 +328,9 @@ void entrada_salida(char * identificador, int cantidad) {
 }
 
 void vaciarColasIO(estructuraIO solicitudIO){
+
+	//t_nombre_semaforo
+
 
 	t_queue * cola = colasIO[solicitudIO.posicionDispostivo];
 	int posicion= solicitudIO.posicionDispostivo;
