@@ -54,6 +54,7 @@
    int* variableCompartidaValor;
    char* ipUMC;
    char* UMCPort;
+   int stackSize;
    int tamanioPaginas;
 
    //Otras Variables

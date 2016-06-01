@@ -14,7 +14,7 @@
 char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
-
+	inicializarVariables();
 
 	  //Creacion de Hilos
 

@@ -27,7 +27,7 @@ void setearValores(t_config * archivoConfig) {
 	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
 	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
-
+	stackSize = config_get_int_value(archivoConfig, "STACK_SIZE");
 }
 
 pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
