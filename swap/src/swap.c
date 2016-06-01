@@ -67,7 +67,7 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
 	nodoALeer->bitMap = 0;
-	free(list_replace(listaEspacioAsignado, posicionActualDeNodo, nodoALeer));
+	list_replace(listaEspacioAsignado, posicionActualDeNodo, nodoALeer);
 	int dondeEscribo = nodoALeer->posicionDePag;
 	int enDondeEstoyDeLoQueMeMandaron = 0;
 	while (enDondeEstoyDeLoQueMeMandaron < atoi(tamPagina)) {
@@ -93,9 +93,6 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 	} else {
 		int lugarDeLaCadena = 0;
 		nodoALeer->bitMap = 1;
-		free(
-				list_replace(listaEspacioAsignado, posicionActualDeNodo,
-						nodoALeer));
 		char paginaADevolver[atoi(tamPagina)];
 		char*punteroADevolver = (&paginaADevolver[0]);
 		int posicionDeChar = (nodoALeer->posicionDePag);
@@ -182,6 +179,7 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 	int paginaActual = 0; //me dice en que página estoy actualmente
 	espacioLibre* nodoActual; //el nodo que voy a ir iterando
 	nodoActual = list_get(listaEspacioLibre, paginaActual);
+	miPaginaLibre=nodoActual->IDPaginaInterno;
 	while ((paginaActual <= list_size(listaEspacioLibre))) { // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
 		if (cantidadDePaginas == contadorDePaginasSeguidas)
 			return (miPaginaLibre);
