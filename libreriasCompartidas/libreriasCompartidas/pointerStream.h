@@ -40,7 +40,6 @@ typedef struct strConKer {
 	Byte* fileContent;
 	Int32U fileContentLen;
 	Int32U tid;
-
 } __attribute__((packed)) StrConKer;
 
 
@@ -137,5 +136,58 @@ typedef struct strUmcSwa {
 
 ////////////////////////////////////////////////////////
 
+/***********************************************/
+/* Constructores
+/***********************************************/
+
+StrConKer* newStrConKer(Char, Char, Byte*, Int32U, Int32U);
+StrKerCpu* newStrKerCpu(Char, Char, Tcb, Int8U);
+StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
+StrKerCon* newStrKerCon(Char, Char, Int32U);
+StrCpuKer* newStrCpuKer(Char, Char, Tcb, Int32U, Int32U);
+StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U);
+StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);
+StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);
+//StrUmcSwa* newStrUmcSwa(Char, Char);
+
+/***********************************************/
+
+
+/***********************************************/
+/* Serialize
+/***********************************************/
+SocketBuffer* serializeConKer(StrConKer*);
+
+SocketBuffer* serializeKerCpu(StrKerCpu*);
+SocketBuffer* serializeKerUmc(StrKerUmc*);
+SocketBuffer* serializeKerCon(StrKerCon*);
+
+SocketBuffer* serializeCpuKer(StrCpuKer*);
+SocketBuffer* serializeCpuUmc(StrCpuUmc*);
+
+SocketBuffer* serializeUmcKer(StrUmcKer*);
+SocketBuffer* serializeUmcCpu(StrUmcCpu*);
+
+//SocketBuffer* serializeUmcSwa(StrUmcSwa*);
+/***********************************************/
+
+
+/***********************************************/
+/* Unserialize
+/***********************************************/
+SocketBuffer* unserializeConKer(Stream);
+
+SocketBuffer* unserializeKerCpu(Stream);
+SocketBuffer* unserializeKerUmc(Stream);
+SocketBuffer* unserializeKerCon(Stream);
+
+SocketBuffer* unserializeCpuKer(Stream);
+SocketBuffer* unserializeCpuUmc(Stream);
+
+SocketBuffer* unserializeUmcKer(Stream);
+SocketBuffer* unserializeUmcCpu(Stream);
+
+//SocketBuffer* unserializeUmcSwa(Stream);
+/***********************************************/
 
 #endif /* LIBRERIASCOMPARTIDAS_POINTERSTREAM_H_ */
