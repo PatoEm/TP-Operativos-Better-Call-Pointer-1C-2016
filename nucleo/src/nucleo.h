@@ -34,9 +34,6 @@
 //Variables Globales
 
 	//Variables de lectura de archivo
-
-
-
    char*  puertoPropio;
    char*  cpuPort;
    int  quantum;
@@ -59,12 +56,13 @@
 
    //Otras Variables
    int idProgramas; //Contador de programa
+   bool primeraLectura;
+
 
    //Sincronizacion
    pthread_mutex_t* mutexIO;
    pthread_mutex_t* mutexVariables;
    pthread_mutex_t mutexQuantum;
-   pthread_mutex_t mutexVariablesCompartidas;
    pthread_mutex_t mutexSemaforosCompartidos;
 
    //Colas
@@ -135,7 +133,6 @@ typedef struct {
    //Prototipos
 
    void setearValores(t_config * archivoConfig);
-   void cambioQuamtum(t_config * archivoConfig);
    void escuchoMuchasConexiones();
 
 

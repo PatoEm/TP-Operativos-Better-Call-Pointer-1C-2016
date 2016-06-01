@@ -9,25 +9,25 @@
 //#define manejarError(msg) {perror(msg); abort();}
 
 void setearValores(t_config * archivoConfig) {
-	puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
-	cpuPort = config_get_string_value(archivoConfig, "PUERTO_CPU");
-	ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
-	UMCPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
+
 	pthread_mutex_lock(&mutexQuantum);
 	quantum = config_get_int_value(archivoConfig, "QUANTUM");
 	quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
 	pthread_mutex_unlock(&mutexQuantum);
-	pthread_mutex_lock(&mutexSemaforosCompartidos);
+	if(primeraLectura==true){
+	puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
+	cpuPort = config_get_string_value(archivoConfig, "PUERTO_CPU");
+	ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
+	UMCPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
 	idSemaforos = config_get_array_value(archivoConfig, "SEM_IDS");
 	viSemaforos = config_get_array_value(archivoConfig, "SEM_INIT");
-	pthread_mutex_unlock(&mutexSemaforosCompartidos);
 	idIO = config_get_array_value(archivoConfig, "IO_IDS");
 	retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
-	pthread_mutex_lock(&mutexVariablesCompartidas);
 	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
-	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
 	stackSize = config_get_int_value(archivoConfig, "STACK_SIZE");
+	primeraLectura=false;
+	}
 }
 
 pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
@@ -439,6 +439,8 @@ void signal(char* identificador){
 
 int inicializarVariables(){
 
+	primeraLectura=true;
+
 	int i;
 	  //Leo el archivo de configuracion
 		  leerArchivoDeConfiguracion("confignucleo");
@@ -499,20 +501,12 @@ int inicializarVariables(){
 	        return -1;
 	    }
 
-	  if (pthread_mutex_init(&mutexVariablesCompartidas, NULL) != 0)
-	 	    {
-	 	        printf("\n init mutexVariablesCompartidas fallo\n");
-	 	        return -1;
-	 	    }
 	  if (pthread_mutex_init(&mutexSemaforosCompartidos, NULL) != 0)
 		 	    {
 		 	        printf("\n init mutexVaremaforosCompartidos fallo\n");
 		 	        return -1;
 		 	    }
 
-
-	  //Leo el archivo de configuracion
-	  leerArchivoDeConfiguracion("confignucleo");
 
 	 //inicio El contador de ids
 	  idProgramas=0;
