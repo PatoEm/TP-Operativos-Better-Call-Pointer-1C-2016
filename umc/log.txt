@@ -1,2 +1,4 @@
 [INFO] 15:29:16:922 Elestac/(3807:3807): Inicio Log UMC
 [INFO] 15:29:16:922 Elestac/(3807:3807): Memoria real reservada
+[INFO] 23:33:51:340 Elestac/(7834:7834): Inicio Log UMC
+[INFO] 23:33:51:340 Elestac/(7834:7834): Memoria real reservada
