@@ -12,7 +12,7 @@
  * Dependencias
  *******************************************************/
 #include "pointerTipos.h"
-
+#include "pointerSocketes.h"
 
 /*******************************************************
  * IDs (Duenio del stream)

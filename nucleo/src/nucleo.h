@@ -65,6 +65,8 @@
    pthread_mutex_t mutexQuantum;
    pthread_mutex_t mutexSemaforosCompartidos;
 
+
+
    //Colas
    t_queue *colaNew;
    t_queue *colaReady;

@@ -14,6 +14,7 @@ void setearValores(t_config * archivoConfig) {
 	quantum = config_get_int_value(archivoConfig, "QUANTUM");
 	quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
 	pthread_mutex_unlock(&mutexQuantum);
+
 	if(primeraLectura==true){
 	puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
 	cpuPort = config_get_string_value(archivoConfig, "PUERTO_CPU");
@@ -30,7 +31,11 @@ void setearValores(t_config * archivoConfig) {
 	}
 }
 
+
+
 pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
+
+
 
 	t_medatada_program* metaNuevoPrograma = metadata_desde_literal(
 			programaAnsisop);

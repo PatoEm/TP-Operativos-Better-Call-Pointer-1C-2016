@@ -6,16 +6,19 @@
 C_SRCS += \
 ../libreriasCompartidas/archivosYLogsYMas.c \
 ../libreriasCompartidas/pointerSocketes.c \
+../libreriasCompartidas/pointerStream.c \
 ../libreriasCompartidas/socket.c 
 
 OBJS += \
 ./libreriasCompartidas/archivosYLogsYMas.o \
 ./libreriasCompartidas/pointerSocketes.o \
+./libreriasCompartidas/pointerStream.o \
 ./libreriasCompartidas/socket.o 
 
 C_DEPS += \
 ./libreriasCompartidas/archivosYLogsYMas.d \
 ./libreriasCompartidas/pointerSocketes.d \
+./libreriasCompartidas/pointerStream.d \
 ./libreriasCompartidas/socket.d 
 
 
