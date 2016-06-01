@@ -26,23 +26,6 @@ int main(void) {
 	 pthread_attr_destroy(&attrHiloQuantum);
 
 
-
-
-	 puts("hola Nico");
-
-	//Inicio el Contador de programas en 0 y creo las Colas
-	idProgramas=0;
-
-
-	colaNew = queue_create();
-	colaReady= queue_create();
-	colaExec= queue_create();
-	colaBlock= queue_create();
-	colaExit= queue_create();
-	puts("hola");
-
-	while(1){}
-
 	//Se conecta a la consola. COMENTEMOS QUE HACEMOS
 
 /*
@@ -86,7 +69,7 @@ int main(void) {
 	*/
 
 	//Destruyo semaforos sincro
-		pthread_mutex_destroy(&mutexQuantum);
+	pthread_mutex_destroy(&mutexQuantum);
 	return EXIT_SUCCESS;
 }
 

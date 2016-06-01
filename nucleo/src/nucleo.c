@@ -72,6 +72,8 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	pcbNuevoPrograma.estado = 0; //NEW
 
+	pcbNuevoPrograma.indiceDelStack =(paginaDeStack*)malloc(sizeof(paginaDeStack)*stackSize);
+
 	return pcbNuevoPrograma;
 }
 
@@ -348,19 +350,19 @@ void vaciarColasIO(estructuraIO solicitudIO){
 
 int obtener_valor(char* identificador) {
 
-pthread_mutex_lock(&mutexVariablesCompartidas);
 int i;
 int abortar = 0; //SI es 0 Aborta.
 for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 	if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
+		pthread_mutex_lock(&mutexVariables[i]);
 		return( variableCompartidaValor[i]);
+		pthread_mutex_unlock(&mutexVariables[i]);
 		abortar++;
 
 	}
 
 }
-pthread_mutex_unlock(&mutexVariablesCompartidas);
 if (abortar == 0) {
  //todo MATAR
 }
@@ -369,21 +371,20 @@ return FAIL;
 }
 
 void grabar_valor(char* identificador, int valor){
-	pthread_mutex_lock(&mutexVariablesCompartidas);
+
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
-
+			pthread_mutex_lock(&mutexVariables[i]);
 			variableCompartidaValor[i]=valor;
-
+			pthread_mutex_unlock(&mutexVariables[i]);
 			abortar++;
 
 		}
 
 	}
-	pthread_mutex_unlock(&mutexVariablesCompartidas);
 	if (abortar == 0) {
 		//todo MATAR
 	}
@@ -451,6 +452,7 @@ int inicializarVariables(){
 			  variableCompartidaValor[i]=0;
 		}
 
+
 	//inicio cantIO
 
 	cantIO=cantidadPalabrasEnArrayDeStrings(idIO);
@@ -482,6 +484,14 @@ int inicializarVariables(){
 			    }
 			}
 
+	for (i = 0; i < cantVarCompartidas; i++) {
+
+			 if (pthread_mutex_init(&mutexVariables[i], NULL) != 0)
+				    {
+				        printf("\n init mutexVariables %d fallo\n", i);
+				        return -1;
+				    }
+				}
 
 	  if (pthread_mutex_init(&mutexQuantum, NULL) != 0)
 	    {
@@ -504,8 +514,15 @@ int inicializarVariables(){
 	  //Leo el archivo de configuracion
 	  leerArchivoDeConfiguracion("confignucleo");
 
-	  //InicioLasColas
+	 //inicio El contador de ids
+	  idProgramas=0;
 
+	  //InicioLasColas
+	  	colaNew = queue_create();
+	  	colaReady= queue_create();
+	  	colaExec= queue_create();
+	  	colaBlock= queue_create();
+	  	colaExit= queue_create();
 
 return 0;
 }

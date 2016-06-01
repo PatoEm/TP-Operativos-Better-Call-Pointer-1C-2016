@@ -100,7 +100,7 @@
  	   int retPos;
  	   variables retVars;
 
-    }indiceDeStack;
+    }paginaDeStack;
 
    typedef enum {
         NEW=0,
@@ -118,7 +118,7 @@
    	int paginasDeCodigo;
    	arrayBidimensional * indiceDeCodigo;
    	char * indiceDeEtiquetas;
-   	indiceDeStack * indiceDelStack;
+   	paginaDeStack * indiceDelStack;
    	t_medatada_program* metaProgram;
    	estadoPrograma estado;
 
