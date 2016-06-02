@@ -13,6 +13,16 @@
  *******************************************************/
 #include "pointerTipos.h"
 #include "pointerSocketes.h"
+#include <commons/bitarray.h>
+
+/*******************************************************
+ * Acciones
+ *******************************************************/
+
+
+/* aca van los defines de actions*/
+
+
 
 /*******************************************************
  * IDs (Duenio del stream)
@@ -128,18 +138,18 @@ typedef struct strUmcCpu {
 
 /*************************
  * Stream Umc-Swap (POR DEFINIR CON LOS MEMORY-BOYS)
- ************************/
+ ************************
 typedef struct strUmcSwa {
 	Char id;
 	Char action;
 } __attribute__((packed)) StrUmcSwa;
+*/
 
 ////////////////////////////////////////////////////////
 
 /***********************************************/
 /* Constructores
-/***********************************************/
-
+***********************************************/
 StrConKer* newStrConKer(Char, Char, Byte*, Int32U, Int32U);
 StrKerCpu* newStrKerCpu(Char, Char, Tcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
@@ -152,10 +162,26 @@ StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);
 
 /***********************************************/
 
+/***********************************************/
+/* Sizes
+***********************************************/
+Int32U getSizeConKer(StrConKer* sck);
+
+Int32U getSizeKerCpu(StrKerCpu* skc);
+Int32U getSizeKerUmc(StrKerUmc* sku);
+Int32U getSizeKerCon(StrKerCon* skc);
+
+Int32U getSizeCpuKer(StrCpuKer* sck);
+Int32U getSizeCpuUmc(StrCpuUmc* scu);
+
+Int32U getSizeUmcKer(StrUmcKer* suk);
+Int32U getSizeUmcCpu(StrUmcCpu* suc);
+
+//Int32U getSizeUmcSwa(StrUmcSwa*);
 
 /***********************************************/
 /* Serialize
-/***********************************************/
+***********************************************/
 SocketBuffer* serializeConKer(StrConKer*);
 
 SocketBuffer* serializeKerCpu(StrKerCpu*);
@@ -169,12 +195,12 @@ SocketBuffer* serializeUmcKer(StrUmcKer*);
 SocketBuffer* serializeUmcCpu(StrUmcCpu*);
 
 //SocketBuffer* serializeUmcSwa(StrUmcSwa*);
-/***********************************************/
 
+/***********************************************/
 
 /***********************************************/
 /* Unserialize
-/***********************************************/
+***********************************************/
 SocketBuffer* unserializeConKer(Stream);
 
 SocketBuffer* unserializeKerCpu(Stream);
@@ -188,11 +214,17 @@ SocketBuffer* unserializeUmcKer(Stream);
 SocketBuffer* unserializeUmcCpu(Stream);
 
 //SocketBuffer* unserializeUmcSwa(Stream);
+
 /***********************************************/
 
 /***********************************************/
 /* Para Handshake
-/***********************************************/
+***********************************************/
 Char getStreamId(Stream);
+
+/***********************************************/
+/* bitarrayToSocketBuffer
+***********************************************/
+SocketBuffer* bitarrayToSocketBuffer(t_bitarray*);
 
 #endif /* LIBRERIASCOMPARTIDAS_POINTERSTREAM_H_ */
