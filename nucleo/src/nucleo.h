@@ -18,6 +18,7 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <commons/collections/queue.h>
+#include <commons/collections/list.h>
 #include <parser/metadata_program.h>
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
@@ -46,7 +47,7 @@
    char**  idIO;
    char** retardoIO;
    int cantIO;	//No se lee por config
-   t_queue **colasIO;		//Estas no necesitan captura por archivo de config
+
    char** idVariableCompartida;
    int cantVarCompartidas;
    int* variableCompartidaValor;
@@ -69,10 +70,16 @@
 
 
    //Colas
+   pthread_mutex_t mutexColaNew;
    t_queue *colaNew;
+
+   pthread_mutex_t mutexColaReady;
    t_queue *colaReady;
-   t_queue *colaExec;
-   t_queue *colaBlock;
+   pthread_mutex_t mutexListaExec;
+   t_list *listaExec;
+   pthread_mutex_t mutexListaBlock;
+  t_list *listaBlock;
+   pthread_mutex_t mutexColaExit;
    t_queue *colaExit;
 
    //Estructuras PCB
@@ -127,11 +134,8 @@
 
 
    //Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
-typedef struct {
-	int retardo;
-	int posicionDispostivo;
 
-}estructuraIO;
+
 
    //Prototipos
 
@@ -141,15 +145,18 @@ typedef struct {
 
    pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
    void moverAColaReady(pcb * programa);
-   void moverAColaBlock(pcb* programa);
+   void moverAListaBlock(pcb* programa);
    void moverAColaExit(pcb* programa);
    void finalizarProcesosColaExit();
    void verificarModificacionesArchivoConfig();
    void funcionHiloQuantum();
-   void entrada_salida(char * identificador, int cantidad);
-   void vaciarColasIO(estructuraIO solicitudIO);
-   void iniciarColasSemIO();
+   void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma);
+   void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo );
+   int obtener_valor(char* identificador, pcb* pcbPrograma);
+
+
+
 
    int inicializarVariables();
-
+   void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco);
 #endif /* NUCLEO_H_ */

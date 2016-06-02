@@ -84,15 +84,21 @@ void moverAColaReady(pcb * programa) {
 
 	switch (programa->estado) {
 	case 0:
+		pthread_mutex_lock(&mutexColaNew);
 		queue_pop(colaNew);
+		pthread_mutex_unlock(&mutexColaNew);
 		break; //0 NEW
 	case 1:
 		break;
 	case 2:
-		queue_pop(colaExec);
+		pthread_mutex_lock(&mutexListaExec);
+		buscarYEliminarPCBEnLista(listaExec,programa);
+		pthread_mutex_unlock(&mutexListaExec);
 		break; //2 EXEC
 	case 3:
-		queue_pop(colaBlock);
+		pthread_mutex_lock(&mutexListaBlock);
+		buscarYEliminarPCBEnLista(listaBlock,programa);
+		pthread_mutex_unlock(&mutexListaBlock);
 		break; //3 BLOCK
 	case 4:
 		break;
@@ -101,16 +107,39 @@ void moverAColaReady(pcb * programa) {
 	programa->estado = 1; //1 READY
 	queue_push(colaReady, programa);
 }
-void moverAColaBlock(pcb* programa) {
-	queue_pop(colaExec);
+void moverAListaBlock(pcb* programa) {
+	pthread_mutex_lock(&mutexListaExec);
+	buscarYEliminarPCBEnLista(listaExec,programa);
+	pthread_mutex_unlock(&mutexListaExec);
+
 	programa->estado = 3; //3 BLOCK
-	queue_push(colaBlock, programa);
+
+	pthread_mutex_lock(&mutexListaBlock);
+	list_add(listaBlock,programa);
+	pthread_mutex_unlock(&mutexListaBlock);
 
 }
+void moverAListaExec(pcb* programa) {
+		pthread_mutex_lock(&mutexColaReady);
+		queue_pop(colaReady);
+		pthread_mutex_unlock(&mutexColaReady);
+
+		programa->estado = 2; //3 BLOCK
+
+		pthread_mutex_lock(&mutexListaExec);
+		list_add(listaExec,programa);
+		pthread_mutex_unlock(&mutexListaExec);
+}
 void moverAColaExit(pcb* programa) {
-	queue_pop(colaExec);
+	pthread_mutex_lock(&mutexListaExec);
+	buscarYEliminarPCBEnLista(listaExec,programa);
+	pthread_mutex_unlock(&mutexListaExec);
+
 	programa->estado = 4; // 4 EXIT
+
+	pthread_mutex_lock(&mutexColaExit);
 	queue_push(colaExit, programa);
+	pthread_mutex_unlock(&mutexColaExit);
 }
 void finalizarProcesosColaExit() {
 	//ACA DEBO ENVIAR MENSAJE A LA CONSOLA DE QUE FINALIZARON SUS PROGRAMAS
@@ -287,7 +316,7 @@ void verificarModificacionesArchivoConfig() {
 
 }
 
-void entrada_salida(char * identificador, int cantidad) {
+void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 
 	int i;
 	int j;
@@ -312,58 +341,66 @@ void entrada_salida(char * identificador, int cantidad) {
 	totalRetardo = retardoPeriferico * cantidad*1000;
 	//usleep(totalRetardo*1000);
 
-	estructuraIO nuevaIO;
+
+	if(pthread_mutex_trylock(&mutexIO[j])==0){
 
 
-	nuevaIO.posicionDispostivo=j;
-	nuevaIO.retardo=totalRetardo;
-
-	pthread_mutex_lock(&mutexIO[j]);
-	queue_push(colasIO[j], &nuevaIO);
-	pthread_mutex_unlock(&mutexIO[j]);
-
-	vaciarColasIO(nuevaIO);
+		ejecutarIO(j,pcbPrograma, totalRetardo);
 
 
-}
 
-void vaciarColasIO(estructuraIO solicitudIO){
+	}
+	else{
 
-	//t_nombre_semaforo
+		moverAListaBlock(pcbPrograma);
 
 
-	t_queue * cola = colasIO[solicitudIO.posicionDispostivo];
-	int posicion= solicitudIO.posicionDispostivo;
-	estructuraIO* nueva;
-	for(;;){
-		pthread_mutex_lock(&mutexIO[posicion]);
-		 if((queue_size(cola))==0){
-			 pthread_mutex_unlock(&mutexIO[posicion]);
-			 break;
-		 }
-		 else{
-			pthread_mutex_lock(&mutexIO[posicion]);
-			nueva=queue_peek(cola);
-			queue_pop(cola);
-			pthread_mutex_unlock(&mutexIO[posicion]);
-			usleep(nueva->retardo);
+		pthread_mutex_lock(&mutexIO[j]);
+		ejecutarIO(j,pcbPrograma, totalRetardo);
 
-		 }
+
 	}
 
 
+
+
+
+
+
 }
 
-int obtener_valor(char* identificador) {
+void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo ){
+
+		usleep(retardo);
+		pthread_mutex_unlock(&mutexIO[posicion]);
+		//todo Mover el programCounter.
+		moverAColaReady(pcbDelPrograma);
+}
+
+
+int obtener_valor(char* identificador, pcb* pcbPrograma) {
 
 int i;
 int abortar = 0; //SI es 0 Aborta.
+int valor;
 for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 	if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
+
+
+		if(pthread_mutex_trylock(&mutexVariables[i])==0){
+			moverAColaReady(pcbPrograma);
+			valor=variableCompartidaValor[i];
+			pthread_mutex_unlock(&mutexVariables[i]);
+		}
+		else{
+			moverAListaBlock(pcbPrograma);
+
 		pthread_mutex_lock(&mutexVariables[i]);
-		return( variableCompartidaValor[i]);
+		moverAColaReady(pcbPrograma);
+		valor= variableCompartidaValor[i];
 		pthread_mutex_unlock(&mutexVariables[i]);
+		}
 		abortar++;
 
 	}
@@ -372,20 +409,30 @@ for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 if (abortar == 0) {
  //todo MATAR
 }
-return FAIL;
+return valor;
 
 }
 
-void grabar_valor(char* identificador, int valor){
+void grabar_valor(char* identificador, int valor, pcb* pcbPrograma){
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
-			pthread_mutex_lock(&mutexVariables[i]);
-			variableCompartidaValor[i]=valor;
-			pthread_mutex_unlock(&mutexVariables[i]);
+			if(pthread_mutex_trylock(&mutexVariables[i])==0){
+						moverAColaReady(pcbPrograma);
+						variableCompartidaValor[i]=valor;
+						pthread_mutex_unlock(&mutexVariables[i]);
+					}
+					else{
+						moverAListaBlock(pcbPrograma);
+
+					pthread_mutex_lock(&mutexVariables[i]);
+					moverAColaReady(pcbPrograma);
+					variableCompartidaValor[i]=valor;
+					pthread_mutex_unlock(&mutexVariables[i]);
+					}
 			abortar++;
 
 		}
@@ -469,7 +516,7 @@ int inicializarVariables(){
 	//Inicio Colas IO
 	for (i = 0; i < cantIO; i++) {
 
-		colasIO[i]=queue_create();
+	//	colasIO[i]=queue_create();
 	}
 
 	//Inicio Colas Semaforos
@@ -520,9 +567,32 @@ int inicializarVariables(){
 	  //InicioLasColas
 	  	colaNew = queue_create();
 	  	colaReady= queue_create();
-	  	colaExec= queue_create();
-	  	colaBlock= queue_create();
+	  	//colaExec= queue_create();
+	  	//colaBlock= queue_create();
 	  	colaExit= queue_create();
 
 return 0;
 }
+
+void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco){
+
+	int i;
+
+	pcb * pcbComparar;
+	for (i = 0; i < list_size(lista); i++) {
+
+	pcbComparar=((pcb*)list_get(lista,i));
+
+	if((pcbComparar->id)==(pcbLoco->id)){
+
+		list_remove(lista,i);
+
+	}
+
+
+	}
+
+
+
+}
+
