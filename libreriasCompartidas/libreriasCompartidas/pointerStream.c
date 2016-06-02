@@ -20,57 +20,104 @@
 /*******************************
  * Constructor Consola-Kernel
  ******************************/
-StrConKer* newStrConKer(Char, Char, Byte*, Int32U, Int32U){
-
+StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen, Int32U tid){
+	StrConKer* sconk = malloc(sizeof(StrConKer));
+	sconk->id = id;
+	sconk->action = action;
+	sconk->fileContent = fileContent;
+	sconk->fileContentLen = fileContentLen;
+	sconk->tid = tid;
+	return sconk;
 }
 
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char, Char, Tcb, Int8U){
-
+StrKerCpu* newStrKerCpu(Char id, Char action, Tcb tcb, Int8U quantum){
+	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
+	skc->id = id;
+	skc->action = action;
+	skc->tcb = tcb;
+	skc->quantum = quantum;
+	return skc;
 }
 
 /*******************************
  * Constructor Kernel-UMC
  ******************************/
-StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U){
-
+StrKerUmc* newStrKerUmc(Char id, Char action, Byte *data, Int32U size, Int32U pid, Int32U address){
+	StrKerUmc* sku = malloc(sizeof(StrKerUmc));
+	sku->id = id;
+	sku->action = action;
+	sku->data = data;
+	sku->size = size;
+	sku->pid = pid;
+	sku->address;
+	return sku;
 }
 
 /*******************************
  * Constructor Kernel-Consola
  ******************************/
-StrKerCon* newStrKerCon(Char, Char, Int32U){
-
+StrKerCon* newStrKerCon(Char id, Char action, Int32U tid){
+	StrKerCon* skcon = malloc(sizeof(StrKerCon));
+	skcon->id = id;
+	skcon->action = action;
+	skcon->tid = tid;
+	return skcon;
 }
 
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char, Char, Tcb, Int32U, Int32U){
-
+StrCpuKer* newStrCpuKer(Char id, Char action, Tcb tcb, Int32U address, Int32U tid){
+	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
+	sck->id = id;
+	sck->action = action;
+	sck->tcb = tcb;
+	sck->address = address;
+	sck->tid = tid;
+	return sck;
 }
 
 /*******************************
  * Constructor CPU-UMC
  ******************************/
-StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U){
-
+StrCpuUmc* newStrCpuUmc(Char id, Char action, Int32U address, Int32U dataLen, Byte* data, Int32U pid){
+	StrCpuUmc* scu = malloc(sizeof(StrCpuUmc));
+	scu->id = id;
+	scu-> action = action;
+	scu->address = address;
+	scu->dataLen = dataLen;
+	scu->data = data;
+	scu->pid = pid;
+	return scu;
 }
 
 /*******************************
  * Constructor UMC-Kernel
  ******************************/
-StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U){
-
+StrUmcKer* newStrUmcKer(Char id, Char action, Int32U address, Byte* data, Int32U dataLen){
+	StrUmcKer* suk = malloc(sizeof(StrUmcKer));
+	suk->id = id;
+	suk->action = action;
+	suk->address = address;
+	suk->data = data;
+	suk->dataLen = dataLen;
+	return suk;
 }
 
 /*******************************
  * Constructor UMC-CPU
  ******************************/
-StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*){
-
+StrUmcCpu* newStrUmcCpu(Char id, Char action, Int32U address, Int32U dataLen, Byte* data){
+	StrUmcCpu* suc = malloc(sizeof(StrUmcCpu));
+	suc->id = id;
+	suc->action = action;
+	suc->address = address;
+	suc->dataLen = dataLen;
+	suc->data = data;
+	return suc;
 }
 
 /*******************************

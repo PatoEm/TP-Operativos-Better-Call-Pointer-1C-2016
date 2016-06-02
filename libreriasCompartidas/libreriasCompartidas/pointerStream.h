@@ -165,11 +165,11 @@ StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);
 /***********************************************/
 /* Sizes
 ***********************************************/
-Int32U getSizeConKer(StrConKer* sck);
+Int32U getSizeConKer(StrConKer* sconk);
 
 Int32U getSizeKerCpu(StrKerCpu* skc);
 Int32U getSizeKerUmc(StrKerUmc* sku);
-Int32U getSizeKerCon(StrKerCon* skc);
+Int32U getSizeKerCon(StrKerCon* skcon);
 
 Int32U getSizeCpuKer(StrCpuKer* sck);
 Int32U getSizeCpuUmc(StrCpuUmc* scu);
