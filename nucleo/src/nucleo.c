@@ -15,27 +15,24 @@ void setearValores(t_config * archivoConfig) {
 	quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
 	pthread_mutex_unlock(&mutexQuantum);
 
-	if(primeraLectura==true){
-	puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
-	cpuPort = config_get_string_value(archivoConfig, "PUERTO_CPU");
-	ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
-	UMCPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
-	idSemaforos = config_get_array_value(archivoConfig, "SEM_IDS");
-	viSemaforos = config_get_array_value(archivoConfig, "SEM_INIT");
-	idIO = config_get_array_value(archivoConfig, "IO_IDS");
-	retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
-	idVariableCompartida = config_get_array_value(archivoConfig, "SHARED_VARS");
-	tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
-	stackSize = config_get_int_value(archivoConfig, "STACK_SIZE");
-	primeraLectura=false;
+	if (primeraLectura == true) {
+		puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
+		cpuPort = config_get_string_value(archivoConfig, "PUERTO_CPU");
+		ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
+		UMCPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
+		idSemaforos = config_get_array_value(archivoConfig, "SEM_IDS");
+		viSemaforos = config_get_array_value(archivoConfig, "SEM_INIT");
+		idIO = config_get_array_value(archivoConfig, "IO_IDS");
+		retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
+		idVariableCompartida = config_get_array_value(archivoConfig,
+				"SHARED_VARS");
+		tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
+		stackSize = config_get_int_value(archivoConfig, "STACK_SIZE");
+		primeraLectura = false;
 	}
 }
 
-
-
 pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
-
-
 
 	t_medatada_program* metaNuevoPrograma = metadata_desde_literal(
 			programaAnsisop);
@@ -75,7 +72,8 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	pcbNuevoPrograma.estado = 0; //NEW
 
-	pcbNuevoPrograma.indiceDelStack =(paginaDeStack*)malloc(sizeof(paginaDeStack)*stackSize);
+	pcbNuevoPrograma.indiceDelStack = (paginaDeStack*) malloc(
+			sizeof(paginaDeStack) * stackSize);
 
 	return pcbNuevoPrograma;
 }
@@ -84,15 +82,21 @@ void moverAColaReady(pcb * programa) {
 
 	switch (programa->estado) {
 	case 0:
+		pthread_mutex_lock(&mutexColaNew);
 		queue_pop(colaNew);
+		pthread_mutex_unlock(&mutexColaNew);
 		break; //0 NEW
 	case 1:
 		break;
 	case 2:
-		queue_pop(colaExec);
+		pthread_mutex_lock(&mutexListaExec);
+		buscarYEliminarPCBEnLista(listaExec, programa);
+		pthread_mutex_unlock(&mutexListaExec);
 		break; //2 EXEC
 	case 3:
-		queue_pop(colaBlock);
+		pthread_mutex_lock(&mutexListaBlock);
+		buscarYEliminarPCBEnLista(listaBlock, programa);
+		pthread_mutex_unlock(&mutexListaBlock);
 		break; //3 BLOCK
 	case 4:
 		break;
@@ -101,16 +105,39 @@ void moverAColaReady(pcb * programa) {
 	programa->estado = 1; //1 READY
 	queue_push(colaReady, programa);
 }
-void moverAColaBlock(pcb* programa) {
-	queue_pop(colaExec);
+void moverAListaBlock(pcb* programa) {
+	pthread_mutex_lock(&mutexListaExec);
+	buscarYEliminarPCBEnLista(listaExec, programa);
+	pthread_mutex_unlock(&mutexListaExec);
+
 	programa->estado = 3; //3 BLOCK
-	queue_push(colaBlock, programa);
+
+	pthread_mutex_lock(&mutexListaBlock);
+	list_add(listaBlock, programa);
+	pthread_mutex_unlock(&mutexListaBlock);
 
 }
+void moverAListaExec(pcb* programa) {
+	pthread_mutex_lock(&mutexColaReady);
+	queue_pop(colaReady);
+	pthread_mutex_unlock(&mutexColaReady);
+
+	programa->estado = 2; //3 BLOCK
+
+	pthread_mutex_lock(&mutexListaExec);
+	list_add(listaExec, programa);
+	pthread_mutex_unlock(&mutexListaExec);
+}
 void moverAColaExit(pcb* programa) {
-	queue_pop(colaExec);
+	pthread_mutex_lock(&mutexListaExec);
+	buscarYEliminarPCBEnLista(listaExec, programa);
+	pthread_mutex_unlock(&mutexListaExec);
+
 	programa->estado = 4; // 4 EXIT
+
+	pthread_mutex_lock(&mutexColaExit);
 	queue_push(colaExit, programa);
+	pthread_mutex_unlock(&mutexColaExit);
 }
 void finalizarProcesosColaExit() {
 	//ACA DEBO ENVIAR MENSAJE A LA CONSOLA DE QUE FINALIZARON SUS PROGRAMAS
@@ -287,7 +314,7 @@ void verificarModificacionesArchivoConfig() {
 
 }
 
-void entrada_salida(char * identificador, int cantidad) {
+void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 
 	int i;
 	int j;
@@ -297,7 +324,7 @@ void entrada_salida(char * identificador, int cantidad) {
 	for (i = 0; (idIO[i] != '\0'); i++) {
 
 		if ((strcmp(idIO[i], identificador)) == 0) {
-			j=i;
+			j = i;
 
 			retardoPeriferico = (int) retardoIO[i];
 			abortar++;
@@ -305,87 +332,88 @@ void entrada_salida(char * identificador, int cantidad) {
 
 	}
 
-	if(abortar==0){
+	if (abortar == 0) {
 		//ACA PARA MATAR todo
 
 	}
-	totalRetardo = retardoPeriferico * cantidad*1000;
+	totalRetardo = retardoPeriferico * cantidad * 1000;
 	//usleep(totalRetardo*1000);
 
-	estructuraIO nuevaIO;
+	if (pthread_mutex_trylock(&mutexIO[j]) == 0) {
 
+		ejecutarIO(j, pcbPrograma, totalRetardo);
 
-	nuevaIO.posicionDispostivo=j;
-	nuevaIO.retardo=totalRetardo;
+	} else {
 
-	pthread_mutex_lock(&mutexIO[j]);
-	queue_push(colasIO[j], &nuevaIO);
-	pthread_mutex_unlock(&mutexIO[j]);
+		moverAListaBlock(pcbPrograma);
 
-	vaciarColasIO(nuevaIO);
-
-
-}
-
-void vaciarColasIO(estructuraIO solicitudIO){
-
-	//t_nombre_semaforo
-
-
-	t_queue * cola = colasIO[solicitudIO.posicionDispostivo];
-	int posicion= solicitudIO.posicionDispostivo;
-	estructuraIO* nueva;
-	for(;;){
-		pthread_mutex_lock(&mutexIO[posicion]);
-		 if((queue_size(cola))==0){
-			 pthread_mutex_unlock(&mutexIO[posicion]);
-			 break;
-		 }
-		 else{
-			pthread_mutex_lock(&mutexIO[posicion]);
-			nueva=queue_peek(cola);
-			queue_pop(cola);
-			pthread_mutex_unlock(&mutexIO[posicion]);
-			usleep(nueva->retardo);
-
-		 }
-	}
-
-
-}
-
-int obtener_valor(char* identificador) {
-
-int i;
-int abortar = 0; //SI es 0 Aborta.
-for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
-
-	if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
-		pthread_mutex_lock(&mutexVariables[i]);
-		return( variableCompartidaValor[i]);
-		pthread_mutex_unlock(&mutexVariables[i]);
-		abortar++;
+		pthread_mutex_lock(&mutexIO[j]);
+		ejecutarIO(j, pcbPrograma, totalRetardo);
 
 	}
 
 }
-if (abortar == 0) {
- //todo MATAR
+
+void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo) {
+
+	usleep(retardo);
+	pthread_mutex_unlock(&mutexIO[posicion]);
+	//todo Mover el programCounter.
+	moverAColaReady(pcbDelPrograma);
 }
-return FAIL;
+
+int obtener_valor(char* identificador, pcb* pcbPrograma) {
+
+	int i;
+	int abortar = 0; //SI es 0 Aborta.
+	int valor;
+	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
+
+		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
+
+			if (pthread_mutex_trylock(&mutexVariables[i]) == 0) {
+				moverAColaReady(pcbPrograma);
+				valor = variableCompartidaValor[i];
+				pthread_mutex_unlock(&mutexVariables[i]);
+			} else {
+				moverAListaBlock(pcbPrograma);
+
+				pthread_mutex_lock(&mutexVariables[i]);
+				moverAColaReady(pcbPrograma);
+				valor = variableCompartidaValor[i];
+				pthread_mutex_unlock(&mutexVariables[i]);
+			}
+			abortar++;
+
+		}
+
+	}
+	if (abortar == 0) {
+		//todo MATAR
+	}
+	return valor;
 
 }
 
-void grabar_valor(char* identificador, int valor){
+void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
-			pthread_mutex_lock(&mutexVariables[i]);
-			variableCompartidaValor[i]=valor;
-			pthread_mutex_unlock(&mutexVariables[i]);
+			if (pthread_mutex_trylock(&mutexVariables[i]) == 0) {
+				moverAColaReady(pcbPrograma);
+				variableCompartidaValor[i] = valor;
+				pthread_mutex_unlock(&mutexVariables[i]);
+			} else {
+				moverAListaBlock(pcbPrograma);
+
+				pthread_mutex_lock(&mutexVariables[i]);
+				moverAColaReady(pcbPrograma);
+				variableCompartidaValor[i] = valor;
+				pthread_mutex_unlock(&mutexVariables[i]);
+			}
 			abortar++;
 
 		}
@@ -395,134 +423,165 @@ void grabar_valor(char* identificador, int valor){
 		//todo MATAR
 	}
 
-
 }
 
-void wait(char * identificador){
-	pthread_mutex_lock(&mutexSemaforosCompartidos);
+void wait(char * identificador, pcb *pcbPrograma) {
+
 	int i;
-		int abortar = 0; //SI es 0 Aborta.
-		for (i = 0; (idSemaforos[i] != '\0'); i++) {
+	int abortar = 0; //SI es 0 Aborta.
+	for (i = 0; (idSemaforos[i] != '\0'); i++) {
 
-			if ((strcmp(idSemaforos[i], identificador)) == 0) {
+		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
-				viSemaforos[i]= (char*)((int)viSemaforos[i]-1);
+			if (sem_trywait(&semaforosAnsisop[i]) == 0) {
 
-				abortar++;
+				moverAColaReady(pcbPrograma);
+			} else {
 
+				moverAListaBlock(pcbPrograma);
+				sem_wait(&semaforosAnsisop[i]);
+				moverAColaReady(pcbPrograma);
 			}
 
+			abortar++;
+
 		}
-		pthread_mutex_unlock(&mutexSemaforosCompartidos);
-		if (abortar == 0) {
-			//todo MATAR
-		}
+
+	}
+	if (abortar == 0) {
+		//todo MATAR
+	}
 
 }
 
-void signal(char* identificador){
-	pthread_mutex_lock(&mutexSemaforosCompartidos);
+void signal(char* identificador, pcb*pcbPrograma) {
+
 	int i;
-		int abortar = 0; //SI es 0 Aborta.
-		for (i = 0; (idSemaforos[i] != '\0'); i++) {
+	int abortar = 0; //SI es 0 Aborta.
+	for (i = 0; (idSemaforos[i] != '\0'); i++) {
 
-			if ((strcmp(idSemaforos[i], identificador)) == 0) {
+		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
-				viSemaforos[i]= (char*)((int)viSemaforos[i]+1);
+			sem_post(&semaforosAnsisop[i]);
 
-				abortar++;
+			moverAColaReady(pcbPrograma);
 
-			}
+			abortar++;
 
 		}
-		pthread_mutex_unlock(&mutexSemaforosCompartidos);
-		if (abortar == 0) {
-				// TODO MATAR
-		}
 
+	}
+	if (abortar == 0) {
+		//todo MATAR
+	}
 
 }
 
-int inicializarVariables(){
+int inicializarVariables() {
 
-	primeraLectura=true;
+	primeraLectura = true;
 
 	int i;
-	  //Leo el archivo de configuracion
-		  leerArchivoDeConfiguracion("confignucleo");
+	//Leo el archivo de configuracion
+	leerArchivoDeConfiguracion("confignucleo");
 
 	//inicio cantVarsCompartidas
-		  cantVarCompartidas=cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
+	cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
 
-		  variableCompartidaValor = (int*)malloc(sizeof(int)*cantVarCompartidas);
+	variableCompartidaValor = (int*) malloc(sizeof(int) * cantVarCompartidas);
 
-		  for ( i= 0; i < cantVarCompartidas; i++) {
-			  variableCompartidaValor[i]=0;
-		}
-
+	for (i = 0; i < cantVarCompartidas; i++) {
+		variableCompartidaValor[i] = 0;
+	}
 
 	//inicio cantIO
 
-	cantIO=cantidadPalabrasEnArrayDeStrings(idIO);
+	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
 
-
-	//Inicio Colas IO
-	for (i = 0; i < cantIO; i++) {
-
-		colasIO[i]=queue_create();
-	}
-
-	//Inicio Colas Semaforos
-	cantSemaforos=cantidadPalabrasEnArrayDeStrings(idSemaforos);
+	//Inicio Semaforos
+	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
 
 	for (i = 0; i < cantSemaforos; i++) {
 
-			colasSemaforos[i]=queue_create();
+		if (sem_init(&semaforosAnsisop[i], 0, (int) viSemaforos[i]) != 0) {
+			printf("\n init semaforoAnsisop %d fallo\n", i);
+			return -1;
 		}
-
+	}
 
 	//Inicio Semaforos de Sincro
 
 	for (i = 0; i < cantIO; i++) {
 
-		 if (pthread_mutex_init(&mutexIO[i], NULL) != 0)
-			    {
-			        printf("\n init mutexIO %d fallo\n", i);
-			        return -1;
-			    }
-			}
+		if (pthread_mutex_init(&mutexIO[i], NULL) != 0) {
+			printf("\n init mutexIO %d fallo\n", i);
+			return -1;
+		}
+	}
 
 	for (i = 0; i < cantVarCompartidas; i++) {
 
-			 if (pthread_mutex_init(&mutexVariables[i], NULL) != 0)
-				    {
-				        printf("\n init mutexVariables %d fallo\n", i);
-				        return -1;
-				    }
-				}
+		if (pthread_mutex_init(&mutexVariables[i], NULL) != 0) {
+			printf("\n init mutexVariables %d fallo\n", i);
+			return -1;
+		}
+	}
 
-	  if (pthread_mutex_init(&mutexQuantum, NULL) != 0)
-	    {
-	        printf("\n init mutexQuamtum fallo\n");
-	        return -1;
-	    }
+	if (pthread_mutex_init(&mutexQuantum, NULL) != 0) {
+		printf("\n init mutexQuamtum fallo\n");
+		return -1;
+	}
 
-	  if (pthread_mutex_init(&mutexSemaforosCompartidos, NULL) != 0)
-		 	    {
-		 	        printf("\n init mutexVaremaforosCompartidos fallo\n");
-		 	        return -1;
-		 	    }
+	if (pthread_mutex_init(&mutexColaNew, NULL) != 0) {
+		printf("\n init mutexCOlaNew fallo\n");
+		return -1;
+	}
+	if (pthread_mutex_init(&mutexColaReady, NULL) != 0) {
+		printf("\n init mutexColaReady fallo\n");
+		return -1;
+	}
+	if (pthread_mutex_init(&mutexColaExit, NULL) != 0) {
+		printf("\n init mutexColaExit fallo\n");
+		return -1;
+	}
+	if (pthread_mutex_init(&mutexListaBlock, NULL) != 0) {
+		printf("\n init mutexListaBlock fallo\n");
+		return -1;
+	}
+	if (pthread_mutex_init(&mutexListaExec, NULL) != 0) {
+		printf("\n init mutexListaExec fallo\n");
+		return -1;
+	}
 
+	//inicio El contador de ids
+	idProgramas = 0;
 
-	 //inicio El contador de ids
-	  idProgramas=0;
+	//InicioLasColas
+	colaNew = queue_create();
+	colaReady = queue_create();
+	listaExec = list_create();
+	listaBlock = list_create();
+	colaExit = queue_create();
 
-	  //InicioLasColas
-	  	colaNew = queue_create();
-	  	colaReady= queue_create();
-	  	colaExec= queue_create();
-	  	colaBlock= queue_create();
-	  	colaExit= queue_create();
-
-return 0;
+	return 0;
 }
+
+void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
+
+	int i;
+
+	pcb * pcbComparar;
+	for (i = 0; i < list_size(lista); i++) {
+
+		pcbComparar = ((pcb*) list_get(lista, i));
+
+		if ((pcbComparar->id) == (pcbLoco->id)) {
+
+			list_remove(lista, i);
+
+		}
+
+	}
+
+}
+

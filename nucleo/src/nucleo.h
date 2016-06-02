@@ -18,11 +18,11 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <commons/collections/queue.h>
+#include <commons/collections/list.h>
 #include <parser/metadata_program.h>
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
-
 
 #include <unistd.h>
 #include <errno.h>
@@ -34,122 +34,121 @@
 #define EVENT_BUF_LEN ( 1024 * EVENT_SIZE )
 //Variables Globales
 
-	//Variables de lectura de archivo
-   char*  puertoPropio;
-   char*  cpuPort;
-   int  quantum;
-   int  quantumSleep;
-   char**   idSemaforos;
-   char**  viSemaforos;
-   int cantSemaforos; //No se lee por config
-   t_queue **colasSemaforos; //Estas no necesitan captura por archivo de config
-   char**  idIO;
-   char** retardoIO;
-   int cantIO;	//No se lee por config
-   t_queue **colasIO;		//Estas no necesitan captura por archivo de config
-   char** idVariableCompartida;
-   int cantVarCompartidas;
-   int* variableCompartidaValor;
-   char* ipUMC;
-   char* UMCPort;
-   int stackSize;
-   int tamanioPaginas;
+//Variables de lectura de archivo
+char* puertoPropio;
+char* cpuPort;
+int quantum;
+int quantumSleep;
+char** idSemaforos;
+char** viSemaforos;
+int cantSemaforos; //No se lee por config
+char** idIO;
+char** retardoIO;
+int cantIO;	//No se lee por config
 
-   //Otras Variables
-   int idProgramas; //Contador de programa
-   bool primeraLectura;
+char** idVariableCompartida;
+int cantVarCompartidas;
+int* variableCompartidaValor;
+char* ipUMC;
+char* UMCPort;
+int stackSize;
+int tamanioPaginas;
 
+//Otras Variables
+int idProgramas; //Contador de programa
+bool primeraLectura;
 
-   //Sincronizacion
-   pthread_mutex_t* mutexIO;
-   pthread_mutex_t* mutexVariables;
-   pthread_mutex_t mutexQuantum;
-   pthread_mutex_t mutexSemaforosCompartidos;
+//Sincronizacion
+pthread_mutex_t* mutexIO;
+pthread_mutex_t* mutexVariables;
+pthread_mutex_t mutexQuantum;
 
+ sem_t * semaforosAnsisop;
 
+pthread_mutex_t mutexColaNew;
+pthread_mutex_t mutexColaReady;
+pthread_mutex_t mutexColaExit;
+pthread_mutex_t mutexListaExec;
+pthread_mutex_t mutexListaBlock;
 
-   //Colas
-   t_queue *colaNew;
-   t_queue *colaReady;
-   t_queue *colaExec;
-   t_queue *colaBlock;
-   t_queue *colaExit;
+//Colas y listas
 
-   //Estructuras PCB
+t_queue *colaNew;
 
-   typedef struct{
-   	int comienzo;
-   	int longitud;
-   }arrayBidimensional;
+t_queue *colaReady;
 
-   typedef struct {
- 	   int id;
- 	   int pag;
- 	   int off;
- 	   int size;
-    }variables;
-    typedef struct{
- 	   int pag;
- 	   int off;
- 	   int size;
-    }argumentos;
+t_list *listaExec;
 
-    typedef struct {
- 	   int pos;
- 	   argumentos args;
- 	   variables vars;
- 	   int retPos;
- 	   variables retVars;
+t_list *listaBlock;
 
-    }paginaDeStack;
+t_queue *colaExit;
 
-   typedef enum {
-        NEW=0,
-        READY=1,
-        EXEC=2,
-		BLOCK=3,
-        EXIT=4
-    }estadoPrograma;
+//Estructuras PCB
 
-
-   typedef struct{
-   	int id;
-   	int tamanioArchivoOriginal;
-   	t_puntero_instruccion programCounter;
-   	int paginasDeCodigo;
-   	arrayBidimensional * indiceDeCodigo;
-   	char * indiceDeEtiquetas;
-   	paginaDeStack * indiceDelStack;
-   	t_medatada_program* metaProgram;
-   	estadoPrograma estado;
-
-   }pcb ;
-
-
-   //Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
 typedef struct {
-	int retardo;
-	int posicionDispostivo;
+	int comienzo;
+	int longitud;
+} arrayBidimensional;
 
-}estructuraIO;
+typedef struct {
+	int id;
+	int pag;
+	int off;
+	int size;
+} variables;
+typedef struct {
+	int pag;
+	int off;
+	int size;
+} argumentos;
 
-   //Prototipos
+typedef struct {
+	int pos;
+	argumentos args;
+	variables vars;
+	int retPos;
+	variables retVars;
 
-   void setearValores(t_config * archivoConfig);
-   void escuchoMuchasConexiones();
+} paginaDeStack;
 
+typedef enum {
+	NEW = 0, READY = 1, EXEC = 2, BLOCK = 3, EXIT = 4
+} estadoPrograma;
 
-   pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo);
-   void moverAColaReady(pcb * programa);
-   void moverAColaBlock(pcb* programa);
-   void moverAColaExit(pcb* programa);
-   void finalizarProcesosColaExit();
-   void verificarModificacionesArchivoConfig();
-   void funcionHiloQuantum();
-   void entrada_salida(char * identificador, int cantidad);
-   void vaciarColasIO(estructuraIO solicitudIO);
-   void iniciarColasSemIO();
+typedef struct {
+	int id;
+	int tamanioArchivoOriginal;
+	t_puntero_instruccion programCounter;
+	int paginasDeCodigo;
+	arrayBidimensional * indiceDeCodigo;
+	char * indiceDeEtiquetas;
+	paginaDeStack * indiceDelStack;
+	t_medatada_program* metaProgram;
+	estadoPrograma estado;
 
-   int inicializarVariables();
+} pcb;
+
+//Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
+
+//Prototipos
+
+void setearValores(t_config * );
+pcb crearNuevoPcb(char * , int ) ;
+void moverAColaReady(pcb * );
+void moverAListaBlock(pcb* );
+void moverAListaExec(pcb* );
+void moverAColaExit(pcb* );
+void finalizarProcesosColaExit();
+void escuchoMuchasConexiones();
+void funcionHiloQuantum();
+void verificarModificacionesArchivoConfig() ;
+void entrada_salida(char * , int , pcb *);
+void ejecutarIO(int , pcb* , int ) ;
+int obtener_valor(char* , pcb*);
+void grabar_valor(char* , int , pcb* );
+void wait(char * , pcb *);
+void signal(char* , pcb*);
+int inicializarVariables();
+void buscarYEliminarPCBEnLista(t_list *, pcb* );
 
 #endif /* NUCLEO_H_ */
