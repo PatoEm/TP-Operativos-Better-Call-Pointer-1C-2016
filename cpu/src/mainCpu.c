@@ -26,7 +26,7 @@ int main() {
 	while(opcion != 'e'){
 
 		puts("h: Crear nuevo hilo");
-		pust("l: Listar hilos");
+		puts("l: Listar hilos");
 		puts("e: Salir");
 
 		scanf("%s",&opcion);
@@ -42,9 +42,6 @@ int main() {
 			break;
 
 		}
-		}
-
-
 	}
 
 //	FIN IMPLEMENTACION DE PRUEBA
