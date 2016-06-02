@@ -26,7 +26,7 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileCont
 	sconk->action = action;
 	sconk->fileContent = fileContent;
 	sconk->fileContentLen = fileContentLen;
-	sconk->tid = tid;
+	//sconk->tid = tid;
 	return sconk;
 }
 
