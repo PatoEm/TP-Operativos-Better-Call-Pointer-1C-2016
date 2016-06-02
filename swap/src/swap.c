@@ -195,6 +195,8 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 			nodoActual = list_get(listaEspacioLibre, paginaActual);
 		}
 	}
+	if (cantidadDePaginas == contadorDePaginasSeguidas)
+			return (miPaginaLibre);
 	return -1;
 }
 
