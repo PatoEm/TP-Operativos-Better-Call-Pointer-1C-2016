@@ -136,59 +136,59 @@ StrUmcCpu* newStrUmcCpu(Char id, Char action, Int32U address, Int32U dataLen, By
 /*******************************
  * getSize Consola-Kernel
  ******************************/
-Int32U getSizeConKer(StrConKer* sck){
+/*Int32U getSizeConKer(StrConKer* sck){
 
 }
-
+*/
 /*******************************
  * getSize Kernel-CPU
  ******************************/
-Int32U getSizeKerCpu(StrKerCpu* skc){
+/*Int32U getSizeKerCpu(StrKerCpu* skc){
 
 }
-
+*/
 /*******************************
  * getSize Kernel-UMC
  ******************************/
-Int32U getSizeKerUmc(StrKerUmc* sku){
+/*Int32U getSizeKerUmc(StrKerUmc* sku){
 
 }
-
+*/
 /*******************************
  * getSize Kernel-Consola
  ******************************/
-Int32U getSizeKerCon(StrKerCon* skc){
+/*Int32U getSizeKerCon(StrKerCon* skc){
 
 }
-
+*/
 /*******************************
  * getSize CPU-Kernel
  ******************************/
-Int32U getSizeCpuKer(StrCpuKer* sck){
+/*Int32U getSizeCpuKer(StrCpuKer* sck){
 
 }
-
+*/
 /*******************************
  * getSize CPU-UMC
  ******************************/
-Int32U getSizeCpuUmc(StrCpuUmc* scu){
+/*Int32U getSizeCpuUmc(StrCpuUmc* scu){
 
 }
-
+*/
 /*******************************
  * getSize UMC-Kernel
  ******************************/
-Int32U getSizeUmcKer(StrUmcKer* suk){
+/*Int32U getSizeUmcKer(StrUmcKer* suk){
 
 }
-
+*/
 /*******************************
  * getSize UMC-CPU
  ******************************/
-Int32U getSizeUmcCpu(StrUmcCpu* suc){
+/*Int32U getSizeUmcCpu(StrUmcCpu* suc){
 
 }
-
+*/
 /*******************************
  * getSize UMC-Swap
  ******************************/
@@ -204,66 +204,66 @@ Int32U getSizeUmcCpu(StrUmcCpu* suc){
 /*******************************
  * Serialization Consola-Kernel
  ******************************/
-SocketBuffer* serializeConKer(StrConKer*){
+/*SocketBuffer* serializeConKer(StrConKer*){
 
 }
-
+*/
 
 /***************************
  * Serialization Kernel-CPU
  **************************/
-SocketBuffer* serializeKerCpu(StrKerCpu*){
+/*SocketBuffer* serializeKerCpu(StrKerCpu*){
 
 }
-
+*/
 
 /***************************
  * Serialization Kernel-UMC
 ***************************/
-SocketBuffer* serializeKerUmc(StrKerUmc*){
+/*SocketBuffer* serializeKerUmc(StrKerUmc*){
 
 }
-
+*/
 
 /******************************
  * Serialization Kernel-Consola
  *****************************/
-SocketBuffer* serializeKerCon(StrKerCon*){
+/*SocketBuffer* serializeKerCon(StrKerCon*){
 
 }
-
+*/
 
 /***************************
  * Serialization CPU-Kernel
  **************************/
-SocketBuffer* serializeCpuKer(StrCpuKer*){
+/*SocketBuffer* serializeCpuKer(StrCpuKer*){
 
 }
-
+*/
 
 /*************************
  * Serialization CPU-UMC
  ************************/
-SocketBuffer* serializeCpuUmc(StrCpuUmc*){
+/*SocketBuffer* serializeCpuUmc(StrCpuUmc*){
 
 }
-
+*/
 
 /***************************
  * Serialization UMC-Kernel
  ***************************/
-SocketBuffer* serializeUmcKer(StrUmcKer*){
+/*SocketBuffer* serializeUmcKer(StrUmcKer*){
 
 }
-
+*/
 
 /*************************
  * Serialization UCM-CPU
  ************************/
-SocketBuffer* serializeUmcCpu(StrUmcCpu*){
+/*SocketBuffer* serializeUmcCpu(StrUmcCpu*){
 
 }
-
+*/
 //================================================================================================
 
 
@@ -274,59 +274,59 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu*){
 /***********************************************/
 /* Unserialize Consola -Kernel
 ***********************************************/
-SocketBuffer* unserializeConKer(Stream){
+/*SocketBuffer* unserializeConKer(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize Kernel-CPU
 ***********************************************/
-SocketBuffer* unserializeKerCpu(Stream){
+/*SocketBuffer* unserializeKerCpu(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize Kernel-UMC
 ***********************************************/
-SocketBuffer* unserializeKerUmc(Stream){
+/*SocketBuffer* unserializeKerUmc(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize Kernel-Consola
 ***********************************************/
-SocketBuffer* unserializeKerCon(Stream){
+/*SocketBuffer* unserializeKerCon(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize CPU-Kernel
 ***********************************************/
-SocketBuffer* unserializeCpuKer(Stream){
+/*SocketBuffer* unserializeCpuKer(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize CPU-UMC
 ***********************************************/
-SocketBuffer* unserializeCpuUmc(Stream){
+/*SocketBuffer* unserializeCpuUmc(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize UMC-Kernel
 ***********************************************/
-SocketBuffer* unserializeUmcKer(Stream){
+/*SocketBuffer* unserializeUmcKer(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize UMC-CPU
 ***********************************************/
-SocketBuffer* unserializeUmcCpu(Stream){
+/*SocketBuffer* unserializeUmcCpu(Stream){
 
 }
-
+*/
 /***********************************************/
 /* Unserialize UMC-Swap
 ***********************************************/
