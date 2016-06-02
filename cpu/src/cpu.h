@@ -17,8 +17,10 @@
 #include <commons/config.h>
 #include <parser/parser.h>
 #include <commons/log.h>
+#include <pthread.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <commons/collections/list.h>
 #define FAIL -1
 //======================================================
 
