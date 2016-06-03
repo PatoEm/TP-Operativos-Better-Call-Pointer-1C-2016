@@ -21,22 +21,24 @@ int main() {
 
 //	IMPLEMENTACION DE PRUEBA
 
-	t_list* coreList = list_create();
+	coreList = list_create();
 	char opcion='n';
-
+	int i=1;
 	while(opcion != 'e'){
 
 		puts("h: Crear nuevo hilo");
 		puts("l: Listar hilos");
 		puts("s: Cantidad Cpus");
 		puts("e: Salir");
+		puts(" ");
 
 		scanf("%s",&opcion);
 
 		switch(opcion){
 
 		case 'h':
-			nuevoCore(coreList);
+			list_add(coreList, i);
+//			nuevoCore(coreList);
 			break;
 		case 'l':
 			imprimirElementosLista(coreList);
@@ -46,7 +48,7 @@ int main() {
 			break;
 
 		}
-
+		i++;
 	}
 	list_clean(coreList);
 
@@ -82,7 +84,7 @@ int nuevoCore(t_list *lista){
 	pthread_t nuevoHilo;
 	pthread_create(&nuevoHilo, NULL, tareaCore, NULL);
 	list_add(lista, 5);
-	printf("ID: %d\n", (int)&nuevoHilo);
+	printf("ID: %d\n", &nuevoHilo);
 	return 0;
 }
 
@@ -90,9 +92,11 @@ int nuevoCore(t_list *lista){
 void imprimirElementosLista (t_list *a){
 	t_link_element *aux = a->head;
 	int i = 0;
+	void* buffer;
 	while (aux != NULL)
 	{
-		printf("\nelemento de la lista %d: %d\n", i++,aux->data);
+		buffer = aux->data;
+		printf("\nelemento de la lista %d: %d\n", i++, buffer);
 		aux = aux->next;
 	}
 	if (aux == NULL)
