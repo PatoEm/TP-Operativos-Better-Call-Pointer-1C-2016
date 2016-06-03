@@ -32,6 +32,7 @@ char* umcPort;
 char* nucleoPort;
 char* ipNucleo;
 int clienteNucleo;
+t_list* coreList;
 //======================================================
 
 /*******************************************************
@@ -48,6 +49,12 @@ typedef struct functionParameters {
 	char param[1];
 	void (*func)(void*, void*);
 } FunctionParameters;
+
+typedef struct core {
+	bool online;
+	bool busy;
+	int socket;
+} t_core;
 //======================================================
 
 /*******************************************************

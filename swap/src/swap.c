@@ -179,19 +179,24 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 	int paginaActual = 0; //me dice en que página estoy actualmente
 	espacioLibre* nodoActual; //el nodo que voy a ir iterando
 	nodoActual = list_get(listaEspacioLibre, paginaActual);
-	miPaginaLibre=nodoActual->IDPaginaInterno;
-	while ((paginaActual <= list_size(listaEspacioLibre))) { // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
-		if (cantidadDePaginas == contadorDePaginasSeguidas)
-			return (miPaginaLibre);
-		paginaActual++;
-		nodoActual = list_get(listaEspacioLibre, paginaActual);
-		if (miPaginaLibre + 1 == nodoActual->IDPaginaInterno) {
-			contadorDePaginasSeguidas++; //si consigo paginas seguidas sumo una
-		} else {
-			contadorDePaginasSeguidas = 1; //sino vuelvo a 0
-			miPaginaLibre = nodoActual->IDPaginaInterno; //reasigno la página para que sea la correcta
+	miPaginaLibre = nodoActual->IDPaginaInterno;
+	if (cantidadDePaginas == contadorDePaginasSeguidas)
+		return (miPaginaLibre);
+	else {
+		while ((paginaActual < list_size(listaEspacioLibre))) { // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
+
+			if (miPaginaLibre + 1 == nodoActual->IDPaginaInterno) {
+				contadorDePaginasSeguidas++; //si consigo paginas seguidas sumo una
+			} else {
+				contadorDePaginasSeguidas = 1; //sino vuelvo a 0
+				miPaginaLibre = nodoActual->IDPaginaInterno; //reasigno la página para que sea la correcta
+			}
+			paginaActual++;
+			nodoActual = list_get(listaEspacioLibre, paginaActual);
 		}
 	}
+	if (cantidadDePaginas == contadorDePaginasSeguidas)
+			return (miPaginaLibre);
 	return -1;
 }
 
@@ -206,7 +211,6 @@ void eliminarProceso(int pid) {
 		nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
-	nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 	nodoLibre = list_get(listaEspacioLibre, enDondeAgregarEspacio);
 	while (nodoLibre->IDPaginaInterno < nodoAReventar->IDPaginaInterno) {
 		enDondeAgregarEspacio++;
@@ -220,6 +224,8 @@ void eliminarProceso(int pid) {
 				(&nodoAAgregar));
 		enDondeAgregarEspacio++;
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
+		free(nodoAReventar);
+		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
 }
 
@@ -228,24 +234,29 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
 	int contadorDePaginas = 0; //cuento para el while
-	espacioAsignado* paginasAReservar = malloc(sizeof(espacioAsignado)); //nodo para agarrar cosas
+	espacioAsignado* paginasAReservar; //nodo para agarrar cosas
 	espacioLibre* paginaAMatar;
 	if (list_size(listaEspacioAsignado) != 0) {
 		paginasAReservar = list_get(listaEspacioAsignado,
 				lugarEnDondeDeboColocarMiNodo);
-		while ((paginasAReservar->IDPaginaInterno) < paginaDeComienzo) {
+		while (((paginasAReservar->IDPaginaInterno) < paginaDeComienzo)) {
 			lugarEnDondeDeboColocarMiNodo++;
 			paginasAReservar = list_get(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo);
+			if ((lugarEnDondeDeboColocarMiNodo
+					== (listaEspacioAsignado->elements_count))) {
+				break;
+			}
 		}
 		paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
-		while ((paginaAMatar->IDPaginaInterno) != paginaDeComienzo) {
+		while ((paginaAMatar->IDPaginaInterno) < paginaDeComienzo) {
 
 			nodosQueDeboReventar++;
 			paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
 
 		}
 	}
+	paginasAReservar = malloc(sizeof(espacioAsignado));
 	(paginasAReservar->pid) = pid;
 	(paginasAReservar->bitMap) = 0;
 	(paginasAReservar->tamanio) = atoi(tamPagina);
@@ -257,7 +268,8 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 		(paginasAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
 		list_add_in_index(listaEspacioAsignado, lugarEnDondeDeboColocarMiNodo,
 				paginasAReservar);
-		free(list_remove(listaEspacioLibre, nodosQueDeboReventar));
+		espacioLibre*nodoChau=list_remove(listaEspacioLibre, (nodosQueDeboReventar));
+		free(nodoChau);
 		nodosQueDeboReventar++;
 		contadorDePaginas++;
 		paginaActual++;
@@ -317,7 +329,7 @@ void compactarSwap() {
 		paginasContiguas++;
 		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
 
-	} while (paginasContiguas <= list_size(listaEspacioAsignado));
+	} while (paginasContiguas <list_size(listaEspacioAsignado));
 	list_clean(listaEspacioLibre);
 	paginasContiguas--;
 	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);

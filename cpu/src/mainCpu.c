@@ -9,7 +9,9 @@
  */
 #include "cpu.h"
 
-void* nuevoCore(void* argumento);
+void* tareaCore(void* argumento);
+void imprimirElementosLista (t_list *a);
+int nuevoCore(t_list *lista);
 
 int main() {
 
@@ -19,30 +21,36 @@ int main() {
 
 //	IMPLEMENTACION DE PRUEBA
 
-	pthread_t nuevoHilo;
-	t_list* coreList = list_create();
+	coreList = list_create();
 	char opcion='n';
-
+	int i=1;
 	while(opcion != 'e'){
 
 		puts("h: Crear nuevo hilo");
 		puts("l: Listar hilos");
+		puts("s: Cantidad Cpus");
 		puts("e: Salir");
+		puts(" ");
 
 		scanf("%s",&opcion);
 
 		switch(opcion){
 
 		case 'h':
-			pthread_create(&nuevoHilo, NULL, nuevoCore, NULL);
-			list_add(coreList, &nuevoHilo);
+			list_add(coreList, i);
+//			nuevoCore(coreList);
 			break;
 		case 'l':
-
+			imprimirElementosLista(coreList);
+			break;
+		case 's':
+			printf("Hay %d CPUs.\n", list_size(coreList));
 			break;
 
 		}
+		i++;
 	}
+	list_clean(coreList);
 
 //	FIN IMPLEMENTACION DE PRUEBA
 
@@ -66,8 +74,31 @@ int main() {
 
 }
 
-void* nuevoCore(void* argumento){
+void* tareaCore(void* argumento){
 
 	printf("Se ha creado un CPU.\n");
 	pthread_exit(NULL);
+}
+
+int nuevoCore(t_list *lista){
+	pthread_t nuevoHilo;
+	pthread_create(&nuevoHilo, NULL, tareaCore, NULL);
+	list_add(lista, 5);
+	printf("ID: %d\n", &nuevoHilo);
+	return 0;
+}
+
+
+void imprimirElementosLista (t_list *a){
+	t_link_element *aux = a->head;
+	int i = 0;
+	void* buffer;
+	while (aux != NULL)
+	{
+		buffer = aux->data;
+		printf("\nelemento de la lista %d: %d\n", i++, buffer);
+		aux = aux->next;
+	}
+	if (aux == NULL)
+		printf("\n\nSe ha llegado al final de la lista\n\n");
 }
