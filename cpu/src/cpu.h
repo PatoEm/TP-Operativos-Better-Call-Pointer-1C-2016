@@ -32,6 +32,7 @@ char* umcPort;
 char* nucleoPort;
 char* ipNucleo;
 int clienteNucleo;
+t_list* coreList;
 //======================================================
 
 /*******************************************************
