@@ -15,7 +15,7 @@ char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
 	inicializarVariables();
-
+	puts("Ya inicialice");
 	  //Creacion de Hilos
 
 	 pthread_t hiloQuantum;

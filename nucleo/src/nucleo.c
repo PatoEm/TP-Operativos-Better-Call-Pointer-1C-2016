@@ -500,15 +500,20 @@ int inicializarVariables() {
 
 	//Inicio Semaforos
 	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
-
+	unsigned int valorInicial;
 	for (i = 0; i < cantSemaforos; i++) {
+		printf("%s",viSemaforos[i]);
+	}
 
-		if (sem_init(&semaforosAnsisop[i], 0, (int) viSemaforos[i]) != 0) {
+/*
+	for (i = 0; i < cantSemaforos; i++) {
+		valorInicial=(unsigned int)viSemaforos[i];
+		if (sem_init(&semaforosAnsisop[i], 0, valorInicial) != 0) {
 			printf("\n init semaforoAnsisop %d fallo\n", i);
 			return -1;
 		}
 	}
-
+*/
 	//Inicio Semaforos de Sincro
 
 	for (i = 0; i < cantIO; i++) {
