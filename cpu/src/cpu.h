@@ -48,6 +48,12 @@ typedef struct functionParameters {
 	char param[1];
 	void (*func)(void*, void*);
 } FunctionParameters;
+
+typedef struct core {
+	bool online;
+	bool busy;
+	int socket;
+} t_core;
 //======================================================
 
 /*******************************************************
