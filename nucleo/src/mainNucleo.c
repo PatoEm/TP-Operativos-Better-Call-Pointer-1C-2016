@@ -69,7 +69,7 @@ int main(void) {
 	*/
 
 	//Destruyo semaforos sincro
-	pthread_mutex_destroy(&mutexQuantum);
+	//pthread_mutex_destroy(&mutexQuantum);
 	return EXIT_SUCCESS;
 }
 

@@ -3,7 +3,7 @@ libreriasCompartidas/pointerStream.d: \
  ../libreriasCompartidas/pointerStream.h \
  ../libreriasCompartidas/pointerTipos.h \
  ../libreriasCompartidas/pointerSocketes.h \
- /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h
 
 ../libreriasCompartidas/pointerStream.h:
 
@@ -11,4 +11,4 @@ libreriasCompartidas/pointerStream.d: \
 
 ../libreriasCompartidas/pointerSocketes.h:
 
-/home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h:
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h:

@@ -6,18 +6,22 @@
  */
 
 
-/***************************************
- * Dependencias
- **************************************/
+
+/*
+
+ //Dependencias
+
 #include "pointerSocketes.h"
 #include <stdio.h>
 #include "pointerStream.h"
-/*************************************/
+#include <sys/select.h>
+#include "pointerTipos.h"
 
 
-/***************************************
- * Variables Globales
- **************************************/
+
+
+ // Variables Globales
+
 SocketClient* socketUmc;
 Socket* serverSocket;
 
@@ -25,31 +29,30 @@ Socket* serverSocket;
 fd_set master;
 
 // conjunto temporal de descriptores
-fd_set read_fds
+fd_set read_fds;
 
 // maximo descriptor a monitorear
 Int32U fdmax;
-/**************************************/
 
 
-/***************************************
- * Prototipos de funciones
-***************************************/
+
+//
+  //Prototipos de funciones
+
 Boolean initServer();
 void checkConnections();
 newClientHandler(Socket* );
-/**************************************/
 
 
-/*************************************
- * Implementacion de funciones
-/*************************************/
+
+ //Implementacion de funciones
+
 
 // en lo que seria el main
 Boolean funcionMain(){
 	// hacer conexion con la UMC
 	puts("Escuchando conexiones del Kernel o CPUs.");
-	socketUmc socketCreateClient();
+	socketUmc=socketCreateClient();
 
 	//socketConnect(socketUmc, config->umcIP, config-> umcPORT ); la comento porque me rompe, tendria que incluir el config, paja
 	if ( socketUmc == NULL){
@@ -162,3 +165,6 @@ void checkConnections() {
 newClientHandler(Socket* client) {
 	//continuara...
 }
+
+*/
+
