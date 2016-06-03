@@ -224,6 +224,7 @@ void eliminarProceso(int pid) {
 				(&nodoAAgregar));
 		enDondeAgregarEspacio++;
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
+		free(nodoAReventar);
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
 }
@@ -248,7 +249,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 			}
 		}
 		paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
-		while ((paginaAMatar->IDPaginaInterno) <= paginaDeComienzo) {
+		while ((paginaAMatar->IDPaginaInterno) < paginaDeComienzo) {
 
 			nodosQueDeboReventar++;
 			paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
@@ -267,7 +268,8 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 		(paginasAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
 		list_add_in_index(listaEspacioAsignado, lugarEnDondeDeboColocarMiNodo,
 				paginasAReservar);
-		free(list_remove(listaEspacioLibre, (nodosQueDeboReventar)));
+		espacioLibre*nodoChau=list_remove(listaEspacioLibre, (nodosQueDeboReventar));
+		free(nodoChau);
 		nodosQueDeboReventar++;
 		contadorDePaginas++;
 		paginaActual++;
@@ -327,7 +329,7 @@ void compactarSwap() {
 		paginasContiguas++;
 		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
 
-	} while (paginasContiguas <= list_size(listaEspacioAsignado));
+	} while (paginasContiguas <list_size(listaEspacioAsignado));
 	list_clean(listaEspacioLibre);
 	paginasContiguas--;
 	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
