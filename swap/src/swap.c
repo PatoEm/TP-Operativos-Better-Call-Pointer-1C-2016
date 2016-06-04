@@ -231,7 +231,7 @@ void eliminarProceso(int pid) {
 }
 
 void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
-	int paginaActual = paginaDeComienzo; // en donde empieza todo.
+	int paginaActual = paginaDeComienzo; // donde empieza toodo.
 	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
 	int contadorDePaginas = 0; //cuento para el while
@@ -257,20 +257,21 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 
 		}
 	}
-	paginasAReservar = malloc(sizeof(espacioAsignado));
-	(paginasAReservar->pid) = pid;
-	(paginasAReservar->bitMap) = 0;
-	(paginasAReservar->tamanio) = atoi(tamPagina);
 
 	while (contadorDePaginas < cantidadDePaginas) {
 
+		paginasAReservar = malloc(sizeof(espacioAsignado));
+		(paginasAReservar->pid) = pid;
+		(paginasAReservar->bitMap) = 0;
+		(paginasAReservar->tamanio) = atoi(tamPagina);
 		(paginasAReservar->IDPaginaInterno) = paginaActual;
 		(paginasAReservar->numDePag) = contadorDePaginas;
 		(paginasAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
-		if(lugarEnDondeDeboColocarMiNodo<list_size(listaEspacioAsignado))
-		list_add_in_index(listaEspacioAsignado, lugarEnDondeDeboColocarMiNodo,
-				paginasAReservar);
-		else list_add(listaEspacioAsignado,paginasAReservar);
+		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
+			list_add_in_index(listaEspacioAsignado,
+					lugarEnDondeDeboColocarMiNodo, paginasAReservar);
+		else
+			list_add(listaEspacioAsignado, paginasAReservar);
 		if (nodosQueDeboReventar < list_size(listaEspacioLibre))
 			list_remove(listaEspacioLibre, (nodosQueDeboReventar));
 		contadorDePaginas++;
