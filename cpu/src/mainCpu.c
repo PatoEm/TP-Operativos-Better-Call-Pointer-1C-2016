@@ -23,6 +23,7 @@ int main() {
 
 	coreList = list_create();
 	char opcion='n';
+	int* data;
 	int i=1;
 	while(opcion != 'e'){
 
@@ -32,13 +33,17 @@ int main() {
 		puts("e: Salir");
 		puts(" ");
 
-		scanf("%s",&opcion);
+		opcion = getchar();
+
 
 		switch(opcion){
 
 		case 'h':
-			list_add(coreList, i);
+			data = malloc(sizeof(data));
+			*data = i;
+			list_add(coreList, (void*)data);
 //			nuevoCore(coreList);
+			i++;
 			break;
 		case 'l':
 			imprimirElementosLista(coreList);
@@ -48,7 +53,6 @@ int main() {
 			break;
 
 		}
-		i++;
 	}
 	list_clean(coreList);
 
@@ -96,9 +100,12 @@ void imprimirElementosLista (t_list *a){
 	while (aux != NULL)
 	{
 		buffer = aux->data;
-		printf("\nelemento de la lista %d: %d\n", i++, buffer);
+		printf("\nelemento de la lista %d: %d\n", i++, *(int*)buffer);
+		free(buffer);
 		aux = aux->next;
 	}
 	if (aux == NULL)
 		printf("\n\nSe ha llegado al final de la lista\n\n");
+
+	list_destroy(a);
 }
