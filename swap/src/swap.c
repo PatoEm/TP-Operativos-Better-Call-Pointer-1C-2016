@@ -338,14 +338,15 @@ void compactarSwap() {
 	(nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
 	list_add(listaEspacioLibre, nodoLibre);
 	int iDActual = ((nodoLibre->IDPaginaInterno) + 1);
-	while ((nodoLibre->IDPaginaInterno) != atoi(paginas)) {
+	do {
 
 		nodoLibre++;
 		(nodoLibre->IDPaginaInterno) = iDActual;
 		(nodoLibre->inicio) = atoi(tamPagina) * (nodoLibre->IDPaginaInterno);
+		(nodoLibre->tamanio)= atoi(tamPagina);
 		list_add(listaEspacioLibre, nodoLibre);
 		iDActual++;
 
-	}
+	}while (iDActual != atoi(paginas));
 	usleep(1000 * atoi(retCompactacion));
 }
