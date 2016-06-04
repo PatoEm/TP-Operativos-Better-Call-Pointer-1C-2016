@@ -201,17 +201,17 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu*);
 /***********************************************/
 /* Unserialize
 ***********************************************/
-SocketBuffer* unserializeConKer(Stream);
+SocketBuffer* unserializeConKer(Stream conKer);
 
-SocketBuffer* unserializeKerCpu(Stream);
-SocketBuffer* unserializeKerUmc(Stream);
-SocketBuffer* unserializeKerCon(Stream);
+SocketBuffer* unserializeKerCpu(Stream kerCpu);
+SocketBuffer* unserializeKerUmc(Stream kerUmc);
+SocketBuffer* unserializeKerCon(Stream kerCon);
 
-SocketBuffer* unserializeCpuKer(Stream);
-SocketBuffer* unserializeCpuUmc(Stream);
+SocketBuffer* unserializeCpuKer(Stream cpuKer);
+SocketBuffer* unserializeCpuUmc(Stream cpuUmc);
 
-SocketBuffer* unserializeUmcKer(Stream);
-SocketBuffer* unserializeUmcCpu(Stream);
+SocketBuffer* unserializeUmcKer(Stream umcKer);
+SocketBuffer* unserializeUmcCpu(Stream umcCpu);
 
 //SocketBuffer* unserializeUmcSwa(Stream);
 

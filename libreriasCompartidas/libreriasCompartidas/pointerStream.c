@@ -274,59 +274,51 @@ StrUmcCpu* newStrUmcCpu(Char id, Char action, Int32U address, Int32U dataLen, By
 /***********************************************/
 /* Unserialize Consola -Kernel
 ***********************************************/
-/*SocketBuffer* unserializeConKer(Stream){
+SocketBuffer* unserializeConKer(Stream conKer){
 
 }
-*/
 /***********************************************/
 /* Unserialize Kernel-CPU
 ***********************************************/
-/*SocketBuffer* unserializeKerCpu(Stream){
+SocketBuffer* unserializeKerCpu(Stream kerCpu){
 
 }
-*/
 /***********************************************/
 /* Unserialize Kernel-UMC
 ***********************************************/
-/*SocketBuffer* unserializeKerUmc(Stream){
+SocketBuffer* unserializeKerUmc(Stream kerUmc){
 
 }
-*/
 /***********************************************/
 /* Unserialize Kernel-Consola
 ***********************************************/
-/*SocketBuffer* unserializeKerCon(Stream){
+SocketBuffer* unserializeKerCon(Stream kerCon){
 
 }
-*/
 /***********************************************/
 /* Unserialize CPU-Kernel
 ***********************************************/
-/*SocketBuffer* unserializeCpuKer(Stream){
+SocketBuffer* unserializeCpuKer(Stream cpuKer){
 
 }
-*/
 /***********************************************/
 /* Unserialize CPU-UMC
 ***********************************************/
-/*SocketBuffer* unserializeCpuUmc(Stream){
+SocketBuffer* unserializeCpuUmc(Stream cpuUmc){
 
 }
-*/
 /***********************************************/
 /* Unserialize UMC-Kernel
 ***********************************************/
-/*SocketBuffer* unserializeUmcKer(Stream){
+SocketBuffer* unserializeUmcKer(Stream umcKer){
 
 }
-*/
 /***********************************************/
 /* Unserialize UMC-CPU
 ***********************************************/
-/*SocketBuffer* unserializeUmcCpu(Stream){
+SocketBuffer* unserializeUmcCpu(Stream umcCpu){
 
 }
-*/
 /***********************************************/
 /* Unserialize UMC-Swap
 ***********************************************/
