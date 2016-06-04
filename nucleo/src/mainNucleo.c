@@ -16,7 +16,8 @@ int main(void) {
 
 	inicializarVariables();
 	puts("Ya inicialice");
-	  //Creacion de Hilos
+
+//Creacion de Hilos
 
 	 pthread_t hiloQuantum;
 	 pthread_attr_t attrHiloQuantum;

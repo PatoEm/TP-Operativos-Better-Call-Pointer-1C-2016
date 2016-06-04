@@ -593,15 +593,15 @@ int inicializarVariables() {
 		for (i = 0; i < cantVarCompartidas; i++) {
 			variableCompartidaValor[i] = 0;
 		}
-
+		mutexVariables=malloc(sizeof(char));
 	for (i = 0; i < cantVarCompartidas; i++) {
-
+		mutexVariables[i]=malloc(sizeof(pthread_mutex_t));
 		if (pthread_mutex_init(mutexVariables[i], NULL) != 0) {
 			printf("\n init mutexVariables %d fallo\n", i);
 			return -1;
 		}
 	}
-
+puts("putototal");
 	if (pthread_mutex_init(mutexQuantum, NULL) != 0) {
 		printf("\n init mutexQuamtum fallo\n");
 		return -1;
