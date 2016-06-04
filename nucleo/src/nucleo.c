@@ -1,5 +1,5 @@
 /*
- * nucleo.c
+  * nucleo.c
  *
  *  Created on: 23/4/2016
  *      Author: utnso
@@ -8,12 +8,15 @@
 #include "nucleo.h"
 //#define manejarError(msg) {perror(msg); abort();}
 
+
+
+
 void setearValores(t_config * archivoConfig) {
 
-	pthread_mutex_lock(&mutexQuantum);
+	pthread_mutex_lock(mutexQuantum);
 	quantum = config_get_int_value(archivoConfig, "QUANTUM");
 	quantumSleep = config_get_int_value(archivoConfig, "QUANTUM_SLEEP");
-	pthread_mutex_unlock(&mutexQuantum);
+	pthread_mutex_unlock(mutexQuantum);
 
 	if (primeraLectura == true) {
 		puertoPropio = config_get_string_value(archivoConfig, "PUERTO_PROPIO");
@@ -82,21 +85,21 @@ void moverAColaReady(pcb * programa) {
 
 	switch (programa->estado) {
 	case 0:
-		pthread_mutex_lock(&mutexColaNew);
+		pthread_mutex_lock(mutexColaNew);
 		queue_pop(colaNew);
-		pthread_mutex_unlock(&mutexColaNew);
+		pthread_mutex_unlock(mutexColaNew);
 		break; //0 NEW
 	case 1:
 		break;
 	case 2:
-		pthread_mutex_lock(&mutexListaExec);
+		pthread_mutex_lock(mutexListaExec);
 		buscarYEliminarPCBEnLista(listaExec, programa);
-		pthread_mutex_unlock(&mutexListaExec);
+		pthread_mutex_unlock(mutexListaExec);
 		break; //2 EXEC
 	case 3:
-		pthread_mutex_lock(&mutexListaBlock);
+		pthread_mutex_lock(mutexListaBlock);
 		buscarYEliminarPCBEnLista(listaBlock, programa);
-		pthread_mutex_unlock(&mutexListaBlock);
+		pthread_mutex_unlock(mutexListaBlock);
 		break; //3 BLOCK
 	case 4:
 		break;
@@ -106,38 +109,38 @@ void moverAColaReady(pcb * programa) {
 	queue_push(colaReady, programa);
 }
 void moverAListaBlock(pcb* programa) {
-	pthread_mutex_lock(&mutexListaExec);
+	pthread_mutex_lock(mutexListaExec);
 	buscarYEliminarPCBEnLista(listaExec, programa);
-	pthread_mutex_unlock(&mutexListaExec);
+	pthread_mutex_unlock(mutexListaExec);
 
 	programa->estado = 3; //3 BLOCK
 
-	pthread_mutex_lock(&mutexListaBlock);
+	pthread_mutex_lock(mutexListaBlock);
 	list_add(listaBlock, programa);
-	pthread_mutex_unlock(&mutexListaBlock);
+	pthread_mutex_unlock(mutexListaBlock);
 
 }
 void moverAListaExec(pcb* programa) {
-	pthread_mutex_lock(&mutexColaReady);
+	pthread_mutex_lock(mutexColaReady);
 	queue_pop(colaReady);
-	pthread_mutex_unlock(&mutexColaReady);
+	pthread_mutex_unlock(mutexColaReady);
 
 	programa->estado = 2; //3 BLOCK
 
-	pthread_mutex_lock(&mutexListaExec);
+	pthread_mutex_lock(mutexListaExec);
 	list_add(listaExec, programa);
-	pthread_mutex_unlock(&mutexListaExec);
+	pthread_mutex_unlock(mutexListaExec);
 }
 void moverAColaExit(pcb* programa) {
-	pthread_mutex_lock(&mutexListaExec);
+	pthread_mutex_lock(mutexListaExec);
 	buscarYEliminarPCBEnLista(listaExec, programa);
-	pthread_mutex_unlock(&mutexListaExec);
+	pthread_mutex_unlock(mutexListaExec);
 
 	programa->estado = 4; // 4 EXIT
 
-	pthread_mutex_lock(&mutexColaExit);
+	pthread_mutex_lock(mutexColaExit);
 	queue_push(colaExit, programa);
-	pthread_mutex_unlock(&mutexColaExit);
+	pthread_mutex_unlock(mutexColaExit);
 }
 void finalizarProcesosColaExit() {
 	//ACA DEBO ENVIAR MENSAJE A LA CONSOLA DE QUE FINALIZARON SUS PROGRAMAS
@@ -339,7 +342,7 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 	totalRetardo = retardoPeriferico * cantidad * 1000;
 	//usleep(totalRetardo*1000);
 
-	if (pthread_mutex_trylock(&mutexIO[j]) == 0) {
+	if (pthread_mutex_trylock(mutexIO[j]) == 0) {
 
 		ejecutarIO(j, pcbPrograma, totalRetardo);
 
@@ -347,7 +350,7 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 
 		moverAListaBlock(pcbPrograma);
 
-		pthread_mutex_lock(&mutexIO[j]);
+		pthread_mutex_lock(mutexIO[j]);
 		ejecutarIO(j, pcbPrograma, totalRetardo);
 
 	}
@@ -357,7 +360,7 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo) {
 
 	usleep(retardo);
-	pthread_mutex_unlock(&mutexIO[posicion]);
+	pthread_mutex_unlock(mutexIO[posicion]);
 	//todo Mover el programCounter.
 	moverAColaReady(pcbDelPrograma);
 }
@@ -371,17 +374,17 @@ int obtener_valor(char* identificador, pcb* pcbPrograma) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 
-			if (pthread_mutex_trylock(&mutexVariables[i]) == 0) {
+			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
 				moverAColaReady(pcbPrograma);
 				valor = variableCompartidaValor[i];
-				pthread_mutex_unlock(&mutexVariables[i]);
+				pthread_mutex_unlock(mutexVariables[i]);
 			} else {
 				moverAListaBlock(pcbPrograma);
 
-				pthread_mutex_lock(&mutexVariables[i]);
+				pthread_mutex_lock(mutexVariables[i]);
 				moverAColaReady(pcbPrograma);
 				valor = variableCompartidaValor[i];
-				pthread_mutex_unlock(&mutexVariables[i]);
+				pthread_mutex_unlock(mutexVariables[i]);
 			}
 			abortar++;
 
@@ -402,17 +405,17 @@ void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
 	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
-			if (pthread_mutex_trylock(&mutexVariables[i]) == 0) {
+			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
 				moverAColaReady(pcbPrograma);
 				variableCompartidaValor[i] = valor;
-				pthread_mutex_unlock(&mutexVariables[i]);
+				pthread_mutex_unlock(mutexVariables[i]);
 			} else {
 				moverAListaBlock(pcbPrograma);
 
-				pthread_mutex_lock(&mutexVariables[i]);
+				pthread_mutex_lock(mutexVariables[i]);
 				moverAColaReady(pcbPrograma);
 				variableCompartidaValor[i] = valor;
-				pthread_mutex_unlock(&mutexVariables[i]);
+				pthread_mutex_unlock(mutexVariables[i]);
 			}
 			abortar++;
 
@@ -433,14 +436,15 @@ void wait(char * identificador, pcb *pcbPrograma) {
 
 		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
-			if (sem_trywait(&semaforosAnsisop[i]) == 0) {
+			if (sem_trywait(semaforosAnsisop[i]) == 0) {
 
 				moverAColaReady(pcbPrograma);
 			} else {
 
 				moverAListaBlock(pcbPrograma);
-				sem_wait(&semaforosAnsisop[i]);
+				sem_wait(semaforosAnsisop[i]);
 				moverAColaReady(pcbPrograma);
+				//
 			}
 
 			abortar++;
@@ -462,7 +466,7 @@ void signal(char* identificador, pcb*pcbPrograma) {
 
 		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
-			sem_post(&semaforosAnsisop[i]);
+			sem_post(semaforosAnsisop[i]);
 
 			moverAColaReady(pcbPrograma);
 
@@ -479,81 +483,135 @@ void signal(char* identificador, pcb*pcbPrograma) {
 
 int inicializarVariables() {
 
+
+
+	//Variables de lectura de archivo
+	puertoPropio=(char*)malloc(sizeof(puertoPropio));
+	cpuPort=(char*)malloc(sizeof(cpuPort));
+	quantum=(int)malloc(sizeof(quantum));
+	quantumSleep=(int)(sizeof(quantumSleep));
+	idSemaforos=(char**)malloc(sizeof(idSemaforos));
+	viSemaforos=(char**)malloc(sizeof(viSemaforos));
+	cantSemaforos=(int)malloc(sizeof(cantSemaforos)); //No se lee por config
+	idIO=(char**)malloc(sizeof(idIO));
+	retardoIO=(char**)malloc(sizeof(retardoIO));
+	int cantIO=(int)malloc(sizeof(cantIO));	//No se lee por config
+
+	idVariableCompartida=(char**)malloc(sizeof(idVariableCompartida));
+	cantVarCompartidas=(int)malloc(sizeof(cantVarCompartidas));
+	//variableCompartidaValor=(int*)malloc(sizeof(variableCompartidaValor));
+	ipUMC=(char*)malloc((sizeof(ipUMC)));
+	UMCPort=(char*)malloc((sizeof(UMCPort)));
+	stackSize=(int)malloc((sizeof(stackSize)));
+	tamanioPaginas=(int)malloc((sizeof(tamanioPaginas)));
+
+	//Otras Variables
+	idProgramas=(int)malloc(sizeof(idProgramas)); //Contador de programa
+	primeraLectura=(bool)malloc(sizeof(primeraLectura));
+
+	//Sincronizacion
+	//pthread_mutex_t** mutexIO;
+	//pthread_mutex_t** mutexVariables;
+	mutexQuantum=malloc(sizeof(mutexQuantum));
+
+	mutexColaNew=(pthread_mutex_t*)malloc(sizeof(mutexColaNew));
+	mutexColaReady=(pthread_mutex_t*)malloc(sizeof(mutexColaReady));
+	mutexColaExit=(pthread_mutex_t*)malloc(sizeof(mutexColaExit));
+	mutexListaExec=(pthread_mutex_t*)malloc(sizeof(mutexListaExec));
+	mutexListaBlock=(pthread_mutex_t*)malloc(sizeof(mutexListaBlock));
+
+	//Colas y listas
+
+	//t_queue *colaNew;
+
+	//t_queue *colaReady;
+
+	//t_list *listaExec;
+
+	//t_list *listaBlock;
+
+	//t_queue *colaExit;
+
+
 	primeraLectura = true;
 
 	int i;
+
 	//Leo el archivo de configuracion
 	leerArchivoDeConfiguracion("confignucleo");
 
-	//inicio cantVarsCompartidas
-	cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
-
-	variableCompartidaValor = (int*) malloc(sizeof(int) * cantVarCompartidas);
-
-	for (i = 0; i < cantVarCompartidas; i++) {
-		variableCompartidaValor[i] = 0;
-	}
-
-	//inicio cantIO
-
-	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
 
 	//Inicio Semaforos
 	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
 	unsigned int valorInicial;
-	for (i = 0; i < cantSemaforos; i++) {
-		printf("%s",viSemaforos[i]);
-	}
 
-/*
+	semaforosAnsisop=malloc(sizeof(sem_t)*cantSemaforos);
+
+
+
 	for (i = 0; i < cantSemaforos; i++) {
 		valorInicial=(unsigned int)viSemaforos[i];
-		if (sem_init(&semaforosAnsisop[i], 0, valorInicial) != 0) {
+		if (sem_init((semaforosAnsisop[i]), 0, valorInicial) != 0) {
 			printf("\n init semaforoAnsisop %d fallo\n", i);
 			return -1;
 		}
 	}
-*/
+
 	//Inicio Semaforos de Sincro
+
+	//inicio cantIO
+
+	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
+	mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
 
 	for (i = 0; i < cantIO; i++) {
 
-		if (pthread_mutex_init(&mutexIO[i], NULL) != 0) {
+		if (pthread_mutex_init(mutexIO[i], NULL) != 0) {
 			printf("\n init mutexIO %d fallo\n", i);
 			return -1;
 		}
 	}
 
+
+	//inicio cantVarsCompartidas
+		cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
+
+		variableCompartidaValor = (int*) malloc(sizeof(int) * cantVarCompartidas);
+
+		for (i = 0; i < cantVarCompartidas; i++) {
+			variableCompartidaValor[i] = 0;
+		}
+
 	for (i = 0; i < cantVarCompartidas; i++) {
 
-		if (pthread_mutex_init(&mutexVariables[i], NULL) != 0) {
+		if (pthread_mutex_init(mutexVariables[i], NULL) != 0) {
 			printf("\n init mutexVariables %d fallo\n", i);
 			return -1;
 		}
 	}
 
-	if (pthread_mutex_init(&mutexQuantum, NULL) != 0) {
+	if (pthread_mutex_init(mutexQuantum, NULL) != 0) {
 		printf("\n init mutexQuamtum fallo\n");
 		return -1;
 	}
 
-	if (pthread_mutex_init(&mutexColaNew, NULL) != 0) {
+	if (pthread_mutex_init(mutexColaNew, NULL) != 0) {
 		printf("\n init mutexCOlaNew fallo\n");
 		return -1;
 	}
-	if (pthread_mutex_init(&mutexColaReady, NULL) != 0) {
+	if (pthread_mutex_init(mutexColaReady, NULL) != 0) {
 		printf("\n init mutexColaReady fallo\n");
 		return -1;
 	}
-	if (pthread_mutex_init(&mutexColaExit, NULL) != 0) {
+	if (pthread_mutex_init(mutexColaExit, NULL) != 0) {
 		printf("\n init mutexColaExit fallo\n");
 		return -1;
 	}
-	if (pthread_mutex_init(&mutexListaBlock, NULL) != 0) {
+	if (pthread_mutex_init(mutexListaBlock, NULL) != 0) {
 		printf("\n init mutexListaBlock fallo\n");
 		return -1;
 	}
-	if (pthread_mutex_init(&mutexListaExec, NULL) != 0) {
+	if (pthread_mutex_init(mutexListaExec, NULL) != 0) {
 		printf("\n init mutexListaExec fallo\n");
 		return -1;
 	}

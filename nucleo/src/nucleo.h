@@ -60,17 +60,15 @@ int idProgramas; //Contador de programa
 bool primeraLectura;
 
 //Sincronizacion
-pthread_mutex_t* mutexIO;
-pthread_mutex_t* mutexVariables;
-pthread_mutex_t mutexQuantum;
-
- sem_t * semaforosAnsisop;
-
-pthread_mutex_t mutexColaNew;
-pthread_mutex_t mutexColaReady;
-pthread_mutex_t mutexColaExit;
-pthread_mutex_t mutexListaExec;
-pthread_mutex_t mutexListaBlock;
+pthread_mutex_t** mutexIO;
+pthread_mutex_t** mutexVariables;
+pthread_mutex_t* mutexQuantum;
+sem_t ** semaforosAnsisop;
+pthread_mutex_t* mutexColaNew;
+pthread_mutex_t* mutexColaReady;
+pthread_mutex_t* mutexColaExit;
+pthread_mutex_t* mutexListaExec;
+pthread_mutex_t* mutexListaBlock;
 
 //Colas y listas
 
