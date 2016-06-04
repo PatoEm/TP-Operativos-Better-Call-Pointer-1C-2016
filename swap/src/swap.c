@@ -62,10 +62,11 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != numeroDePagina)) {
+	while (((nodoALeer->pid) != pid) && (nodoALeer->bitMap != 1)) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
+	nodoALeer->numDePag=numeroDePagina;
 	nodoALeer->bitMap = 0;
 	list_replace(listaEspacioAsignado, posicionActualDeNodo, nodoALeer);
 	int dondeEscribo = nodoALeer->posicionDePag;
@@ -230,19 +231,20 @@ void eliminarProceso(int pid) {
 	}
 }
 
-void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
+void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas, int numeroPrimerPagina) {
+	int numInternoDePagina=numeroPrimerPagina;
 	int paginaActual = paginaDeComienzo; // donde empieza toodo.
 	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
 	int contadorDePaginas = 0; //cuento para el while
-	espacioAsignado* paginasAReservar; //nodo para agarrar cosas
+	espacioAsignado* paginaAReservar; //nodo para agarrar cosas
 	espacioLibre* paginaAMatar;
 	if (list_size(listaEspacioAsignado) != 0) {
-		paginasAReservar = list_get(listaEspacioAsignado,
+		paginaAReservar = list_get(listaEspacioAsignado,
 				lugarEnDondeDeboColocarMiNodo);
-		while (((paginasAReservar->IDPaginaInterno) < paginaDeComienzo)) {
+		while (((paginaAReservar->IDPaginaInterno) < paginaDeComienzo)) {
 			lugarEnDondeDeboColocarMiNodo++;
-			paginasAReservar = list_get(listaEspacioAsignado,
+			paginaAReservar = list_get(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo);
 			if ((lugarEnDondeDeboColocarMiNodo
 					== (listaEspacioAsignado->elements_count))) {
@@ -260,20 +262,21 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 
 	while (contadorDePaginas < cantidadDePaginas) {
 
-		paginasAReservar = malloc(sizeof(espacioAsignado));
-		(paginasAReservar->pid) = pid;
-		(paginasAReservar->bitMap) = 0;
-		(paginasAReservar->tamanio) = atoi(tamPagina);
-		(paginasAReservar->IDPaginaInterno) = paginaActual;
-		(paginasAReservar->numDePag) = contadorDePaginas;
-		(paginasAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
+		paginaAReservar = malloc(sizeof(espacioAsignado));
+		(paginaAReservar->pid) = pid;
+		(paginaAReservar->bitMap) = 0;
+		(paginaAReservar->tamanio) = atoi(tamPagina);
+		(paginaAReservar->IDPaginaInterno) = paginaActual;
+		(paginaAReservar->numDePag) = numInternoDePagina;
+		(paginaAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
-					lugarEnDondeDeboColocarMiNodo, paginasAReservar);
+					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
 		else
-			list_add(listaEspacioAsignado, paginasAReservar);
+			list_add(listaEspacioAsignado, paginaAReservar);
 		if (nodosQueDeboReventar < list_size(listaEspacioLibre))
 			list_remove(listaEspacioLibre, (nodosQueDeboReventar));
+		numInternoDePagina++;
 		contadorDePaginas++;
 		paginaActual++;
 		lugarEnDondeDeboColocarMiNodo++;
@@ -282,16 +285,16 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 }
 
 //Recibe un nuevo programa. 1 si lo puede recibir, 0 si no
-bool recibirNuevoPrograma(int pid, int cantidadDePaginasAGuardar) {
+bool recibirNuevoPrograma(int pid, int cantidadDePaginasAGuardar, int pgDeComienzo) {
 	if (verificarSiHayEspacio(cantidadDePaginasAGuardar)) {
 		if (paginasContiguasDeSwap(cantidadDePaginasAGuardar) == -1) {
 			compactarSwap(); //Tengo que seguir desde acá DR Mengueche
 			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),
-					pid, cantidadDePaginasAGuardar);
+					pid, cantidadDePaginasAGuardar, pgDeComienzo);
 			return TRUE;
 		} else {
 			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),
-					pid, cantidadDePaginasAGuardar);
+					pid, cantidadDePaginasAGuardar, pgDeComienzo);
 			return TRUE;
 		}
 	} else
