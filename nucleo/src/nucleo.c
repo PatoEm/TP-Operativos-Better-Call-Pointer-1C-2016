@@ -543,35 +543,47 @@ int inicializarVariables() {
 
 	//Inicio Semaforos
 	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
-	unsigned int valorInicial;
+	char* valorInicial;
+	char algo;
+	unsigned int algo2=0;
 
-	semaforosAnsisop=malloc(sizeof(sem_t)*cantSemaforos);
+	//sem_t semaforoPrueba;
+	//sem_init(&semaforoPrueba, 0, 4);
+
+	semaforosAnsisop=malloc(sizeof(char));
 
 
 
 	for (i = 0; i < cantSemaforos; i++) {
-		valorInicial=(unsigned int)viSemaforos[i];
-		if (sem_init((semaforosAnsisop[i]), 0, valorInicial) != 0) {
+		valorInicial=viSemaforos[i];
+		//algo=*valorInicial;
+		algo2=atoi(valorInicial);
+		semaforosAnsisop[i]=malloc(sizeof(sem_t));
+		puts("hola puto");
+		if (sem_init((semaforosAnsisop[i]), 0, algo2) != 0) {
 			printf("\n init semaforoAnsisop %d fallo\n", i);
 			return -1;
 		}
+		puts("hola puto2");
 	}
+	puts("hola puto3");
 
 	//Inicio Semaforos de Sincro
 
 	//inicio cantIO
 
 	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
-	mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
+	mutexIO=malloc(sizeof(char));
 
 	for (i = 0; i < cantIO; i++) {
 
+		mutexIO[i]=malloc(sizeof(pthread_mutex_t));
 		if (pthread_mutex_init(mutexIO[i], NULL) != 0) {
 			printf("\n init mutexIO %d fallo\n", i);
 			return -1;
 		}
 	}
-
+	puts("puto4");
 
 	//inicio cantVarsCompartidas
 		cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
