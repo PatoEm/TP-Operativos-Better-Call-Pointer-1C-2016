@@ -1,4 +1,3 @@
-
 #ifndef UMC_H_
 #define UMC_H_
 
@@ -22,6 +21,7 @@ char* puerto_Swap;
 int marcos;
 int marco_Size;
 int marco_x_proc;
+char* algoritmoDeReemplazo;
 int entradas_TLB;
 int espera;
 
@@ -41,7 +41,6 @@ int espera;
 
 t_list * listaEspacioLibre;
 t_list * listaEspacioAsignado;
-
 
 
 //estructuras para los hilos de CPU y nucleo
@@ -77,6 +76,8 @@ char * reservarMemoria(int , int );
 
 void comandosUMC ();
 
+void menuUMC();
+
 void retardoUMC (int);
 
 void dump ();
@@ -96,5 +97,9 @@ void meHablaCPU();
 void meHablaKernelPrueba ();
 
 void meHablaCPUPrueba ();
+
+void inicioTLB(t_list *, int, int);
+
+t_list * creoTLB();
 
 #endif /* UMC_H_ */

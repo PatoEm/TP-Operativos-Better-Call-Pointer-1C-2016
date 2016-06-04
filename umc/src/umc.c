@@ -305,6 +305,7 @@ void setearValores(t_config * archivoConfig) {
 	marcos = config_get_int_value(archivoConfig, "MARCOS");
 	marco_Size = config_get_int_value(archivoConfig, "MARCO_SIZE");
 	marco_x_proc = config_get_int_value(archivoConfig, "MARCO_X_PROC");
+	algoritmoDeReemplazo = config_get_string_value(archivoConfig, "ALGORITMO");
 	entradas_TLB = config_get_int_value(archivoConfig, "ENTRADAS_TLB");
 	espera = config_get_int_value(archivoConfig, "RETARDO");
 }
@@ -313,7 +314,6 @@ char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	// Si lo hago con calloc me la llena de \0 papa
 	char * memory = calloc(cantidadFrames, capacidadFrames);
 	log_info(logger, "Memoria real reservada", NULL);
-	printf("Memoria real reservada OK.\n\n");
 	return memory;
 }
 
@@ -546,7 +546,48 @@ void retardoUMC(int retardo) {
 }
 
 void dump() {
+	int i=0;
+	espacioAsignado * nodoActualDeAsignados;
+	espacioLibre * nodoActualDeLibres;
 
+	//IMPRIMO EN PANTALLA
+	puts("Paginas Asignadas:\n");
+	while(nodoActualDeAsignados->IDFrame < marcos){
+		nodoActualDeAsignados = (espacioAsignado*)list_get(listaEspacioAsignado, i);
+		printf("ID Frame: %d\n",nodoActualDeAsignados->IDFrame);
+		printf("PID: %d\n",nodoActualDeAsignados->pid);
+		i++;
+	}
+
+	puts("Paginas Libres:\n");
+	i=0;
+
+	while(nodoActualDeLibres->IDFrame < marcos){
+		nodoActualDeLibres = (espacioLibre*)list_get(listaEspacioLibre, i);
+		printf("ID Frame vacio: %d\n",nodoActualDeLibres->IDFrame);
+		i++;
+	}
+
+	//IMPRIMO EN EL LOG
+	i=0;
+
+	while(nodoActualDeAsignados->IDFrame < marcos){
+		nodoActualDeAsignados = (espacioAsignado*)list_get(listaEspacioAsignado, i);
+		log_info(logger,"Frame: %d \nPID: %d\n\n",nodoActualDeAsignados->IDFrame, nodoActualDeAsignados->pid);
+
+	}
+	//IMPRIMO EN EL ARCHIVO
+	/*
+	archivo = fopen("Dump","rw+");
+	while(nodoActualDeAsignados->IDFrame < marcos){
+
+	}
+
+	while(nodoActualDeLibres->IDFrame < marcos){
+
+	}
+	fclose(archivo);
+	*/
 }
 
 void flushTLB() {
@@ -557,3 +598,33 @@ void flushMemory() {
 
 }
 
+void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos){
+
+	pthread_attr_init(&attrhiloComandos);
+
+	pthread_attr_setdetachstate(&attrhiloComandos, PTHREAD_CREATE_DETACHED);
+	int hiloParaComandos = pthread_create (&hiloComandos, &attrhiloComandos, (void *)comandosUMC, NULL);
+
+
+	pthread_attr_destroy(&attrhiloComandos);
+}
+
+void inicioTLB(t_list * TLB, int aciertos, int accesos){
+	if(entradas_TLB == 0){
+		log_info(logger, "TLB Deshabilitada");
+	}
+	else{
+		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
+
+		TLB = creoTLB();
+
+		//Inicializo la cantidad de aciertos y accesos
+		aciertos=0;
+		accesos=0;
+	}
+}
+
+t_list * creoTLB(){
+	 t_list * TLB = list_create();
+	 return TLB;
+}

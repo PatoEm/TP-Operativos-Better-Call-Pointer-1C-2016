@@ -1,10 +1,8 @@
 /*
  ============================================================================
  Name        : umc.c
- Author      : 
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
+
+BETTER CALL POINTER PERRO
  ============================================================================
  */
 #include "umc.h"
@@ -15,21 +13,20 @@ int main(void) {
 	crearLogger(1);
 
 	puts("Inicio UMC");
-
 	log_info(logger, "Inicio Log UMC", NULL);
 
-	memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
+	t_list * TLB;
+	int aciertosTLB;
+	int accesosTLB;
 	pthread_t hiloComandos;
-
 	pthread_attr_t attrhiloComandos;
 
-	pthread_attr_init(&attrhiloComandos);
+	memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 
-	pthread_attr_setdetachstate(&attrhiloComandos, PTHREAD_CREATE_DETACHED);
-	int hiloParaComandos = pthread_create (&hiloComandos, &attrhiloComandos, (void *)comandosUMC, NULL);
+	menuUMC(hiloComandos, attrhiloComandos);
 
+	inicioTLB(TLB, aciertosTLB, accesosTLB);
 
-	pthread_attr_destroy(&attrhiloComandos);
 	escuchoMuchasConexiones();
 
 /*
