@@ -19,12 +19,46 @@ int main(void) {
 
 //Creacion de Hilos
 
-	 pthread_t hiloQuantum;
-	 pthread_attr_t attrHiloQuantum;
-	 pthread_attr_init(&attrHiloQuantum);
-	 pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
-	 pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
-	 pthread_attr_destroy(&attrHiloQuantum);
+	crearHilos();
+
+puts("Ya cree los hilos");
+
+char * programita = leerProgramaAnSISOP1("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
+
+int tamanioArchivo32 = tamArchivo("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
+
+ pcb * nuevoPcbPrueba= crearNuevoPcb(programita,tamanioArchivo32);
+
+puts("Ya cree la pcb");
+
+//entrada_salida("Disco",4, nuevoPcbPrueba);
+
+puts("Ya hice la IO");
+
+int valorVariable;
+
+grabar_valor("!Global",54,nuevoPcbPrueba);
+
+valorVariable=obtener_valor("!Global",nuevoPcbPrueba);
+
+puts("Ya grabe y obtuve valores");
+
+
+wait("SEM3",nuevoPcbPrueba);
+
+int valorSem;
+
+sem_getvalue(semaforosAnsisop[2],&valorSem);
+
+printf("%d \n",valorSem);
+
+signal("SEM3",nuevoPcbPrueba);
+
+sem_getvalue(semaforosAnsisop[2],&valorSem);
+
+printf("%d \n",valorSem);
+
+puts("Hice waits y signals");
 
 
 	//Se conecta a la consola. COMENTEMOS QUE HACEMOS

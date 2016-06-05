@@ -10,7 +10,7 @@
 
 
 
-
+//testeada
 void setearValores(t_config * archivoConfig) {
 
 	pthread_mutex_lock(mutexQuantum);
@@ -34,8 +34,8 @@ void setearValores(t_config * archivoConfig) {
 		primeraLectura = false;
 	}
 }
-
-pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
+//testeada
+pcb* crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	t_medatada_program* metaNuevoPrograma = metadata_desde_literal(
 			programaAnsisop);
@@ -44,18 +44,18 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	t_size cantidadInstrucciones = metaNuevoPrograma->instrucciones_size;
 
-	pcb pcbNuevoPrograma;
+	pcb* pcbNuevoPrograma=malloc(sizeof(pcb));
 	idProgramas = idProgramas + 1;
 	puts("hola");
-	pcbNuevoPrograma.id = idProgramas;
+	pcbNuevoPrograma->id = idProgramas;
 
-	pcbNuevoPrograma.tamanioArchivoOriginal = tamanioArchivo;
+	pcbNuevoPrograma->tamanioArchivoOriginal = tamanioArchivo;
 
-	pcbNuevoPrograma.metaProgram = metaNuevoPrograma;
+	pcbNuevoPrograma->metaProgram = metaNuevoPrograma;
 
-	pcbNuevoPrograma.programCounter = metaNuevoPrograma->instruccion_inicio;
+	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
-	pcbNuevoPrograma.paginasDeCodigo = cantidadPaginas(tamanioPaginas,
+	pcbNuevoPrograma->paginasDeCodigo = cantidadPaginas(tamanioPaginas,
 			tamanioArchivo);
 
 	//pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones, instrucciones);
@@ -69,13 +69,13 @@ pcb crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 		array[i].longitud = (instrucciones[i].offset);
 	}
 
-	pcbNuevoPrograma.indiceDeCodigo = array;
+	pcbNuevoPrograma->indiceDeCodigo = array;
 
-	pcbNuevoPrograma.indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
+	pcbNuevoPrograma->indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
-	pcbNuevoPrograma.estado = 0; //NEW
+	pcbNuevoPrograma->estado = 0; //NEW
 
-	pcbNuevoPrograma.indiceDelStack = (paginaDeStack*) malloc(
+	pcbNuevoPrograma->indiceDelStack = (paginaDeStack*) malloc(
 			sizeof(paginaDeStack) * stackSize);
 
 	return pcbNuevoPrograma;
@@ -263,6 +263,7 @@ void escuchoMuchasConexiones() {
 	}
 }
 
+//Testeada
 void funcionHiloQuantum() {
 
 	for (;;) {
@@ -274,7 +275,7 @@ void funcionHiloQuantum() {
 	}
 
 }
-
+//Testeada
 void verificarModificacionesArchivoConfig() {
 
 	int length;
@@ -316,7 +317,7 @@ void verificarModificacionesArchivoConfig() {
 	close(fd);
 
 }
-
+//testeada
 void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 
 	int i;
@@ -329,7 +330,9 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 		if ((strcmp(idIO[i], identificador)) == 0) {
 			j = i;
 
-			retardoPeriferico = (int) retardoIO[i];
+			//retardoPeriferico = (int) retardoIO[i];
+
+			retardoPeriferico = atoi( retardoIO[i]);
 			abortar++;
 		}
 
@@ -356,7 +359,7 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 	}
 
 }
-
+//testeada
 void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo) {
 
 	usleep(retardo);
@@ -364,7 +367,7 @@ void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo) {
 	//todo Mover el programCounter.
 	moverAColaReady(pcbDelPrograma);
 }
-
+//testeada
 int obtener_valor(char* identificador, pcb* pcbPrograma) {
 
 	int i;
@@ -397,7 +400,7 @@ int obtener_valor(char* identificador, pcb* pcbPrograma) {
 	return valor;
 
 }
-
+//testeada
 void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
 
 	int i;
@@ -427,7 +430,7 @@ void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
 	}
 
 }
-
+//testeada
 void wait(char * identificador, pcb *pcbPrograma) {
 
 	int i;
@@ -457,7 +460,7 @@ void wait(char * identificador, pcb *pcbPrograma) {
 	}
 
 }
-
+//testeada
 void signal(char* identificador, pcb*pcbPrograma) {
 
 	int i;
@@ -480,7 +483,7 @@ void signal(char* identificador, pcb*pcbPrograma) {
 	}
 
 }
-
+//testeada
 int inicializarVariables() {
 
 
@@ -559,14 +562,11 @@ int inicializarVariables() {
 		//algo=*valorInicial;
 		algo2=atoi(valorInicial);
 		semaforosAnsisop[i]=malloc(sizeof(sem_t));
-		puts("hola puto");
 		if (sem_init((semaforosAnsisop[i]), 0, algo2) != 0) {
 			printf("\n init semaforoAnsisop %d fallo\n", i);
 			return -1;
 		}
-		puts("hola puto2");
 	}
-	puts("hola puto3");
 
 	//Inicio Semaforos de Sincro
 
@@ -583,7 +583,6 @@ int inicializarVariables() {
 			return -1;
 		}
 	}
-	puts("puto4");
 
 	//inicio cantVarsCompartidas
 		cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
@@ -601,7 +600,7 @@ int inicializarVariables() {
 			return -1;
 		}
 	}
-puts("putototal");
+
 	if (pthread_mutex_init(mutexQuantum, NULL) != 0) {
 		printf("\n init mutexQuamtum fallo\n");
 		return -1;
@@ -641,6 +640,17 @@ puts("putototal");
 	return 0;
 }
 
+//testeada
+void crearHilos(){
+
+	 	 pthread_t hiloQuantum;
+		 pthread_attr_t attrHiloQuantum;
+		 pthread_attr_init(&attrHiloQuantum);
+		 pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
+		 pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
+		 pthread_attr_destroy(&attrHiloQuantum);
+}
+
 void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 	int i;
@@ -659,4 +669,5 @@ void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 	}
 
 }
+
 

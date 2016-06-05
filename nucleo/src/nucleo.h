@@ -132,7 +132,7 @@ typedef struct {
 //Prototipos
 
 void setearValores(t_config * );
-pcb crearNuevoPcb(char * , int ) ;
+pcb* crearNuevoPcb(char * , int ) ;
 void moverAColaReady(pcb * );
 void moverAListaBlock(pcb* );
 void moverAListaExec(pcb* );
@@ -148,6 +148,7 @@ void grabar_valor(char* , int , pcb* );
 void wait(char * , pcb *);
 void signal(char* , pcb*);
 int inicializarVariables();
+void crearHilos();
 void buscarYEliminarPCBEnLista(t_list *, pcb* );
 
 #endif /* NUCLEO_H_ */
