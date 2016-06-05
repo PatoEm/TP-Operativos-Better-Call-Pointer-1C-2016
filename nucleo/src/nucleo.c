@@ -73,35 +73,38 @@ pcb* crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	pcbNuevoPrograma->indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
-	pcbNuevoPrograma->estado = 0; //NEW
+	pcbNuevoPrograma->estado = NEW; //NEW
 
 	pcbNuevoPrograma->indiceDelStack = (paginaDeStack*) malloc(
 			sizeof(paginaDeStack) * stackSize);
 
+	pthread_mutex_lock(mutexColaNew);
+	queue_push(colaNew,pcbNuevoPrograma);
+	pthread_mutex_unlock(mutexColaNew);
 	return pcbNuevoPrograma;
 }
-
+//testeadas
 void moverAColaReady(pcb * programa) {
 
 	switch (programa->estado) {
-	case 0:
+	case NEW:
 		pthread_mutex_lock(mutexColaNew);
 		queue_pop(colaNew);
 		pthread_mutex_unlock(mutexColaNew);
 		break; //0 NEW
-	case 1:
+	case READY:
 		break;
-	case 2:
+	case EXEC:
 		pthread_mutex_lock(mutexListaExec);
 		buscarYEliminarPCBEnLista(listaExec, programa);
 		pthread_mutex_unlock(mutexListaExec);
 		break; //2 EXEC
-	case 3:
+	case BLOCK:
 		pthread_mutex_lock(mutexListaBlock);
 		buscarYEliminarPCBEnLista(listaBlock, programa);
 		pthread_mutex_unlock(mutexListaBlock);
 		break; //3 BLOCK
-	case 4:
+	case EXIT:
 		break;
 	}
 
