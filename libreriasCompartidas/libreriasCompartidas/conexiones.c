@@ -5,40 +5,38 @@
  *      Author: utnso
  */
 
-
 /***************************************
 * Dependencias
 **************************************/
-	#include <stdio.h>
-	#include <commons/collections/list.h>
-	#include <commons/log.h>
-	#include "pointerSocketes.h"
-	#include "pointerStream.h"
-	#include <pthread.h>
-	/*************************************/
+#include <stdio.h>
+#include <commons/collections/list.h>
+#include <commons/log.h>
+#include "pointerSocketes.h"
+#include "pointerStream.h"
+#include <pthread.h>
+/*************************************/
+
+/***************************************
+* Variables Globales
+**************************************/
+t_list* socketConnections = NULL;
+Int32U umcPort = 0;
+/**************************************/
 
 
-	/***************************************
-	 * Variables Globales
-	 **************************************/
-	t_list* socketConnections = NULL;
-	Int32U umcPort = 0;
-	/**************************************/
+/***************************************
+* Prototipos de funciones
+***************************************/
+void manageSocketConnections();
+void* manageSocketConnection(void*);
 
+Boolean manageCpuRequest(Socket*, StrCpuUmc*);
+Boolean manageKernelRequest(Socket*, StrKerUmc*);
+/**************************************/
 
-	/***************************************
-	 * Prototipos de funciones
-	***************************************/
-	void manageSocketConnections();
-	void* manageSocketConnection(void*);
-
-	Boolean manageCpuRequest(Socket*, StrCpuUmc*);
-	Boolean manageKernelRequest(Socket*, StrKerUmc*);
-	/**************************************/
-
-	/*************************************
-	 * Implementacion de funciones
-	*************************************/
+/*************************************
+* Implementacion de funciones
+*************************************/
 
 void manageSocketConnections(){
 	socketConnections = list_create();

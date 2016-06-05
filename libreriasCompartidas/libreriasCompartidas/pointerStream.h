@@ -14,16 +14,6 @@
 #include "pointerTipos.h"
 #include "pointerSocketes.h"
 #include <commons/bitarray.h>
-
-/*******************************************************
- * Acciones
- *******************************************************/
-
-
-/* aca van los defines de actions*/
-
-
-
 /*******************************************************
  * IDs (Duenio del stream)
  ******************************************************/
@@ -34,6 +24,12 @@
 #define SWAP_ID 4
 ////////////////////////////////////////////////////////
 
+/*******************************************************
+ * Acciones
+ *******************************************************/
+#define STD_OUTPUT 5
+
+/* aca van los defines de actions*/
 
 /*******************************************************
  * Estructuras de Streaming
@@ -49,7 +45,7 @@ typedef struct strConKer {
 	Char action;
 	Byte* fileContent;
 	Int32U fileContentLen;
-	Int32U tid;
+	//Int32U tid;
 } __attribute__((packed)) StrConKer;
 
 
@@ -59,7 +55,7 @@ typedef struct strConKer {
 typedef struct strKerCpu {
 	Char id;
 	Char action;
-	Tcb tcb;
+	//Tcb tcb;
 	Int8U quantum;
 } __attribute__((packed)) StrKerCpu;
 
@@ -83,7 +79,7 @@ typedef struct strKerUmc {
 typedef struct strKerCon {
 	Char id;
 	Char action;
-	Int32U tid;
+	//Int32U tid;
 } __attribute__((packed)) StrKerCon;
 
 
@@ -93,7 +89,7 @@ typedef struct strKerCon {
 typedef struct strCpuKer {
 	Char id;
 	Char action;
-	Tcb tcb;
+	//Pcb pcb;
 	Int32U address;
 	Int32U tid;
 } __attribute__((packed)) StrCpuKer;
