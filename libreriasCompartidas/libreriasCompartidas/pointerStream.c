@@ -20,7 +20,8 @@
 /*******************************
  * Constructor Consola-Kernel
  ******************************/
-StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen, Int32U tid){
+StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen){
+		//, Int32U tid){
 	StrConKer* sconk = malloc(sizeof(StrConKer));
 	sconk->id = id;
 	sconk->action = action;
@@ -33,7 +34,8 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileCont
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char id, Char action, Tcb tcb, Int8U quantum){
+StrKerCpu* newStrKerCpu(Char id, Char action, Int8U quantum){
+		//Pcb Pcb, Int8U quantum){
 	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
 	skc->id = id;
 	skc->action = action;
@@ -59,7 +61,8 @@ StrKerUmc* newStrKerUmc(Char id, Char action, Byte *data, Int32U size, Int32U pi
 /*******************************
  * Constructor Kernel-Consola
  ******************************/
-StrKerCon* newStrKerCon(Char id, Char action, Int32U tid){
+StrKerCon* newStrKerCon(Char id, Char action){
+		//, Int32U tid){
 	StrKerCon* skcon = malloc(sizeof(StrKerCon));
 	skcon->id = id;
 	skcon->action = action;
@@ -70,7 +73,8 @@ StrKerCon* newStrKerCon(Char id, Char action, Int32U tid){
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char id, Char action, Tcb tcb, Int32U address, Int32U tid){
+StrCpuKer* newStrCpuKer(Char id, Char action, Int32U address, Int32U tid) {
+		//Tcb tcb, Int32U address, Int32U tid){
 	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
 	sck->id = id;
 	sck->action = action;
@@ -524,50 +528,203 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
 /***********************************************/
 /* Unserialize Consola -Kernel
 ***********************************************/
-SocketBuffer* unserializeConKer(Stream conKer){
+SocketBuffer* unserializeConKer(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	Byte* fileContent = NULL;
+	Int32U fileContentLen;
+	//Int32U tid;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&fileContent, ptrByte, sizeof(fileContent));
+	ptrByte += sizeof(fileContent);
+	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
+	ptrByte += sizeof(fileContentLen);
+/*
+	memcpy(&tid, ptrByte, sizeof(tid));
+	ptrByte += sizeof(tid);
+*/
+	free(dataSerialized);
+	return newStrConKer(id, action, fileContent, fileContentLen);
 }
 /***********************************************/
 /* Unserialize Kernel-CPU
 ***********************************************/
-SocketBuffer* unserializeKerCpu(Stream kerCpu){
+SocketBuffer* unserializeKerCpu(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	//pcb pcb;
+	Int8U quantum;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+/*
+	memcpy(&pcb, ptrByte, sizeof(pcb));
+	ptrByte += sizeof(pcb);
+*/
+	memcpy(&quantum, ptrByte, sizeof(quantum));
+	ptrByte += sizeof(quantum);
+
+	free(dataSerialized);
+	return newStrKerCpu(id, action, quantum);
 }
 /***********************************************/
 /* Unserialize Kernel-UMC
 ***********************************************/
-SocketBuffer* unserializeKerUmc(Stream kerUmc){
+SocketBuffer* unserializeKerUmc(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	Byte *data;
+	Int32U size;
+	Int32U pid;
+	Int32U address;
+
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&data, ptrByte, sizeof(data));
+	ptrByte += sizeof(data);
+	memcpy(&size, ptrByte, sizeof(size));
+	ptrByte += sizeof(size);
+	memcpy(&pid, ptrByte, sizeof(pid));
+	ptrByte += sizeof(pid);
+	memcpy(&address, ptrByte, sizeof(address));
+	ptrByte += sizeof(address);
+
+	free(dataSerialized);
+	return newStrKerUmc(id, action, data, size, pid, address);
 
 }
 /***********************************************/
 /* Unserialize Kernel-Consola
 ***********************************************/
-SocketBuffer* unserializeKerCon(Stream kerCon){
+SocketBuffer* unserializeKerCon(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	//Int32U tid;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+
+	free(dataSerialized);
+	return newStrKerCon(id, action);
 }
 /***********************************************/
 /* Unserialize CPU-Kernel
 ***********************************************/
-SocketBuffer* unserializeCpuKer(Stream cpuKer){
+SocketBuffer* unserializeCpuKer(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	//Pcb pcb;
+	Int32U address;
+	Int32U tid;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+/*
+	memcpy(&pcb, ptrByte, sizeof(pcb));
+	ptrByte += sizeof(pcb);
+*/
+	memcpy(&address, ptrByte, sizeof(address));
+	ptrByte += sizeof(address);
+	memcpy(&tid, ptrByte, sizeof(tid));
+	ptrByte += sizeof(tid);
+
+	free(dataSerialized);
+	return newStrCpuKer(id, action, address, tid);
 }
 /***********************************************/
 /* Unserialize CPU-UMC
 ***********************************************/
-SocketBuffer* unserializeCpuUmc(Stream cpuUmc){
+SocketBuffer* unserializeCpuUmc(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	Int32U address;
+	Int32U dataLen;
+	Byte* data;
+	Int32U pid;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&address, ptrByte, sizeof(address));
+	ptrByte += sizeof(address);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
+	memcpy(&data, ptrByte, sizeof(data));
+	ptrByte += sizeof(data);
+	memcpy(&pid, ptrByte, sizeof(pid));
+	ptrByte += sizeof(pid);
+
+	free(dataSerialized);
+	return newStrCpuUmc(id, action, address, dataLen, data, pid);
 }
 /***********************************************/
 /* Unserialize UMC-Kernel
 ***********************************************/
-SocketBuffer* unserializeUmcKer(Stream umcKer){
+SocketBuffer* unserializeUmcKer(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	Int32U address;
+	Byte* data;
+	Int32U dataLen;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&address, ptrByte, sizeof(address));
+	ptrByte += sizeof(address);
+	memcpy(&data, ptrByte, sizeof(data));
+	ptrByte += sizeof(data);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
+
+	free(dataSerialized);
+	return newStrUmcKer(id, action, address, data, dataLen);
 }
 /***********************************************/
 /* Unserialize UMC-CPU
 ***********************************************/
-SocketBuffer* unserializeUmcCpu(Stream umcCpu){
+SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	Int32U address;
+	Int32U dataLen;
+	Byte* data;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&address, ptrByte, sizeof(address));
+	ptrByte += sizeof(address);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
+	memcpy(&data, ptrByte, sizeof(data));
+	ptrByte += sizeof(data);
+
+	free(dataSerialized);
+	return newStrUmcCpu(id, action, address, dataLen, data);
 }
 /***********************************************/
 /* Unserialize UMC-Swap
@@ -582,9 +739,10 @@ SocketBuffer* unserializeUmcCpu(Stream umcCpu){
 /* Para Handshake
 ************************************************/
 Char getStreamId(Stream dataSerialized) {
-	Char id;
 	Stream ptrByte = dataSerialized;
+	Char id;
 	memcpy(&id, ptrByte, sizeof(id));
+	free(dataSerialized);
 	return id;
 }
 

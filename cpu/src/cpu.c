@@ -248,6 +248,7 @@ int imprimir(t_valor_variable valor_mostrar){
 	memcpy(mensaje,&protocolo,2);
 	memcpy(mensaje[2], &valor_mostrar, sizeof(t_valor_variable));
 	enviarMensaje(clienteNucleo,mensaje,6);
+	return 0;
 }
 
 /*
