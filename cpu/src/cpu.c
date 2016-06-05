@@ -9,6 +9,7 @@
  * DEPENDENCIAS
  *******************************************************/
 #include "cpu.h"
+#include <libreriasCompartidas/pointerStream.h>
 #include <commons/collections/dictionary.h>
 #define manejarError(msg) {perror(msg); abort();}
 //======================================================
@@ -176,7 +177,8 @@ t_valor_variable dereferenciar(t_puntero direccion_variable){
  * asignar
  */
 void asignar(t_puntero direccion_variable, t_valor_variable valor){
-	printf("Operacion asignar");
+	printf("< Copiando segundo argumento en el primero >");
+	memcpy(direccion_variable, &valor, sizeof(t_valor_variable));
 }
 
 /*
@@ -237,10 +239,14 @@ t_puntero_instruccion retornar(t_valor_variable retorno){
  * imprimir
  */
 int imprimir(t_valor_variable valor_mostrar){
-	char* mensaje=string_new();
+	StrCpuKer sck;
+	//sck = newStrCpuKer(CPU_ID, STD_OUTPUT, pcb);
+	//serializar el stream
+	//enviar al nucleo
+	char* mensaje = string_new();
 	char protocolo[3]="01";
 	memcpy(mensaje,&protocolo,2);
-	memcpy(mensaje[2],&valor_mostrar,4);
+	memcpy(mensaje[2], &valor_mostrar, sizeof(t_valor_variable));
 	enviarMensaje(clienteNucleo,mensaje,6);
 }
 
