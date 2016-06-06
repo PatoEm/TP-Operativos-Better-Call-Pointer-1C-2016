@@ -550,7 +550,7 @@ int inicializarVariables() {
 	//Inicio Semaforos
 	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
 	char* valorInicial;
-	char algo;
+	//char algo;
 	unsigned int algo2=0;
 
 	//sem_t semaforoPrueba;
