@@ -6,6 +6,7 @@
 C_SRCS += \
 ../libreriasCompartidas/archivosYLogsYMas.c \
 ../libreriasCompartidas/conexiones.c \
+../libreriasCompartidas/pcb.c \
 ../libreriasCompartidas/pointerSocketes.c \
 ../libreriasCompartidas/pointerStream.c \
 ../libreriasCompartidas/selectParaKernel.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 OBJS += \
 ./libreriasCompartidas/archivosYLogsYMas.o \
 ./libreriasCompartidas/conexiones.o \
+./libreriasCompartidas/pcb.o \
 ./libreriasCompartidas/pointerSocketes.o \
 ./libreriasCompartidas/pointerStream.o \
 ./libreriasCompartidas/selectParaKernel.o \
@@ -22,6 +24,7 @@ OBJS += \
 C_DEPS += \
 ./libreriasCompartidas/archivosYLogsYMas.d \
 ./libreriasCompartidas/conexiones.d \
+./libreriasCompartidas/pcb.d \
 ./libreriasCompartidas/pointerSocketes.d \
 ./libreriasCompartidas/pointerStream.d \
 ./libreriasCompartidas/selectParaKernel.d \
