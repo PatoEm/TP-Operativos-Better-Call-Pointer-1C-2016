@@ -54,7 +54,7 @@ StrKerUmc* newStrKerUmc(Char id, Char action, Byte *data, Int32U size, Int32U pi
 	sku->data = data;
 	sku->size = size;
 	sku->pid = pid;
-	sku->address;
+	sku->address = address;
 	return sku;
 }
 
@@ -249,9 +249,9 @@ Int32U getSizeUmcCpu(StrUmcCpu* suc){
 /* Serialization
 //================================================================================================
 
-/*******************************
- * Serialization Consola-Kernel
- ******************************/
+/ ******************************
+* Serialization Consola-Kernel
+* *****************************/
 SocketBuffer* serializeConKer(StrConKer* sconk){
 	Int8U size = getSizeConKer(sconk);
 	Stream data = malloc(size);
@@ -525,9 +525,12 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
 /* Unserialization
 //================================================================================================
 
-/***********************************************/
-/* Unserialize Consola -Kernel
-***********************************************/
+
+
+
+/ ***********************************************
+* Unserialize Consola -Kernel
+* **********************************************/
 SocketBuffer* unserializeConKer(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;

@@ -13,6 +13,7 @@
  *******************************************************/
 #include "pointerTipos.h"
 #include "pointerSocketes.h"
+#include <stdlib.h>
 #include <commons/bitarray.h>
 /*******************************************************
  * IDs (Duenio del stream)
