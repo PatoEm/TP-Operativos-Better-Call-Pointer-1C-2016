@@ -21,6 +21,7 @@
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
 #include <commons/collections/list.h>
+#include <libreriasCompartidas/pcb.h>
 #define FAIL -1
 //======================================================
 
