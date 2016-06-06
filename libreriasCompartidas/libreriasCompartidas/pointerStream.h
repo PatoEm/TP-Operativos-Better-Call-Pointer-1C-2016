@@ -183,19 +183,19 @@ Int32U getSizeUmcCpu(StrUmcCpu* suc);
 /***********************************************/
 /* Serialize
 ***********************************************/
-SocketBuffer* serializeConKer(StrConKer*);
+SocketBuffer* serializeConKer(StrConKer* conKer);
 
-SocketBuffer* serializeKerCpu(StrKerCpu*);
-SocketBuffer* serializeKerUmc(StrKerUmc*);
-SocketBuffer* serializeKerCon(StrKerCon*);
+SocketBuffer* serializeKerCpu(StrKerCpu* kerCpu);
+SocketBuffer* serializeKerUmc(StrKerUmc* kerUmc);
+SocketBuffer* serializeKerCon(StrKerCon* kerCon);
 
-SocketBuffer* serializeCpuKer(StrCpuKer*);
-SocketBuffer* serializeCpuUmc(StrCpuUmc*);
+SocketBuffer* serializeCpuKer(StrCpuKer* cpuKer);
+SocketBuffer* serializeCpuUmc(StrCpuUmc* cpuUmc);
 
-SocketBuffer* serializeUmcKer(StrUmcKer*);
-SocketBuffer* serializeUmcCpu(StrUmcCpu*);
+SocketBuffer* serializeUmcKer(StrUmcKer* umcKer);
+SocketBuffer* serializeUmcCpu(StrUmcCpu* umcCpu);
 
-//SocketBuffer* serializeUmcSwa(StrUmcSwa*);
+//SocketBuffer* serializeUmcSwa(StrUmcSwa* umcSwa);
 
 /***********************************************/
 
@@ -214,7 +214,7 @@ SocketBuffer* unserializeCpuUmc(Stream cpuUmc);
 SocketBuffer* unserializeUmcKer(Stream umcKer);
 SocketBuffer* unserializeUmcCpu(Stream umcCpu);
 
-//SocketBuffer* unserializeUmcSwa(Stream);
+//SocketBuffer* unserializeUmcSwa(Stream umcSwa);
 
 /***********************************************/
 
