@@ -31,5 +31,13 @@ void newClientHandler(Socket* cliente);
 void clientHandler(Socket* cliente);
 
 
+// ESTRUCTURAS
+
+typedef struct core {
+	bool busy;
+	int socket;
+} t_core;
+
+
 
 #endif /* CPUHANDLER_H_ */

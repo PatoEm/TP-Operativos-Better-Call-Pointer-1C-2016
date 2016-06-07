@@ -17,6 +17,10 @@ int main() {
 
 	cpuHandlerThread();
 
+	while(TRUE){
+	}
+
+
 	return EXIT_SUCCESS;
 
 }

@@ -3,6 +3,7 @@
 #include <pthread.h>
 
 pthread_t cpuht;
+void** nada;
 
 fd_set master;
 fd_set read_fds;
@@ -10,10 +11,10 @@ fd_set read_fds;
 int fdmax;
 
 void cpuHandlerThread(){
+	// EL HILO VA A HACER SUS COSAS SIEMPRE QUE EL PROCESO PADRE
+	// SIGA VIVO
 
-//	pthread_create(&cpuht, NULL, cpuHandlerThreadRoutine, NULL);
-
-	cpuHandlerThreadRoutine("nada");
+	pthread_create(&cpuht, NULL, cpuHandlerThreadRoutine, "nada");
 
 }
 
@@ -113,7 +114,7 @@ void checkCpuConnections() {
 
 					} else {
 						//NO, ENTONCES GESTIONO EL SOCKET QUE HABLO...
-						clientHandler(i);
+						clientHandler((Socket*)i);
 					}
 				}
 			}
@@ -124,7 +125,12 @@ void checkCpuConnections() {
 void newClientHandler(Socket* cliente){
 
 	SocketBuffer* buffer;
+	t_core* datos;
+	t_core core;
 	buffer = socketReceive(cliente);
+
+	core.busy = TRUE;
+	core.socket = cliente;
 
 	if(buffer == NULL){
 		puts("Error al recibir información del cliente.");
@@ -133,6 +139,11 @@ void newClientHandler(Socket* cliente){
 			puts("Se ha conectado una nueva CPU.");
 
 			// AGREGAR CPU A LA LISTA
+			datos = malloc(sizeof(datos));
+			*datos = core;
+
+
+
 		} else {
 			puts("El nuevo cliente dice cosas raras :/");
 		}
