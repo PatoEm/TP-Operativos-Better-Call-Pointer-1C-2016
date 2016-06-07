@@ -250,6 +250,66 @@ Boolean socketDestroy(Socket *ptrSocket){
 
 
 Boolean handshake(SocketClient* client, Char id) {
+	/*SocketBuffer* sb;
+	StrCpuKer* sck;
+	StrConKer* sconk;
+	StrKerUmc* sku;
+	StrUmcKer* suk;
+	StrKerCon* skcon;
+	StrKerCpu* skc;
+	Pcb pcb;
+	Char action;
+	switch (id) {
+		case CPU_ID:
+			sck = newStrCpuKer(id, pcb, HANDSHAKE, 0, NULL, 0, 0, 0, 0);
+			sb = serializeCpuKer(sck);
+			break;
+		case CONSOLA_ID:
+			sconk = newStrConKer(id, NULL, NULL, HANDSHAKE, 0, 0, 0);
+			sb= serializeConKer(sconk);
+			break;
+		case KERNEL_ID:
+			sku = newStrKerUmc(id, NULL, HANDSHAKE, 0, 0, 0);
+			sb = serializeKerUmc(sku),
+			break;
+		default:
+			break;
+	}
+	
+	if(!socketSend(client->ptrSocket, sb)) {
+		printf("No se pudo realizar el handshake. \n");
+		return FALSE;
+	}
+	
+	sb = socketReceive(client->ptrSocket);
+	if (sb == NULL) {
+		return FALSE;
+	} else {
+		switch(id) {
+			case CPU_ID:
+				skc = unserializeKerCpu((Stream) sb->data);
+				action = skc->action;
+				break;
+			case CONSOLA_ID:
+				skcon = unserializeKerCon((Stream) sb->data);
+				action = skcon->action;
+				break;
+			case KERNEL_ID:
+				suk = unserializeUmcKer((Stream) sb->data);
+				action = suk->action;
+				break;
+			default:
+				break;
+		}
+		
+		if (action == HANDSHAKE) {
+			return TRUE;
+		} else {
+			return FALSE;
+		}
+	}
+
+	*/
 	return TRUE;
 }
 
