@@ -10,25 +10,12 @@
 #include "cpu.h"
 #include "cpuHandler.h"
 
-Socket* serverSocket;
 
 int main() {
 	leerArchivoDeConfiguracion("configcpu");
 	puts("Hello world!!!");
 
-//	serverSocket = socketCreateServer(2020);
-
-	if(initServer()){
-	puts("Server iniciado");
-	}
-	else{
-		puts("Server no iniciado");
-	}
-
-
-	checkConnections();
-	puts("Connections Check");
-
+	cpuHandlerThread();
 
 	return EXIT_SUCCESS;
 

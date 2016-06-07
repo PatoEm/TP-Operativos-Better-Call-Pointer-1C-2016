@@ -8,11 +8,23 @@
 #ifndef CPUHANDLER_H_
 #define CPUHANDLER_H_
 
+// INCLUDES
 #include <libreriasCompartidas/pointerSocketes.h>
+#include <commons/collections/list.h>
+#include <stdio.h>
 
-//Socket* serverSocket;
+// VARIABLES GLOBALES
+t_list* coreList;
+Socket* serverSocket;
 
-Boolean initServer();
-void checkConnections();
+
+// DEFINICION DE FUNCIONES
+void cpuHandlerThread();
+Boolean initCpuServer();
+void checkCpuConnections();
+void newClientHandler(Socket* cliente);
+void clientHandler(Socket* cliente);
+
+
 
 #endif /* CPUHANDLER_H_ */
