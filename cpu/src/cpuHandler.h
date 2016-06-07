@@ -8,6 +8,10 @@
 #ifndef CPUHANDLER_H_
 #define CPUHANDLER_H_
 
+// DEFINES
+#define CPU_HANDLER_SOCKET 2020
+
+
 // INCLUDES
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <commons/collections/list.h>
@@ -20,6 +24,7 @@ Socket* serverSocket;
 
 // DEFINICION DE FUNCIONES
 void cpuHandlerThread();
+void* cpuHandlerThreadRoutine(void*);
 Boolean initCpuServer();
 void checkCpuConnections();
 void newClientHandler(Socket* cliente);

@@ -1,14 +1,24 @@
 #include "cpuHandler.h"
-//#include "cpu.h"
 #include "sys/select.h"
+#include <pthread.h>
+
+pthread_t cpuht;
 
 fd_set master;
 fd_set read_fds;
 
 int fdmax;
 
-
 void cpuHandlerThread(){
+
+//	pthread_create(&cpuht, NULL, cpuHandlerThreadRoutine, NULL);
+
+	cpuHandlerThreadRoutine("nada");
+
+}
+
+
+void* cpuHandlerThreadRoutine(void* parametro){
 	if(initCpuServer()){
 	puts("Server iniciado");
 	}
@@ -20,21 +30,29 @@ void cpuHandlerThread(){
 	checkCpuConnections();
 	puts("Connections Check");
 
+	return "nada";
 }
 
 
 Boolean initCpuServer() {
 
-	serverSocket = socketCreateServer(2020); //la comento por lo mismo de arriba, paja
+//	INICIO LA LISTA DE CPUS
+	coreList = list_create();
+	if(coreList == NULL){
+		puts("Error al crear la lista de CPUs.");
+		return FALSE;
+	}
+
+
+//	INICIO EL SOCKET ESCUCHA
+	serverSocket = socketCreateServer(CPU_HANDLER_SOCKET);
 	if (serverSocket == NULL) {
 		puts("No se pudo crear el server escucha.");
 		return FALSE;
 	}
-
 	if (!socketListen(serverSocket)) {
 		puts("No se pudo poner a escuchar al server.");
 	}
-
 	puts("Server creado con exito y escuchando.");
 	return TRUE;
 }
