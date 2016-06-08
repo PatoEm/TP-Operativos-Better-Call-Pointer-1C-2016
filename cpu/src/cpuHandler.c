@@ -1,12 +1,15 @@
 #include "cpuHandler.h"
 #include "sys/select.h"
 #include <pthread.h>
+#include <commons/log.h>
 
 pthread_t cpuht;
 void** nada;
 
 fd_set master;
 fd_set read_fds;
+
+t_log* cpuhlog;
 
 int fdmax;
 
@@ -20,18 +23,28 @@ void cpuHandlerThread(){
 
 
 void* cpuHandlerThreadRoutine(void* parametro){
+
+	cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
+
 	if(initCpuServer()){
-	puts("Server iniciado");
+		log_info(cpuhlog, "Server iniciado.");
 	}
 	else{
-		puts("Server no iniciado");
+		log_error(cpuhlog, "No se pudo iniciar el server.");
 	}
 
 
 	checkCpuConnections();
-	puts("Connections Check");
 
-	return "nada";
+
+	// CAMBIAR ESTO POR list_dest_elem CON UNA FUNCION QUE HAGA
+	// FREE DE CADA MALLOC
+	list_destroy(coreList);
+
+	// CIERRO EL LOG
+	log_destroy(cpuhlog);
+
+	return NULL;
 }
 
 
@@ -40,7 +53,7 @@ Boolean initCpuServer() {
 //	INICIO LA LISTA DE CPUS
 	coreList = list_create();
 	if(coreList == NULL){
-		puts("Error al crear la lista de CPUs.");
+		log_error(cpuhlog, "Error al crear la lista de CPUs.");
 		return FALSE;
 	}
 
@@ -48,13 +61,13 @@ Boolean initCpuServer() {
 //	INICIO EL SOCKET ESCUCHA
 	serverSocket = socketCreateServer(CPU_HANDLER_SOCKET);
 	if (serverSocket == NULL) {
-		puts("No se pudo crear el server escucha.");
+		log_error(cpuhlog, "No se pudo crear el server escucha.");
 		return FALSE;
 	}
 	if (!socketListen(serverSocket)) {
-		puts("No se pudo poner a escuchar al server.");
+		log_error(cpuhlog, "No se pudo poner a escuchar al server.");
 	}
-	puts("Server creado con exito y escuchando.");
+	log_info(cpuhlog, "Server creado con exito y escuchando.");
 	return TRUE;
 }
 
@@ -122,7 +135,7 @@ void checkCpuConnections() {
 	}
 }
 
-void newClientHandler(Socket* cliente){
+bool newClientHandler(Socket* cliente){
 
 	SocketBuffer* buffer;
 	t_core* datos;
@@ -133,22 +146,29 @@ void newClientHandler(Socket* cliente){
 	core.socket = cliente;
 
 	if(buffer == NULL){
-		puts("Error al recibir información del cliente.");
+		log_error(cpuhlog, "Mensaje vacio recibido.");
+		return FALSE;
 	} else{
-		if(buffer->data[0] == 'a'){
-			puts("Se ha conectado una nueva CPU.");
+		if(buffer->data[0] == 'a'){ 				// ACA HAY QUE TOCAR CON LOS STREAMS
 
 			// AGREGAR CPU A LA LISTA
 			datos = malloc(sizeof(datos));
+			if(datos == NULL){
+				log_error(cpuhlog, "No se pudo agregar CPU a la lista. (malloc)");
+				return FALSE;
+			}
 			*datos = core;
+			list_add(coreList, (void*)datos);
 
 
+			log_info(cpuhlog, "Se ha conectado una nueva CPU.");
 
 		} else {
-			puts("El nuevo cliente dice cosas raras :/");
+			log_error(cpuhlog, "Mensaje erroneo recibido.");
+			return FALSE;
 		}
 	}
-
+	return TRUE;
 }
 
 void clientHandler(Socket* cliente){

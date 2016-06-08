@@ -27,7 +27,7 @@ void cpuHandlerThread();
 void* cpuHandlerThreadRoutine(void*);
 Boolean initCpuServer();
 void checkCpuConnections();
-void newClientHandler(Socket* cliente);
+bool newClientHandler(Socket* cliente);
 void clientHandler(Socket* cliente);
 
 
