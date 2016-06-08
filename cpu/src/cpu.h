@@ -51,11 +51,11 @@ typedef struct functionParameters {
 	void (*func)(void*, void*);
 } FunctionParameters;
 
-typedef struct core {
-	bool online;
-	bool busy;
-	int socket;
-} t_core;
+//typedef struct core {
+//	bool online;
+//	bool busy;
+//	int socket;
+//} t_core;
 //======================================================
 
 /*******************************************************
