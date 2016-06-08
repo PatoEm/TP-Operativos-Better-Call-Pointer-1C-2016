@@ -35,7 +35,7 @@ void clientHandler(Socket* cliente);
 
 typedef struct core {
 	bool busy;
-	int socket;
+	Socket* socket;
 } t_core;
 
 

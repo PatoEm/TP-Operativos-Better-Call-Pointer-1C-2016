@@ -2,6 +2,7 @@
 #include "sys/select.h"
 #include <pthread.h>
 #include <commons/log.h>
+#include <stdlib.h>
 
 pthread_t cpuht;
 void** nada;
