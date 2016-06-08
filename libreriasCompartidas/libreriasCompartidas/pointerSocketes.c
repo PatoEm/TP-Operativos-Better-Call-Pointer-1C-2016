@@ -267,7 +267,7 @@ Boolean handshake(SocketClient* client, Char id) {
 			break;
 		case CONSOLA_ID:
 			sconk = newStrConKer(id, HANDSHAKE, NULL, 0);
-			sb= serializeConKer(sconk);
+			sb = serializeConKer(sconk);
 			break;
 		case KERNEL_ID:
 			sku = newStrKerUmc(id, HANDSHAKE, NULL, 0, 0, 0);
