@@ -15,7 +15,8 @@
 #include <netdb.h>
 #include "pointerTipos.h"
 #include "pointerSocketes.h"
-
+#include "pointerStream.h"
+#include "pcb.h"
 
 /**
  * @NAME: socketCreate
@@ -250,27 +251,27 @@ Boolean socketDestroy(Socket *ptrSocket){
 
 
 Boolean handshake(SocketClient* client, Char id) {
-	/*SocketBuffer* sb;
+	SocketBuffer* sb;
 	StrCpuKer* sck;
 	StrConKer* sconk;
 	StrKerUmc* sku;
 	StrUmcKer* suk;
 	StrKerCon* skcon;
 	StrKerCpu* skc;
-	Pcb pcb;
+	pcb pcb;
 	Char action;
 	switch (id) {
 		case CPU_ID:
-			sck = newStrCpuKer(id, pcb, HANDSHAKE, 0, NULL, 0, 0, 0, 0);
+			sck = newStrCpuKer(id, HANDSHAKE, pcb, 0, 0);
 			sb = serializeCpuKer(sck);
 			break;
 		case CONSOLA_ID:
-			sconk = newStrConKer(id, NULL, NULL, HANDSHAKE, 0, 0, 0);
+			sconk = newStrConKer(id, HANDSHAKE, NULL, 0);
 			sb= serializeConKer(sconk);
 			break;
 		case KERNEL_ID:
-			sku = newStrKerUmc(id, NULL, HANDSHAKE, 0, 0, 0);
-			sb = serializeKerUmc(sku),
+			sku = newStrKerUmc(id, HANDSHAKE, NULL, 0, 0, 0);
+			sb = serializeKerUmc(sku);
 			break;
 		default:
 			break;
@@ -309,7 +310,6 @@ Boolean handshake(SocketClient* client, Char id) {
 		}
 	}
 
-	*/
 	return TRUE;
 }
 

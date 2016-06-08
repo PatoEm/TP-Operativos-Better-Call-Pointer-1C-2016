@@ -13,6 +13,7 @@
  *******************************************************/
 #include "pointerTipos.h"
 #include "pointerSocketes.h"
+#include "pcb.h"
 #include <stdlib.h>
 #include <commons/bitarray.h>
 /*******************************************************
@@ -28,7 +29,8 @@
 /*******************************************************
  * Acciones
  *******************************************************/
-#define STD_OUTPUT 5
+#define HANDSHAKE 5
+#define STD_OUTPUT 6
 
 /* aca van los defines de actions*/
 
@@ -46,7 +48,7 @@ typedef struct strConKer {
 	Char action;
 	Byte* fileContent;
 	Int32U fileContentLen;
-	//Int32U tid;
+	//Int32U tid; duda si lo dejo o no
 } __attribute__((packed)) StrConKer;
 
 
@@ -56,7 +58,7 @@ typedef struct strConKer {
 typedef struct strKerCpu {
 	Char id;
 	Char action;
-	//pcb pcb;
+	pcb pcb;
 	Int8U quantum;
 } __attribute__((packed)) StrKerCpu;
 
@@ -80,7 +82,7 @@ typedef struct strKerUmc {
 typedef struct strKerCon {
 	Char id;
 	Char action;
-	//Int32U tid;
+	//Int32U tid; por si decidimos dejarlo
 } __attribute__((packed)) StrKerCon;
 
 
@@ -90,7 +92,7 @@ typedef struct strKerCon {
 typedef struct strCpuKer {
 	Char id;
 	Char action;
-	//Pcb pcb;
+	pcb pcb;
 	Int32U address;
 	Int32U tid;
 } __attribute__((packed)) StrCpuKer;
@@ -148,14 +150,12 @@ typedef struct strUmcSwa {
 /* Constructores
 ***********************************************/
 StrConKer* newStrConKer(Char, Char, Byte*, Int32U);
-		//Int32U);
-StrKerCpu* newStrKerCpu(Char, Char, Int8U);
-		//Pcb, Int8U);
+		//Int32U); por si decidimos dejarlo
+StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
 StrKerCon* newStrKerCon(Char, Char);
-		//, Int32U);
-StrCpuKer* newStrCpuKer(Char, Char, Int32U, Int32U);
-		//Pcb, Int32U, Int32U);
+		//, Int32U); por si decidimos dejarlo
+StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U);
 StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U);
 StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);
 StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);

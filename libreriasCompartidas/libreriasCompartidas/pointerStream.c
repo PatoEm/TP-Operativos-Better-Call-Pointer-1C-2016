@@ -11,6 +11,7 @@
 #include "pointerStream.h"
 #include "pointerSocketes.h"
 #include "pointerTipos.h"
+#include "pcb.h"
 /*******************************************************/
 
 //================================================================================================
@@ -21,25 +22,24 @@
  * Constructor Consola-Kernel
  ******************************/
 StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen){
-		//, Int32U tid){
+		//, Int32U tid){ por si decidimos dejarlo
 	StrConKer* sconk = malloc(sizeof(StrConKer));
 	sconk->id = id;
 	sconk->action = action;
 	sconk->fileContent = fileContent;
 	sconk->fileContentLen = fileContentLen;
-	//sconk->tid = tid;
+	//sconk->tid = tid; por si decidimos dejarlo
 	return sconk;
 }
 
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char id, Char action, Int8U quantum){
-		//Pcb Pcb, Int8U quantum){
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum){
 	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
 	skc->id = id;
 	skc->action = action;
-	//skc->pcb = pcb;
+	skc->pcb = pcb;
 	skc->quantum = quantum;
 	return skc;
 }
@@ -73,12 +73,11 @@ StrKerCon* newStrKerCon(Char id, Char action){
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char id, Char action, Int32U address, Int32U tid) {
-		//Tcb tcb, Int32U address, Int32U tid){
+StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U address, Int32U tid) {
 	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
 	sck->id = id;
 	sck->action = action;
-	//sck->tcb = tcb;
+	sck->pcb = pcb;
 	sck->address = address;
 	sck->tid = tid;
 	return sck;
@@ -156,7 +155,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	Int32U size = 0;
 	size += sizeof(skc->id);
 	size += sizeof(skc->action);
-	//size += sizeof(skc->pcb);
+	size += sizeof(skc->pcb);
 	size += sizeof(skc->quantum);
 	return size;
 }
@@ -192,7 +191,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	Int32U size = 0;
 	size += sizeof(sck->id);
 	size += sizeof(sck->action);
-	//size += sizeof(sck->pcb);
+	size += sizeof(sck->pcb);
 	size += sizeof(sck->address);
 	size += sizeof(sck->tid);
 	return size;
@@ -295,11 +294,11 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	ptrByte = (Byte*) &skc->action;
 	memcpy(ptrData, ptrByte, sizeof(skc->action));
 	ptrData += sizeof(skc->action);
-/*
-	ptrByte = (Byte*) &skc ->tcb;
-	memcpy(ptrData,ptrByte, sizeof(skc->tcb));
-	ptrData += sizeof(skc->tcb);
-*/
+
+	ptrByte = (Byte*) &skc ->pcb;
+	memcpy(ptrData,ptrByte, sizeof(skc->pcb));
+	ptrData += sizeof(skc->pcb);
+
 	ptrByte = (Byte*) &skc->quantum;
 	memcpy(ptrData, ptrByte, sizeof(skc->quantum));
 	ptrData += sizeof(skc->quantum);
@@ -385,11 +384,11 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	ptrByte = (Byte*) &sck->action;
 	memcpy(ptrData, ptrByte, sizeof(sck->action));
 	ptrData += sizeof(sck->action);
-/*
+
 	ptrByte = (Byte*) &sck->pcb;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb));
 	ptrData += sizeof(sck->pcb);
-*/
+
 	ptrByte = (Byte*) &sck->address;
 	memcpy(ptrData, ptrByte, sizeof(sck->address));
 	ptrData += sizeof(sck->address);
@@ -537,7 +536,7 @@ SocketBuffer* unserializeConKer(Stream dataSerialized){
 	Char action;
 	Byte* fileContent = NULL;
 	Int32U fileContentLen;
-	//Int32U tid;
+	//Int32U tid; por si decidimos dejarlo
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -548,7 +547,7 @@ SocketBuffer* unserializeConKer(Stream dataSerialized){
 	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
 	ptrByte += sizeof(fileContentLen);
 /*
-	memcpy(&tid, ptrByte, sizeof(tid));
+	memcpy(&tid, ptrByte, sizeof(tid)); por si decidimos dejarlo
 	ptrByte += sizeof(tid);
 */
 	free(dataSerialized);
@@ -561,22 +560,22 @@ SocketBuffer* unserializeKerCpu(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	//pcb pcb;
+	pcb pcb;
 	Int8U quantum;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-/*
+
 	memcpy(&pcb, ptrByte, sizeof(pcb));
 	ptrByte += sizeof(pcb);
-*/
+
 	memcpy(&quantum, ptrByte, sizeof(quantum));
 	ptrByte += sizeof(quantum);
 
 	free(dataSerialized);
-	return newStrKerCpu(id, action, quantum);
+	return newStrKerCpu(id, action, pcb, quantum);
 }
 /***********************************************/
 /* Unserialize Kernel-UMC
@@ -631,7 +630,7 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	//Pcb pcb;
+	pcb pcb;
 	Int32U address;
 	Int32U tid;
 
@@ -639,17 +638,17 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-/*
+
 	memcpy(&pcb, ptrByte, sizeof(pcb));
 	ptrByte += sizeof(pcb);
-*/
+
 	memcpy(&address, ptrByte, sizeof(address));
 	ptrByte += sizeof(address);
 	memcpy(&tid, ptrByte, sizeof(tid));
 	ptrByte += sizeof(tid);
 
 	free(dataSerialized);
-	return newStrCpuKer(id, action, address, tid);
+	return newStrCpuKer(id, action, pcb, address, tid);
 }
 /***********************************************/
 /* Unserialize CPU-UMC
