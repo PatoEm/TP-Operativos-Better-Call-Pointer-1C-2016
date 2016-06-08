@@ -174,6 +174,18 @@ bool newClientHandler(Socket* cliente){
 
 void clientHandler(Socket* cliente){
 
+//	list_find(coreList, cpuCore);
 
+
+}
+
+
+
+bool cpuCoreInList(t_list* lista, Socket* cliente){
+
+	int index = 0;
+	t_core* data;
+
+	data = (t_core*)list_get(lista, index);
 
 }
