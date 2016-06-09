@@ -23,7 +23,7 @@
 #define CONFIG_FILE "configcpu.txt"
 #define PARAM_LENGTH 4
 #define PUERTO_KERNEL "PUERTO_KERNEL"
-#define IP_KERNEL "IP_KERNEL"
+#define IP_KERNEL "127.0.0.1"
 #define PUERTO_UMC "PUERTO_UMC"
 #define IP_UMC "IP_UMC"
 
@@ -63,6 +63,14 @@ Boolean loadConfig();
 Boolean socketConnection();
 Boolean getNextPcb();
 Boolean processPcb();
+Boolean nucleoHandShake(Socket* fd);
+void disponible(int fd);
+
+/*****************************************
+ * GLOBAL
+ ****************************************/
+
+SocketBuffer* buffer;
 
 /*****************************************
  *
@@ -77,25 +85,36 @@ Boolean processPcb();
 
 int main() {
 
-	//==============================================================================================
+//==============================================================================================
 
-	//	leerArchivoDeConfiguracion("configcpu");
+//	leerArchivoDeConfiguracion("configcpu");
 
-	//==============================================================================================
+//==============================================================================================
 
-	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
-		while (TRUE){
-			if(!getNextPcb()) {
-				return TRUE;
-			}
+	int fdNucleo =  -1;
 
-			if(!processPcb()) {
-				return TRUE;
-			}
-		}
+	while(fdNucleo == -1){ // PRUEBO Y PRUEBO HASTA Q LA PONGO
+
+		fdNucleo = crearCliente(IP_KERNEL,"2020");
 
 	}
-	config_destroy(tConfig);
+
+	nucleoHandShake(fdNucleo);
+
+
+//	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
+//		while (TRUE){
+//			if(!getNextPcb()) {
+//				return TRUE;
+//			}
+//
+//			if(!processPcb()) {
+//				return TRUE;
+//			}
+//		}
+//
+//	}
+//	config_destroy(tConfig);
 	return FALSE;
 }
 
@@ -215,4 +234,25 @@ Boolean getNextPcb() {
 
 Boolean processPcb() {
 	return TRUE;
+}
+
+Boolean nucleoHandShake(Socket* fd){
+
+	enviarMensaje(fd, "c", 2);
+
+	buffer = socketReceive(fd);
+
+	if(buffer->data[0] == 'k'){
+		disponible(fd);
+	}
+	else{
+		puts("No me dieron el ok.");
+		return FALSE;
+	}
+
+	return TRUE;
+}
+
+void disponible(int fd){
+	enviarMensaje(fd, "d", 2);
 }

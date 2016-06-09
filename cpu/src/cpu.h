@@ -20,6 +20,7 @@
 #include <pthread.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/pointerSocketes.h>
 #include <commons/collections/list.h>
 #include <libreriasCompartidas/pcb.h>
 #define FAIL -1

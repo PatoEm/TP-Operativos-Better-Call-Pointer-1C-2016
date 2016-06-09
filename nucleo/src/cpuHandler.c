@@ -141,6 +141,7 @@ bool newClientHandler(Socket* cliente){
 	SocketBuffer* buffer;
 	t_core* datos;
 	t_core core;
+
 	buffer = socketReceive(cliente);
 
 	core.busy = TRUE;
@@ -150,7 +151,7 @@ bool newClientHandler(Socket* cliente){
 		log_error(cpuhlog, "Mensaje vacio recibido.");
 		return FALSE;
 	} else{
-		if(buffer->data[0] == 'a'){ 				// ACA HAY QUE TOCAR CON LOS STREAMS
+		if(buffer->data[0] == 'c'){ 				// ACA HAY QUE TOCAR CON LOS STREAMS
 
 			// AGREGAR CPU A LA LISTA
 			datos = malloc(sizeof(datos));
@@ -174,11 +175,17 @@ bool newClientHandler(Socket* cliente){
 
 void clientHandler(Socket* cliente){
 
-	int cpuNodo;
-	cpuNodo = cpuCoreInList(coreList, cliente);
-
-
-
+//	int cpuNodo;
+//	cpuNodo = cpuCoreInList(coreList, cliente);
+//	t_core* datos = malloc(sizeof(t_core));
+//
+//	SocketBuffer* buffer;
+//
+//	buffer = socketReceive(cliente);
+//
+//	if(buffer->data[0] == 'd'){
+//		puts("Una CPU se ha disponinbilizado.");
+//	}
 
 }
 
