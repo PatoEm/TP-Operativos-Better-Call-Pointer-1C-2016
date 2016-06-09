@@ -12,33 +12,39 @@
 #include "nucleo.h"
 
 char * leerProgramaAnSISOP1(char * direccionArchivo);
+
+// MAIN FUNCHION
+
 int main(void) {
 
 	inicializarVariables();
-	puts("Ya inicialice");
+	log_info(nucleolog, "Variables inicializadas.");
 
-//Creacion de Hilos
+	/**************************************************/
+	//Creacion de Hilos
 
 	crearHilos();
+	log_info(nucleolog, "Se han creado los threads.");
 
-puts("Ya cree los hilos");
-
-char * programita = leerProgramaAnSISOP1("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
-
-int tamanioArchivo32 = tamArchivo("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
+	/**************************************************/
 
 
-
- pcb * nuevoPcbPrueba= crearNuevoPcb(programita,tamanioArchivo32);
-
-puts("Ya cree la pcb");
-
-
-moverAColaReady(nuevoPcbPrueba);
-
-moverAListaExec(nuevoPcbPrueba);
-
-moverAColaReady(nuevoPcbPrueba);
+//	char * programita = leerProgramaAnSISOP1("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
+//
+//	int tamanioArchivo32 = tamArchivo("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
+//
+//
+//
+//	pcb * nuevoPcbPrueba= crearNuevoPcb(programita,tamanioArchivo32);
+//
+//	puts("Ya cree la pcb");
+//
+//
+//	moverAColaReady(nuevoPcbPrueba);
+//
+//	moverAListaExec(nuevoPcbPrueba);
+//
+//	moverAColaReady(nuevoPcbPrueba);
 
 ////entrada_salida("Disco",4, nuevoPcbPrueba);
 //
@@ -114,7 +120,15 @@ moverAColaReady(nuevoPcbPrueba);
 
 	//Destruyo semaforos sincro
 	//pthread_mutex_destroy(&mutexQuantum);
-puts("termine re piola");
+
+
+	/* ESTE WAIT ES PARA QUE SIGAN CORRIENDO LOS HILOS */
+	while(1){
+		sleep(5);
+	}
+	/***************************************************/
+
+	log_info(nucleolog, "Termine re piola.");
 	return EXIT_SUCCESS;
 }
 

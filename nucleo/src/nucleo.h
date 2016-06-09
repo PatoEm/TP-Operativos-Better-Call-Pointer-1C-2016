@@ -58,6 +58,7 @@ int tamanioPaginas;
 //Otras Variables
 int idProgramas; //Contador de programa
 bool primeraLectura;
+t_log* nucleolog;
 
 //Sincronizacion
 pthread_mutex_t** mutexIO;

@@ -10,13 +10,12 @@
 /*****************************************
  * Dependencias
  ****************************************/
-#include "cpu.h"
-#include "cpuHandler.h"
 #include "commons/config.h"
 #include "commons/collections/dictionary.h"
 #include "libreriasCompartidas/pointerStream.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "cpu.h"
 
 /*****************************************
  * Constantes
@@ -66,10 +65,24 @@ Boolean getNextPcb();
 Boolean processPcb();
 
 /*****************************************
- * Funcion MAIN
+ *
+ *
+ *  |\  /|    /\    | |\   |
+ *  | \/ |   /  \   | | \  |
+ *  |    |  /----\  | |  \ |
+ * 	|    | /      \ | |   \|
+ *
+ *
  ****************************************/
 
 int main() {
+
+	//==============================================================================================
+
+	//	leerArchivoDeConfiguracion("configcpu");
+
+	//==============================================================================================
+
 	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
 		while (TRUE){
 			if(!getNextPcb()) {
@@ -85,17 +98,7 @@ int main() {
 	config_destroy(tConfig);
 	return FALSE;
 }
-//==============================================================================================
-	/*
-	leerArchivoDeConfiguracion("configcpu");
-	puts("Hello world!!!");
-	cpuHandlerThread();
-	while(TRUE) {
-		}
-	return EXIT_SUCCESS;
-	}
- 	 */
-//==============================================================================================
+
 /*****************************************
  * Implementacion de funciones
  ****************************************/
@@ -188,7 +191,7 @@ Boolean socketConnection() {
 
 Boolean getNextPcb() {
 	if (sck == NULL) {
-		pcbActual = newEmptyPcb();
+//		pcbActual = newEmptyPcb();
 		//sck = newStrCpuKer(CPU_ID, PRIMER_PCB, *pcbActual, 0, 0);
 	}
 	// serializo y armo el socket

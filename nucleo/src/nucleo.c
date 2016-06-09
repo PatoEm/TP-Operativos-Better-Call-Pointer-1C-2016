@@ -491,6 +491,8 @@ void signal(char* identificador, pcb*pcbPrograma) {
 //testeada
 int inicializarVariables() {
 
+	// LOG
+	nucleolog = log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO);
 
 
 	//Variables de lectura de archivo
@@ -654,6 +656,10 @@ void crearHilos(){
 		 pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
 		 pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
 		 pthread_attr_destroy(&attrHiloQuantum);
+
+		 cpuHandlerThread();
+
+
 }
 
 void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
