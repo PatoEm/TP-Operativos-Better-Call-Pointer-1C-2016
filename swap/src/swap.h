@@ -59,24 +59,16 @@ char* tamArchivo;
 char* archivoMappeado;
 
 //estructuras
- typedef struct{
-	int IDPaginaInterno;
-  	int inicio;
-  	int tamanio;
-  }espacioLibre;
 
   typedef struct{
 	int IDPaginaInterno;
   	int pid;
-  	int tamanio;
-  	bool bitMap;
+  	bool bitLectura;
   	int numDePag;
-  	int posicionDePag;
 
   }espacioAsignado;
 
-
-t_list * listaEspacioLibre;
+bool*bitMap;
 t_list * listaEspacioAsignado;
 
 
