@@ -151,33 +151,31 @@ bool verificarSiHayEspacio(int cantidadDePaginas) {
 
 //me dice si tengo que compactar. -1 hay que compactar, siino devuelve a partir de que pagina puedo usar
 int paginasContiguasDeSwap(int cantidadDePaginas) {
-	int paginaADevolver=0;
+	int paginaADevolver = 0;
 	int contador = 0;
 	int paginasSeguidasLibres = 0;
 	while ((contador < atoi(paginas)) && (paginasSeguidasLibres != 1)) {
 		if (bitMap[contador] == 0) {
 			paginasSeguidasLibres = 1;
-			paginaADevolver=contador;
+			paginaADevolver = contador;
 		}
 		contador++;
 	}
 	if (cantidadDePaginas == paginasSeguidasLibres)
 		return paginaADevolver;
-	while(contador<atoi(paginas)){
-		if(bitMap[contador]==0){
-			if(paginasSeguidasLibres==0){
+	while (contador < atoi(paginas)) {
+		if (bitMap[contador] == 0) {
+			if (paginasSeguidasLibres == 0) {
 				paginasSeguidasLibres = 1;
-				paginaADevolver=contador;
-			}
-			else{
+				paginaADevolver = contador;
+			} else {
 				paginasSeguidasLibres++;
 			}
+		} else {
+			paginasSeguidasLibres = 0;
+			contador = 0;
 		}
-		else{
-			paginasSeguidasLibres=0;
-			contador=0;
-		}
-		if(cantidadDePaginas==paginasSeguidasLibres){
+		if (cantidadDePaginas == paginasSeguidasLibres) {
 			return paginaADevolver;
 		}
 	}
@@ -194,7 +192,7 @@ void eliminarProceso(int pid) {
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
 	while ((nodoAReventar->pid) == pid) {
-		bitMap[nodoAReventar->IDPaginaInterno]=0;
+		bitMap[nodoAReventar->IDPaginaInterno] = 0;
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
@@ -209,7 +207,6 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
 	int contadorDePaginas = 0; //cuento para el while
 	espacioAsignado* paginaAReservar; //nodo para agarrar cosas
-	espacioLibre* paginaAMatar;
 	if (list_size(listaEspacioAsignado) != 0) {
 		paginaAReservar = list_get(listaEspacioAsignado,
 				lugarEnDondeDeboColocarMiNodo);
@@ -222,31 +219,20 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 				break;
 			}
 		}
-		paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
-		while ((paginaAMatar->IDPaginaInterno) < paginaDeComienzo) {
-
-			nodosQueDeboReventar++;
-			paginaAMatar = list_get(listaEspacioLibre, nodosQueDeboReventar);
-
-		}
 	}
 
 	while (contadorDePaginas < cantidadDePaginas) {
 
 		paginaAReservar = malloc(sizeof(espacioAsignado));
 		(paginaAReservar->pid) = pid;
-		(paginaAReservar->bitMap) = 0;
-		(paginaAReservar->tamanio) = atoi(tamPagina);
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
-		(paginaAReservar->posicionDePag) = paginaActual * atoi(tamPagina);
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
 		else
 			list_add(listaEspacioAsignado, paginaAReservar);
-		if (nodosQueDeboReventar < list_size(listaEspacioLibre))
-			list_remove(listaEspacioLibre, (nodosQueDeboReventar));
+		bitMap[paginaActual] = 1;
 		numInternoDePagina++;
 		contadorDePaginas++;
 		paginaActual++;
@@ -285,12 +271,12 @@ void compactarSwap() {
 	espacioAsignado* nodoActual = malloc(sizeof(espacioAsignado));
 	int contadorParaCadenaActual;
 	int contadorParaCadenaVieja;
-	espacioLibre* nodoLibre = malloc(sizeof(espacioLibre));
 	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
 	while (paginasContiguas < list_size(listaEspacioAsignado)) {
 		if ((nodoActual->IDPaginaInterno) != paginasContiguas) {
 			contadorParaCadenaActual = paginasContiguas * atoi(tamPagina);
-			contadorParaCadenaVieja = (nodoActual->posicionDePag);
+			contadorParaCadenaVieja = (nodoActual->IDPaginaInterno)
+					* atoi(tamPagina);
 			while (contadorParaCadenaActual
 					< (paginasContiguas + 1) * (atoi(tamPagina))) {
 				archivoMappeado[contadorParaCadenaActual] =
@@ -299,29 +285,19 @@ void compactarSwap() {
 				contadorParaCadenaActual++;
 				contadorParaCadenaVieja++;
 			}
+			bitMap[nodoActual->IDPaginaInterno] = 0;
 			(nodoActual->IDPaginaInterno) = paginasContiguas;
-			(nodoActual->posicionDePag) = paginasContiguas * atoi(tamPagina);
+			bitMap[paginasContiguas] = 1;
+
 		}
 		paginasContiguas++;
 		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
 
 	}
-	list_clean(listaEspacioLibre);
-	paginasContiguas--;
-	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
-	(nodoLibre->inicio) = (nodoActual->posicionDePag) + atoi(tamPagina);
-	(nodoLibre->tamanio) = atoi(tamPagina);
-	(nodoLibre->IDPaginaInterno) = calcularIDPagina(nodoLibre->inicio);
-	list_add(listaEspacioLibre, nodoLibre);
-	int iDActual = ((nodoLibre->IDPaginaInterno) + 1);
-	while (iDActual != atoi(paginas)) {
+	while (paginasContiguas != atoi(paginas)) {
 
-		nodoLibre++;
-		(nodoLibre->IDPaginaInterno) = iDActual;
-		(nodoLibre->inicio) = atoi(tamPagina) * (nodoLibre->IDPaginaInterno);
-		(nodoLibre->tamanio) = atoi(tamPagina);
-		list_add(listaEspacioLibre, nodoLibre);
-		iDActual++;
+		bitMap[paginasContiguas] = 0;
+		paginasContiguas++;
 
 	}
 	//usleep(1000 * atoi(retCompactacion)); todo
