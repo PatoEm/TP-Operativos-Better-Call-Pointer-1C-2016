@@ -6,6 +6,7 @@
 C_SRCS += \
 ../libreriasCompartidas/archivosYLogsYMas.c \
 ../libreriasCompartidas/conexiones.c \
+../libreriasCompartidas/pcb.c \
 ../libreriasCompartidas/pointerSocketes.c \
 ../libreriasCompartidas/pointerStream.c \
 ../libreriasCompartidas/selectParaKernel.c \
@@ -14,6 +15,7 @@ C_SRCS += \
 OBJS += \
 ./libreriasCompartidas/archivosYLogsYMas.o \
 ./libreriasCompartidas/conexiones.o \
+./libreriasCompartidas/pcb.o \
 ./libreriasCompartidas/pointerSocketes.o \
 ./libreriasCompartidas/pointerStream.o \
 ./libreriasCompartidas/selectParaKernel.o \
@@ -22,6 +24,7 @@ OBJS += \
 C_DEPS += \
 ./libreriasCompartidas/archivosYLogsYMas.d \
 ./libreriasCompartidas/conexiones.d \
+./libreriasCompartidas/pcb.d \
 ./libreriasCompartidas/pointerSocketes.d \
 ./libreriasCompartidas/pointerStream.d \
 ./libreriasCompartidas/selectParaKernel.d \
@@ -32,7 +35,7 @@ C_DEPS += \
 libreriasCompartidas/%.o: ../libreriasCompartidas/%.c
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C Compiler'
-	gcc -I"/home/utnso/tp-2016-1c-Better-call-pointer/parser" -I"/home/utnso/tp-2016-1c-Better-call-pointer/commons" -O0 -g3 -Wall -lpthread -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	gcc -I"/home/utnso/workspace/tp-2016-1c-Better-call-pointer/parser" -I"/home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons" -O0 -g3 -Wall -lpthread -c -fmessage-length=0 -fPIC -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

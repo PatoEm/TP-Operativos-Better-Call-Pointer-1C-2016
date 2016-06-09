@@ -60,22 +60,21 @@ char* archivoMappeado;
 
 //estructuras
 
-  typedef struct{
+typedef struct {
 	int IDPaginaInterno;
-  	int pid;
-  	bool bitLectura;
-  	int numDePag;
+	int pid;
+	bool bitLectura;
+	int numDePag;
 
-  }espacioAsignado;
+} espacioAsignado;
 
 bool*bitMap;
 t_list * listaEspacioAsignado;
 
-
 //prototipos
-char* crearArchivo(char* ,char* );
+char* crearArchivo(char*, char*);
 
-void* mappearArchivo(char* );
+void* mappearArchivo(char*);
 
 void setearValores(t_config *);
 
@@ -87,30 +86,26 @@ void iniciarEstructurasSwap();
 
 int calcularIDPagina(int);
 
-espacioLibre* crearEspacioLibre (int );
+void agregarEspacioLibre(int);
 
-void agregarEspacioLibre(int );
+espacioAsignado* crearEspacioAsignado(bool, int, int, int);
 
-espacioAsignado* crearEspacioAsignado(bool,int ,int , int);
+void agregarEspacioAsigando(bool, int, int, int, int);
 
-void agregarEspacioAsigando(bool,int ,int , int , int );
-
-bool  verificarSiHayEspacio(int );
+bool verificarSiHayEspacio(int);
 
 int paginasContiguasDeSwap(int);
 
 void eliminarProceso(int pid);
 
-void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) ;
+void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
+		int numeroPrimerPagina);
 
-bool recibirNuevoPrograma(int ,int );
+bool recibirNuevoPrograma(int pid, int cantidadDePaginasAGuardar,
+		int pgDeComienzo);
 
-
-void crearListas () ;
+void crearListas();
 
 void compactarSwap();
-
-
-
 
 #endif /* SWAP_H_ */

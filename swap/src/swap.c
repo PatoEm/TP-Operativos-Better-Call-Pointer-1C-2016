@@ -34,16 +34,16 @@ void* mappearArchivo(char* filename) {
 
 	fd = open(filename, O_RDWR);
 	if (fd == -1)
-		printf("error 3"); //acá van errores
+		printf("error 3"); //acá van errores todo
 
 	if (fstat(fd, &sb) == -1) /* To obtain file size */
-		printf("error 3"); //acá van errores
+		printf("error 3"); //acá van errores todo
 
 	length = sb.st_size;
 	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,
 	MAP_SHARED | MAP_NORESERVE, fd, 0);
 	if (addr == MAP_FAILED)
-		printf("error 3"); //acá van errores
+		printf("error 3"); //acá van errores todo
 	return addr;
 
 }
