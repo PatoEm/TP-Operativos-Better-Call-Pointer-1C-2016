@@ -174,18 +174,27 @@ bool newClientHandler(Socket* cliente){
 
 void clientHandler(Socket* cliente){
 
-//	list_find(coreList, cpuCore);
+	int cpuNodo;
+	cpuNodo = cpuCoreInList(coreList, cliente);
+
+
 
 
 }
 
 
 
-bool cpuCoreInList(t_list* lista, Socket* cliente){
+int cpuCoreInList(t_list* lista, Socket* cliente){
 
-	int index = 0;
+	int index;  // NO ESTOY SEGURO DE SI ARRANCA EN 0 O EN 1, PUEDE TRAER PROBLEMAS
+	int ultimoIndex = list_size(lista) -1 ;
 	t_core* data;
 
-	data = (t_core*)list_get(lista, index);
-
+	for(index = 0; index < ultimoIndex; index = index + 1){
+		data = (t_core*)list_get(lista, index);
+		if(data->socket == cliente){
+			return index;
+		}
+	}
+	return -1;
 }

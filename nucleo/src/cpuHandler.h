@@ -29,6 +29,7 @@ Boolean initCpuServer();
 void checkCpuConnections();
 bool newClientHandler(Socket* cliente);
 void clientHandler(Socket* cliente);
+int cpuCoreInList(t_list* lista, Socket* cliente);
 
 
 // ESTRUCTURAS
