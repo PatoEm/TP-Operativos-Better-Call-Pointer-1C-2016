@@ -31,6 +31,8 @@
  *******************************************************/
 #define HANDSHAKE 5
 #define STD_OUTPUT 6
+#define PRIMER_PCB 7
+
 
 /* aca van los defines de actions*/
 

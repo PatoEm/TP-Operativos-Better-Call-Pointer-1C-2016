@@ -53,5 +53,8 @@ typedef struct {
 
 } pcb;
 
-
+pcb* newPcb(int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
+		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,
+		paginaDeStack* indiceDelStack, t_metadata_program* metaProgram, estadoPrograma estado);
+pcb* newEmptyPcb();
 #endif /* LIBRERIASCOMPARTIDAS_PCB_H_ */
