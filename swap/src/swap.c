@@ -173,11 +173,11 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 			}
 		} else {
 			paginasSeguidasLibres = 0;
-			contador = 0;
 		}
 		if (cantidadDePaginas == paginasSeguidasLibres) {
 			return paginaADevolver;
 		}
+		contador++;
 	}
 	return -1;
 }
@@ -227,6 +227,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
+		(paginaAReservar->bitLectura)=0;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
