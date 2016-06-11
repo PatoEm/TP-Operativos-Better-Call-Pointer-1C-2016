@@ -36,10 +36,23 @@ void iniciarEstructuras() {
 	}
 	listaEspacioAsignado = list_create();
 }
+//Devuelve la cantidad de paginas libres que hay
+int cantidadDePaginasLibres(){
+	int paginasLibres=0;
+	int i;
+	while(i<'\0'){
+		if(bitMap[i]==0){
+			paginasLibres++;
+		}
+		i++;
+	}
+	return paginasLibres;
+}
 
-//0 si no hay memoria, 1 si hay memoria Dr Mengueche
+//0 si no hay memoria
 bool hayMemoriaSuficiente(int paginas) {
-	if (paginas <= list_size(listaEspacioLibre))
+	int paginasLibres = cantidadDePaginasLibres();
+	if (paginas <= paginasLibres)
 		return 1;
 	else
 		return 0;
@@ -56,8 +69,7 @@ void finalizarProceso(int pid) {
 	}
 	while ((nodoActual->pid) == pid) {
 		int inicioActual = nodoActual->posicionDePag;
-		insertarNodoOrdenadoLibre(nodoActual->posicionDePag, 1,
-				nodoActual->IDFrame);
+		insertarNodoOrdenadoLibre(nodoActual->posicionDePag, 1,nodoActual->IDFrame);
 		eliminarFramesOcupadosContiguos(1, nodoActual->IDFrame);
 		while (inicioActual != (nodoActual->posicionDePag) - 1) {
 			memoriaReal[inicioActual] = '\0';
@@ -114,8 +126,7 @@ int paginasContiguasDeMemoria(int cantidadDePaginas) {
 	int miPaginaLibre = 0; //me da el ID de la página libre actual
 	int paginaActual = 0; //me dice en que página estoy actualmente
 	espacioLibre* nodoActual; //el nodo que voy a ir iterando
-	while ((paginaActual <= list_size(listaEspacioLibre))
-			|| (cantidadDePaginas == contadorDePaginasSeguidas)) {
+	while ((paginaActual <= list_size(listaEspacioLibre)) || (cantidadDePaginas == contadorDePaginasSeguidas)) {
 		nodoActual = list_get(listaEspacioLibre, paginaActual); // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
 		if (miPaginaLibre + 1 == nodoActual->IDFrame) {
 			contadorDePaginasSeguidas++; //si consigo paginas seguidas sumo una
@@ -248,8 +259,7 @@ char* solicitudDeBytes(int pagina, int offset, int tamanio, int pid) {
 	int recorredor = 0;
 	int desplazamiento = offset;
 	nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
-	while ((nodoAUbicar->pid != pid)
-			|| (recorredor < list_size(listaEspacioLibre))) {
+	while ((nodoAUbicar->pid != pid) || (recorredor < list_size(listaEspacioLibre))) {
 		recorredor++;
 		nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
 	}
@@ -548,7 +558,6 @@ void retardoUMC(int retardo) {
 void dump() {
 	int i=0;
 	espacioAsignado * nodoActualDeAsignados;
-	espacioLibre * nodoActualDeLibres;
 
 	//IMPRIMO EN PANTALLA
 	puts("Paginas Asignadas:\n");
@@ -561,12 +570,6 @@ void dump() {
 
 	puts("Paginas Libres:\n");
 	i=0;
-
-	while(nodoActualDeLibres->IDFrame < marcos){
-		nodoActualDeLibres = (espacioLibre*)list_get(listaEspacioLibre, i);
-		printf("ID Frame vacio: %d\n",nodoActualDeLibres->IDFrame);
-		i++;
-	}
 
 	//IMPRIMO EN EL LOG
 	i=0;
@@ -590,8 +593,18 @@ void dump() {
 	*/
 }
 
-void flushTLB() {
-
+void flushTLB(t_list* TLB) {
+	if (entradas_TLB == 0){
+		log_info(logger, "TLB Deshabilitado");
+	}
+	else {
+		int i=0;
+		while(i<TLB->elements_count){
+			//list_remove_and_destroy_element(TLB, 0,(void *) elDestructorDeNodosTLB); //No se por que rompe esto
+			i++;
+		}
+	log_info(logger,"TLB acaba de vaciarse");
+	}
 }
 
 void flushMemory() {
@@ -627,4 +640,8 @@ void inicioTLB(t_list * TLB, int aciertos, int accesos){
 t_list * creoTLB(){
 	 t_list * TLB = list_create();
 	 return TLB;
+}
+
+void elDestructorDeNodosTLB(t_tlb * TLB){
+	free(TLB);
 }

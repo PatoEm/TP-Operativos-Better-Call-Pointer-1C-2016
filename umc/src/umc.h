@@ -25,23 +25,30 @@ char* algoritmoDeReemplazo;
 int entradas_TLB;
 int espera;
 
-//estructuras para el manejo de memoria DR Mengueche
- typedef struct{
-	int IDFrame;
-  	int inicio;
-  }espacioLibre;
-
   typedef struct{
 	int IDFrame;
   	int pid;
-  	int frameDelPrograma;
-  	int posicionDePag;
+  	int numPagina;
+  	int frameDelPrograma; //ESTE CAMPO SE TIENE QUE BORRAR PERO NO LA BORRO AHORA PARA QUE NO ROMPA TODO
+  	int posicionDePag; //ESTE CAMPO SE TIENE QUE BORRAR PERO NO LA BORRO AHORA PARA QUE NO ROMPA TODO
   }espacioAsignado;
 
+  //ESTA ESTRUCTURA SE TIENE QUE BORRAR PERO NO LA BORRO AHORA PARA QUE NO ROMPA TODO
+  typedef struct{
+	int IDFrame;
+	int inicio;
+  }espacioLibre;
 
-t_list * listaEspacioLibre;
+  typedef struct{
+	  int pid;
+	  int frame;
+	  int pagina;
+  }t_tlb;
+
+bool* bitMap;
 t_list * listaEspacioAsignado;
-
+//ESTA LISTA SE TIENE QUE BORRAR PERO NO LA BORRO PARA QUE NO ROMPA TODO
+t_list * listaEspacioLibre;
 
 //estructuras para los hilos de CPU y nucleo
 
@@ -58,13 +65,15 @@ void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame);
 
 void eliminarFramesOcupadosContiguos(int cantidad, int frame);
 
-espacioLibre * crearEspacioLibre(int inicio) ;
+//espacioLibre * crearEspacioLibre(int inicio) ;
 
 void agregarEspacioLibre(int inicio);
 
 int calcularIDPagina(int inicio);
 
 void iniciarEstructuras();
+
+int cantidadDePaginasLibres();
 
 bool hayMemoriaSuficiente(int paginas);
 
@@ -97,6 +106,8 @@ void meHablaCPU();
 void meHablaKernelPrueba ();
 
 void meHablaCPUPrueba ();
+
+void elDestructorDeNodosTLB();
 
 void inicioTLB(t_list *, int, int);
 
