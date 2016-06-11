@@ -29,10 +29,14 @@
 /*******************************************************
  * Acciones
  *******************************************************/
+#define FAIL -1
 #define HANDSHAKE 5
 #define STD_OUTPUT 6
 #define PRIMER_PCB 7
-
+#define IMPRIMIR 8
+#define IMPRIMIRTEXTO 9
+#define CERRARCONSOLA 10
+#define ARCHIVO_ANSISOP 11
 
 /* aca van los defines de actions*/
 
@@ -84,7 +88,8 @@ typedef struct strKerUmc {
 typedef struct strKerCon {
 	Char id;
 	Char action;
-	//Int32U tid; por si decidimos dejarlo
+	Int32U logLen;
+	Byte* log;
 } __attribute__((packed)) StrKerCon;
 
 
@@ -155,8 +160,7 @@ StrConKer* newStrConKer(Char, Char, Byte*, Int32U);
 		//Int32U); por si decidimos dejarlo
 StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
-StrKerCon* newStrKerCon(Char, Char);
-		//, Int32U); por si decidimos dejarlo
+StrKerCon* newStrKerCon(Char, Char , Int32U, Byte*);
 StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U);
 StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U);
 StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);

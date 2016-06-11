@@ -61,12 +61,12 @@ StrKerUmc* newStrKerUmc(Char id, Char action, Byte *data, Int32U size, Int32U pi
 /*******************************
  * Constructor Kernel-Consola
  ******************************/
-StrKerCon* newStrKerCon(Char id, Char action){
-		//, Int32U tid){
+StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log){
 	StrKerCon* skcon = malloc(sizeof(StrKerCon));
 	skcon->id = id;
 	skcon->action = action;
-	//skcon->tid = tid;
+	skcon->logLen = logLen;
+	skcon->log = log;
 	return skcon;
 }
 
@@ -181,6 +181,8 @@ Int32U getSizeKerCon(StrKerCon* skc){
 	Int32U size = 0;
 	size += sizeof(skc->id);
 	size += sizeof(skc->action);
+	size +=sizeof(skc->logLen);
+	size +=sizeof(skc->log);
 	return size;
 }
 
@@ -362,6 +364,14 @@ SocketBuffer* serializeKerCon(StrKerCon* skcon){
 	ptrByte = (Byte*) &skcon->action;
 	memcpy(ptrData, ptrByte, sizeof(skcon->action));
 	ptrData += sizeof(skcon->action);
+
+	ptrByte = (Byte*) &skcon->logLen;
+	memcpy(ptrData, ptrByte, sizeof(skcon->logLen));
+	ptrData += sizeof(skcon->logLen);
+
+	ptrByte = (Byte*) &skcon->log;
+	memcpy(ptrData, ptrByte, sizeof(skcon->log));
+	ptrData += sizeof(skcon->log);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -613,15 +623,20 @@ SocketBuffer* unserializeKerCon(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	//Int32U tid;
+	Int32U logLen;
+	Byte* log;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+	memcpy(&logLen, ptrByte, sizeof(logLen));
+	ptrByte += sizeof(logLen);
+	memcpy(&log, ptrByte, sizeof(log));
+	ptrByte += sizeof(log);
 
 	free(dataSerialized);
-	return newStrKerCon(id, action);
+	return newStrKerCon(id, action, logLen, log);
 }
 /***********************************************/
 /* Unserialize CPU-Kernel

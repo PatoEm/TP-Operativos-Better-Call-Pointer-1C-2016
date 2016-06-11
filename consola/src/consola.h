@@ -8,24 +8,30 @@
 #ifndef CONSOLA_H_
 #define CONSOLA_H_
 
-
+/*
+ * Dependencias
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include "libreriasCompartidas/pointerTipos.h"
+#include "libreriasCompartidas/pointerSocketes.h"
+#include "libreriasCompartidas/pointerStream.h"
+#include <commons/string.h>
 
-// define
-#define FAIL -1
-#define IMPRIMIR 3
-#define IMPRIMIRTEXTO 4
-#define CERRARCONSOLA 5
+/*
+ * Defines
+ */
+#define PARAM_LENGTH 2
+#define IP_NUCLEO "IP_NUCLEO"
+#define PUERTO_NUCLEO "PUERTO_NUCLEO"
 
-//variables
-char* ipNucleo;
-char* nucleoPort;
 int   fdSocketConsola;
+
+
 
 
 //prototipos
