@@ -26,14 +26,14 @@ endif
 all: umc
 
 dependents:
-	-cd /home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) all
-	-cd /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug && $(MAKE) all
 
 # Tool invocations
-umc: $(OBJS) $(USER_OBJS) /home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug/liblibreriasCompartidas.so
+umc: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so /home/utnso/workspace/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug/liblibreriasCompartidas.so
 	@echo 'Building target: $@'
 	@echo 'Invoking: GCC C Linker'
-	gcc -L"/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug" -L"/home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug" -o "umc" $(OBJS) $(USER_OBJS) $(LIBS)
+	gcc -L"/home/utnso/workspace/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug" -L"/home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug" -o "umc" $(OBJS) $(USER_OBJS) $(LIBS)
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -44,7 +44,7 @@ clean:
 
 .PHONY: all clean dependents
 .SECONDARY:
-/home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so:
-/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug/liblibreriasCompartidas.so:
+/home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so:
+/home/utnso/workspace/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug/liblibreriasCompartidas.so:
 
 -include ../makefile.targets

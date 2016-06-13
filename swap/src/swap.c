@@ -191,7 +191,17 @@ void eliminarProceso(int pid) {
 		nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
+	int contador;
+	int posicion;
 	while ((nodoAReventar->pid) == pid) {
+		contador=0;
+		posicion= nodoAReventar->pid *atoi(tamPagina);
+		while(contador<atoi(tamPagina)){
+			archivoMappeado[posicion]='\0';
+			posicion++;
+			contador++;
+		}
+
 		bitMap[nodoAReventar->IDPaginaInterno] = 0;
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
@@ -227,7 +237,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
-		(paginaAReservar->bitLectura)=0;
+		(paginaAReservar->bitLectura) = 0;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);

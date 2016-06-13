@@ -3,105 +3,247 @@
 
 //Ideas locas para crear las estructuras para manejar la memoria DR Mengueche
 
-espacioLibre * crearEspacioLibre(int inicio) {
-	espacioLibre * nuevoEspacioLibre = malloc(sizeof(espacioLibre));
-	nuevoEspacioLibre->inicio = inicio;
-	nuevoEspacioLibre->IDFrame = calcularIDPagina(inicio);
-	return nuevoEspacioLibre;
-}
-
-void agregarEspacioLibre(int inicio) {
-	espacioLibre * nuevoEspacioLibre = crearEspacioLibre(inicio);
-	list_add(listaEspacioLibre, nuevoEspacioLibre);
-}
-
 int calcularIDPagina(int inicio) {
 
 	if (inicio == 0)
 		return 0;
 	else {
-		return (inicio / (marco_Size));
+		return (inicio / marcos);
 	}
 
 }
 
-//inicia las estructuras al principio de todo Dr Mengueche
-void iniciarEstructuras() {
-	int contadorDePaginasAniadidas = 0;
-	int inicioDePagina = 0;
-	while (contadorDePaginasAniadidas != marcos) {
-		agregarEspacioLibre(inicioDePagina);
-		contadorDePaginasAniadidas++;
-		inicioDePagina = inicioDePagina + marco_Size;
+void iniciarEstructurasUMC() {
+	int counter = 0;
+	bitMap = malloc(sizeof(bool) * marcos);
+	crearListas();
+	while (counter != marcos) {
+		bitMap[counter] = 0;
+		counter++;
 	}
+
+}
+
+void crearListas() {
 	listaEspacioAsignado = list_create();
 }
-//Devuelve la cantidad de paginas libres que hay
-int cantidadDePaginasLibres(){
-	int paginasLibres=0;
-	int i;
-	while(i<'\0'){
-		if(bitMap[i]==0){
-			paginasLibres++;
+
+bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa a la umc
+	if (verificarSiHayEspacio(paginas)) {
+		if (paginasContiguasDeUMC(paginas) == -1) {
+			compactarUMC(); //Tengo que seguir desde acá DR Mengueche
+			reservarPaginas(paginasContiguasDeSwap(paginas), pid, paginas);
+			return TRUE;
+		} else {
+			reservarPaginas(paginasContiguasDeSwap(paginas), pid, paginas);
+			return TRUE;
 		}
-		i++;
-	}
-	return paginasLibres;
+	} else
+		return FALSE;
+
 }
 
-//0 si no hay memoria
-bool hayMemoriaSuficiente(int paginas) {
-	int paginasLibres = cantidadDePaginasLibres();
-	if (paginas <= paginasLibres)
-		return 1;
-	else
-		return 0;
-}
-
-void finalizarProceso(int pid) {
-	//pedirle al swap que destruya todo
-	espacioAsignado*nodoActual;
-	int contadorDeNodos = 0;
-	nodoActual = list_get(listaEspacioAsignado, contadorDeNodos);
-	while ((nodoActual->pid) != pid) {
-		contadorDeNodos++;
-		nodoActual = list_get(listaEspacioAsignado, contadorDeNodos);
-	}
-	while ((nodoActual->pid) == pid) {
-		int inicioActual = nodoActual->posicionDePag;
-		insertarNodoOrdenadoLibre(nodoActual->posicionDePag, 1,nodoActual->IDFrame);
-		eliminarFramesOcupadosContiguos(1, nodoActual->IDFrame);
-		while (inicioActual != (nodoActual->posicionDePag) - 1) {
-			memoriaReal[inicioActual] = '\0';
-			inicioActual++;
+void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
+	int numInternoDePagina = 0;
+	int paginaActual = paginaDeComienzo; // donde empieza toodo.
+	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
+	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
+	int contadorDePaginas = 0; //cuento para el while
+	espacioAsignado* paginaAReservar; //nodo para agarrar cosas
+	if (list_size(listaEspacioAsignado) != 0) {
+		paginaAReservar = list_get(listaEspacioAsignado,
+				lugarEnDondeDeboColocarMiNodo);
+		while (((paginaAReservar->IDPaginaInterno) < paginaDeComienzo)) {
+			lugarEnDondeDeboColocarMiNodo++;
+			paginaAReservar = list_get(listaEspacioAsignado,
+					lugarEnDondeDeboColocarMiNodo);
+			if ((lugarEnDondeDeboColocarMiNodo
+					== (listaEspacioAsignado->elements_count))) {
+				break;
+			}
 		}
-		contadorDeNodos++;
-		nodoActual = list_get(listaEspacioAsignado, contadorDeNodos);
+	}
+
+	while (contadorDePaginas < cantidadDePaginas) {
+
+		paginaAReservar = malloc(sizeof(espacioAsignado));
+		(paginaAReservar->pid) = pid;
+		(paginaAReservar->IDPaginaInterno) = paginaActual;
+		(paginaAReservar->numDePag) = numInternoDePagina;
+		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
+			list_add_in_index(listaEspacioAsignado,
+					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
+		else
+			list_add(listaEspacioAsignado, paginaAReservar);
+		bitMap[paginaActual] = 1;
+		numInternoDePagina++;
+		contadorDePaginas++;
+		paginaActual++;
+		lugarEnDondeDeboColocarMiNodo++;
 	}
 
 }
 
-//Inserta ordenado segun el frame
-void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame) {
-	espacioLibre*nodoLibre;
+void compactarUMC() {
+
+	int paginasContiguas = 0;
+	espacioAsignado* nodoActual = malloc(sizeof(espacioAsignado));
+	int contadorParaCadenaActual;
+	int contadorParaCadenaVieja;
+	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
+	while (paginasContiguas < list_size(listaEspacioAsignado)) {
+		if ((nodoActual->IDPaginaInterno) != paginasContiguas) {
+			contadorParaCadenaActual = paginasContiguas * marcos;
+			contadorParaCadenaVieja = (nodoActual->IDPaginaInterno) * marcos;
+			while (contadorParaCadenaActual < (paginasContiguas + 1) * marcos) {
+				memoriaReal[contadorParaCadenaActual] =
+						memoriaReal[contadorParaCadenaVieja];
+				memoriaReal[contadorParaCadenaVieja] = '\0';
+				contadorParaCadenaActual++;
+				contadorParaCadenaVieja++;
+			}
+			bitMap[nodoActual->IDPaginaInterno] = 0;
+			(nodoActual->IDPaginaInterno) = paginasContiguas;
+			bitMap[paginasContiguas] = 1;
+
+		}
+		paginasContiguas++;
+		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
+
+	}
+	while (paginasContiguas != marcos) {
+
+		bitMap[paginasContiguas] = 0;
+		paginasContiguas++;
+
+	}
+
+}
+
+bool verificarSiHayEspacio(int cantidadDePaginas) {
+
 	int contador = 0;
-	int paginasAgregadas = 0;
-	int inicioActual = inicio;
-	int id = IDFrame;
-	nodoLibre = list_get(listaEspacioLibre, contador);
-	while ((nodoLibre->IDFrame) < IDFrame) {
+	int cantidad = 0;
+	while (contador < marcos) {
+		if (bitMap[contador] == 0) {
+			cantidad++;
+		}
 		contador++;
-		nodoLibre = list_get(listaEspacioLibre, contador);
 	}
-	while (paginasAgregadas != cantidad) {
-		nodoLibre->IDFrame = id;
-		nodoLibre->inicio = inicioActual;
-		list_add_in_index(listaEspacioLibre, contador, nodoLibre);
-		id++;
+	if (cantidad >= cantidadDePaginas)
+		return TRUE;
+	else
+		return FALSE;
+}
+
+int paginasContiguasDeUMC(int cantidadDePaginas) {
+	int paginaADevolver = 0;
+	int contador = 0;
+	int paginasSeguidasLibres = 0;
+	while ((contador < marcos) && (paginasSeguidasLibres != 1)) {
+		if (bitMap[contador] == 0) {
+			paginasSeguidasLibres = 1;
+			paginaADevolver = contador;
+		}
 		contador++;
-		inicioActual = inicioActual + marco_Size;
-		paginasAgregadas++;
 	}
+	if (cantidadDePaginas == paginasSeguidasLibres)
+		return paginaADevolver;
+	while (contador < marcos) {
+		if (bitMap[contador] == 0) {
+			if (paginasSeguidasLibres == 0) {
+				paginasSeguidasLibres = 1;
+				paginaADevolver = contador;
+			} else {
+				paginasSeguidasLibres++;
+			}
+		} else {
+			paginasSeguidasLibres = 0;
+		}
+		if (cantidadDePaginas == paginasSeguidasLibres) {
+			return paginaADevolver;
+		}
+		contador++;
+	}
+	return -1;
+}
+
+char*solicitarBytes(int pid, int pagina, int offset, int cantidad) {
+
+	espacioAsignado* nodoALeer;
+	int posicionActualDeNodo = 0;
+	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != pagina)) {
+		posicionActualDeNodo++;
+		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	}
+	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
+		//IR A BUSCAR AL SWAP todo
+	} else {
+		int lugarDeLaCadena = 0;
+		char paginaADevolver[cantidad];
+		char*punteroADevolver = (&paginaADevolver[0]);
+		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
+		while (lugarDeLaCadena < cantidad) {
+			paginaADevolver[lugarDeLaCadena] = memoriaReal[posicionDeChar];
+			posicionDeChar++;
+			lugarDeLaCadena++;
+		}
+		return (punteroADevolver);
+	}
+}
+
+void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
+	espacioAsignado* nodoALeer;
+	int posicionActualDeNodo = 0;
+	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	while ((((nodoALeer->pid) != pid) && (nodoALeer->numDePag))
+			|| (posicionActualDeNodo == list_size(listaEspacioAsignado))) {
+		posicionActualDeNodo++;
+		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+	}
+	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
+		//todo ir a buscar al swap la pagina
+	} else {
+		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
+		int enDondeEstoyDeLoQueMeMandaron = 0;
+		int contador = 0;
+		while (contador < tamanio) {
+			memoriaReal[dondeEscribo] = buffer[enDondeEstoyDeLoQueMeMandaron];
+			dondeEscribo++;
+			enDondeEstoyDeLoQueMeMandaron++;
+			contador++;
+		}
+	}
+}
+
+void finalizarPrograma(int pid) {//todo avisar al swap que tiene que reventar pid
+
+	espacioAsignado*nodoAReventar;
+	int enDondeAgregarEspacio = 0;
+	int nodoActualAReventar = 0;
+	nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
+	while ((nodoAReventar->pid) != pid) {
+		nodoActualAReventar++;
+		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
+	}
+	int contador;
+	int posicion;
+	while ((nodoAReventar->pid) == pid) {
+		contador = 0;
+		posicion = nodoAReventar->pid * marco_Size;
+		while (contador < marco_Size) {
+			memoriaReal[posicion] = '\0';
+			posicion++;
+			contador++;
+		}
+
+		bitMap[nodoAReventar->IDPaginaInterno] = 0;
+		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
+		free(nodoAReventar);
+		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
+	}
+
 }
 
 //Funcion básica del tp
@@ -120,194 +262,6 @@ void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame) {
 //	}
 //}
 
-// me devuelve un nro de dónde empiezo a asignar páginas, -1 no tengo esa cantidad contigua
-int paginasContiguasDeMemoria(int cantidadDePaginas) {
-	int contadorDePaginasSeguidas = 1; //tiene que ser igual a cantidadDePaginas para devolver una página determinada
-	int miPaginaLibre = 0; //me da el ID de la página libre actual
-	int paginaActual = 0; //me dice en que página estoy actualmente
-	espacioLibre* nodoActual; //el nodo que voy a ir iterando
-	while ((paginaActual <= list_size(listaEspacioLibre)) || (cantidadDePaginas == contadorDePaginasSeguidas)) {
-		nodoActual = list_get(listaEspacioLibre, paginaActual); // si es menor a la lista o conseguí la cantidad de páginas que buscaba hago esto
-		if (miPaginaLibre + 1 == nodoActual->IDFrame) {
-			contadorDePaginasSeguidas++; //si consigo paginas seguidas sumo una
-		} else {
-			contadorDePaginasSeguidas = 1; //sino vuelvo a 0
-			miPaginaLibre = nodoActual->IDFrame; //reasigno la página para que sea la correcta
-		}
-		paginaActual++;
-	}
-	if (cantidadDePaginas == contadorDePaginasSeguidas)
-		return (miPaginaLibre);
-	else
-		return -1;
-}
-
-//inserta al nodo ordenado por su idFrame
-
-bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) {
-	espacioAsignado*nodoLeidoActual = malloc(sizeof(espacioAsignado));
-	espacioAsignado*nodoAAgregar = (espacioAsignado*) malloc(
-			sizeof(espacioAsignado));
-	int paginaActual = 0;
-	int framePrograma = 0;
-	int paginasEscritas = 0;
-	nodoLeidoActual = list_get(listaEspacioAsignado, paginaActual);
-	while (nodoLeidoActual->IDFrame < idFrame) {
-		paginaActual++;
-		nodoLeidoActual = list_get(listaEspacioAsignado, paginaActual);
-	}
-	do {
-		nodoAAgregar->frameDelPrograma = framePrograma;
-		nodoAAgregar->IDFrame = idFrame;
-		nodoAAgregar->pid = pid;
-		nodoAAgregar->posicionDePag = (idFrame * marco_Size);
-		list_add_in_index(listaEspacioAsignado, paginaActual, nodoAAgregar);
-		paginaActual++;
-		paginasEscritas++;
-		framePrograma++;
-	} while (paginasEscritas < cantidadDeNodos);
-	return 1;
-}
-
-void eliminarFramesOcupadosContiguos(int cantidad, int frame) {
-
-	int posicion = 0;
-	int contadorDeReventados = 0;
-	espacioAsignado*lugarActual = list_get(listaEspacioAsignado, posicion);
-	while (lugarActual->IDFrame != frame) {
-		posicion++;
-		espacioAsignado*lugarActual = list_get(listaEspacioAsignado, posicion);
-	}
-	while (contadorDeReventados < cantidad) {
-		free(list_remove(listaEspacioAsignado, posicion));
-		posicion++;
-		contadorDeReventados++;
-
-	}
-}
-void eliminarFramesLibresContiguos(int cantidad, int frame) {
-	int posicion = 0;
-	int contadorDeReventados = 0;
-	espacioLibre*lugarActual = list_get(listaEspacioLibre, posicion);
-	while (lugarActual->IDFrame != frame) {
-		posicion++;
-		espacioLibre*lugarActual = list_get(listaEspacioLibre, posicion);
-	}
-	while (contadorDeReventados < cantidad) {
-		free(list_remove(listaEspacioLibre, posicion));
-		posicion++;
-		contadorDeReventados++;
-	}
-}
-
-void asignarPaginas(int id, int cantPaginas, int idFrame) {
-	insertarEnListaAsignadoOrdenado(id, cantPaginas, idFrame);
-	eliminarFramesLibresContiguos(cantPaginas, idFrame);
-}
-
-//se manda acá cuando anteriormente se comprobó que hay que compactar
-void compactarMemoria() {
-
-	int paginasContiguas = 0;
-	espacioAsignado* nodoActual;
-	int contadorParaCadenaActual;
-	int contadorParaCadenaVieja;
-	espacioLibre unNodoPiola;
-	espacioLibre* nodoLibre = (&unNodoPiola);
-	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
-	do {
-		if ((nodoActual->IDFrame) != paginasContiguas) {
-			contadorParaCadenaActual = paginasContiguas * marco_Size;
-			contadorParaCadenaVieja = (nodoActual->posicionDePag);
-			while (contadorParaCadenaActual
-					< (paginasContiguas + 1) * (marco_Size)) {
-				memoriaReal[contadorParaCadenaActual] =
-						memoriaReal[contadorParaCadenaVieja];
-				memoriaReal[contadorParaCadenaVieja] = '\0';
-				contadorParaCadenaActual++;
-				contadorParaCadenaVieja++;
-			}
-			(nodoActual->IDFrame) = paginasContiguas;
-			(nodoActual->posicionDePag) = paginasContiguas * marco_Size;
-		}
-		paginasContiguas++;
-		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
-
-	} while (paginasContiguas <= list_size(listaEspacioAsignado));
-	list_clean(listaEspacioLibre);
-	paginasContiguas--;
-	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
-	(nodoLibre->inicio) = (nodoActual->posicionDePag) + marco_Size;
-	(nodoLibre->IDFrame) = calcularIDPagina(nodoLibre->inicio);
-	list_add(listaEspacioLibre, nodoLibre);
-	int iDActual = ((nodoLibre->IDFrame) + 1);
-	while ((nodoLibre->IDFrame) != marcos) {
-		nodoLibre++;
-		(nodoLibre->IDFrame) = iDActual;
-		(nodoLibre->inicio) = marco_Size * (nodoLibre->IDFrame);
-		list_add(listaEspacioLibre, nodoLibre);
-		iDActual++;
-	}
-
-}
-
-//Función básica para solicitar bytes. el pid lo poseo como variable local cuando cambio de proceso
-
-char* solicitudDeBytes(int pagina, int offset, int tamanio, int pid) {
-	char*cadenaADevolver = malloc(sizeof(char) * (tamanio + 1));
-	espacioAsignado*nodoAUbicar;
-	int recorredor = 0;
-	int desplazamiento = offset;
-	nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
-	while ((nodoAUbicar->pid != pid) || (recorredor < list_size(listaEspacioLibre))) {
-		recorredor++;
-		nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
-	}
-	if (recorredor == list_size(listaEspacioLibre)) {
-		//llamar al swap y retornar eso todo
-	}
-	if (nodoAUbicar->pid == pid) {
-		while (((nodoAUbicar->frameDelPrograma) != pagina)
-				&& (nodoAUbicar->pid == pid)) {
-			recorredor++;
-			nodoAUbicar = list_get(listaEspacioAsignado, recorredor);
-		}
-		if (nodoAUbicar->pid != pid) {
-			//llamar al swap para buscar lo que necesito todo
-		} else {
-			desplazamiento = desplazamiento + (nodoAUbicar->posicionDePag);
-			int counter = 0;
-			while (counter < tamanio) {
-				cadenaADevolver[counter] = memoriaReal[desplazamiento];
-				counter++;
-			}
-			cadenaADevolver[counter] = '\0';
-			return cadenaADevolver;
-		}
-	}
-}
-
-//1 si se inició piola, -2 si no DR Mengueche
-int iniciarPrograma(int iDPrograma, int paginasRequeridas, char* codigo) {
-	if (hayMemoriaSuficiente(paginasRequeridas)) {
-		if (paginasContiguasDeMemoria(paginasRequeridas) != -1) {
-			asignarPaginas(iDPrograma, paginasRequeridas,
-					paginasContiguasDeMemoria(paginasRequeridas));
-			//ENVIAR ARCHIVO AL SWAP CUANDO PUEDA todo
-			return 1;
-		} else {
-			compactarMemoria();
-			asignarPaginas(iDPrograma, paginasRequeridas,
-					paginasContiguasDeMemoria(paginasRequeridas));
-			//ENVIAR ARCHIVO AL SWAP CUANDO PUEDA todo
-			return 1;
-		}
-
-	} else
-		return PROGRAMA_NO_INICIADO;
-
-}
-
 void setearValores(t_config * archivoConfig) {
 	puertoEscucha = config_get_string_value(archivoConfig, "PUERTO");
 	ip_Swap = config_get_string_value(archivoConfig, "IP_SWAP");
@@ -321,7 +275,7 @@ void setearValores(t_config * archivoConfig) {
 }
 
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
-	// Si lo hago con calloc me la llena de \0 papa
+// Si lo hago con calloc me la llena de \0 papa
 	char * memory = calloc(cantidadFrames, capacidadFrames);
 	log_info(logger, "Memoria real reservada", NULL);
 	return memory;
@@ -334,7 +288,7 @@ void liberarMemoria(char * memoria_para_liberar) {
 
 void escuchoMuchasConexiones(void) {
 
-	//ACA ME TENGO QUE HACER CLIENTE DEL SWAP
+//ACA ME TENGO QUE HACER CLIENTE DEL SWAP
 	fd_set master; // maestro es el conjunto de file descriptors que están actualmente conectados
 	fd_set read_fds; // conjunto temporal de descriptores de fichero para select()
 
@@ -362,36 +316,36 @@ void escuchoMuchasConexiones(void) {
 	myaddr.sin_port = htons(atoi(puertoEscucha));
 	memset(&(myaddr.sin_zero), '\0', 8);
 
-	// obtener socket a la escucha
+// obtener socket a la escucha
 	if ((listener = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
 		perror("Error en el socket");
 		exit(1);
 	}
-	// obviar el mensaje "address already in use" (la dirección ya se está usando)
+// obviar el mensaje "address already in use" (la dirección ya se está usando)
 	if (setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int))
 			== -1) {
 		perror("setsockopt");
 		exit(1);
 	}
 
-	// enlazar
+// enlazar
 	if (bind(listener, (struct sockaddr *) &myaddr, sizeof(myaddr)) == -1) {
 		perror("bind");
 		exit(1);
 	}
 
-	// escuchar
+// escuchar
 	if (listen(listener, 10) == -1) {
 		perror("Error en el listen");
 		exit(1);
 	}
 
-	// añadir listener al conjunto maestro
+// añadir listener al conjunto maestro
 	FD_SET(listener, &master);
-	// seguir la pista del descriptor de fichero mayor
+// seguir la pista del descriptor de fichero mayor
 	fdmax = listener; // por ahora es éste
 	printf("Empieza el select\n");
-	// bucle principal
+// bucle principal
 	for (;;) {
 		read_fds = master; // cópialo
 		if (select(fdmax + 1, &read_fds, NULL, NULL, NULL) == -1) {
@@ -556,54 +510,56 @@ void retardoUMC(int retardo) {
 }
 
 void dump() {
-	int i=0;
+	int i = 0;
 	espacioAsignado * nodoActualDeAsignados;
 
-	//IMPRIMO EN PANTALLA
+//IMPRIMO EN PANTALLA
 	puts("Paginas Asignadas:\n");
-	while(nodoActualDeAsignados->IDFrame < marcos){
-		nodoActualDeAsignados = (espacioAsignado*)list_get(listaEspacioAsignado, i);
-		printf("ID Frame: %d\n",nodoActualDeAsignados->IDFrame);
-		printf("PID: %d\n",nodoActualDeAsignados->pid);
+	while (nodoActualDeAsignados->IDFrame < marcos) {
+		nodoActualDeAsignados = (espacioAsignado*) list_get(
+				listaEspacioAsignado, i);
+		printf("ID Frame: %d\n", nodoActualDeAsignados->IDFrame);
+		printf("PID: %d\n", nodoActualDeAsignados->pid);
 		i++;
 	}
 
 	puts("Paginas Libres:\n");
-	i=0;
+	i = 0;
 
-	//IMPRIMO EN EL LOG
-	i=0;
+//IMPRIMO EN EL LOG
+	i = 0;
 
-	while(nodoActualDeAsignados->IDFrame < marcos){
-		nodoActualDeAsignados = (espacioAsignado*)list_get(listaEspacioAsignado, i);
-		log_info(logger,"Frame: %d \nPID: %d\n\n",nodoActualDeAsignados->IDFrame, nodoActualDeAsignados->pid);
+	while (nodoActualDeAsignados->IDFrame < marcos) {
+		nodoActualDeAsignados = (espacioAsignado*) list_get(
+				listaEspacioAsignado, i);
+		log_info(logger, "Frame: %d \nPID: %d\n\n",
+				nodoActualDeAsignados->IDFrame, nodoActualDeAsignados->pid);
 
 	}
-	//IMPRIMO EN EL ARCHIVO
+//IMPRIMO EN EL ARCHIVO
 	/*
-	archivo = fopen("Dump","rw+");
-	while(nodoActualDeAsignados->IDFrame < marcos){
+	 archivo = fopen("Dump","rw+");
+	 while(nodoActualDeAsignados->IDFrame < marcos){
 
-	}
+	 }
 
-	while(nodoActualDeLibres->IDFrame < marcos){
+	 while(nodoActualDeLibres->IDFrame < marcos){
 
-	}
-	fclose(archivo);
-	*/
+	 }
+	 fclose(archivo);
+	 */
 }
 
 void flushTLB(t_list* TLB) {
-	if (entradas_TLB == 0){
+	if (entradas_TLB == 0) {
 		log_info(logger, "TLB Deshabilitado");
-	}
-	else {
-		int i=0;
-		while(i<TLB->elements_count){
+	} else {
+		int i = 0;
+		while (i < TLB->elements_count) {
 			//list_remove_and_destroy_element(TLB, 0,(void *) elDestructorDeNodosTLB); //No se por que rompe esto
 			i++;
 		}
-	log_info(logger,"TLB acaba de vaciarse");
+		log_info(logger, "TLB acaba de vaciarse");
 	}
 }
 
@@ -611,37 +567,36 @@ void flushMemory() {
 
 }
 
-void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos){
+void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
 
 	pthread_attr_init(&attrhiloComandos);
 
 	pthread_attr_setdetachstate(&attrhiloComandos, PTHREAD_CREATE_DETACHED);
-	int hiloParaComandos = pthread_create (&hiloComandos, &attrhiloComandos, (void *)comandosUMC, NULL);
-
+	int hiloParaComandos = pthread_create(&hiloComandos, &attrhiloComandos,
+			(void *) comandosUMC, NULL);
 
 	pthread_attr_destroy(&attrhiloComandos);
 }
 
-void inicioTLB(t_list * TLB, int aciertos, int accesos){
-	if(entradas_TLB == 0){
+void inicioTLB(t_list * TLB, int aciertos, int accesos) {
+	if (entradas_TLB == 0) {
 		log_info(logger, "TLB Deshabilitada");
-	}
-	else{
+	} else {
 		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
 
 		TLB = creoTLB();
 
 		//Inicializo la cantidad de aciertos y accesos
-		aciertos=0;
-		accesos=0;
+		aciertos = 0;
+		accesos = 0;
 	}
 }
 
-t_list * creoTLB(){
-	 t_list * TLB = list_create();
-	 return TLB;
+t_list * creoTLB() {
+	t_list * TLB = list_create();
+	return TLB;
 }
 
-void elDestructorDeNodosTLB(t_tlb * TLB){
+void elDestructorDeNodosTLB(t_tlb * TLB) {
 	free(TLB);
 }

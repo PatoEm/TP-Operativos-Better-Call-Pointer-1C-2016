@@ -12,6 +12,9 @@
 #include <commons/collections/list.h>
 #define FAIL -1
 #define PROGRAMA_NO_INICIADO -2
+#define TRUE 1
+#define FALSE 0
+
 
 //parametros
 char* memoriaReal;
@@ -24,20 +27,15 @@ int marco_x_proc;
 char* algoritmoDeReemplazo;
 int entradas_TLB;
 int espera;
+bool*bitMap;
 
-  typedef struct{
-	int IDFrame;
-  	int pid;
-  	int numPagina;
-  	int frameDelPrograma; //ESTE CAMPO SE TIENE QUE BORRAR PERO NO LA BORRO AHORA PARA QUE NO ROMPA TODO
-  	int posicionDePag; //ESTE CAMPO SE TIENE QUE BORRAR PERO NO LA BORRO AHORA PARA QUE NO ROMPA TODO
-  }espacioAsignado;
+typedef struct {
+	int IDPaginaInterno;
+	int pid;
+	int numDePag;
 
-  //ESTA ESTRUCTURA SE TIENE QUE BORRAR PERO NO LA BORRO AHORA PARA QUE NO ROMPA TODO
-  typedef struct{
-	int IDFrame;
-	int inicio;
-  }espacioLibre;
+} espacioAsignado;
+
 
   typedef struct{
 	  int pid;
@@ -45,10 +43,7 @@ int espera;
 	  int pagina;
   }t_tlb;
 
-bool* bitMap;
 t_list * listaEspacioAsignado;
-//ESTA LISTA SE TIENE QUE BORRAR PERO NO LA BORRO PARA QUE NO ROMPA TODO
-t_list * listaEspacioLibre;
 
 //estructuras para los hilos de CPU y nucleo
 
@@ -71,13 +66,27 @@ void agregarEspacioLibre(int inicio);
 
 int calcularIDPagina(int inicio);
 
-void iniciarEstructuras();
+void iniciarEstructurasUMC();
 
 int cantidadDePaginasLibres();
 
+bool verificarSiHayEspacio(int cantidadDePaginas) ;
+
+void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) ;
+
+void compactarUMC();
+
+bool inicializarPrograma(int pid, int paginas, char*codigo);
+
 bool hayMemoriaSuficiente(int paginas);
 
-int paginasContiguasDeMemoria(int cantidadDePaginas);
+char*solicitarBytes(int pid, int pagina, int offset, int cantidad) ;
+
+int paginasContiguasDeUMC(int cantidadDePaginas);
+
+void finalizarPrograma(int pid);
+
+void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) ;
 
 bool insertarEnListaAsignadoOrdenado(int pid, int cantidadDeNodos, int idFrame) ;
 
