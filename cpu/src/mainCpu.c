@@ -13,6 +13,7 @@
 #include "commons/config.h"
 #include "commons/collections/dictionary.h"
 #include "libreriasCompartidas/pointerStream.h"
+#include "libreriasCompartidas/pointerSocketes.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "cpu.h"
@@ -91,15 +92,16 @@ int main() {
 
 //==============================================================================================
 
-	int fdNucleo =  -1;
+	SocketClient* fdNucleo =  socketCreateClient();
 
-	while(fdNucleo == -1){ // PRUEBO Y PRUEBO HASTA Q LA PONGO
 
-		fdNucleo = crearCliente(IP_KERNEL,"2020");
 
-	}
+	while(!socketConnect(fdNucleo, IP_KERNEL, (Int32U) 2020)){
+		puts("Intentando conectar con el Nucleo.");
+		sleep(3);
+	} // PRUEBO Y PRUEBO HASTA Q LA PONGO
 
-	nucleoHandShake(fdNucleo);
+
 
 
 //	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
