@@ -27,6 +27,8 @@
 #define T_NOMBRE_SEMAFORO 6
 #define CHAR_AST 7
 #define INT 8
+
+pcb pcbEnEjecucion;
 //======================================================
 
 bool loadFunctionDictionary(t_dictionary** functionParameters) {
@@ -34,21 +36,26 @@ bool loadFunctionDictionary(t_dictionary** functionParameters) {
 	*functionParameters = dictionary_create();
 
 	//01
-	FunctionParameters* fparamDefinirVariable = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamDefinirVariable = malloc(
+			sizeof(FunctionParameters));
 	fparamDefinirVariable->param[0] = T_NOMBRE_VARIABLE;
 	fparamDefinirVariable->param[1] = NONE;
 	fparamDefinirVariable->func = definirVariable;
-	dictionary_put(*functionParameters, "DEFINIR_VARIABLE", fparamDefinirVariable);
+	dictionary_put(*functionParameters, "DEFINIR_VARIABLE",
+			fparamDefinirVariable);
 
 	//02
-	FunctionParameters* fparamObtenerPosicionVariable = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamObtenerPosicionVariable = malloc(
+			sizeof(FunctionParameters));
 	fparamObtenerPosicionVariable->param[0] = T_NOMBRE_VARIABLE;
 	fparamObtenerPosicionVariable->param[1] = NONE;
 	fparamObtenerPosicionVariable->func = obtenerPosicionVariable;
-	dictionary_put(*functionParameters, "OBTENER_POSICION_VARIABLE", fparamObtenerPosicionVariable);
+	dictionary_put(*functionParameters, "OBTENER_POSICION_VARIABLE",
+			fparamObtenerPosicionVariable);
 
 	//03
-	FunctionParameters* fparamDereferenciar = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamDereferenciar = malloc(
+			sizeof(FunctionParameters));
 	fparamDereferenciar->param[0] = T_PUNTERO;
 	fparamDereferenciar->param[1] = NONE;
 	fparamDereferenciar->func = dereferenciar;
@@ -62,18 +69,22 @@ bool loadFunctionDictionary(t_dictionary** functionParameters) {
 	dictionary_put(*functionParameters, "ASIGNAR", fparamAsignar);
 
 	//05
-	FunctionParameters* fparamObtenerValorCompartida = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamObtenerValorCompartida = malloc(
+			sizeof(FunctionParameters));
 	fparamObtenerValorCompartida->param[0] = T_NOMBRE_COMPARTIDA;
 	fparamObtenerValorCompartida->param[1] = NONE;
 	fparamObtenerValorCompartida->func = obtenerValorCompartida;
-	dictionary_put(*functionParameters, "OBTENER_VALOR_COMPARTIDA", fparamObtenerValorCompartida);
+	dictionary_put(*functionParameters, "OBTENER_VALOR_COMPARTIDA",
+			fparamObtenerValorCompartida);
 
 	//06
-	FunctionParameters* fparamAsignarValorCompartida = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamAsignarValorCompartida = malloc(
+			sizeof(FunctionParameters));
 	fparamAsignarValorCompartida->param[0] = T_NOMBRE_COMPARTIDA;
 	fparamAsignarValorCompartida->param[1] = T_VALOR_VARIABLE;
 	fparamAsignarValorCompartida->func = asignarValorCompartida;
-	dictionary_put(*functionParameters, "ASIGNAR_VALOR_COMPARTIDA", fparamAsignarValorCompartida);
+	dictionary_put(*functionParameters, "ASIGNAR_VALOR_COMPARTIDA",
+			fparamAsignarValorCompartida);
 
 	//07
 	FunctionParameters* fparamIrAlLabel = malloc(sizeof(FunctionParameters));
@@ -83,11 +94,13 @@ bool loadFunctionDictionary(t_dictionary** functionParameters) {
 	dictionary_put(*functionParameters, "IR_A_LABEL", fparamIrAlLabel);
 
 	//08
-	FunctionParameters* fparamLlamarConRetorno = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamLlamarConRetorno = malloc(
+			sizeof(FunctionParameters));
 	fparamLlamarConRetorno->param[0] = T_NOMBRE_ETIQUETA;
 	fparamLlamarConRetorno->param[1] = T_PUNTERO;
 	fparamLlamarConRetorno->func = llamarConRetorno;
-	dictionary_put(*functionParameters, "LLAMAR_CON_RETORNO", fparamLlamarConRetorno);
+	dictionary_put(*functionParameters, "LLAMAR_CON_RETORNO",
+			fparamLlamarConRetorno);
 
 	//09
 	FunctionParameters* fparamRetornar = malloc(sizeof(FunctionParameters));
@@ -104,14 +117,16 @@ bool loadFunctionDictionary(t_dictionary** functionParameters) {
 	dictionary_put(*functionParameters, "IMPRIMIR", fparamImprimir);
 
 	//11
-	FunctionParameters* fparamImprimirTexto = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamImprimirTexto = malloc(
+			sizeof(FunctionParameters));
 	fparamImprimirTexto->param[0] = CHAR_AST;
 	fparamImprimirTexto->param[1] = NONE;
 	fparamImprimirTexto->func = imprimirTexto;
 	dictionary_put(*functionParameters, "IMPRIMIR_TEXTO", fparamImprimirTexto);
 
 	//12
-	FunctionParameters* fparamEntradaSalida = malloc(sizeof(FunctionParameters));
+	FunctionParameters* fparamEntradaSalida = malloc(
+			sizeof(FunctionParameters));
 	fparamEntradaSalida->param[0] = T_NOMBRE_DISPOSITIVO;
 	fparamEntradaSalida->param[1] = INT;
 	fparamEntradaSalida->func = entradaSalida;
@@ -136,13 +151,12 @@ bool loadFunctionDictionary(t_dictionary** functionParameters) {
 
 //Creo structs necesarias para el parser BY DRMENGUECHE
 
-
 void setearValores(t_config * archivoConfig) {
-		ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
-		umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
-		ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
-		nucleoPort = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
-		puts("hola");
+	ipUMC = config_get_string_value(archivoConfig, "IP_UMC");
+	umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
+	ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
+	nucleoPort = config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
+	puts("hola");
 }
 
 /*******************************************************
@@ -152,7 +166,7 @@ void setearValores(t_config * archivoConfig) {
 /*
  * definirVariable
  */
-t_puntero definirVariable(t_nombre_variable identificador_variable){
+t_puntero definirVariable(t_nombre_variable identificador_variable) {
 	printf("Operacion definir variable");
 	return 0;
 }
@@ -160,7 +174,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable){
 /*
  * obtenerPosicionVariable
  */
-t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable){
+t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
 	printf("Operacion obtener posicion variable");
 	return 0;
 }
@@ -168,10 +182,7 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable){
 /*
  * dereferenciar
  */
-t_valor_variable dereferenciar(t_puntero direccion_variable){
-
-
-
+t_valor_variable dereferenciar(t_puntero direccion_variable) {
 
 	printf("Operacion dereferenciar");
 	return 0;
@@ -180,7 +191,7 @@ t_valor_variable dereferenciar(t_puntero direccion_variable){
 /*
  * asignar
  */
-void asignar(t_puntero direccion_variable, t_valor_variable valor){
+void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	printf("< Copiando segundo argumento en el primero >");
 	memcpy(direccion_variable, &valor, sizeof(t_valor_variable));
 }
@@ -188,7 +199,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor){
 /*
  * obtenerValorCompartida
  */
-t_valor_variable obtenerValorCompartida(t_nombre_compartida variable){
+t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	printf("Operacion obtener valor variable compartida");
 	return 0;
 }
@@ -196,7 +207,8 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable){
 /*
  * 	asignarValorCompartida
  */
-t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_variable valor){
+t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
+		t_valor_variable valor) {
 	printf("Operacion asignar valor variable compartida");
 	return 0;
 }
@@ -204,7 +216,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_va
 /*
  * 	irAlLabel
  */
-t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta){
+t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta) {
 	printf("Operacion ir al label");
 	return 0;
 }
@@ -212,21 +224,21 @@ t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta){
 /*
  * llamarSinRetorno
  */
-void llamarSinRetorno(t_nombre_etiqueta etiqueta){
+void llamarSinRetorno(t_nombre_etiqueta etiqueta) {
 	printf("Operacion llamar sin retorno");
 }
 
 /*
  * llamarConRetorno
  */
-void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar){
+void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	printf("Operacion llamar con retorno");
 }
 
 /*
  * finalizar
  */
-void finalizar(void){
+void finalizar(void) {
 
 }
 
@@ -234,7 +246,7 @@ void finalizar(void){
  * retornar
  *
  */
-t_puntero_instruccion retornar(t_valor_variable retorno){
+t_puntero_instruccion retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
 	return 0;
 }
@@ -242,38 +254,38 @@ t_puntero_instruccion retornar(t_valor_variable retorno){
 /*
  * imprimir
  */
-int imprimir(t_valor_variable valor_mostrar){
+int imprimir(t_valor_variable valor_mostrar) {
 	StrCpuKer sck;
 	//sck = newStrCpuKer(CPU_ID, STD_OUTPUT, pcb);
 	//serializar el stream
 	//enviar al nucleo
 	char* mensaje = string_new();
-	char protocolo[3]="01";
-	memcpy(mensaje,&protocolo,2);
+	char protocolo[3] = "01";
+	memcpy(mensaje, &protocolo, 2);
 	memcpy(mensaje[2], &valor_mostrar, sizeof(t_valor_variable));
-	enviarMensaje(clienteNucleo,mensaje,6);
+	enviarMensaje(clienteNucleo, mensaje, 6);
 	return 0;
 }
 
 /*
  * imprimirTexto
  */
-int imprimirTexto(char* texto){
+int imprimirTexto(char* texto) {
 	printf("se imprime un texto");
-	char* mensaje=string_new();
-	char protocolo[3]="02";
+	char* mensaje = string_new();
+	char protocolo[3] = "02";
 	int tamanioDelTexto = (string_length(texto));
-	memcpy(mensaje,&protocolo,2);
-	memcpy(mensaje[2],&tamanioDelTexto,4);
-	memcpy(mensaje[6],texto,string_length(texto));
-	enviarMensaje(clienteNucleo,mensaje,6+string_length(texto));
+	memcpy(mensaje, &protocolo, 2);
+	memcpy(mensaje[2], &tamanioDelTexto, 4);
+	memcpy(mensaje[6], texto, string_length(texto));
+	enviarMensaje(clienteNucleo, mensaje, 6 + string_length(texto));
 	return 0;
 }
 
 /*
  * entradaSalida
  */
-int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo){
+int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	printf("Operacion de entrada y salida");
 	return 0;
 }
@@ -281,7 +293,7 @@ int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo){
 /*
  * wait
  */
-int wait(t_nombre_semaforo identificador_semaforo){
+int wait(t_nombre_semaforo identificador_semaforo) {
 	printf("Operacion privilegiada wait");
 	return 0;
 }
@@ -289,29 +301,71 @@ int wait(t_nombre_semaforo identificador_semaforo){
 /*
  * signal
  */
-int signal(t_nombre_semaforo identificador_semaforo){
+int signal(t_nombre_semaforo identificador_semaforo) {
 	printf("Operacion privilegiada signal");
 	return 0;
 }
 
+char * pedirCodigoAUMC() {
 
-AnSISOP_funciones funciones = {
-		.AnSISOP_definirVariable			= definirVariable,
-		.AnSISOP_obtenerPosicionVariable	= obtenerPosicionVariable,
-		.AnSISOP_dereferenciar				= dereferenciar,
-		.AnSISOP_asignar					= asignar,
-		.AnSISOP_obtenerValorCompartida 	= obtenerValorCompartida,
-		.AnSISOP_asignarValorCompartida 	= asignarValorCompartida,
-		.AnSISOP_irAlLabel					= irAlLabel,
-		.AnSISOP_llamarConRetorno			= llamarConRetorno,
-		.AnSISOP_retornar					= retornar,
-		.AnSISOP_entradaSalida				= entradaSalida,
-		.AnSISOP_imprimir					= imprimir,
-		.AnSISOP_imprimirTexto				= imprimirTexto,
-};
+	//pcbEnEjecucion.programCounter;
+	char*lineaDeCodigoADevolver=malloc(sizeof(char)*pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud);
+	int comienzo =
+			pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].comienzo;
 
-AnSISOP_kernel funcionesDeKernel= {
-		.AnSISOP_wait			= wait,
-		.AnSISOP_signal			= signal,
-};
+	int paginaDeComienzo = comienzo / tamanioPaginaUmc;
+
+	int desplazamiento =
+			comienzo
+					+ pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud;
+
+	int paginaDeFin = desplazamiento / tamanioPaginaUmc;
+
+	int dondeEmpiezo = comienzo - tamanioPaginaUmc * paginaDeComienzo;
+
+	int longitudTotalAPedir =
+			pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud;
+
+	if (paginaDeComienzo == paginaDeFin) {
+		//todo pedir pagina con el tamaño que ya tengo de antemano
+		//pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud
+		//usarPaginaDeComienzo
+	} else {
+		int cantPaginas = paginaDeFin - paginaDeComienzo;
+		int i;
+		int tamanioAPedir;
+		int paginaActual = paginaDeComienzo;
+		for (i = 0; i <= cantPaginas; i++) {
+
+			tamanioAPedir = tamanioPaginaUmc - dondeEmpiezo;
+			if (tamanioAPedir > longitudTotalAPedir) {
+				//todo pedir longitudTotalAPedir de paginaActual
+				break;
+			} else {
+				//todo pedir tamanioAPedir de paginaActual
+				longitudTotalAPedir = longitudTotalAPedir - tamanioAPedir;
+				dondeEmpiezo = 0;
+			}
+			//hay que ver como voy agrupando todo lo que pido en una sola cadena char*
+			paginaActual++;
+
+		}
+	}
+	return lineaDeCodigoADevolver;
+}
+
+
+
+AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
+		.AnSISOP_obtenerPosicionVariable = obtenerPosicionVariable,
+		.AnSISOP_dereferenciar = dereferenciar, .AnSISOP_asignar = asignar,
+		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
+		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
+		.AnSISOP_irAlLabel = irAlLabel, .AnSISOP_llamarConRetorno =
+				llamarConRetorno, .AnSISOP_retornar = retornar,
+		.AnSISOP_entradaSalida = entradaSalida, .AnSISOP_imprimir = imprimir,
+		.AnSISOP_imprimirTexto = imprimirTexto, };
+
+AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
+		signal, };
 

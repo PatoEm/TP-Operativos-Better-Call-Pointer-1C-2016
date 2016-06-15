@@ -57,4 +57,6 @@ pcb* newPcb(int id, int tamanioArchivoOriginal, t_puntero_instruccion programCou
 		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,
 		paginaDeStack* indiceDelStack, t_metadata_program* metaProgram, estadoPrograma estado);
 pcb* newEmptyPcb();
+
+char * pedirCodigoAUMC();
 #endif /* LIBRERIASCOMPARTIDAS_PCB_H_ */
