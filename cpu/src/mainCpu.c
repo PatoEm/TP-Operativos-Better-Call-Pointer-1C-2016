@@ -92,16 +92,17 @@ int main() {
 
 //==============================================================================================
 
-	SocketClient* fdNucleo =  socketCreateClient();
+	SocketClient* nucleo =  socketCreateClient();
+	SocketBuffer* buffer;
 
-
-
-	while(!socketConnect(fdNucleo, IP_KERNEL, (Int32U) 2020)){
+	do {
 		puts("Intentando conectar con el Nucleo.");
 		sleep(3);
-	} // PRUEBO Y PRUEBO HASTA Q LA PONGO
+	} while(!socketConnect(nucleo, IP_KERNEL, (Int32U) 2020));
 
-
+	do {
+		puts("Intentando realizar handshake.");
+	} while(!handshake(nucleo, CPU_ID) | 0);
 
 
 //	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {

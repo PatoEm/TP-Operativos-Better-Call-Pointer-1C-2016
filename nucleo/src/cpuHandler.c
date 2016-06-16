@@ -136,42 +136,74 @@ void checkCpuConnections() {
 	}
 }
 
-bool newClientHandler(Socket* cliente){
+void newClientHandler(Socket* client) {
 
-	SocketBuffer* buffer;
-	t_core* datos;
-	t_core core;
+	log_info(cpuhlog, "Nueva Conexion detectada, realizando handshake");
 
-	buffer = socketReceive(cliente);
+	//ADMINISTRO LA NUEVA CONEXION Y REALIZO EL HANDSHAKE
+	SocketBuffer* buffer = socketReceive(client);
+	if(buffer == NULL) {
+		log_error(cpuhlog, "Error al recibir de Cliente");
+	} else {
+		Stream strReceived = (Stream) buffer->data;
+		Char id = getStreamId(strReceived);
 
-	core.busy = TRUE;
-	core.socket = cliente;
+		log_info(cpuhlog, "ID Nuevo Cliente: %d.",id);
+		switch (id) {
 
-	if(buffer == NULL){
-		log_error(cpuhlog, "Mensaje vacio recibido.");
-		return FALSE;
-	} else{
-		if(buffer->data[0] == 'c'){ 				// ACA HAY QUE TOCAR CON LOS STREAMS
+		case CPU_ID:
+			log_info(cpuhlog, "Nuevo Cliente CPU");
+			newCpuClient(client,strReceived);
+			break;
 
-			// AGREGAR CPU A LA LISTA
-			datos = malloc(sizeof(datos));
-			if(datos == NULL){
-				log_error(cpuhlog, "No se pudo agregar CPU a la lista. (malloc)");
-				return FALSE;
-			}
-			*datos = core;
-			list_add(coreList, (void*)datos);
+		case CONSOLA_ID:
+			log_info(cpuhlog, "Nuevo Cliente CONSOLA");
+//			newConsoleClient(client,strReceived);
+			break;
 
-
-			log_info(cpuhlog, "Se ha conectado una nueva CPU.");
-
-		} else {
-			log_error(cpuhlog, "Mensaje erroneo recibido.");
-			return FALSE;
 		}
 	}
-	return TRUE;
 }
+
+void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
+
+	t_core *cpu;
+	StrCpuKer* sck = unserializeCpuKer(dataSerialized); //ESTO ESTA ROMPIENDO
+	puts("Data deserializada.");
+	StrKerCpu* skc;
+	SocketBuffer* sb;
+	pcb pcb;
+	switch(sck->action) {
+		case HANDSHAKE:
+			log_debug(cpuhlog, "KER-CPU: HANDSHAKE recibido");
+			skc = newStrKerCpu(CPU_ID, HANDSHAKE, pcb, 0);
+			sb = serializeKerCpu(skc);
+			if (socketSend(cpuClient, sb)) {
+				log_debug(cpuhlog, "KER-CPU: HANDSHAKE enviado");
+				//AGREGARLO A LA LISTA DE DESCRIPTORES DE CPU  DEL PLANIFICADOR
+				cpu = malloc(sizeof(cpu));
+				cpu->cpuClient = cpuClient;
+				cpu->pcb = NULL;
+
+				//LOG OBLIGATORIO
+//				conexion_cpu(cpuClient->descriptor);
+
+//				mtxLock(&mtxCpuList);
+				list_add(coreList, cpu);
+//				mtxUnlock(&mtxCpuList);
+				//ACTIVO LA LISTA DE CPUS PARA EL PLANIFICADOR
+//				semSignal(&semCpuList);
+			} else {
+				log_error(cpuhlog, "KER-CPU: HANDSHAKE fallo al devolver");
+			}
+
+			break;
+		default:
+			log_error(cpuhlog, "Nueva CPU no puedo hacer el Handshake");
+			break;
+	}
+}
+
 
 void clientHandler(Socket* cliente){
 
@@ -199,7 +231,7 @@ int cpuCoreInList(t_list* lista, Socket* cliente){
 
 	for(index = 0; index < ultimoIndex; index = index + 1){
 		data = (t_core*)list_get(lista, index);
-		if(data->socket == cliente){
+		if(data->cpuClient == cliente){
 			return index;
 		}
 	}

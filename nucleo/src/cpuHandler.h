@@ -14,6 +14,7 @@
 
 // INCLUDES
 #include <libreriasCompartidas/pointerSocketes.h>
+#include <libreriasCompartidas/pointerStream.h>
 #include <commons/collections/list.h>
 #include <stdio.h>
 
@@ -27,7 +28,8 @@ void cpuHandlerThread();
 void* cpuHandlerThreadRoutine(void*);
 Boolean initCpuServer();
 void checkCpuConnections();
-bool newClientHandler(Socket* cliente);
+void newClientHandler(Socket* client);
+void newCpuClient(Socket* cpuClient, Stream dataSerialized);
 void clientHandler(Socket* cliente);
 int cpuCoreInList(t_list* lista, Socket* cliente);
 
@@ -35,8 +37,8 @@ int cpuCoreInList(t_list* lista, Socket* cliente);
 // ESTRUCTURAS
 
 typedef struct core {
-	bool busy;
-	Socket* socket;
+	pcb* pcb;
+	Socket* cpuClient;
 } t_core;
 
 
