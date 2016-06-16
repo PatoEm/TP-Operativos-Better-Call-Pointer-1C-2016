@@ -64,8 +64,6 @@ Boolean loadConfig();
 Boolean socketConnection();
 Boolean getNextPcb();
 Boolean processPcb();
-Boolean nucleoHandShake(Socket* fd);
-void disponible(int fd);
 
 /*****************************************
  * GLOBAL
@@ -93,17 +91,22 @@ int main() {
 //==============================================================================================
 
 	SocketClient* nucleo =  socketCreateClient();
-	SocketBuffer* buffer;
 
 	do {
 		puts("Intentando conectar con el Nucleo.");
 		sleep(3);
 	} while(!socketConnect(nucleo, IP_KERNEL, (Int32U) 2020));
 
-	do {
-		puts("Intentando realizar handshake.");
-	} while(!handshake(nucleo, CPU_ID) | 0);
 
+	puts("Intentando realizar handshake.");
+	handshake(nucleo, CPU_ID);
+
+	getNextPcb();
+
+	while(1){
+		sleep(10);
+		puts("Esperando..");
+	}
 
 //	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
 //		while (TRUE){
@@ -210,12 +213,12 @@ Boolean socketConnection() {
 	return TRUE;
 }
 
-
 Boolean getNextPcb() {
 	if (sck == NULL) {
-//		pcbActual = newEmptyPcb();
-		//sck = newStrCpuKer(CPU_ID, PRIMER_PCB, *pcbActual, 0, 0);
+		pcbActual = newEmptyPcb();
+		sck = newStrCpuKer(CPU_ID, /*PRIMER_PCB*/ 7, *pcbActual, 0, 0);
 	}
+	puts("getNextPcb: Nuevo PCB vacio creado.");
 	// serializo y armo el socket
 	SocketBuffer* sb = serializeCpuKer(sck);
 	if (!socketSend(kernelClient->ptrSocket, sb)) {
@@ -237,25 +240,4 @@ Boolean getNextPcb() {
 
 Boolean processPcb() {
 	return TRUE;
-}
-
-Boolean nucleoHandShake(Socket* fd){
-
-	enviarMensaje(fd, "c", 2);
-
-	buffer = socketReceive(fd);
-
-	if(buffer->data[0] == 'k'){
-		disponible(fd);
-	}
-	else{
-		puts("No me dieron el ok.");
-		return FALSE;
-	}
-
-	return TRUE;
-}
-
-void disponible(int fd){
-	enviarMensaje(fd, "d", 2);
 }

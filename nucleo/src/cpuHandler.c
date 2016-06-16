@@ -14,6 +14,13 @@ t_log* cpuhlog;
 
 int fdmax;
 
+
+/*
+ *
+ * THREAD DEL CPUHANDLER
+ *
+ */
+
 void cpuHandlerThread(){
 	// EL HILO VA A HACER SUS COSAS SIEMPRE QUE EL PROCESO PADRE
 	// SIGA VIVO
@@ -72,8 +79,11 @@ Boolean initCpuServer() {
 	return TRUE;
 }
 
-
-
+/*
+ *
+ * EL PUTO SELEC
+ *
+ */
 
 void checkCpuConnections() {
 
@@ -136,6 +146,13 @@ void checkCpuConnections() {
 	}
 }
 
+
+/*
+ *
+ * PROCEDIMIENTOS PARA NUEVOS CLIENTES
+ *
+ */
+
 void newClientHandler(Socket* client) {
 
 	log_info(cpuhlog, "Nueva Conexion detectada, realizando handshake");
@@ -170,16 +187,17 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	t_core *cpu;
 	StrCpuKer* sck = unserializeCpuKer(dataSerialized); //ESTO ESTA ROMPIENDO
 	puts("Data deserializada.");
+	printf("Action: %d\n", sck->action);
 	StrKerCpu* skc;
 	SocketBuffer* sb;
 	pcb pcb;
 	switch(sck->action) {
-		case HANDSHAKE:
-			log_debug(cpuhlog, "KER-CPU: HANDSHAKE recibido");
+		case 0://HANDSHAKE:
+			log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
 			skc = newStrKerCpu(CPU_ID, HANDSHAKE, pcb, 0);
 			sb = serializeKerCpu(skc);
 			if (socketSend(cpuClient, sb)) {
-				log_debug(cpuhlog, "KER-CPU: HANDSHAKE enviado");
+				log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
 				//AGREGARLO A LA LISTA DE DESCRIPTORES DE CPU  DEL PLANIFICADOR
 				cpu = malloc(sizeof(cpu));
 				cpu->cpuClient = cpuClient;
@@ -204,36 +222,87 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	}
 }
 
-
-void clientHandler(Socket* cliente){
-
-//	int cpuNodo;
-//	cpuNodo = cpuCoreInList(coreList, cliente);
-//	t_core* datos = malloc(sizeof(t_core));
-//
-//	SocketBuffer* buffer;
-//
-//	buffer = socketReceive(cliente);
-//
-//	if(buffer->data[0] == 'd'){
-//		puts("Una CPU se ha disponinbilizado.");
-//	}
-
-}
+/*
+ *
+ * PROCDIMIENTOS PARA CLIENTES CONOCIDOS
+ *
+ */
 
 
+void clientHandler(int clientDescriptor) {
 
-int cpuCoreInList(t_list* lista, Socket* cliente){
+	Socket* tempClient = malloc(sizeof(Socket));
+	tempClient->descriptor = clientDescriptor;
 
-	int index;  // NO ESTOY SEGURO DE SI ARRANCA EN 0 O EN 1, PUEDE TRAER PROBLEMAS
-	int ultimoIndex = list_size(lista) -1 ;
-	t_core* data;
+	SocketBuffer* buffer = socketReceive(tempClient);
 
-	for(index = 0; index < ultimoIndex; index = index + 1){
-		data = (t_core*)list_get(lista, index);
-		if(data->cpuClient == cliente){
-			return index;
+	if (buffer == NULL) {
+
+		//SE CALLO UN CLIENTE
+		log_info(cpuhlog, "KERNEL : Se cayo el cliente %d", clientDescriptor);
+
+		//REALIZO EL PROCEDIMIENTO DE CAIDA DE UN CLIENTE
+//		clientDown(clientDescriptor);
+
+		//ELIMINO EL DESCRIPTOR DEL CONJUNTO
+		FD_CLR(clientDescriptor, &master);
+		log_info(cpuhlog, "KERNEL : Se elimina el cliente %d de la bolsa de descriptores", clientDescriptor);
+
+		//CIERRO EL SOCKET
+		socketDestroy(tempClient);
+		free(tempClient);
+		log_info(cpuhlog, "KERNEL : Se elimina el descriptor %d para ese cliente", clientDescriptor);
+
+	} else {
+
+		// ** SE ATIENDEN SOLICITUDES DE CLIENTES **
+		log_info(cpuhlog, "KERNEL : El cliente %d ha enviado un paquete", clientDescriptor);
+
+		Stream strReceived = (Stream) buffer->data;
+		Char id = getStreamId(strReceived);
+
+		switch (id) {
+
+		case CPU_ID:
+			cpuClientHandler(tempClient, strReceived);
+			break;
+
+		case CONSOLA_ID:
+//			consoleClientHandler(tempClient, strReceived);
+			break;
+
 		}
 	}
-	return -1;
 }
+
+void cpuClientHandler(Socket* cpuClient, Stream data) {
+
+	pcb* aux;
+//	t_hilo* pcbClipboard;
+	StrCpuKer* sck = unserializeCpuKer(data);
+
+	if(sck->action == PRIMER_PCB){
+		/*
+		 * ACA NO SE HACE NADA, SI EL PLANIFICADOR TIENE TCBS PARA ENVIAR, LOS ENVIA
+		 * SI NO, LA CPU VA A TENER QUE ESPERAR. PARA ESTE PUNTO, EL PLANIFICADOR YA SABE
+		 * QUE EXISTE ESTA CPU
+		 */
+
+		log_info(cpuhlog, "KERNEL : CPU %d ha enviado FIRST_PCB",cpuClient->descriptor);
+		return;
+	}
+
+//	pcbClipboard = copyPcbToClipboard(&(sck->pcb));
+
+	switch (sck->action) {
+
+	// ACA VA EL RECONOCIMIENTO DE ACCIONES
+
+	default:
+		log_error(cpuhlog, "KERNEL : CPU %d ha enviado un action incomprensible",cpuClient->descriptor);
+		break;
+
+	}
+
+}
+

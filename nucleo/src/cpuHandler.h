@@ -30,8 +30,9 @@ Boolean initCpuServer();
 void checkCpuConnections();
 void newClientHandler(Socket* client);
 void newCpuClient(Socket* cpuClient, Stream dataSerialized);
-void clientHandler(Socket* cliente);
+void clientHandler(int cliente);
 int cpuCoreInList(t_list* lista, Socket* cliente);
+void cpuClientHandler(Socket* cpuClient, Stream data);
 
 
 // ESTRUCTURAS
