@@ -28,13 +28,16 @@ char* algoritmoDeReemplazo;
 int entradas_TLB;
 int espera;
 bool*bitMap;
+bool* bitMapTLB;
+int aciertosTLB;
+int accesosTLB;
 
 typedef struct {
 	int IDPaginaInterno;
 	int pid;
 	int numDePag;
 
-} espacioAsignado;
+}espacioAsignado;
 
 
   typedef struct{
@@ -44,6 +47,7 @@ typedef struct {
   }t_tlb;
 
 t_list * listaEspacioAsignado;
+t_list * TLB;
 
 //estructuras para los hilos de CPU y nucleo
 
@@ -116,10 +120,28 @@ void meHablaKernelPrueba ();
 
 void meHablaCPUPrueba ();
 
-void elDestructorDeNodosTLB();
+void elDestructorDeNodosTLB(int);
 
-void inicioTLB(t_list *, int, int);
+void elDestructorDeNodosMemoria(int);
+
+void inicioTLB();
 
 t_list * creoTLB();
+
+//SI ENCUENTRA DEVUELVE LA ENTRADA, SI NO ENCUENTRA DEVUELVE NULL
+t_tlb * buscarEnTLB(int, int , int* );
+
+void leerEnTLB(int , int, int *);
+
+//DEVUELVE 1 SI ESTA LLENA, DEVUELVE 0 SI NO ESTA LLENA
+int tlbLlena();
+
+//DEVUELVE 1 SI ESTA HABILITADA, DEVUELVE 0 SI NO ESTA HABILITADA
+int tlbHabilitada();
+
+void leerEnMemoriaReal(int , int);
+
+//SI ENCUENTRA DEVUELVE LA PAGINA, SI NO ENCUENTRA DEvUELVE NULL
+espacioAsignado * buscarEnMemoriaReal(int , int);
 
 #endif /* UMC_H_ */
