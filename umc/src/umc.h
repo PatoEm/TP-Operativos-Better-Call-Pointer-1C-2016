@@ -27,6 +27,7 @@ int marco_x_proc;
 char* algoritmoDeReemplazo;
 int entradas_TLB;
 int espera;
+char* memoriaTLB;
 bool*bitMap;
 bool* bitMapTLB;
 int aciertosTLB;
@@ -36,14 +37,15 @@ typedef struct {
 	int IDPaginaInterno;
 	int pid;
 	int numDePag;
-
+	int bitModificado;
 }espacioAsignado;
 
 
   typedef struct{
 	  int pid;
-	  int frame;
 	  int pagina;
+	  int frameTLB;
+	  int momentoEntrada;
   }t_tlb;
 
 t_list * listaEspacioAsignado;
@@ -60,6 +62,9 @@ typedef struct{
 }t_CPU;
 
 //Prototipos
+
+void insertarNodoOrdenadoEnTLB(t_tlb*unNodo);
+
 void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame);
 
 void eliminarFramesOcupadosContiguos(int cantidad, int frame);
@@ -67,6 +72,8 @@ void eliminarFramesOcupadosContiguos(int cantidad, int frame);
 //espacioLibre * crearEspacioLibre(int inicio) ;
 
 void agregarEspacioLibre(int inicio);
+
+void iniciarTLB();
 
 int calcularIDPagina(int inicio);
 
@@ -113,6 +120,8 @@ void liberarMemoria(char * );
 void escuchoMuchasConexiones();
 
 void meHablaKernel();
+
+void crearListas();
 
 void meHablaCPU();
 

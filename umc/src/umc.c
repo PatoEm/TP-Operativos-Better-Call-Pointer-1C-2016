@@ -32,10 +32,10 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 	if (verificarSiHayEspacio(paginas)) {
 		if (paginasContiguasDeUMC(paginas) == -1) {
 			compactarUMC(); //Tengo que seguir desde acá DR Mengueche
-			reservarPaginas(paginasContiguasDeSwap(paginas), pid, paginas);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
 			return TRUE;
 		} else {
-			reservarPaginas(paginasContiguasDeSwap(paginas), pid, paginas);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
 			return TRUE;
 		}
 	} else
@@ -62,6 +62,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 				break;
 			}
 		}
+
 	}
 
 	while (contadorDePaginas < cantidadDePaginas) {
@@ -70,6 +71,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
+		(paginaAReservar->bitModificado) = 0;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
@@ -217,7 +219,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	}
 }
 
-void finalizarPrograma(int pid) {//todo avisar al swap que tiene que reventar pid
+void finalizarPrograma(int pid) { //todo avisar al swap que tiene que reventar pid
 
 	espacioAsignado*nodoAReventar;
 	int enDondeAgregarEspacio = 0;
@@ -275,7 +277,7 @@ void setearValores(t_config * archivoConfig) {
 }
 
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
-	char * memory = calloc(cantidadFrames, capacidadFrames);
+	char * memory = calloc(1, cantidadFrames * capacidadFrames);
 	log_info(logger, "Memoria real reservada", NULL);
 	return memory;
 }
@@ -506,45 +508,56 @@ void comandosUMC() {
 
 void retardoUMC(int retardo) {
 	espera = retardo;
+	int i = 0;
+	espacioAsignado * nodoActualDeAsignados;
 }
 
-void dump() {
+void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
+	int i = 0;
+	espacioAsignado * nodoActualDeAsignados;
+	//IMPRIMO EN PANTALLA
+	puts("Paginas Asignadas al proceso: %d\n", pid);
+	while (i < list_size(listaEspacioAsignado)) {
+			nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
+			if(nodoActualDeAsignados->pid==pid){
+			printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
+			printf("PID: %d\n", nodoActualDeAsignados->pid);
+			printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
+			log_info(logger, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
+					nodoActualDeAsignados->IDPaginaInterno,
+					nodoActualDeAsignados->pid);
+			}
+			i++;
+		}
+
+}
+
+void dumpEstructuraDeMemoriaTodosLosProcesos() {
 	int i = 0;
 	espacioAsignado * nodoActualDeAsignados;
 
 //IMPRIMO EN PANTALLA
 	puts("Paginas Asignadas:\n");
-	while (nodoActualDeAsignados->IDPaginaInterno < marcos) {
-		nodoActualDeAsignados = (espacioAsignado*) list_get(listaEspacioAsignado, i);
+	while (i < list_size(listaEspacioAsignado)) {
+		nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
 		printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
 		printf("PID: %d\n", nodoActualDeAsignados->pid);
+		printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
+		log_info(logger, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
+				nodoActualDeAsignados->IDPaginaInterno,
+				nodoActualDeAsignados->pid);
 		i++;
 	}
 
 	puts("Paginas Libres:\n");
 	i = 0;
-
-//IMPRIMO EN EL LOG
-	i = 0;
-
-	while (nodoActualDeAsignados->IDPaginaInterno < marcos) {
-		nodoActualDeAsignados = (espacioAsignado*) list_get(listaEspacioAsignado, i);
-		log_info(logger, "Frame: %d \nPID: %d\n\n",
-				nodoActualDeAsignados->IDPaginaInterno, nodoActualDeAsignados->pid);
+	while (i < marcos) {
+		if (bitMap[i] == 0) {
+			printf("ID Frame: %d \n", i);
+			log_info(logger, "Frame libre: %d\n", i);
+		}
 	}
 
-//IMPRIMO EN EL ARCHIVO
-	/*
-	 archivo = fopen("Dump","rw+");
-	 while(nodoActualDeAsignados->IDFrame < marcos){
-
-	 }
-
-	 while(nodoActualDeLibres->IDFrame < marcos){
-
-	 }
-	 fclose(archivo);
-*/
 }
 
 void flushTLB() {
@@ -554,7 +567,7 @@ void flushTLB() {
 		int i = 0;
 		while (i < TLB->elements_count) {
 			elDestructorDeNodosTLB(i);
-			bitMapTLB[i]=false; //Vacio todo el bitMap de la tlb
+			bitMapTLB[i] = FALSE; //Vacio todo el bitMap de la tlb
 			i++;
 		}
 		log_info(logger, "TLB acaba de vaciarse");
@@ -563,9 +576,11 @@ void flushTLB() {
 
 void flushMemory() {
 	int i = 0;
-	while (i < listaEspacioAsignado->elements_count){
-		elDestructorDeNodosMemoria(i);
-		bitMap[i] = false; //vacio todo el bitMap
+	espacioAsignado*nodoAModificar;
+	while (i < listaEspacioAsignado->elements_count) {
+		nodoAModificar = list_get(listaEspacioAsignado, i);
+		nodoAModificar->bitModificado = 1;
+		i++;
 	}
 }
 
@@ -588,10 +603,19 @@ void inicioTLB() {
 		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
 
 		TLB = creoTLB();
-
+		bitMapTLB = malloc(sizeof(bool) * entradas_TLB);
+		iniciarTLB();
+		memoriaTLB = calloc(1, marco_Size * entradas_TLB);
 		//Inicializo la cantidad de aciertos y accesos
 		aciertosTLB = 0;
 		accesosTLB = 0;
+	}
+}
+
+void iniciarTLB() {
+	int i;
+	for (i = 0; i < entradas_TLB; i++) {
+		bitMapTLB[i] = FALSE;
 	}
 }
 
@@ -608,72 +632,175 @@ void elDestructorDeNodosMemoria(int i) {
 	list_remove(listaEspacioAsignado, i);
 }
 
-void leerEnTLB(int PID, int pagina,int * posicion){
-
-	t_tlb * entradaTLB = buscarEnTLB(PID, pagina, posicion);
-	int habilitada=tlbHabilitada();
-
-	if(habilitada != 0){
-		if(entradaTLB != NULL){
-			log_info("Acierto de TLB en el frame %d y pagina %d",entradaTLB->frame,entradaTLB->pagina);
-			//Creo que no hay ningun retardo pero si lo hay lo pongo en esta linea
-			//Aca le tengo que mandar al CPU o al kernel que el pedido de lectura esta hecho
-		}
-		//Si no lo encontró leo en memoria real
-	}
-}
-
-t_tlb * buscarEnTLB(int PID, int pagina, int* posicion){
+bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	int i = 0;
-	int sizeTLB = list_size(TLB);
-	while ( i < sizeTLB){
-		t_tlb * entradaTLB = list_get(TLB, i);
-		if (entradaTLB->pid == PID){
-			if (entradaTLB->pagina == pagina){
-				*posicion = i;
-				return entradaTLB; //La encontro
-			}
-		}
+	t_tlb*nodoActual = list_get(TLB, i);
+	while (i < list_size(TLB)) {
+
+		if ((nodoActual->pid) == pid && nodoActual->pagina == pagina)
+			break;
 		i++;
 	}
-	*posicion = -1;
-	return NULL;
+	if (i >= list_size(TLB))
+		return 0;
+	else {
+		int lugarActual = nodoActual->frameTLB * marco_Size + offset;
+		for (i = 0; i < cantidad; i++) {
+			memoriaTLB[lugarActual] = buffer[i];
+			i++;
+			lugarActual++;
+		}
+		return 1;
+	}
+
 }
+
+void llevarPaginaATLB(int PID, int pagina, char* buffer) {
+	if (tlbHabilitada()) {
+		int TLBLlena = tlbLlena();
+		if (TLBLlena) {
+			int paginaAEscribir = reemplazarPaginaLRU();
+			memoriaTLB[paginaAEscribir] = 1;
+			t_tlb* tlb = malloc(sizeof(t_tlb));
+			tlb->pid = PID;
+			tlb->pagina = pagina;
+			tlb->momentoEntrada = accesosTLB;
+			tlb->frameTLB = paginaAEscribir;
+			insertarNodoOrdenadoEnTLB(tlb);
+			int contador = 0;
+			int posicionEnTLB = marco_Size * paginaAEscribir;
+			while (contador < marco_Size) {
+				memoriaTLB[posicionEnTLB] = buffer[contador];
+				contador++;
+			}
+		} else {
+			t_tlb* tlb = malloc(sizeof(t_tlb));
+			tlb->pid = PID;
+			tlb->pagina = pagina;
+			tlb->momentoEntrada = accesosTLB;
+			int paginaVacia = buscarPaginaVaciaEnTLB();
+			bitMapTLB[paginaVacia] = 1;
+			tlb->frameTLB = paginaVacia;
+			insertarNodoOrdenadoEnTLB(tlb);
+			int contador = 0;
+			int posicionEnTLB = marco_Size * paginaVacia;
+			while (contador < marco_Size) {
+				memoriaTLB[posicionEnTLB] = buffer[contador];
+				contador++;
+			}
+
+		}
+	}
+
+}
+
+//detecta Que pagina debe reemplazar y la lleva a memoria si debe
+int reemplazarPaginaLRU() {
+	int paginaLibre;
+	int contadorPrimerMomento;
+	t_tlb*paginaAComparar;
+	t_tlb*paginaAMatar;
+	char* buffer = malloc(sizeof(char) * marco_Size);
+	paginaAMatar = list_get(TLB, contadorPrimerMomento);
+	int lugarDePaginaAMatar = 0;
+	for (contadorPrimerMomento = 0; contadorPrimerMomento < list_size(TLB);
+			contadorPrimerMomento++) {
+		paginaAComparar = list_get(TLB, contadorPrimerMomento);
+		if (paginaAComparar->momentoEntrada < paginaAMatar->momentoEntrada) {
+			paginaAMatar = paginaAComparar;
+			lugarDePaginaAMatar = contadorPrimerMomento;
+		}
+	}
+	int comienzoDePagina = ((paginaAMatar->frameTLB) * marco_Size);
+	int i = 0;
+	while (comienzoDePagina
+			< ((paginaAMatar->frameTLB) * marco_Size) + marco_Size) {
+		buffer[i] = memoriaTLB[comienzoDePagina];
+		i++;
+		comienzoDePagina++;
+	}
+
+	almacenarBytes(paginaAMatar->frameTLB, paginaAMatar->pagina, marco_Size,
+			buffer);
+	paginaLibre = paginaAMatar->frameTLB;
+	memoriaTLB[paginaLibre] = 0;
+	free(list_remove(TLB, lugarDePaginaAMatar));
+	return paginaLibre;
+}
+
+//nodo ordenado por PID
+void insertarNodoOrdenadoEnTLB(t_tlb*unNodo) {
+	int contador = 0;
+	t_tlb*nodoActual = list_get(TLB, contador);
+	while (nodoActual->pid < unNodo->pid && contador < list_size(TLB)) {
+		contador++;
+		nodoActual = list_get(TLB, contador);
+	}
+	list_add_in_index(TLB, contador, unNodo);
+}
+
+int buscarPaginaVaciaEnTLB() {
+	int i = 0;
+	while (bitMapTLB[i] != 0) {
+		i++;
+	}
+	return i;
+}
+
+char*leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
+
+	int habilitada = tlbHabilitada();
+	char* buffer;
+	if (habilitada != 0) {
+		t_tlb * entradaTLB = buscarEnTLB(PID, pagina);
+		if (entradaTLB != NULL) {
+			log_info("Acierto de TLB en el frame %d y pagina %d",
+					entradaTLB->frameTLB, entradaTLB->pagina);
+			buffer = malloc(sizeof(char) * tamanio);
+			int i;
+			int lugarEnTLB = entradaTLB->frameTLB * marco_Size + posicion;
+			for (i = 0; i < tamanio; i++) {
+				buffer[i] = memoriaTLB[lugarEnTLB];
+				i++;
+				lugarEnTLB++;
+			}
+			return buffer;
+			//Creo que no hay ningun retardo pero si lo hay lo pongo en esta linea
+			//Aca le tengo que mandar al CPU o al kernel que el pedido de lectura esta hecho todo
+		} else {
+			//Si no lo encontró leo en memoria real todo
+		}
+	}
+
+	t_tlb * buscarEnTLB(int PID, int pagina) {
+		int i = 0;
+		int sizeTLB = list_size(TLB);
+		while (i < sizeTLB) {
+			t_tlb * entradaTLB = list_get(TLB, i);
+			if (entradaTLB->pid == PID) {
+				if (entradaTLB->pagina == pagina) {
+					return entradaTLB; //La encontro
+				}
+			}
+			i++;
+		}
+		return NULL;
+	}
 
 //Devuelve 1 si esta llena, devuelve 0 si no esta llena
-int tlbLlena(){
-	if(TLB->elements_count == entradas_TLB){
-	return 1;
-	}
+	int tlbLlena() {
+		if (TLB->elements_count == entradas_TLB) {
+			return 1;
+		}
 
-	return 0;
-}
-
-//DEVUeLVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
-int tlbHabilitada(){
-	if(entradas_TLB == 0){
 		return 0;
 	}
-	return 1;
-}
 
-void leerEnMemoriaReal(int PID, int pagina){
-
-	espacioAsignado * paginaActual = buscarEnMemoriaReal(PID, pagina);
-	int habilitada=tlbHabilitada();
-	//Tengo que seguir esto
-
-}
-
-espacioAsignado * buscarEnMemoriaReal(int PID, int pagina){
-	int i=0;
-	int sizeMemory = list_size(listaEspacioAsignado);
-	while(i<sizeMemory){
-		espacioAsignado * paginaActual = list_get(listaEspacioAsignado, i);
-		if(paginaActual->pid == PID){
-			return paginaActual; //devuelvo la pagina que encontre
+//DEVUeLVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
+	int tlbHabilitada() {
+		if (entradas_TLB == 0) {
+			return 0;
 		}
-		i++;
+		return 1;
 	}
-	return NULL; //No la encontro en memoria real
-}
+

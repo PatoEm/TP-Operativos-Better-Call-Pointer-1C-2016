@@ -10,7 +10,7 @@ BETTER CALL POINTER PERRO
 int main(void) {
 
 	leerArchivoDeConfiguracion("configumc");
-	crearLogger(1);
+	crearLogger(0);
 
 	puts("Inicio UMC");
 	log_info(logger, "Inicio Log UMC", NULL);
