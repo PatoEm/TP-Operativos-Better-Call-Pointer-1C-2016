@@ -22,13 +22,11 @@
  * Constructor Consola-Kernel
  ******************************/
 StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen){
-		//, Int32U tid){ por si decidimos dejarlo
 	StrConKer* sconk = malloc(sizeof(StrConKer));
 	sconk->id = id;
 	sconk->action = action;
 	sconk->fileContent = fileContent;
 	sconk->fileContentLen = fileContentLen;
-	//sconk->tid = tid; por si decidimos dejarlo
 	return sconk;
 }
 
@@ -128,7 +126,30 @@ StrUmcCpu* newStrUmcCpu(Char id, Char action, Int32U address, Int32U dataLen, By
 /*******************************
  * Constructor UMC-Swap
  ******************************/
-//StrUmcSwa* newStrUmcSwa(Char, Char);
+StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado page, Int32U nroPage, Byte* data, Int32U dataLen){
+	StrUmcSwa* sus = malloc(sizeof(StrUmcSwa));
+	sus->id = id;
+	sus->action = action;
+	sus->page = page;
+	sus->nroPage = nroPage;
+	sus->data = data;
+	sus->dataLen = dataLen;
+	return sus;
+}
+
+/*******************************
+ * Constructor Swap-UMC
+ ******************************/
+StrUmcSwa* newStrSwaUmc(Char id, Char action, espacioAsignado page, Int32U nroPage, Byte* data, Int32U dataLen){
+	StrSwaUmc* ssu = malloc(sizeof(StrUmcSwa));
+	ssu->id = id;
+	ssu->action = action;
+	ssu->page = page;
+	ssu->nroPage = nroPage;
+	ssu->data = data;
+	ssu->dataLen = dataLen;
+	return ssu;
+}
 
 //================================================================================================
 
@@ -245,7 +266,30 @@ Int32U getSizeUmcCpu(StrUmcCpu* suc){
 /*******************************
  * getSize UMC-Swap
  ******************************/
-//Int32U getSizeUmcSwa(StrUmcSwa*);
+Int32U getSizeUmcSwa(StrUmcSwa* sus){
+	Int32U size = 0;
+	size += sizeof(sus->id);
+	size += sizeof(sus->action);
+	size += sizeof(sus->page);
+	size += sizeof(sus->nroPage);
+	size += sizeof(sus->data);
+	size += sizeof(sus->dataLen);
+	return size;
+}
+
+/*******************************
+ * getSize Swap-UMC
+ ******************************/
+Int32U getSizeSwaUmc(StrSwaUmc* ssu){
+	Int32U size = 0;
+	size += sizeof(ssu->id);
+	size += sizeof(ssu->action);
+	size += sizeof(ssu->page);
+	size += sizeof(ssu->nroPage);
+	size += sizeof(ssu->data);
+	size += sizeof(ssu->dataLen);
+	return size;
+}
 
 //================================================================================================
 
@@ -466,7 +510,7 @@ SocketBuffer* serializeCpuUmc(StrCpuUmc* scu){
  * Serialization UMC-Kernel
  ***************************/
 SocketBuffer* serializeUmcKer(StrUmcKer* suk){
-	Int8U size = getSizeCpuUmc(suk);
+	Int8U size = getSizeUmcKer(suk);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -500,7 +544,7 @@ SocketBuffer* serializeUmcKer(StrUmcKer* suk){
  * Serialization UMC-CPU
  ************************/
 SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
-	Int8U size = getSizeCpuUmc(suc);
+	Int8U size = getSizeUmcCpu(suc);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -532,12 +576,76 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
 /*************************
  * Serialization UMC-SWAP
  ************************/
-//SocketBuffer* serializeUmcSwa(StrUmcSwa*){
+SocketBuffer* serializeUmcSwa(StrUmcSwa* sus){
+	Int8U size = getSizeUmcSwa(sus);
+	Stream data = malloc(size);
+	Stream ptrData = data;
+	Byte* ptrByte;
 
-	//t_bitarray* barray = bitarray_create((char*) data, size);
-	//return bitarrayToSocketBuffer(barray);
+	ptrByte = (Byte*) &sus->id;
+	memcpy(ptrData, ptrByte, sizeof(sus->id));
+	ptrData += sizeof(sus->id);
 
-//}
+	ptrByte = (Byte*) &sus->action;
+	memcpy(ptrData, ptrByte, sizeof(sus->action));
+	ptrData += sizeof(sus->action);
+
+	ptrByte = (Byte*) &sus->page;
+	memcpy(ptrData, ptrByte, sizeof(sus->page));
+	ptrData += sizeof(sus->page);
+
+	ptrByte = (Byte*) &sus->nroPage;
+	memcpy(ptrData, ptrByte, sizeof(sus->nroPage));
+	ptrData += sizeof(sus->nroPage);
+
+	ptrByte = (Byte*) &sus->data;
+	memcpy(ptrData, ptrByte, sizeof(sus->data));
+	ptrData += sizeof(sus->data);
+
+	ptrByte = (Byte*) &sus->dataLen;
+	memcpy(ptrData, ptrByte, sizeof(sus->dataLen));
+	ptrData += sizeof(sus->dataLen);
+
+	t_bitarray* barray = bitarray_create((char*) data, size);
+	return bitarrayToSocketBuffer(barray);
+}
+
+/*************************
+ * Serialization SWAP-UMC
+ ************************/
+SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu){
+	Int8U size = getSizeSwaUmc(ssu);
+	Stream data = malloc(size);
+	Stream ptrData = data;
+	Byte* ptrByte;
+
+	ptrByte = (Byte*) &ssu->id;
+	memcpy(ptrData, ptrByte, sizeof(ssu->id));
+	ptrData += sizeof(ssu->id);
+
+	ptrByte = (Byte*) &ssu->action;
+	memcpy(ptrData, ptrByte, sizeof(ssu->action));
+	ptrData += sizeof(ssu->action);
+
+	ptrByte = (Byte*) &ssu->page;
+	memcpy(ptrData, ptrByte, sizeof(ssu->page));
+	ptrData += sizeof(ssu->page);
+
+	ptrByte = (Byte*) &ssu->nroPage;
+	memcpy(ptrData, ptrByte, sizeof(ssu->nroPage));
+	ptrData += sizeof(ssu->nroPage);
+
+	ptrByte = (Byte*) &ssu->data;
+	memcpy(ptrData, ptrByte, sizeof(ssu->data));
+	ptrData += sizeof(ssu->data);
+
+	ptrByte = (Byte*) &ssu->dataLen;
+	memcpy(ptrData, ptrByte, sizeof(ssu->dataLen));
+	ptrData += sizeof(ssu->dataLen);
+
+	t_bitarray* barray = bitarray_create((char*) data, size);
+	return bitarrayToSocketBuffer(barray);
+}
 
 //================================================================================================
 
@@ -545,9 +653,6 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
 //================================================================================================
 /* Unserialization
 //================================================================================================
-
-
-
 
 / ***********************************************
 * Unserialize Consola -Kernel
@@ -558,7 +663,6 @@ SocketBuffer* unserializeConKer(Stream dataSerialized){
 	Char action;
 	Byte* fileContent = NULL;
 	Int32U fileContentLen;
-	//Int32U tid; por si decidimos dejarlo
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -568,13 +672,11 @@ SocketBuffer* unserializeConKer(Stream dataSerialized){
 	ptrByte += sizeof(fileContent);
 	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
 	ptrByte += sizeof(fileContentLen);
-/*
-	memcpy(&tid, ptrByte, sizeof(tid)); por si decidimos dejarlo
-	ptrByte += sizeof(tid);
-*/
+
 	free(dataSerialized);
 	return newStrConKer(id, action, fileContent, fileContentLen);
 }
+
 /***********************************************/
 /* Unserialize Kernel-CPU
 ***********************************************/
@@ -599,6 +701,7 @@ SocketBuffer* unserializeKerCpu(Stream dataSerialized){
 	free(dataSerialized);
 	return newStrKerCpu(id, action, pcb, quantum);
 }
+
 /***********************************************/
 /* Unserialize Kernel-UMC
 ***********************************************/
@@ -626,8 +729,8 @@ SocketBuffer* unserializeKerUmc(Stream dataSerialized){
 
 	free(dataSerialized);
 	return newStrKerUmc(id, action, data, size, pid, address);
-
 }
+
 /***********************************************/
 /* Unserialize Kernel-Consola
 ***********************************************/
@@ -650,6 +753,7 @@ SocketBuffer* unserializeKerCon(Stream dataSerialized){
 	free(dataSerialized);
 	return newStrKerCon(id, action, logLen, log);
 }
+
 /***********************************************/
 /* Unserialize CPU-Kernel
 ***********************************************/
@@ -681,6 +785,7 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	free(dataSerialized);
 	return newStrCpuKer(id, action, pcb, address, pid, logLen, log);
 }
+
 /***********************************************/
 /* Unserialize CPU-UMC
 ***********************************************/
@@ -709,6 +814,7 @@ SocketBuffer* unserializeCpuUmc(Stream dataSerialized){
 	free(dataSerialized);
 	return newStrCpuUmc(id, action, address, dataLen, data, pid);
 }
+
 /***********************************************/
 /* Unserialize UMC-Kernel
 ***********************************************/
@@ -734,6 +840,7 @@ SocketBuffer* unserializeUmcKer(Stream dataSerialized){
 	free(dataSerialized);
 	return newStrUmcKer(id, action, address, data, dataLen);
 }
+
 /***********************************************/
 /* Unserialize UMC-CPU
 ***********************************************/
@@ -759,12 +866,64 @@ SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
 	free(dataSerialized);
 	return newStrUmcCpu(id, action, address, dataLen, data);
 }
+
 /***********************************************/
 /* Unserialize UMC-Swap
 ***********************************************/
-//SocketBuffer* unserializeUmcSwa(Stream);
+SocketBuffer* unserializeUmcSwa(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	espacioAsignado page;
+	Int32U nroPage;
+	Byte* data;
+	Int32U dataLen;
 
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&page, ptrByte, sizeof(page));
+	ptrByte += sizeof(page);
+	memcpy(&nroPage, ptrByte, sizeof(nroPage));
+	ptrByte += sizeof(nroPage);
+	memcpy(&data, ptrByte, sizeof(data));
+	ptrByte += sizeof(data);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
 
+	free(dataSerialized);
+	return newStrUmcSwa(id, action, page, nroPage, data, dataLen);
+}
+
+/***********************************************/
+/* Unserialize Swap-UMC
+***********************************************/
+SocketBuffer* unserializeSwaUmc(Stream dataSerialized){
+	Stream ptrByte = dataSerialized;
+	Char id;
+	Char action;
+	espacioAsignado page;
+	Int32U nroPage;
+	Byte* data;
+	Int32U dataLen;
+
+	memcpy(&id, ptrByte, sizeof(id));
+	ptrByte += sizeof(id);
+	memcpy(&action, ptrByte, sizeof(action));
+	ptrByte += sizeof(action);
+	memcpy(&page, ptrByte, sizeof(page));
+	ptrByte += sizeof(page);
+	memcpy(&nroPage, ptrByte, sizeof(nroPage));
+	ptrByte += sizeof(nroPage);
+	memcpy(&data, ptrByte, sizeof(data));
+	ptrByte += sizeof(data);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
+
+	free(dataSerialized);
+	return newStrSwaUmc(id, action, page, nroPage, data, dataLen);
+}
 //================================================================================================
 
 
