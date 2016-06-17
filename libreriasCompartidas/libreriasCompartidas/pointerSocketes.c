@@ -309,7 +309,5 @@ Boolean handshake(SocketClient* client, Char id) {
 			return FALSE;
 		}
 	}
-
-	return TRUE;
 }
 
