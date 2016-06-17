@@ -143,6 +143,10 @@ typedef struct strUmcCpu {
 	Byte* data;
 } __attribute__((packed)) StrUmcCpu;
 
+//funciones para obtener offset y pagina
+
+
+
 
 /*************************
  * Stream Umc-Swap (POR DEFINIR CON LOS MEMORY-BOYS)
