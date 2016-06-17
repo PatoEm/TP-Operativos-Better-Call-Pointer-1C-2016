@@ -168,7 +168,7 @@ Boolean instructionsFromKernel() {
 	puts("Esperando al Kernel");
 
 	if((sb = socketReceive(kernelClient->ptrSocket)) == NULL) {
-		printf("[ERROR]: No se pudo recibir el stream del Kernel. ----- Ternimando \n");
+		printf("[ERROR]: No se pudo recibir el stream del Kernel. ----- Terminando \n");
 		return FALSE;
 	}
 	puts("Instruccion del Kernel recibida");
@@ -193,6 +193,7 @@ Boolean instructionsFromKernel() {
 
 Boolean realizarImprimir() {
 	t_valor_variable valor_mostrar;
+	//valor_mostrar = skc->log;
 	printf("%d\n", valor_mostrar);
 	return TRUE;
 }

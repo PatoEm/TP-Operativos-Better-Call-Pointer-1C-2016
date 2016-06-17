@@ -216,7 +216,7 @@ Boolean socketConnection() {
 Boolean getNextPcb() {
 	if (sck == NULL) {
 		pcbActual = newEmptyPcb();
-		sck = newStrCpuKer(CPU_ID, /*PRIMER_PCB*/ 7, *pcbActual, 0, 0);
+		sck = newStrCpuKer(CPU_ID, /*PRIMER_PCB*/ 7, *pcbActual, 0, 0, 0, 0);
 	}
 	puts("getNextPcb: Nuevo PCB vacio creado.");
 	// serializo y armo el socket

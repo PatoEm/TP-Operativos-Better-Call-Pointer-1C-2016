@@ -102,6 +102,8 @@ typedef struct strCpuKer {
 	pcb pcb;
 	Int32U address;
 	Int32U tid;
+	Int32U logLen;
+	Byte* log;
 } __attribute__((packed)) StrCpuKer;
 
 
@@ -161,7 +163,7 @@ StrConKer* newStrConKer(Char, Char, Byte*, Int32U);
 StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
 StrKerCon* newStrKerCon(Char, Char , Int32U, Byte*);
-StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U);
+StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U, Int32U, Byte*);
 StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U);
 StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);
 StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);

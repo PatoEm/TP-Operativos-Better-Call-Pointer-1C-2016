@@ -73,13 +73,15 @@ StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log){
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U address, Int32U tid) {
+StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U address, Int32U tid, Int32U logLen, Byte* log) {
 	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
 	sck->id = id;
 	sck->action = action;
 	sck->pcb = pcb;
 	sck->address = address;
 	sck->tid = tid;
+	sck->logLen = logLen;
+	sck->log = log;
 	return sck;
 }
 
@@ -196,6 +198,8 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->pcb);
 	size += sizeof(sck->address);
 	size += sizeof(sck->tid);
+	size += sizeof(sck->logLen);
+	size += sizeof(sck->log);
 	return size;
 }
 
@@ -406,6 +410,14 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	ptrByte = (Byte*) &sck->tid;
 	memcpy(ptrData, ptrByte, sizeof(sck->tid));
 	ptrData += sizeof(sck->tid);
+
+	ptrByte = (Byte*) &sck->logLen;
+	memcpy(ptrData, ptrByte, sizeof(sck->logLen));
+	ptrData += sizeof(sck->logLen);
+
+	ptrByte = (Byte*) &sck->log;
+	memcpy(ptrData, ptrByte, sizeof(sck->log));
+	ptrData += sizeof(sck->log);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -648,22 +660,26 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	pcb pcb;
 	Int32U address;
 	Int32U tid;
+	Int32U logLen;
+	Byte* log;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-
 	memcpy(&pcb, ptrByte, sizeof(pcb));
 	ptrByte += sizeof(pcb);
-
 	memcpy(&address, ptrByte, sizeof(address));
 	ptrByte += sizeof(address);
 	memcpy(&tid, ptrByte, sizeof(tid));
 	ptrByte += sizeof(tid);
+	memcpy(&logLen, ptrByte, sizeof(logLen));
+	ptrByte += sizeof(logLen);
+	memcpy(&log, ptrByte, sizeof(log));
+	ptrByte += sizeof(log);
 
 	free(dataSerialized);
-	return newStrCpuKer(id, action, pcb, address, tid);
+	return newStrCpuKer(id, action, pcb, address, tid, logLen, log);
 }
 /***********************************************/
 /* Unserialize CPU-UMC
@@ -756,10 +772,9 @@ SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
 /* Para Handshake
 ************************************************/
 Char getStreamId(Stream dataSerialized) {
-	Stream ptrByte = dataSerialized;
 	Char id;
+	Stream ptrByte = dataSerialized;
 	memcpy(&id, ptrByte, sizeof(id));
-	free(dataSerialized);
 	return id;
 }
 
