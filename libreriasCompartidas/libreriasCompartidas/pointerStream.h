@@ -101,7 +101,7 @@ typedef struct strCpuKer {
 	Char action;
 	pcb pcb;
 	Int32U address;
-	Int32U tid;
+	Int32U pid;
 	Int32U logLen;
 	Byte* log;
 } __attribute__((packed)) StrCpuKer;

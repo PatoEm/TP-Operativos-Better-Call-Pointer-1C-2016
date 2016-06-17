@@ -73,13 +73,13 @@ StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log){
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U address, Int32U tid, Int32U logLen, Byte* log) {
+StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U address, Int32U pid, Int32U logLen, Byte* log) {
 	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
 	sck->id = id;
 	sck->action = action;
 	sck->pcb = pcb;
 	sck->address = address;
-	sck->tid = tid;
+	sck->pid = pid;
 	sck->logLen = logLen;
 	sck->log = log;
 	return sck;
@@ -197,7 +197,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->action);
 	size += sizeof(sck->pcb);
 	size += sizeof(sck->address);
-	size += sizeof(sck->tid);
+	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
 	size += sizeof(sck->log);
 	return size;
@@ -407,9 +407,9 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	memcpy(ptrData, ptrByte, sizeof(sck->address));
 	ptrData += sizeof(sck->address);
 
-	ptrByte = (Byte*) &sck->tid;
-	memcpy(ptrData, ptrByte, sizeof(sck->tid));
-	ptrData += sizeof(sck->tid);
+	ptrByte = (Byte*) &sck->pid;
+	memcpy(ptrData, ptrByte, sizeof(sck->pid));
+	ptrData += sizeof(sck->pid);
 
 	ptrByte = (Byte*) &sck->logLen;
 	memcpy(ptrData, ptrByte, sizeof(sck->logLen));
@@ -659,7 +659,7 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	Char action;
 	pcb pcb;
 	Int32U address;
-	Int32U tid;
+	Int32U pid;
 	Int32U logLen;
 	Byte* log;
 
@@ -671,15 +671,15 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(pcb);
 	memcpy(&address, ptrByte, sizeof(address));
 	ptrByte += sizeof(address);
-	memcpy(&tid, ptrByte, sizeof(tid));
-	ptrByte += sizeof(tid);
+	memcpy(&pid, ptrByte, sizeof(pid));
+	ptrByte += sizeof(pid);
 	memcpy(&logLen, ptrByte, sizeof(logLen));
 	ptrByte += sizeof(logLen);
 	memcpy(&log, ptrByte, sizeof(log));
 	ptrByte += sizeof(log);
 
 	free(dataSerialized);
-	return newStrCpuKer(id, action, pcb, address, tid, logLen, log);
+	return newStrCpuKer(id, action, pcb, address, pid, logLen, log);
 }
 /***********************************************/
 /* Unserialize CPU-UMC
