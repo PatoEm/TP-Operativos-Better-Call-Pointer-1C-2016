@@ -16,6 +16,7 @@
 #include "pcb.h"
 #include <stdlib.h>
 #include <commons/bitarray.h>
+#include <../umc/src/umc.h>
 /*******************************************************
  * IDs (Duenio del stream)
  ******************************************************/
@@ -38,7 +39,6 @@
 #define CERRARCONSOLA 10
 #define ARCHIVO_ANSISOP 11
 
-/* aca van los defines de actions*/
 
 /*******************************************************
  * Estructuras de Streaming
@@ -143,19 +143,31 @@ typedef struct strUmcCpu {
 	Byte* data;
 } __attribute__((packed)) StrUmcCpu;
 
-//funciones para obtener offset y pagina
-
-
-
 
 /*************************
- * Stream Umc-Swap (POR DEFINIR CON LOS MEMORY-BOYS)
- ************************
+ * Stream Umc-Swap
+ ************************/
 typedef struct strUmcSwa {
 	Char id;
 	Char action;
+	espacioAsignado page;
+	Int32U nroPage;
+	Byte* data;
+	Int32U dataLen;
 } __attribute__((packed)) StrUmcSwa;
-*/
+
+
+/*************************
+ * Stream Swap-Umc
+ ************************/
+typedef struct strSwaUmc {
+	Char id;
+	Char action;
+	espacioAsignado page;
+	Int32U nroPage;
+	Byte* data;
+	Int32U dataLen;
+} __attribute__((packed)) StrSwaUmc;
 
 ////////////////////////////////////////////////////////
 
@@ -163,16 +175,19 @@ typedef struct strUmcSwa {
 /* Constructores
 ***********************************************/
 StrConKer* newStrConKer(Char, Char, Byte*, Int32U);
-		//Int32U); por si decidimos dejarlo
+
 StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
 StrKerCon* newStrKerCon(Char, Char , Int32U, Byte*);
+
 StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U, Int32U, Byte*);
 StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U);
+
 StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);
 StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);
-//StrUmcSwa* newStrUmcSwa(Char, Char);
+StrUmcSwa* newStrUmcSwa(Char, Char, espacioAsignado, Int32U, Byte*, Int32U);
 
+StrSwaUmc* newStrSwaUmc(Char, Char, espacioAsignado, Int32U, Byte*, Int32U);
 /***********************************************/
 
 /***********************************************/
@@ -189,9 +204,9 @@ Int32U getSizeCpuUmc(StrCpuUmc* scu);
 
 Int32U getSizeUmcKer(StrUmcKer* suk);
 Int32U getSizeUmcCpu(StrUmcCpu* suc);
+Int32U getSizeUmcSwa(StrUmcSwa* sus);
 
-//Int32U getSizeUmcSwa(StrUmcSwa*);
-
+Int32U getSizeSwaUmc(StrSwaUmc* ssu);
 /***********************************************/
 /* Serialize
 ***********************************************/
@@ -206,9 +221,9 @@ SocketBuffer* serializeCpuUmc(StrCpuUmc* cpuUmc);
 
 SocketBuffer* serializeUmcKer(StrUmcKer* umcKer);
 SocketBuffer* serializeUmcCpu(StrUmcCpu* umcCpu);
+SocketBuffer* serializeUmcSwa(StrUmcSwa* umcSwa);
 
-//SocketBuffer* serializeUmcSwa(StrUmcSwa* umcSwa);
-
+SocketBuffer* serializeSwaUmc(StrSwaUmc* swaUmc);
 /***********************************************/
 
 /***********************************************/
@@ -225,9 +240,9 @@ SocketBuffer* unserializeCpuUmc(Stream cpuUmc);
 
 SocketBuffer* unserializeUmcKer(Stream umcKer);
 SocketBuffer* unserializeUmcCpu(Stream umcCpu);
+SocketBuffer* unserializeUmcSwa(Stream umcSwa);
 
-//SocketBuffer* unserializeUmcSwa(Stream umcSwa);
-
+SocketBuffer* unserializeSwaUmc(Stream swaUmc);
 /***********************************************/
 
 /***********************************************/
