@@ -602,21 +602,24 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 void dumpContenidoDeMemoriaTodosLosProcesos() {
 	int i = 0;
 	int direccionFisica;
-	int hastaDondeLeer; //Hago el tamanio con i+1 porque muestro hasta que termine la pagina
+	int hastaDondeLeer;
 	espacioAsignado * nodoActual;
 
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActual = list_get(listaEspacioAsignado, i);
 		direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
 		hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
+
 		printf("Frame: %d\nPID: %d\nPagina: %d\nContenido:\n",
 				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
 				nodoActual->numDePag);
+
 		log_info(logger, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
 				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
 				nodoActual->numDePag);
+
 		while (direccionFisica < hastaDondeLeer) {
-			printf("%c", memoriaReal[direccionFisica]); //A contenido le asigno lo que esta apuntado por esa direccion fisica (osea leo la memoria)
+			printf("%c", memoriaReal[direccionFisica]);
 			log_info(logger, "%c", memoriaReal[direccionFisica]);
 			direccionFisica++;
 		}
@@ -629,34 +632,31 @@ void dumpContenidoDeMemoriaTodosLosProcesos() {
 
 void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 	int i = 0;
-	int direccionFisica = i * marco_Size;
-	int hastaDondeLeer = marco_Size * (i + 1);
+	int direccionFisica;
+	int hastaDondeLeer;
 	espacioAsignado * nodoActual;
 
 	while (i < list_size(listaEspacioAsignado)) {
-		if (nodoActual->pid == PID) {
-			nodoActual = list_get(listaEspacioAsignado, i);
+		nodoActual = list_get(listaEspacioAsignado, i);
+		if(nodoActual->pid == PID){
+			direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
+			hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
 
-			while (i < list_size(listaEspacioAsignado)) {
-				nodoActual = list_get(listaEspacioAsignado, i);
-				char * contenido;
+			printf("Frame: %d\nPID: %d\nPagina: %d\nContenido:\n",
+					nodoActual->IDPaginaInterno, nodoActual->pid,nodoActual->numDePag);
 
-				while (direccionFisica <= hastaDondeLeer) {
-					contenido = *direccionFisica; //A contenido le asigno lo que esta apuntado por esa direccion fisica (osea leo la memoria)
-					direccionFisica++;
-				}
+			log_info(logger, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
+					nodoActual->IDPaginaInterno, nodoActual->pid,nodoActual->numDePag);
 
-				printf("Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
-						nodoActual->IDPaginaInterno, nodoActual->pid,
-						nodoActual, nodoActual->numDePag, contenido);
-
-				log_info(logger,
-						"Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
-						nodoActual->IDPaginaInterno, nodoActual->pid,
-						nodoActual, nodoActual->numDePag, contenido);
+			while (direccionFisica < hastaDondeLeer) {
+				printf("%c", memoriaReal[direccionFisica]);
+				log_info(logger, "%c", memoriaReal[direccionFisica]);
+				direccionFisica++;
 			}
-			i++;
+			printf("\n");
+			log_info(logger, "\n");
 		}
+		i++;
 	}
 }
 
