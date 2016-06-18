@@ -473,6 +473,7 @@ void comandosUMC() {
 
 		switch (opcionPrincipal) {
 		case 1:
+			system("clear");
 			puts("Ingresar retardo\n");
 			scanf("%d", &retardo);
 			retardoUMC(retardo);
@@ -496,8 +497,10 @@ void comandosUMC() {
 			case 1:
 				system("clear");
 				dumpEstructuraDeMemoriaTodosLosProcesos();
+				system("clear");
 				break;
 			case 2:
+				system("clear");
 				puts("Coloque el número de proceso: \n");
 				scanf("%d", &procesoElegido);
 				system("clear");
@@ -506,8 +509,10 @@ void comandosUMC() {
 			case 3:
 				system("clear");
 				dumpContenidoDeMemoriaTodosLosProcesos();
+				system("clear");
 				break;
 			case 4:
+				system("clear");
 				puts("Ingresar process ID: \n");
 				scanf("%d", &procesoQueElijo);
 				system("clear");
@@ -517,17 +522,20 @@ void comandosUMC() {
 			break;
 
 		case 3:
+			system("clear");
 			puts("Opcion 1: TLB\n");
 			puts("Opcion 2: Memory\n");
 			scanf("%d", &opcionmemoryoTLB);
 
 			switch (opcionmemoryoTLB) {
 			case 1:
+				system("clear");
 				flushTLB();
 				system("clear");
 				break;
 
 			case 2:
+				system("clear");
 				flushMemory();
 				system("clear");
 				break;
