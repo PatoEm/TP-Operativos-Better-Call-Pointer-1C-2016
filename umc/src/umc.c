@@ -481,10 +481,14 @@ void comandosUMC() {
 
 		case 2:
 			puts("seleccione el tipo de dump:\n");
-			puts("opción 1 : Dump de estructuras de memoria de todos los procesos\n");
-			puts("opción 2 : Dump de estructuras de memoria de un proceso en particular\n");
-			puts("opción 3 : Dump del contenido de la memoria de todos los procesos\n");
-			puts("opción 4 : Dump del contenido de la memoria de un proceso en particular\n");
+			puts(
+					"opción 1 : Dump de estructuras de memoria de todos los procesos\n");
+			puts(
+					"opción 2 : Dump de estructuras de memoria de un proceso en particular\n");
+			puts(
+					"opción 3 : Dump del contenido de la memoria de todos los procesos\n");
+			puts(
+					"opción 4 : Dump del contenido de la memoria de un proceso en particular\n");
 
 			scanf("%d", &opcionDump);
 
@@ -505,7 +509,7 @@ void comandosUMC() {
 				break;
 			case 4:
 				puts("Ingresar process ID: \n");
-				scanf("%d",&procesoQueElijo);
+				scanf("%d", &procesoQueElijo);
 				system("clear");
 				dumpContenidoDeMemoriaProcesoEnParticular(procesoQueElijo);
 				break;
@@ -538,13 +542,13 @@ void comandosUMC() {
 
 			break;
 		}
-	system("clear");
+		system("clear");
 	}
 }
 
 void retardoUMC(int retardo) {
 	espera = retardo;
-	log_info(logger,"El retardo ha sido modificado\n");
+	log_info(logger, "El retardo ha sido modificado\n");
 }
 
 void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
@@ -595,56 +599,64 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 
 }
 
-void dumpContenidoDeMemoriaTodosLosProcesos(){
-	int i=0;
-	int direccionFisica=i*marco_Size;
-	int hastaDondeLeer=marco_Size*(i+1); //Hago el tamanio con i+1 porque muestro hasta que termine la pagina
+void dumpContenidoDeMemoriaTodosLosProcesos() {
+	int i = 0;
+	int direccionFisica;
+	int hastaDondeLeer; //Hago el tamanio con i+1 porque muestro hasta que termine la pagina
 	espacioAsignado * nodoActual;
 
-	while(i<list_size(listaEspacioAsignado)){
-		nodoActual = list_get(listaEspacioAsignado,i);
-		char * contenido;
-
-		while(direccionFisica <= hastaDondeLeer){
-			contenido = *direccionFisica; //A contenido le asigno lo que esta apuntado por esa direccion fisica (osea leo la memoria)
+	while (i < list_size(listaEspacioAsignado)) {
+		nodoActual = list_get(listaEspacioAsignado, i);
+		direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
+		hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
+		printf("Frame: %d\nPID: %d\nPagina: %d\nContenido:\n",
+				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
+				nodoActual->numDePag);
+		log_info(logger, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
+				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
+				nodoActual->numDePag);
+		while (direccionFisica < hastaDondeLeer) {
+			printf("%c", memoriaReal[direccionFisica]); //A contenido le asigno lo que esta apuntado por esa direccion fisica (osea leo la memoria)
+			log_info(logger, "%c", memoriaReal[direccionFisica]);
 			direccionFisica++;
 		}
+		printf("\n");
+		log_info(logger, "\n");
 
-		printf("Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
-				nodoActual->IDPaginaInterno,nodoActual->pid,nodoActual,nodoActual->numDePag,contenido);
-
-		log_info(logger,"Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
-				nodoActual->IDPaginaInterno,nodoActual->pid,nodoActual,nodoActual->numDePag,contenido);
 		i++;
 	}
 }
 
-void dumpContenidoDeMemoriaProcesoEnParticular(int PID){
-	int i=0;
-	int direccionFisica=i*marco_Size;
-	int hastaDondeLeer=marco_Size*(i+1);
+void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
+	int i = 0;
+	int direccionFisica = i * marco_Size;
+	int hastaDondeLeer = marco_Size * (i + 1);
 	espacioAsignado * nodoActual;
 
-	while(i<list_size(listaEspacioAsignado)){
-		if(nodoActual->pid == PID){
-			nodoActual = list_get(listaEspacioAsignado,i);
+	while (i < list_size(listaEspacioAsignado)) {
+		if (nodoActual->pid == PID) {
+			nodoActual = list_get(listaEspacioAsignado, i);
 
-			while(i<list_size(listaEspacioAsignado)){
-				nodoActual = list_get(listaEspacioAsignado,i);
+			while (i < list_size(listaEspacioAsignado)) {
+				nodoActual = list_get(listaEspacioAsignado, i);
 				char * contenido;
 
-				while(direccionFisica <= hastaDondeLeer){
+				while (direccionFisica <= hastaDondeLeer) {
 					contenido = *direccionFisica; //A contenido le asigno lo que esta apuntado por esa direccion fisica (osea leo la memoria)
 					direccionFisica++;
 				}
 
-			printf("Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
-					nodoActual->IDPaginaInterno,nodoActual->pid,nodoActual,nodoActual->numDePag,contenido);
+				printf("Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
+						nodoActual->IDPaginaInterno, nodoActual->pid,
+						nodoActual, nodoActual->numDePag, contenido);
 
-			log_info(logger,"Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
-					nodoActual->IDPaginaInterno,nodoActual->pid,nodoActual,nodoActual->numDePag,contenido);
+				log_info(logger,
+						"Frame: %d\nPID: %d\nPagina: %d\nContenido: %s\n\n",
+						nodoActual->IDPaginaInterno, nodoActual->pid,
+						nodoActual, nodoActual->numDePag, contenido);
+			}
+			i++;
 		}
-		i++;
 	}
 }
 
@@ -677,7 +689,8 @@ void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
 	pthread_attr_init(&attrhiloComandos);
 
 	pthread_attr_setdetachstate(&attrhiloComandos, PTHREAD_CREATE_DETACHED);
-	int hiloParaComandos = pthread_create(&hiloComandos, &attrhiloComandos,(void *) comandosUMC, NULL);
+	int hiloParaComandos = pthread_create(&hiloComandos, &attrhiloComandos,
+			(void *) comandosUMC, NULL);
 
 	pthread_attr_destroy(&attrhiloComandos);
 }
@@ -841,7 +854,7 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 	if (habilitada != 0) {
 		t_tlb * entradaTLB = buscarEnTLB(PID, pagina);
 		if (entradaTLB != NULL) {
-			log_info(logger,"Acierto de TLB en el frame %d y pagina %d",
+			log_info(logger, "Acierto de TLB en el frame %d y pagina %d",
 					entradaTLB->frameTLB, entradaTLB->pagina);
 			buffer = malloc(sizeof(char) * tamanio);
 			int i;
@@ -875,18 +888,18 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 	}
 
 //Devuelve 1 si esta llena, devuelve 0 si no esta llena
-int tlbLlena() {
-	if (TLB->elements_count == entradas_TLB) {
-		return 1;
-	}
+	int tlbLlena() {
+		if (TLB->elements_count == entradas_TLB) {
+			return 1;
+		}
 
 		return 0;
-}
+	}
 
 //DEVUeLVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
-int tlbHabilitada() {
-	if (entradas_TLB == 0) {
-		return 0;
+	int tlbHabilitada() {
+		if (entradas_TLB == 0) {
+			return 0;
+		}
+		return 1;
 	}
-	return 1;
-}
