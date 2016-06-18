@@ -460,6 +460,7 @@ void comandosUMC() {
 	int opcionPrincipal;
 	int opcionmemoryoTLB;
 	int retardo;
+	int opcionDump;
 
 	while (1) {
 		puts("Opcion 1: Retardo\n");
@@ -476,7 +477,31 @@ void comandosUMC() {
 			break;
 
 		case 2:
-			dump();
+			puts("seleccione el tipo de dump:\n");
+			puts(
+					"opción 1 : dump de estructuras de memoria de todos los procesos\n");
+			puts(
+					"opción 2 : dump de estructuras de memoria de un proceso en particular\n");
+			puts(
+					"opción 3 : dump del contenido de la memoria de todos los procesos\n");
+			puts(
+					"opción 4 : dump del contenido de la memoria de un proceso en particular\n");
+			scanf("%d", &opcionDump);
+			switch (opcionDump) {
+			case 1:
+				dumpEstructuraDeMemoriaTodosLosProcesos();
+				break;
+			case 2:
+				int procesoElegido;
+				puts("Coloque el número de proceso: \n");
+				scanf("%d", &procesoElegido);
+				dumpEstructuraDeMemoriaProcesoEnParticular(procesoElegido);
+				break;
+			case 3:
+				break; //todo
+			case 4:
+				break; //todo
+			}
 			break;
 
 		case 3:
@@ -518,17 +543,17 @@ void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
 	//IMPRIMO EN PANTALLA
 	puts("Paginas Asignadas al proceso: %d\n", pid);
 	while (i < list_size(listaEspacioAsignado)) {
-			nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
-			if(nodoActualDeAsignados->pid==pid){
+		nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
+		if (nodoActualDeAsignados->pid == pid) {
 			printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
 			printf("PID: %d\n", nodoActualDeAsignados->pid);
 			printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
 			log_info(logger, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
 					nodoActualDeAsignados->IDPaginaInterno,
 					nodoActualDeAsignados->pid);
-			}
-			i++;
 		}
+		i++;
+	}
 
 }
 
