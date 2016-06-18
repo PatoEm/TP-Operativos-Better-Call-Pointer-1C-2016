@@ -135,10 +135,18 @@ void elDestructorDeNodosMemoria(int);
 
 void inicioTLB();
 
+void dumpContenidoDeMemoriaProcesoEnParticular(int );
+
+void dumpContenidoDeMemoriaTodosLosProcesos();
+
+void dumpEstructuraDeMemoriaTodosLosProcesos();
+
+void dumpEstructuraDeMemoriaProcesoEnParticular(int );
+
 t_list * creoTLB();
 
 //SI ENCUENTRA DEVUELVE LA ENTRADA, SI NO ENCUENTRA DEVUELVE NULL
-t_tlb * buscarEnTLB(int, int , int* );
+t_tlb * buscarEnTLB(int, int );
 
 void leerEnTLB(int , int, int *);
 
@@ -148,9 +156,15 @@ int tlbLlena();
 //DEVUELVE 1 SI ESTA HABILITADA, DEVUELVE 0 SI NO ESTA HABILITADA
 int tlbHabilitada();
 
-void leerEnMemoriaReal(int , int);
-
 //SI ENCUENTRA DEVUELVE LA PAGINA, SI NO ENCUENTRA DEvUELVE NULL
 espacioAsignado * buscarEnMemoriaReal(int , int);
+
+bool escribirEnTLB(int , int , int , int , char*);
+
+void llevarPaginaATLB(int , int , char* );
+
+int reemplazarPaginaLRU();
+
+int buscarPaginaVaciaEnTLB();
 
 #endif /* UMC_H_ */
