@@ -54,7 +54,6 @@ typedef struct strConKer {
 	Char action;
 	Byte* fileContent;
 	Int32U fileContentLen;
-	//Int32U tid; duda si lo dejo o no
 } __attribute__((packed)) StrConKer;
 
 
@@ -78,7 +77,7 @@ typedef struct strKerUmc {
 	Byte *data;
 	Int32U size;
 	Int32U pid;
-	Int32U address;
+	Int32U cantPage;
 } __attribute__((packed)) StrKerUmc;
 
 
@@ -100,7 +99,6 @@ typedef struct strCpuKer {
 	Char id;
 	Char action;
 	pcb pcb;
-	Int32U address;
 	Int32U pid;
 	Int32U logLen;
 	Byte* log;
@@ -113,7 +111,8 @@ typedef struct strCpuKer {
 typedef struct strCpuUmc {
 	Char id;
 	Char action;
-	Int32U address;
+	espacioAsignado pageComienzo;
+	//tipoOffset offset;
 	Int32U dataLen;
 	Byte* data;
 	Int32U pid;
@@ -138,9 +137,11 @@ typedef struct strUmcKer {
 typedef struct strUmcCpu {
 	Char id;
 	Char action;
-	Int32U address;
+	espacioAsignado pageComienzo;
+	//tipoOffset offset;
 	Int32U dataLen;
 	Byte* data;
+	Int32U pid;
 } __attribute__((packed)) StrUmcCpu;
 
 
@@ -150,10 +151,11 @@ typedef struct strUmcCpu {
 typedef struct strUmcSwa {
 	Char id;
 	Char action;
-	espacioAsignado page;
-	Int32U nroPage;
+	espacioAsignado pageComienzo;
+	Int32U cantPage;
 	Byte* data;
 	Int32U dataLen;
+	Int32U pid;
 } __attribute__((packed)) StrUmcSwa;
 
 
@@ -163,10 +165,11 @@ typedef struct strUmcSwa {
 typedef struct strSwaUmc {
 	Char id;
 	Char action;
-	espacioAsignado page;
-	Int32U nroPage;
+	espacioAsignado pageComienzo;
+	Int32U cantPage;
 	Byte* data;
 	Int32U dataLen;
+	Int32U pid;
 } __attribute__((packed)) StrSwaUmc;
 
 ////////////////////////////////////////////////////////
@@ -180,14 +183,14 @@ StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
 StrKerCon* newStrKerCon(Char, Char , Int32U, Byte*);
 
-StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U, Int32U, Byte*);
-StrCpuUmc* newStrCpuUmc(Char, Char, Int32U, Int32U, Byte*, Int32U);
+StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U, Byte*);
+StrCpuUmc* newStrCpuUmc(Char, Char, espacioAsignado, /*offset*/Int32U, Byte*, Int32U);
 
 StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);
-StrUmcCpu* newStrUmcCpu(Char, Char, Int32U, Int32U, Byte*);
-StrUmcSwa* newStrUmcSwa(Char, Char, espacioAsignado, Int32U, Byte*, Int32U);
+StrUmcCpu* newStrUmcCpu(Char, Char, espacioAsignado, /*offset*/Int32U, Byte*, Int32U);
+StrUmcSwa* newStrUmcSwa(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
 
-StrSwaUmc* newStrSwaUmc(Char, Char, espacioAsignado, Int32U, Byte*, Int32U);
+StrSwaUmc* newStrSwaUmc(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
 /***********************************************/
 
 /***********************************************/

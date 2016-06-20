@@ -45,14 +45,14 @@ StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum){
 /*******************************
  * Constructor Kernel-UMC
  ******************************/
-StrKerUmc* newStrKerUmc(Char id, Char action, Byte *data, Int32U size, Int32U pid, Int32U address){
+StrKerUmc* newStrKerUmc(Char id, Char action, Byte *data, Int32U size, Int32U pid, Int32U cantPage){
 	StrKerUmc* sku = malloc(sizeof(StrKerUmc));
 	sku->id = id;
 	sku->action = action;
 	sku->data = data;
 	sku->size = size;
 	sku->pid = pid;
-	sku->address = address;
+	sku->cantPage = cantPage;
 	return sku;
 }
 
@@ -71,12 +71,11 @@ StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log){
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U address, Int32U pid, Int32U logLen, Byte* log) {
+StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log) {
 	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
 	sck->id = id;
 	sck->action = action;
 	sck->pcb = pcb;
-	sck->address = address;
 	sck->pid = pid;
 	sck->logLen = logLen;
 	sck->log = log;
@@ -126,28 +125,30 @@ StrUmcCpu* newStrUmcCpu(Char id, Char action, Int32U address, Int32U dataLen, By
 /*******************************
  * Constructor UMC-Swap
  ******************************/
-StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado page, Int32U nroPage, Byte* data, Int32U dataLen){
+StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid){
 	StrUmcSwa* sus = malloc(sizeof(StrUmcSwa));
 	sus->id = id;
 	sus->action = action;
-	sus->page = page;
-	sus->nroPage = nroPage;
+	sus->pageComienzo = pageComienzo;
+	sus->cantPage = cantPage;
 	sus->data = data;
 	sus->dataLen = dataLen;
+	sus->pid = pid;
 	return sus;
 }
 
 /*******************************
  * Constructor Swap-UMC
  ******************************/
-StrUmcSwa* newStrSwaUmc(Char id, Char action, espacioAsignado page, Int32U nroPage, Byte* data, Int32U dataLen){
+StrUmcSwa* newStrSwaUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid){
 	StrSwaUmc* ssu = malloc(sizeof(StrUmcSwa));
 	ssu->id = id;
 	ssu->action = action;
-	ssu->page = page;
-	ssu->nroPage = nroPage;
+	ssu->pageComienzo = pageComienzo;
+	ssu->cantPage = cantPage;
 	ssu->data = data;
 	ssu->dataLen = dataLen;
+	ssu->pid = pid;
 	return ssu;
 }
 
@@ -193,7 +194,7 @@ Int32U getSizeKerUmc(StrKerUmc* sku){
 	size += sizeof(sku->data);
 	size += sizeof(sku->size);
 	size += sizeof(sku->pid);
-	size += sizeof(sku->address);
+	size += sizeof(sku->cantPage);
 	return size;
 }
 
@@ -217,7 +218,6 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->id);
 	size += sizeof(sck->action);
 	size += sizeof(sck->pcb);
-	size += sizeof(sck->address);
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
 	size += sizeof(sck->log);
@@ -270,10 +270,11 @@ Int32U getSizeUmcSwa(StrUmcSwa* sus){
 	Int32U size = 0;
 	size += sizeof(sus->id);
 	size += sizeof(sus->action);
-	size += sizeof(sus->page);
-	size += sizeof(sus->nroPage);
+	size += sizeof(sus->pageComienzo);
+	size += sizeof(sus->cantPage);
 	size += sizeof(sus->data);
 	size += sizeof(sus->dataLen);
+	size += sizeof(sus->pid);
 	return size;
 }
 
@@ -284,10 +285,11 @@ Int32U getSizeSwaUmc(StrSwaUmc* ssu){
 	Int32U size = 0;
 	size += sizeof(ssu->id);
 	size += sizeof(ssu->action);
-	size += sizeof(ssu->page);
-	size += sizeof(ssu->nroPage);
+	size += sizeof(ssu->pageComienzo);
+	size += sizeof(ssu->cantPage);
 	size += sizeof(ssu->data);
 	size += sizeof(ssu->dataLen);
+	size += sizeof(ssu->pid);
 	return size;
 }
 
@@ -387,9 +389,9 @@ SocketBuffer* serializeKerUmc(StrKerUmc* sku){
 	memcpy(ptrData, ptrByte, sizeof(sku->pid));
 	ptrData += sizeof(sku->pid);
 
-	ptrByte = (Byte*) &sku->address;
-	memcpy(ptrData, ptrByte, sizeof(sku->address));
-	ptrData += sizeof(sku->address);
+	ptrByte = (Byte*) &sku->cantPage;
+	memcpy(ptrData, ptrByte, sizeof(sku->cantPage));
+	ptrData += sizeof(sku->cantPage);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -446,10 +448,6 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	ptrByte = (Byte*) &sck->pcb;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb));
 	ptrData += sizeof(sck->pcb);
-
-	ptrByte = (Byte*) &sck->address;
-	memcpy(ptrData, ptrByte, sizeof(sck->address));
-	ptrData += sizeof(sck->address);
 
 	ptrByte = (Byte*) &sck->pid;
 	memcpy(ptrData, ptrByte, sizeof(sck->pid));
@@ -590,13 +588,13 @@ SocketBuffer* serializeUmcSwa(StrUmcSwa* sus){
 	memcpy(ptrData, ptrByte, sizeof(sus->action));
 	ptrData += sizeof(sus->action);
 
-	ptrByte = (Byte*) &sus->page;
-	memcpy(ptrData, ptrByte, sizeof(sus->page));
-	ptrData += sizeof(sus->page);
+	ptrByte = (Byte*) &sus->pageComienzo;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo));
+	ptrData += sizeof(sus->pageComienzo);
 
-	ptrByte = (Byte*) &sus->nroPage;
-	memcpy(ptrData, ptrByte, sizeof(sus->nroPage));
-	ptrData += sizeof(sus->nroPage);
+	ptrByte = (Byte*) &sus->cantPage;
+	memcpy(ptrData, ptrByte, sizeof(sus->cantPage));
+	ptrData += sizeof(sus->cantPage);
 
 	ptrByte = (Byte*) &sus->data;
 	memcpy(ptrData, ptrByte, sizeof(sus->data));
@@ -605,6 +603,10 @@ SocketBuffer* serializeUmcSwa(StrUmcSwa* sus){
 	ptrByte = (Byte*) &sus->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(sus->dataLen));
 	ptrData += sizeof(sus->dataLen);
+
+	ptrByte = (Byte*) &sus->pid;
+	memcpy(ptrData, ptrByte, sizeof(sus->pid));
+	ptrData += sizeof(sus->pid);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -627,13 +629,13 @@ SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu){
 	memcpy(ptrData, ptrByte, sizeof(ssu->action));
 	ptrData += sizeof(ssu->action);
 
-	ptrByte = (Byte*) &ssu->page;
-	memcpy(ptrData, ptrByte, sizeof(ssu->page));
-	ptrData += sizeof(ssu->page);
+	ptrByte = (Byte*) &ssu->pageComienzo;
+	memcpy(ptrData, ptrByte, sizeof(ssu->pageComienzo));
+	ptrData += sizeof(ssu->pageComienzo);
 
-	ptrByte = (Byte*) &ssu->nroPage;
-	memcpy(ptrData, ptrByte, sizeof(ssu->nroPage));
-	ptrData += sizeof(ssu->nroPage);
+	ptrByte = (Byte*) &ssu->cantPage;
+	memcpy(ptrData, ptrByte, sizeof(ssu->cantPage));
+	ptrData += sizeof(ssu->cantPage);
 
 	ptrByte = (Byte*) &ssu->data;
 	memcpy(ptrData, ptrByte, sizeof(ssu->data));
@@ -642,6 +644,10 @@ SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu){
 	ptrByte = (Byte*) &ssu->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(ssu->dataLen));
 	ptrData += sizeof(ssu->dataLen);
+
+	ptrByte = (Byte*) &ssu->pid;
+	memcpy(ptrData, ptrByte, sizeof(ssu->pid));
+	ptrData += sizeof(ssu->pid);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -691,10 +697,8 @@ SocketBuffer* unserializeKerCpu(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-
 	memcpy(&pcb, ptrByte, sizeof(pcb));
 	ptrByte += sizeof(pcb);
-
 	memcpy(&quantum, ptrByte, sizeof(quantum));
 	ptrByte += sizeof(quantum);
 
@@ -712,7 +716,7 @@ SocketBuffer* unserializeKerUmc(Stream dataSerialized){
 	Byte *data;
 	Int32U size;
 	Int32U pid;
-	Int32U address;
+	Int32U cantPage;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -724,11 +728,11 @@ SocketBuffer* unserializeKerUmc(Stream dataSerialized){
 	ptrByte += sizeof(size);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
-	memcpy(&address, ptrByte, sizeof(address));
-	ptrByte += sizeof(address);
+	memcpy(&cantPage, ptrByte, sizeof(cantPage));
+	ptrByte += sizeof(cantPage);
 
 	free(dataSerialized);
-	return newStrKerUmc(id, action, data, size, pid, address);
+	return newStrKerUmc(id, action, data, size, pid, cantPage);
 }
 
 /***********************************************/
@@ -762,7 +766,6 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	Char id;
 	Char action;
 	pcb pcb;
-	Int32U address;
 	Int32U pid;
 	Int32U logLen;
 	Byte* log;
@@ -773,8 +776,6 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(action);
 	memcpy(&pcb, ptrByte, sizeof(pcb));
 	ptrByte += sizeof(pcb);
-	memcpy(&address, ptrByte, sizeof(address));
-	ptrByte += sizeof(address);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 	memcpy(&logLen, ptrByte, sizeof(logLen));
@@ -783,7 +784,7 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(log);
 
 	free(dataSerialized);
-	return newStrCpuKer(id, action, pcb, address, pid, logLen, log);
+	return newStrCpuKer(id, action, pcb, pid, logLen, log);
 }
 
 /***********************************************/
@@ -874,26 +875,29 @@ SocketBuffer* unserializeUmcSwa(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	espacioAsignado page;
-	Int32U nroPage;
+	espacioAsignado pageComienzo;
+	Int32U cantPage;
 	Byte* data;
 	Int32U dataLen;
+	Int32U pid;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-	memcpy(&page, ptrByte, sizeof(page));
-	ptrByte += sizeof(page);
-	memcpy(&nroPage, ptrByte, sizeof(nroPage));
-	ptrByte += sizeof(nroPage);
+	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
+	ptrByte += sizeof(pageComienzo);
+	memcpy(&cantPage, ptrByte, sizeof(cantPage));
+	ptrByte += sizeof(cantPage);
 	memcpy(&data, ptrByte, sizeof(data));
 	ptrByte += sizeof(data);
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
+	memcpy(&pid, ptrByte, sizeof(pid));
+	ptrByte += sizeof(pid);
 
 	free(dataSerialized);
-	return newStrUmcSwa(id, action, page, nroPage, data, dataLen);
+	return newStrUmcSwa(id, action, pageComienzo, cantPage, data, dataLen, pid);
 }
 
 /***********************************************/
@@ -903,26 +907,29 @@ SocketBuffer* unserializeSwaUmc(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	espacioAsignado page;
-	Int32U nroPage;
+	espacioAsignado pageComienzo;
+	Int32U cantPage;
 	Byte* data;
 	Int32U dataLen;
+	Int32U pid;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-	memcpy(&page, ptrByte, sizeof(page));
-	ptrByte += sizeof(page);
-	memcpy(&nroPage, ptrByte, sizeof(nroPage));
-	ptrByte += sizeof(nroPage);
+	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
+	ptrByte += sizeof(pageComienzo);
+	memcpy(&cantPage, ptrByte, sizeof(cantPage));
+	ptrByte += sizeof(cantPage);
 	memcpy(&data, ptrByte, sizeof(data));
 	ptrByte += sizeof(data);
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
+	memcpy(&pid, ptrByte, sizeof(pid));
+	ptrByte += sizeof(pid);
 
 	free(dataSerialized);
-	return newStrSwaUmc(id, action, page, nroPage, data, dataLen);
+	return newStrSwaUmc(id, action, pageComienzo, cantPage, data, dataLen, pid);
 }
 //================================================================================================
 
