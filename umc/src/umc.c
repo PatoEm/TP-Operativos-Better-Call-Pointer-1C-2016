@@ -68,10 +68,15 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 	while (contadorDePaginas < cantidadDePaginas) {
 
 		paginaAReservar = malloc(sizeof(espacioAsignado));
+		if(contadorDePaginas==0)
+			paginaAReservar->punteroAPagina = 1;
+		else
+			paginaAReservar->punteroAPagina = 0;
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
 		(paginaAReservar->bitModificado) = 0;
+		(paginaAReservar->bitUso) = 1;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
@@ -170,6 +175,11 @@ int paginasContiguasDeUMC(int cantidadDePaginas) {
 	return -1;
 }
 
+//devuelve el nodo del espacio en memoria
+espacioAsignado*reemplazoClock(int pid, int pagina) {
+
+}
+
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 
 	espacioAsignado* nodoALeer;
@@ -182,6 +192,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
 		//IR A BUSCAR AL SWAP todo
 	} else {
+		(nodoALeer->bitUso) = 1;
 		int lugarDeLaCadena = 0;
 		char paginaADevolver[cantidad];
 		char*punteroADevolver = (&paginaADevolver[0]);
@@ -207,6 +218,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
 		//todo ir a buscar al swap la pagina
 	} else {
+		(nodoALeer->bitUso )= 1;
+		(nodoALeer->bitModificado )= 1;
 		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
 		int enDondeEstoyDeLoQueMeMandaron = 0;
 		int contador = 0;
@@ -646,15 +659,17 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActual = list_get(listaEspacioAsignado, i);
-		if(nodoActual->pid == PID){
+		if (nodoActual->pid == PID) {
 			direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
 			hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
 
 			printf("Frame: %d\nPID: %d\nPagina: %d\nContenido:\n",
-					nodoActual->IDPaginaInterno, nodoActual->pid,nodoActual->numDePag);
+					nodoActual->IDPaginaInterno, nodoActual->pid,
+					nodoActual->numDePag);
 
 			log_info(logger, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
-					nodoActual->IDPaginaInterno, nodoActual->pid,nodoActual->numDePag);
+					nodoActual->IDPaginaInterno, nodoActual->pid,
+					nodoActual->numDePag);
 
 			while (direccionFisica < hastaDondeLeer) {
 				printf("%c", memoriaReal[direccionFisica]);

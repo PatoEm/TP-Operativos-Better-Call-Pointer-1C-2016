@@ -37,7 +37,9 @@ typedef struct {
 	int IDPaginaInterno;
 	int pid;
 	int numDePag;
+	int bitUso;
 	int bitModificado;
+	bool punteroAPagina;
 }espacioAsignado;
 
 
