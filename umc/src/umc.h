@@ -65,6 +65,8 @@ typedef struct{
 
 //Prototipos
 
+int lugarAsignadoInicial(int pid) ;
+
 void insertarNodoOrdenadoEnTLB(t_tlb*unNodo);
 
 void insertarNodoOrdenadoLibre(int inicio, int cantidad, int IDFrame);
@@ -150,7 +152,7 @@ t_list * creoTLB();
 //SI ENCUENTRA DEVUELVE LA ENTRADA, SI NO ENCUENTRA DEVUELVE NULL
 t_tlb * buscarEnTLB(int, int );
 
-void leerEnTLB(int , int, int *);
+char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) ;
 
 //DEVUELVE 1 SI ESTA LLENA, DEVUELVE 0 SI NO ESTA LLENA
 int tlbLlena();

@@ -68,7 +68,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 	while (contadorDePaginas < cantidadDePaginas) {
 
 		paginaAReservar = malloc(sizeof(espacioAsignado));
-		if(contadorDePaginas==0)
+		if (contadorDePaginas == 0)
 			paginaAReservar->punteroAPagina = 1;
 		else
 			paginaAReservar->punteroAPagina = 0;
@@ -178,6 +178,18 @@ int paginasContiguasDeUMC(int cantidadDePaginas) {
 //devuelve el nodo del espacio en memoria
 espacioAsignado*reemplazoClock(int pid, int pagina) {
 
+	lugarAsignadoInicial(pid);
+
+}
+
+int lugarAsignadoInicial(int pid) {
+	int contador = 0;
+	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
+	while (nodoActual->pid != pid) {
+		contador++;
+		nodoActual = list_get(listaEspacioAsignado, contador);
+	}
+	return contador;
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
@@ -218,8 +230,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
 		//todo ir a buscar al swap la pagina
 	} else {
-		(nodoALeer->bitUso )= 1;
-		(nodoALeer->bitModificado )= 1;
+		(nodoALeer->bitUso) = 1;
+		(nodoALeer->bitModificado) = 1;
 		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
 		int enDondeEstoyDeLoQueMeMandaron = 0;
 		int contador = 0;
@@ -575,7 +587,7 @@ void retardoUMC(int retardo) {
 void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
 	int i = 0;
 	espacioAsignado * nodoActualDeAsignados;
-	//IMPRIMO EN PANTALLA
+//IMPRIMO EN PANTALLA
 	printf("Paginas Asignadas al proceso: %d\n", pid);
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
@@ -843,7 +855,7 @@ int reemplazarPaginaLRU() {
 		comienzoDePagina++;
 	}
 
-	almacenarBytes(paginaAMatar->frameTLB, paginaAMatar->pagina, marco_Size,
+	almacenarBytes(paginaAMatar->pid, paginaAMatar->pagina, 0, marco_Size,
 			buffer); //todo Aca te falta el offset
 	paginaLibre = paginaAMatar->frameTLB;
 	memoriaTLB[paginaLibre] = 0;
@@ -894,35 +906,36 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 			//Si no lo encontró leo en memoria real todo
 		}
 	}
+}
 
-	t_tlb * buscarEnTLB(int PID, int pagina) {
-		int i = 0;
-		int sizeTLB = list_size(TLB);
-		while (i < sizeTLB) {
-			t_tlb * entradaTLB = list_get(TLB, i);
-			if (entradaTLB->pid == PID) {
-				if (entradaTLB->pagina == pagina) {
-					return entradaTLB; //La encontro
-				}
+t_tlb * buscarEnTLB(int PID, int pagina) {
+	int i = 0;
+	int sizeTLB = list_size(TLB);
+	while (i < sizeTLB) {
+		t_tlb * entradaTLB = list_get(TLB, i);
+		if (entradaTLB->pid == PID) {
+			if (entradaTLB->pagina == pagina) {
+				return entradaTLB; //La encontro
 			}
-			i++;
 		}
-		return NULL;
+		i++;
 	}
+	return NULL;
+}
 
 //Devuelve 1 si esta llena, devuelve 0 si no esta llena
-	int tlbLlena() {
-		if (TLB->elements_count == entradas_TLB) {
-			return 1;
-		}
-
-		return 0;
-	}
-
-//DEVUeLVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
-	int tlbHabilitada() {
-		if (entradas_TLB == 0) {
-			return 0;
-		}
+int tlbLlena() {
+	if (TLB->elements_count == entradas_TLB) {
 		return 1;
 	}
+
+	return 0;
+}
+
+//DEVUeLVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
+int tlbHabilitada() {
+	if (entradas_TLB == 0) {
+		return 0;
+	}
+	return 1;
+}
