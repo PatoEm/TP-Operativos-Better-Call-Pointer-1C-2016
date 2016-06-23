@@ -4,14 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/cpuHandler.c \
 ../src/mainNucleo.c \
 ../src/nucleo.c 
 
 OBJS += \
+./src/cpuHandler.o \
 ./src/mainNucleo.o \
 ./src/nucleo.o 
 
 C_DEPS += \
+./src/cpuHandler.d \
 ./src/mainNucleo.d \
 ./src/nucleo.d 
 

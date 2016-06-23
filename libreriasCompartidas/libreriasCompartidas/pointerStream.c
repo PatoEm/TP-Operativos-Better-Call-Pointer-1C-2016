@@ -85,11 +85,12 @@ StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen
 /*******************************
  * Constructor CPU-UMC
  ******************************/
-StrCpuUmc* newStrCpuUmc(Char id, Char action, Int32U address, Int32U dataLen, Byte* data, Int32U pid){
+//StrCpuUmc* newStrCpuUmc(Char, Char, espacioAsignado, /*offset*/Int32U, Byte*, Int32U);
+StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado espacio, Int32U dataLen, Byte* data, Int32U pid){
 	StrCpuUmc* scu = malloc(sizeof(StrCpuUmc));
 	scu->id = id;
 	scu-> action = action;
-	scu->address = address;
+	// todo scu->address = address;
 	scu->dataLen = dataLen;
 	scu->data = data;
 	scu->pid = pid;
@@ -112,11 +113,13 @@ StrUmcKer* newStrUmcKer(Char id, Char action, Int32U address, Byte* data, Int32U
 /*******************************
  * Constructor UMC-CPU
  ******************************/
-StrUmcCpu* newStrUmcCpu(Char id, Char action, Int32U address, Int32U dataLen, Byte* data){
+//StrUmcCpu* newStrUmcCpu(Char, Char, espacioAsignado, /*offset*/Int32U, Byte*, Int32U);
+
+StrUmcCpu* newStrUmcCpu(Char id, Char action, espacioAsignado espacio, Int32U dataLen, Byte* data, Int32U algo){
 	StrUmcCpu* suc = malloc(sizeof(StrUmcCpu));
 	suc->id = id;
 	suc->action = action;
-	suc->address = address;
+	// todo suc->address = address;
 	suc->dataLen = dataLen;
 	suc->data = data;
 	return suc;
@@ -140,7 +143,9 @@ StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int3
 /*******************************
  * Constructor Swap-UMC
  ******************************/
-StrUmcSwa* newStrSwaUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid){
+//StrSwaUmc* newStrSwaUmc(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
+
+StrSwaUmc* newStrSwaUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid){
 	StrSwaUmc* ssu = malloc(sizeof(StrUmcSwa));
 	ssu->id = id;
 	ssu->action = action;
@@ -257,7 +262,7 @@ Int32U getSizeUmcCpu(StrUmcCpu* suc){
 	Int32U size = 0;
 	size += sizeof(suc->id);
 	size += sizeof(suc->action);
-	size += sizeof(suc->address);
+	// todo size += sizeof(suc->address);
 	size += sizeof(suc->dataLen);
 	size += sizeof(suc->data);
 	return size;
@@ -483,9 +488,9 @@ SocketBuffer* serializeCpuUmc(StrCpuUmc* scu){
 	memcpy(ptrData, ptrByte, sizeof(scu->action));
 	ptrData += sizeof(scu->action);
 
-	ptrByte = (Byte*) &scu->address;
-	memcpy(ptrData, ptrByte, sizeof(scu->address));
-	ptrData += sizeof(scu->address);
+	// todo ptrByte = (Byte*) &scu->address;
+	// todo memcpy(ptrData, ptrByte, sizeof(scu->address));
+	// todo ptrData += sizeof(scu->address);
 
 	ptrByte = (Byte*) &scu->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(scu->dataLen));
@@ -555,9 +560,9 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
 	memcpy(ptrData, ptrByte, sizeof(suc->action));
 	ptrData += sizeof(suc->action);
 
-	ptrByte = (Byte*) &suc->address;
-	memcpy(ptrData, ptrByte, sizeof(suc->address));
-	ptrData += sizeof(suc->address);
+	// todo ptrByte = (Byte*) &suc->address;
+	// todo memcpy(ptrData, ptrByte, sizeof(suc->address));
+	// todo ptrData += sizeof(suc->address);
 
 	ptrByte = (Byte*) &suc->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(suc->dataLen));
@@ -794,7 +799,7 @@ SocketBuffer* unserializeCpuUmc(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	Int32U address;
+	espacioAsignado address;
 	Int32U dataLen;
 	Byte* data;
 	Int32U pid;
@@ -849,7 +854,7 @@ SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	Int32U address;
+	espacioAsignado address;
 	Int32U dataLen;
 	Byte* data;
 
@@ -865,7 +870,10 @@ SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
 	ptrByte += sizeof(data);
 
 	free(dataSerialized);
-	return newStrUmcCpu(id, action, address, dataLen, data);
+	//trUmcCpu* newStrUmcCpu(Char id, Char action, espacioAsignado espacio, Int32U dataLen, Byte* data, Int32U algo){
+	Int32U algo;
+	//todo hice este cambio de agregar ese algo vacio porque si no rompia
+	return newStrUmcCpu(id, action, address, dataLen, data, algo);
 }
 
 /***********************************************/

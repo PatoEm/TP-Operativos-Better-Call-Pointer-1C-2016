@@ -262,8 +262,9 @@ Boolean handshake(SocketClient* client, Char id) {
 	Char action;
 	switch (id) {
 		case CPU_ID:
-			sck = newStrCpuKer(id, HANDSHAKE, pcb, 0, 0, 0, 0);
+			sck = newStrCpuKer(id, HANDSHAKE, pcb, 0, 0, 0);
 			sb = serializeCpuKer(sck);
+			//newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log)
 			break;
 		case CONSOLA_ID:
 			sconk = newStrConKer(id, HANDSHAKE, NULL, 0);

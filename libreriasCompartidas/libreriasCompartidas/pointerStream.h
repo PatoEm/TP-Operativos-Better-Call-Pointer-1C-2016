@@ -16,7 +16,8 @@
 #include "pcb.h"
 #include <stdlib.h>
 #include <commons/bitarray.h>
-#include <../umc/src/umc.h>
+//#include <../umc/src/umc.h>
+#include "espacioAsignado.h"
 /*******************************************************
  * IDs (Duenio del stream)
  ******************************************************/
