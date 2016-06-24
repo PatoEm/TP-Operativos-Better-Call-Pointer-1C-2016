@@ -176,10 +176,63 @@ int paginasContiguasDeUMC(int cantidadDePaginas) {
 }
 
 //devuelve el nodo del espacio en memoria
-espacioAsignado*reemplazoClock(int pid, int pagina) {
+int reemplazarPaginaClock(int pid, int pagina) {
 
-	lugarAsignadoInicial(pid);
+	int inicio = lugarAsignadoInicial(pid);
+	int fin = lugarAsignadoFinal(pid);
+	int contador = encontrarPuntero(pid);
+	int posicionDePaginaLibre;
+	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
+	while ((nodoActual->bitUso) == 1) {
+		nodoActual->bitUso = 0;
+		contador++;
+		if (contador > fin)
+			contador = inicio;
+		nodoActual = list_get(listaEspacioAsignado, contador);
+	}
+	posicionDePaginaLibre=nodoActual->IDPaginaInterno;
+	espacioAsignado*nodoSiguiente=(list_get(listaEspacioAsignado, (contador+1)));
+	nodoSiguiente->punteroAPagina=1;
+	//todo llevar pagina al swap
+	limpiarPagina(nodoActual->IDPaginaInterno*marco_Size);
+	//todo traer pagina del swap
+	//todo acomodar pagina
+	return posicionDePaginaLibre;
+}
 
+void limpiarPagina(int comienzoDePagina){
+	int contador=comienzoDePagina;
+	int finDePagina= comienzoDePagina + marco_Size;
+	while(contador!=finDePagina){
+		memoriaReal[contador]='\0';
+	}
+
+}
+
+int encontrarPuntero(int pid) {
+	int inicio = lugarAsignadoInicial(pid);
+	int fin = lugarAsignadoFinal(pid);
+	int contador = inicio;
+	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, inicio);
+	while ((nodoActual->punteroAPagina) != 1) {
+		contador++;
+		if (contador > fin)
+			contador = inicio;
+		nodoActual = list_get(listaEspacioAsignado, contador);
+	}
+	nodoActual->punteroAPagina=0;
+	return contador;
+}
+
+int lugarAsignadoFinal(int pid) {
+	int inicio = lugarAsignadoInicial(pid);
+	espacioAsignado*nodoFinal;
+	nodoFinal = list_get(listaEspacioAsignado, inicio);
+	while (nodoFinal->pid == pid) {
+		inicio++;
+		nodoFinal = list_get(listaEspacioAsignado, inicio);
+	}
+	return (inicio - 1);
 }
 
 int lugarAsignadoInicial(int pid) {
@@ -856,7 +909,7 @@ int reemplazarPaginaLRU() {
 	}
 
 	almacenarBytes(paginaAMatar->pid, paginaAMatar->pagina, 0, marco_Size,
-			buffer); //todo Aca te falta el offset
+			buffer);
 	paginaLibre = paginaAMatar->frameTLB;
 	memoriaTLB[paginaLibre] = 0;
 	free(list_remove(TLB, lugarDePaginaAMatar));

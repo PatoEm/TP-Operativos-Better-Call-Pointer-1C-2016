@@ -65,6 +65,12 @@ typedef struct{
 
 //Prototipos
 
+int encontrarPuntero(int pid);
+
+void limpiarPagina(int comienzoDePagina);
+
+int lugarAsignadoFinal(int pid);
+
 int lugarAsignadoInicial(int pid) ;
 
 void insertarNodoOrdenadoEnTLB(t_tlb*unNodo);
@@ -170,5 +176,7 @@ void llevarPaginaATLB(int , int , char* );
 int reemplazarPaginaLRU();
 
 int buscarPaginaVaciaEnTLB();
+
+int reemplazarPaginaClock(int pid, int pagina);
 
 #endif /* UMC_H_ */
