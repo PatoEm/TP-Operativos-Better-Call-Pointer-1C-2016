@@ -38,7 +38,14 @@ Boolean realizarCierreConsola();
 String stringFromByteArray(Byte*, Int32U);
 
 int main(void) {
+
 	if (loadConfig() && socketConnection()) {
+
+		while(1){
+			puts("Esperando..");
+			sleep(10);
+		}
+
 		if (!callAndSendAnSISOP(direccionDeArchivo)) {
 			puts("No se pudo obtener el archivo y enviarlo al Kernel");
 			return FALSE;
@@ -96,19 +103,23 @@ Boolean loadConfig() {
 Boolean socketConnection() {
 	kernelClient = socketCreateClient();
 
-	if (!socketConnect(kernelClient, ipKernel, puertoKernel)) {
-		printf("[ERROR]: No se pudo conectar al Kernel en la direccion %s puerto %d.\n", ipKernel, puertoKernel);
-		return FALSE;
-	}
-	puts("HANDSHAKE con Kernel");
-	if (handshake(kernelClient, CONSOLA_ID)) {
-		puts("CON-KER: HANDSHAKE realizado con exito.");
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con el Nucleo.");
+		printf("IP: %s, Puerto: %d\n", ipKernel, (int)puertoKernel);
+		sleep(3);
+	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
+
+	if(handshake(kernelClient, CPU_ID)){
+		puts("Handshake realizado con exito.");
 	} else {
-		puts("CON-KER: ERROR al realizar el HANDSHAKE.");
+		puts("No se pudo realizar el handshake.");
 		return FALSE;
 	}
 	return TRUE;
 }
+
+
 
 Boolean callAndSendAnSISOP(String path) {
 	if ( path == NULL || string_is_empty(path)) {

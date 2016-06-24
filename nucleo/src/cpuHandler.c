@@ -65,6 +65,12 @@ Boolean initCpuServer() {
 		return FALSE;
 	}
 
+//	INICIO LA LISTA DE CONSOLAS
+	consoleList = list_create();
+	if(consoleList == NULL){
+		log_error(cpuhlog, "Error al crear la lista de Consolas.");
+		return FALSE;
+	}
 
 //	INICIO EL SOCKET ESCUCHA
 	serverSocket = socketCreateServer(CPU_HANDLER_SOCKET);
@@ -175,7 +181,7 @@ void newClientHandler(Socket* client) {
 
 		case CONSOLA_ID:
 			log_info(cpuhlog, "Nuevo Cliente CONSOLA");
-//			newConsoleClient(client,strReceived);
+			newConsoleClient(client,strReceived);
 			break;
 
 		}
@@ -192,7 +198,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	SocketBuffer* sb;
 	pcb pcb;
 	switch(sck->action) {
-		case 0://HANDSHAKE:
+		case HANDSHAKE:
 			log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
 			skc = newStrKerCpu(CPU_ID, HANDSHAKE, pcb, 0);
 			sb = serializeKerCpu(skc);
@@ -221,6 +227,30 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 			break;
 	}
 }
+
+void newConsoleClient(Socket* consoleClient, Stream dataSerialized) {
+
+	StrConKer* sck = unserializeConKer(dataSerialized);
+	StrKerCon* skc;
+	SocketBuffer* sb;
+	if(sck->action == HANDSHAKE) {
+		log_info(cpuhlog, "Nuevo Cliente Consola %d aceptado.",consoleClient->descriptor);
+		skc = newStrKerCon(CONSOLA_ID, HANDSHAKE, 0,0);
+		sb = serializeKerCon(skc);
+		if (socketSend(consoleClient, sb)) {
+			log_info(cpuhlog, "KER-CON: HANDSHAKE se devolvio handshake");
+			//LOG OBLIGATORIO
+			//conexion_consola(consoleClient->descriptor);
+			list_add(consoleList, consoleClient);
+		} else {
+			log_error(cpuhlog, "KER-CON: HANDSHAKE fallo al devolver");
+		}
+	} else {
+		log_error(cpuhlog, "No se pudo determinar la accion de un cliente Consola.");
+	}
+
+}
+
 
 /*
  *

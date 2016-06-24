@@ -20,6 +20,7 @@
 
 // VARIABLES GLOBALES
 t_list* coreList;
+t_list* consoleList;
 Socket* serverSocket;
 
 
@@ -33,7 +34,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized);
 void clientHandler(int cliente);
 int cpuCoreInList(t_list* lista, Socket* cliente);
 void cpuClientHandler(Socket* cpuClient, Stream data);
-
+void newConsoleClient(Socket* consoleClient, Stream dataSerialized);
 
 // ESTRUCTURAS
 
