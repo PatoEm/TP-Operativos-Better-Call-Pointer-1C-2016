@@ -94,18 +94,22 @@ int main() {
 
 	do {
 		puts("Intentando conectar con el Nucleo.");
+		printf("IP: %s, Puerto: %s\n", IP_KERNEL, PUERTO_KERNEL);
 		sleep(3);
 	} while(!socketConnect(nucleo, IP_KERNEL, (Int32U) 2020));
 
+	if(handshake(nucleo, CPU_ID)){
+		puts("Handshake realizado con exito.");
+	} else {
+		puts("No se pudo realizar el handshake.");
+		return -1;
+	}
 
-	puts("Intentando realizar handshake.");
-	handshake(nucleo, CPU_ID);
-
-	getNextPcb();
+//	getNextPcb();
 
 	while(1){
-		sleep(10);
 		puts("Esperando..");
+		sleep(10);
 	}
 
 //	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
