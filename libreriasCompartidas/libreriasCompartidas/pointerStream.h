@@ -16,7 +16,6 @@
 #include "pcb.h"
 #include <stdlib.h>
 #include <commons/bitarray.h>
-//#include <../umc/src/umc.h>
 #include "espacioAsignado.h"
 /*******************************************************
  * IDs (Duenio del stream)
@@ -75,7 +74,7 @@ typedef struct strKerCpu {
 typedef struct strKerUmc {
 	Char id;
 	Char action;
-	Byte *data;
+	Byte* data;
 	Int32U size;
 	Int32U pid;
 	Int32U cantPage;
@@ -113,7 +112,7 @@ typedef struct strCpuUmc {
 	Char id;
 	Char action;
 	espacioAsignado pageComienzo;
-	//tipoOffset offset;
+	Int32U offset;
 	Int32U dataLen;
 	Byte* data;
 	Int32U pid;
@@ -126,9 +125,10 @@ typedef struct strCpuUmc {
 typedef struct strUmcKer {
 	Char id;
 	Char action;
-	Int32U address;
 	Byte* data;
-	Int32U dataLen;
+	Int32U size;
+	Int32U pid;
+	Int32U cantPage;
 } __attribute__((packed)) StrUmcKer;
 
 
@@ -139,7 +139,7 @@ typedef struct strUmcCpu {
 	Char id;
 	Char action;
 	espacioAsignado pageComienzo;
-	//tipoOffset offset;
+	Int32U offset;
 	Int32U dataLen;
 	Byte* data;
 	Int32U pid;
@@ -182,13 +182,13 @@ StrConKer* newStrConKer(Char, Char, Byte*, Int32U);
 
 StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
 StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
-StrKerCon* newStrKerCon(Char, Char , Int32U, Byte*);
+StrKerCon* newStrKerCon(Char, Char, Int32U, Byte*);
 
 StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U, Byte*);
-StrCpuUmc* newStrCpuUmc(Char, Char, espacioAsignado, /*offset*/Int32U, Byte*, Int32U);
+StrCpuUmc* newStrCpuUmc(Char, Char, espacioAsignado, Int32U, Int32U, Byte*, Int32U);
 
-StrUmcKer* newStrUmcKer(Char, Char, Int32U, Byte*, Int32U);
-StrUmcCpu* newStrUmcCpu(Char, Char, espacioAsignado, /*offset*/Int32U, Byte*, Int32U);
+StrUmcKer* newStrUmcKer(Char, Char, Byte*, Int32U, Int32U, Int32U);
+StrUmcCpu* newStrUmcCpu(Char, Char, espacioAsignado, Int32U, Int32U, Byte*, Int32U);
 StrUmcSwa* newStrUmcSwa(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
 
 StrSwaUmc* newStrSwaUmc(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
