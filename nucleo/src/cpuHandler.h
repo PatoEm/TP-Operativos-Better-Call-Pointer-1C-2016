@@ -17,6 +17,7 @@
 #include <libreriasCompartidas/pointerStream.h>
 #include <commons/collections/list.h>
 #include <stdio.h>
+#include "nucleo.h"
 
 // VARIABLES GLOBALES
 t_list* coreList;

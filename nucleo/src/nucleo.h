@@ -23,7 +23,7 @@
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
-//#include <libreriasCompartidas/pcb.h>
+#include <libreriasCompartidas/pcb.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -82,51 +82,51 @@ t_list *listaExec;
 t_list *listaBlock;
 
 t_queue *colaExit;
-
-//Estructuras PCB
-
-typedef struct {
-	int comienzo;
-	int longitud;
-} arrayBidimensional;
-
-typedef struct {
-	int id;
-	int pag;
-	int off;
-	int size;
-} variables;
-typedef struct {
-	int pag;
-	int off;
-	int size;
-} argumentos;
-
-typedef struct {
-	int pos;
-	argumentos args;
-	variables vars;
-	int retPos;
-	variables retVars;
-
-} paginaDeStack;
-
-typedef enum {
-	NEW = 0, READY = 1, EXEC = 2, BLOCK = 3, EXIT = 4
-} estadoPrograma;
-
-typedef struct {
-	int id;
-	int tamanioArchivoOriginal;
-	t_puntero_instruccion programCounter;
-	int paginasDeCodigo;
-	arrayBidimensional * indiceDeCodigo;
-	char * indiceDeEtiquetas;
-	paginaDeStack * indiceDelStack;
-	t_medatada_program* metaProgram;
-	estadoPrograma estado;
-
-} pcb;
+//
+////Estructuras PCB
+//
+//typedef struct {
+//	int comienzo;
+//	int longitud;
+//} arrayBidimensional;
+//
+//typedef struct {
+//	int id;
+//	int pag;
+//	int off;
+//	int size;
+//} variables;
+//typedef struct {
+//	int pag;
+//	int off;
+//	int size;
+//} argumentos;
+//
+//typedef struct {
+//	int pos;
+//	argumentos args;
+//	variables vars;
+//	int retPos;
+//	variables retVars;
+//
+//} paginaDeStack;
+//
+//typedef enum {
+//	NEW = 0, READY = 1, EXEC = 2, BLOCK = 3, EXIT = 4
+//} estadoPrograma;
+//
+//typedef struct {
+//	int id;
+//	int tamanioArchivoOriginal;
+//	t_puntero_instruccion programCounter;
+//	int paginasDeCodigo;
+//	arrayBidimensional * indiceDeCodigo;
+//	char * indiceDeEtiquetas;
+//	paginaDeStack * indiceDelStack;
+//	t_medatada_program* metaProgram;
+//	estadoPrograma estado;
+//
+//} pcb;
 
 //Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
 

@@ -13,8 +13,7 @@ src/consola.d: ../src/consola.c ../src/consola.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerSocketes.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/../umc/src/umc.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h
 
 ../src/consola.h:
 
@@ -46,6 +45,4 @@ src/consola.d: ../src/consola.c ../src/consola.h \
 
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h:
 
-/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/../umc/src/umc.h:
-
-/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h:
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h:
