@@ -41,15 +41,17 @@ int main(void) {
 
 	if (loadConfig() && socketConnection()) {
 
-		while(1){
-			puts("Esperando..");
-			sleep(10);
-		}
+		direccionDeArchivo = (char *) malloc(150);
+		verificarMemoria(direccionDeArchivo);
+		printf("Ingrese direccion del archivo: ");
+	    scanf("%s", direccionDeArchivo);
+
 
 		if (!callAndSendAnSISOP(direccionDeArchivo)) {
 			puts("No se pudo obtener el archivo y enviarlo al Kernel");
 			return FALSE;
 		}
+
 		while (TRUE) {
 			if(!instructionsFromKernel()) {
 				puts("No se recibio instrucciones del Kernel");
@@ -65,14 +67,9 @@ int main(void) {
  * Implementacion de Funciones
  */
 Boolean loadConfig() {
-	direccionDeArchivo = (char *) malloc(150);
-	verificarMemoria(direccionDeArchivo);
-	printf("Ingrese direccion del archivo: ");
-    scanf("%s", direccionDeArchivo);
-
-    tConfig = config_create(direccionDeArchivo);
+    tConfig = config_create(ARCHIVO_CONF);
     if (tConfig == NULL) {
-    	printf("No se encuentra o falta el archivo de configuracion en la direccion '%s'.\n", direccionDeArchivo);
+    	printf("No se encuentra o falta el archivo de configuracion en la direccion '/%s'.\n", ARCHIVO_CONF);
     	return FALSE;
     }
 
@@ -122,6 +119,7 @@ Boolean socketConnection() {
 
 
 Boolean callAndSendAnSISOP(String path) {
+
 	if ( path == NULL || string_is_empty(path)) {
 		printf("[ERROR]: La direccion del archivo es vacio. ------- Terminando \n");
 		return FALSE;
@@ -149,14 +147,14 @@ Boolean callAndSendAnSISOP(String path) {
 		free(sck);
 	}
 
-	//sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, file, fileLen);
-	puts("Enviando al Kernel el archivo");
+	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, file, fileLen);
+	puts("Enviando al Nucleo el archivo");
 	return sendStream();
 }
 
 Boolean sendStream() {
 	if (sck == NULL) {
-		printf("[ERROR] Al tratar de enviar el stream al Kernel sin inicializar. ----- Ternimando \n");
+		printf("[ERROR] Al tratar de enviar el stream al Kernel sin inicializar. ----- Terminando \n");
 		return FALSE;
 	}
 
@@ -204,13 +202,13 @@ Boolean instructionsFromKernel() {
 
 Boolean realizarImprimir() {
 	t_valor_variable valor_mostrar;
-	//valor_mostrar = skc->log;
+	valor_mostrar = skc->log;
 	printf("%d\n", valor_mostrar);
 	return TRUE;
 }
 
 Boolean realizarImprimirTexto() {
-	//printf("%s\n", stringFromByteArray(skc->log, skc->logLen));
+	printf("%s\n", stringFromByteArray(skc->log, skc->logLen));
 	return TRUE;
 }
 
