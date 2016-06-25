@@ -3,6 +3,7 @@
 #include <pthread.h>
 #include <commons/log.h>
 #include <stdlib.h>
+#include "nucleo.h"
 
 pthread_t cpuht;
 void** nada;
@@ -336,3 +337,69 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 }
 
+void consoleClientHandler(Socket *consoleClient, Stream data){
+	pcb *pcb;
+	Console *console;
+	StrConKer *sck = unserializeConKer(data);
+	Byte *ptrByte;
+	switch (sck->action) {
+//		case STD_INPUT:
+//
+//			log_debug(getLogger(), "KERNEL : El Cliente %d mando STD_INPUT",consoleClient->descriptor);
+//			console = getConsoleByTid(sck->tid);
+//
+//			SysCall *scd = getSysCallByTid(console->tcb->tid);
+//			if(scd != NULL){
+//
+//				scd->dataLength = sck->bufferWriterLen;
+//				scd->data = malloc(sizeof(sck->bufferWriterLen));
+//				ptrByte = (Byte*) &sck->bufferWriter;
+//				memcpy(&scd->data,ptrByte,sck->bufferWriterLen);
+//
+//				wakeTcbForSTDINComplete(console->tcb->tid);
+//			}
+//
+//			break;
+
+		case STD_OUTPUT:
+
+			log_debug(cpuhlog, "KERNEL : El Cliente %d mando STD_OUTPUT",consoleClient->descriptor);
+			//SI CONSOLA ME MANDA OUT, NO PASA NADA, PORQUE EL TCB NO CAMBIA
+			//Y YA ESTA DESBLOQUEADO. ACA NO DEBERIA DE HACER NADA EL KERNEL
+			break;
+
+		case ARCHIVO_ANSISOP:
+
+			log_debug(cpuhlog, "KERNEL : El Cliente %d mando BESO_FILE",consoleClient->descriptor);
+
+			//SE GENERA EL NUEVO TCB
+//			pcb = crearNuevoPcb(char * , int ); //createNewPcb(sck);
+//			log_info(cpuhlog, "KERNEL : El proceso %d comenzara",pcb->id);
+
+			//CARGO LA CONSOLA INGRESADA JUNTO CON EL PCB QUE
+			//TRAJO A LA LISTA DE CONSOLAS QUE VOY A USAR PARA GESTIONAR
+			//LOS SERVICIOS EXPUESTOS A LA CPU
+			Console *clientConsole = malloc(sizeof(Console));
+
+			clientConsole->consoleClient = consoleClient;
+			clientConsole->pcb = pcb;
+			clientConsole->data = sck->fileContent;
+			clientConsole->dataLength = sck->fileContentLen;
+
+
+//			mtxLock(&mtxConsoleList);
+			list_add(consoleList, clientConsole);
+//			mtxUnlock(&mtxConsoleList);
+
+
+			//MUEVO EL NUEVO TCB A LA COLA DE NEW
+//			newProcessesHandlerThread(pcb);
+
+			break;
+
+		default:
+			log_error(cpuhlog, "KERNEL : No se pudo determinar el action del cliente CONSOLA");
+			log_error(cpuhlog, "KERNEL : Action = %d",sck->action);
+			break;
+	}
+}

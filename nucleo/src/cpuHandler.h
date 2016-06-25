@@ -42,6 +42,12 @@ typedef struct core {
 	pcb* pcb;
 	Socket* cpuClient;
 } t_core;
+typedef struct console {
+	Socket *consoleClient;
+	pcb *pcb;
+	Byte *data;
+	Int32U dataLength;
+} Console;
 
 
 
