@@ -295,11 +295,13 @@ void clientHandler(int clientDescriptor) {
 		switch (id) {
 
 		case CPU_ID:
+			log_info(cpuhlog, "KERNEL : El cliente %d es un CPU", clientDescriptor);
 			cpuClientHandler(tempClient, strReceived);
 			break;
 
 		case CONSOLA_ID:
-//			consoleClientHandler(tempClient, strReceived);
+			log_info(cpuhlog, "KERNEL : El cliente %d es una consola", clientDescriptor);
+			consoleClientHandler(tempClient, strReceived);
 			break;
 
 		}
@@ -363,16 +365,16 @@ void consoleClientHandler(Socket *consoleClient, Stream data){
 
 		case STD_OUTPUT:
 
-			log_debug(cpuhlog, "KERNEL : El Cliente %d mando STD_OUTPUT",consoleClient->descriptor);
+			log_error(cpuhlog, "KERNEL : El Cliente %d mando STD_OUTPUT",consoleClient->descriptor);
 			//SI CONSOLA ME MANDA OUT, NO PASA NADA, PORQUE EL TCB NO CAMBIA
 			//Y YA ESTA DESBLOQUEADO. ACA NO DEBERIA DE HACER NADA EL KERNEL
 			break;
 
 		case ARCHIVO_ANSISOP:
 
-			log_debug(cpuhlog, "KERNEL : El Cliente %d mando BESO_FILE",consoleClient->descriptor);
+			log_error(cpuhlog, "KERNEL : El Cliente %d mando ANSISOP",consoleClient->descriptor);
 
-			//SE GENERA EL NUEVO TCB
+			//SE GENERA EL NUEVO PCB
 //			pcb = crearNuevoPcb(char * , int ); //createNewPcb(sck);
 //			log_info(cpuhlog, "KERNEL : El proceso %d comenzara",pcb->id);
 
@@ -389,10 +391,11 @@ void consoleClientHandler(Socket *consoleClient, Stream data){
 
 //			mtxLock(&mtxConsoleList);
 			list_add(consoleList, clientConsole);
+
 //			mtxUnlock(&mtxConsoleList);
+			log_error(cpuhlog, "KERNEL : Consola %d añadida a la lista",consoleClient->descriptor);
 
-
-			//MUEVO EL NUEVO TCB A LA COLA DE NEW
+			//MUEVO EL NUEVO PCB A LA COLA DE NEW
 //			newProcessesHandlerThread(pcb);
 
 			break;

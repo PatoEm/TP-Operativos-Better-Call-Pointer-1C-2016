@@ -107,7 +107,7 @@ Boolean socketConnection() {
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
 
-	if(handshake(kernelClient, CPU_ID)){
+	if(handshake(kernelClient, CONSOLA_ID)){
 		puts("Handshake realizado con exito.");
 	} else {
 		puts("No se pudo realizar el handshake.");
