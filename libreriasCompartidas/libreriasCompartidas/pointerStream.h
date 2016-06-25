@@ -38,7 +38,11 @@
 #define IMPRIMIRTEXTO 9
 #define CERRARCONSOLA 10
 #define ARCHIVO_ANSISOP 11
-
+#define RECIBIR_NUEVO_PROGRAMA 12
+#define LEER_UNA_PAGINA 13
+#define ESCRIBIR_UNA_PAGINA 14
+#define ELIMINAR_PROCESO 15
+#define PROGRAMA_NO_RECIBIDO 16
 
 /*******************************************************
  * Estructuras de Streaming
