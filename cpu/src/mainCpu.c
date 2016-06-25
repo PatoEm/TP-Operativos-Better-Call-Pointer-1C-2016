@@ -21,10 +21,10 @@
 /*****************************************
  * Constantes
  ****************************************/
-#define CONFIG_FILE "configcpu.txt"
+#define CONFIG_FILE "configcpu"
 #define PARAM_LENGTH 4
 #define PUERTO_KERNEL "PUERTO_KERNEL"
-#define IP_KERNEL "127.0.0.1"
+#define IP_KERNEL "IP_KERNEL"
 #define PUERTO_UMC "PUERTO_UMC"
 #define IP_UMC "IP_UMC"
 
@@ -84,47 +84,25 @@ SocketBuffer* buffer;
 
 int main() {
 
-//==============================================================================================
-
-//	leerArchivoDeConfiguracion("configcpu");
-
-//==============================================================================================
-
 	SocketClient* nucleo =  socketCreateClient();
 
-	do {
-		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, Puerto: %s\n", IP_KERNEL, PUERTO_KERNEL);
-		sleep(3);
-	} while(!socketConnect(nucleo, IP_KERNEL, (Int32U) 2020));
+	if (/* loadFunctionDictionary(&functionsDictionary) && */ loadConfig() && socketConnection()) {
+		while (TRUE){
+			if(!getNextPcb()) {
+				return TRUE;
+			}
 
-	if(handshake(nucleo, CPU_ID)){
-		puts("Handshake realizado con exito.");
-	} else {
-		puts("No se pudo realizar el handshake.");
-		return -1;
+			if(!processPcb()) {
+				return TRUE;
+			}
+		}
+
 	}
-
-//	getNextPcb();
-
+	config_destroy(tConfig);
 	while(1){
 		puts("Esperando..");
 		sleep(10);
 	}
-
-//	if (loadFunctionDictionary(&functionsDictionary) && loadConfig() && socketConnection()) {
-//		while (TRUE){
-//			if(!getNextPcb()) {
-//				return TRUE;
-//			}
-//
-//			if(!processPcb()) {
-//				return TRUE;
-//			}
-//		}
-//
-//	}
-//	config_destroy(tConfig);
 	return FALSE;
 }
 
@@ -149,28 +127,28 @@ Boolean loadConfig() {
 		if (config_has_property(tConfig, PUERTO_KERNEL)) {
 			puertoKernel = config_get_int_value(tConfig, PUERTO_KERNEL);
 		} else {
-			printf("ERROR: Falta un parametro. \n");
+			printf("ERROR: Falta un parametro PUERTO_KERNEL. \n");
 			return FALSE;
 		}
 
 		if (config_has_property(tConfig, IP_KERNEL)) {
 			ipKernel = config_get_string_value(tConfig, IP_KERNEL);
 		} else {
-			printf("ERROR: Falta un parametro. \n");
+			printf("ERROR: Falta un parametro IP_KERNEL. \n");
 			return FALSE;
 		}
 		// Verifico que los parametros de la UMC tengan sus valores OK
 		if (config_has_property(tConfig, PUERTO_UMC)) {
 			puertoUmc = config_get_int_value(tConfig, PUERTO_UMC);
 		} else {
-			printf("ERROR: Falta un parametro. \n");
+			printf("ERROR: Falta un parametro PUERTO_UMC. \n");
 			return FALSE;
 		}
 
 		if (config_has_property(tConfig, IP_UMC)) {
 			ipUmc = config_get_string_value(tConfig, IP_UMC);
 		} else {
-			printf("ERROR: Falta un parametro. \n");
+			printf("ERROR: Falta un parametro IP_UMC. \n");
 			return FALSE;
 		}
 
@@ -187,40 +165,45 @@ Boolean loadConfig() {
 Boolean socketConnection() {
 	// Conexion al kernel
 	kernelClient = socketCreateClient();
-	printf("Conectando al kernel");
-	if (!socketConnect(kernelClient, ipKernel, puertoKernel)) {
-		printf("No se pudo conectar al kernel en la direccion %s puerto %d \n", ipKernel, puertoKernel);
-		return FALSE;
-	}
-	printf("Haciendo HANDSHAKE con el kernel");
-	if (handshake(kernelClient, CPU_ID)) {
-		printf("CPU-KER: Handshake realizado con exito");
+
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con el Nucleo.");
+		printf("IP: %s, Puerto: %d\n", ipKernel, (int)puertoKernel);
+		sleep(3);
+	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
+
+	if(handshake(kernelClient, CPU_ID)){
+		puts("Handshake realizado con exito.");
 	} else {
-		printf("CPU-KER: No se pudo realizar el handshake");
+		puts("No se pudo realizar el handshake.");
 		return FALSE;
 	}
 
 	// Conexion a la UMC
 	umcClient = socketCreateClient();
-	printf("Conectando a la UMC");
-	if (!socketConnect(umcClient, ipUmc, puertoUmc)) {
-		printf("No se pudo conectar a la UMC en la direccion %s puerto %d \n", ipUmc, puertoUmc);
-		return FALSE;
-	}
-	printf("Haciendo HANDSHAKE con la UMC");
-	if (handshake(umcClient, CPU_ID)) {
-		printf("CPU-UMC: Handshake realizado con exito");
+
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con la UMC.");
+		printf("IP: %s, Puerto: %d\n", ipUmc, (int)puertoUmc);
+		sleep(3);
+	} while(!socketConnect(umcClient, ipUmc, puertoUmc));
+
+	if(handshake(umcClient, CPU_ID)){
+		puts("Handshake realizado con exito.");
 	} else {
-		printf("CPU-UMC: No se pudo realizar el handshake");
+		puts("No se pudo realizar el handshake.");
 		return FALSE;
 	}
+
 	return TRUE;
 }
 
 Boolean getNextPcb() {
 	if (sck == NULL) {
 		pcbActual = newEmptyPcb();
-		sck = newStrCpuKer(CPU_ID, /*PRIMER_PCB*/ 7, *pcbActual, 0, 0, 0);
+		sck = newStrCpuKer(CPU_ID, PRIMER_PCB, *pcbActual, 0, 0, 0);
 	}
 	puts("getNextPcb: Nuevo PCB vacio creado.");
 	// serializo y armo el socket
