@@ -20,6 +20,7 @@
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/pointerStream.h>
+#include <libreriasCompartidas/paginaAsignada.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <time.h>
@@ -66,14 +67,6 @@ StrUmcSwa * streamUmcSwap;
 StrSwaUmc * streamSwapUmc;
 
 //estructuras
-
-typedef struct {
-	int IDPaginaInterno;
-	int pid;
-	bool bitLectura;
-	int numDePag;
-
-} paginaAsignada;
 
 bool*bitMap;
 t_list * listaEspacioAsignado;
