@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <commons/bitarray.h>
 #include "espacioAsignado.h"
+#include "paginaAsignada.h"
 /*******************************************************
  * IDs (Duenio del stream)
  ******************************************************/
