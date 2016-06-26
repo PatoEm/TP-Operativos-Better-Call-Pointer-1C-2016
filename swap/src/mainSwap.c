@@ -8,4 +8,5 @@ int main(void) {
 
 	manejoDeConexiones();
 
+	return EXIT_SUCCESS;
 }

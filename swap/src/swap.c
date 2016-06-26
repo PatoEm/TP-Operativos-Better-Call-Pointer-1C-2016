@@ -194,10 +194,10 @@ void eliminarProceso(int pid) {
 	int contador;
 	int posicion;
 	while ((nodoAReventar->pid) == pid) {
-		contador=0;
-		posicion= nodoAReventar->pid *atoi(tamPagina);
-		while(contador<atoi(tamPagina)){
-			archivoMappeado[posicion]='\0';
+		contador = 0;
+		posicion = nodoAReventar->pid * atoi(tamPagina);
+		while (contador < atoi(tamPagina)) {
+			archivoMappeado[posicion] = '\0';
 			posicion++;
 			contador++;
 		}
@@ -314,72 +314,84 @@ void compactarSwap() {
 	//usleep(1000 * atoi(retCompactacion)); todo
 }
 
-void manejoDeConexiones(){
+void manejoDeConexiones() {
 	serverSwap = socketCreateServer(swapPort);
+	char* pagina;
 
-	if (serverSwap == NULL){
+	if (serverSwap == NULL) {
 		puts("Error no se pudo crear el server");
 	}
 
-	if(!socketListen(serverSwap)){
+	if (!socketListen(serverSwap)) {
 		puts("No me pude poner a escuchar");
-	}else
+	} else
 		puts("Server creado y escuchando correctamente");
 
 	umcClient = socketAcceptClient(serverSwap);
 
-	while(1){
+	while (1) {
 		buffer = socketReceive(umcClient);
 		if (buffer == NULL)
 			puts("Error al recibir del cliente");
 
-		streamUmcSwap=unserializeUmcSwa(buffer);
+		streamUmcSwap = unserializeUmcSwa(buffer);
 
 		bool programaRecibido;
 		bool escribirPagina;
 
-		switch(streamUmcSwap->action){
-			case RECIBIR_NUEVO_PROGRAMA:
+		switch (streamUmcSwap->action) {
+		case RECIBIR_NUEVO_PROGRAMA:
 
-				programaRecibido = recibirNuevoPrograma(streamUmcSwap->pid,streamUmcSwap->cantPage,streamUmcSwap->pageComienzo);
-				if(programaRecibido == 0){
-					streamSwapUmc=newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO, NULL, 0, NULL, 0, streamUmcSwap->pid);
-					buffer = serializeSwaUmc(streamSwapUmc);
-					if(!socketSend(umcClient,buffer))
-						puts("Error al enviar el paquete");
-				}
+			programaRecibido = recibirNuevoPrograma(streamUmcSwap->pid,
+					streamUmcSwap->cantPage, streamUmcSwap->pageComienzo);
+			if (programaRecibido == 0) {
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO,
+				NULL, 0, NULL, 0, streamUmcSwap->pid);
+				buffer = serializeSwaUmc(streamSwapUmc);
+				if (!socketSend(umcClient, buffer))
+					puts("Error al enviar el paquete");
+			}
 
-				break;
+			break;
 
-			case LEER_UNA_PAGINA:
+		case LEER_UNA_PAGINA:
 
-				leerUnaPagina(streamUmcSwap->pid,streamUmcSwap->pageComienzo->numDePag); //todo aca me falta asignarlo a algo para los if que siguen
+			pagina = leerUnaPagina(streamUmcSwap->pid,
+					streamUmcSwap->pageComienzo->numDePag); //todo aca me falta asignarlo a algo para los if que siguen
+			streamSwapUmc = newStrSwaUmc(SWAP_ID, LEER_UNA_PAGINA,
+					streamUmcSwap->pageComienzo, 1, atoi(tamPagina), 0,
+					streamUmcSwap->pid);
+			buffer = serializeSwaUmc(streamSwapUmc);
+			if (!socketSend(umcClient, buffer))
+				puts("Error al enviar el paquete");
 
+			break;
 
-				break;
+		case ESCRIBIR_UNA_PAGINA:
 
-			case ESCRIBIR_UNA_PAGINA:
+			escribirPagina = escribirPagina(streamUmcSwap->pid,
+					streamUmcSwap->pageComienzo.numDePag, streamUmcSwap->data);
+			if (escribirPagina == 0) {
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, PAGINA_NO_ESCRITA,
+						streamUmcSwap->pageComienzo->numDePag, 0, NULL, 0,
+						streamUmcSwap->pid);
+				buffer = serializeSwaUmc(streamSwapUmc);
+				if (!socketSend(umcClient, buffer))
+					puts("Error al enviar");
+			}
 
-				escribirPagina = escribirPagina(streamUmcSwap->pid, streamUmcSwap->pageComienzo.numDePag, /*todo aca va el puntero*/);
-				if(escribirPagina == 0){
-					streamSwapUmc = newStrSwaUmc(SWAP_ID, PAGINA_NO_ESCRITA, streamUmcSwap->pageComienzo->numDePag, 0, NULL, 0, streamUmcSwap->pid);
-					buffer = serializeSwaUmc(streamSwapUmc);
-					if(!socketSend(umcClient,buffer))
-						puts("Error al enviar");
-				}
+			break;
 
-				break;
+		case ELIMINAR_PROCESO:
 
-			case ELIMINAR_PROCESO:
+			eliminarProceso(streamUmcSwap->pid);
+			puts("Proceso eliminado");
 
-				eliminarProceso(streamUmcSwap->pid);
-				puts("Proceso eliminado");
+			break;
 
-				break;
-
-			default:
-				puts("HARRY TIENE UN PROBLEMA");
-				break;
+		default:
+			puts("HARRY TIENE UN PROBLEMA");
+			break;
 		}
 	}
 }
