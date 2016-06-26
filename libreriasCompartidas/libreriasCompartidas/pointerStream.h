@@ -43,6 +43,9 @@
 #define ESCRIBIR_UNA_PAGINA 14
 #define ELIMINAR_PROCESO 15
 #define PROGRAMA_NO_RECIBIDO 16
+#define PAGINA_NO_LEIDA 17
+#define PAGINA_NO_ESCRITA 18
+#define PROCESO_NO_ELIMINADO 19
 
 /*******************************************************
  * Estructuras de Streaming

@@ -52,14 +52,14 @@ void setearValores(t_config * archivoConfig) {
 	swapPort = config_get_int_value(archivoConfig, "PUERTO_ESCUCHA");
 	nombreSwap = config_get_string_value(archivoConfig, "NOMBRE_SWAP");
 	paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
-	tamPagina = config_get_string_value(archivoConfig, "TAMANO_PAGINA");
+	tamPagina = config_get_string_value(archivoConfig, "TAMANIO_PAGINA");
 	retCompactacion = config_get_string_value(archivoConfig,
 			"RETARDO_COMPACTACION");
-	tamArchivo = config_get_string_value(archivoConfig, "TAMANO_ARCHIVO");
+	tamArchivo = config_get_string_value(archivoConfig, "TAMANIO_ARCHIVO");
 }
 
 bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
-	espacioAsignado* nodoALeer;
+	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	while (((nodoALeer->pid) != pid) && (nodoALeer->bitLectura != 1)) {
@@ -82,7 +82,7 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 char* leerUnaPagina(int pid, int numeroDePagina) {
 	char paginaLeida[5] = "-2";
 	char*punteroAPaginaLeida = (&paginaLeida[0]);
-	espacioAsignado* nodoALeer;
+	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != numeroDePagina)) {
@@ -183,7 +183,7 @@ int paginasContiguasDeSwap(int cantidadDePaginas) {
 }
 
 void eliminarProceso(int pid) {
-	espacioAsignado*nodoAReventar;
+	paginaAsignada *nodoAReventar;
 	int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
 	nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
@@ -216,7 +216,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
 	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
 	int contadorDePaginas = 0; //cuento para el while
-	espacioAsignado* paginaAReservar; //nodo para agarrar cosas
+	paginaAsignada * paginaAReservar; //nodo para agarrar cosas
 	if (list_size(listaEspacioAsignado) != 0) {
 		paginaAReservar = list_get(listaEspacioAsignado,
 				lugarEnDondeDeboColocarMiNodo);
@@ -233,7 +233,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 
 	while (contadorDePaginas < cantidadDePaginas) {
 
-		paginaAReservar = malloc(sizeof(espacioAsignado));
+		paginaAReservar = malloc(sizeof(paginaAsignada));
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
@@ -279,7 +279,7 @@ void crearListas() {
 void compactarSwap() {
 
 	int paginasContiguas = 0;
-	espacioAsignado* nodoActual = malloc(sizeof(espacioAsignado));
+	paginaAsignada* nodoActual = malloc(sizeof(paginaAsignada));
 	int contadorParaCadenaActual;
 	int contadorParaCadenaVieja;
 	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
@@ -312,4 +312,74 @@ void compactarSwap() {
 
 	}
 	//usleep(1000 * atoi(retCompactacion)); todo
+}
+
+void manejoDeConexiones(){
+	serverSwap = socketCreateServer(swapPort);
+
+	if (serverSwap == NULL){
+		puts("Error no se pudo crear el server");
+	}
+
+	if(!socketListen(serverSwap)){
+		puts("No me pude poner a escuchar");
+	}else
+		puts("Server creado y escuchando correctamente");
+
+	umcClient = socketAcceptClient(serverSwap);
+
+	while(1){
+		buffer = socketReceive(umcClient);
+		if (buffer == NULL)
+			puts("Error al recibir del cliente");
+
+		streamUmcSwap=unserializeUmcSwa(buffer);
+
+		bool programaRecibido;
+		bool escribirPagina;
+
+		switch(streamUmcSwap->action){
+			case RECIBIR_NUEVO_PROGRAMA:
+
+				programaRecibido = recibirNuevoPrograma(streamUmcSwap->pid,streamUmcSwap->cantPage,streamUmcSwap->pageComienzo);
+				if(programaRecibido == 0){
+					streamSwapUmc=newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO, NULL, 0, NULL, 0, streamUmcSwap->pid);
+					buffer = serializeSwaUmc(streamSwapUmc);
+					if(!socketSend(umcClient,buffer))
+						puts("Error al enviar el paquete");
+				}
+
+				break;
+
+			case LEER_UNA_PAGINA:
+
+				leerUnaPagina(streamUmcSwap->pid,streamUmcSwap->pageComienzo->numDePag); //todo aca me falta asignarlo a algo para los if que siguen
+
+
+				break;
+
+			case ESCRIBIR_UNA_PAGINA:
+
+				escribirPagina = escribirPagina(streamUmcSwap->pid, streamUmcSwap->pageComienzo.numDePag, /*todo aca va el puntero*/);
+				if(escribirPagina == 0){
+					streamSwapUmc = newStrSwaUmc(SWAP_ID, PAGINA_NO_ESCRITA, streamUmcSwap->pageComienzo->numDePag, 0, NULL, 0, streamUmcSwap->pid);
+					buffer = serializeSwaUmc(streamSwapUmc);
+					if(!socketSend(umcClient,buffer))
+						puts("Error al enviar");
+				}
+
+				break;
+
+			case ELIMINAR_PROCESO:
+
+				eliminarProceso(streamUmcSwap->pid);
+				puts("Proceso eliminado");
+
+				break;
+
+			default:
+				puts("HARRY TIENE UN PROBLEMA");
+				break;
+		}
+	}
 }

@@ -73,7 +73,7 @@ typedef struct {
 	bool bitLectura;
 	int numDePag;
 
-} espacioAsignado;
+} paginaAsignada;
 
 bool*bitMap;
 t_list * listaEspacioAsignado;
@@ -114,5 +114,7 @@ bool recibirNuevoPrograma(int pid, int cantidadDePaginasAGuardar,
 void crearListas();
 
 void compactarSwap();
+
+void manejoDeConexiones();
 
 #endif /* SWAP_H_ */
