@@ -147,7 +147,7 @@ Boolean callAndSendAnSISOP(String path) {
 		free(sck);
 	}
 
-	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, file, fileLen);
+	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, (Byte*) buffer, fileLen);
 	puts("Enviando al Nucleo el archivo");
 	return sendStream();
 }
