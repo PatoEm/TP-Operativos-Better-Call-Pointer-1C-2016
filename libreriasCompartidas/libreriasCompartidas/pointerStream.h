@@ -186,20 +186,20 @@ typedef struct strSwaUmc {
 /***********************************************/
 /* Constructores
 ***********************************************/
-StrConKer* newStrConKer(Char, Char, Byte*, Int32U);
+StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen);
 
-StrKerCpu* newStrKerCpu(Char, Char, pcb, Int8U);
-StrKerUmc* newStrKerUmc(Char, Char, Byte*, Int32U, Int32U, Int32U);
-StrKerCon* newStrKerCon(Char, Char, Int32U, Byte*);
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum);
+StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage);
+StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log);
 
-StrCpuKer* newStrCpuKer(Char, Char, pcb, Int32U, Int32U, Byte*);
-StrCpuUmc* newStrCpuUmc(Char, Char, espacioAsignado, Int32U, Int32U, Byte*, Int32U);
+StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log);
+StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid);
 
-StrUmcKer* newStrUmcKer(Char, Char, Byte*, Int32U, Int32U, Int32U);
-StrUmcCpu* newStrUmcCpu(Char, Char, espacioAsignado, Int32U, Int32U, Byte*, Int32U);
-StrUmcSwa* newStrUmcSwa(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
+StrUmcKer* newStrUmcKer(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage);
+StrUmcCpu* newStrUmcCpu(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid);
+StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid);
 
-StrSwaUmc* newStrSwaUmc(Char, Char, paginaAsignada, Int32U, Byte*, Int32U, Int32U);
+StrSwaUmc* newStrSwaUmc(Char id, Char action, paginaAsignada pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid);
 /***********************************************/
 
 /***********************************************/
@@ -260,11 +260,11 @@ SocketBuffer* unserializeSwaUmc(Stream swaUmc);
 /***********************************************/
 /* Para Handshake
 ***********************************************/
-Char getStreamId(Stream);
+Char getStreamId(Stream stream);
 
 /***********************************************/
 /* bitarrayToSocketBuffer
 ***********************************************/
-SocketBuffer* bitarrayToSocketBuffer(t_bitarray*);
+SocketBuffer* bitarrayToSocketBuffer(t_bitarray* bitarray);
 
 #endif /* LIBRERIASCOMPARTIDAS_POINTERSTREAM_H_ */
