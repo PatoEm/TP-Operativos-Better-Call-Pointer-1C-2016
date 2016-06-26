@@ -19,6 +19,7 @@
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/pointerStream.h>
 #include <arpa/inet.h>
 #include <netinet/in.h>
 #include <time.h>
@@ -49,7 +50,7 @@
 
 //variables
 char* ipUMC;
-char* umcPort;
+int swapPort;
 char* puerto_Escucha;
 char* nombreSwap;
 char* paginas;
@@ -57,6 +58,12 @@ char* tamPagina;
 char* retCompactacion;
 char* tamArchivo;
 char* archivoMappeado;
+
+Socket * serverSwap;
+SocketBuffer * buffer;
+Socket * umcClient;
+StrUmcSwa * streamUmcSwap;
+StrSwaUmc * streamSwapUmc;
 
 //estructuras
 

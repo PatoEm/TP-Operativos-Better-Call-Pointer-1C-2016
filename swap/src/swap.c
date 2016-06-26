@@ -49,7 +49,7 @@ void* mappearArchivo(char* filename) {
 }
 
 void setearValores(t_config * archivoConfig) {
-	umcPort = config_get_string_value(archivoConfig, "PUERTO_UMC");
+	swapPort = config_get_int_value(archivoConfig, "PUERTO_ESCUCHA");
 	nombreSwap = config_get_string_value(archivoConfig, "NOMBRE_SWAP");
 	paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
 	tamPagina = config_get_string_value(archivoConfig, "TAMANO_PAGINA");
