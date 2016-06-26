@@ -174,7 +174,7 @@ typedef struct strUmcSwa {
 typedef struct strSwaUmc {
 	Char id;
 	Char action;
-	espacioAsignado pageComienzo;
+	paginaAsignada pageComienzo;
 	Int32U cantPage;
 	Byte* data;
 	Int32U dataLen;
@@ -199,7 +199,7 @@ StrUmcKer* newStrUmcKer(Char, Char, Byte*, Int32U, Int32U, Int32U);
 StrUmcCpu* newStrUmcCpu(Char, Char, espacioAsignado, Int32U, Int32U, Byte*, Int32U);
 StrUmcSwa* newStrUmcSwa(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
 
-StrSwaUmc* newStrSwaUmc(Char, Char, espacioAsignado, Int32U, Byte*, Int32U, Int32U);
+StrSwaUmc* newStrSwaUmc(Char, Char, paginaAsignada, Int32U, Byte*, Int32U, Int32U);
 /***********************************************/
 
 /***********************************************/

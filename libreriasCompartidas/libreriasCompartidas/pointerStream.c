@@ -145,7 +145,7 @@ StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int3
 /*******************************
  * Constructor Swap-UMC
  ******************************/
-StrSwaUmc* newStrSwaUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid){
+StrSwaUmc* newStrSwaUmc(Char id, Char action, paginaAsignada pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid){
 	StrSwaUmc* ssu = malloc(sizeof(StrUmcSwa));
 	ssu->id = id;
 	ssu->action = action;
@@ -945,7 +945,7 @@ SocketBuffer* unserializeSwaUmc(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
-	espacioAsignado pageComienzo;
+	paginaAsignada pageComienzo;
 	Int32U cantPage;
 	Byte* data = NULL;
 	Int32U dataLen;
