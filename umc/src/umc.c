@@ -190,21 +190,93 @@ int reemplazarPaginaClock(int pid, int pagina) {
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
-	posicionDePaginaLibre=nodoActual->IDPaginaInterno;
-	espacioAsignado*nodoSiguiente=(list_get(listaEspacioAsignado, (contador+1)));
-	nodoSiguiente->punteroAPagina=1;
+	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
+	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
+			(contador + 1)));
+	nodoSiguiente->punteroAPagina = 1;
 	//todo llevar pagina al swap
-	limpiarPagina(nodoActual->IDPaginaInterno*marco_Size);
+	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	//todo traer pagina del swap
+	nodoActual->numDePag = pagina;
+	nodoActual->bitUso = 1;
 	//todo acomodar pagina
 	return posicionDePaginaLibre;
 }
 
-void limpiarPagina(int comienzoDePagina){
-	int contador=comienzoDePagina;
-	int finDePagina= comienzoDePagina + marco_Size;
-	while(contador!=finDePagina){
-		memoriaReal[contador]='\0';
+//devuelve el nodo del espacio en memoria. 0 lectura 1 escritura
+int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
+
+	int inicio = lugarAsignadoInicial(pid);
+	int fin = lugarAsignadoFinal(pid);
+	int comienzoDelPuntero = encontrarPuntero(pid);
+	int contador = comienzoDelPuntero;
+	int posicionDePaginaLibre;
+	espacioAsignado*nodoActual;
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0))) {
+
+		nodoActual = list_get(listaEspacioAsignado, contador);
+		contador++;
+		if (contador > fin)
+			contador = inicio;
+		if (contador == comienzoDelPuntero)
+			break;
+	}
+	if (contador == comienzoDelPuntero) {
+		while (!(((nodoActual->bitUso) == 1)
+				&& ((nodoActual->bitModificado) == 0))) {
+			nodoActual->bitUso = 0;
+			nodoActual = list_get(listaEspacioAsignado, contador);
+			contador++;
+			if (contador > fin)
+				contador = inicio;
+			if (contador == comienzoDelPuntero)
+				break;
+		}
+		if (contador == comienzoDelPuntero) {
+			while (!(((nodoActual->bitUso) == 0)
+					&& ((nodoActual->bitModificado) == 0))) {
+
+				nodoActual = list_get(listaEspacioAsignado, contador);
+				contador++;
+				if (contador > fin)
+					contador = inicio;
+				if (contador == comienzoDelPuntero)
+					break;
+			}
+			if (contador == comienzoDelPuntero) {
+				while (!(((nodoActual->bitUso) == 0)
+						&& ((nodoActual->bitModificado) == 1))) {
+
+					nodoActual = list_get(listaEspacioAsignado, contador);
+					contador++;
+					if (contador > fin)
+						contador = inicio;
+					if (contador == comienzoDelPuntero)
+						break;
+				}
+			}
+		}
+	}
+	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
+	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
+			(contador + 1)));
+	nodoSiguiente->punteroAPagina = 1;
+	//todo llevar pagina al swap
+	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
+	//todo traer pagina del swap
+	nodoActual->numDePag = pagina;
+	nodoActual->bitUso = 1;
+	nodoActual->bitModificado=lectoEscritura;
+	//todo acomodar pagina
+	return posicionDePaginaLibre;
+}
+
+
+void limpiarPagina(int comienzoDePagina) {
+	int contador = comienzoDePagina;
+	int finDePagina = comienzoDePagina + marco_Size;
+	while (contador != finDePagina) {
+		memoriaReal[contador] = '\0';
 	}
 
 }
@@ -220,7 +292,7 @@ int encontrarPuntero(int pid) {
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
-	nodoActual->punteroAPagina=0;
+	nodoActual->punteroAPagina = 0;
 	return contador;
 }
 
