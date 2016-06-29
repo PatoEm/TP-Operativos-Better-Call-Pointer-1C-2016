@@ -8,6 +8,7 @@
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/espacioAsignado.h>
 #include <pthread.h>
 #include <commons/collections/list.h>
 #define FAIL -1
@@ -32,16 +33,6 @@ bool*bitMap;
 bool* bitMapTLB;
 int aciertosTLB;
 int accesosTLB;
-
-typedef struct {
-	int IDPaginaInterno;
-	int pid;
-	int numDePag;
-	int bitUso;
-	int bitModificado;
-	bool punteroAPagina;
-}espacioAsignado;
-
 
   typedef struct{
 	  int pid;
@@ -178,5 +169,13 @@ int reemplazarPaginaLRU();
 int buscarPaginaVaciaEnTLB();
 
 int reemplazarPaginaClock(int pid, int pagina);
+
+int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura);
+
+int reemplazarPagina(int pid, int pagina,bool lectoEscritura);
+
+int lugarAsignadoFinal(int pid);
+
+int lugarAsignadoInicial(int pid);
 
 #endif /* UMC_H_ */

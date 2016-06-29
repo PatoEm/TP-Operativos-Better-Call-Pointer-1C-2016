@@ -203,6 +203,13 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	return posicionDePaginaLibre;
 }
 
+int reemplazarPagina(int pid, int pagina, bool lectoEscritura) {
+	if (!strcmp(algoritmoDeReemplazo, "CLOCK"))
+		return reemplazarPaginaClock(pid, pagina);
+	else
+		return reemplazarPaginaClockModificado(pid, pagina, lectoEscritura);
+}
+
 //devuelve el nodo del espacio en memoria. 0 lectura 1 escritura
 int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 
@@ -266,11 +273,10 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 	//todo traer pagina del swap
 	nodoActual->numDePag = pagina;
 	nodoActual->bitUso = 1;
-	nodoActual->bitModificado=lectoEscritura;
+	nodoActual->bitModificado = lectoEscritura;
 	//todo acomodar pagina
 	return posicionDePaginaLibre;
 }
-
 
 void limpiarPagina(int comienzoDePagina) {
 	int contador = comienzoDePagina;
@@ -318,7 +324,8 @@ int lugarAsignadoInicial(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
-
+	char paginaADevolver[cantidad];
+	char*punteroADevolver = (&paginaADevolver[0]);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -327,12 +334,19 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
 	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
-		//IR A BUSCAR AL SWAP todo
+		int frame = reemplazarPagina(pid, pagina, 1);
+		int comienzoDeCadena = frame * marco_Size + offset;
+		int finDeCadena = frame * marco_Size + offset;
+		int lugarDeLaCadena = 0;
+		while (lugarDeLaCadena < cantidad) {
+			paginaADevolver[lugarDeLaCadena] = memoriaReal[comienzoDeCadena];
+			comienzoDeCadena++;
+			lugarDeLaCadena++;
+		}
+		return (punteroADevolver);
 	} else {
 		(nodoALeer->bitUso) = 1;
 		int lugarDeLaCadena = 0;
-		char paginaADevolver[cantidad];
-		char*punteroADevolver = (&paginaADevolver[0]);
 		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
 		while (lugarDeLaCadena < cantidad) {
 			paginaADevolver[lugarDeLaCadena] = memoriaReal[posicionDeChar];
@@ -372,7 +386,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 void finalizarPrograma(int pid) { //todo avisar al swap que tiene que reventar pid
 
 	espacioAsignado*nodoAReventar;
-	int enDondeAgregarEspacio = 0;
+	//int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
 	nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	while ((nodoAReventar->pid) != pid) {
