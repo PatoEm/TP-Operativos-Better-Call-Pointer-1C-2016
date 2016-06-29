@@ -1,2 +1,124 @@
 [INFO] 14:51:27:284 CPUHANDLER/(3473:3479): Server creado con exito y escuchando.
 [INFO] 14:51:27:284 CPUHANDLER/(3473:3479): Server iniciado.
+[INFO] 01:59:01:100 CPUHANDLER/(2832:2834): Server creado con exito y escuchando.
+[INFO] 01:59:01:100 CPUHANDLER/(2832:2834): Server iniciado.
+[ERROR] 01:59:30:106 CPUHANDLER/(2884:2886): No se pudo crear el server escucha.
+[ERROR] 01:59:30:106 CPUHANDLER/(2884:2886): No se pudo iniciar el server.
+[INFO] 01:59:41:515 CPUHANDLER/(2930:2932): Server creado con exito y escuchando.
+[INFO] 01:59:41:515 CPUHANDLER/(2930:2932): Server iniciado.
+[INFO] 02:00:02:533 CPUHANDLER/(2930:2932): Nueva Conexion detectada, realizando handshake
+[INFO] 02:00:02:534 CPUHANDLER/(2930:2932): ID Nuevo Cliente: 0.
+[INFO] 02:00:02:534 CPUHANDLER/(2930:2932): Nuevo Cliente CONSOLA
+[INFO] 02:00:02:534 CPUHANDLER/(2930:2932): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:00:02:534 CPUHANDLER/(2930:2932): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:00:34:466 CPUHANDLER/(2930:2932): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:00:34:466 CPUHANDLER/(2930:2932): KERNEL : El cliente 7 es una consola
+[ERROR] 02:00:34:467 CPUHANDLER/(2930:2932): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:00:55:883 CPUHANDLER/(3133:3142): Server creado con exito y escuchando.
+[INFO] 02:00:55:883 CPUHANDLER/(3133:3142): Server iniciado.
+[INFO] 02:01:03:782 CPUHANDLER/(3133:3142): Nueva Conexion detectada, realizando handshake
+[INFO] 02:01:03:783 CPUHANDLER/(3133:3142): ID Nuevo Cliente: 0.
+[INFO] 02:01:03:783 CPUHANDLER/(3133:3142): Nuevo Cliente CONSOLA
+[INFO] 02:01:03:783 CPUHANDLER/(3133:3142): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:01:03:783 CPUHANDLER/(3133:3142): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:01:15:929 CPUHANDLER/(3133:3142): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:01:15:929 CPUHANDLER/(3133:3142): KERNEL : El cliente 7 es una consola
+[ERROR] 02:01:15:929 CPUHANDLER/(3133:3142): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:02:11:665 CPUHANDLER/(3232:3239): Server creado con exito y escuchando.
+[INFO] 02:02:11:665 CPUHANDLER/(3232:3239): Server iniciado.
+[INFO] 02:02:20:905 CPUHANDLER/(3232:3239): Nueva Conexion detectada, realizando handshake
+[INFO] 02:02:20:905 CPUHANDLER/(3232:3239): ID Nuevo Cliente: 0.
+[INFO] 02:02:20:905 CPUHANDLER/(3232:3239): Nuevo Cliente CONSOLA
+[INFO] 02:02:20:905 CPUHANDLER/(3232:3239): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:02:20:905 CPUHANDLER/(3232:3239): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:02:28:3 CPUHANDLER/(3232:3239): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:02:28:3 CPUHANDLER/(3232:3239): KERNEL : El cliente 7 es una consola
+[ERROR] 02:02:28:3 CPUHANDLER/(3232:3239): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:03:37:692 CPUHANDLER/(3333:3340): Server creado con exito y escuchando.
+[INFO] 02:03:37:692 CPUHANDLER/(3333:3340): Server iniciado.
+[INFO] 02:03:43:664 CPUHANDLER/(3333:3340): Nueva Conexion detectada, realizando handshake
+[INFO] 02:03:43:664 CPUHANDLER/(3333:3340): ID Nuevo Cliente: 0.
+[INFO] 02:03:43:664 CPUHANDLER/(3333:3340): Nuevo Cliente CONSOLA
+[INFO] 02:03:43:664 CPUHANDLER/(3333:3340): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:03:43:664 CPUHANDLER/(3333:3340): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:03:52:277 CPUHANDLER/(3333:3340): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:03:52:277 CPUHANDLER/(3333:3340): KERNEL : El cliente 7 es una consola
+[ERROR] 02:03:52:277 CPUHANDLER/(3333:3340): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:07:43:608 CPUHANDLER/(3499:3501): Server creado con exito y escuchando.
+[INFO] 02:07:43:608 CPUHANDLER/(3499:3501): Server iniciado.
+[INFO] 02:10:01:57 CPUHANDLER/(3688:3692): Server creado con exito y escuchando.
+[INFO] 02:10:01:57 CPUHANDLER/(3688:3692): Server iniciado.
+[INFO] 02:12:47:560 CPUHANDLER/(3861:3866): Server creado con exito y escuchando.
+[INFO] 02:12:47:560 CPUHANDLER/(3861:3866): Server iniciado.
+[ERROR] 02:13:05:772 CPUHANDLER/(3996:4004): No se pudo crear el server escucha.
+[ERROR] 02:13:05:772 CPUHANDLER/(3996:4004): No se pudo iniciar el server.
+[INFO] 02:13:17:475 CPUHANDLER/(3861:3866): Nueva Conexion detectada, realizando handshake
+[INFO] 02:13:17:476 CPUHANDLER/(3861:3866): ID Nuevo Cliente: 0.
+[INFO] 02:13:17:476 CPUHANDLER/(3861:3866): Nuevo Cliente CONSOLA
+[INFO] 02:13:17:476 CPUHANDLER/(3861:3866): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:13:17:476 CPUHANDLER/(3861:3866): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:13:25:361 CPUHANDLER/(3861:3866): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:13:25:361 CPUHANDLER/(3861:3866): KERNEL : El cliente 7 es una consola
+[ERROR] 02:13:25:361 CPUHANDLER/(3861:3866): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:14:05:362 CPUHANDLER/(4100:4106): Server creado con exito y escuchando.
+[INFO] 02:14:05:362 CPUHANDLER/(4100:4106): Server iniciado.
+[INFO] 02:14:14:306 CPUHANDLER/(4100:4106): Nueva Conexion detectada, realizando handshake
+[INFO] 02:14:14:306 CPUHANDLER/(4100:4106): ID Nuevo Cliente: 0.
+[INFO] 02:14:14:306 CPUHANDLER/(4100:4106): Nuevo Cliente CONSOLA
+[INFO] 02:14:14:306 CPUHANDLER/(4100:4106): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:14:14:306 CPUHANDLER/(4100:4106): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:14:22:880 CPUHANDLER/(4100:4106): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:14:22:880 CPUHANDLER/(4100:4106): KERNEL : El cliente 7 es una consola
+[ERROR] 02:14:22:880 CPUHANDLER/(4100:4106): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:16:56:773 CPUHANDLER/(4209:4215): Server creado con exito y escuchando.
+[INFO] 02:16:56:773 CPUHANDLER/(4209:4215): Server iniciado.
+[INFO] 02:17:12:625 CPUHANDLER/(4209:4215): Nueva Conexion detectada, realizando handshake
+[INFO] 02:17:12:625 CPUHANDLER/(4209:4215): ID Nuevo Cliente: 0.
+[INFO] 02:17:12:625 CPUHANDLER/(4209:4215): Nuevo Cliente CONSOLA
+[INFO] 02:17:12:625 CPUHANDLER/(4209:4215): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:17:12:625 CPUHANDLER/(4209:4215): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:20:45:429 CPUHANDLER/(4209:4215): KERNEL : Se cayo el cliente 7
+[INFO] 02:20:45:429 CPUHANDLER/(4209:4215): KERNEL : Se elimina el cliente 7 de la bolsa de descriptores
+[INFO] 02:20:45:429 CPUHANDLER/(4209:4215): KERNEL : Se elimina el descriptor 7 para ese cliente
+[INFO] 02:22:21:689 CPUHANDLER/(4407:4414): Server creado con exito y escuchando.
+[INFO] 02:22:21:689 CPUHANDLER/(4407:4414): Server iniciado.
+[INFO] 02:22:45:935 CPUHANDLER/(4509:4516): Server creado con exito y escuchando.
+[INFO] 02:22:45:935 CPUHANDLER/(4509:4516): Server iniciado.
+[INFO] 02:22:56:65 CPUHANDLER/(4509:4516): Nueva Conexion detectada, realizando handshake
+[INFO] 02:22:56:66 CPUHANDLER/(4509:4516): ID Nuevo Cliente: 0.
+[INFO] 02:22:56:66 CPUHANDLER/(4509:4516): Nuevo Cliente CONSOLA
+[INFO] 02:22:56:66 CPUHANDLER/(4509:4516): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:22:56:66 CPUHANDLER/(4509:4516): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:23:57:841 CPUHANDLER/(4509:4516): KERNEL : Se cayo el cliente 7
+[INFO] 02:23:57:841 CPUHANDLER/(4509:4516): KERNEL : Se elimina el cliente 7 de la bolsa de descriptores
+[INFO] 02:23:57:841 CPUHANDLER/(4509:4516): KERNEL : Se elimina el descriptor 7 para ese cliente
+[INFO] 02:25:53:71 CPUHANDLER/(4689:4696): Server creado con exito y escuchando.
+[INFO] 02:25:53:71 CPUHANDLER/(4689:4696): Server iniciado.
+[INFO] 02:26:04:299 CPUHANDLER/(4689:4696): Nueva Conexion detectada, realizando handshake
+[INFO] 02:26:04:299 CPUHANDLER/(4689:4696): ID Nuevo Cliente: 0.
+[INFO] 02:26:04:299 CPUHANDLER/(4689:4696): Nuevo Cliente CONSOLA
+[INFO] 02:26:04:299 CPUHANDLER/(4689:4696): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:26:04:299 CPUHANDLER/(4689:4696): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:27:27:231 CPUHANDLER/(4689:4696): KERNEL : Se cayo el cliente 7
+[INFO] 02:27:27:231 CPUHANDLER/(4689:4696): KERNEL : Se elimina el cliente 7 de la bolsa de descriptores
+[INFO] 02:27:27:232 CPUHANDLER/(4689:4696): KERNEL : Se elimina el descriptor 7 para ese cliente
+[INFO] 02:27:41:744 CPUHANDLER/(4813:4819): Server creado con exito y escuchando.
+[INFO] 02:27:41:744 CPUHANDLER/(4813:4819): Server iniciado.
+[INFO] 02:27:49:410 CPUHANDLER/(4813:4819): Nueva Conexion detectada, realizando handshake
+[INFO] 02:27:49:411 CPUHANDLER/(4813:4819): ID Nuevo Cliente: 0.
+[INFO] 02:27:49:411 CPUHANDLER/(4813:4819): Nuevo Cliente CONSOLA
+[INFO] 02:27:49:411 CPUHANDLER/(4813:4819): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:27:49:411 CPUHANDLER/(4813:4819): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:27:53:337 CPUHANDLER/(4813:4819): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:27:53:337 CPUHANDLER/(4813:4819): KERNEL : El cliente 7 es una consola
+[ERROR] 02:27:53:337 CPUHANDLER/(4813:4819): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 02:28:53:743 CPUHANDLER/(4913:4920): Server creado con exito y escuchando.
+[INFO] 02:28:53:743 CPUHANDLER/(4913:4920): Server iniciado.
+[INFO] 02:29:02:929 CPUHANDLER/(4913:4920): Nueva Conexion detectada, realizando handshake
+[INFO] 02:29:02:929 CPUHANDLER/(4913:4920): ID Nuevo Cliente: 0.
+[INFO] 02:29:02:929 CPUHANDLER/(4913:4920): Nuevo Cliente CONSOLA
+[INFO] 02:29:02:929 CPUHANDLER/(4913:4920): Nuevo Cliente Consola 7 aceptado.
+[INFO] 02:29:02:929 CPUHANDLER/(4913:4920): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 02:34:47:835 CPUHANDLER/(4913:4920): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 02:34:47:835 CPUHANDLER/(4913:4920): KERNEL : El cliente 7 es una consola
+[ERROR] 02:34:47:835 CPUHANDLER/(4913:4920): KERNEL : El Cliente 7 mando ANSISOP

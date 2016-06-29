@@ -375,7 +375,8 @@ void consoleClientHandler(Socket *consoleClient, Stream data){
 			log_error(cpuhlog, "KERNEL : El Cliente %d mando ANSISOP",consoleClient->descriptor);
 
 			//SE GENERA EL NUEVO PCB
-//			pcb = crearNuevoPcb(char * , int ); //createNewPcb(sck);
+			pcb = crearNuevoPcb(sck->fileContent,sck->fileContentLen);
+			puts("hola");//createNewPcb(sck);
 //			log_info(cpuhlog, "KERNEL : El proceso %d comenzara",pcb->id);
 
 			//CARGO LA CONSOLA INGRESADA JUNTO CON EL PCB QUE

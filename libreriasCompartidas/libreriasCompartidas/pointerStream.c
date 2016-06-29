@@ -705,7 +705,7 @@ SocketBuffer* unserializeConKer(Stream dataSerialized){
 	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
 	ptrByte += sizeof(fileContentLen);
 
-	free(dataSerialized);
+	//free(dataSerialized);
 	return newStrConKer(id, action, fileContent, fileContentLen);
 }
 
