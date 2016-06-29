@@ -397,7 +397,7 @@ int lugarAsignadoInicial(int pid) {
 	return contador;
 }
 
-char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo agregar a la TLB
+char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 	char paginaADevolver[cantidad];
 	char*punteroADevolver = (&paginaADevolver[0]);
 	espacioAsignado* nodoALeer;
@@ -427,11 +427,22 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo agr
 			posicionDeChar++;
 			lugarDeLaCadena++;
 		}
+		if (tlbHabilitada()) {
+			int cont = 0;
+			char*buffer = malloc(sizeof(char) * marco_Size);
+			int posicionEnMemoria = (nodoALeer->IDPaginaInterno) * marco_Size;
+			while (cont < marco_Size) {
+				buffer[cont] = memoriaReal[posicionEnMemoria];
+				cont++;
+				posicionEnMemoria++;
+			}
+			llevarPaginaATLB(pid, pagina, buffer);
+		}
 		return (punteroADevolver);
 	}
 }
 
-void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) { //todo agregar la tlb
+void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -441,7 +452,17 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
 	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
-		//todo ir a buscar al swap la pagina
+		posicionActualDeNodo = reemplazarPagina(pid, pagina, 1);
+		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
+		int enDondeEstoyDeLoQueMeMandaron = 0;
+		int contador = 0;
+		while (contador < tamanio) {
+			memoriaReal[dondeEscribo] = buffer[enDondeEstoyDeLoQueMeMandaron];
+			dondeEscribo++;
+			enDondeEstoyDeLoQueMeMandaron++;
+			contador++;
+		}
 	} else {
 		(nodoALeer->bitUso) = 1;
 		(nodoALeer->bitModificado) = 1;
@@ -455,13 +476,25 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 			contador++;
 		}
 	}
+	if (tlbHabilitada()) {
+		int cont = 0;
+		char*bufer = malloc(sizeof(char) * marco_Size);
+		int posicionEnMemoria = (nodoALeer->IDPaginaInterno) * marco_Size;
+		while (cont < marco_Size) {
+			bufer[cont] = memoriaReal[posicionEnMemoria];
+			cont++;
+			posicionEnMemoria++;
+		}
+		llevarPaginaATLB(pid, pagina, bufer);
+	}
 }
 
 void finalizarPrograma(int pid) {
 	StrUmcSwa*streamUmcSwa;
-	streamUmcSwa=newStrUmcSwa(UMC_ID,ELIMINAR_PROCESO,NULL,NULL,NULL,NULL,pid);
-	SocketBuffer*buffer=serialize(streamUmcSwa);
-	if(!socketSend(socketSwap->ptrSocket,buffer))
+	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, NULL, NULL, NULL,
+	NULL, pid);
+	SocketBuffer*buffer = serialize(streamUmcSwa);
+	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
 	espacioAsignado*nodoAReventar;
 	//int enDondeAgregarEspacio = 0;
@@ -594,14 +627,25 @@ Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			pidActivo = streamCpuUmc->pid;
 			break;
 		case SOLICITAR_BYTES:
-			bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
-					scu->offset, scu->dataLen);
+			if (tlbHabilitada()) {
+				bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
+						scu->offset, scu->dataLen);
+			} else
+				bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
+						scu->offset, scu->dataLen);
 			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES, NULL,
 					scu->offset, scu->dataLen, bytes, scu->pid);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			break;
 		case 26 /*ALMACENAR_BYTES*/:
+			if (tlbHabilitada()) {
+				if(!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
+						scu->offset, scu->dataLen, scu->data)){
+					almacenarBytes(pidActivo, scu->pageComienzo.numDePag, scu->offset,
+										scu->dataLen, scu->data);
+				}
+			}else
 			almacenarBytes(pidActivo, scu->pageComienzo.numDePag, scu->offset,
 					scu->dataLen, scu->data);
 			break;
@@ -610,7 +654,7 @@ Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			break;
 		}
 		buffer = socketReceive(socket);
-		if (buffer == NULL){
+		if (buffer == NULL) {
 			puts("Problemas al recibir del cpu");
 			break;
 		}
@@ -648,6 +692,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 
 //return result;
 }
+
 Boolean sendResponse(Char target, void* stream, Socket* socket) {
 	SocketBuffer* sb = NULL;
 	puts("Serializando.");
@@ -1098,8 +1143,6 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 				lugarEnTLB++;
 			}
 			return buffer;
-			//Creo que no hay ningun retardo pero si lo hay lo pongo en esta linea
-			//Aca le tengo que mandar al CPU o al kernel que el pedido de lectura esta hecho todo
 		} else {
 			return solicitarBytes(PID, pagina, posicion, tamanio);
 		}

@@ -28,7 +28,7 @@ int main(void) {
 
 	socketSwap=socketCreateClient();
 
-	socketConnect(socketSwap,atoi(ip_Swap),atoi(puerto_Swap));
+	socketConnect(socketSwap,ip_Swap,atoi(puerto_Swap));
 
 	menuUMC(hiloComandos, attrhiloComandos);
 
