@@ -40,15 +40,16 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 		StrUmcSwa*streamUmcSwap;
 		espacioAsignado pagina;
 		StrSwaUmc * streamSwapUmc;
-		pagina->numDePag=0;
-		streamUmcSwap=newStrUmcSwa(UMC_ID,INICIALIZAR_PROGRAMA,pagina,paginas,codigo,0,pid);
-		buffer=serializeUmcSwa(streamUmcSwap);
-		socketSend(socketSwap->ptrSocket,buffer);
+		pagina->numDePag = 0;
+		streamUmcSwap = newStrUmcSwa(UMC_ID, INICIALIZAR_PROGRAMA, pagina,
+				paginas, codigo, 0, pid);
+		buffer = serializeUmcSwa(streamUmcSwap);
+		socketSend(socketSwap->ptrSocket, buffer);
 
 		buffer = socketReceive(socketSwap->ptrSocket);
 		streamSwapUmc = unserializeSwaUmc(buffer->data);
 
-		if(streamSwapUmc->action == PROGRAMA_RECIBIDO)
+		if (streamSwapUmc->action == PROGRAMA_RECIBIDO)
 			return TRUE;
 
 	} else
@@ -195,6 +196,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	int fin = lugarAsignadoFinal(pid);
 	int contador = encontrarPuntero(pid);
 	int posicionDePaginaLibre;
+	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
 	while ((nodoActual->bitUso) == 1) {
 		nodoActual->bitUso = 0;
@@ -207,12 +209,41 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
 			(contador + 1)));
 	nodoSiguiente->punteroAPagina = 1;
-	//todo llevar pagina al swap
+	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
+	int inicioLectura = posicionDePaginaLibre * marco_Size;
+	int counter = 0;
+	while (counter < marco_Size) {
+		paginaAEnviar[counter] = memoriaReal[inicioLectura];
+		inicioLectura++;
+		counter++;
+	}
+	espacioAsignado pageToSend;
+	pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
+	pageToSend.numDePag = nodoActual->numDePag;
+	pageToSend.pid = nodoActual->pid;
+	streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA, pageToSend, 1,
+			paginaAEnviar, marco_Size, nodoActual->pid);
+	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
+	if (!socketSend(socketSwap->ptrSocket, buffer))
+		puts("error al enviar al swap");
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
-	//todo traer pagina del swap
+	pageToSend.numDePag = pagina;
+	streamUmcSwap = newStreUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
+			0, nodoActual->pid);
+	buffer = serializeUmcSwa(streamUmcSwap);
+	if (!socketSend(socketSwap->ptrSocket, buffer))
+		puts("error al enviar al swap");
+	buffer = socketReceive(socketSwap->ptrSocket);
+	StrSwaUmc* streamSwapUmc = unserializeSwaUmc(buffer);
+	inicioLectura = posicionDePaginaLibre * marco_Size;
+	counter = 0;
+	while (counter < marco_Size) {
+		memoriaReal[inicioLectura] = streamSwapUmc->data[counter];
+		counter++;
+		inicioLectura++;
+	}
 	nodoActual->numDePag = pagina;
 	nodoActual->bitUso = 1;
-	//todo acomodar pagina
 	return posicionDePaginaLibre;
 }
 
@@ -281,13 +312,43 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
 			(contador + 1)));
 	nodoSiguiente->punteroAPagina = 1;
-	//todo llevar pagina al swap
+	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
+	int inicioLectura = posicionDePaginaLibre * marco_Size;
+	int counter = 0;
+	while (counter < marco_Size) {
+		paginaAEnviar[counter] = memoriaReal[inicioLectura];
+		inicioLectura++;
+		counter++;
+	}
+	espacioAsignado pageToSend;
+	pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
+	pageToSend.numDePag = nodoActual->numDePag;
+	pageToSend.pid = nodoActual->pid;
+	StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA,
+			pageToSend, 1, paginaAEnviar, marco_Size, nodoActual->pid);
+	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
+	if (!socketSend(socketSwap->ptrSocket, buffer))
+		puts("error al enviar al swap");
+
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
-	//todo traer pagina del swap
+	pageToSend.numDePag = pagina;
+	streamUmcSwap = newStreUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
+			0, nodoActual->pid);
+	buffer = serializeUmcSwa(streamUmcSwap);
+	if (!socketSend(socketSwap->ptrSocket, buffer))
+		puts("error al enviar al swap");
+	buffer = socketReceive(socketSwap->ptrSocket);
+	StrSwaUmc* streamSwapUmc = unserializeSwaUmc(buffer);
+	inicioLectura = posicionDePaginaLibre * marco_Size;
+	counter = 0;
+	while (counter < marco_Size) {
+		memoriaReal[inicioLectura] = streamSwapUmc->data[counter];
+		counter++;
+		inicioLectura++;
+	}
 	nodoActual->numDePag = pagina;
 	nodoActual->bitUso = 1;
 	nodoActual->bitModificado = lectoEscritura;
-	//todo acomodar pagina
 	return posicionDePaginaLibre;
 }
 
@@ -336,7 +397,7 @@ int lugarAsignadoInicial(int pid) {
 	return contador;
 }
 
-char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
+char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo agregar a la TLB
 	char paginaADevolver[cantidad];
 	char*punteroADevolver = (&paginaADevolver[0]);
 	espacioAsignado* nodoALeer;
@@ -370,7 +431,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 	}
 }
 
-void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
+void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) { //todo agregar la tlb
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -396,8 +457,12 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	}
 }
 
-void finalizarPrograma(int pid) { //todo avisar al swap que tiene que reventar pid
-
+void finalizarPrograma(int pid) {
+	StrUmcSwa*streamUmcSwa;
+	streamUmcSwa=newStrUmcSwa(UMC_ID,ELIMINAR_PROCESO,NULL,NULL,NULL,NULL,pid);
+	SocketBuffer*buffer=serialize(streamUmcSwa);
+	if(!socketSend(socketSwap->ptrSocket,buffer))
+		puts("error al enviar al swap");
 	espacioAsignado*nodoAReventar;
 	//int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
@@ -531,20 +596,24 @@ Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 		case SOLICITAR_BYTES:
 			bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
 					scu->offset, scu->dataLen);
-			streamUmcCpu=newStrUmcCpu(UMC_ID,SOLICITAR_BYTES,NULL,scu->offset,scu->dataLen,bytes,scu->pid);
+			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES, NULL,
+					scu->offset, scu->dataLen, bytes, scu->pid);
 			buffer = serializeUmcCpu(streamUmcCpu);
-			socketSend(socket,buffer);
+			socketSend(socket, buffer);
 			break;
 		case 26 /*ALMACENAR_BYTES*/:
-			almacenarBytes(pidActivo,scu->pageComienzo.numDePag,scu->offset,scu->dataLen,scu->data);
+			almacenarBytes(pidActivo, scu->pageComienzo.numDePag, scu->offset,
+					scu->dataLen, scu->data);
 			break;
 		default:
 			printf("No se pudo identificar la accion de la CPU");
 			break;
 		}
 		buffer = socketReceive(socket);
-		if (buffer == NULL)
-			puts("Problemas al recibir del cpu");//todo break
+		if (buffer == NULL){
+			puts("Problemas al recibir del cpu");
+			break;
+		}
 		streamCpuUmc = unserializeCpuUmc(buffer);
 	}
 //StrUmcCpu* suc;/*= newStrUmcCpu();*/
