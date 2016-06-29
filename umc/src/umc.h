@@ -9,6 +9,7 @@
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/espacioAsignado.h>
+#include <libreriasCompartidas/pointerStream.h>
 #include <pthread.h>
 #include <commons/collections/list.h>
 #define FAIL -1
@@ -33,6 +34,7 @@ bool*bitMap;
 bool* bitMapTLB;
 int aciertosTLB;
 int accesosTLB;
+t_list* socketConnections = NULL;
 
   typedef struct{
 	  int pid;

@@ -16,39 +16,19 @@ int main(void) {
 	log_info(logger, "Inicio Log UMC", NULL);
 
 	t_list * TLB;
-	int aciertosTLB;
 	int accesosTLB;
+	int aciertosTLB;
 	pthread_t hiloComandos;
 	pthread_attr_t attrhiloComandos;
 
 	memoriaReal = reservarMemoria(marcos, marco_Size); //Fabrico mi memoria real
 
-	menuUMC(hiloComandos, attrhiloComandos);
-
 	inicioTLB(TLB, aciertosTLB, accesosTLB);
+
+	menuUMC(hiloComandos, attrhiloComandos);
 
 	escuchoMuchasConexiones();
 
-/*
-	int fdSocketNucleo= crearSocketServidor(puertoEscucha);
-	escucharSocket(fdSocketNucleo,1);
-	int aceptarNucleo=aceptarConexiones(fdSocketNucleo);
-*/
-	//no tengo idea para que sirve esto, lo puedo romper? COMENTEMOS QUE HACEMOS
-
-/*
-	int fdSocketCPU= crearSocketServidor(puertoEscucha);
-	escucharSocket(fdSocketCPU,5);
-	int conexionCPU = aceptarConexiones(fdSocketCPU);
-	char* mensaje;
-	mensaje=(char*)malloc(11*sizeof(char));
-	if(mensaje==NULL){
-		puts("falló al reservar la memoria");
-		return -1;
-	}
-	recibirMensaje(conexionCPU,mensaje,11*sizeof(char));
-	puts(mensaje);
-*/
 
 	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
 	//enviarMensaje(fdSocketUMC,mensaje,11*sizeof(char));

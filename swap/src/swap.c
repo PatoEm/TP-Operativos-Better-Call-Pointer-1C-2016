@@ -330,6 +330,7 @@ void manejoDeConexiones() {
 	umcClient = socketAcceptClient(serverSwap);
 
 	while (1) {
+		paginaAsignada paginaAMandar;
 		buffer = socketReceive(umcClient);
 		if (buffer == NULL)
 			puts("Error al recibir del cliente");
@@ -337,16 +338,17 @@ void manejoDeConexiones() {
 		streamUmcSwap = unserializeUmcSwa(buffer);
 
 		bool programaRecibido;
-		bool escribirPagina;
+		bool escribirPagina2;
 
 		switch (streamUmcSwap->action) {
 		case RECIBIR_NUEVO_PROGRAMA:
 
 			programaRecibido = recibirNuevoPrograma(streamUmcSwap->pid,
-					streamUmcSwap->cantPage, streamUmcSwap->pageComienzo);
+					streamUmcSwap->cantPage,
+					streamUmcSwap->pageComienzo.numDePag);
 			if (programaRecibido == 0) {
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO,
-				NULL, 0, NULL, 0, streamUmcSwap->pid);
+						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer))
 					puts("Error al enviar el paquete");
@@ -357,10 +359,14 @@ void manejoDeConexiones() {
 		case LEER_UNA_PAGINA:
 
 			pagina = leerUnaPagina(streamUmcSwap->pid,
-					streamUmcSwap->pageComienzo->numDePag); //todo aca me falta asignarlo a algo para los if que siguen
+					streamUmcSwap->pageComienzo.numDePag); //todo aca me falta asignarlo a algo para los if que siguen
+			paginaAMandar.IDPaginaInterno =
+					streamUmcSwap->pageComienzo.IDPaginaInterno;
+			paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
+			paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
+			paginaAMandar.bitLectura = 1;
 			streamSwapUmc = newStrSwaUmc(SWAP_ID, LEER_UNA_PAGINA,
-					streamUmcSwap->pageComienzo, 1, atoi(tamPagina), 0,
-					streamUmcSwap->pid);
+					paginaAMandar, 1, atoi(tamPagina), 0, streamUmcSwap->pid);
 			buffer = serializeSwaUmc(streamSwapUmc);
 			if (!socketSend(umcClient, buffer))
 				puts("Error al enviar el paquete");
@@ -369,11 +375,16 @@ void manejoDeConexiones() {
 
 		case ESCRIBIR_UNA_PAGINA:
 
-			escribirPagina = escribirPagina(streamUmcSwap->pid,
+			escribirPagina2 = escribirPagina(streamUmcSwap->pid,
 					streamUmcSwap->pageComienzo.numDePag, streamUmcSwap->data);
-			if (escribirPagina == 0) {
+			if (escribirPagina2 == 0) {
+				paginaAMandar.IDPaginaInterno =
+						streamUmcSwap->pageComienzo.IDPaginaInterno;
+				paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
+				paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
+				paginaAMandar.bitLectura = 1;
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PAGINA_NO_ESCRITA,
-						streamUmcSwap->pageComienzo->numDePag, 0, NULL, 0,
+						paginaAMandar, 0, NULL, 0,
 						streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer))

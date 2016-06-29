@@ -451,172 +451,156 @@ void liberarMemoria(char * memoria_para_liberar) {
 	puts("Memoria liberada");
 }
 
-void escuchoMuchasConexiones(void) {
-
-//ACA ME TENGO QUE HACER CLIENTE DEL SWAP
-	fd_set master; // maestro es el conjunto de file descriptors que están actualmente conectados
-	fd_set read_fds; // conjunto temporal de descriptores de fichero para select()
-
-	struct sockaddr_in myaddr;       // dirección del servidor
-	struct sockaddr_in remoteaddr;     // dirección del cliente
-
-	struct timeval tv;    //esta es la estructura que regula el tiempo
-	tv.tv_sec = 2;    //estos son los segundos que tarda
-	tv.tv_usec = 500000;  //estos son los microsegundos que tarda
-
-	int fdmax;        // número máximo de file descriptors
-	int listener;     // descriptor de socket a la escucha
-	int newfd;        // descriptor de socket de nueva conexión aceptada
-	char buf[256]; // buffer para datos del cliente ESTO VA A TENER EL TAMAÑO DE LO QUE MANDEMOS
-	int nbytes;
-	int yes = 1;        // para setsockopt() SO_REUSEADDR, más abajo
-	int addrlen;
-	int i, j;
-
-	FD_ZERO(&master);    // borra los conjuntos maestro y temporal
-	FD_ZERO(&read_fds);
-
-	myaddr.sin_family = AF_INET;
-	myaddr.sin_addr.s_addr = INADDR_ANY;
-	myaddr.sin_port = htons(atoi(puertoEscucha));
-	memset(&(myaddr.sin_zero), '\0', 8);
-
-// obtener socket a la escucha
-	if ((listener = socket(AF_INET, SOCK_STREAM, 0)) == -1) {
-		perror("Error en el socket");
-		exit(1);
-	}
-// obviar el mensaje "address already in use" (la dirección ya se está usando)
-	if (setsockopt(listener, SOL_SOCKET, SO_REUSEADDR, &yes, sizeof(int))
-			== -1) {
-		perror("setsockopt");
-		exit(1);
-	}
-
-// enlazar
-	if (bind(listener, (struct sockaddr *) &myaddr, sizeof(myaddr)) == -1) {
-		perror("bind");
-		exit(1);
-	}
-
-// escuchar
-	if (listen(listener, 10) == -1) {
-		perror("Error en el listen");
-		exit(1);
-	}
-
-// añadir listener al conjunto maestro
-	FD_SET(listener, &master);
-// seguir la pista del descriptor de fichero mayor
-	fdmax = listener; // por ahora es éste
-	printf("Empieza el select\n");
-// bucle principal
-	for (;;) {
-		read_fds = master; // cópialo
-		if (select(fdmax + 1, &read_fds, NULL, NULL, NULL) == -1) {
-			perror("Error en el select");
-			exit(1);
-		}
-		// explorar conexiones existentes en busca de datos que leer
-		for (i = 0; i <= fdmax; i++) {
-			if (FD_ISSET(i, &read_fds)) { // TENEMOS DATOS PAPA
-				if (i == listener) {
-					// gestionar nuevas conexiones
-					addrlen = sizeof(remoteaddr);
-					if ((newfd = accept(listener,
-							(struct sockaddr *) &remoteaddr, &addrlen)) == -1) {
-						perror("Error en el accept");
-					} else {
-						FD_SET(newfd, &master); // añadir al conjunto maestro
-						if (newfd > fdmax) {    // actualizar el máximo
-							fdmax = newfd;
-						}
-						printf("Nueva conexion de %s en " "socket %d\n",
-								inet_ntoa(remoteaddr.sin_addr), newfd);
-					}
-				} else {
-					// gestionar datos de un cliente
-					printf("Hago el recv\n");
-					if ((nbytes = recv(i, (void*) buf, sizeof(buf), 0)) <= 0) { //LOS DATOS LOS RECIBO ACA
-						// error o conexión cerrada por el cliente
-						if (nbytes == 0) {
-							// conexión cerrada
-							printf(
-									"Servidor select: socket %d acaba de colgar\n",
-									i);
-						} else {
-							perror("recv");
-						}
-						close(i); // chau gil
-						FD_CLR(i, &master); // elimino del conjunto maestro
-					} else {
-
-						/*tenemos datos de algún cliente
-						 *
-						 * ACA HAGO TODAS LAS COSAS OK? SI OK
-						 * ACA TENGO QUE MANDAR LOS HILOS DE GESTION DE LOS N CPUS Y DEL NUCLEO
-						 *
-						 * la variable i es el socket que me manda datos en ese momento
-						 * la variable buf es lo que yo recibo de datos
-						 * la variable nbytes son los bytes que recibo
-						 *
-						 * HAGO TOODO ESTO Y SE LO MANDO AL SWAP
-						 */
-
-						pthread_t hiloNucleo, hiloCPU;
-						int hilo1, hilo2;
-						char* argumentoNucleo = "devuelvo hilo nucleo";
-						char* argumentoCPU = "devuelvo hilo CPU";
-
-						printf("Me habla el Socket %d: ", i);
-						//if (nbytes != 0) printf("%s", buf); //ESTA LINEA
-
-						if (buf[0] == '0') { //Aca vendria el protocolo con el nucleo en la condicion del if uso esto para probar
-
-							hilo1 = pthread_create(&hiloNucleo, NULL,
-									(void *) meHablaKernelPrueba,
-									(void *) argumentoNucleo);
-
-							hilo1 = pthread_join(hiloNucleo, NULL);
-						} else if (buf[0] == '1') { //Aca vendria el protocolo con el cpu en la condicion del if uso esto para probar
-
-							hilo2 = pthread_create(&hiloCPU, NULL,
-									(void *) meHablaCPUPrueba,
-									(void *) argumentoCPU);
-
-							hilo2 = pthread_join(hiloCPU, NULL);
-						} else {
-
-							printf("No me habló ni CPU ni Nucleo\n");
-						}
-
-						for (j = 0; j <= fdmax; j++) {
-							// le envio a tooodo el mundo
-							if (FD_ISSET(j, &master)) {
-								// excepto al listener y a nosotros mismos
-								if (j != listener && j != i) {
-									if (send(j, buf, nbytes, 0) == -1) {
-										perror("send");
-									}
-								}
-							}
-						}
-					}
-				}
-			}  //La asquerosidad de esto llega a niveles inhumanos
+void manageSocketConnections() {
+	socketConnections = list_create();
+	Socket* s = socketCreateServer(puertoEscucha);
+	while (TRUE) {
+		pthread_t socketConnection;
+		puts("Escuchando conexiones del Kernel o CPUs.");
+		socketListen(s);
+		Socket* socketClient;
+		socketClient = socketAcceptClient(s);
+		if (socketClient != NULL) {
+			puts("Alguien se conecto.");
+			pthread_create(&socketConnection, NULL, manageSocketConnection,
+					(void*) socketClient);
+			list_add(socketConnections, &socketConnection);
 		}
 	}
-}
-
-void meHablaCPUPrueba() {
-
-	printf("Hola soy el CPU\n");
 
 }
 
-void meHablaKernelPrueba() {
+void* manageSocketConnection(void* param) {
+	Socket* socket = (Socket*) param;
+	Boolean connected = TRUE;
+	puts("Gestion de conexiones.");
+	while (TRUE) {
+		puts("Esperando el request.");
+		SocketBuffer* sb = socketReceive(socket);
+		puts("Entro el request.");
+		if (sb != NULL) {
+			Char id = getStreamId((Stream) sb->data);
+			StrKerUmc* sku = NULL;
+			StrCpuUmc* scu = NULL;
+			switch (id) {
+			case KERNEL_ID:
+				sku = unserializeKerUmc((Stream) sb->data);
+				//connected =
+				manageKernelRequest(socket, sku);
+				break;
+			case CPU_ID:
+				scu = unserializeCpuUmc((Stream) sb->data);
+				connected = manageCpuRequest(socket, scu);
+				break;
+			default:
+				connected = FALSE; //todo loggear algun error.
+				break;
+			}
+		} else {
+			puts("No pudo recibir request, desconectando al cliente.");
+			connected = FALSE;
+		}
+	}
+	return NULL;
+}
 
-	printf("Hola soy el Nucleo\n");
+Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
+	int pidActivo;
+	SocketBuffer*buffer;
+	StrCpuUmc*streamCpuUmc = scu;
+	char* bytes;
+	while (!24/*CIERRE_CONEXION_CPU*/) {
+		switch (streamCpuUmc->action) {
+		case 23 /*CAMBIO_PROCESO_ACTIVO*/:
+			pidActivo=streamCpuUmc->pid;
+			break;
+		case 25 /*SOLICITAR_BYTES*/:
+			bytes=solicitarBytes(pidActivo,scu->pageComienzo.numDePag,scu->offset,scu->dataLen);
+
+			break;
+		case 3 /*CREATE_SEG*/:
+			printf("Nuevo stream CPU-UMC de CREATE_SEG");
+			// hacer lo que tenga que hacer
+			break;
+		case 4 /*DELETE_SEG*/:
+			printf("Nuevo stream CPU-UMC de DELETE_SEG");
+			// hacer lo que tenga que hacer
+			break;
+		case 5 /*HANDSHAKE*/:
+			printf("Nueva conexion de CPU");
+			printf("HANDSHAKE de CPU recibido");
+			printf("HANDSHAKE respuesta enviado");
+			// hacer lo que tenga que hacer
+			break;
+		default:
+			printf("No se pudo identificar la accion de la CPU");
+			break;
+		}
+		buffer = socketReceive(socket);
+		if (buffer == NULL)
+			puts("Problemas al recibir del cpu");
+		streamCpuUmc = unserializeCpuUmc(buffer);
+	}
+//StrUmcCpu* suc;/*= newStrUmcCpu();*/
+//Boolean result = sendResponse(CPU_ID, suc, socket);
+
+//return result;
+}
+
+void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
+	StrUmcKer*streamAlKerner;
+	SocketBuffer*buffer;
+	switch (sku->action) {
+	case 20 /*INICIALIZAR_PROGRAMA*/:
+		if (0 == inicializarPrograma(sku->pid, sku->cantPage, sku->data)) {
+			streamAlKerner = newStrUmcKer(UMC_ID,
+					21/*PROGRAMA_NO_INICIALIZADO*/,
+					NULL, 0, 0, 0);
+			buffer = serializeUmcKer(streamAlKerner);
+			socketSend(socket, buffer);
+		}
+		break;
+	case 22 /*FINALIZAR_PROGRAMA*/:
+		finalizarPrograma(sku->pid);
+		break;
+	default:
+		printf("No se pudo identificar la accion del Kernel");
+		break;
+	}
+
+//StrUmcKer* suk ;/*= newStrUmcKer();*/
+//Boolean result = sendResponse(KERNEL_ID, suk, socket);
+
+//return result;
+}
+Boolean sendResponse(Char target, void* stream, Socket* socket) {
+	SocketBuffer* sb = NULL;
+	puts("Serializando.");
+	switch (target) {
+	case CPU_ID:
+		sb = serializeUmcCpu((StrUmcCpu*) stream);
+		puts("Enviando respuesta a la CPU.");
+		break;
+	case KERNEL_ID:
+		sb = serializeUmcKer((StrUmcKer*) stream);
+		puts("Enviando respuesta al KERNEL.");
+		break;
+	default:
+		return FALSE;
+	}
+
+//Envio respuesta
+	if (!socketSend(socket, sb)) {
+		puts("No se pudo enviar el Stream.");
+		if (sb != NULL) {
+			free(sb);
+			sb = NULL;
+		}
+		return FALSE;
+	}
+	puts("Enviado con exito");
+
+	return TRUE;
 }
 
 void comandosUMC() {
@@ -1042,7 +1026,7 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 			//Creo que no hay ningun retardo pero si lo hay lo pongo en esta linea
 			//Aca le tengo que mandar al CPU o al kernel que el pedido de lectura esta hecho todo
 		} else {
-			//Si no lo encontró leo en memoria real todo
+			return solicitarBytes(PID, pagina, posicion, tamanio);
 		}
 	}
 }
