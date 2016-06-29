@@ -47,6 +47,12 @@
 #define PAGINA_NO_LEIDA 17
 #define PAGINA_NO_ESCRITA 18
 #define PROCESO_NO_ELIMINADO 19
+#define INICIALIZAR_PROGRAMA 20
+#define PROGRAMA_NO_INICIALIZADO 21
+#define FINALIZAR_PROGRAMA 22
+#define CAMBIO_PROCESO_ACTIVO 23
+#define CIERRE_CONEXION_CPU 24
+#define SOLICITAR_BYTES 25
 
 /*******************************************************
  * Estructuras de Streaming
