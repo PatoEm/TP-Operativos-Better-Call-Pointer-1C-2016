@@ -339,7 +339,10 @@ void manejoDeConexiones() {
 
 		bool programaRecibido;
 		bool escribirPagina2;
-
+		int contadorPaginasRecibidas = 0;
+		int ubicacionActual = 0;
+		char*guardarPagina = malloc(sizeof(char) * atoi(tamPagina));
+		int contador = 0;
 		switch (streamUmcSwap->action) {
 		case RECIBIR_NUEVO_PROGRAMA:
 
@@ -348,6 +351,23 @@ void manejoDeConexiones() {
 					streamUmcSwap->pageComienzo.numDePag);
 			if (programaRecibido == 0) {
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO,
+						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
+				buffer = serializeSwaUmc(streamSwapUmc);
+				if (!socketSend(umcClient, buffer))
+					puts("Error al enviar el paquete");
+			} else {
+				contadorPaginasRecibidas = 0;
+				while (contadorPaginasRecibidas != streamUmcSwap->cantPage) {
+					ubicacionActual = contadorPaginasRecibidas
+							* atoi(tamPagina);
+					while (contador < atoi(tamPagina)) {
+						guardarPagina[contador] =
+								(streamUmcSwap->data)[ubicacionActual];
+					}
+					escribirPagina(streamUmcSwap->pid, contadorPaginasRecibidas,
+							guardarPagina);
+				}
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, 27/*PROGRAMA_RECIBIDO*/,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer))
@@ -384,8 +404,7 @@ void manejoDeConexiones() {
 				paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
 				paginaAMandar.bitLectura = 1;
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PAGINA_NO_ESCRITA,
-						paginaAMandar, 0, NULL, 0,
-						streamUmcSwap->pid);
+						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer))
 					puts("Error al enviar");

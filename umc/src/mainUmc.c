@@ -25,18 +25,14 @@ int main(void) {
 
 	inicioTLB(TLB, aciertosTLB, accesosTLB);
 
+	socketSwap=socketCreateClient();
+
+	socketConnect(socketSwap,atoi(ip_Swap),atoi(puerto_Swap));
+
 	menuUMC(hiloComandos, attrhiloComandos);
 
 	escuchoMuchasConexiones();
 
-
-	int fdSocketUMC = crearCliente(ip_Swap,puerto_Swap);
-	//enviarMensaje(fdSocketUMC,mensaje,11*sizeof(char));
-
-
-
-
-	//printf("el socket de la umc es:%d y el del nucleo es: %d",fdSocketUMC, aceptarNucleo);
 
 	liberarMemoria(memoriaReal); //Una vez terminado, libero toda mi memoria real
 	log_destroy(logger);

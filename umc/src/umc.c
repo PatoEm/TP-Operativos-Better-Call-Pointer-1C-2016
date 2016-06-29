@@ -28,16 +28,29 @@ void crearListas() {
 	listaEspacioAsignado = list_create();
 }
 
-bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa a la umc
+bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa al swap nico chupame la pija
 	if (verificarSiHayEspacio(paginas)) {
 		if (paginasContiguasDeUMC(paginas) == -1) {
-			compactarUMC(); //Tengo que seguir desde acá DR Mengueche
+			compactarUMC();
 			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
-			return TRUE;
 		} else {
 			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
-			return TRUE;
 		}
+		SocketBuffer*buffer;
+		StrUmcSwa*streamUmcSwap;
+		espacioAsignado pagina;
+		StrSwaUmc * streamSwapUmc;
+		pagina->numDePag=0;
+		streamUmcSwap=newStrUmcSwa(UMC_ID,INICIALIZAR_PROGRAMA,pagina,paginas,codigo,0,pid);
+		buffer=serializeUmcSwa(streamUmcSwap);
+		socketSend(socketSwap->ptrSocket,buffer);
+
+		buffer = socketReceive(socketSwap->ptrSocket);
+		streamSwapUmc = unserializeSwaUmc(buffer->data);
+
+		if(streamSwapUmc->action == PROGRAMA_RECIBIDO)
+			return TRUE;
+
 	} else
 		return FALSE;
 
@@ -508,29 +521,22 @@ Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	int pidActivo;
 	SocketBuffer*buffer;
 	StrCpuUmc*streamCpuUmc = scu;
+	StrUmcCpu*streamUmcCpu;
 	char* bytes;
-	while (!24/*CIERRE_CONEXION_CPU*/) {
+	while (!CIERRE_CONEXION_CPU) {
 		switch (streamCpuUmc->action) {
-		case 23 /*CAMBIO_PROCESO_ACTIVO*/:
-			pidActivo=streamCpuUmc->pid;
+		case CAMBIO_PROCESO_ACTIVO:
+			pidActivo = streamCpuUmc->pid;
 			break;
-		case 25 /*SOLICITAR_BYTES*/:
-			bytes=solicitarBytes(pidActivo,scu->pageComienzo.numDePag,scu->offset,scu->dataLen);
-
+		case SOLICITAR_BYTES:
+			bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
+					scu->offset, scu->dataLen);
+			streamUmcCpu=newStrUmcCpu(UMC_ID,SOLICITAR_BYTES,NULL,scu->offset,scu->dataLen,bytes,scu->pid);
+			buffer = serializeUmcCpu(streamUmcCpu);
+			socketSend(socket,buffer);
 			break;
-		case 3 /*CREATE_SEG*/:
-			printf("Nuevo stream CPU-UMC de CREATE_SEG");
-			// hacer lo que tenga que hacer
-			break;
-		case 4 /*DELETE_SEG*/:
-			printf("Nuevo stream CPU-UMC de DELETE_SEG");
-			// hacer lo que tenga que hacer
-			break;
-		case 5 /*HANDSHAKE*/:
-			printf("Nueva conexion de CPU");
-			printf("HANDSHAKE de CPU recibido");
-			printf("HANDSHAKE respuesta enviado");
-			// hacer lo que tenga que hacer
+		case 26 /*ALMACENAR_BYTES*/:
+			almacenarBytes(pidActivo,scu->pageComienzo.numDePag,scu->offset,scu->dataLen,scu->data);
 			break;
 		default:
 			printf("No se pudo identificar la accion de la CPU");
@@ -538,7 +544,7 @@ Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 		}
 		buffer = socketReceive(socket);
 		if (buffer == NULL)
-			puts("Problemas al recibir del cpu");
+			puts("Problemas al recibir del cpu");//todo break
 		streamCpuUmc = unserializeCpuUmc(buffer);
 	}
 //StrUmcCpu* suc;/*= newStrUmcCpu();*/
