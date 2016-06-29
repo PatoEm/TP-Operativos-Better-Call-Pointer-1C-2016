@@ -247,20 +247,20 @@ SocketBuffer* serializeSwaUmc(StrSwaUmc* swaUmc);
 /***********************************************/
 /* Unserialize
 ***********************************************/
-SocketBuffer* unserializeConKer(Stream conKer);
+StrConKer* unserializeConKer(Stream conKer);
 
-SocketBuffer* unserializeKerCpu(Stream kerCpu);
-SocketBuffer* unserializeKerUmc(Stream kerUmc);
-SocketBuffer* unserializeKerCon(Stream kerCon);
+StrKerCpu* unserializeKerCpu(Stream kerCpu);
+StrKerUmc* unserializeKerUmc(Stream kerUmc);
+StrKerCon* unserializeKerCon(Stream kerCon);
 
-SocketBuffer* unserializeCpuKer(Stream cpuKer);
-SocketBuffer* unserializeCpuUmc(Stream cpuUmc);
+StrCpuKer* unserializeCpuKer(Stream cpuKer);
+StrCpuUmc* unserializeCpuUmc(Stream cpuUmc);
 
-SocketBuffer* unserializeUmcKer(Stream umcKer);
-SocketBuffer* unserializeUmcCpu(Stream umcCpu);
-SocketBuffer* unserializeUmcSwa(Stream umcSwa);
+StrUmcKer* unserializeUmcKer(Stream umcKer);
+StrUmcCpu* unserializeUmcCpu(Stream umcCpu);
+StrUmcSwa* unserializeUmcSwa(Stream umcSwa);
 
-SocketBuffer* unserializeSwaUmc(Stream swaUmc);
+StrSwaUmc* unserializeSwaUmc(Stream swaUmc);
 /***********************************************/
 
 /***********************************************/

@@ -172,8 +172,8 @@ Int32U getSizeConKer(StrConKer* sck){
 	Int32U size = 0;
 	size += sizeof(sck->id);
 	size += sizeof(sck->action);
-	size += sizeof(sck->fileContent);
 	size += sizeof(sck->fileContentLen);
+	size += sck->fileContentLen;
 	return size;
 }
 
@@ -196,10 +196,10 @@ Int32U getSizeKerUmc(StrKerUmc* sku){
 	Int32U size = 0;
 	size += sizeof(sku->id);
 	size += sizeof(sku->action);
-	size += sizeof(sku->data);
-	size += sizeof(sku->size);
 	size += sizeof(sku->pid);
 	size += sizeof(sku->cantPage);
+	size += sizeof(sku->size);
+	size += sku->size;
 	return size;
 }
 
@@ -211,7 +211,7 @@ Int32U getSizeKerCon(StrKerCon* skc){
 	size += sizeof(skc->id);
 	size += sizeof(skc->action);
 	size += sizeof(skc->logLen);
-	size += sizeof(skc->log);
+	size += skc->logLen;
 	return size;
 }
 
@@ -225,7 +225,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->pcb);
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
-	size += sizeof(sck->log);
+	size += sck->logLen;
 	return size;
 }
 
@@ -238,9 +238,9 @@ Int32U getSizeCpuUmc(StrCpuUmc* scu){
 	size += sizeof(scu->action);
 	size += sizeof(scu->pageComienzo);
 	size += sizeof(scu->offset);
-	size += sizeof(scu->dataLen);
-	size += sizeof(scu->data);
 	size += sizeof(scu->pid);
+	size += sizeof(scu->dataLen);
+	size += scu->dataLen;
 	return size;
 }
 
@@ -251,10 +251,10 @@ Int32U getSizeUmcKer(StrUmcKer* suk){
 	Int32U size = 0;
 	size += sizeof(suk->id);
 	size += sizeof(suk->action);
-	size += sizeof(suk->data);
-	size += sizeof(suk->size);
 	size += sizeof(suk->pid);
 	size += sizeof(suk->cantPage);
+	size += sizeof(suk->size);
+	size += suk->size;
 	return size;
 }
 
@@ -267,9 +267,9 @@ Int32U getSizeUmcCpu(StrUmcCpu* suc){
 	size += sizeof(suc->action);
 	size += sizeof(suc->pageComienzo);
 	size += sizeof(suc->offset);
-	size += sizeof(suc->dataLen);
-	size += sizeof(suc->data);
 	size += sizeof(suc->pid);
+	size += sizeof(suc->dataLen);
+	size += suc->dataLen;
 	return size;
 }
 
@@ -282,9 +282,9 @@ Int32U getSizeUmcSwa(StrUmcSwa* sus){
 	size += sizeof(sus->action);
 	size += sizeof(sus->pageComienzo);
 	size += sizeof(sus->cantPage);
-	size += sizeof(sus->data);
-	size += sizeof(sus->dataLen);
 	size += sizeof(sus->pid);
+	size += sizeof(sus->dataLen);
+	size += sus->dataLen;
 	return size;
 }
 
@@ -297,9 +297,9 @@ Int32U getSizeSwaUmc(StrSwaUmc* ssu){
 	size += sizeof(ssu->action);
 	size += sizeof(ssu->pageComienzo);
 	size += sizeof(ssu->cantPage);
-	size += sizeof(ssu->data);
-	size += sizeof(ssu->dataLen);
 	size += sizeof(ssu->pid);
+	size += sizeof(ssu->dataLen);
+	size += ssu->dataLen;
 	return size;
 }
 
@@ -689,7 +689,7 @@ SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu){
 / ***********************************************
 * Unserialize Consola -Kernel
 * **********************************************/
-SocketBuffer* unserializeConKer(Stream dataSerialized){
+StrConKer* unserializeConKer(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -712,7 +712,7 @@ SocketBuffer* unserializeConKer(Stream dataSerialized){
 /***********************************************/
 /* Unserialize Kernel-CPU
 ***********************************************/
-SocketBuffer* unserializeKerCpu(Stream dataSerialized){
+StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -735,7 +735,7 @@ SocketBuffer* unserializeKerCpu(Stream dataSerialized){
 /***********************************************/
 /* Unserialize Kernel-UMC
 ***********************************************/
-SocketBuffer* unserializeKerUmc(Stream dataSerialized){
+StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -764,7 +764,7 @@ SocketBuffer* unserializeKerUmc(Stream dataSerialized){
 /***********************************************/
 /* Unserialize Kernel-Consola
 ***********************************************/
-SocketBuffer* unserializeKerCon(Stream dataSerialized){
+StrKerCon* unserializeKerCon(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -787,7 +787,7 @@ SocketBuffer* unserializeKerCon(Stream dataSerialized){
 /***********************************************/
 /* Unserialize CPU-Kernel
 ***********************************************/
-SocketBuffer* unserializeCpuKer(Stream dataSerialized){
+StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -816,7 +816,7 @@ SocketBuffer* unserializeCpuKer(Stream dataSerialized){
 /***********************************************/
 /* Unserialize CPU-UMC
 ***********************************************/
-SocketBuffer* unserializeCpuUmc(Stream dataSerialized){
+StrCpuUmc* unserializeCpuUmc(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -848,7 +848,7 @@ SocketBuffer* unserializeCpuUmc(Stream dataSerialized){
 /***********************************************/
 /* Unserialize UMC-Kernel
 ***********************************************/
-SocketBuffer* unserializeUmcKer(Stream dataSerialized){
+StrUmcKer* unserializeUmcKer(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -877,7 +877,7 @@ SocketBuffer* unserializeUmcKer(Stream dataSerialized){
 /***********************************************/
 /* Unserialize UMC-CPU
 ***********************************************/
-SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
+StrUmcCpu* unserializeUmcCpu(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -909,7 +909,7 @@ SocketBuffer* unserializeUmcCpu(Stream dataSerialized){
 /***********************************************/
 /* Unserialize UMC-Swap
 ***********************************************/
-SocketBuffer* unserializeUmcSwa(Stream dataSerialized){
+StrUmcSwa* unserializeUmcSwa(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
@@ -941,7 +941,7 @@ SocketBuffer* unserializeUmcSwa(Stream dataSerialized){
 /***********************************************/
 /* Unserialize Swap-UMC
 ***********************************************/
-SocketBuffer* unserializeSwaUmc(Stream dataSerialized){
+StrSwaUmc* unserializeSwaUmc(Stream dataSerialized){
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
