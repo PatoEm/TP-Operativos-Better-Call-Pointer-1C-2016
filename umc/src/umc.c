@@ -51,6 +51,8 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 
 		if (streamSwapUmc->action == PROGRAMA_RECIBIDO)
 			return TRUE;
+		else
+			return FALSE;
 
 	} else
 		return FALSE;
@@ -615,7 +617,7 @@ void* manageSocketConnection(void* param) {
 	return NULL;
 }
 
-Boolean manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
+void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	int pidActivo;
 	SocketBuffer*buffer;
 	StrCpuUmc*streamCpuUmc = scu;

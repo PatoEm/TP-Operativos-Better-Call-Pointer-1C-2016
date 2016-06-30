@@ -163,6 +163,8 @@ int tlbHabilitada();
 //SI ENCUENTRA DEVUELVE LA PAGINA, SI NO ENCUENTRA DEvUELVE NULL
 espacioAsignado * buscarEnMemoriaReal(int , int);
 
+void manageSocketConnections();
+
 bool escribirEnTLB(int , int , int , int , char*);
 
 void llevarPaginaATLB(int , int , char* );

@@ -32,7 +32,7 @@ int main(void) {
 
 	menuUMC(hiloComandos, attrhiloComandos);
 
-	escuchoMuchasConexiones();
+	manageSocketConnections();
 
 
 	liberarMemoria(memoriaReal); //Una vez terminado, libero toda mi memoria real
