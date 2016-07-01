@@ -38,7 +38,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 		}
 		SocketBuffer*buffer;
 		StrUmcSwa*streamUmcSwap;
-		espacioAsignado pagina;
+		espacioAsignado* pagina;
 		StrSwaUmc * streamSwapUmc;
 		pagina->numDePag = 0;
 		streamUmcSwap = newStrUmcSwa(UMC_ID, INICIALIZAR_PROGRAMA, pagina,

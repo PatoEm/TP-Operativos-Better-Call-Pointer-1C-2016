@@ -4,6 +4,10 @@
  *  Created on: 23/6/2016
  *      Author: utnso
  */
+
+#ifndef LIBRERIASCOMPARTIDAS_ESPACIOASIGNADO_H_
+#define LIBRERIASCOMPARTIDAS_ESPACIOASIGNADO_H_
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -15,4 +19,6 @@ typedef struct {
 	int bitUso;
 	int bitModificado;
 	bool punteroAPagina;
-}espacioAsignado;
+} espacioAsignado;
+
+#endif /* LIBRERIASCOMPARTIDAS_ESPACIOASIGNADO_H_ */

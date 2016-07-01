@@ -55,6 +55,7 @@
 #define CAMBIO_PROCESO_ACTIVO 23
 #define CIERRE_CONEXION_CPU 24
 #define SOLICITAR_BYTES 25
+#define PROGRAMA_RECIBIDO 26
 ////////////////////////////////////////////////////////
 
 /*******************************************************

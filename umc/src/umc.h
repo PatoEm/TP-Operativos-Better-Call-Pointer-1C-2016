@@ -165,6 +165,8 @@ espacioAsignado * buscarEnMemoriaReal(int , int);
 
 void manageSocketConnections();
 
+void* manageSocketConnection(void* param);
+
 bool escribirEnTLB(int , int , int , int , char*);
 
 void llevarPaginaATLB(int , int , char* );
