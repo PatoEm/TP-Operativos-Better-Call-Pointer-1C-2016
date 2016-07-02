@@ -26,8 +26,8 @@ endif
 all: liblibreriasCompartidas.so
 
 dependents:
-	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) all
-	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/parser/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) clean all
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/parser/Debug && $(MAKE) clean all
 
 # Tool invocations
 liblibreriasCompartidas.so: $(OBJS) $(USER_OBJS) /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so /home/utnso/workspace/tp-2016-1c-Better-call-pointer/parser/Debug/libparser.so

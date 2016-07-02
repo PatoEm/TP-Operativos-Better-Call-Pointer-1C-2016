@@ -201,14 +201,15 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	StrCpuKer*streamCpuKer;
-	streamCpuKer = newStrCpuKer(CPU_ID, 30 /*OBTENER_VALOR_COMPARTIDA*/, pcbProceso,
-			pcbProceso.id, 0, variable);
+	streamCpuKer = newStrCpuKer(CPU_ID, 30 /*OBTENER_VALOR_COMPARTIDA*/,
+			pcbProceso, pcbProceso.id, 0, variable);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
-	StrKerCpu*streamKerCpu=unserializeKerCpu(buffer);
-	return 0;
-
+	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
+	if (streamKerCpu->action == 30/*OBTENER_VALOR_COMPARTIDA*/) {
+		return itoa(streamKerCpu->data);
+	}
 }
 
 /*
@@ -216,8 +217,16 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
  */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
-	printf("Operacion asignar valor variable compartida");
-	return 0;
+	StrCpuKer*streamCpuKer;
+	char* datosAEnviar = (sizeof(variable) + sizeof(valor) + 1);
+	datosAEnviar = strcat(variable, atoi(valor));
+	streamCpuKer = newStrCpuKer(CPU_ID, 33/*ASIGNAR_VALOR_COMPARTIDA*/,
+			pcbProceso, pcbProceso.id, sizeof(variable), datosAEnviar);
+	buffer = socketReceive(socketNucleo->ptrSocket);
+	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
+	if (streamKerCpu->action == 33/*ASIGNAR_VALOR_COMPARTIDA*/) {
+		return itoa(streamKerCpu->data);
+	}
 }
 
 /*
@@ -294,13 +303,20 @@ int imprimirTexto(char* texto) {
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	char*inOut = malloc(
 			sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
-	strcpy(inOut, dispositivo);
-	strcpy(inOut, itoa(tiempo));
+	inOut = strcat(dispositivo, itoa(tiempo));
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 29 /*ENTRADA_SALIDA*/, pcbProceso,
 			pcbProceso.id, strlen(dispositivo), inOut);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+	buffer = socketReceive(socketNucleo->ptrSocket);
+	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
+	if (StreamKerCpu->action == 31/*PROGRAMA_bLOQUEADO*/) {
+		streamCpuKer = newStrCpuKer(CPU_ID, 32 /*ENVIO_PCB*/, pcbProceso,
+				pcbProceso.id, 0, NULL);
+		buffer = serializeCpuKer(streamCpuKer);
+		socketSend(socketNucleo->ptrSocket, buffer);
+	}
 }
 
 /*
@@ -312,6 +328,14 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 			strlen(identificador_semaforo), identificador_semaforo);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+	buffer = socketReceive(socketNucleo->ptrSocket);
+	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
+	if (StreamKerCpu->action == 31/*PROGRAMA_bLOQUEADO*/) {
+		streamCpuKer = newStrCpuKer(CPU_ID, 32 /*ENVIO_PCB*/, pcbProceso,
+				pcbProceso.id, 0, NULL);
+		buffer = serializeCpuKer(streamCpuKer);
+		socketSend(socketNucleo->ptrSocket, buffer);
+	}
 }
 
 /*
@@ -382,11 +406,16 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 		.AnSISOP_dereferenciar = dereferenciar, .AnSISOP_asignar = asignar,
 		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
 		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
-		.AnSISOP_irAlLabel = irAlLabel, .AnSISOP_llamarConRetorno =
-				llamarConRetorno, .AnSISOP_retornar = retornar,
-		.AnSISOP_entradaSalida = entradaSalida, .AnSISOP_imprimir = imprimir,
-		.AnSISOP_imprimirTexto = imprimirTexto, };
+		.AnSISOP_irAlLabel = irAlLabel,
+		.AnSISOP_llamarConRetorno =llamarConRetorno,
+		.AnSISOP_retornar = retornar,
+		.AnSISOP_entradaSalida = entradaSalida,
+		.AnSISOP_imprimir = imprimir,
+		.AnSISOP_imprimirTexto = imprimirTexto,
+};
 
-AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
-		signal, };
+AnSISOP_kernel funcionesDeKernel = {
+		.AnSISOP_wait = wait,
+		.AnSISOP_signal =signal,
+};
 

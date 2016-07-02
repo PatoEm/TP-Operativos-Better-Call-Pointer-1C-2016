@@ -60,6 +60,9 @@
 #define SIGNAL 28
 #define ENTRADA_SALIDA 29
 #define OBTENER_VALOR_COMPARTIDA 30
+#define PROGRAMA_BLOQUEADO 31
+#define ENVIO_PCB 32
+#define ASIGNAR_VALOR_COMPARTIDA 33
 
 
 ////////////////////////////////////////////////////////
