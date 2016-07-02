@@ -279,7 +279,7 @@ Boolean handshake(SocketClient* client, Char id) {
 	}
 	
 	if(!socketSend(client->ptrSocket, sb)) {
-		printf("No se pudo realizar el handshake send. \n");
+		printf("No se pudo realizar el handshake. \n");
 		return FALSE;
 	}
 	

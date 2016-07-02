@@ -200,8 +200,15 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  * obtenerValorCompartida
  */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
-	printf("Operacion obtener valor variable compartida");
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, 30 /*OBTENER_VALOR_COMPARTIDA*/, pcbProceso,
+			pcbProceso.id, 0, variable);
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
+	buffer = socketReceive(socketNucleo->ptrSocket);
+	StrKerCpu*streamKerCpu=unserializeKerCpu(buffer);
 	return 0;
+
 }
 
 /*
@@ -239,7 +246,11 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
  * finalizar
  */
 void finalizar(void) {
-
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, 22 /*FINALIZAR_PROGRAMA*/, pcbProceso,
+			pcbProceso.id, 0, NULL);
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
 }
 
 /*
@@ -255,61 +266,73 @@ t_puntero_instruccion retornar(t_valor_variable retorno) {
  * imprimir
  */
 int imprimir(t_valor_variable valor_mostrar) {
-	StrCpuKer sck;
-	//sck = newStrCpuKer(CPU_ID, STD_OUTPUT, pcb);
-	//serializar el stream
-	//enviar al nucleo
-	char* mensaje = string_new();
-	char protocolo[3] = "01";
-	memcpy(mensaje, &protocolo, 2);
-	memcpy(mensaje[2], &valor_mostrar, sizeof(t_valor_variable));
-	enviarMensaje(clienteNucleo, mensaje, 6);
-	return 0;
+
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
+			strlen(itoa(valor_mostrar)), itoa(valor_mostrar));
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
+	return strlen(itoa(valor_mostrar));
 }
 
 /*
  * imprimirTexto
  */
+
 int imprimirTexto(char* texto) {
-	printf("se imprime un texto");
-	char* mensaje = string_new();
-	char protocolo[3] = "02";
-	int tamanioDelTexto = (string_length(texto));
-	memcpy(mensaje, &protocolo, 2);
-	memcpy(mensaje[2], &tamanioDelTexto, 4);
-	memcpy(mensaje[6], texto, string_length(texto));
-	enviarMensaje(clienteNucleo, mensaje, 6 + string_length(texto));
-	return 0;
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIRTEXTO, pcbProceso,
+			pcbProceso.id, strlen(texto), texto);
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
+	return strlen(texto);
 }
 
 /*
  * entradaSalida
  */
-int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
-	printf("Operacion de entrada y salida");
-	return 0;
+void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
+	char*inOut = malloc(
+			sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
+	strcpy(inOut, dispositivo);
+	strcpy(inOut, itoa(tiempo));
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, 29 /*ENTRADA_SALIDA*/, pcbProceso,
+			pcbProceso.id, strlen(dispositivo), inOut);
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
 }
 
 /*
  * wait
  */
-int wait(t_nombre_semaforo identificador_semaforo) {
-	printf("Operacion privilegiada wait");
-	return 0;
+void wait(t_nombre_semaforo identificador_semaforo) {
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, 27 /*WAIT*/, pcbProceso, pcbProceso.id,
+			strlen(identificador_semaforo), identificador_semaforo);
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
 }
 
 /*
  * signal
  */
-int signal(t_nombre_semaforo identificador_semaforo) {
-	printf("Operacion privilegiada signal");
-	return 0;
+void signal(t_nombre_semaforo identificador_semaforo) {
+	StrCpuKer*streamCpuKer;
+	streamCpuKer = newStrCpuKer(CPU_ID, 28 /*SIGNAL*/, pcbProceso,
+			pcbProceso.id, strlen(identificador_semaforo),
+			identificador_semaforo);
+	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
 }
 
 char * pedirCodigoAUMC() {
 
 	//pcbEnEjecucion.programCounter;
-	char*lineaDeCodigoADevolver=malloc(sizeof(char)*pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud);
+	char*lineaDeCodigoADevolver =
+			malloc(
+					sizeof(char)
+							* pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud);
 	int comienzo =
 			pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].comienzo;
 
@@ -353,8 +376,6 @@ char * pedirCodigoAUMC() {
 	}
 	return lineaDeCodigoADevolver;
 }
-
-
 
 AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 		.AnSISOP_obtenerPosicionVariable = obtenerPosicionVariable,

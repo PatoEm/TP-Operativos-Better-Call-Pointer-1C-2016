@@ -20,6 +20,7 @@
 #include <pthread.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/pcb.h>
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <commons/collections/list.h>
 #include <libreriasCompartidas/pcb.h>
@@ -35,7 +36,10 @@ char* nucleoPort;
 char* ipNucleo;
 int clienteNucleo;
 t_list* coreList;
+SocketClient* socketNucleo;
 int tamanioPaginaUmc;
+pcb pcbProceso;
+
 //======================================================
 
 /*******************************************************
@@ -123,17 +127,17 @@ int imprimirTexto(char* texto);
 /*
  * entradaSalida
  */
-int entradaSalida(t_nombre_dispositivo dispositivo, int tiempo);
+void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo);
 
 /*
  * wait
  */
-int wait(t_nombre_semaforo identificador_semaforo);
+void wait(t_nombre_semaforo identificador_semaforo);
 
 /*
  * signal
  */
-int signal(t_nombre_semaforo identificador_semaforo);
+void signal(t_nombre_semaforo identificador_semaforo);
 
 //======================================================
 #endif /* CPU_H_ */
