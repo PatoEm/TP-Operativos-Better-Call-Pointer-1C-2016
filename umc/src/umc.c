@@ -38,9 +38,9 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 		}
 		SocketBuffer*buffer;
 		StrUmcSwa*streamUmcSwap;
-		espacioAsignado* pagina;
+		espacioAsignado pagina;
 		StrSwaUmc * streamSwapUmc;
-		pagina->numDePag = 0;
+		pagina.numDePag = 0;
 		streamUmcSwap = newStrUmcSwa(UMC_ID, INICIALIZAR_PROGRAMA, pagina,
 				paginas, codigo, 0, pid);
 		buffer = serializeUmcSwa(streamUmcSwap);
@@ -493,7 +493,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 
 void finalizarPrograma(int pid) {
 	StrUmcSwa*streamUmcSwa;
-	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, NULL, NULL, NULL,
+	espacioAsignado pagina;
+	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, pagina, NULL, NULL,
 	NULL, pid);
 	SocketBuffer*buffer = serialize(streamUmcSwa);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
@@ -619,6 +620,7 @@ void* manageSocketConnection(void* param) {
 
 void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	int pidActivo;
+
 	SocketBuffer*buffer;
 	StrCpuUmc*streamCpuUmc = scu;
 	StrUmcCpu*streamUmcCpu;
@@ -635,7 +637,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			} else
 				bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
 						scu->offset, scu->dataLen);
-			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES, NULL,
+			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES,NULL,
 					scu->offset, scu->dataLen, bytes, scu->pid);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
