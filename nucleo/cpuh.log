@@ -122,3 +122,72 @@
 [INFO] 02:34:47:835 CPUHANDLER/(4913:4920): KERNEL : El cliente 7 ha enviado un paquete
 [INFO] 02:34:47:835 CPUHANDLER/(4913:4920): KERNEL : El cliente 7 es una consola
 [ERROR] 02:34:47:835 CPUHANDLER/(4913:4920): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 23:52:54:701 CPUHANDLER/(2907:2909): Server creado con exito y escuchando.
+[INFO] 23:52:54:701 CPUHANDLER/(2907:2909): Server iniciado.
+[INFO] 23:53:15:760 CPUHANDLER/(2950:2957): Server creado con exito y escuchando.
+[INFO] 23:53:15:760 CPUHANDLER/(2950:2957): Server iniciado.
+[INFO] 23:53:56:632 CPUHANDLER/(3001:3008): Server creado con exito y escuchando.
+[INFO] 23:53:56:632 CPUHANDLER/(3001:3008): Server iniciado.
+[INFO] 23:54:12:295 CPUHANDLER/(3001:3008): Nueva Conexion detectada, realizando handshake
+[INFO] 23:54:12:295 CPUHANDLER/(3001:3008): ID Nuevo Cliente: 0.
+[INFO] 23:54:12:295 CPUHANDLER/(3001:3008): Nuevo Cliente CONSOLA
+[INFO] 23:54:53:596 CPUHANDLER/(3098:3104): Server creado con exito y escuchando.
+[INFO] 23:54:53:596 CPUHANDLER/(3098:3104): Server iniciado.
+[INFO] 23:55:00:272 CPUHANDLER/(3098:3104): Nueva Conexion detectada, realizando handshake
+[INFO] 23:55:00:273 CPUHANDLER/(3098:3104): ID Nuevo Cliente: 0.
+[INFO] 23:55:00:273 CPUHANDLER/(3098:3104): Nuevo Cliente CONSOLA
+[INFO] 23:55:41:706 CPUHANDLER/(3194:3201): Server creado con exito y escuchando.
+[INFO] 23:55:41:706 CPUHANDLER/(3194:3201): Server iniciado.
+[INFO] 23:56:34:13 CPUHANDLER/(3194:3201): Nueva Conexion detectada, realizando handshake
+[INFO] 23:58:23:788 CPUHANDLER/(3194:3201): ID Nuevo Cliente: 0.
+[INFO] 23:58:23:788 CPUHANDLER/(3194:3201): Nuevo Cliente CONSOLA
+[INFO] 23:59:36:810 CPUHANDLER/(3515:3520): Server creado con exito y escuchando.
+[INFO] 23:59:36:810 CPUHANDLER/(3515:3520): Server iniciado.
+[INFO] 23:59:42:882 CPUHANDLER/(3515:3520): Nueva Conexion detectada, realizando handshake
+[INFO] 23:59:42:883 CPUHANDLER/(3515:3520): ID Nuevo Cliente: 0.
+[INFO] 23:59:42:883 CPUHANDLER/(3515:3520): Nuevo Cliente CONSOLA
+[INFO] 23:59:53:44 CPUHANDLER/(3605:3608): Server creado con exito y escuchando.
+[INFO] 23:59:53:44 CPUHANDLER/(3605:3608): Server iniciado.
+[INFO] 00:00:00:349 CPUHANDLER/(3605:3608): Nueva Conexion detectada, realizando handshake
+[INFO] 00:00:00:350 CPUHANDLER/(3605:3608): ID Nuevo Cliente: 0.
+[INFO] 00:00:00:350 CPUHANDLER/(3605:3608): Nuevo Cliente CONSOLA
+[INFO] 00:02:20:56 CPUHANDLER/(3799:3803): Server creado con exito y escuchando.
+[INFO] 00:02:20:56 CPUHANDLER/(3799:3803): Server iniciado.
+[INFO] 00:02:28:821 CPUHANDLER/(3799:3803): Nueva Conexion detectada, realizando handshake
+[INFO] 00:02:28:822 CPUHANDLER/(3799:3803): ID Nuevo Cliente: 0.
+[INFO] 00:02:28:822 CPUHANDLER/(3799:3803): Nuevo Cliente CONSOLA
+[INFO] 00:03:25:616 CPUHANDLER/(3983:3986): Server creado con exito y escuchando.
+[INFO] 00:03:25:616 CPUHANDLER/(3983:3986): Server iniciado.
+[INFO] 00:03:42:579 CPUHANDLER/(3983:3986): Nueva Conexion detectada, realizando handshake
+[INFO] 00:03:42:582 CPUHANDLER/(3983:3986): ID Nuevo Cliente: 0.
+[INFO] 00:03:42:582 CPUHANDLER/(3983:3986): Nuevo Cliente CONSOLA
+[INFO] 00:04:34:972 CPUHANDLER/(4091:4095): Server creado con exito y escuchando.
+[INFO] 00:04:34:972 CPUHANDLER/(4091:4095): Server iniciado.
+[INFO] 00:04:51:807 CPUHANDLER/(4091:4095): Nueva Conexion detectada, realizando handshake
+[INFO] 00:04:51:808 CPUHANDLER/(4091:4095): ID Nuevo Cliente: 0.
+[INFO] 00:04:51:808 CPUHANDLER/(4091:4095): Nuevo Cliente CONSOLA
+[INFO] 00:06:25:593 CPUHANDLER/(4191:4197): Server creado con exito y escuchando.
+[INFO] 00:06:25:593 CPUHANDLER/(4191:4197): Server iniciado.
+[INFO] 00:06:35:84 CPUHANDLER/(4191:4197): Nueva Conexion detectada, realizando handshake
+[INFO] 00:06:35:84 CPUHANDLER/(4191:4197): ID Nuevo Cliente: 0.
+[INFO] 00:06:35:84 CPUHANDLER/(4191:4197): Nuevo Cliente CONSOLA
+[INFO] 00:08:58:841 CPUHANDLER/(4337:4344): Server creado con exito y escuchando.
+[INFO] 00:08:58:841 CPUHANDLER/(4337:4344): Server iniciado.
+[INFO] 00:09:24:416 CPUHANDLER/(4337:4344): Nueva Conexion detectada, realizando handshake
+[INFO] 00:09:24:416 CPUHANDLER/(4337:4344): ID Nuevo Cliente: 0.
+[INFO] 00:09:24:416 CPUHANDLER/(4337:4344): Nuevo Cliente CONSOLA
+[INFO] 00:11:07:487 CPUHANDLER/(4473:4477): Server creado con exito y escuchando.
+[INFO] 00:11:07:487 CPUHANDLER/(4473:4477): Server iniciado.
+[INFO] 00:11:13:844 CPUHANDLER/(4473:4477): Nueva Conexion detectada, realizando handshake
+[INFO] 00:11:13:845 CPUHANDLER/(4473:4477): ID Nuevo Cliente: 0.
+[INFO] 00:11:13:845 CPUHANDLER/(4473:4477): Nuevo Cliente CONSOLA
+[INFO] 00:12:00:518 CPUHANDLER/(4563:4567): Server creado con exito y escuchando.
+[INFO] 00:12:00:518 CPUHANDLER/(4563:4567): Server iniciado.
+[INFO] 00:12:21:53 CPUHANDLER/(4563:4567): Nueva Conexion detectada, realizando handshake
+[INFO] 00:12:21:56 CPUHANDLER/(4563:4567): ID Nuevo Cliente: 0.
+[INFO] 00:12:21:56 CPUHANDLER/(4563:4567): Nuevo Cliente CONSOLA
+[INFO] 00:19:53:719 CPUHANDLER/(4830:4834): Server creado con exito y escuchando.
+[INFO] 00:19:53:719 CPUHANDLER/(4830:4834): Server iniciado.
+[INFO] 00:20:09:512 CPUHANDLER/(4830:4834): Nueva Conexion detectada, realizando handshake
+[INFO] 00:20:09:514 CPUHANDLER/(4830:4834): ID Nuevo Cliente: 0.
+[INFO] 00:20:09:514 CPUHANDLER/(4830:4834): Nuevo Cliente CONSOLA

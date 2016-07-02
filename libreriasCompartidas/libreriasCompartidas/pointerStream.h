@@ -56,6 +56,13 @@
 #define CIERRE_CONEXION_CPU 24
 #define SOLICITAR_BYTES 25
 #define PROGRAMA_RECIBIDO 26
+
+//OPERACIONES PRIVILEGIADAS NUCLEO
+#define WAIT_SEM_ANSISOP 27
+#define SIGNAL_SEM_ANSISOP 28
+#define OBTENER_VALOR_VARIABLE_ANSISOP 29
+#define ASIGNAR_VALOR_VARIABLE_ANSISOP 30
+#define I_O_ANSISOP 31
 ////////////////////////////////////////////////////////
 
 /*******************************************************
