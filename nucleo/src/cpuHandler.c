@@ -4,7 +4,7 @@
 #include <commons/log.h>
 #include <stdlib.h>
 #include "nucleo.h"
-
+#include <libreriasCompartidas/pointerStream.h>
 pthread_t cpuht;
 void** nada;
 
@@ -358,6 +358,17 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	//break;
 	// ACA VA EL RECONOCIMIENTO DE ACCIONES
+	case RECIBIR_NUEVO_PROGRAMA:
+
+		enviarPcbACpu(cpuClient);
+
+		log_info(cpuhlog, "KERNEL : CPU %d ha enviado RECIBIR_NUEVO_PROGRAMA",
+				cpuClient->descriptor);
+
+
+		break;
+
+	//case ANSISOP_SEM_WAIT: break;
 
 	default:
 		log_error(cpuhlog,
