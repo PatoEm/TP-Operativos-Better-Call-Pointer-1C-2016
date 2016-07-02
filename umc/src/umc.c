@@ -230,7 +230,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 		puts("error al enviar al swap");
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	pageToSend.numDePag = pagina;
-	streamUmcSwap = newStreUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
+	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
 			0, nodoActual->pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
@@ -334,7 +334,7 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	pageToSend.numDePag = pagina;
-	streamUmcSwap = newStreUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
+	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
 			0, nodoActual->pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
@@ -496,7 +496,7 @@ void finalizarPrograma(int pid) {
 	espacioAsignado pagina;
 	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, pagina, NULL, NULL,
 	NULL, pid);
-	SocketBuffer*buffer = serialize(streamUmcSwa);
+	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwa);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
 	espacioAsignado*nodoAReventar;
@@ -566,7 +566,7 @@ void liberarMemoria(char * memoria_para_liberar) {
 }
 
 void manageSocketConnections() {
-	socketConnections = list_create();
+	conexionSockets = list_create();
 	Socket* s = socketCreateServer(puertoEscucha);
 	while (TRUE) {
 		pthread_t socketConnection;
@@ -578,7 +578,7 @@ void manageSocketConnections() {
 			puts("Alguien se conecto.");
 			pthread_create(&socketConnection, NULL, manageSocketConnection,
 					(void*) socketClient);
-			list_add(socketConnections, &socketConnection);
+			list_add(conexionSockets, &socketConnection);
 		}
 	}
 
@@ -620,7 +620,7 @@ void* manageSocketConnection(void* param) {
 
 void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	int pidActivo;
-
+	espacioAsignado unaPagina;
 	SocketBuffer*buffer;
 	StrCpuUmc*streamCpuUmc = scu;
 	StrUmcCpu*streamUmcCpu;
@@ -637,7 +637,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			} else
 				bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
 						scu->offset, scu->dataLen);
-			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES,NULL,
+			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES,unaPagina,
 					scu->offset, scu->dataLen, bytes, scu->pid);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);

@@ -34,7 +34,7 @@ bool*bitMap;
 bool* bitMapTLB;
 int aciertosTLB;
 int accesosTLB;
-t_list* socketConnections = NULL;
+t_list* conexionSockets ;
 SocketClient * socketSwap;
 
   typedef struct{
