@@ -436,7 +436,7 @@ void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
 
 }
 //testeada
-void wait(char * identificador, pcb *pcbPrograma) {
+void waitAnsisop(char * identificador, pcb *pcbPrograma) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
@@ -452,7 +452,7 @@ void wait(char * identificador, pcb *pcbPrograma) {
 				moverAListaBlock(pcbPrograma);
 				sem_wait(semaforosAnsisop[i]);
 				moverAColaReady(pcbPrograma);
-				//
+				//todo avisar a cpu que se bloqueo
 			}
 
 			abortar++;
@@ -466,7 +466,7 @@ void wait(char * identificador, pcb *pcbPrograma) {
 
 }
 //testeada
-void signal(char* identificador, pcb*pcbPrograma) {
+void signalAnsisop(char* identificador, pcb*pcbPrograma) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.

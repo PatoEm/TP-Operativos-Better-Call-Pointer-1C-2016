@@ -367,8 +367,41 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 
 		break;
+		//case 27 es ANSISOP_WAIT_SEM NO ME TOMA LOS DEFINES
+	case 27:
 
-	//case ANSISOP_SEM_WAIT: break;
+
+		waitAnsisop(sck->log,&sck->pcb);
+		//todo que le envio al cpu?
+		break;
+
+		//case 27 es ANSISOP_SIGNAL_SEM NO ME TOMA LOS DEFINES
+	case 28:
+
+
+		signalAnsisop(sck->log,&sck->pcb);
+		//todo que le envio al cpu?
+		break;
+		//case 29 es OBTENER_VALOR_VARIABLE_ANSISOP
+	case 29:
+		obtener_valor(sck->log, &sck->pcb);
+		//todo que le envio al cpu?
+		break;
+		//case 30 es ASIGNAR_VALOR_VARIABLE_ANSISOP
+	case 30:
+
+		//grabar_valor()
+
+
+		break;
+		//case 31 I_O_ANSISOP
+
+	case 31:
+
+		//entrada_salida(sck->log, )
+		//todo avisar si se bloquea o no
+
+		break;
 
 	default:
 		log_error(cpuhlog,
