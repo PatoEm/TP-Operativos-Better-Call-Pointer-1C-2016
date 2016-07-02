@@ -89,6 +89,8 @@ typedef struct strKerCpu {
 	Char action;
 	pcb pcb;
 	Int8U quantum;
+	Byte* data;
+	Int32U dataLen;
 } __attribute__((packed)) StrKerCpu;
 
 
@@ -204,7 +206,7 @@ typedef struct strSwaUmc {
 ***********************************************/
 StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen);
 
-StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum);
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen);
 StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage);
 StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log);
 

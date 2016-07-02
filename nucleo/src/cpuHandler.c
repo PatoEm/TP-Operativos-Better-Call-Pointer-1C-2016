@@ -193,7 +193,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	switch (sck->action) {
 	case HANDSHAKE:
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
-		skc = newStrKerCpu(CPU_ID, HANDSHAKE, pcb, 0);
+		skc = newStrKerCpu(CPU_ID, HANDSHAKE, pcb, 0, NULL, 0);
 		sb = serializeKerCpu(skc);
 		if (socketSend(cpuClient, sb)) {
 			log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
@@ -315,7 +315,7 @@ void enviarPcbACpu(Socket * cpuClient) {
 		pthread_mutex_unlock(mutexColaReady);
 
 		pthread_mutex_lock(mutexQuantum);
-		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, 0, *pcbAEnviar, quantum);
+		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, 0, *pcbAEnviar, quantum, NULL, 0);
 		pthread_mutex_unlock(mutexQuantum);
 
 		SocketBuffer* sb = serializeKerCpu(skc);
@@ -367,41 +367,8 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 
 		break;
-		//case 27 es ANSISOP_WAIT_SEM NO ME TOMA LOS DEFINES
-	case 27:
 
-
-		waitAnsisop(sck->log,&sck->pcb);
-		//todo que le envio al cpu?
-		break;
-
-		//case 27 es ANSISOP_SIGNAL_SEM NO ME TOMA LOS DEFINES
-	case 28:
-
-
-		signalAnsisop(sck->log,&sck->pcb);
-		//todo que le envio al cpu?
-		break;
-		//case 29 es OBTENER_VALOR_VARIABLE_ANSISOP
-	case 29:
-		obtener_valor(sck->log, &sck->pcb);
-		//todo que le envio al cpu?
-		break;
-		//case 30 es ASIGNAR_VALOR_VARIABLE_ANSISOP
-	case 30:
-
-		//grabar_valor()
-
-
-		break;
-		//case 31 I_O_ANSISOP
-
-	case 31:
-
-		//entrada_salida(sck->log, )
-		//todo avisar si se bloquea o no
-
-		break;
+	//case ANSISOP_SEM_WAIT: break;
 
 	default:
 		log_error(cpuhlog,

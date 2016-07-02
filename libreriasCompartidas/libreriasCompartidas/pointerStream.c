@@ -33,12 +33,14 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileCont
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum){
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen){
 	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
 	skc->id = id;
 	skc->action = action;
 	skc->pcb = pcb;
 	skc->quantum = quantum;
+	skc->data = data;
+	skc->dataLen = dataLen;
 	return skc;
 }
 
@@ -186,6 +188,8 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	size += sizeof(skc->action);
 	size += sizeof(skc->pcb);
 	size += sizeof(skc->quantum);
+	size += sizeof(skc->dataLen);
+	size += skc->dataLen;
 	return size;
 }
 
@@ -364,6 +368,14 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	ptrByte = (Byte*) &skc->quantum;
 	memcpy(ptrData, ptrByte, sizeof(skc->quantum));
 	ptrData += sizeof(skc->quantum);
+
+	ptrByte = (Byte*) skc->data;
+	memcpy(ptrData, ptrByte, skc->dataLen);
+	ptrData += skc->dataLen;
+
+	ptrByte = (Byte*) &skc->dataLen;
+	memcpy(ptrData, ptrByte, sizeof(skc->dataLen));
+	ptrData += sizeof(skc->dataLen);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -721,6 +733,8 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	Char action;
 	pcb pcb;
 	Int8U quantum;
+	Byte* data;
+	Int32U dataLen;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -731,8 +745,15 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	memcpy(&quantum, ptrByte, sizeof(quantum));
 	ptrByte += sizeof(quantum);
 
+	data = malloc(dataLen);
+	memcpy(data, ptrByte, dataLen);
+	ptrByte += dataLen;
+
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
+
 	free(dataSerialized);
-	return newStrKerCpu(id, action, pcb, quantum);
+	return newStrKerCpu(id, action, pcb, quantum, data, dataLen);
 }
 
 /***********************************************/
