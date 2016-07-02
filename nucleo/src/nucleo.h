@@ -23,6 +23,7 @@
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
 #include <libreriasCompartidas/socket.h>
+#include <libreriasCompartidas/pointerSocketes.h>
 #include <libreriasCompartidas/pcb.h>
 #include <unistd.h>
 #include <errno.h>
@@ -150,6 +151,7 @@ void wait(char * , pcb *);
 void signal(char* , pcb*);
 int inicializarVariables();
 void crearHilos();
+void enviarPcbACpu(Socket *);
 void buscarYEliminarPCBEnLista(t_list *, pcb* );
 
 #endif /* NUCLEO_H_ */

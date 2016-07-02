@@ -16,6 +16,8 @@ src/nucleo.d: ../src/nucleo.c ../src/nucleo.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/parser/parser/parser.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerSocketes.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerTipos.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h
 
 ../src/nucleo.h:
@@ -53,5 +55,9 @@ src/nucleo.d: ../src/nucleo.c ../src/nucleo.h \
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerSocketes.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerTipos.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h:
