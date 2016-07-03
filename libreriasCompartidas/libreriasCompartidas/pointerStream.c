@@ -331,13 +331,13 @@ SocketBuffer* serializeConKer(StrConKer* sconk){
 	memcpy(ptrData, ptrByte, sizeof(sconk->action));
 	ptrData += sizeof(sconk->action);
 
-	ptrByte = (Byte*) sconk->fileContent;
-	memcpy(ptrData, ptrByte, sconk->fileContentLen);
-	ptrData += sconk->fileContentLen;
-
 	ptrByte = (Byte*) &sconk->fileContentLen;
 	memcpy(ptrData, ptrByte, sizeof(sconk->fileContentLen));
 	ptrData += sizeof(sconk->fileContentLen);
+
+	ptrByte = (Byte*) sconk->fileContent;
+	memcpy(ptrData, ptrByte, sconk->fileContentLen);
+	ptrData += sconk->fileContentLen;
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -369,13 +369,13 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	memcpy(ptrData, ptrByte, sizeof(skc->quantum));
 	ptrData += sizeof(skc->quantum);
 
-	ptrByte = (Byte*) skc->data;
-	memcpy(ptrData, ptrByte, skc->dataLen);
-	ptrData += skc->dataLen;
-
 	ptrByte = (Byte*) &skc->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(skc->dataLen));
 	ptrData += sizeof(skc->dataLen);
+
+	ptrByte = (Byte*) skc->data;
+	memcpy(ptrData, ptrByte, skc->dataLen);
+	ptrData += skc->dataLen;
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -399,13 +399,13 @@ SocketBuffer* serializeKerUmc(StrKerUmc* sku){
 	memcpy(ptrData, ptrByte, sizeof(sku->action));
 	ptrData += sizeof(sku->action);
 
-	ptrByte = (Byte*) sku->data;
-	memcpy(ptrData, ptrByte, sku->size);
-	ptrData += sku->size;
-
 	ptrByte = (Byte*) &sku->size;
 	memcpy(ptrData, ptrByte, sizeof(sku->size));
 	ptrData += sizeof(sku->size);
+
+	ptrByte = (Byte*) sku->data;
+	memcpy(ptrData, ptrByte, sku->size);
+	ptrData += sku->size;
 
 	ptrByte = (Byte*) &sku->pid;
 	memcpy(ptrData, ptrByte, sizeof(sku->pid));
@@ -547,13 +547,13 @@ SocketBuffer* serializeUmcKer(StrUmcKer* suk){
 	memcpy(ptrData, ptrByte, sizeof(suk->action));
 	ptrData += sizeof(suk->action);
 
-	ptrByte = (Byte*) suk->data;
-	memcpy(ptrData, ptrByte, suk->size);
-	ptrData += suk->size;
-
 	ptrByte = (Byte*) &suk->size;
 	memcpy(ptrData, ptrByte, sizeof(suk->size));
 	ptrData += sizeof(suk->size);
+
+	ptrByte = (Byte*) suk->data;
+	memcpy(ptrData, ptrByte, suk->size);
+	ptrData += suk->size;
 
 	ptrByte = (Byte*) &suk->pid;
 	memcpy(ptrData, ptrByte, sizeof(suk->pid));
@@ -634,13 +634,13 @@ SocketBuffer* serializeUmcSwa(StrUmcSwa* sus){
 	memcpy(ptrData, ptrByte, sizeof(sus->cantPage));
 	ptrData += sizeof(sus->cantPage);
 
-	ptrByte = (Byte*) sus->data;
-	memcpy(ptrData, ptrByte, sus->dataLen);
-	ptrData += sus->dataLen;
-
 	ptrByte = (Byte*) &sus->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(sus->dataLen));
 	ptrData += sizeof(sus->dataLen);
+
+	ptrByte = (Byte*) sus->data;
+	memcpy(ptrData, ptrByte, sus->dataLen);
+	ptrData += sus->dataLen;
 
 	ptrByte = (Byte*) &sus->pid;
 	memcpy(ptrData, ptrByte, sizeof(sus->pid));
@@ -675,13 +675,13 @@ SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu){
 	memcpy(ptrData, ptrByte, sizeof(ssu->cantPage));
 	ptrData += sizeof(ssu->cantPage);
 
-	ptrByte = (Byte*) ssu->data;
-	memcpy(ptrData, ptrByte, ssu->dataLen);
-	ptrData += ssu->dataLen;
-
 	ptrByte = (Byte*) &ssu->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(ssu->dataLen));
 	ptrData += sizeof(ssu->dataLen);
+
+	ptrByte = (Byte*) ssu->data;
+	memcpy(ptrData, ptrByte, ssu->dataLen);
+	ptrData += ssu->dataLen;
 
 	ptrByte = (Byte*) &ssu->pid;
 	memcpy(ptrData, ptrByte, sizeof(ssu->pid));
@@ -712,13 +712,12 @@ StrConKer* unserializeConKer(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
+	ptrByte += sizeof(fileContentLen);
 
 	fileContent = malloc(fileContentLen);
 	memcpy(fileContent, ptrByte, fileContentLen);
 	ptrByte += fileContentLen;
-
-	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
-	ptrByte += sizeof(fileContentLen);
 
 	free(dataSerialized);
 	return newStrConKer(id, action, fileContent, fileContentLen);
@@ -744,13 +743,12 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	ptrByte += sizeof(pcb);
 	memcpy(&quantum, ptrByte, sizeof(quantum));
 	ptrByte += sizeof(quantum);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
 
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
-
-	memcpy(&dataLen, ptrByte, sizeof(dataLen));
-	ptrByte += sizeof(dataLen);
 
 	free(dataSerialized);
 	return newStrKerCpu(id, action, pcb, quantum, data, dataLen);
@@ -772,13 +770,13 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+	memcpy(&size, ptrByte, sizeof(size));
+	ptrByte += sizeof(size);
 
 	data = malloc(size);
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
 
-	memcpy(&size, ptrByte, sizeof(size));
-	ptrByte += sizeof(size);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
@@ -895,13 +893,13 @@ StrUmcKer* unserializeUmcKer(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+	memcpy(&size, ptrByte, sizeof(size));
+	ptrByte += sizeof(size);
 
 	data = malloc(size);
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
 
-	memcpy(&size, ptrByte, sizeof(size));
-	ptrByte += sizeof(size);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
@@ -967,13 +965,13 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized){
 	ptrByte += sizeof(pageComienzo);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
 
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
-	memcpy(&dataLen, ptrByte, sizeof(dataLen));
-	ptrByte += sizeof(dataLen);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 
@@ -1002,13 +1000,13 @@ StrSwaUmc* unserializeSwaUmc(Stream dataSerialized){
 	ptrByte += sizeof(pageComienzo);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
+	memcpy(&dataLen, ptrByte, sizeof(dataLen));
+	ptrByte += sizeof(dataLen);
 
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
-	memcpy(&dataLen, ptrByte, sizeof(dataLen));
-	ptrByte += sizeof(dataLen);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 

@@ -4,11 +4,12 @@
  *  Created on: 23/4/2016
  *      Author: utnso
  */
+
 /*
  * Dependencias
  */
 #include "consola.h"
-//#define manejarError(msg) {perror(msg); abort();}
+
 
 void enviarArchivoANucleo(char*direccion){
 
@@ -42,8 +43,6 @@ void recibirArchivo(){
 
 }
 
-
-
 void setearValores(t_config * archivoConfig) {
 		//ipNucleo = config_get_string_value(archivoConfig, "IP_NUCLEO");
 		//nucleoPort= config_get_string_value(archivoConfig, "PUERTO_NUCLEO");
@@ -66,7 +65,7 @@ int tamArchivo(char * direccionArchivo) {
 	return tamanio;
 }
 
- char * leerProgramaAnSISOP(char * direccionArchivo) {
+char * leerProgramaAnSISOP(char * direccionArchivo) {
 
 	int tamanio=tamArchivo(direccionArchivo);
 

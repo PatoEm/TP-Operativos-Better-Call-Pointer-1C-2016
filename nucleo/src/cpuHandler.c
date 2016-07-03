@@ -193,7 +193,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	switch (sck->action) {
 	case HANDSHAKE:
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
-		skc = newStrKerCpu(CPU_ID, HANDSHAKE, pcb, 0, NULL, 0);
+		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, pcb, 0, NULL, 0);
 		sb = serializeKerCpu(skc);
 		if (socketSend(cpuClient, sb)) {
 			log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
@@ -229,7 +229,7 @@ void newConsoleClient(Socket* consoleClient, Stream dataSerialized) {
 	if (sck->action == HANDSHAKE) {
 		log_info(cpuhlog, "Nuevo Cliente Consola %d aceptado.",
 				consoleClient->descriptor);
-		skc = newStrKerCon(CONSOLA_ID, HANDSHAKE, 0, 0);
+		skc = newStrKerCon(KERNEL_ID, HANDSHAKE, 0, NULL);
 		sb = serializeKerCon(skc);
 		if (socketSend(consoleClient, sb)) {
 			log_info(cpuhlog, "KER-CON: HANDSHAKE se devolvio handshake");

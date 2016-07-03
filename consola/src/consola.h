@@ -33,8 +33,6 @@
 int   fdSocketConsola;
 
 
-
-
 //prototipos
 //void leerArchivoDeConfiguracion();
 //int verificarExistenciaDeArchivo(char* rutaArchivoConfig);

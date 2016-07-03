@@ -107,12 +107,38 @@ Boolean socketConnection() {
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
 
+	switch(handshake(kernelClient, CONSOLA_ID)) {
+		case 1:
+			puts("Handshake realizado con exito");
+			return TRUE;
+			break;
+		case 2:
+			puts("Error en socketSend");
+			return FALSE;
+			break;
+		case 3:
+			puts("Error en socketRecv");
+			return FALSE;
+			break;
+		case 4:
+			puts("Error ACTION");
+			return FALSE;
+			break;
+		default:
+			puts("MSJ DEFAULT");
+			return FALSE;
+			break;
+	}
+
+	/*
 	if(handshake(kernelClient, CONSOLA_ID)){
 		puts("Handshake realizado con exito.");
 	} else {
-		puts("No se pudo realizar el handshake.");
+		puts("No se pudo realizar el handshake!!!.");
 		return FALSE;
 	}
+	*/
+
 	return TRUE;
 }
 
@@ -126,30 +152,31 @@ Boolean callAndSendAnSISOP(String path) {
 	}
 
 	char* buffer = NULL;
-	long fileLen=tamArchivo(path);
-	buffer=leerProgramaAnSISOP(path);
-//	FILE* file = fopen(path, "rb");
-//	puts("Leyendo el archivo");
-//	if (!file) {
-//		puts("[ERROR]: No se pudo abrir el archivo.");
-//		return FALSE;
-//	} else {
-//		puts("Se encontro el archivo.");
-//		fseek(file, 0, SEEK_END);
-//		fileLen = ftell(file);
-//		rewind(file);
-//		buffer = (char*) malloc((fileLen + 1) * sizeof(char));
-//		fread(buffer, fileLen, 1, file);
-//		fclose(file);
-//	}
+	long fileLen;
+	//=tamArchivo(path);
+	//buffer=leerProgramaAnSISOP(path);
 
+	FILE* file = fopen(path, "rb");
+	puts("Leyendo el archivo");
 
+	if (!file) {
+		puts("[ERROR]: No se pudo abrir el archivo.");
+		return FALSE;
+	} else {
+		puts("Se encontro el archivo.");
+		fseek(file, 0, SEEK_END);
+		fileLen = ftell(file);
+		rewind(file);
+		buffer = (char*) malloc((fileLen + 1) * sizeof(char));
+		fread(buffer, fileLen, 1, file);
+		fclose(file);
+	}
 
 	if (sck != NULL) {
 		free(sck);
 	}
 
-	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, buffer, fileLen);
+	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, (Byte*) buffer, fileLen);
 	puts("Enviando al Nucleo el archivo");
 	return sendStream();
 }
