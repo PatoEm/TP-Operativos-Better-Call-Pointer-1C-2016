@@ -107,37 +107,12 @@ Boolean socketConnection() {
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
 
-	switch(handshake(kernelClient, CONSOLA_ID)) {
-		case 1:
-			puts("Handshake realizado con exito");
-			return TRUE;
-			break;
-		case 2:
-			puts("Error en socketSend");
-			return FALSE;
-			break;
-		case 3:
-			puts("Error en socketRecv");
-			return FALSE;
-			break;
-		case 4:
-			puts("Error ACTION");
-			return FALSE;
-			break;
-		default:
-			puts("MSJ DEFAULT");
-			return FALSE;
-			break;
-	}
-
-	/*
 	if(handshake(kernelClient, CONSOLA_ID)){
 		puts("Handshake realizado con exito.");
 	} else {
 		puts("No se pudo realizar el handshake!!!.");
 		return FALSE;
 	}
-	*/
 
 	return TRUE;
 }

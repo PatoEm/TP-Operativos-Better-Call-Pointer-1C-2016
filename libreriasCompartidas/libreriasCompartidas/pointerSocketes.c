@@ -280,12 +280,12 @@ Boolean handshake(SocketClient* client, Char id) {
 	
 	if(!socketSend(client->ptrSocket, sb)) {
 		printf("No se pudo realizar el handshake. \n");
-		return 2;
+		return FALSE;
 	}
 	
 	sb = socketReceive(client->ptrSocket);
 	if (sb == NULL) {
-		return 3;
+		return FALSE;
 	} else {
 		switch(id) {
 			case CPU_ID:
@@ -307,7 +307,7 @@ Boolean handshake(SocketClient* client, Char id) {
 		if (action == HANDSHAKE) {
 			return TRUE;
 		} else {
-			return 4;
+			return FALSE;
 		}
 	}
 }
