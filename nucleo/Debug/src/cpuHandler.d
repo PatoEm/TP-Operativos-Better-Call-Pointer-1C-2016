@@ -12,10 +12,10 @@ src/cpuHandler.d: ../src/cpuHandler.c ../src/cpuHandler.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/string.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/error.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/parser/parser/parser.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/paginaAsignada.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h \
  ../src/nucleo.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/config.h \
@@ -55,13 +55,13 @@ src/cpuHandler.d: ../src/cpuHandler.c ../src/cpuHandler.h \
 
 /home/utnso/tp-2016-1c-Better-call-pointer/parser/parser/parser.h:
 
+/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h:
+
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/paginaAsignada.h:
-
-/home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h:
 
 ../src/nucleo.h:
 

@@ -28,7 +28,6 @@
 #define CHAR_AST 7
 #define INT 8
 
-pcb pcbEnEjecucion;
 //======================================================
 
 bool loadFunctionDictionary(t_dictionary** functionParameters) {
@@ -169,26 +168,30 @@ void setearValores(t_config * archivoConfig) {
 t_puntero definirVariable(t_nombre_variable identificador_variable) {
 	if (0 == list_size(pcbProceso.indiceDelStack)) {
 		espacioAsignado paginaAMandar;
-		paginaAMandar = (pcbProceso.paginasDeCodigo - 1); //todo ojo acá si explota algo
+		int pagina;
+		pagina = ((pcbProceso.paginasDeCodigo) - 1); //todo ojo acá si explota algo
 		paginaDeStack*nuevaVariable = malloc(sizeof(paginaDeStack));
+		paginaAMandar.numDePag = ((pcbProceso.paginasDeCodigo) - 1);
 		nuevaVariable->pos = 0;
 		StrCpuUmc*streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
-				paginaAMandar, (tamanioPaginaUmc-5), 4, NULL, 0);
-		SocketBuffer*buffer = serialize(streamCpuUmc);
+				paginaAMandar, (tamanioPaginaUmc - 5), 4, NULL, 0);
+		SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
 		socketSend(socketUMC->ptrSocket, buffer);
 		buffer = socketReceive(socketUMC->ptrSocket);
-		StrUmcCpu*streamUmcCpu = unserialize(buffer);
+		StrUmcCpu*streamUmcCpu = unserializeCpuUmc(buffer);
 		if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
 			nuevaVariable->vars.id = identificador_variable;
 			nuevaVariable->vars.pag = paginaAMandar.numDePag;
-			nuevaVariable->vars.off=(tamanioPaginaUmc-5);
-			nuevaVariable->vars.size=4;
-			list_add(pcbProceso->indiceDelStack,nuevaVariable);
+			nuevaVariable->vars.off = (tamanioPaginaUmc - 5);
+			nuevaVariable->vars.size = 4;
+			t_list * lista = pcbProceso.indiceDelStack;
+			list_add((pcbProceso.indiceDelStack), nuevaVariable);
 		} else
 			seguirEjecutando = FALSE;
 	}
-	if(list_size(pcbProceso.indiceDelStack)!=0){
-		paginaDeStack*ultimaPagina=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso.indiceDelStack)-1);
+	if (list_size(pcbProceso.indiceDelStack) != 0) {
+		paginaDeStack*ultimaPagina = list_get(pcbProceso.indiceDelStack,
+				list_size(pcbProceso.indiceDelStack) - 1);
 
 	}
 }
@@ -211,8 +214,27 @@ bool espacioMemoriaVacio(int tamanio, char*bytes) {
  * obtenerPosicionVariable
  */
 t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
-	printf("Operacion obtener posicion variable");
-	return 0;
+
+	if (list_size(pcbProceso.indiceDelStack) != 0) {
+
+		int i;
+		paginaDeStack* aux;
+		for (i = 0; i<list_size(pcbProceso.indiceDelStack); ++i) {
+
+			aux =list_get(pcbProceso.indiceDelStack,i);
+			if(aux->vars.id==identificador_variable){
+
+				return aux->pos;
+			}
+
+		}
+
+
+
+	} else {
+		return -1;
+	}
+	return -1;
 }
 
 /*
@@ -395,22 +417,20 @@ char * pedirCodigoAUMC() {
 	char*lineaDeCodigoADevolver =
 			malloc(
 					sizeof(char)
-							* pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud);
-	int comienzo =
-			pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].comienzo;
+							* pcbProceso.indiceDeCodigo[pcbProceso.programCounter].longitud);
+	int comienzo = pcbProceso.indiceDeCodigo[pcbProceso.programCounter].comienzo;
 
 	int paginaDeComienzo = comienzo / tamanioPaginaUmc;
 
-	int desplazamiento =
-			comienzo
-					+ pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud;
+	int desplazamiento = comienzo
+			+ pcbProceso.indiceDeCodigo[pcbProceso.programCounter].longitud;
 
 	int paginaDeFin = desplazamiento / tamanioPaginaUmc;
 
 	int dondeEmpiezo = comienzo - tamanioPaginaUmc * paginaDeComienzo;
 
 	int longitudTotalAPedir =
-			pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud;
+			pcbProceso.indiceDeCodigo[pcbProceso.programCounter].longitud;
 
 	if (paginaDeComienzo == paginaDeFin) {
 		//todo pedir pagina con el tamaño que ya tengo de antemano

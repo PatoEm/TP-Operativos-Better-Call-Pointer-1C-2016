@@ -25,6 +25,7 @@
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <commons/collections/list.h>
 #include <libreriasCompartidas/pcb.h>
+
 #define FAIL -1
 //======================================================
 
@@ -141,6 +142,9 @@ void wait(t_nombre_semaforo identificador_semaforo);
  * signal
  */
 void signal(t_nombre_semaforo identificador_semaforo);
+
+
+bool espacioMemoriaVacio(int tamanio, char*bytes);
 
 //======================================================
 #endif /* CPU_H_ */
