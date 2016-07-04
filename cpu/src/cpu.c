@@ -166,19 +166,23 @@ void setearValores(t_config * archivoConfig) {
  * definirVariable
  */
 t_puntero definirVariable(t_nombre_variable identificador_variable) {
+	int pagina;
+	espacioAsignado paginaAMandar;
+	paginaDeStack*nuevaVariable;
+	StrCpuUmc*streamCpuUmc;
+	SocketBuffer*buffer;
+	StrUmcCpu*streamUmcCpu;
 	if (0 == list_size(pcbProceso.indiceDelStack)) {
-		espacioAsignado paginaAMandar;
-		int pagina;
 		pagina = ((pcbProceso.paginasDeCodigo) - 1); //todo ojo acá si explota algo
-		paginaDeStack*nuevaVariable = malloc(sizeof(paginaDeStack));
+		nuevaVariable = malloc(sizeof(paginaDeStack));
 		paginaAMandar.numDePag = ((pcbProceso.paginasDeCodigo) - 1);
 		nuevaVariable->pos = 0;
-		StrCpuUmc*streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
+		streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
 				paginaAMandar, (tamanioPaginaUmc - 5), 4, NULL, 0);
-		SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
+		buffer = serializeCpuUmc(streamCpuUmc);
 		socketSend(socketUMC->ptrSocket, buffer);
 		buffer = socketReceive(socketUMC->ptrSocket);
-		StrUmcCpu*streamUmcCpu = unserializeCpuUmc(buffer);
+		streamUmcCpu = unserializeCpuUmc(buffer);
 		if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
 			nuevaVariable->vars.id = identificador_variable;
 			nuevaVariable->vars.pag = paginaAMandar.numDePag;
@@ -190,10 +194,51 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			seguirEjecutando = FALSE;
 	}
 	if (list_size(pcbProceso.indiceDelStack) != 0) {
+
 		paginaDeStack*ultimaPagina = list_get(pcbProceso.indiceDelStack,
 				list_size(pcbProceso.indiceDelStack) - 1);
+		if (ultimaPagina->vars.off - 4 < 0) {
+			paginaAMandar.numDePag = ultimaPagina->vars.pag - 1;
+			streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
+					paginaAMandar, tamanioPaginaUmc - 5, 4, 0, 0);
+			buffer = serializeCpuUmc(streamCpuUmc);
+			socketSend(socketUMC->ptrSocket, buffer);
+			buffer = socketReceive(socketUMC->ptrSocket);
+			streamUmcCpu = unserializeCpuUmc(buffer);
+			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
+				nuevaVariable->pos = ultimaPagina->pos + 1;
+				nuevaVariable->vars.id = identificador_variable;
+				nuevaVariable->vars.pag = paginaAMandar.numDePag;
+				nuevaVariable->vars.off = (tamanioPaginaUmc - 5);
+				nuevaVariable->vars.size = 4;
+				t_list * lista = pcbProceso.indiceDelStack;
+				list_add((pcbProceso.indiceDelStack), nuevaVariable);
+			} else
+				seguirEjecutando = FALSE;
+		} else {
+			paginaAMandar.numDePag = ultimaPagina->vars.pag;
+			streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
+					paginaAMandar, ultimaPagina->vars.off - 4, 4, 0, 0);
+			buffer = serializeCpuUmc(streamCpuUmc);
+			socketSend(socketUMC->ptrSocket, buffer);
+			buffer = socketReceive(socketUMC->ptrSocket);
+			streamUmcCpu = unserializeCpuUmc(buffer);
+			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
+				nuevaVariable->pos = ultimaPagina->pos + 1;
+				nuevaVariable->vars.id = identificador_variable;
+				nuevaVariable->vars.pag = paginaAMandar.numDePag;
+				nuevaVariable->vars.size = 4;
+				nuevaVariable->vars.off = ultimaPagina->vars.off - 4;
+				t_list * lista = pcbProceso.indiceDelStack;
+				list_add((pcbProceso.indiceDelStack), nuevaVariable);
+			} else {
+				seguirEjecutando = FALSE;
+			}
 
+		}
 	}
+
+	return nuevaVariable->pos;
 }
 
 // devuelve 1 si la página está vacía
