@@ -346,14 +346,45 @@ void irAlLabel(t_nombre_etiqueta etiqueta) {
  */
 void llamarSinRetorno(t_nombre_etiqueta etiqueta) {
 	printf("Operacion llamar sin retorno");
+	//todo Que carajo es esto que ni en el tp existe?
 }
 
 /*
  * llamarConRetorno
  */
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
+
+	paginaDeStack* aux=malloc(sizeof(paginaDeStack));
+	aux->retVars.pag=donde_retornar/tamanioPaginaUmc;
+	aux->retVars.off=donde_retornar%tamanioPaginaUmc;
+	aux->retPos=pcbProceso.programCounter;
+	list_add(pcbProceso.indiceDelStack, aux);
+
+	pcbProceso.programCounter=metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize);
+
 	printf("Operacion llamar con retorno");
+
+
+
 }
+
+
+//void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar){
+//	t_stack*stackAux=malloc(sizeof(t_stack));
+//	stackAux->args=list_create();
+//	stackAux->vars=list_create();
+//	stackAux->cantArgs=0;
+//	stackAux->cantVars=0;
+//	stackAux->retVar.pag=donde_retornar/tamanioPagina;
+//	stackAux->retVar.offset=donde_retornar%tamanioPagina;
+//	stackAux->retPos=pcb->PC+1;
+//	pcb->SP=list_add(pcb->indiceDeStack,stackAux);
+//	pcb->tamanioIndiceStack++;
+//	pcb->PC=metadata_buscar_etiqueta(etiqueta,pcb->indiceDeEtiquetas.etiquetas,pcb->indiceDeEtiquetas.etiquetas_size);
+//	flagSaltoLinea=1;
+//
+//}
+
 
 /*
  * finalizar
@@ -372,6 +403,7 @@ void finalizar(void) {
  */
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
+	//todo EMI REVISA ESTO PORFA
 	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,(pcbProceso.indiceDelStack->elements_count)-1);
 	pcbProceso.programCounter=aux->retPos;
 	StrCpuUmc*streamCpuUmc;
