@@ -292,11 +292,8 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  * 	irAlLabel
  */
 t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta) {
-	printf("Operacion ir al label");
+	return (pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize));
 
-	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize);
-
-	return 0;
 }
 
 /*
