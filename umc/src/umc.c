@@ -642,7 +642,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			break;
-		case 26 /*ALMACENAR_BYTES*/:
+		case 34 /*ALMACENAR_BYTES*/:
 			if (tlbHabilitada()) {
 				if(!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
 						scu->offset, scu->dataLen, scu->data)){

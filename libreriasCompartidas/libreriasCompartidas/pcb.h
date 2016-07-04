@@ -16,7 +16,7 @@ typedef struct {
 } arrayBidimensional;
 
 typedef struct {
-	int id;
+	char id;
 	int pag;
 	int off;
 	int size;

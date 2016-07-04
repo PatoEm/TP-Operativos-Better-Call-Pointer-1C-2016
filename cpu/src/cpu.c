@@ -167,8 +167,44 @@ void setearValores(t_config * archivoConfig) {
  * definirVariable
  */
 t_puntero definirVariable(t_nombre_variable identificador_variable) {
-	printf("Operacion definir variable");
-	return 0;
+	if (0 == list_size(pcbProceso.indiceDelStack)) {
+		espacioAsignado paginaAMandar;
+		paginaAMandar = (pcbProceso.paginasDeCodigo - 1); //todo ojo acá si explota algo
+		paginaDeStack*nuevaVariable = malloc(sizeof(paginaDeStack));
+		nuevaVariable->pos = 0;
+		StrCpuUmc*streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
+				paginaAMandar, (tamanioPaginaUmc-5), 4, NULL, 0);
+		SocketBuffer*buffer = serialize(streamCpuUmc);
+		socketSend(socketUMC->ptrSocket, buffer);
+		buffer = socketReceive(socketUMC->ptrSocket);
+		StrUmcCpu*streamUmcCpu = unserialize(buffer);
+		if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
+			nuevaVariable->vars.id = identificador_variable;
+			nuevaVariable->vars.pag = paginaAMandar.numDePag;
+			nuevaVariable->vars.off=(tamanioPaginaUmc-5);
+			nuevaVariable->vars.size=4;
+			list_add(pcbProceso->indiceDelStack,nuevaVariable);
+		} else
+			seguirEjecutando = FALSE;
+	}
+	if(list_size(pcbProceso.indiceDelStack)!=0){
+		paginaDeStack*ultimaPagina=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso.indiceDelStack)-1);
+
+	}
+}
+
+// devuelve 1 si la página está vacía
+bool espacioMemoriaVacio(int tamanio, char*bytes) {
+	int counter = 0;
+	while (counter < tamanio) {
+		if (bytes[counter != '\0'])
+			break;
+		counter++;
+	}
+	if (counter == tamanio)
+		return TRUE;
+	else
+		return FALSE;
 }
 
 /*
@@ -317,6 +353,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 				pcbProceso.id, 0, NULL);
 		buffer = serializeCpuKer(streamCpuKer);
 		socketSend(socketNucleo->ptrSocket, buffer);
+		seguirEjecutando = FALSE;
 	}
 }
 
@@ -336,6 +373,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 				pcbProceso.id, 0, NULL);
 		buffer = serializeCpuKer(streamCpuKer);
 		socketSend(socketNucleo->ptrSocket, buffer);
+		seguirEjecutando = FALSE;
 	}
 }
 
@@ -353,7 +391,7 @@ void signal(t_nombre_semaforo identificador_semaforo) {
 
 char * pedirCodigoAUMC() {
 
-	//pcbEnEjecucion.programCounter;
+//pcbEnEjecucion.programCounter;
 	char*lineaDeCodigoADevolver =
 			malloc(
 					sizeof(char)
@@ -407,16 +445,11 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 		.AnSISOP_dereferenciar = dereferenciar, .AnSISOP_asignar = asignar,
 		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
 		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
-		.AnSISOP_irAlLabel = irAlLabel,
-		.AnSISOP_llamarConRetorno =llamarConRetorno,
-		.AnSISOP_retornar = retornar,
-		.AnSISOP_entradaSalida = entradaSalida,
-		.AnSISOP_imprimir = imprimir,
-		.AnSISOP_imprimirTexto = imprimirTexto,
-};
+		.AnSISOP_irAlLabel = irAlLabel, .AnSISOP_llamarConRetorno =
+				llamarConRetorno, .AnSISOP_retornar = retornar,
+		.AnSISOP_entradaSalida = entradaSalida, .AnSISOP_imprimir = imprimir,
+		.AnSISOP_imprimirTexto = imprimirTexto, };
 
-AnSISOP_kernel funcionesDeKernel = {
-		.AnSISOP_wait = wait,
-		.AnSISOP_signal =signal,
-};
+AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
+		signal, };
 

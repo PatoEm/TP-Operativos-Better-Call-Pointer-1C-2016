@@ -38,8 +38,10 @@ char* ipNucleo;
 int clienteNucleo;
 t_list* coreList;
 SocketClient* socketNucleo;
+SocketClient* socketUMC;
 int tamanioPaginaUmc;
 pcb pcbProceso;
+bool seguirEjecutando; //1 SI 0 NO
 
 //======================================================
 
