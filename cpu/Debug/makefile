@@ -26,9 +26,15 @@ endif
 all: cpu
 
 dependents:
+<<<<<<< HEAD
 	-cd /home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) all
 	-cd /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug && $(MAKE) all
 	-cd /home/utnso/tp-2016-1c-Better-call-pointer/parser/Debug && $(MAKE) all
+=======
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug && $(MAKE) all
+	-cd /home/utnso/workspace/tp-2016-1c-Better-call-pointer/parser/Debug && $(MAKE) all
+>>>>>>> branch 'master' of https://github.com/sisoputnfrba/tp-2016-1c-Better-call-pointer.git
 
 # Tool invocations
 cpu: $(OBJS) $(USER_OBJS) /home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug/libcommons.so /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug/liblibreriasCompartidas.so /home/utnso/tp-2016-1c-Better-call-pointer/parser/Debug/libparser.so

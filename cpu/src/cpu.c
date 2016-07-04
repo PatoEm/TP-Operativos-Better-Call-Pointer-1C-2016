@@ -217,6 +217,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
  */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
+	char* buffer;
 	StrCpuKer*streamCpuKer;
 	char* datosAEnviar = (sizeof(variable) + sizeof(valor) + 1);
 	datosAEnviar = strcat(variable, atoi(valor));
