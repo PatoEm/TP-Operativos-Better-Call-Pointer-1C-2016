@@ -106,7 +106,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_va
 /*
  * 	irAlLabel
  */
-t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta);
+void irAlLabel(t_nombre_etiqueta etiqueta);
 
 /*
  * llamarConRetorno

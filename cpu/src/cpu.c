@@ -291,8 +291,8 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 /*
  * 	irAlLabel
  */
-t_puntero_instruccion irAlLabel(t_nombre_etiqueta etiqueta) {
-	return (pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize));
+void irAlLabel(t_nombre_etiqueta etiqueta) {
+	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize);
 
 }
 
