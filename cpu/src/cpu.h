@@ -17,6 +17,7 @@
 #include <commons/config.h>
 #include <commons/config.h>
 #include <parser/parser.h>
+#include <parser/metadata_program.h>
 #include <commons/log.h>
 #include <pthread.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>

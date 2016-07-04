@@ -47,6 +47,7 @@ typedef struct {
 	int paginasDeCodigo;
 	arrayBidimensional * indiceDeCodigo;
 	char * indiceDeEtiquetas;
+	t_size etiquetaSize;
 	t_list* indiceDelStack;
 	t_medatada_program* metaProgram;
 	estadoPrograma estado;
@@ -54,8 +55,8 @@ typedef struct {
 } pcb;
 
 pcb* newPcb(int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
-		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,
-		paginaDeStack* indiceDelStack, t_metadata_program* metaProgram, estadoPrograma estado);
+		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,t_size etiquetas,
+		t_list* indiceDelStack, t_metadata_program* metaProgram, estadoPrograma estado);
 pcb* newEmptyPcb();
 
 char * pedirCodigoAUMC();

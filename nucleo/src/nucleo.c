@@ -75,6 +75,8 @@ pcb* crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	pcbNuevoPrograma->indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
+	pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
+
 	pcbNuevoPrograma->estado = 0; //NEW
 
 	pcbNuevoPrograma->indiceDelStack = list_create();
