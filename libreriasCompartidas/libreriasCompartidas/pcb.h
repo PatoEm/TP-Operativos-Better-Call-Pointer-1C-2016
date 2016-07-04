@@ -9,7 +9,7 @@
 #define LIBRERIASCOMPARTIDAS_PCB_H_
 #include <parser/metadata_program.h>
 #include <parser/parser.h>
-
+#include <commons/collections/list.h>
 typedef struct {
 	int comienzo;
 	int longitud;
@@ -47,7 +47,7 @@ typedef struct {
 	int paginasDeCodigo;
 	arrayBidimensional * indiceDeCodigo;
 	char * indiceDeEtiquetas;
-	paginaDeStack * indiceDelStack;
+	t_list* indiceDelStack;
 	t_medatada_program* metaProgram;
 	estadoPrograma estado;
 

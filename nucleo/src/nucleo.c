@@ -77,8 +77,7 @@ pcb* crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 
 	pcbNuevoPrograma->estado = 0; //NEW
 
-	pcbNuevoPrograma->indiceDelStack = (paginaDeStack*) malloc(
-			sizeof(paginaDeStack) * stackSize);
+	pcbNuevoPrograma->indiceDelStack = list_create();
 
 	pthread_mutex_lock(mutexColaNew);
 	queue_push(colaNew,pcbNuevoPrograma);
