@@ -325,10 +325,19 @@ void finalizar(void) {
  * retornar
  *
  */
-t_puntero_instruccion retornar(t_valor_variable retorno) {
+void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
-	return 0;
+	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,(pcbProceso.indiceDelStack->elements_count)-1);
+	pcbProceso.programCounter=aux->retPos;
+	StrCpuUmc*streamCpuUmc;
+	espacioAsignado paginaAMandar;
+	paginaAMandar.numDePag=aux->retVars.pag;
+	streamCpuUmc = newStrCpuUmc(CPU_ID, 34/*ALMACENAR_BYTES*/,paginaAMandar, aux->retVars.off, 4, NULL, 0);
+		SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
+		socketSend(socketUMC->ptrSocket, buffer);
+
 }
+
 
 /*
  * imprimir

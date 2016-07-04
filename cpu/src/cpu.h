@@ -117,7 +117,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar);
  * retornar
  *
  */
-t_puntero_instruccion retornar(t_valor_variable retorno);
+void retornar(t_valor_variable retorno);
 
 /*
  * imprimir
