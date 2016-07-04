@@ -369,23 +369,6 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 }
 
 
-//void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar){
-//	t_stack*stackAux=malloc(sizeof(t_stack));
-//	stackAux->args=list_create();
-//	stackAux->vars=list_create();
-//	stackAux->cantArgs=0;
-//	stackAux->cantVars=0;
-//	stackAux->retVar.pag=donde_retornar/tamanioPagina;
-//	stackAux->retVar.offset=donde_retornar%tamanioPagina;
-//	stackAux->retPos=pcb->PC+1;
-//	pcb->SP=list_add(pcb->indiceDeStack,stackAux);
-//	pcb->tamanioIndiceStack++;
-//	pcb->PC=metadata_buscar_etiqueta(etiqueta,pcb->indiceDeEtiquetas.etiquetas,pcb->indiceDeEtiquetas.etiquetas_size);
-//	flagSaltoLinea=1;
-//
-//}
-
-
 /*
  * finalizar
  */
