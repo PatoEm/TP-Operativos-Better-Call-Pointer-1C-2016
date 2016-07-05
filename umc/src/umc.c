@@ -29,19 +29,19 @@ void crearListas() {
 }
 
 bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa al swap nico chupame la pija
-	if (verificarSiHayEspacio(paginas)) {
+	if (verificarSiHayEspacio(paginas)&&paginas<marco_x_proc) {
 		if (paginasContiguasDeUMC(paginas) == -1) {
 			compactarUMC();
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid, marco_x_proc);
 		} else {
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid, marco_x_proc);
 		}
 		SocketBuffer*buffer;
 		StrUmcSwa*streamUmcSwap;
 		espacioAsignado pagina;
 		StrSwaUmc * streamSwapUmc;
 		pagina.numDePag = 0;
-		streamUmcSwap = newStrUmcSwa(UMC_ID, INICIALIZAR_PROGRAMA, pagina,
+		streamUmcSwap = newStrUmcSwa(UMC_ID, 20/*INICIALIZAR_PROGRAMA*/, pagina,
 				paginas, codigo, 0, pid);
 		buffer = serializeUmcSwa(streamUmcSwap);
 		socketSend(socketSwap->ptrSocket, buffer);
@@ -49,7 +49,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 		buffer = socketReceive(socketSwap->ptrSocket);
 		streamSwapUmc = unserializeSwaUmc(buffer->data);
 
-		if (streamSwapUmc->action == PROGRAMA_RECIBIDO)
+		if (streamSwapUmc->action == 26/*PROGRAMA_RECIBIDO*/)
 			return TRUE;
 		else
 			return FALSE;
@@ -625,33 +625,33 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	StrCpuUmc*streamCpuUmc = scu;
 	StrUmcCpu*streamUmcCpu;
 	char* bytes;
-	while (!CIERRE_CONEXION_CPU) {
+	while (!24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
-		case CAMBIO_PROCESO_ACTIVO:
+		case 23/*CAMBIO_PROCESO_ACTIVO*/:
 			pidActivo = streamCpuUmc->pid;
 			break;
-		case SOLICITAR_BYTES:
+		case 25/*SOLICITAR_BYTES*/:
 			if (tlbHabilitada()) {
 				bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
 						scu->offset, scu->dataLen);
 			} else
 				bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
 						scu->offset, scu->dataLen);
-			streamUmcCpu = newStrUmcCpu(UMC_ID, SOLICITAR_BYTES,unaPagina,
-					scu->offset, scu->dataLen, bytes, scu->pid);
+			streamUmcCpu = newStrUmcCpu(UMC_ID, 25/*SOLICITAR_BYTES*/,
+					unaPagina, scu->offset, scu->dataLen, bytes, scu->pid);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			break;
 		case 34 /*ALMACENAR_BYTES*/:
 			if (tlbHabilitada()) {
-				if(!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
-						scu->offset, scu->dataLen, scu->data)){
-					almacenarBytes(pidActivo, scu->pageComienzo.numDePag, scu->offset,
-										scu->dataLen, scu->data);
+				if (!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
+						scu->offset, scu->dataLen, scu->data)) {
+					almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
+							scu->offset, scu->dataLen, scu->data);
 				}
-			}else
-			almacenarBytes(pidActivo, scu->pageComienzo.numDePag, scu->offset,
-					scu->dataLen, scu->data);
+			} else
+				almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
+						scu->offset, scu->dataLen, scu->data);
 			break;
 		default:
 			printf("No se pudo identificar la accion de la CPU");
@@ -683,6 +683,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 			socketSend(socket, buffer);
 		}
 		break;
+	//todo hablar con pato el almacenar y leer bytes
 	case 22 /*FINALIZAR_PROGRAMA*/:
 		finalizarPrograma(sku->pid);
 		break;
@@ -983,21 +984,10 @@ void inicioTLB() {
 		log_info(logger, "TLB Deshabilitada");
 	} else {
 		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
-
 		TLB = creoTLB();
-		bitMapTLB = malloc(sizeof(bool) * entradas_TLB);
-		iniciarTLB();
-		memoriaTLB = calloc(1, marco_Size * entradas_TLB);
 		//Inicializo la cantidad de aciertos y accesos
 		aciertosTLB = 0;
 		accesosTLB = 0;
-	}
-}
-
-void iniciarTLB() {
-	int i;
-	for (i = 0; i < entradas_TLB; i++) {
-		bitMapTLB[i] = FALSE;
 	}
 }
 
@@ -1005,15 +995,15 @@ t_list * creoTLB() {
 	t_list * TLB = list_create();
 	return TLB;
 }
-
-void elDestructorDeNodosTLB(int i) {
-	list_remove(TLB, i);
-}
-
-void elDestructorDeNodosMemoria(int i) {
-	list_remove(listaEspacioAsignado, i);
-}
-
+/*
+ void elDestructorDeNodosTLB(int i) {
+ list_remove(TLB, i);
+ }
+ */
+/*void elDestructorDeNodosMemoria(int i) {
+ list_remove(listaEspacioAsignado, i);
+ }
+ */
 bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	int i = 0;
 	t_tlb*nodoActual = list_get(TLB, i);
@@ -1037,40 +1027,40 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 
 }
 
+int buscarFrameEnMemoria(int PID, int pagina) {
+
+	espacioAsignado * pagina;
+	int i = 0;
+	while (i < list_size(listaEspacioAsignado)) {
+		pagina = list_get(listaEspacioAsignado, i);
+		if (pagina->pid == PID) {
+			if (pagina->numDePagina == pagina) {
+				return pagina->IDPaginaInterno;
+			}
+		}
+	}
+
+}
+
 void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 	if (tlbHabilitada()) {
 		int TLBLlena = tlbLlena();
 		if (TLBLlena) {
 			int paginaAEscribir = reemplazarPaginaLRU();
-			memoriaTLB[paginaAEscribir] = 1;
 			t_tlb* tlb = malloc(sizeof(t_tlb));
 			tlb->pid = PID;
 			tlb->pagina = pagina;
 			tlb->momentoEntrada = accesosTLB;
-			tlb->frameTLB = paginaAEscribir;
+			tlb->frameTLB = buscarFrameEnMemoria(PID, pagina);
 			insertarNodoOrdenadoEnTLB(tlb);
-			int contador = 0;
-			int posicionEnTLB = marco_Size * paginaAEscribir;
-			while (contador < marco_Size) {
-				memoriaTLB[posicionEnTLB] = buffer[contador];
-				contador++;
-			}
+
 		} else {
 			t_tlb* tlb = malloc(sizeof(t_tlb));
 			tlb->pid = PID;
 			tlb->pagina = pagina;
 			tlb->momentoEntrada = accesosTLB;
-			int paginaVacia = buscarPaginaVaciaEnTLB();
-			bitMapTLB[paginaVacia] = 1;
-			tlb->frameTLB = paginaVacia;
+			tlb->frameTLB = buscarFrameEnMemoria(PID, pagina);
 			insertarNodoOrdenadoEnTLB(tlb);
-			int contador = 0;
-			int posicionEnTLB = marco_Size * paginaVacia;
-			while (contador < marco_Size) {
-				memoriaTLB[posicionEnTLB] = buffer[contador];
-				contador++;
-			}
-
 		}
 	}
 
@@ -1079,7 +1069,7 @@ void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 //detecta Que pagina debe reemplazar y la lleva a memoria si debe
 int reemplazarPaginaLRU() {
 	int paginaLibre;
-	int contadorPrimerMomento;
+	int contadorPrimerMomento = 0;
 	t_tlb*paginaAComparar;
 	t_tlb*paginaAMatar;
 	char* buffer = malloc(sizeof(char) * marco_Size);
@@ -1093,19 +1083,7 @@ int reemplazarPaginaLRU() {
 			lugarDePaginaAMatar = contadorPrimerMomento;
 		}
 	}
-	int comienzoDePagina = ((paginaAMatar->frameTLB) * marco_Size);
-	int i = 0;
-	while (comienzoDePagina
-			< ((paginaAMatar->frameTLB) * marco_Size) + marco_Size) {
-		buffer[i] = memoriaTLB[comienzoDePagina];
-		i++;
-		comienzoDePagina++;
-	}
-
-	almacenarBytes(paginaAMatar->pid, paginaAMatar->pagina, 0, marco_Size,
-			buffer);
 	paginaLibre = paginaAMatar->frameTLB;
-	memoriaTLB[paginaLibre] = 0;
 	free(list_remove(TLB, lugarDePaginaAMatar));
 	return paginaLibre;
 }
@@ -1132,25 +1110,23 @@ int buscarPaginaVaciaEnTLB() {
 char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 
 	int habilitada = tlbHabilitada();
-	char* buffer;
+	char* buffer = malloc(sizeof(char) * tamanio);
 	if (habilitada != 0) {
 		t_tlb * entradaTLB = buscarEnTLB(PID, pagina);
 		if (entradaTLB != NULL) {
 			log_info(logger, "Acierto de TLB en el frame %d y pagina %d",
 					entradaTLB->frameTLB, entradaTLB->pagina);
-			buffer = malloc(sizeof(char) * tamanio);
+			int inicioLectura = entradaTLB->frameTLB * marco_Size + posicion;
 			int i;
-			int lugarEnTLB = entradaTLB->frameTLB * marco_Size + posicion;
-			for (i = 0; i < tamanio; i++) {
-				buffer[i] = memoriaTLB[lugarEnTLB];
-				i++;
-				lugarEnTLB++;
+			for (i = 0; i++; i < tamanio) {
+				buffer[i] = memoriaReal[inicioLectura];
+				inicioLectura++;
 			}
 			return buffer;
-		} else {
-			return solicitarBytes(PID, pagina, posicion, tamanio);
 		}
+
 	}
+	return solicitarBytes(PID, pagina, posicion, tamanio);
 }
 
 t_tlb * buscarEnTLB(int PID, int pagina) {
