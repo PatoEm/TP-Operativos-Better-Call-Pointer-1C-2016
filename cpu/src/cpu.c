@@ -158,6 +158,10 @@ void setearValores(t_config * archivoConfig) {
 	puts("hola");
 }
 
+void cuerpoDelCpu(){
+
+}
+
 /*******************************************************
  * FUNCIONES AnSISOP
  *******************************************************/
