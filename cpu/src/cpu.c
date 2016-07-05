@@ -286,10 +286,24 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
  * dereferenciar
  */
 t_valor_variable dereferenciar(t_puntero direccion_variable) {
+	//todo Emi chequea esto
+	espacioAsignado aux;
+	aux.numDePag=direccion_variable/tamanioPaginaUmc;
+	int offset=direccion_variable/tamanioPaginaUmc;
+	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
-	printf("Operacion dereferenciar");
-	return 0;
+	StrCpuUmc* streamCpuUMC;
+	streamCpuUMC= newStrCpuUmc(CPU_ID, SOLICITAR_BYTES,aux ,offset, 4, NULL, 0);
+	SocketBuffer* buffer= serializeCpuUmc(streamCpuUMC);
+	socketSend(socketUMC->ptrSocket,buffer);
+	buffer = socketReceive(socketUMC->ptrSocket);
+	StrUmcCpu*streamUmcCpu;
+	streamUmcCpu = unserializeCpuUmc(buffer);
+
+	return atoi(streamCpuUMC->data);
+
 }
+
 
 /*
  * asignar
