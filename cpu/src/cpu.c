@@ -309,9 +309,32 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
  * asignar
  */
 void asignar(t_puntero direccion_variable, t_valor_variable valor) {
-	printf("< Copiando segundo argumento en el primero >");
-	memcpy(direccion_variable, &valor, sizeof(t_valor_variable));
+
+	espacioAsignado aux;
+	aux.numDePag=direccion_variable/tamanioPaginaUmc;
+	int offset=direccion_variable%tamanioPaginaUmc;
+
+
+	Byte* dataAMandar;
+	sprintf(dataAMandar,"%d",valor);
+
+
+	StrCpuUmc* streamCpuUMC;
+
+		streamCpuUMC= newStrCpuUmc(CPU_ID, ALMACENAR_BYTES,aux ,offset, 4, valor, 0);
+		SocketBuffer* buffer= serializeCpuUmc(streamCpuUMC);
+		socketSend(socketUMC->ptrSocket,buffer);
+		buffer = socketReceive(socketUMC->ptrSocket);
+
 }
+
+//void asignar(t_puntero direccion_variable, t_valor_variable valor){
+//	uint32_t pagina=direccion_variable/tamanioPagina;
+//	uint32_t offset=direccion_variable%tamanioPagina;
+//	almacenarBytesUMC(umc,pagina,offset,4,valor);
+//}
+
+
 
 /*
  * obtenerValorCompartida
@@ -325,7 +348,9 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == 30/*OBTENER_VALOR_COMPARTIDA*/) {
-		return itoa(streamKerCpu->data);
+
+		return (atoi(streamKerCpu->data));
+
 	}
 }
 
@@ -343,7 +368,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == 33/*ASIGNAR_VALOR_COMPARTIDA*/) {
-		return itoa(streamKerCpu->data);
+		return atoi(streamKerCpu->data);
 	}
 }
 
@@ -419,11 +444,21 @@ void retornar(t_valor_variable retorno) {
 int imprimir(t_valor_variable valor_mostrar) {
 
 	StrCpuKer*streamCpuKer;
-	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
-			strlen(itoa(valor_mostrar)), itoa(valor_mostrar));
+	Byte* aux;
+		sprintf(aux,"%d",valor_mostrar);
+
+	//streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
+			//strlen(itoa(valor_mostrar)), itoa(valor_mostrar));
+		streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
+					strlen(aux), aux);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
-	return strlen(itoa(valor_mostrar));
+
+	Byte* auxLoco;
+		sprintf(auxLoco,"%d",valor_mostrar);
+
+	//return strlen(itoa(valor_mostrar));
+		return auxLoco;
 }
 
 /*
@@ -443,9 +478,13 @@ int imprimirTexto(char* texto) {
  * entradaSalida
  */
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
+	Byte * auxLoco;
+	sprintf(auxLoco,"%d",tiempo);
 	char*inOut = malloc(
-			sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
-	inOut = strcat(dispositivo, itoa(tiempo));
+			//sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
+			sizeof(dispositivo) + sizeof(auxLoco) + sizeof(char));
+	//inOut = strcat(dispositivo, itoa(tiempo));
+	inOut = strcat(dispositivo, auxLoco);
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 29 /*ENTRADA_SALIDA*/, pcbProceso,
 			pcbProceso.id, strlen(dispositivo), inOut);
