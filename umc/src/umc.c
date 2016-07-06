@@ -33,11 +33,9 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 	if (verificarSiHayEspacio(paginas) && paginas <= marco_x_proc) {
 		if (paginasContiguasDeUMC(paginas) == -1) {
 			compactarUMC();
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid,
-					paginas);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
 		} else {
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid,
-					paginas);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
 		}
 		SocketBuffer*buffer;
 		StrUmcSwa*streamUmcSwap;
@@ -219,8 +217,8 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	int posicionDePaginaLibre;
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	nodoActual=buscarBitDeUsoEn0(pid);
-	nodoActual->bitDePresencia=1;
+	nodoActual = buscarBitDeUsoEn0(pid);
+	nodoActual->bitDePresencia = 1;
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
 			(contador + 1)));
@@ -325,6 +323,7 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 		}
 	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
+	nodoActual->bitDePresencia = 1;
 	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
 			(contador + 1)));
 	nodoSiguiente->punteroAPagina = 1;
@@ -423,7 +422,8 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)||nodoALeer->bitDePresencia==0) {
+	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)
+			|| nodoALeer->bitDePresencia == 0) {
 		int frame = reemplazarPagina(pid, pagina, 1);
 		int comienzoDeCadena = frame * marco_Size + offset;
 		int finDeCadena = frame * marco_Size + offset;
@@ -467,7 +467,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)||nodoALeer->bitDePresencia==0) {
+	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)
+			|| nodoALeer->bitDePresencia == 0) {
 		posicionActualDeNodo = reemplazarPagina(pid, pagina, 1);
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
