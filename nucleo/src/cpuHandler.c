@@ -309,14 +309,23 @@ void clientHandler(int clientDescriptor) {
 
 void enviarPcbACpu(Socket * cpuClient) {
 
-	if (queue_is_empty(colaReady) != 0) {
+	if (!queue_is_empty(colaReady)) {
 		pthread_mutex_lock(mutexColaReady);
 		pcb* pcbAEnviar = (pcb*) queue_pop(colaReady);
 		pthread_mutex_unlock(mutexColaReady);
 
+		pcbAEnviar->estado=EXEC;
+
+		pthread_mutex_lock(mutexListaExec);
+		list_add(listaExec, pcbAEnviar);
+		pthread_mutex_unlock(mutexListaExec);
+
 		pthread_mutex_lock(mutexQuantum);
-		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, 0, *pcbAEnviar, quantum, NULL, 0);
+		//todo ver envio_pcb
+		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum, NULL, 0);
 		pthread_mutex_unlock(mutexQuantum);
+
+
 
 		SocketBuffer* sb = serializeKerCpu(skc);
 		if (!socketSend(cpuClient->ptrAddress, sb)) {
@@ -352,11 +361,15 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 //	pcbClipboard = copyPcbToClipboard(&(sck->pcb));
 
 	switch (sck->action) {
-	//case WAIT_SEM_ANSISOP:
+	case 27/*WAIT_SEM_ANSISOP*/:
+
+
+		waitAnsisop(sck->log,&(sck->pcb));
+
 
 	//todo acá debería estar el nombre de que semaforo modificar
 
-	//break;
+	break;
 	// ACA VA EL RECONOCIMIENTO DE ACCIONES
 	case RECIBIR_NUEVO_PROGRAMA:
 
@@ -419,7 +432,12 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 
 		//SE GENERA EL NUEVO PCB
 		pcb = crearNuevoPcb(sck->fileContent, sck->fileContentLen);
-		puts("hola");			//createNewPcb(sck);
+
+		moverAColaReady(pcb);
+
+
+
+		//createNewPcb(sck);
 //			log_info(cpuhlog, "KERNEL : El proceso %d comenzara",pcb->id);
 
 		//CARGO LA CONSOLA INGRESADA JUNTO CON EL PCB QUE

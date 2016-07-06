@@ -191,3 +191,37 @@
 [INFO] 00:20:09:512 CPUHANDLER/(4830:4834): Nueva Conexion detectada, realizando handshake
 [INFO] 00:20:09:514 CPUHANDLER/(4830:4834): ID Nuevo Cliente: 0.
 [INFO] 00:20:09:514 CPUHANDLER/(4830:4834): Nuevo Cliente CONSOLA
+[INFO] 23:28:56:263 CPUHANDLER/(5279:5289): Server creado con exito y escuchando.
+[INFO] 23:28:56:263 CPUHANDLER/(5279:5289): Server iniciado.
+[INFO] 23:28:57:218 CPUHANDLER/(5279:5289): Nueva Conexion detectada, realizando handshake
+[INFO] 23:28:57:218 CPUHANDLER/(5279:5289): ID Nuevo Cliente: 0.
+[INFO] 23:28:57:218 CPUHANDLER/(5279:5289): Nuevo Cliente CONSOLA
+[INFO] 23:28:57:218 CPUHANDLER/(5279:5289): Nuevo Cliente Consola 7 aceptado.
+[INFO] 23:28:57:218 CPUHANDLER/(5279:5289): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 23:29:05:92 CPUHANDLER/(5279:5289): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 23:29:05:92 CPUHANDLER/(5279:5289): KERNEL : El cliente 7 es una consola
+[ERROR] 23:29:05:92 CPUHANDLER/(5279:5289): KERNEL : El Cliente 7 mando ANSISOP
+[ERROR] 23:29:05:92 CPUHANDLER/(5279:5289): KERNEL : Consola 7 añadida a la lista
+[INFO] 23:29:51:356 CPUHANDLER/(5372:5379): Server creado con exito y escuchando.
+[INFO] 23:29:51:356 CPUHANDLER/(5372:5379): Server iniciado.
+[INFO] 23:30:02:49 CPUHANDLER/(5372:5379): Nueva Conexion detectada, realizando handshake
+[INFO] 23:30:02:49 CPUHANDLER/(5372:5379): ID Nuevo Cliente: 0.
+[INFO] 23:30:02:49 CPUHANDLER/(5372:5379): Nuevo Cliente CONSOLA
+[INFO] 23:30:02:49 CPUHANDLER/(5372:5379): Nuevo Cliente Consola 7 aceptado.
+[INFO] 23:30:02:49 CPUHANDLER/(5372:5379): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 23:30:22:767 CPUHANDLER/(5372:5379): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 23:30:22:767 CPUHANDLER/(5372:5379): KERNEL : El cliente 7 es una consola
+[ERROR] 23:30:22:767 CPUHANDLER/(5372:5379): KERNEL : El Cliente 7 mando ANSISOP
+[ERROR] 23:30:22:767 CPUHANDLER/(5372:5379): KERNEL : Consola 7 añadida a la lista
+[INFO] 23:31:36:603 CPUHANDLER/(5471:5478): Server creado con exito y escuchando.
+[INFO] 23:31:36:603 CPUHANDLER/(5471:5478): Server iniciado.
+[INFO] 23:31:43:869 CPUHANDLER/(5471:5478): Nueva Conexion detectada, realizando handshake
+[INFO] 23:31:43:870 CPUHANDLER/(5471:5478): ID Nuevo Cliente: 0.
+[INFO] 23:31:43:870 CPUHANDLER/(5471:5478): Nuevo Cliente CONSOLA
+[INFO] 23:31:43:870 CPUHANDLER/(5471:5478): Nuevo Cliente Consola 7 aceptado.
+[INFO] 23:31:43:870 CPUHANDLER/(5471:5478): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 23:31:51:261 CPUHANDLER/(5471:5478): KERNEL : El cliente 7 ha enviado un paquete
+[INFO] 23:31:51:261 CPUHANDLER/(5471:5478): KERNEL : El cliente 7 es una consola
+[ERROR] 23:31:51:261 CPUHANDLER/(5471:5478): KERNEL : El Cliente 7 mando ANSISOP
+[INFO] 00:23:02:460 CPUHANDLER/(6817:6822): Server creado con exito y escuchando.
+[INFO] 00:23:02:460 CPUHANDLER/(6817:6822): Server iniciado.
