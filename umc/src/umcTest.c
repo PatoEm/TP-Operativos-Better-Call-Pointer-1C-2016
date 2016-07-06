@@ -13,11 +13,14 @@
  */
 
 #include "umc.h"
-/*
-int main(int argc, char ** argv){
 
+int main() {
+	leerArchivoDeConfiguracion("configumc");
 
+	iniciarEstructurasUMC();
+
+	inicializarPrograma(1,1,"holaF");
 
 	return 0;
 }
-*/
+

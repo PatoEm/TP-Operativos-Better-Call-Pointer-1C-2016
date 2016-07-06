@@ -7,7 +7,7 @@ BETTER CALL POINTER PERRO
  */
 
 #include "umc.h"
-
+/*
 int main(void) {
 
 	leerArchivoDeConfiguracion("configumc");
@@ -41,3 +41,4 @@ int main(void) {
 	return EXIT_SUCCESS;
 
 }
+*/

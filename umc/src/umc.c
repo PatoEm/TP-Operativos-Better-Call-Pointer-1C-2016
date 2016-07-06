@@ -17,6 +17,7 @@ void iniciarEstructurasUMC() {
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
 	crearListas();
+	inicioTLB();
 	while (counter != marcos) {
 		bitMap[counter] = 0;
 		counter++;
@@ -29,12 +30,12 @@ void crearListas() {
 }
 
 bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa al swap nico chupame la pija
-	if (verificarSiHayEspacio(paginas)&&paginas<marco_x_proc) {
-		if (paginasContiguasDeUMC(paginas) == -1) {
+	if (verificarSiHayEspacio(marco_x_proc) && paginas <= marco_x_proc) {
+		if (paginasContiguasDeUMC(marco_x_proc) == -1) {
 			compactarUMC();
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid, marco_x_proc);
+			reservarPaginas(paginasContiguasDeUMC(marco_x_proc), pid, marco_x_proc);
 		} else {
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid, marco_x_proc);
+			reservarPaginas(paginasContiguasDeUMC(marco_x_proc), pid, marco_x_proc);
 		}
 		SocketBuffer*buffer;
 		StrUmcSwa*streamUmcSwap;
@@ -42,7 +43,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 		StrSwaUmc * streamSwapUmc;
 		pagina.numDePag = 0;
 		streamUmcSwap = newStrUmcSwa(UMC_ID, 20/*INICIALIZAR_PROGRAMA*/, pagina,
-				paginas, codigo, 0, pid);
+				marco_x_proc, codigo, 0, pid);
 		buffer = serializeUmcSwa(streamUmcSwap);
 		socketSend(socketSwap->ptrSocket, buffer);
 
@@ -683,7 +684,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 			socketSend(socket, buffer);
 		}
 		break;
-	//todo hablar con pato el almacenar y leer bytes
+		//todo hablar con pato el almacenar y leer bytes
 	case 22 /*FINALIZAR_PROGRAMA*/:
 		finalizarPrograma(sku->pid);
 		break;
@@ -995,15 +996,15 @@ t_list * creoTLB() {
 	t_list * TLB = list_create();
 	return TLB;
 }
-/*
+
  void elDestructorDeNodosTLB(int i) {
  list_remove(TLB, i);
  }
- */
-/*void elDestructorDeNodosMemoria(int i) {
+
+void elDestructorDeNodosMemoria(int i) {
  list_remove(listaEspacioAsignado, i);
  }
- */
+
 bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	int i = 0;
 	t_tlb*nodoActual = list_get(TLB, i);
@@ -1029,13 +1030,13 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 
 int buscarFrameEnMemoria(int PID, int pagina) {
 
-	espacioAsignado * pagina;
+	espacioAsignado * paginas;
 	int i = 0;
 	while (i < list_size(listaEspacioAsignado)) {
-		pagina = list_get(listaEspacioAsignado, i);
-		if (pagina->pid == PID) {
-			if (pagina->numDePagina == pagina) {
-				return pagina->IDPaginaInterno;
+		paginas = list_get(listaEspacioAsignado, i);
+		if (paginas->pid == PID) {
+			if (paginas->numDePag == pagina) {
+				return paginas->IDPaginaInterno;
 			}
 		}
 	}
