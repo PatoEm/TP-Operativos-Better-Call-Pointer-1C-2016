@@ -128,28 +128,28 @@ Boolean callAndSendAnSISOP(String path) {
 
 	char* buffer = NULL;
 	long fileLen;
-	//=tamArchivo(path);
-	//buffer=leerProgramaAnSISOP(path);
+	fileLen=tamArchivo(path);
+	buffer=leerProgramaAnSISOP(path);
 
-	FILE* file = fopen(path, "rb");
-	puts("Leyendo el archivo");
-
-	if (!file) {
-		puts("[ERROR]: No se pudo abrir el archivo.");
-		return FALSE;
-	} else {
-		puts("Se encontro el archivo.");
-		fseek(file, 0, SEEK_END);
-		fileLen = ftell(file);
-		rewind(file);
-		buffer = (char*) malloc((fileLen + 1) * sizeof(char));
-		fread(buffer, fileLen, 1, file);
-		fclose(file);
-	}
-
-	if (sck != NULL) {
-		free(sck);
-	}
+//	FILE* file = fopen(path, "rb");
+//	puts("Leyendo el archivo");
+//
+//	if (!file) {
+//		puts("[ERROR]: No se pudo abrir el archivo.");
+//		return FALSE;
+//	} else {
+//		puts("Se encontro el archivo.");
+//		fseek(file, 0, SEEK_END);
+//		fileLen = ftell(file);
+//		rewind(file);
+//		buffer = (char*) malloc((fileLen + 1) * sizeof(char));
+//		fread(buffer, fileLen, 1, file);
+//		fclose(file);
+//	}
+//
+//	if (sck != NULL) {
+//		free(sck);
+//	}
 
 	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, (Byte*) buffer, fileLen);
 	puts("Enviando al Nucleo el archivo");

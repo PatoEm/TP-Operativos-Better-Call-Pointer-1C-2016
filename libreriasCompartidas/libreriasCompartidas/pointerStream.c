@@ -718,6 +718,8 @@ StrConKer* unserializeConKer(Stream dataSerialized){
 	fileContent = malloc(fileContentLen);
 	memcpy(fileContent, ptrByte, fileContentLen);
 	ptrByte += fileContentLen;
+	fileContent[fileContentLen]='\0';
+
 
 	free(dataSerialized);
 	return newStrConKer(id, action, fileContent, fileContentLen);
@@ -749,6 +751,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
+	data[dataLen]='\0';
 
 	free(dataSerialized);
 	return newStrKerCpu(id, action, pcb, quantum, data, dataLen);
@@ -781,6 +784,8 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	ptrByte += sizeof(pid);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
+	data[size]='\0';
+
 
 	free(dataSerialized);
 	return newStrKerUmc(id, action, data, size, pid, cantPage);
@@ -806,6 +811,9 @@ StrKerCon* unserializeKerCon(Stream dataSerialized){
 	log = malloc(logLen);
 	memcpy(log, ptrByte, logLen);
 	ptrByte += logLen;
+	log[logLen]='\0';
+
+
 
 	free(dataSerialized);
 	return newStrKerCon(id, action, logLen, log);
@@ -837,6 +845,9 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	log = malloc(logLen);
 	memcpy(log, ptrByte, logLen);
 	ptrByte += logLen;
+
+	log[logLen]='\0';
+
 
 	free(dataSerialized);
 	return newStrCpuKer(id, action, pcb, pid, logLen, log);
@@ -870,6 +881,9 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized){
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
+	data[dataLen]='\0';
+
+
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 
@@ -899,6 +913,9 @@ StrUmcKer* unserializeUmcKer(Stream dataSerialized){
 	data = malloc(size);
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
+
+	data[size]='\0';
+
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -936,6 +953,9 @@ StrUmcCpu* unserializeUmcCpu(Stream dataSerialized){
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
+	data[dataLen]='\0';
+
+
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -971,6 +991,9 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized){
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
+	data[dataLen]='\0';
+
+
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1006,6 +1029,8 @@ StrSwaUmc* unserializeSwaUmc(Stream dataSerialized){
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
+	data[dataLen]='\0';
+
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
