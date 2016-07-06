@@ -30,12 +30,14 @@ void crearListas() {
 }
 
 bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa al swap nico chupame la pija
-	if (verificarSiHayEspacio(marco_x_proc) && paginas <= marco_x_proc) {
-		if (paginasContiguasDeUMC(marco_x_proc) == -1) {
+	if (verificarSiHayEspacio(paginas) && paginas <= marco_x_proc) {
+		if (paginasContiguasDeUMC(paginas) == -1) {
 			compactarUMC();
-			reservarPaginas(paginasContiguasDeUMC(marco_x_proc), pid, marco_x_proc);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid,
+					paginas);
 		} else {
-			reservarPaginas(paginasContiguasDeUMC(marco_x_proc), pid, marco_x_proc);
+			reservarPaginas(paginasContiguasDeUMC(paginas), pid,
+					paginas);
 		}
 		SocketBuffer*buffer;
 		StrUmcSwa*streamUmcSwap;
@@ -43,7 +45,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta envia
 		StrSwaUmc * streamSwapUmc;
 		pagina.numDePag = 0;
 		streamUmcSwap = newStrUmcSwa(UMC_ID, 20/*INICIALIZAR_PROGRAMA*/, pagina,
-				marco_x_proc, codigo, 0, pid);
+				paginas, codigo, 0, pid);
 		buffer = serializeUmcSwa(streamUmcSwap);
 		socketSend(socketSwap->ptrSocket, buffer);
 
@@ -94,6 +96,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
 		(paginaAReservar->numDePag) = numInternoDePagina;
 		(paginaAReservar->bitModificado) = 0;
 		(paginaAReservar->bitUso) = 1;
+		paginaAReservar->bitDePresencia = 0;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
@@ -192,6 +195,21 @@ int paginasContiguasDeUMC(int cantidadDePaginas) {
 	return -1;
 }
 
+espacioAsignado*buscarBitDeUsoEn0(int pid) {
+	int inicio = lugarAsignadoInicial(pid);
+	int fin = lugarAsignadoFinal(pid);
+	int contador = encontrarPuntero(pid);
+	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
+	while ((nodoActual->bitUso) == 1) {
+		nodoActual->bitUso = 0;
+		contador++;
+		if (contador > fin)
+			contador = inicio;
+		nodoActual = list_get(listaEspacioAsignado, contador);
+	}
+	return nodoActual;
+}
+
 //devuelve el nodo del espacio en memoria
 int reemplazarPaginaClock(int pid, int pagina) {
 
@@ -201,13 +219,8 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	int posicionDePaginaLibre;
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while ((nodoActual->bitUso) == 1) {
-		nodoActual->bitUso = 0;
-		contador++;
-		if (contador > fin)
-			contador = inicio;
-		nodoActual = list_get(listaEspacioAsignado, contador);
-	}
+	nodoActual=buscarBitDeUsoEn0(pid);
+	nodoActual->bitDePresencia=1;
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
 			(contador + 1)));
@@ -410,7 +423,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
+	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)||nodoALeer->bitDePresencia==0) {
 		int frame = reemplazarPagina(pid, pagina, 1);
 		int comienzoDeCadena = frame * marco_Size + offset;
 		int finDeCadena = frame * marco_Size + offset;
@@ -454,7 +467,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)) {
+	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)||nodoALeer->bitDePresencia==0) {
 		posicionActualDeNodo = reemplazarPagina(pid, pagina, 1);
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
@@ -946,7 +959,7 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 
 void flushTLB() {
 	if (entradas_TLB == 0) {
-		log_info(logger, "TLB Deshabilitado");
+		//log_info(logger, "TLB Deshabilitado"); todo que loguee otro
 	} else {
 		int i = 0;
 		while (i < TLB->elements_count) {
@@ -982,7 +995,7 @@ void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
 void inicioTLB() {
 	int habilitada = tlbHabilitada();
 	if (habilitada == 0) {
-		log_info(logger, "TLB Deshabilitada");
+		//log_info(logger, "TLB Deshabilitada"); que loguee otro x2 todo
 	} else {
 		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
 		TLB = creoTLB();
@@ -997,13 +1010,13 @@ t_list * creoTLB() {
 	return TLB;
 }
 
- void elDestructorDeNodosTLB(int i) {
- list_remove(TLB, i);
- }
+void elDestructorDeNodosTLB(int i) {
+	list_remove(TLB, i);
+}
 
 void elDestructorDeNodosMemoria(int i) {
- list_remove(listaEspacioAsignado, i);
- }
+	list_remove(listaEspacioAsignado, i);
+}
 
 bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	int i = 0;

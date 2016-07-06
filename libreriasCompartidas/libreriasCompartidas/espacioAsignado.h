@@ -19,6 +19,7 @@ typedef struct {
 	int bitUso;
 	int bitModificado;
 	bool punteroAPagina;
+	bool bitDePresencia;
 } espacioAsignado;
 
 #endif /* LIBRERIASCOMPARTIDAS_ESPACIOASIGNADO_H_ */
