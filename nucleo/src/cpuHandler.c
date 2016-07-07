@@ -335,7 +335,10 @@ void enviarPcbACpu(Socket * cpuClient) {
 		}
 		free(sb);
 	}
+	// TODO: Aca iria un else en caso de que no haya en la cola de ready,
+	// Tendría que mandar un mensaje para que el cpu siga pidiendo.
 }
+
 
 void cpuClientHandler(Socket* cpuClient, Stream data) {
 
@@ -361,7 +364,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 //	pcbClipboard = copyPcbToClipboard(&(sck->pcb));
 
 	switch (sck->action) {
-	case 27/*WAIT_SEM_ANSISOP*/:
+	case WAIT_SEM_ANSISOP:
 
 
 		waitAnsisop(sck->log,&(sck->pcb));
@@ -382,6 +385,28 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		break;
 
 	//case ANSISOP_SEM_WAIT: break;
+
+	case IMPRIMIRTEXTO: //TODO NUEVO
+
+
+		// Creo y serializo string kernel a consola.
+//		StrKerCon* skc = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, sck->logLen, sck->log);
+//		SocketBuffer* sb = serializeKerCon(skc);
+
+		// ¿Como identifico a que consola enviar?
+		// Hay que agregarlo al pcb
+
+
+
+//		if (!socketSend(consoleClient->ptrAddress, sb)) {
+//					log_error(cpuhlog, "No se pudo mandar IMPRMIRTEXTO a la consola.");
+//				} else {
+//					log_info(cpuhlog, "Se envio IMPRMIRTEXTO a la consola.");
+//				}
+//				free(sb);
+
+
+		break;
 
 	default:
 		log_error(cpuhlog,
