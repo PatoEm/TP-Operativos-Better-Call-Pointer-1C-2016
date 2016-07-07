@@ -44,6 +44,12 @@ SocketClient * socketSwap;
 	  int momentoEntrada;
   }t_tlb;
 
+  typedef struct{
+	  int pid;
+	  int cantPaginasEnMemoria;
+  }paginasPorPrograma;
+
+t_list * listaPaginasPorPrograma;
 t_list * listaEspacioAsignado;
 t_list * TLB;
 

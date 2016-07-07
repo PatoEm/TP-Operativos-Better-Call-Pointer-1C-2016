@@ -21,8 +21,6 @@ int main() {
 
 	inicializarPrograma(1,1,"holaF");
 
-	solicitarBytes()
-
 	return 0;
 }
 

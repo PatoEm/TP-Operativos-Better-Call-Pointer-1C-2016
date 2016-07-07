@@ -18,6 +18,7 @@ void iniciarEstructurasUMC() {
 	bitMap = malloc(sizeof(bool) * marcos);
 	crearListas();
 	inicioTLB();
+	listaPaginasPorPrograma = list_create();
 	while (counter != marcos) {
 		bitMap[counter] = 0;
 		counter++;
@@ -29,121 +30,45 @@ void crearListas() {
 	listaEspacioAsignado = list_create();
 }
 
-bool inicializarPrograma(int pid, int paginas, char*codigo) { //todo falta enviar el programa al swap nico chupame la pija
-	if (verificarSiHayEspacio(paginas) && paginas <= marco_x_proc) {
-		if (paginasContiguasDeUMC(paginas) == -1) {
-			compactarUMC();
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
-		} else {
-			reservarPaginas(paginasContiguasDeUMC(paginas), pid, paginas);
+bool inicializarPrograma(int pid, int paginas, char*codigo) {
+	SocketBuffer*buffer;
+	StrUmcSwa*streamUmcSwap;
+	espacioAsignado pagina;
+	StrSwaUmc * streamSwapUmc;
+	pagina.numDePag = 0;
+	streamUmcSwap = newStrUmcSwa(UMC_ID, 20/*INICIALIZAR_PROGRAMA*/, pagina,
+			paginas, codigo, 0, pid);
+	buffer = serializeUmcSwa(streamUmcSwap);
+	socketSend(socketSwap->ptrSocket, buffer);
+
+	buffer = socketReceive(socketSwap->ptrSocket);
+	streamSwapUmc = unserializeSwaUmc(buffer->data);
+
+	if (streamSwapUmc->action == 26/*PROGRAMA_RECIBIDO*/) {
+		int i = 0;
+		paginasPorPrograma*pagina = malloc(sizeof(paginasPorPrograma));
+		pagina->pid = pid;
+		pagina->cantPaginasEnMemoria = 0;
+		list_add(listaPaginasPorPrograma, pagina);
+		while (i < paginas) {
+			espacioAsignado*nuevoMarco;
+			nuevoMarco->bitDePresencia = 0;
+			nuevoMarco->bitModificado = 0;
+			nuevoMarco->bitUso = 0;
+			nuevoMarco->numDePag = i;
+			nuevoMarco->pid = pid;
+			if (i == 0)
+				nuevoMarco->punteroAPagina = 1;
+			else
+				nuevoMarco->punteroAPagina = 0;
+			list_add(listaEspacioAsignado, nuevoMarco);
 		}
-		SocketBuffer*buffer;
-		StrUmcSwa*streamUmcSwap;
-		espacioAsignado pagina;
-		StrSwaUmc * streamSwapUmc;
-		pagina.numDePag = 0;
-		streamUmcSwap = newStrUmcSwa(UMC_ID, 20/*INICIALIZAR_PROGRAMA*/, pagina,
-				paginas, codigo, 0, pid);
-		buffer = serializeUmcSwa(streamUmcSwap);
-		socketSend(socketSwap->ptrSocket, buffer);
-
-		buffer = socketReceive(socketSwap->ptrSocket);
-		streamSwapUmc = unserializeSwaUmc(buffer->data);
-
-		if (streamSwapUmc->action == 26/*PROGRAMA_RECIBIDO*/)
-			return TRUE;
-		else
-			return FALSE;
-
+		return TRUE;
 	} else
 		return FALSE;
 
 }
 
-void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas) {
-	int numInternoDePagina = 0;
-	int paginaActual = paginaDeComienzo; // donde empieza toodo.
-	int lugarEnDondeDeboColocarMiNodo = 0; // aca se en donde tengo que meter esto
-	int nodosQueDeboReventar = 0; // los nodos que quiero fusilar en donde empiezan
-	int contadorDePaginas = 0; //cuento para el while
-	espacioAsignado* paginaAReservar; //nodo para agarrar cosas
-	if (list_size(listaEspacioAsignado) != 0) {
-		paginaAReservar = list_get(listaEspacioAsignado,
-				lugarEnDondeDeboColocarMiNodo);
-		while (((paginaAReservar->IDPaginaInterno) < paginaDeComienzo)) {
-			lugarEnDondeDeboColocarMiNodo++;
-			paginaAReservar = list_get(listaEspacioAsignado,
-					lugarEnDondeDeboColocarMiNodo);
-			if ((lugarEnDondeDeboColocarMiNodo
-					== (listaEspacioAsignado->elements_count))) {
-				break;
-			}
-		}
-
-	}
-
-	while (contadorDePaginas < cantidadDePaginas) {
-
-		paginaAReservar = malloc(sizeof(espacioAsignado));
-		if (contadorDePaginas == 0)
-			paginaAReservar->punteroAPagina = 1;
-		else
-			paginaAReservar->punteroAPagina = 0;
-		(paginaAReservar->pid) = pid;
-		(paginaAReservar->IDPaginaInterno) = paginaActual;
-		(paginaAReservar->numDePag) = numInternoDePagina;
-		(paginaAReservar->bitModificado) = 0;
-		(paginaAReservar->bitUso) = 1;
-		paginaAReservar->bitDePresencia = 0;
-		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
-			list_add_in_index(listaEspacioAsignado,
-					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
-		else
-			list_add(listaEspacioAsignado, paginaAReservar);
-		bitMap[paginaActual] = 1;
-		numInternoDePagina++;
-		contadorDePaginas++;
-		paginaActual++;
-		lugarEnDondeDeboColocarMiNodo++;
-	}
-
-}
-
-void compactarUMC() {
-
-	int paginasContiguas = 0;
-	espacioAsignado* nodoActual = malloc(sizeof(espacioAsignado));
-	int contadorParaCadenaActual;
-	int contadorParaCadenaVieja;
-	nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
-	while (paginasContiguas < list_size(listaEspacioAsignado)) {
-		if ((nodoActual->IDPaginaInterno) != paginasContiguas) {
-			contadorParaCadenaActual = paginasContiguas * marcos;
-			contadorParaCadenaVieja = (nodoActual->IDPaginaInterno) * marcos;
-			while (contadorParaCadenaActual < (paginasContiguas + 1) * marcos) {
-				memoriaReal[contadorParaCadenaActual] =
-						memoriaReal[contadorParaCadenaVieja];
-				memoriaReal[contadorParaCadenaVieja] = '\0';
-				contadorParaCadenaActual++;
-				contadorParaCadenaVieja++;
-			}
-			bitMap[nodoActual->IDPaginaInterno] = 0;
-			(nodoActual->IDPaginaInterno) = paginasContiguas;
-			bitMap[paginasContiguas] = 1;
-
-		}
-		paginasContiguas++;
-		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
-
-	}
-	while (paginasContiguas != marcos) {
-
-		bitMap[paginasContiguas] = 0;
-		paginasContiguas++;
-
-	}
-
-}
 
 bool verificarSiHayEspacio(int cantidadDePaginas) {
 
@@ -412,6 +337,17 @@ int lugarAsignadoInicial(int pid) {
 	return contador;
 }
 
+int paginasOcupadasPorPid(int pid) {
+	int contador = 0;
+	paginasPorPrograma*paginaAEncontrar = list_get(listaPaginasPorPrograma,
+			contador);
+	while (paginaAEncontrar->pid != pid) {
+		contador++;
+		paginaAEncontrar = list_get(listaPaginasPorPrograma, contador);
+	}
+	return paginaAEncontrar->cantPaginasEnMemoria;
+}
+
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 	char paginaADevolver[cantidad];
 	char*punteroADevolver = (&paginaADevolver[0]);
@@ -422,19 +358,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)
-			|| nodoALeer->bitDePresencia == 0) {
-		int frame = reemplazarPagina(pid, pagina, 1);
-		int comienzoDeCadena = frame * marco_Size + offset;
-		int finDeCadena = frame * marco_Size + offset;
-		int lugarDeLaCadena = 0;
-		while (lugarDeLaCadena < cantidad) {
-			paginaADevolver[lugarDeLaCadena] = memoriaReal[comienzoDeCadena];
-			comienzoDeCadena++;
-			lugarDeLaCadena++;
-		}
-		return (punteroADevolver);
-	} else {
+	if (nodoALeer->bitDePresencia == 1) {
 		(nodoALeer->bitUso) = 1;
 		int lugarDeLaCadena = 0;
 		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
@@ -444,17 +368,65 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 			lugarDeLaCadena++;
 		}
 		if (tlbHabilitada()) {
-			int cont = 0;
-			char*buffer = malloc(sizeof(char) * marco_Size);
-			int posicionEnMemoria = (nodoALeer->IDPaginaInterno) * marco_Size;
-			while (cont < marco_Size) {
-				buffer[cont] = memoriaReal[posicionEnMemoria];
-				cont++;
-				posicionEnMemoria++;
-			}
-			llevarPaginaATLB(pid, pagina, buffer);
+			llevarPaginaATLB(pid, pagina, NULL);
 		}
 		return (punteroADevolver);
+
+	} else {
+
+		if (paginasOcupadasPorPid(pid) < marco_x_proc
+				&& paginasContiguasDeUMC(1) == 1) {
+			int contador = 0;
+			paginasPorPrograma*paginaAEncontrar = list_get(
+					listaPaginasPorPrograma, contador);
+			while (paginaAEncontrar->pid != pid) {
+				contador++;
+				paginaAEncontrar = list_get(listaPaginasPorPrograma, contador);
+			}
+			paginaAEncontrar->cantPaginasEnMemoria++;
+			nodoALeer->IDPaginaInterno = paginasContiguasDeUMC(1);
+			bitMap[nodoALeer->IDPaginaInterno] = 1;
+			nodoALeer->bitUso = 1;
+			nodoALeer->bitModificado = 0;
+			nodoALeer->bitDePresencia = 1;
+			espacioAsignado pageToSend;
+			pageToSend.numDePag = pagina;
+			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA,
+					pageToSend, 1,
+					NULL, 0, nodoALeer->pid);
+			SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
+			if (!socketSend(socketSwap->ptrSocket, buffer))
+				puts("error al enviar al swap");
+			buffer = socketReceive(socketSwap->ptrSocket);
+			StrSwaUmc* streamSwapUmc = unserializeSwaUmc(buffer);
+			int inicioLectura = nodoALeer->IDPaginaInterno * marco_Size;
+			int counter = 0;
+			while (counter < marco_Size) {
+				memoriaReal[inicioLectura] = streamSwapUmc->data[counter];
+				counter++;
+				inicioLectura++;
+			}
+			int comCadena = nodoALeer->IDPaginaInterno * marco_Size + offset;
+			int lugCad = 0;
+			while (lugCad < cantidad) {
+				paginaADevolver[lugCad] = memoriaReal[comCadena];
+				comCadena++;
+				lugCad++;
+			}
+			return (punteroADevolver);
+		} else {
+			int frame = reemplazarPagina(pid, pagina, 1);
+			int comienzoDeCadena = frame * marco_Size + offset;
+			int lugarDeLaCadena = 0;
+			while (lugarDeLaCadena < cantidad) {
+				paginaADevolver[lugarDeLaCadena] =
+						memoriaReal[comienzoDeCadena];
+				comienzoDeCadena++;
+				lugarDeLaCadena++;
+			}
+			return (punteroADevolver);
+
+		}
 	}
 }
 
@@ -462,54 +434,90 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while ((((nodoALeer->pid) != pid) && (nodoALeer->numDePag))
+	while ((((nodoALeer->pid) != pid) && (nodoALeer->numDePag) != pagina)
 			|| (posicionActualDeNodo == list_size(listaEspacioAsignado))) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo >= list_size(listaEspacioAsignado)
-			|| nodoALeer->bitDePresencia == 0) {
-		posicionActualDeNodo = reemplazarPagina(pid, pagina, 1);
-		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
-		int enDondeEstoyDeLoQueMeMandaron = 0;
-		int contador = 0;
-		while (contador < tamanio) {
-			memoriaReal[dondeEscribo] = buffer[enDondeEstoyDeLoQueMeMandaron];
-			dondeEscribo++;
-			enDondeEstoyDeLoQueMeMandaron++;
-			contador++;
+	if (nodoALeer->bitDePresencia == 1) {
+		(nodoALeer->bitUso) = 1;
+		nodoALeer->bitModificado = 1;
+		int lugarDeLaCadena = 0;
+		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
+		while (lugarDeLaCadena < tamanio) {
+			memoriaReal[posicionDeChar] = buffer[lugarDeLaCadena];
+			posicionDeChar++;
+			lugarDeLaCadena++;
 		}
 	} else {
-		(nodoALeer->bitUso) = 1;
-		(nodoALeer->bitModificado) = 1;
-		int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
-		int enDondeEstoyDeLoQueMeMandaron = 0;
-		int contador = 0;
-		while (contador < tamanio) {
-			memoriaReal[dondeEscribo] = buffer[enDondeEstoyDeLoQueMeMandaron];
-			dondeEscribo++;
-			enDondeEstoyDeLoQueMeMandaron++;
-			contador++;
+
+		if (paginasOcupadasPorPid(pid) < marco_x_proc
+				&& paginasContiguasDeUMC(1) == 1) {
+			int contador = 0;
+			paginasPorPrograma*paginaAEncontrar = list_get(
+					listaPaginasPorPrograma, contador);
+			while (paginaAEncontrar->pid != pid) {
+				contador++;
+				paginaAEncontrar = list_get(listaPaginasPorPrograma, contador);
+			}
+			paginaAEncontrar->cantPaginasEnMemoria++;
+			nodoALeer->IDPaginaInterno = paginasContiguasDeUMC(1);
+			bitMap[nodoALeer->IDPaginaInterno] = 1;
+			nodoALeer->bitUso = 1;
+			nodoALeer->bitModificado = 1;
+			nodoALeer->bitDePresencia = 1;
+			espacioAsignado pageToSend;
+			pageToSend.numDePag = pagina;
+			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA,
+					pageToSend, 1,
+					NULL, 0, nodoALeer->pid);
+			SocketBuffer*buf = serializeUmcSwa(streamUmcSwap);
+			if (!socketSend(socketSwap->ptrSocket, buf))
+				puts("error al enviar al swap");
+			buf = socketReceive(socketSwap->ptrSocket);
+			StrSwaUmc* streamSwapUmc = unserializeSwaUmc(buf);
+			int inicioLectura = nodoALeer->IDPaginaInterno * marco_Size;
+			int counter = 0;
+			while (counter < marco_Size) {
+				memoriaReal[inicioLectura] = streamSwapUmc->data[counter];
+				counter++;
+				inicioLectura++;
+			}
+			int comCadena = nodoALeer->IDPaginaInterno * marco_Size + offset;
+			int lugCad = 0;
+			while (lugCad < tamanio) {
+				memoriaReal[comCadena] = buffer[lugCad];
+				comCadena++;
+				lugCad++;
+			}
+		} else {
+
+			posicionActualDeNodo = reemplazarPagina(pid, pagina, 1);
+			nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+			int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size
+					+ offset;
+			int enDondeEstoyDeLoQueMeMandaron = 0;
+			int contador = 0;
+			while (contador < tamanio) {
+				memoriaReal[dondeEscribo] =
+						buffer[enDondeEstoyDeLoQueMeMandaron];
+				dondeEscribo++;
+				enDondeEstoyDeLoQueMeMandaron++;
+				contador++;
+			}
 		}
-	}
-	if (tlbHabilitada()) {
-		int cont = 0;
-		char*bufer = malloc(sizeof(char) * marco_Size);
-		int posicionEnMemoria = (nodoALeer->IDPaginaInterno) * marco_Size;
-		while (cont < marco_Size) {
-			bufer[cont] = memoriaReal[posicionEnMemoria];
-			cont++;
-			posicionEnMemoria++;
+		if (tlbHabilitada()) {
+			llevarPaginaATLB(pid, pagina, NULL);
 		}
-		llevarPaginaATLB(pid, pagina, bufer);
+
 	}
 }
 
 void finalizarPrograma(int pid) {
 	StrUmcSwa*streamUmcSwa;
 	espacioAsignado pagina;
-	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, pagina, NULL, NULL,
+	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, pagina, NULL,
+	NULL,
 	NULL, pid);
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwa);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
@@ -525,20 +533,20 @@ void finalizarPrograma(int pid) {
 	int contador;
 	int posicion;
 	while ((nodoAReventar->pid) == pid) {
-		contador = 0;
-		posicion = nodoAReventar->pid * marco_Size;
-		while (contador < marco_Size) {
-			memoriaReal[posicion] = '\0';
-			posicion++;
-			contador++;
+		if (nodoAReventar->bitDePresencia == 1) {
+			contador = 0;
+			posicion = nodoAReventar->IDPaginaInterno * marco_Size;
+			while (contador < marco_Size) {
+				memoriaReal[posicion] = '\0';
+				posicion++;
+				contador++;
+			}
+			bitMap[nodoAReventar->IDPaginaInterno] = 0;
 		}
-
-		bitMap[nodoAReventar->IDPaginaInterno] = 0;
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
-
 }
 
 //Funcion básica del tp
@@ -698,7 +706,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 			socketSend(socket, buffer);
 		}
 		break;
-		//todo hablar con pato el almacenar y leer bytes
+//todo hablar con pato el almacenar y leer bytes
 	case 22 /*FINALIZAR_PROGRAMA*/:
 		finalizarPrograma(sku->pid);
 		break;
@@ -960,12 +968,11 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 
 void flushTLB() {
 	if (entradas_TLB == 0) {
-		//log_info(logger, "TLB Deshabilitado"); todo que loguee otro
+//log_info(logger, "TLB Deshabilitado"); todo que loguee otro
 	} else {
 		int i = 0;
 		while (i < TLB->elements_count) {
 			elDestructorDeNodosTLB(i);
-			bitMapTLB[i] = FALSE; //Vacio toodo el bitMap de la tlb
 			i++;
 		}
 		log_info(logger, "TLB acaba de vaciarse");
@@ -986,7 +993,8 @@ void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
 
 	pthread_attr_init(&attrhiloComandos);
 
-	pthread_attr_setdetachstate(&attrhiloComandos, PTHREAD_CREATE_DETACHED);
+	pthread_attr_setdetachstate(&attrhiloComandos,
+	PTHREAD_CREATE_DETACHED);
 	int hiloParaComandos = pthread_create(&hiloComandos, &attrhiloComandos,
 			(void *) comandosUMC, NULL);
 
@@ -996,11 +1004,11 @@ void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
 void inicioTLB() {
 	int habilitada = tlbHabilitada();
 	if (habilitada == 0) {
-		//log_info(logger, "TLB Deshabilitada"); que loguee otro x2 todo
+//log_info(logger, "TLB Deshabilitada"); que loguee otro x2 todo
 	} else {
 		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
 		TLB = creoTLB();
-		//Inicializo la cantidad de aciertos y accesos
+//Inicializo la cantidad de aciertos y accesos
 		aciertosTLB = 0;
 		accesosTLB = 0;
 	}
@@ -1020,6 +1028,7 @@ void elDestructorDeNodosMemoria(int i) {
 }
 
 bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
+	accesosTLB++;
 	int i = 0;
 	t_tlb*nodoActual = list_get(TLB, i);
 	while (i < list_size(TLB)) {
@@ -1033,7 +1042,7 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	else {
 		int lugarActual = nodoActual->frameTLB * marco_Size + offset;
 		for (i = 0; i < cantidad; i++) {
-			memoriaTLB[lugarActual] = buffer[i];
+			memoriaReal[lugarActual] = buffer[i];
 			i++;
 			lugarActual++;
 		}
@@ -1058,6 +1067,7 @@ int buscarFrameEnMemoria(int PID, int pagina) {
 }
 
 void llevarPaginaATLB(int PID, int pagina, char* buffer) {
+	accesosTLB++;
 	if (tlbHabilitada()) {
 		int TLBLlena = tlbLlena();
 		if (TLBLlena) {
@@ -1123,7 +1133,7 @@ int buscarPaginaVaciaEnTLB() {
 }
 
 char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
-
+	accesosTLB++;
 	int habilitada = tlbHabilitada();
 	char* buffer = malloc(sizeof(char) * tamanio);
 	if (habilitada != 0) {
@@ -1145,6 +1155,7 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 }
 
 t_tlb * buscarEnTLB(int PID, int pagina) {
+	accesosTLB++;
 	int i = 0;
 	int sizeTLB = list_size(TLB);
 	while (i < sizeTLB) {
