@@ -69,7 +69,6 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 
 }
 
-
 bool verificarSiHayEspacio(int cantidadDePaginas) {
 
 	int contador = 0;
@@ -143,6 +142,9 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
 	nodoActual = buscarBitDeUsoEn0(pid);
+	while (nodoActual->bitDePresencia == 0) {
+		nodoActual = buscarBitDeUsoEn0(pid);
+	}
 	nodoActual->bitDePresencia = 1;
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
@@ -193,9 +195,7 @@ int reemplazarPagina(int pid, int pagina, bool lectoEscritura) {
 		return reemplazarPaginaClockModificado(pid, pagina, lectoEscritura);
 }
 
-//devuelve el nodo del espacio en memoria. 0 lectura 1 escritura
-int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
-
+espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 	int inicio = lugarAsignadoInicial(pid);
 	int fin = lugarAsignadoFinal(pid);
 	int comienzoDelPuntero = encontrarPuntero(pid);
@@ -246,6 +246,22 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 				}
 			}
 		}
+	}
+	return nodoActual;
+}
+
+//devuelve el nodo del espacio en memoria. 0 lectura 1 escritura
+int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
+
+	int inicio = lugarAsignadoInicial(pid);
+	int fin = lugarAsignadoFinal(pid);
+	int comienzoDelPuntero = encontrarPuntero(pid);
+	int contador = comienzoDelPuntero;
+	int posicionDePaginaLibre;
+	espacioAsignado*nodoActual;
+	nodoActual=buscarPaginaClockModificado(pid,pagina);
+	while(nodoActual->bitDePresencia==0){
+		nodoActual=buscarPaginaClockModificado(pid,pagina);
 	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	nodoActual->bitDePresencia = 1;
@@ -348,7 +364,7 @@ int paginasOcupadasPorPid(int pid) {
 	return paginaAEncontrar->cantPaginasEnMemoria;
 }
 
-char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
+char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {//todo ver que hago si no puedo pedir
 	char paginaADevolver[cantidad];
 	char*punteroADevolver = (&paginaADevolver[0]);
 	espacioAsignado* nodoALeer;
