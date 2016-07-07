@@ -51,7 +51,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 		pagina->cantPaginasEnMemoria = 0;
 		list_add(listaPaginasPorPrograma, pagina);
 		while (i < paginas) {
-			espacioAsignado*nuevoMarco;
+			espacioAsignado*nuevoMarco= malloc(sizeof(espacioAsignado));
 			nuevoMarco->bitDePresencia = 0;
 			nuevoMarco->bitModificado = 0;
 			nuevoMarco->bitUso = 0;
@@ -135,8 +135,8 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 //devuelve el nodo del espacio en memoria
 int reemplazarPaginaClock(int pid, int pagina) {
 
-	int inicio = lugarAsignadoInicial(pid);
-	int fin = lugarAsignadoFinal(pid);
+	//int inicio = lugarAsignadoInicial(pid);
+	//int fin = lugarAsignadoFinal(pid);
 	int contador = encontrarPuntero(pid);
 	int posicionDePaginaLibre;
 	StrUmcSwa*streamUmcSwap;
@@ -1160,7 +1160,7 @@ int reemplazarPaginaLRU() {
 	int contadorPrimerMomento = 0;
 	t_tlb*paginaAComparar;
 	t_tlb*paginaAMatar;
-	char* buffer = malloc(sizeof(char) * marco_Size);
+	//char* buffer = malloc(sizeof(char) * marco_Size);
 	paginaAMatar = list_get(TLB, contadorPrimerMomento);
 	int lugarDePaginaAMatar = 0;
 	for (contadorPrimerMomento = 0; contadorPrimerMomento < list_size(TLB);
