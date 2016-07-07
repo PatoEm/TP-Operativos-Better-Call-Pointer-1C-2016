@@ -259,9 +259,9 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 	int contador = comienzoDelPuntero;
 	int posicionDePaginaLibre;
 	espacioAsignado*nodoActual;
-	nodoActual=buscarPaginaClockModificado(pid,pagina);
-	while(nodoActual->bitDePresencia==0){
-		nodoActual=buscarPaginaClockModificado(pid,pagina);
+	nodoActual = buscarPaginaClockModificado(pid, pagina);
+	while (nodoActual->bitDePresencia == 0) {
+		nodoActual = buscarPaginaClockModificado(pid, pagina);
 	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	nodoActual->bitDePresencia = 1;
@@ -364,7 +364,7 @@ int paginasOcupadasPorPid(int pid) {
 	return paginaAEncontrar->cantPaginasEnMemoria;
 }
 
-char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {//todo ver que hago si no puedo pedir
+char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
 	char paginaADevolver[cantidad];
 	char*punteroADevolver = (&paginaADevolver[0]);
 	espacioAsignado* nodoALeer;
@@ -599,6 +599,17 @@ char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	return memory;
 }
 
+int cantidadDePaginasLibres() {
+	int contadorDePaginas;
+	int i = 0;
+	for (i = 0; i < marcos; i++) {
+		if (bitMap[i] == 0) {
+			contadorDePaginas++;
+		}
+	}
+	return contadorDePaginas;
+}
+
 void liberarMemoria(char * memoria_para_liberar) {
 	free(memoria_para_liberar);
 	puts("Memoria liberada");
@@ -670,27 +681,49 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			pidActivo = streamCpuUmc->pid;
 			break;
 		case 25/*SOLICITAR_BYTES*/:
-			if (tlbHabilitada()) {
-				bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
-						scu->offset, scu->dataLen);
-			} else
-				bytes = solicitarBytes(pidActivo, scu->pageComienzo.numDePag,
-						scu->offset, scu->dataLen);
-			streamUmcCpu = newStrUmcCpu(UMC_ID, 25/*SOLICITAR_BYTES*/,
-					unaPagina, scu->offset, scu->dataLen, bytes, scu->pid);
-			buffer = serializeUmcCpu(streamUmcCpu);
-			socketSend(socket, buffer);
+			if (paginasOcupadasPorPid(pidActivo) == 0
+					|| cantidadDePaginasLibres() == 0) {
+				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
+						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+				buffer = serializeUmcCpu(streamUmcCpu);
+				socketSend(socket, buffer);
+			} else {
+				if (tlbHabilitada()) {
+					bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
+							scu->offset, scu->dataLen);
+				} else
+					bytes = solicitarBytes(pidActivo,
+							scu->pageComienzo.numDePag, scu->offset,
+							scu->dataLen);
+				streamUmcCpu = newStrUmcCpu(UMC_ID, 25/*SOLICITAR_BYTES*/,
+						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+				buffer = serializeUmcCpu(streamUmcCpu);
+				socketSend(socket, buffer);
+			}
 			break;
 		case 34 /*ALMACENAR_BYTES*/:
-			if (tlbHabilitada()) {
-				if (!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
-						scu->offset, scu->dataLen, scu->data)) {
+			if (paginasOcupadasPorPid(pidActivo) == 0
+					|| cantidadDePaginasLibres() == 0) {
+				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
+						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+				buffer = serializeUmcCpu(streamUmcCpu);
+				socketSend(socket, buffer);
+			} else {
+
+				if (tlbHabilitada()) {
+					if (!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
+							scu->offset, scu->dataLen, scu->data)) {
+						almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
+								scu->offset, scu->dataLen, scu->data);
+					}
+				} else
 					almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
 							scu->offset, scu->dataLen, scu->data);
-				}
-			} else
-				almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
-						scu->offset, scu->dataLen, scu->data);
+				streamUmcCpu = newStrUmcCpu(UMC_ID, 34 /*ALMACENAR_BYTES*/,
+						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+				buffer = serializeUmcCpu(streamUmcCpu);
+				socketSend(socket, buffer);
+			}
 			break;
 		default:
 			printf("No se pudo identificar la accion de la CPU");
@@ -713,6 +746,12 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 	StrUmcKer*streamAlKerner;
 	SocketBuffer*buffer;
 	switch (sku->action) {
+	case 36 /*TAMANIO_DE_MARCOS*/:
+		streamAlKerner = newStrUmcKer(UMC_ID, 36/*TAMANIO_DE_MARCOS*/,
+		NULL, marco_Size, 0, 0);
+		buffer = serializeUmcKer(streamAlKerner);
+		socketSend(socket, buffer);
+		break;
 	case 20 /*INICIALIZAR_PROGRAMA*/:
 		if (0 == inicializarPrograma(sku->pid, sku->cantPage, sku->data)) {
 			streamAlKerner = newStrUmcKer(UMC_ID,
@@ -720,8 +759,16 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 					NULL, 0, 0, 0);
 			buffer = serializeUmcKer(streamAlKerner);
 			socketSend(socket, buffer);
+		} else {
+			streamAlKerner = newStrUmcKer(UMC_ID,
+			PROGRAMA_RECIBIDO,
+			NULL, 0, 0, 0);
+			buffer = serializeUmcKer(streamAlKerner);
+			socketSend(socket, buffer);
 		}
+
 		break;
+
 //todo hablar con pato el almacenar y leer bytes
 	case 22 /*FINALIZAR_PROGRAMA*/:
 		finalizarPrograma(sku->pid);
@@ -1159,7 +1206,7 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 					entradaTLB->frameTLB, entradaTLB->pagina);
 			int inicioLectura = entradaTLB->frameTLB * marco_Size + posicion;
 			int i;
-			for (i = 0; i++; i < tamanio) {
+			for (i = 0;  i < tamanio;i++) {
 				buffer[i] = memoriaReal[inicioLectura];
 				inicioLectura++;
 			}
