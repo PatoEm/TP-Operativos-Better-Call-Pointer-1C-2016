@@ -3,7 +3,7 @@
 int main(void) {
 
 	leerArchivoDeConfiguracion("swapconfig");
-
+	iniciarEstructurasSwap();
 	archivoMappeado = crearArchivo(tamArchivo, nombreSwap);
 
 	manejoDeConexiones();

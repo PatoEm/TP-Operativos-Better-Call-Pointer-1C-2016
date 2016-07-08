@@ -36,7 +36,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	espacioAsignado pagina;
 	StrSwaUmc * streamSwapUmc;
 	pagina.numDePag = 0;
-	streamUmcSwap = newStrUmcSwa(UMC_ID, 20/*INICIALIZAR_PROGRAMA*/, pagina,
+	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, pagina,
 			paginas, codigo, 0, pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	socketSend(socketSwap->ptrSocket, buffer);
@@ -44,7 +44,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	buffer = socketReceive(socketSwap->ptrSocket);
 	streamSwapUmc = unserializeSwaUmc(buffer->data);
 
-	if (streamSwapUmc->action == 26/*PROGRAMA_RECIBIDO*/) {
+	if (streamSwapUmc->action == PROGRAMA_RECIBIDO) {
 		int i = 0;
 		paginasPorPrograma*pagina = malloc(sizeof(paginasPorPrograma));
 		pagina->pid = pid;
@@ -62,6 +62,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 			else
 				nuevoMarco->punteroAPagina = 0;
 			list_add(listaEspacioAsignado, nuevoMarco);
+			i++;
 		}
 		return TRUE;
 	} else

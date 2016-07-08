@@ -363,11 +363,14 @@ void manejoDeConexiones() {
 					while (contador < atoi(tamPagina)) {
 						guardarPagina[contador] =
 								(streamUmcSwap->data)[ubicacionActual];
+						contador++;
+						ubicacionActual++;
 					}
 					escribirPagina(streamUmcSwap->pid, contadorPaginasRecibidas,
 							guardarPagina);
+					contadorPaginasRecibidas++;
 				}
-				streamSwapUmc = newStrSwaUmc(SWAP_ID, 27/*PROGRAMA_RECIBIDO*/,
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, 26/*PROGRAMA_RECIBIDO*/ ,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer))
