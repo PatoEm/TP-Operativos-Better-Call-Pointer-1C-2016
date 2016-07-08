@@ -345,6 +345,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	pcb* aux;
 //	t_hilo* pcbClipboard;
 	StrCpuKer* sck = unserializeCpuKer(data);
+	StrKerCon* skc;
 
 	if (sck->action == PRIMER_PCB) {
 
@@ -386,26 +387,22 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	//case ANSISOP_SEM_WAIT: break;
 
-	case IMPRIMIRTEXTO: //TODO NUEVO
-
-
+	case IMPRIMIRTEXTO:
 		// Creo y serializo string kernel a consola.
-//		StrKerCon* skc = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, sck->logLen, sck->log);
-//		SocketBuffer* sb = serializeKerCon(skc);
+		skc = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, sck->logLen, sck->log);
+		SocketBuffer* sb = serializeKerCon(skc);
 
-		// ¿Como identifico a que consola enviar?
-		// Hay que agregarlo al pcb
+		// Extraigo el socket de la respectiva consola.
+		pcb* pcb = &(sck->pcb);
+		Socket* consola = &(pcb->consola);
 
-
-
-//		if (!socketSend(consoleClient->ptrAddress, sb)) {
-//					log_error(cpuhlog, "No se pudo mandar IMPRMIRTEXTO a la consola.");
-//				} else {
-//					log_info(cpuhlog, "Se envio IMPRMIRTEXTO a la consola.");
-//				}
-//				free(sb);
-
-
+		// Envio a la conchola
+		if (!socketSend(consola->ptrAddress, sb)) {
+					log_error(cpuhlog, "No se pudo mandar IMPRMIRTEXTO a la consola.");
+				} else {
+					log_info(cpuhlog, "Se envio IMPRMIRTEXTO a la consola.");
+				}
+		free(sb);
 		break;
 
 	default:
