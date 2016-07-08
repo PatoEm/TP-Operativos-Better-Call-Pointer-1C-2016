@@ -35,7 +35,7 @@ void setearValores(t_config * archivoConfig) {
 	}
 }
 //testeada
-pcb* crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
+pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) {
 
 	t_medatada_program* metaNuevoPrograma = metadata_desde_literal(
 			programaAnsisop);
@@ -48,6 +48,7 @@ pcb* crearNuevoPcb(char * programaAnsisop, int tamanioArchivo) {
 	idProgramas = idProgramas + 1;
 	puts("hola");
 
+//	pcbNuevoPrograma->consola = consola;
 
 	pcbNuevoPrograma->id = idProgramas;
 

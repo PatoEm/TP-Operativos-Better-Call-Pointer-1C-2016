@@ -456,7 +456,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 				consoleClient->descriptor);
 
 		//SE GENERA EL NUEVO PCB
-		pcb = crearNuevoPcb(sck->fileContent, sck->fileContentLen);
+		pcb = crearNuevoPcb(consoleClient, sck->fileContent, sck->fileContentLen);
 
 		moverAColaReady(pcb);
 

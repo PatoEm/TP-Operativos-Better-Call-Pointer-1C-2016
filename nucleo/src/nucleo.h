@@ -134,7 +134,7 @@ t_queue *colaExit;
 //Prototipos
 
 void setearValores(t_config * );
-pcb* crearNuevoPcb(char * , int ) ;
+pcb* crearNuevoPcb(Socket*, char * , int ) ;
 void moverAColaReady(pcb * );
 void moverAListaBlock(pcb* );
 void moverAListaExec(pcb* );

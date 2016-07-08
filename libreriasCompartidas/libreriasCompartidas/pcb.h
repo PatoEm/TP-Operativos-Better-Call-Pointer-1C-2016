@@ -10,6 +10,8 @@
 #include <parser/metadata_program.h>
 #include <parser/parser.h>
 #include <commons/collections/list.h>
+#include "pointerSocketes.h"
+
 typedef struct {
 	int comienzo;
 	int longitud;
@@ -41,6 +43,7 @@ typedef enum {
 } estadoPrograma;
 
 typedef struct {
+	Socket* consola;
 	int id;
 	int tamanioArchivoOriginal;
 	t_puntero_instruccion programCounter;
@@ -54,7 +57,7 @@ typedef struct {
 
 } pcb;
 
-pcb* newPcb(int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
+pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
 		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,t_size etiquetas,
 		t_list* indiceDelStack, t_metadata_program* metaProgram, estadoPrograma estado);
 pcb* newEmptyPcb();
