@@ -127,9 +127,28 @@ Boolean callAndSendAnSISOP(String path) {
 	}
 
 	char* buffer = NULL;
+	char cpBuffer[18] = "";
+
 	long fileLen;
 	fileLen = tamArchivo(path);
 	buffer = leerProgramaAnSISOP(path);
+
+	strncpy(cpBuffer, buffer, 18);
+
+	// Confirmo si el archivo tiene el SHEBANG.
+	char rutaCodigoAnsisop[18] = "#!/usr/bin/ansisop";
+	int j;
+	for (j = 0; j < 18; ++j) {
+		if (rutaCodigoAnsisop[j] != cpBuffer[j]){
+			puts("El archivo obtenido no es un .AnSISOP");
+			return FALSE;
+		}
+	}
+
+
+
+	puts("Se reconocio un archivo.AnSISOP");
+	printf("%s\n", buffer);
 
 	if (sck != NULL) {
 		free(sck);

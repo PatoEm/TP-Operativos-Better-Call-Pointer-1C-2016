@@ -34,7 +34,7 @@ int tamArchivo(char * direccionArchivo) {
 
 char * leerProgramaAnSISOP(char * direccionArchivo) {
 
-	int tamanio=tamArchivo(direccionArchivo);
+	int tamanio = tamArchivo(direccionArchivo);
 
 	FILE * fp;
 
@@ -44,22 +44,21 @@ char * leerProgramaAnSISOP(char * direccionArchivo) {
 		puts("Error al abrir archivo");
 	else {
 		char* buffer = (char *) malloc(tamanio);
-			if(buffer==NULL){
-				printf("no se pudo reservar memoria para el archivo");
-				return-1;
-			}
-		 fseek(fp, 0, 0);
+		if(buffer == NULL){
+			printf("No se pudo reservar memoria para el archivo");
+			return FALSE;
+		}
+		fseek(fp, 0, 0);
 		int n = 0;
 		while (!feof(fp)) {
 			buffer[n] = getc(fp);
 			n++;
 		}
-		buffer[n - 1] = '\0';
+		buffer[n-1] = '\0';
+
 		fclose(fp);
-		printf("%s", buffer);
 		return buffer;
 
 	}
-	return "";
-
+	return FALSE;
 }
