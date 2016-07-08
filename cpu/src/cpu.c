@@ -158,7 +158,7 @@ void setearValores(t_config * archivoConfig) {
 	puts("hola");
 }
 
-void cuerpoDelCpu(){
+void cuerpoDelCpu() {
 
 }
 
@@ -187,15 +187,19 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 		socketSend(socketUMC->ptrSocket, buffer);
 		buffer = socketReceive(socketUMC->ptrSocket);
 		streamUmcCpu = unserializeCpuUmc(buffer);
-		if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
-			nuevaVariable->vars.id = identificador_variable;
-			nuevaVariable->vars.pag = paginaAMandar.numDePag;
-			nuevaVariable->vars.off = (tamanioPaginaUmc - 5);
-			nuevaVariable->vars.size = 4;
-			t_list * lista = pcbProceso.indiceDelStack;
-			list_add((pcbProceso.indiceDelStack), nuevaVariable);
-		} else
+		if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 			seguirEjecutando = FALSE;
+		} else {
+			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
+				nuevaVariable->vars.id = identificador_variable;
+				nuevaVariable->vars.pag = paginaAMandar.numDePag;
+				nuevaVariable->vars.off = (tamanioPaginaUmc - 5);
+				nuevaVariable->vars.size = 4;
+				t_list * lista = pcbProceso.indiceDelStack;
+				list_add((pcbProceso.indiceDelStack), nuevaVariable);
+			} else
+				seguirEjecutando = FALSE;
+		}
 	}
 	if (list_size(pcbProceso.indiceDelStack) != 0) {
 
@@ -209,16 +213,21 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			socketSend(socketUMC->ptrSocket, buffer);
 			buffer = socketReceive(socketUMC->ptrSocket);
 			streamUmcCpu = unserializeCpuUmc(buffer);
-			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
-				nuevaVariable->pos = ultimaPagina->pos + 1;
-				nuevaVariable->vars.id = identificador_variable;
-				nuevaVariable->vars.pag = paginaAMandar.numDePag;
-				nuevaVariable->vars.off = (tamanioPaginaUmc - 5);
-				nuevaVariable->vars.size = 4;
-				t_list * lista = pcbProceso.indiceDelStack;
-				list_add((pcbProceso.indiceDelStack), nuevaVariable);
-			} else
+			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
+			} else {
+				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
+						streamUmcCpu->data))) {
+					nuevaVariable->pos = ultimaPagina->pos + 1;
+					nuevaVariable->vars.id = identificador_variable;
+					nuevaVariable->vars.pag = paginaAMandar.numDePag;
+					nuevaVariable->vars.off = (tamanioPaginaUmc - 5);
+					nuevaVariable->vars.size = 4;
+					t_list * lista = pcbProceso.indiceDelStack;
+					list_add((pcbProceso.indiceDelStack), nuevaVariable);
+				} else
+					seguirEjecutando = FALSE;
+			}
 		} else {
 			paginaAMandar.numDePag = ultimaPagina->vars.pag;
 			streamCpuUmc = newStrCpuUmc(CPU_ID, 25/*SOLICITAR_BYTES*/,
@@ -227,18 +236,22 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			socketSend(socketUMC->ptrSocket, buffer);
 			buffer = socketReceive(socketUMC->ptrSocket);
 			streamUmcCpu = unserializeCpuUmc(buffer);
-			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
-				nuevaVariable->pos = ultimaPagina->pos + 1;
-				nuevaVariable->vars.id = identificador_variable;
-				nuevaVariable->vars.pag = paginaAMandar.numDePag;
-				nuevaVariable->vars.size = 4;
-				nuevaVariable->vars.off = ultimaPagina->vars.off - 4;
-				t_list * lista = pcbProceso.indiceDelStack;
-				list_add((pcbProceso.indiceDelStack), nuevaVariable);
-			} else {
+			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
+			} else {
+				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
+						streamUmcCpu->data))) {
+					nuevaVariable->pos = ultimaPagina->pos + 1;
+					nuevaVariable->vars.id = identificador_variable;
+					nuevaVariable->vars.pag = paginaAMandar.numDePag;
+					nuevaVariable->vars.size = 4;
+					nuevaVariable->vars.off = ultimaPagina->vars.off - 4;
+					t_list * lista = pcbProceso.indiceDelStack;
+					list_add((pcbProceso.indiceDelStack), nuevaVariable);
+				} else {
+					seguirEjecutando = FALSE;
+				}
 			}
-
 		}
 	}
 
@@ -268,17 +281,15 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
 
 		int i;
 		paginaDeStack* aux;
-		for (i = 0; i<list_size(pcbProceso.indiceDelStack); ++i) {
+		for (i = 0; i < list_size(pcbProceso.indiceDelStack); ++i) {
 
-			aux =list_get(pcbProceso.indiceDelStack,i);
-			if(aux->vars.id==identificador_variable){
+			aux = list_get(pcbProceso.indiceDelStack, i);
+			if (aux->vars.id == identificador_variable) {
 
 				return aux->pos;
 			}
 
 		}
-
-
 
 	} else {
 		return -1;
@@ -292,22 +303,25 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
 t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	//todo Emi chequea esto
 	espacioAsignado aux;
-	aux.numDePag=direccion_variable/tamanioPaginaUmc;
-	int offset=direccion_variable/tamanioPaginaUmc;
+	aux.numDePag = direccion_variable / tamanioPaginaUmc;
+	int offset = direccion_variable / tamanioPaginaUmc;
 	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
 	StrCpuUmc* streamCpuUMC;
-	streamCpuUMC= newStrCpuUmc(CPU_ID, SOLICITAR_BYTES,aux ,offset, 4, NULL, 0);
-	SocketBuffer* buffer= serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket,buffer);
+	streamCpuUMC = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, aux, offset, 4, NULL,
+			0);
+	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
+	socketSend(socketUMC->ptrSocket, buffer);
 	buffer = socketReceive(socketUMC->ptrSocket);
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeCpuUmc(buffer);
-
-	return atoi(streamCpuUMC->data);
+	if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
+		seguirEjecutando = FALSE;
+		return 0;
+	} else
+		return atoi(streamCpuUMC->data);
 
 }
-
 
 /*
  * asignar
@@ -315,20 +329,19 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 
 	espacioAsignado aux;
-	aux.numDePag=direccion_variable/tamanioPaginaUmc;
-	int offset=direccion_variable%tamanioPaginaUmc;
-
+	aux.numDePag = direccion_variable / tamanioPaginaUmc;
+	int offset = direccion_variable % tamanioPaginaUmc;
 
 	Byte* dataAMandar;
-	sprintf(dataAMandar,"%d",valor);
-
+	sprintf(dataAMandar, "%d", valor);
 
 	StrCpuUmc* streamCpuUMC;
 
-		streamCpuUMC= newStrCpuUmc(CPU_ID, ALMACENAR_BYTES,aux ,offset, 4, valor, 0);
-		SocketBuffer* buffer= serializeCpuUmc(streamCpuUMC);
-		socketSend(socketUMC->ptrSocket,buffer);
-		buffer = socketReceive(socketUMC->ptrSocket);
+	streamCpuUMC = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, aux, offset, 4, valor,
+			0);
+	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
+	socketSend(socketUMC->ptrSocket, buffer);
+	buffer = socketReceive(socketUMC->ptrSocket);
 
 }
 
@@ -337,8 +350,6 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 //	uint32_t offset=direccion_variable%tamanioPagina;
 //	almacenarBytesUMC(umc,pagina,offset,4,valor);
 //}
-
-
 
 /*
  * obtenerValorCompartida
@@ -380,7 +391,8 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  * 	irAlLabel
  */
 void irAlLabel(t_nombre_etiqueta etiqueta) {
-	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize);
+	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,
+			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
 }
 
@@ -397,20 +409,18 @@ void llamarSinRetorno(t_nombre_etiqueta etiqueta) {
  */
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
-	paginaDeStack* aux=malloc(sizeof(paginaDeStack));
-	aux->retVars.pag=donde_retornar/tamanioPaginaUmc;
-	aux->retVars.off=donde_retornar%tamanioPaginaUmc;
-	aux->retPos=pcbProceso.programCounter;
+	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
+	aux->retVars.pag = donde_retornar / tamanioPaginaUmc;
+	aux->retVars.off = donde_retornar % tamanioPaginaUmc;
+	aux->retPos = pcbProceso.programCounter;
 	list_add(pcbProceso.indiceDelStack, aux);
 
-	pcbProceso.programCounter=metadata_buscar_etiqueta(etiqueta,pcbProceso.indiceDeEtiquetas,pcbProceso.etiquetaSize);
+	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,
+			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
 	printf("Operacion llamar con retorno");
 
-
-
 }
-
 
 /*
  * finalizar
@@ -430,17 +440,18 @@ void finalizar(void) {
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
 	//todo EMI REVISA ESTO PORFA
-	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,(pcbProceso.indiceDelStack->elements_count)-1);
-	pcbProceso.programCounter=aux->retPos;
+	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,
+			(pcbProceso.indiceDelStack->elements_count) - 1);
+	pcbProceso.programCounter = aux->retPos;
 	StrCpuUmc*streamCpuUmc;
 	espacioAsignado paginaAMandar;
-	paginaAMandar.numDePag=aux->retVars.pag;
-	streamCpuUmc = newStrCpuUmc(CPU_ID, 34/*ALMACENAR_BYTES*/,paginaAMandar, aux->retVars.off, 4, NULL, 0);
-		SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
-		socketSend(socketUMC->ptrSocket, buffer);
+	paginaAMandar.numDePag = aux->retVars.pag;
+	streamCpuUmc = newStrCpuUmc(CPU_ID, 34/*ALMACENAR_BYTES*/, paginaAMandar,
+			aux->retVars.off, 4, NULL, 0);
+	SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
+	socketSend(socketUMC->ptrSocket, buffer);
 
 }
-
 
 /*
  * imprimir
@@ -449,20 +460,20 @@ int imprimir(t_valor_variable valor_mostrar) {
 
 	StrCpuKer*streamCpuKer;
 	Byte* aux;
-		sprintf(aux,"%d",valor_mostrar);
+	sprintf(aux, "%d", valor_mostrar);
 
 	//streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
-			//strlen(itoa(valor_mostrar)), itoa(valor_mostrar));
-		streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
-					strlen(aux), aux);
+	//strlen(itoa(valor_mostrar)), itoa(valor_mostrar));
+	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
+			strlen(aux), aux);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 
 	Byte* auxLoco;
-		sprintf(auxLoco,"%d",valor_mostrar);
+	sprintf(auxLoco, "%d", valor_mostrar);
 
 	//return strlen(itoa(valor_mostrar));
-		return auxLoco;
+	return auxLoco;
 }
 
 /*
@@ -483,9 +494,9 @@ int imprimirTexto(char* texto) {
  */
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	Byte * auxLoco;
-	sprintf(auxLoco,"%d",tiempo);
+	sprintf(auxLoco, "%d", tiempo);
 	char*inOut = malloc(
-			//sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
+	//sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
 			sizeof(dispositivo) + sizeof(auxLoco) + sizeof(char));
 	//inOut = strcat(dispositivo, itoa(tiempo));
 	inOut = strcat(dispositivo, auxLoco);
