@@ -30,13 +30,6 @@
 #define PUERTO_NUCLEO "PUERTO_NUCLEO"
 #define ARCHIVO_CONF "configconsola"
 
-int   fdSocketConsola;
-
-
-//prototipos
-//void leerArchivoDeConfiguracion();
-//int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
-//void setearValores(t_config * archivoConfig);
 int tamArchivo(char* direccionArchivo);
 char* leerProgramaAnSISOP(char* direccionArchivo);
 
