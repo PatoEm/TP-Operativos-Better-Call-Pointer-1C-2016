@@ -169,7 +169,7 @@ void cuerpoDelCpu() {
 /*
  * definirVariable
  */
-t_puntero definirVariable(t_nombre_variable identificador_variable) {
+t_puntero definirVariable(t_nombre_variable identificador_variable) {//NO TOCAR, YA ESTA TERMINADA
 	int pagina;
 	espacioAsignado paginaAMandar;
 	paginaDeStack*nuevaVariable;
@@ -274,7 +274,7 @@ bool espacioMemoriaVacio(int tamanio, char*bytes) {
 
 /*
  * obtenerPosicionVariable
- */
+ *///NO TOCAR YA ESTÁ TERMINADA
 t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
 
 	if (list_size(pcbProceso.indiceDelStack) != 0) {
@@ -338,7 +338,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	StrCpuUmc* streamCpuUMC;
 
 	streamCpuUMC = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, aux, offset, 4, valor,
-			0);
+			0);// todo chequear si llego bien o aborta
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
 	socketSend(socketUMC->ptrSocket, buffer);
 	buffer = socketReceive(socketUMC->ptrSocket);
@@ -353,7 +353,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 
 /*
  * obtenerValorCompartida
- */
+ *///YA ESTA TERMINADO
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 30 /*OBTENER_VALOR_COMPARTIDA*/,
@@ -371,7 +371,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 
 /*
  * 	asignarValorCompartida
- */
+ */// YA ESTÁ TERMINADA
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
 	char* buffer;
@@ -389,7 +389,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 
 /*
  * 	irAlLabel
- */
+ */// YA ESTA TERMINADA
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
@@ -406,7 +406,7 @@ void llamarSinRetorno(t_nombre_etiqueta etiqueta) {
 
 /*
  * llamarConRetorno
- */
+ */// ESTÁ TERMINADA
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
@@ -418,13 +418,11 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiqueta,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
-	printf("Operacion llamar con retorno");
-
 }
 
 /*
  * finalizar
- */
+ */// FINALIZAR SOLO SI EL PROGRAMA TERMINA BIEN
 void finalizar(void) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 22 /*FINALIZAR_PROGRAMA*/, pcbProceso,
@@ -436,7 +434,7 @@ void finalizar(void) {
 /*
  * retornar
  *
- */
+ */// FALTA MANEJO DE ABORTO
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
 	//todo EMI REVISA ESTO PORFA
@@ -455,7 +453,7 @@ void retornar(t_valor_variable retorno) {
 
 /*
  * imprimir
- */
+ */// YA ESTA
 int imprimir(t_valor_variable valor_mostrar) {
 
 	StrCpuKer*streamCpuKer;
@@ -478,7 +476,7 @@ int imprimir(t_valor_variable valor_mostrar) {
 
 /*
  * imprimirTexto
- */
+ */// ya esta
 
 int imprimirTexto(char* texto) {
 	StrCpuKer*streamCpuKer;
@@ -505,20 +503,12 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 			pcbProceso.id, strlen(dispositivo), inOut);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
-	buffer = socketReceive(socketNucleo->ptrSocket);
-	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
-	if (StreamKerCpu->action == 31/*PROGRAMA_bLOQUEADO*/) {
-		streamCpuKer = newStrCpuKer(CPU_ID, 32 /*ENVIO_PCB*/, pcbProceso,
-				pcbProceso.id, 0, NULL);
-		buffer = serializeCpuKer(streamCpuKer);
-		socketSend(socketNucleo->ptrSocket, buffer);
 		seguirEjecutando = FALSE;
-	}
 }
 
 /*
  * wait
- */
+ *///MODIFICAR PROGRAMA DESBLOQUEADO y envio
 void wait(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 27 /*WAIT*/, pcbProceso, pcbProceso.id,
@@ -527,18 +517,13 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
-	if (StreamKerCpu->action == 31/*PROGRAMA_bLOQUEADO*/) {
-		streamCpuKer = newStrCpuKer(CPU_ID, 32 /*ENVIO_PCB*/, pcbProceso,
-				pcbProceso.id, 0, NULL);
-		buffer = serializeCpuKer(streamCpuKer);
-		socketSend(socketNucleo->ptrSocket, buffer);
-		seguirEjecutando = FALSE;
-	}
+	if(StreamKerCpu->action == 37 /*WAIT_REALIZADO*/) ;// ver que hacer
+
 }
 
 /*
  * signal
- */
+ */ // YA ESTA
 void signal(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 28 /*SIGNAL*/, pcbProceso,

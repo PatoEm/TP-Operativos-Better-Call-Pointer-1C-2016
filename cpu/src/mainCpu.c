@@ -84,6 +84,7 @@ SocketBuffer* buffer;
 
 int main() {
 
+
 	SocketClient* nucleo =  socketCreateClient();
 
 	if (/* loadFunctionDictionary(&functionsDictionary) && */ loadConfig() && socketConnection()) {

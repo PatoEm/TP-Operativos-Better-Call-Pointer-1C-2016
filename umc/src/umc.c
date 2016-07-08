@@ -36,8 +36,9 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	espacioAsignado pagina;
 	StrSwaUmc * streamSwapUmc;
 	pagina.numDePag = 0;
+	//StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, pagina,
-			paginas, codigo, 0, pid);
+			paginas, codigo, sizeof(codigo), pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	socketSend(socketSwap->ptrSocket, buffer);
 
@@ -392,7 +393,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 	} else {
 
 		if (paginasOcupadasPorPid(pid) < marco_x_proc
-				&& paginasContiguasDeUMC(1) == 1) {
+				&& paginasContiguasDeUMC(1) != -1) {
 			int contador = 0;
 			paginasPorPrograma*paginaAEncontrar = list_get(
 					listaPaginasPorPrograma, contador);
@@ -408,6 +409,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			nodoALeer->bitDePresencia = 1;
 			espacioAsignado pageToSend;
 			pageToSend.numDePag = pagina;
+			//(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA,
 					pageToSend, 1,
 					NULL, 0, nodoALeer->pid);
@@ -596,7 +598,7 @@ void setearValores(t_config * archivoConfig) {
 
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	char * memory = calloc(1, cantidadFrames * capacidadFrames);
-	log_info(logger, "Memoria real reservada", NULL);
+//todo	log_info(logger, "Memoria real reservada", NULL);
 	return memory;
 }
 

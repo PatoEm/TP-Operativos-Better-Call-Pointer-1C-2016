@@ -55,6 +55,7 @@ char* puerto_Escucha;
 char* nombreSwap;
 char* paginas;
 char* tamPagina;
+int tamPaginaLoca;
 char* retCompactacion;
 char* tamArchivo;
 char* archivoMappeado;

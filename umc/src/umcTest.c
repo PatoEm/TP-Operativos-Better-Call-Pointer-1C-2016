@@ -20,7 +20,7 @@ int main() {
 	socketSwap = socketCreateClient();
 
 	socketConnect(socketSwap, ip_Swap, atoi(puerto_Swap));
-
+	memoriaReal = reservarMemoria(marcos, marco_Size);
 	iniciarEstructurasUMC();
 
 	inicializarPrograma(1, 1, "holaF");

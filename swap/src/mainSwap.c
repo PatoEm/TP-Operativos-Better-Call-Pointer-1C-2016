@@ -3,6 +3,7 @@
 int main(void) {
 
 	leerArchivoDeConfiguracion("swapconfig");
+	tamPaginaLoca=atoi(tamPagina);
 	iniciarEstructurasSwap();
 	archivoMappeado = crearArchivo(tamArchivo, nombreSwap);
 

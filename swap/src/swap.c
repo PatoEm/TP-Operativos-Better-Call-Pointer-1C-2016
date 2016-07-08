@@ -94,13 +94,12 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 	} else {
 		int lugarDeLaCadena = 0;
 		nodoALeer->bitLectura = 1;
-		char paginaADevolver[atoi(tamPagina)];
-		char*punteroADevolver = (&paginaADevolver[0]);
+		char*punteroADevolver = malloc(sizeof(char)*atoi(tamPagina));
 		int posicionDeChar = (nodoALeer->IDPaginaInterno) * atoi(tamPagina);
 		while (posicionDeChar
 				< ((nodoALeer->IDPaginaInterno) * atoi(tamPagina)
 						+ atoi(tamPagina))) {
-			paginaADevolver[lugarDeLaCadena] = archivoMappeado[posicionDeChar];
+			punteroADevolver[lugarDeLaCadena] = archivoMappeado[posicionDeChar];
 			posicionDeChar++;
 			lugarDeLaCadena++;
 		}
@@ -316,7 +315,7 @@ void compactarSwap() {
 
 void manejoDeConexiones() {
 	serverSwap = socketCreateServer(swapPort);
-	char* pagina;
+	char* paginaLoca = malloc((sizeof(char)*atoi(tamPagina)));
 
 	if (serverSwap == NULL) {
 		puts("Error no se pudo crear el server");
@@ -350,6 +349,7 @@ void manejoDeConexiones() {
 					streamUmcSwap->cantPage,
 					streamUmcSwap->pageComienzo.numDePag);
 			if (programaRecibido == 0) {
+//(Char id, Char action, paginaAsignada pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
@@ -381,15 +381,18 @@ void manejoDeConexiones() {
 
 		case LEER_UNA_PAGINA:
 
-			pagina = leerUnaPagina(streamUmcSwap->pid,
-					streamUmcSwap->pageComienzo.numDePag); //todo aca me falta asignarlo a algo para los if que siguen
+			paginaLoca = leerUnaPagina(streamUmcSwap->pid,
+					streamUmcSwap->pageComienzo.numDePag);
+			//paginaLoca[atoi(tamPagina)]='\0';//todo aca me falta asignarlo a algo para los if que siguen
 			paginaAMandar.IDPaginaInterno =
 					streamUmcSwap->pageComienzo.IDPaginaInterno;
 			paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
-			paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
+			paginaAMandar.pid = streamUmcSwap->pid;
 			paginaAMandar.bitLectura = 1;
+			//int tamanioPaginaLoca = atoi(tamPagina);
+			//(Char id, Char action, paginaAsignada pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 			streamSwapUmc = newStrSwaUmc(SWAP_ID, LEER_UNA_PAGINA,
-					paginaAMandar, 1, atoi(tamPagina), 0, streamUmcSwap->pid);
+					paginaAMandar, 1, paginaLoca,tamPaginaLoca, streamUmcSwap->pid);
 			buffer = serializeSwaUmc(streamSwapUmc);
 			if (!socketSend(umcClient, buffer))
 				puts("Error al enviar el paquete");
