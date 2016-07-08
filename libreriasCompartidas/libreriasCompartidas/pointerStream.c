@@ -47,7 +47,7 @@ StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data
 /*******************************
  * Constructor Kernel-UMC
  ******************************/
-StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage){
+StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio){
 	StrKerUmc* sku = malloc(sizeof(StrKerUmc));
 	sku->id = id;
 	sku->action = action;
@@ -55,6 +55,9 @@ StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pi
 	sku->size = size;
 	sku->pid = pid;
 	sku->cantPage = cantPage;
+	sku->pagina = pagina;
+	sku->offset = offset;
+	sku->tamanio = tamanio;
 	return sku;
 }
 
@@ -202,6 +205,9 @@ Int32U getSizeKerUmc(StrKerUmc* sku){
 	size += sizeof(sku->action);
 	size += sizeof(sku->pid);
 	size += sizeof(sku->cantPage);
+	size += sizeof(sku->pagina);
+	size += sizeof(sku->offset);
+	size += sizeof(sku->tamanio);
 	size += sizeof(sku->size);
 	size += sku->size;
 	return size;
@@ -414,6 +420,18 @@ SocketBuffer* serializeKerUmc(StrKerUmc* sku){
 	ptrByte = (Byte*) &sku->cantPage;
 	memcpy(ptrData, ptrByte, sizeof(sku->cantPage));
 	ptrData += sizeof(sku->cantPage);
+
+	ptrByte = (Byte*) &sku->pagina;
+	memcpy(ptrData, ptrByte, sizeof(sku->pagina));
+	ptrData += sizeof(sku->pagina);
+
+	ptrByte = (Byte*) &sku->offset;
+	memcpy(ptrData, ptrByte, sizeof(sku->offset));
+	ptrData += sizeof(sku->offset);
+
+	ptrByte = (Byte*) &sku->tamanio;
+	memcpy(ptrData, ptrByte, sizeof(sku->tamanio));
+	ptrData += sizeof(sku->tamanio);
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -768,6 +786,9 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	Int32U size;
 	Int32U pid;
 	Int32U cantPage;
+	Int32U pagina;
+	Int32U offset;
+	Int32U tamanio;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -784,11 +805,17 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	ptrByte += sizeof(pid);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
+	memcpy(&pagina, ptrByte, sizeof(pagina));
+	ptrByte += sizeof(pagina);
+	memcpy(&offset, ptrByte, sizeof(offset));
+	ptrByte += sizeof(offset);
+	memcpy(&tamanio, ptrByte, sizeof(tamanio));
+	ptrByte += sizeof(tamanio);
 	data[size]='\0';
 
 
 	free(dataSerialized);
-	return newStrKerUmc(id, action, data, size, pid, cantPage);
+	return newStrKerUmc(id, action, data, size, pid, cantPage, pagina, offset, tamanio);
 }
 
 /***********************************************/
