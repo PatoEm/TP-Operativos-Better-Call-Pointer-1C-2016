@@ -145,8 +145,6 @@ Boolean callAndSendAnSISOP(String path) {
 		}
 	}
 
-
-
 	puts("Se reconocio un archivo.AnSISOP");
 	printf("%s\n", buffer);
 
