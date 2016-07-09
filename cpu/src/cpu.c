@@ -368,7 +368,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	StrCpuKer*streamCpuKer;
 //(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, 29 /*ENTRADA_SALIDA*/, pcbProceso,
-			pcbProceso.id, strlen(auxTiempo), auxTiempo, dispositivo /*NOMBRE DISPOSITIVO*/, sizeof(dispositivo) /*LEN NOMBRE DISPOSITIVO*/);
+			pcbProceso.id, strlen(auxTiempo), auxTiempo, dispositivo /*NOMBRE DISPOSITIVO*/, strlen(dispositivo) /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 		seguirEjecutando = FALSE;
