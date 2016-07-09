@@ -322,21 +322,34 @@ void grabar_valor(char* identificador, int valor) {
 
 }
 //testeada
-void waitAnsisop(char * identificador, pcb *pcbPrograma) {
+void waitAnsisop(char * identificador, pcb *pcbPrograma, Socket* cpuSocket) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
+
+	 StrKerCpu* StrKernelCpu;
+	 SocketBuffer* buffer;
+	StrKernelCpu= newStrKerCpu(1/*KERNEL_ID*/, 37/*WAIT_REALIZADO*/, *pcbPrograma,0,NULL,0,NULL,0 );
+	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
+	buffer=serializeKerCpu(StrKernelCpu);
+
+
+
 	for (i = 0; (idSemaforos[i] != '\0'); i++) {
 
 		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
+				socketSend(cpuSocket,buffer);
 
 				moverAColaReady(pcbPrograma);
+
+
 			} else {
 
 				moverAListaBlock(pcbPrograma);
 				sem_wait(semaforosAnsisop[i]);
+				socketSend(cpuSocket,buffer);
 				moverAColaReady(pcbPrograma);
 				//todo avisar a cpu que se bloqueo
 			}
@@ -578,6 +591,6 @@ entrada_salida(atributos.identificador,atributos.cantidad,atributos.pcbLoca);
 
 void funcionHiloWait(atributosWait atributos){
 
-waitAnsisop(atributos.identificador,atributos.pcbLoca);
+waitAnsisop(atributos.identificador,atributos.pcbLoca,atributos.cpuSocket);
 
 }
