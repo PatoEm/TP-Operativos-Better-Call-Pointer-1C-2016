@@ -449,6 +449,9 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   case ENTRADA_SALIDA:
 
+
+
+
 	log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
 
 	break;

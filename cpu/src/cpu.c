@@ -363,16 +363,12 @@ int imprimirTexto(char* texto) {
  * entradaSalida
  */
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
-	Byte * auxLoco;
-	sprintf(auxLoco, "%d", tiempo);
-	char*inOut = malloc(
-	//sizeof(dispositivo) + sizeof(itoa(tiempo)) + sizeof(char));
-			sizeof(dispositivo) + sizeof(auxLoco) + sizeof(char));
-	//inOut = strcat(dispositivo, itoa(tiempo));
-	inOut = strcat(dispositivo, auxLoco);
+	Byte * auxTiempo;
+	sprintf(auxTiempo, "%d", tiempo);
 	StrCpuKer*streamCpuKer;
+//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, 29 /*ENTRADA_SALIDA*/, pcbProceso,
-			pcbProceso.id, strlen(dispositivo), inOut, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+			pcbProceso.id, strlen(auxTiempo), auxTiempo, dispositivo /*NOMBRE DISPOSITIVO*/, sizeof(dispositivo) /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 		seguirEjecutando = FALSE;
