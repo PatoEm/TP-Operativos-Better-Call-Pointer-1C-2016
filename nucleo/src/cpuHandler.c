@@ -359,6 +359,16 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   Socket* consola_aux;
   Byte * nombreDispositivo;
   int valor_cantidad_tiempo;
+
+  	 atributosIO atributos;
+  	 atributosWait atributosWait;
+	 pthread_t hiloIO;
+	 pthread_attr_t attrHiloIO;
+	 pthread_t hiloWait;
+	pthread_attr_t attrHiloWait;
+
+
+
   if (in_cpu_msg->action == PRIMER_PCB) {
 
     /*
@@ -396,8 +406,21 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   case WAIT_SEM_ANSISOP:
 
-    waitAnsisop(in_cpu_msg->log,&(in_cpu_msg->pcb));
-  //todo acá debería estar el nombre de que semaforo modificar
+	  nombreDispositivo=in_cpu_msg->log;
+
+	  atributosWait.identificador=nombreDispositivo;
+	  atributosWait.pcbLoca=pcb_aux;
+
+	  	  	 pthread_t hiloWait;
+			 pthread_attr_t attrHiloWait;
+			 pthread_attr_init(&attrHiloWait);
+			 pthread_attr_setdetachstate(&attrHiloWait, PTHREAD_CREATE_DETACHED);
+			 pthread_create(&hiloWait, &attrHiloWait, &funcionHiloWait, &atributosWait);
+			 pthread_attr_destroy(&attrHiloWait);
+
+
+
+
 
   break;
 
@@ -453,13 +476,10 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   nombreDispositivo=in_cpu_msg->nombreDispositivo;
   valor_cantidad_tiempo= atoi(in_cpu_msg->log);
 
-  atributosIO atributos;
   atributos.identificador=nombreDispositivo;
   atributos.cantidad=valor_cantidad_tiempo;
   atributos.pcbLoca=pcb_aux;
 
-  	  	 pthread_t hiloIO;
-		 pthread_attr_t attrHiloIO;
 		 pthread_attr_init(&attrHiloIO);
 		 pthread_attr_setdetachstate(&attrHiloIO, PTHREAD_CREATE_DETACHED);
 		 pthread_create(&hiloIO, &attrHiloIO, &funcionHiloIO, &atributos);

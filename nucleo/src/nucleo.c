@@ -575,3 +575,9 @@ void funcionHiloIO(atributosIO atributos){
 entrada_salida(atributos.identificador,atributos.cantidad,atributos.pcbLoca);
 
 }
+
+void funcionHiloWait(atributosWait atributos){
+
+waitAnsisop(atributos.identificador,atributos.pcbLoca);
+
+}
