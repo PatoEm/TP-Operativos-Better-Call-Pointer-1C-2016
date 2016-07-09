@@ -62,7 +62,7 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (((nodoALeer->pid) != pid) && (nodoALeer->bitLectura != 1)) {
+	while (!(((nodoALeer->pid) == pid) && (nodoALeer->bitLectura == 1)) ){
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
@@ -85,7 +85,7 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != numeroDePagina)) {
+	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag == numeroDePagina))) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
@@ -236,7 +236,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
-		(paginaAReservar->bitLectura) = 0;
+		(paginaAReservar->bitLectura) = 1;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);

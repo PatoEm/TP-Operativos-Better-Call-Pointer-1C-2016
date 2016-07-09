@@ -334,7 +334,7 @@ int encontrarPuntero(int pid) {
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, inicio);
 	while ((nodoActual->punteroAPagina) != 1) {
 		contador++;
-		if (contador > fin)
+		if (contador == fin)
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
@@ -349,6 +349,8 @@ int lugarAsignadoFinal(int pid) {
 	while (nodoFinal->pid == pid) {
 		inicio++;
 		nodoFinal = list_get(listaEspacioAsignado, inicio);
+		if(inicio==list_size(listaEspacioAsignado))
+			return inicio;
 	}
 	return (inicio - 1);
 }
@@ -379,7 +381,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != pagina)) {
+	while (!((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina)) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
@@ -463,8 +465,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while ((((nodoALeer->pid) != pid) && (nodoALeer->numDePag) != pagina)
-			|| (posicionActualDeNodo == list_size(listaEspacioAsignado))) {
+	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag) == pagina)) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
@@ -481,7 +482,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	} else {
 
 		if (paginasOcupadasPorPid(pid) < marco_x_proc
-				&& paginasContiguasDeUMC(1) == 1) {
+				&& paginasContiguasDeUMC(1) != -1) {
 			int contador = 0;
 			paginasPorPrograma*paginaAEncontrar = list_get(
 					listaPaginasPorPrograma, contador);
@@ -574,6 +575,9 @@ void finalizarPrograma(int pid) {
 		}
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
+		if(list_size(listaEspacioAsignado)>=nodoActualAReventar)
+			break;
+		nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
 }
