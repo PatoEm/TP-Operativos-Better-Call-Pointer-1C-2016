@@ -50,23 +50,13 @@ bool seguirEjecutando; //1 SI 0 NO
 /*******************************************************
  * TIPOS DE DATOS
  *******************************************************/
-typedef void* Parameter;
-
-typedef struct function {
-	char* name;
-	Parameter param[1];
-} Function;
-
-typedef struct functionParameters {
-	char param[1];
-	void (*func)(void*, void*);
-} FunctionParameters;
 
 //typedef struct core {
 //	bool online;
 //	bool busy;
 //	int socket;
 //} t_core;
+
 //======================================================
 
 /*******************************************************

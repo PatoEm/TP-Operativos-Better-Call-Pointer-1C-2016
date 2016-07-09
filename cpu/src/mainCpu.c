@@ -11,7 +11,6 @@
  * Dependencias
  ****************************************/
 #include "commons/config.h"
-#include "commons/collections/dictionary.h"
 #include "libreriasCompartidas/pointerStream.h"
 #include "libreriasCompartidas/pointerSocketes.h"
 #include <stdio.h>
@@ -23,8 +22,8 @@
  ****************************************/
 #define CONFIG_FILE "configcpu"
 #define PARAM_LENGTH 4
-#define PUERTO_KERNEL "PUERTO_KERNEL"
-#define IP_KERNEL "IP_KERNEL"
+#define PUERTO_NUCLEO "PUERTO_NUCLEO"
+#define IP_NUCLEO "IP_NUCLEO"
 #define PUERTO_UMC "PUERTO_UMC"
 #define IP_UMC "IP_UMC"
 
@@ -32,15 +31,15 @@
  * Configuracion
  ****************************************/
 t_config* tConfig = NULL;
-Int32U puertoKernel;
-String ipKernel;
+Int32U puertoNucleo;
+String ipNucleo;
 Int32U puertoUmc;
 String ipUmc;
 
 /*****************************************
  * Socket & Streams
  ****************************************/
-SocketClient* kernelClient = NULL;
+SocketClient* nucleoClient = NULL;
 SocketClient* umcClient = NULL;
 
 StrCpuKer* sck = NULL;
@@ -52,10 +51,6 @@ StrKerCpu* skc = NULL;
  * PCB actual
  ****************************************/
 pcb* pcbActual = NULL;
-/*****************************************
- * Informacion para las funciones
- ****************************************/
-t_dictionary* functionsDictionary = NULL;
 
 /*****************************************
  * Funciones del main
@@ -83,11 +78,7 @@ SocketBuffer* buffer;
  ****************************************/
 
 int main() {
-
-
-	SocketClient* nucleo =  socketCreateClient();
-
-	if (/* loadFunctionDictionary(&functionsDictionary) && */ loadConfig() && socketConnection()) {
+	if (loadConfig() && socketConnection()) {
 		while (TRUE){
 			if(!getNextPcb()) {
 				return TRUE;
@@ -97,7 +88,6 @@ int main() {
 				return TRUE;
 			}
 		}
-
 	}
 	config_destroy(tConfig);
 	while(1){
@@ -124,18 +114,18 @@ Boolean loadConfig() {
 	// Verifico consistencia, debe haber 4 campos
 	if (config_keys_amount(tConfig) == PARAM_LENGTH) {
 
-		// Verifico que los parametros del Kernel tengan sus valores OK
-		if (config_has_property(tConfig, PUERTO_KERNEL)) {
-			puertoKernel = config_get_int_value(tConfig, PUERTO_KERNEL);
+		// Verifico que los parametros del nucleo tengan sus valores OK
+		if (config_has_property(tConfig, PUERTO_NUCLEO)) {
+			puertoNucleo = config_get_int_value(tConfig, PUERTO_NUCLEO);
 		} else {
-			printf("ERROR: Falta un parametro PUERTO_KERNEL. \n");
+			printf("ERROR: Falta un parametro PUERTO_NUCLEO. \n");
 			return FALSE;
 		}
 
-		if (config_has_property(tConfig, IP_KERNEL)) {
-			ipKernel = config_get_string_value(tConfig, IP_KERNEL);
+		if (config_has_property(tConfig, IP_NUCLEO)) {
+			ipNucleo = config_get_string_value(tConfig, IP_NUCLEO);
 		} else {
-			printf("ERROR: Falta un parametro IP_KERNEL. \n");
+			printf("ERROR: Falta un parametro IP_NUCLEO. \n");
 			return FALSE;
 		}
 		// Verifico que los parametros de la UMC tengan sus valores OK
@@ -154,7 +144,7 @@ Boolean loadConfig() {
 		}
 
 		printf("Archivo de config CPU leido\n============\n");
-		printf("Puerto_Kernel: %d\nIP_Kernel: %s\n", puertoKernel, ipKernel);
+		printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", puertoNucleo, ipNucleo);
 		printf("Puerto_UMC: %d\nIP_UMC: %s\n", puertoUmc, ipUmc);
 		return TRUE;
 	} else {
@@ -164,17 +154,17 @@ Boolean loadConfig() {
 }
 
 Boolean socketConnection() {
-	// Conexion al kernel
-	kernelClient = socketCreateClient();
+	// Conexion al nucleo
+	nucleoClient = socketCreateClient();
 
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, Puerto: %d\n", ipKernel, (int)puertoKernel);
+		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int)puertoNucleo);
 		sleep(3);
-	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
+	} while(!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
 
-	if(handshake(kernelClient, CPU_ID)){
+	if(handshake(nucleoClient, CPU_ID)){
 		puts("Handshake realizado con exito.");
 	} else {
 		puts("No se pudo realizar el handshake.");
@@ -209,14 +199,14 @@ Boolean getNextPcb() {
 	puts("getNextPcb: Nuevo PCB vacio creado.");
 	// serializo y armo el socket
 	SocketBuffer* sb = serializeCpuKer(sck);
-	if (!socketSend(kernelClient->ptrSocket, sb)) {
-		printf("No se pudo enviar el stream al kernel");
+	if (!socketSend(nucleoClient->ptrSocket, sb)) {
+		printf("No se pudo enviar el stream al nucleo");
 	}
 	free(sb);
 	printf("Obtener siguiente PCB");
 
-	if ((sb = socketReceive(kernelClient->ptrSocket)) == NULL) {
-		printf("No se pudo recibir el stream del kernel");
+	if ((sb = socketReceive(nucleoClient->ptrSocket)) == NULL) {
+		printf("No se pudo recibir el stream del nucleo");
 		return FALSE;
 	}
 
