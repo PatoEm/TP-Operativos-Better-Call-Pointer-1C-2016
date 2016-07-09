@@ -48,7 +48,7 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 	idProgramas = idProgramas + 1;
 	puts("hola");
 
-//	pcbNuevoPrograma->consola = consola;
+	pcbNuevoPrograma->consola = consola;
 
 	pcbNuevoPrograma->id = idProgramas;
 
@@ -83,38 +83,43 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->indiceDelStack = list_create();
 
+
+
 	pthread_mutex_lock(mutexColaNew);
-	queue_push(colaNew,pcbNuevoPrograma);
+	list_add(listaNew,pcbNuevoPrograma);
 	pthread_mutex_unlock(mutexColaNew);
 	return pcbNuevoPrograma;
 }
 //testeadas
+
+
+
 void moverAColaReady(pcb * programa) {
 
 	switch (programa->estado) {
-	case 0:
+	case NEW:
 		pthread_mutex_lock(mutexColaNew);
-		queue_pop(colaNew);
+		buscarYEliminarPCBEnLista(listaNew,programa);
 		pthread_mutex_unlock(mutexColaNew);
 		break; //0 NEW
-	case 1:
+	case READY:
 		break;
-	case 2:
+	case EXEC:
 		pthread_mutex_lock(mutexListaExec);
 		buscarYEliminarPCBEnLista(listaExec, programa);
 		pthread_mutex_unlock(mutexListaExec);
 		break; //2 EXEC
-	case 3:
+	case BLOCK:
 		pthread_mutex_lock(mutexListaBlock);
 		buscarYEliminarPCBEnLista(listaBlock, programa);
 		pthread_mutex_unlock(mutexListaBlock);
 		break; //3 BLOCK
-	case 4:
+	case EXIT:
 		break;
 	}
 
 	programa->estado = 1; //1 READY
-	queue_push(colaReady, programa);
+	list_add(listaReady,programa);
 }
 void moverAListaBlock(pcb* programa) {
 	pthread_mutex_lock(mutexListaExec);
@@ -130,7 +135,7 @@ void moverAListaBlock(pcb* programa) {
 }
 void moverAListaExec(pcb* programa) {
 	pthread_mutex_lock(mutexColaReady);
-	queue_pop(colaReady);
+	buscarYEliminarPCBEnLista(listaReady,programa);
 	pthread_mutex_unlock(mutexColaReady);
 
 	programa->estado = EXEC; //2 EXEC
@@ -147,7 +152,7 @@ void moverAColaExit(pcb* programa) {
 	programa->estado = 4; // 4 EXIT
 
 	pthread_mutex_lock(mutexColaExit);
-	queue_push(colaExit, programa);
+	list_add(listaExit,programa);
 	pthread_mutex_unlock(mutexColaExit);
 }
 void finalizarProcesosColaExit() {
@@ -156,7 +161,12 @@ void finalizarProcesosColaExit() {
 	//COMO LO HAGO?
 
 	//todo LUEGO BORRO ABSOLUTAMENTE Y DESTRUYO
-	queue_clean_and_destroy_elements(colaExit, NULL); //ESTO NO SE SI ESTA BIEN
+
+	list_clean(listaExit);
+
+
+
+
 }
 
 
@@ -530,11 +540,14 @@ int inicializarVariables() {
 	idProgramas = 0;
 
 	//InicioLasColas
-	colaNew = queue_create();
-	colaReady = queue_create();
+	listaNew=list_create();
+	//colaNew = queue_create();
+	listaReady=list_create();
+	//colaReady = queue_create();
 	listaExec = list_create();
 	listaBlock = list_create();
-	colaExit = queue_create();
+	listaExit=list_create();
+	//colaExit = queue_create();
 
 	return 0;
 }
@@ -554,7 +567,7 @@ void crearHilos(){
 
 }
 
-void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
+void* buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 	int i;
 
@@ -565,11 +578,13 @@ void buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 		if ((pcbComparar->id) == (pcbLoco->id)) {
 
-			list_remove(lista, i);
+			return list_remove(lista, i);
 
 		}
 
 	}
+
+	return NULL;
 
 }
 

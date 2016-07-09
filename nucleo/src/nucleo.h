@@ -74,60 +74,22 @@ pthread_mutex_t* mutexListaBlock;
 
 //Colas y listas
 
-t_queue *colaNew;
+//t_queue *colaNew;
 
-t_queue *colaReady;
+//t_queue *colaReady;
+
+t_list *listaNew;
+
+t_list *listaReady;
 
 t_list *listaExec;
 
 t_list *listaBlock;
 
-t_queue *colaExit;
-//
-////Estructuras PCB
-//
-//typedef struct {
-//	int comienzo;
-//	int longitud;
-//} arrayBidimensional;
-//
-//typedef struct {
-//	int id;
-//	int pag;
-//	int off;
-//	int size;
-//} variables;
-//typedef struct {
-//	int pag;
-//	int off;
-//	int size;
-//} argumentos;
-//
-//typedef struct {
-//	int pos;
-//	argumentos args;
-//	variables vars;
-//	int retPos;
-//	variables retVars;
-//
-//} paginaDeStack;
-//
-//typedef enum {
-//	NEW = 0, READY = 1, EXEC = 2, BLOCK = 3, EXIT = 4
-//} estadoPrograma;
-//
-//typedef struct {
-//	int id;
-//	int tamanioArchivoOriginal;
-//	t_puntero_instruccion programCounter;
-//	int paginasDeCodigo;
-//	arrayBidimensional * indiceDeCodigo;
-//	char * indiceDeEtiquetas;
-//	paginaDeStack * indiceDelStack;
-//	t_medatada_program* metaProgram;
-//	estadoPrograma estado;
-//
-//} pcb;
+t_list *listaExit;
+
+//t_queue *colaExit;
+
 
 //Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
 
@@ -152,6 +114,6 @@ void signalAnsisop(char* , pcb*);
 int inicializarVariables();
 void crearHilos();
 void enviarPcbACpu(Socket *);
-void buscarYEliminarPCBEnLista(t_list *, pcb* );
+void *buscarYEliminarPCBEnLista(t_list *, pcb* );
 
 #endif /* NUCLEO_H_ */

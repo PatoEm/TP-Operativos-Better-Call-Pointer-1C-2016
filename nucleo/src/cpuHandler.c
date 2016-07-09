@@ -309,16 +309,14 @@ void clientHandler(int clientDescriptor) {
 
 void enviarPcbACpu(Socket * cpuClient) {
 
-	if (!queue_is_empty(colaReady)) {
+	if (list_is_empty(listaReady)!=0) {
 		pthread_mutex_lock(mutexColaReady);
-		pcb* pcbAEnviar = (pcb*) queue_pop(colaReady);
+		pcb* pcbAEnviar = (pcb*) list_get(listaReady,0);
 		pthread_mutex_unlock(mutexColaReady);
 
-		pcbAEnviar->estado=EXEC;
 
-		pthread_mutex_lock(mutexListaExec);
-		list_add(listaExec, pcbAEnviar);
-		pthread_mutex_unlock(mutexListaExec);
+		moverAListaExec(pcbAEnviar);
+
 
 		pthread_mutex_lock(mutexQuantum);
 		//todo ver envio_pcb
