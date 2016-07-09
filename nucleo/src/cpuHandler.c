@@ -339,106 +339,139 @@ void enviarPcbACpu(Socket * cpuClient) {
 	// Tendría que mandar un mensaje para que el cpu siga pidiendo.
 }
 
+String stringFromByteArray(Byte* data, Int32U size) {
+	int i;
+	String result = malloc(size);
+	char* c = (char*) data;
+	for (i=0; i < size; i++) {
+		result[i] = *c;
+		c++;
+	}
+	result[size] = '\0';
+	return result;
+}
 
 void cpuClientHandler(Socket* cpuClient, Stream data) {
 
-	pcb* aux;
-//	t_hilo* pcbClipboard;
-	StrCpuKer* sck = unserializeCpuKer(data);
-	StrKerCon* skc;
+  pcb* pcb_aux;
+  StrCpuKer* in_cpu_msg = unserializeCpuKer(data);
+  StrKerCon* out_con_msg;
+  StrKerCpu* out_cpu_msg;
+  SocketBuffer* sb;
+  Socket* consola_aux;
 
-	if (sck->action == PRIMER_PCB) {
+  if (in_cpu_msg->action == PRIMER_PCB) {
 
-		/*
-		 * ACA NO SE HACE NADA, SI EL PLANIFICADOR TIENE TCBS PARA ENVIAR, LOS ENVIA
-		 * SI NO, LA CPU VA A TENER QUE ESPERAR. PARA ESTE PUNTO, EL PLANIFICADOR YA SABE
-		 * QUE EXISTE ESTA CPU
-		 */
+    /*
+     * ACA NO SE HACE NADA, SI EL PLANIFICADOR TIENE TCBS PARA ENVIAR, LOS ENVIA
+     * SI NO, LA CPU VA A TENER QUE ESPERAR. PARA ESTE PUNTO, EL PLANIFICADOR YA SABE
+     * QUE EXISTE ESTA CPU
+     */
 
-		enviarPcbACpu(cpuClient);
+    enviarPcbACpu(cpuClient);
 
-		log_info(cpuhlog, "KERNEL : CPU %d ha enviado FIRST_PCB",
-				cpuClient->descriptor);
-		return;
-	}
+    log_info(cpuhlog, "KERNEL : CPU %d ha enviado FIRST_PCB",
+        cpuClient->descriptor);
+    return;
+  }
 
-//	pcbClipboard = copyPcbToClipboard(&(sck->pcb));
+  switch (in_cpu_msg->action) {
 
-	switch (sck->action) {
-	case WAIT_SEM_ANSISOP:
+  case OBTENER_VALOR_COMPARTIDA:
+	  log_info(cpuhlog, "CPU pide: OBTENER_VALOR_COMPARTIDA");
+	  // Obtener valor de la variable.
+	  int valor = obtener_valor(stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen), pcb_aux);
+
+	  // TODO: Probar, si no anda: Enviar el valor en datalength que es int32u
+	  out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA, in_cpu_msg->pcb, 0, valor, 0);
+	  sb = serializeKerCpu(out_cpu_msg);
+
+	    // Envio al cpu que me hablo
+	  if (!socketSend(cpuClient, sb)) {
+		  log_error(cpuhlog, "Se envio el valor %d al CPU.", valor);
+	  } else {
+		  log_info(cpuhlog, "Se envio el valor %d al CPU.", valor);
+	  }
+
+	  break;
+
+  case WAIT_SEM_ANSISOP:
+
+    waitAnsisop(in_cpu_msg->log,&(in_cpu_msg->pcb));
+  //todo acá debería estar el nombre de que semaforo modificar
+
+  break;
+
+  // ACA VA EL RECONOCIMIENTO DE ACCIONES
+  case RECIBIR_NUEVO_PROGRAMA:
+
+    enviarPcbACpu(cpuClient);
+
+    log_info(cpuhlog, "KERNEL : CPU %d ha enviado RECIBIR_NUEVO_PROGRAMA",
+        cpuClient->descriptor);
 
 
-		waitAnsisop(sck->log,&(sck->pcb));
+    break;
 
+  case IMPRIMIRTEXTO: // TODO: Probar.
+    // Creo y serializo string kernel a consola.
+    out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, in_cpu_msg->logLen, in_cpu_msg->log);
+    sb = serializeKerCon(out_con_msg);
 
-	//todo acá debería estar el nombre de que semaforo modificar
+    // Extraigo el socket de la respectiva consola.
+    pcb_aux = &(in_cpu_msg->pcb);
+    consola_aux = pcb_aux->consola;
+
+    // Envio a la conchola
+    if (!socketSend(consola_aux, sb)) {
+          log_error(cpuhlog, "No se pudo mandar IMPRMIRTEXTO a la consola.");
+        } else {
+          log_info(cpuhlog, "Se envio IMPRMIRTEXTO a la consola.");
+        }
+
+    break;
+
+  case IMPRIMIR:
+    // Creo y serializo string kernel a consola.
+	out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, in_cpu_msg->logLen, in_cpu_msg->log);
+    sb = serializeKerCon(out_con_msg);
+
+    // Extraigo el socket de la respectiva consola.
+    pcb_aux = &(in_cpu_msg->pcb);
+    consola_aux = pcb_aux->consola;
+
+    // Envio a la conchola
+    if (!socketSend(consola_aux, sb)) {
+          log_error(cpuhlog, "No se pudo mandar IMPRMIR a la consola.");
+        } else {
+          log_info(cpuhlog, "Se envio IMPRMIR a la consola.");
+        }
+
+    break;
+
+  case ENTRADA_SALIDA:
+
+	log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
 
 	break;
-	// ACA VA EL RECONOCIMIENTO DE ACCIONES
-	case RECIBIR_NUEVO_PROGRAMA:
 
-		enviarPcbACpu(cpuClient);
+  case FINALIZAR_PROGRAMA:
 
-		log_info(cpuhlog, "KERNEL : CPU %d ha enviado RECIBIR_NUEVO_PROGRAMA",
-				cpuClient->descriptor);
+	break;
 
+  default:
+    log_error(cpuhlog, "KERNEL : CPU %d ha enviado un action incomprensible", cpuClient->descriptor);
+    break;
 
-		break;
-
-	//case ANSISOP_SEM_WAIT: break;
-
-	case IMPRIMIRTEXTO:
-		// Creo y serializo string kernel a consola.
-		skc = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, sck->logLen, sck->log);
-		SocketBuffer* sb = serializeKerCon(skc);
-
-		// Extraigo el socket de la respectiva consola.
-		pcb* pcb = &(sck->pcb);
-		Socket* consola = &(pcb->consola);
-
-		// Envio a la conchola
-		if (!socketSend(consola->ptrAddress, sb)) {
-					log_error(cpuhlog, "No se pudo mandar IMPRMIRTEXTO a la consola.");
-				} else {
-					log_info(cpuhlog, "Se envio IMPRMIRTEXTO a la consola.");
-				}
-		free(sb);
-		break;
-
-	default:
-		log_error(cpuhlog,
-				"KERNEL : CPU %d ha enviado un action incomprensible",
-				cpuClient->descriptor);
-		break;
-
-	}
-
+  }
+  free(sb);
 }
+
 
 void consoleClientHandler(Socket *consoleClient, Stream data) {
 	pcb *pcb;
-	Console *console;
 	StrConKer *sck = unserializeConKer(data);
-	Byte *ptrByte;
 	switch (sck->action) {
-//		case STD_INPUT:
-//
-//			log_debug(getLogger(), "KERNEL : El Cliente %d mando STD_INPUT",consoleClient->descriptor);
-//			console = getConsoleByTid(sck->tid);
-//
-//			SysCall *scd = getSysCallByTid(console->tcb->tid);
-//			if(scd != NULL){
-//
-//				scd->dataLength = sck->bufferWriterLen;
-//				scd->data = malloc(sizeof(sck->bufferWriterLen));
-//				ptrByte = (Byte*) &sck->bufferWriter;
-//				memcpy(&scd->data,ptrByte,sck->bufferWriterLen);
-//
-//				wakeTcbForSTDINComplete(console->tcb->tid);
-//			}
-//
-//			break;
-
 	case STD_OUTPUT:
 
 		log_error(cpuhlog, "KERNEL : El Cliente %d mando STD_OUTPUT",
