@@ -312,8 +312,16 @@ void compactarSwap() {
 	}
 	//usleep(1000 * atoi(retCompactacion)); todo
 }
+int tamanioCod(char*codigo){
+	int i=0;
+	while(codigo[i]!='\0'){
+		i++;
+	}
+	return i;
+}
 
 void manejoDeConexiones() {
+	int tamanioCodigo=0;
 	serverSwap = socketCreateServer(swapPort);
 	char* paginaLoca = malloc((sizeof(char)*atoi(tamPagina)));
 
@@ -360,12 +368,19 @@ void manejoDeConexiones() {
 				while (contadorPaginasRecibidas != streamUmcSwap->cantPage) {
 					ubicacionActual = contadorPaginasRecibidas
 							* atoi(tamPagina);
-					while (contador < atoi(tamPagina)) {
+					 tamanioCodigo=streamUmcSwap->dataLen;
+					while (contador < atoi(tamPagina) && contador < tamanioCodigo) {
 						guardarPagina[contador] =
 								(streamUmcSwap->data)[ubicacionActual];
 						contador++;
 						ubicacionActual++;
 					}
+					 if(contador!=tamanioCodigo){
+						 while(contador<atoi(tamPagina)){
+							 guardarPagina[contador] = '\0';
+									 contador++;
+						 }
+					 }
 					escribirPagina(streamUmcSwap->pid, contadorPaginasRecibidas,
 							guardarPagina);
 					contadorPaginasRecibidas++;

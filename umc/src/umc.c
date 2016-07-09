@@ -30,6 +30,14 @@ void crearListas() {
 	listaEspacioAsignado = list_create();
 }
 
+int tamanioCodigo(char*codigo){
+	int contador=0;
+	while(codigo[contador]!='\0'){
+		contador++;
+	}
+	return contador;
+}
+
 bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	SocketBuffer*buffer;
 	StrUmcSwa*streamUmcSwap;
@@ -38,7 +46,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	pagina.numDePag = 0;
 	//StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, pagina,
-			paginas, codigo, sizeof(codigo), pid);
+			paginas, codigo, tamanioCodigo(codigo), pid);// SI HAY PROBLEMAS MIRAR TAMANIO CODIGO TODO
 	buffer = serializeUmcSwa(streamUmcSwap);
 	socketSend(socketSwap->ptrSocket, buffer);
 
