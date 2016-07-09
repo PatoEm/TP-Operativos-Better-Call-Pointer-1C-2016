@@ -79,6 +79,8 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
 
+	pcbNuevoPrograma->instruccionesRestantes=metaNuevoPrograma->instrucciones_size;
+
 	pcbNuevoPrograma->estado = 0; //NEW
 
 	pcbNuevoPrograma->indiceDelStack = list_create();
