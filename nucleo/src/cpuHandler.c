@@ -193,7 +193,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	switch (sck->action) {
 	case HANDSHAKE:
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
-		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, pcb, 0, NULL, 0);
+		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, pcb, 0, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(skc);
 		if (socketSend(cpuClient, sb)) {
 			log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
@@ -322,7 +322,7 @@ void enviarPcbACpu(Socket * cpuClient) {
 
 		pthread_mutex_lock(mutexQuantum);
 		//todo ver envio_pcb
-		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum, NULL, 0);
+		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		pthread_mutex_unlock(mutexQuantum);
 
 
@@ -383,7 +383,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	  int valor = obtener_valor(stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen), pcb_aux);
 
 	  // TODO: Probar, si no anda: Enviar el valor en datalength que es int32u
-	  out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA, in_cpu_msg->pcb, 0, valor, 0);
+	  out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA, in_cpu_msg->pcb, 0, valor, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	  sb = serializeKerCpu(out_cpu_msg);
 
 	    // Envio al cpu que me hablo

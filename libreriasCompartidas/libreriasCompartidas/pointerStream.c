@@ -33,7 +33,7 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileCont
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen){
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo){
 	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
 	skc->id = id;
 	skc->action = action;
@@ -41,6 +41,8 @@ StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data
 	skc->quantum = quantum;
 	skc->data = data;
 	skc->dataLen = dataLen;
+	skc->nombreDispositivo = nombreDispositivo;
+	skc->lenNomDispositivo = lenNomDispositivo;
 	return skc;
 }
 
@@ -76,7 +78,7 @@ StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log){
 /*******************************
  * Constructor CPU-Kernel
  ******************************/
-StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log) {
+StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo) {
 	StrCpuKer* sck = malloc(sizeof(StrCpuKer));
 	sck->id = id;
 	sck->action = action;
@@ -84,6 +86,8 @@ StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen
 	sck->pid = pid;
 	sck->logLen = logLen;
 	sck->log = log;
+	sck->nombreDispositivo = nombreDispositivo;
+	sck->lenNomDispositivo = lenNomDispositivo;
 	return sck;
 }
 
@@ -193,6 +197,8 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	size += sizeof(skc->quantum);
 	size += sizeof(skc->dataLen);
 	size += skc->dataLen;
+	size += sizeof(skc->lenNomDispositivo);
+	size += skc->lenNomDispositivo;
 	return size;
 }
 
@@ -236,6 +242,8 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
 	size += sck->logLen;
+	size += sizeof(sck->lenNomDispositivo);
+	size += sck->lenNomDispositivo;
 	return size;
 }
 
@@ -383,6 +391,14 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	memcpy(ptrData, ptrByte, skc->dataLen);
 	ptrData += skc->dataLen;
 
+	ptrByte = (Byte*) &skc->lenNomDispositivo;
+	memcpy(ptrData, ptrByte, sizeof(skc->lenNomDispositivo));
+	ptrData += sizeof(skc->lenNomDispositivo);
+
+	ptrByte = (Byte*) skc->nombreDispositivo;
+	memcpy(ptrData, ptrByte, skc->lenNomDispositivo);
+	ptrData += skc->lenNomDispositivo;
+
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
 }
@@ -500,6 +516,14 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	ptrByte = (Byte*) sck->log;
 	memcpy(ptrData, ptrByte, sck->logLen);
 	ptrData += sck->logLen;
+
+	ptrByte = (Byte*) &sck->lenNomDispositivo;
+	memcpy(ptrData, ptrByte, sizeof(sck->lenNomDispositivo));
+	ptrData += sizeof(sck->lenNomDispositivo);
+
+	ptrByte = (Byte*) sck->nombreDispositivo;
+	memcpy(ptrData, ptrByte, sck->lenNomDispositivo);
+	ptrData += sck->lenNomDispositivo;
 
 	t_bitarray* barray = bitarray_create((char*) data, size);
 	return bitarrayToSocketBuffer(barray);
@@ -730,14 +754,14 @@ StrConKer* unserializeConKer(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+
 	memcpy(&fileContentLen, ptrByte, sizeof(fileContentLen));
 	ptrByte += sizeof(fileContentLen);
-
 	fileContent = malloc(fileContentLen);
 	memcpy(fileContent, ptrByte, fileContentLen);
 	ptrByte += fileContentLen;
-	fileContent[fileContentLen]='\0';
 
+	fileContent[fileContentLen]='\0';
 
 	free(dataSerialized);
 	return newStrConKer(id, action, fileContent, fileContentLen);
@@ -752,8 +776,10 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	Char action;
 	pcb pcb;
 	Int8U quantum;
-	Byte* data;
+	Byte* data = NULL;
 	Int32U dataLen;
+	Byte* nombreDispositivo = NULL;
+	Int32U lenNomDispositivo;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -763,16 +789,25 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	ptrByte += sizeof(pcb);
 	memcpy(&quantum, ptrByte, sizeof(quantum));
 	ptrByte += sizeof(quantum);
+
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
-
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
+
 	data[dataLen]='\0';
 
+	memcpy(&lenNomDispositivo, ptrByte, sizeof(lenNomDispositivo));
+	ptrByte += sizeof(lenNomDispositivo);
+	nombreDispositivo = malloc(lenNomDispositivo);
+	memcpy(nombreDispositivo, ptrByte, lenNomDispositivo);
+	ptrByte += lenNomDispositivo;
+
+	nombreDispositivo[lenNomDispositivo]='\0';
+
 	free(dataSerialized);
-	return newStrKerCpu(id, action, pcb, quantum, data, dataLen);
+	return newStrKerCpu(id, action, pcb, quantum, data, dataLen, nombreDispositivo, lenNomDispositivo);
 }
 
 /***********************************************/
@@ -794,12 +829,14 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+
 	memcpy(&size, ptrByte, sizeof(size));
 	ptrByte += sizeof(size);
-
 	data = malloc(size);
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
+
+	data[size]='\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -811,8 +848,6 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized){
 	ptrByte += sizeof(offset);
 	memcpy(&tamanio, ptrByte, sizeof(tamanio));
 	ptrByte += sizeof(tamanio);
-	data[size]='\0';
-
 
 	free(dataSerialized);
 	return newStrKerUmc(id, action, data, size, pid, cantPage, pagina, offset, tamanio);
@@ -832,15 +867,14 @@ StrKerCon* unserializeKerCon(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+
 	memcpy(&logLen, ptrByte, sizeof(logLen));
 	ptrByte += sizeof(logLen);
-
 	log = malloc(logLen);
 	memcpy(log, ptrByte, logLen);
 	ptrByte += logLen;
+
 	log[logLen]='\0';
-
-
 
 	free(dataSerialized);
 	return newStrKerCon(id, action, logLen, log);
@@ -857,6 +891,8 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	Int32U pid;
 	Int32U logLen;
 	Byte* log = NULL;
+	Byte* nombreDispositivo = NULL;
+	Int32U lenNomDispositivo;
 
 	memcpy(&id, ptrByte, sizeof(id));
 	ptrByte += sizeof(id);
@@ -866,18 +902,25 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(pcb);
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
+
 	memcpy(&logLen, ptrByte, sizeof(logLen));
 	ptrByte += sizeof(logLen);
-
 	log = malloc(logLen);
 	memcpy(log, ptrByte, logLen);
 	ptrByte += logLen;
 
 	log[logLen]='\0';
 
+	memcpy(&lenNomDispositivo, ptrByte, sizeof(lenNomDispositivo));
+	ptrByte += sizeof(lenNomDispositivo);
+	nombreDispositivo = malloc(lenNomDispositivo);
+	memcpy(nombreDispositivo, ptrByte, lenNomDispositivo);
+	ptrByte += lenNomDispositivo;
+
+	nombreDispositivo[lenNomDispositivo]='\0';
 
 	free(dataSerialized);
-	return newStrCpuKer(id, action, pcb, pid, logLen, log);
+	return newStrCpuKer(id, action, pcb, pid, logLen, log, nombreDispositivo, lenNomDispositivo);
 }
 
 /***********************************************/
@@ -901,15 +944,14 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized){
 	ptrByte += sizeof(pageComienzo);
 	memcpy(&offset, ptrByte, sizeof(offset));
 	ptrByte += sizeof(offset);
+
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
-
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
 	data[dataLen]='\0';
-
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -934,15 +976,14 @@ StrUmcKer* unserializeUmcKer(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+
 	memcpy(&size, ptrByte, sizeof(size));
 	ptrByte += sizeof(size);
-
 	data = malloc(size);
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
 
 	data[size]='\0';
-
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -974,15 +1015,13 @@ StrUmcCpu* unserializeUmcCpu(Stream dataSerialized){
 	ptrByte += sizeof(pageComienzo);
 	memcpy(&offset, ptrByte, sizeof(offset));
 	ptrByte += sizeof(offset);
+
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
-
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 	data[dataLen]='\0';
-
-
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1012,15 +1051,14 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized){
 	ptrByte += sizeof(pageComienzo);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
+
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
-
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
+
 	data[dataLen]='\0';
-
-
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1050,14 +1088,14 @@ StrSwaUmc* unserializeSwaUmc(Stream dataSerialized){
 	ptrByte += sizeof(pageComienzo);
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
+
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
-
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
-	data[dataLen]='\0';
 
+	data[dataLen]='\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);

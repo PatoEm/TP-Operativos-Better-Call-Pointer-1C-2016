@@ -357,7 +357,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 30 /*OBTENER_VALOR_COMPARTIDA*/,
-			pcbProceso, pcbProceso.id, sizeof(variable), variable);
+			pcbProceso, pcbProceso.id, sizeof(variable), variable, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
@@ -379,7 +379,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 	char* datosAEnviar = (sizeof(variable) + sizeof(valor) + 1);
 	datosAEnviar = strcat(variable, atoi(valor));
 	streamCpuKer = newStrCpuKer(CPU_ID, 33/*ASIGNAR_VALOR_COMPARTIDA*/,
-			pcbProceso, pcbProceso.id, sizeof(variable), datosAEnviar);
+			pcbProceso, pcbProceso.id, sizeof(variable), datosAEnviar, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == 33/*ASIGNAR_VALOR_COMPARTIDA*/) {
@@ -426,7 +426,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 void finalizar(void) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 22 /*FINALIZAR_PROGRAMA*/, pcbProceso,
-			pcbProceso.id, 0, NULL);
+			pcbProceso.id, 0, NULL, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 }
@@ -463,7 +463,7 @@ int imprimir(t_valor_variable valor_mostrar) {
 	//streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
 	//strlen(itoa(valor_mostrar)), itoa(valor_mostrar));
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
-			strlen(aux), aux);
+			strlen(aux), aux, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 
@@ -481,7 +481,7 @@ int imprimir(t_valor_variable valor_mostrar) {
 int imprimirTexto(char* texto) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIRTEXTO, pcbProceso,
-			pcbProceso.id, strlen(texto), texto);
+			pcbProceso.id, strlen(texto), texto, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	return strlen(texto);
@@ -500,7 +500,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	inOut = strcat(dispositivo, auxLoco);
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 29 /*ENTRADA_SALIDA*/, pcbProceso,
-			pcbProceso.id, strlen(dispositivo), inOut);
+			pcbProceso.id, strlen(dispositivo), inOut, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 		seguirEjecutando = FALSE;
@@ -512,7 +512,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 void wait(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 27 /*WAIT*/, pcbProceso, pcbProceso.id,
-			strlen(identificador_semaforo), identificador_semaforo);
+			strlen(identificador_semaforo), identificador_semaforo, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
@@ -528,7 +528,7 @@ void signal(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 28 /*SIGNAL*/, pcbProceso,
 			pcbProceso.id, strlen(identificador_semaforo),
-			identificador_semaforo);
+			identificador_semaforo, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 }
