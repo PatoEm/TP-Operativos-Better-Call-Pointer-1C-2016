@@ -570,4 +570,8 @@ void* buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 }
 
+funcionHiloIO(char* identificador, int cantidad, pcb *pcbLoca){
 
+
+
+}

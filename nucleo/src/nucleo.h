@@ -115,5 +115,7 @@ int inicializarVariables();
 void crearHilos();
 void enviarPcbACpu(Socket *);
 void *buscarYEliminarPCBEnLista(t_list *, pcb* );
+void funcionHiloIO(char* identificador, int cantidad, pcb *pcbLoca);
+
 
 #endif /* NUCLEO_H_ */

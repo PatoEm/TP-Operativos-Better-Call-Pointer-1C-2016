@@ -357,7 +357,8 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   StrKerCpu* out_cpu_msg;
   SocketBuffer* sb;
   Socket* consola_aux;
-
+  Byte * nombreDispositivo;
+  int valor_cantidad_tiempo;
   if (in_cpu_msg->action == PRIMER_PCB) {
 
     /*
@@ -449,7 +450,15 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   case ENTRADA_SALIDA:
 
+  nombreDispositivo=in_cpu_msg->nombreDispositivo;
+  valor_cantidad_tiempo= atoi(in_cpu_msg->log);
 
+  	  	 pthread_t hiloIO;
+		 pthread_attr_t attrHiloIO;
+		 pthread_attr_init(&attrHiloIO);
+		 pthread_attr_setdetachstate(&attrHiloIO, PTHREAD_CREATE_DETACHED);
+		// pthread_create(&hiloIO, &attrHiloIO, &funcionHiloIO(nombreDispositivo,valor_cantidad_tiempo,(in_cpu_msg->pcb)), NULL);
+		 pthread_attr_destroy(&attrHiloIO);
 
 
 	log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
