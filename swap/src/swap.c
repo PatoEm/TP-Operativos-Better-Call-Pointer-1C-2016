@@ -62,7 +62,8 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (((nodoALeer->pid) != pid) && (nodoALeer->bitLectura != 1)) {
+	while (!(((nodoALeer->pid) == pid)
+			&& (nodoALeer->numDePag == numeroDePagina))) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
@@ -85,26 +86,22 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (((nodoALeer->pid) != pid) && (nodoALeer->numDePag != numeroDePagina)) {
+	while (!(((nodoALeer->pid) == pid)
+			&& (nodoALeer->numDePag == numeroDePagina))) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if ((nodoALeer->bitLectura) == 1) {
-		return (punteroAPaginaLeida);
-	} else {
-		int lugarDeLaCadena = 0;
-		nodoALeer->bitLectura = 1;
-		char*punteroADevolver = malloc(sizeof(char)*atoi(tamPagina));
-		int posicionDeChar = (nodoALeer->IDPaginaInterno) * atoi(tamPagina);
-		while (posicionDeChar
-				< ((nodoALeer->IDPaginaInterno) * atoi(tamPagina)
-						+ atoi(tamPagina))) {
-			punteroADevolver[lugarDeLaCadena] = archivoMappeado[posicionDeChar];
-			posicionDeChar++;
-			lugarDeLaCadena++;
-		}
-		return (punteroADevolver);
+	int lugarDeLaCadena = 0;
+	nodoALeer->bitLectura = 1;
+	char*punteroADevolver = malloc(sizeof(char) * atoi(tamPagina));
+	int posicionDeChar = (nodoALeer->IDPaginaInterno) * atoi(tamPagina);
+	while (posicionDeChar
+			< ((nodoALeer->IDPaginaInterno) * atoi(tamPagina) + atoi(tamPagina))) {
+		punteroADevolver[lugarDeLaCadena] = archivoMappeado[posicionDeChar];
+		posicionDeChar++;
+		lugarDeLaCadena++;
 	}
+	return (punteroADevolver);
 }
 
 int calcularIDPagina(int inicio) {
@@ -236,7 +233,7 @@ void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
 		(paginaAReservar->pid) = pid;
 		(paginaAReservar->IDPaginaInterno) = paginaActual;
 		(paginaAReservar->numDePag) = numInternoDePagina;
-		(paginaAReservar->bitLectura) = 0;
+		(paginaAReservar->bitLectura) = 1;
 		if (lugarEnDondeDeboColocarMiNodo < list_size(listaEspacioAsignado))
 			list_add_in_index(listaEspacioAsignado,
 					lugarEnDondeDeboColocarMiNodo, paginaAReservar);
@@ -312,18 +309,18 @@ void compactarSwap() {
 	}
 	//usleep(1000 * atoi(retCompactacion)); todo
 }
-int tamanioCod(char*codigo){
-	int i=0;
-	while(codigo[i]!='\0'){
+int tamanioCod(char*codigo) {
+	int i = 0;
+	while (codigo[i] != '\0') {
 		i++;
 	}
 	return i;
 }
 
 void manejoDeConexiones() {
-	int tamanioCodigo=0;
+	int tamanioCodigo = 0;
 	serverSwap = socketCreateServer(swapPort);
-	char* paginaLoca = malloc((sizeof(char)*atoi(tamPagina)));
+	char* paginaLoca = malloc((sizeof(char) * atoi(tamPagina)));
 
 	if (serverSwap == NULL) {
 		puts("Error no se pudo crear el server");
@@ -364,30 +361,31 @@ void manejoDeConexiones() {
 				if (!socketSend(umcClient, buffer))
 					puts("Error al enviar el paquete");
 			} else {
-				tamanioCodigo=streamUmcSwap->dataLen;
+				tamanioCodigo = streamUmcSwap->dataLen;
 				contadorPaginasRecibidas = 0;
 				while (contadorPaginasRecibidas != streamUmcSwap->cantPage) {
 					ubicacionActual = contadorPaginasRecibidas
 							* atoi(tamPagina);
-					 tamanioCodigo=streamUmcSwap->dataLen;
-					while (contador < atoi(tamPagina) && contador < tamanioCodigo) {
+					tamanioCodigo = streamUmcSwap->dataLen;
+					while (contador < atoi(tamPagina)
+							&& contador < tamanioCodigo) {
 						guardarPagina[contador] =
 								(streamUmcSwap->data)[ubicacionActual];
 						contador++;
 						ubicacionActual++;
 					}
-					 if(contador!=atoi(tamPagina)){
-						 while(contador<atoi(tamPagina)){
-							 guardarPagina[contador] = '\0';
-									 contador++;
-						 }
-					 }
+					if (contador != atoi(tamPagina)) {
+						while (contador < atoi(tamPagina)) {
+							guardarPagina[contador] = '\0';
+							contador++;
+						}
+					}
 					escribirPagina(streamUmcSwap->pid, contadorPaginasRecibidas,
 							guardarPagina);
 					contadorPaginasRecibidas++;
-					tamanioCodigo=tamanioCodigo-atoi(tamPagina);
+					tamanioCodigo = tamanioCodigo - atoi(tamPagina);
 				}
-				streamSwapUmc = newStrSwaUmc(SWAP_ID, 26/*PROGRAMA_RECIBIDO*/ ,
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, 26/*PROGRAMA_RECIBIDO*/,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer))
@@ -409,7 +407,8 @@ void manejoDeConexiones() {
 			//int tamanioPaginaLoca = atoi(tamPagina);
 			//(Char id, Char action, paginaAsignada pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 			streamSwapUmc = newStrSwaUmc(SWAP_ID, LEER_UNA_PAGINA,
-					paginaAMandar, 1, paginaLoca,tamPaginaLoca, streamUmcSwap->pid);
+					paginaAMandar, 1, paginaLoca, tamPaginaLoca,
+					streamUmcSwap->pid);
 			buffer = serializeSwaUmc(streamSwapUmc);
 			if (!socketSend(umcClient, buffer))
 				puts("Error al enviar el paquete");
