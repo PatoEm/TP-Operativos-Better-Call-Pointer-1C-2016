@@ -364,6 +364,7 @@ void manejoDeConexiones() {
 				if (!socketSend(umcClient, buffer))
 					puts("Error al enviar el paquete");
 			} else {
+				tamanioCodigo=streamUmcSwap->dataLen;
 				contadorPaginasRecibidas = 0;
 				while (contadorPaginasRecibidas != streamUmcSwap->cantPage) {
 					ubicacionActual = contadorPaginasRecibidas
@@ -375,7 +376,7 @@ void manejoDeConexiones() {
 						contador++;
 						ubicacionActual++;
 					}
-					 if(contador!=tamanioCodigo){
+					 if(contador!=atoi(tamPagina)){
 						 while(contador<atoi(tamPagina)){
 							 guardarPagina[contador] = '\0';
 									 contador++;
@@ -384,6 +385,7 @@ void manejoDeConexiones() {
 					escribirPagina(streamUmcSwap->pid, contadorPaginasRecibidas,
 							guardarPagina);
 					contadorPaginasRecibidas++;
+					tamanioCodigo=tamanioCodigo-atoi(tamPagina);
 				}
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, 26/*PROGRAMA_RECIBIDO*/ ,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
