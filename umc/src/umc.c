@@ -375,7 +375,7 @@ int paginasOcupadasPorPid(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
-	char*paginaADevolver=malloc(sizeof(char)*cantidad);
+	char*paginaADevolver=malloc(sizeof(char)*cantidad );
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -395,6 +395,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		if (tlbHabilitada()) {
 			llevarPaginaATLB(pid, pagina, NULL);
 		}
+		paginaADevolver[cantidad]= '\0';
 		return (paginaADevolver);
 
 	} else {
@@ -439,6 +440,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comCadena++;
 				lugCad++;
 			}
+			paginaADevolver[cantidad]= '\0';
 			return (paginaADevolver);
 		} else {
 			int frame = reemplazarPagina(pid, pagina, 1);
@@ -450,6 +452,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comienzoDeCadena++;
 				lugarDeLaCadena++;
 			}
+			paginaADevolver[cantidad]= '\0';
 			return (paginaADevolver);
 
 		}
