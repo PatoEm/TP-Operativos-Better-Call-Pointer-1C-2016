@@ -381,7 +381,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (!((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina)) {
+	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina)) ){
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
