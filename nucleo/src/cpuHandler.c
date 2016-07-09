@@ -410,6 +410,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	  atributosWait.identificador=nombreDispositivo;
 	  atributosWait.pcbLoca=pcb_aux;
+	  atributosWait.cpuSocket=cpuClient;
 
 	  	  	 pthread_t hiloWait;
 			 pthread_attr_t attrHiloWait;

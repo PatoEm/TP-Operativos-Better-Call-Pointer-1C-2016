@@ -386,7 +386,10 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
-	if(StreamKerCpu->action == 37 /*WAIT_REALIZADO*/) ;// ver que hacer
+	if(StreamKerCpu->action == 37 /*WAIT_REALIZADO*/){
+		//no hago nada, me quedo clavado en el recibe.
+
+	} // ver que hacer
 
 }
 

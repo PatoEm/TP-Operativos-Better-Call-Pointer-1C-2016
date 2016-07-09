@@ -25,6 +25,7 @@
 #include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <libreriasCompartidas/pcb.h>
+#include <libreriasCompartidas/pointerStream.h>.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/types.h>
@@ -34,6 +35,11 @@
 #define FAIL -1
 #define EVENT_SIZE  ( sizeof (struct inotify_event) )
 #define EVENT_BUF_LEN ( 1024 * EVENT_SIZE )
+
+
+
+
+
 //Variables Globales
 
 //Variables de lectura de archivo
@@ -101,7 +107,7 @@ typedef struct  {
 } atributosIO;
 
 typedef struct  {
-
+	Socket* cpuSocket;
 	char* identificador;
 	pcb* pcbLoca;
 
@@ -123,7 +129,7 @@ void entrada_salida(char * , int , pcb *);
 void ejecutarIO(int , pcb* , int ) ;
 int obtener_valor(char*);
 void grabar_valor(char* , int );
-void waitAnsisop(char * , pcb *);
+void waitAnsisop(char * , pcb *,Socket*);
 void signalAnsisop(char*);
 int inicializarVariables();
 void crearHilos();
