@@ -378,7 +378,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   case OBTENER_VALOR_COMPARTIDA:
 	  log_info(cpuhlog, "CPU pide: OBTENER_VALOR_COMPARTIDA");
 	  // Obtener valor de la variable.
-	  int valor = obtener_valor(stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen), pcb_aux);
+	  int valor = obtener_valor(stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen));
 
 	  // TODO: Probar, si no anda: Enviar el valor en datalength que es int32u
 	  out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA, in_cpu_msg->pcb, 0, valor, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);

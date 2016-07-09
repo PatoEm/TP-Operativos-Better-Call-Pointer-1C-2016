@@ -252,15 +252,8 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 	totalRetardo = retardoPeriferico * cantidad * 1000;
 	//usleep(totalRetardo*1000);
 
-	if (pthread_mutex_trylock(mutexIO[j]) == 0) {
-
-		ejecutarIO(j, pcbPrograma, totalRetardo);
-
-	} else {
-
+	if (pthread_mutex_lock(mutexIO[j]) == 0) {
 		moverAListaBlock(pcbPrograma);
-
-		pthread_mutex_lock(mutexIO[j]);
 		ejecutarIO(j, pcbPrograma, totalRetardo);
 
 	}
@@ -271,11 +264,10 @@ void ejecutarIO(int posicion, pcb* pcbDelPrograma, int retardo) {
 
 	usleep(retardo);
 	pthread_mutex_unlock(mutexIO[posicion]);
-	//todo Mover el programCounter.
 	moverAColaReady(pcbDelPrograma);
 }
 //testeada
-int obtener_valor(char* identificador, pcb* pcbPrograma) {
+int obtener_valor(char* identificador) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
@@ -284,15 +276,11 @@ int obtener_valor(char* identificador, pcb* pcbPrograma) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 
-			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
-				moverAColaReady(pcbPrograma);
+			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {;
 				valor = variableCompartidaValor[i];
 				pthread_mutex_unlock(mutexVariables[i]);
 			} else {
-				moverAListaBlock(pcbPrograma);
-
 				pthread_mutex_lock(mutexVariables[i]);
-				moverAColaReady(pcbPrograma);
 				valor = variableCompartidaValor[i];
 				pthread_mutex_unlock(mutexVariables[i]);
 			}
@@ -308,7 +296,7 @@ int obtener_valor(char* identificador, pcb* pcbPrograma) {
 
 }
 //testeada
-void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
+void grabar_valor(char* identificador, int valor) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
@@ -316,14 +304,10 @@ void grabar_valor(char* identificador, int valor, pcb* pcbPrograma) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
-				moverAColaReady(pcbPrograma);
 				variableCompartidaValor[i] = valor;
 				pthread_mutex_unlock(mutexVariables[i]);
 			} else {
-				moverAListaBlock(pcbPrograma);
-
 				pthread_mutex_lock(mutexVariables[i]);
-				moverAColaReady(pcbPrograma);
 				variableCompartidaValor[i] = valor;
 				pthread_mutex_unlock(mutexVariables[i]);
 			}
@@ -368,7 +352,7 @@ void waitAnsisop(char * identificador, pcb *pcbPrograma) {
 
 }
 //testeada
-void signalAnsisop(char* identificador, pcb*pcbPrograma) {
+void signalAnsisop(char* identificador) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
@@ -377,8 +361,6 @@ void signalAnsisop(char* identificador, pcb*pcbPrograma) {
 		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
 			sem_post(semaforosAnsisop[i]);
-
-			moverAColaReady(pcbPrograma);
 
 			abortar++;
 
