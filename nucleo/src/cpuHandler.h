@@ -52,4 +52,5 @@ typedef struct console {
 
 
 
+
 #endif /* CPUHANDLER_H_ */

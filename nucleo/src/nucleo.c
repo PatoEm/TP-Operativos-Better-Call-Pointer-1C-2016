@@ -252,8 +252,8 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 	totalRetardo = retardoPeriferico * cantidad * 1000;
 	//usleep(totalRetardo*1000);
 
+	moverAListaBlock(pcbPrograma);
 	if (pthread_mutex_lock(mutexIO[j]) == 0) {
-		moverAListaBlock(pcbPrograma);
 		ejecutarIO(j, pcbPrograma, totalRetardo);
 
 	}
@@ -570,4 +570,14 @@ void* buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 }
 
+void funcionHiloIO(atributosIO atributos){
 
+entrada_salida(atributos.identificador,atributos.cantidad,atributos.pcbLoca);
+
+}
+
+void funcionHiloWait(atributosWait atributos){
+
+waitAnsisop(atributos.identificador,atributos.pcbLoca);
+
+}

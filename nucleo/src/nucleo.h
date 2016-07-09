@@ -92,6 +92,20 @@ t_list *listaExit;
 
 
 //Estructuras auxiliares para el funcionamiento del nucleo (NO ES PARTE DE LA PCB)
+typedef struct  {
+
+	char* identificador;
+	int cantidad;
+	pcb* pcbLoca;
+
+} atributosIO;
+
+typedef struct  {
+
+	char* identificador;
+	pcb* pcbLoca;
+
+} atributosWait;
 
 //Prototipos
 
@@ -115,5 +129,7 @@ int inicializarVariables();
 void crearHilos();
 void enviarPcbACpu(Socket *);
 void *buscarYEliminarPCBEnLista(t_list *, pcb* );
+void funcionHiloIO(atributosIO);
+void funcionHiloWait(atributosWait );
 
 #endif /* NUCLEO_H_ */
