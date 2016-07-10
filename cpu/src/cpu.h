@@ -138,4 +138,29 @@ void signal(t_nombre_semaforo identificador_semaforo);
 bool espacioMemoriaVacio(int tamanio, char*bytes);
 
 //======================================================
+
+/*******************************************************
+ * Structs para el parser
+ *******************************************************/
+
+AnSISOP_funciones funciones = {
+		.AnSISOP_definirVariable = definirVariable,
+		.AnSISOP_obtenerPosicionVariable = obtenerPosicionVariable,
+		.AnSISOP_dereferenciar = dereferenciar,
+		.AnSISOP_asignar = asignar,
+		.AnSISOP_obtenerValorCompartida = obtenerValorCompartida,
+		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
+		.AnSISOP_irAlLabel = irAlLabel,
+		.AnSISOP_llamarConRetorno = llamarConRetorno,
+		.AnSISOP_retornar = retornar,
+		.AnSISOP_entradaSalida = entradaSalida,
+		.AnSISOP_imprimir = imprimir,
+		.AnSISOP_imprimirTexto = imprimirTexto,
+};
+
+AnSISOP_kernel funcionesDeKernel = {
+		.AnSISOP_wait = wait,
+		.AnSISOP_signal = signal,
+};
+
 #endif /* CPU_H_ */

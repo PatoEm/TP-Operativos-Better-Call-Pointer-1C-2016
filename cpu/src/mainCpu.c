@@ -58,7 +58,6 @@ pcb* pcbActual = NULL;
 Boolean loadConfig();
 Boolean socketConnection();
 Boolean getNextPcb();
-Boolean processPcb();
 
 /*****************************************
  * GLOBAL
@@ -78,17 +77,33 @@ SocketBuffer* buffer;
  ****************************************/
 
 int main() {
+	// cargo variables de configuracion, me conecto al nucleo y a la umc
 	if (loadConfig() && socketConnection()) {
 		while (TRUE){
+			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
 			if(!getNextPcb()) {
 				return TRUE;
 			}
+			// proceso el pcb del nucleo
+			Int8U quantum = skc->quantum;
+			while (quantum > 0 /*!=contador*/ && seguirEjecutando) {
+				analizadorLinea(1/*linea a ejecutar*/, &funciones, &funcionesDeKernel);
+				moverProgramCounterPcb(pcbActual);
+			}	// ver forma de marcar si llegue al final
 
-			if(!processPcb()) {
-				return TRUE;
+			if (!seguirEjecutando) {
+				// abortar programa
+				//si llegue al final del programa, finalizar
 			}
+
+			if (quantum == 1/*contador*/){
+				//mandar PCB
+			}
+
+			//volver a pedir otro PCB
 		}
 	}
+
 	config_destroy(tConfig);
 	while(1){
 		puts("Esperando..");
@@ -197,25 +212,28 @@ Boolean getNextPcb() {
 		sck = newStrCpuKer(CPU_ID, PRIMER_PCB, *pcbActual, 0, 0, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
 	puts("getNextPcb: Nuevo PCB vacio creado.");
+
 	// serializo y armo el socket
 	SocketBuffer* sb = serializeCpuKer(sck);
+	// envio el socketBuffer
 	if (!socketSend(nucleoClient->ptrSocket, sb)) {
 		printf("No se pudo enviar el stream al nucleo");
 	}
 	free(sb);
-	printf("Obtener siguiente PCB");
+	puts("Obtener siguiente PCB");
 
+	// recibo la respuesta del nucleo y deserealizo
 	if ((sb = socketReceive(nucleoClient->ptrSocket)) == NULL) {
-		printf("No se pudo recibir el stream del nucleo");
+		puts("No se pudo recibir el stream del nucleo");
 		return FALSE;
 	}
 
+	if (skc != NULL) {
+		free(skc);
+	}
+
 	skc = unserializeKerCpu((Stream)sb->data);
-	//*pcbActual = skc->pcb;
+	*pcbActual = skc->pcb;
 
-	return TRUE;
-}
-
-Boolean processPcb() {
 	return TRUE;
 }
