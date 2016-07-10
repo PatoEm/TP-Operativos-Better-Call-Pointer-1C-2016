@@ -235,9 +235,9 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == 30/*OBTENER_VALOR_COMPARTIDA*/) {
-
 		return (atoi(streamKerCpu->data));
-
+	} else {
+		return -1234;
 	}
 }
 
@@ -248,14 +248,19 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
 	char* buffer;
 	StrCpuKer*streamCpuKer;
-	char* datosAEnviar = (sizeof(variable) + sizeof(valor) + 1);
-	datosAEnviar = strcat(variable, atoi(valor));
 	streamCpuKer = newStrCpuKer(CPU_ID, 33/*ASIGNAR_VALOR_COMPARTIDA*/,
-			pcbProceso, pcbProceso.id, sizeof(variable), datosAEnviar, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+			pcbProceso, pcbProceso.id,
+			valor /*LOGLEN*/,
+			NULL /*LOG*/,
+			variable /*NOMBRE DISPOSITIVO*/,
+			strlen(variable) /*LEN NOMBRE DISPOSITIVO*/);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == 33/*ASIGNAR_VALOR_COMPARTIDA*/) {
-		return atoi(streamKerCpu->data);
+		return atoi(streamKerCpu->lenNomDispositivo);
+	}
+	else {
+		return -1234;
 	}
 }
 
