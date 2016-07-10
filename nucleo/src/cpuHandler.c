@@ -386,6 +386,33 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   switch (in_cpu_msg->action) {
 
+  case ASIGNAR_VALOR_COMPARTIDA:
+	  log_info(cpuhlog, "CPU pide: ASIGNAR_VALOR_COMPARTIDA");
+	  // Obtener nombre de la variable.
+	  char* variable = stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
+
+	  // Obtener nuevo valor TODO que el cpu pase esto así
+	  int valor = in_cpu_msg->logLen;
+
+	  // Asigno el valor.
+	  grabar_valor(variable, valor);
+
+	  // Mando el valor asignado en el campo LEN NOMBRE DISPOSITIVO
+	  out_cpu_msg = newStrKerCpu(KERNEL_ID, ASIGNAR_VALOR_COMPARTIDA, in_cpu_msg->pcb, 0, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, valor /*LEN NOMBRE DISPOSITIVO*/);
+	  sb = serializeKerCpu(out_cpu_msg);
+
+	    // Envio al cpu que me hablo
+	  if (!socketSend(cpuClient, sb)) {
+		  log_error(cpuhlog, "No se asigno %d a %s.\n", valor, variable);
+	  } else {
+		  log_info(cpuhlog, "Se asigno %d a %s.\n", valor, variable);
+	  }
+
+
+
+	  break;
+
+
   case OBTENER_VALOR_COMPARTIDA:
 	  log_info(cpuhlog, "CPU pide: OBTENER_VALOR_COMPARTIDA");
 	  // Obtener valor de la variable.
@@ -397,9 +424,9 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	    // Envio al cpu que me hablo
 	  if (!socketSend(cpuClient, sb)) {
-		  log_error(cpuhlog, "Se envio el valor %d al CPU.", valor);
+		  log_error(cpuhlog, "Se envio el valor %d al CPU.\n", valor);
 	  } else {
-		  log_info(cpuhlog, "Se envio el valor %d al CPU.", valor);
+		  log_info(cpuhlog, "Se envio el valor %d al CPU.\n", valor);
 	  }
 
 	  break;
@@ -474,22 +501,24 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   case ENTRADA_SALIDA:
 
-  nombreDispositivo=in_cpu_msg->nombreDispositivo;
-  valor_cantidad_tiempo= atoi(in_cpu_msg->log);
+//	  TODO: Proba esto para obtener el string.
+	  nombreDispositivo= stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
+//	  nombreDispositivo=in_cpu_msg->nombreDispositivo;
+	  valor_cantidad_tiempo= atoi(in_cpu_msg->log);
 
-  atributos.identificador=nombreDispositivo;
-  atributos.cantidad=valor_cantidad_tiempo;
-  atributos.pcbLoca=pcb_aux;
+	  atributos.identificador=nombreDispositivo;
+	  atributos.cantidad=valor_cantidad_tiempo;
+	  atributos.pcbLoca=pcb_aux;
 
 		 pthread_attr_init(&attrHiloIO);
 		 pthread_attr_setdetachstate(&attrHiloIO, PTHREAD_CREATE_DETACHED);
 		 pthread_create(&hiloIO, &attrHiloIO, &funcionHiloIO, &atributos);
 		 pthread_attr_destroy(&attrHiloIO);
 
-		 //todo testear hilos IO
+//		 todo testear hilos IO
 
 
-	log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
+		 log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
 
 	break;
 
