@@ -11,6 +11,7 @@
 #include <libreriasCompartidas/espacioAsignado.h>
 #include <libreriasCompartidas/pointerStream.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <commons/collections/list.h>
 #define FAIL -1
 #define PROGRAMA_NO_INICIADO -2
@@ -36,6 +37,9 @@ int aciertosTLB;
 int accesosTLB;
 t_list* conexionSockets ;
 SocketClient * socketSwap;
+
+pthread_mutex_t* mutexPedidos;
+
 
   typedef struct{
 	  int pid;

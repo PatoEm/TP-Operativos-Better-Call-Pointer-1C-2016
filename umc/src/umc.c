@@ -16,6 +16,9 @@ int calcularIDPagina(int inicio) {
 void iniciarEstructurasUMC() {
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
+
+	pthread_mutex_init(mutexPedidos,NULL);
+
 	crearListas();
 	inicioTLB();
 	listaPaginasPorPrograma = list_create();
@@ -698,6 +701,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			pidActivo = streamCpuUmc->pid;
 			break;
 		case 25/*SOLICITAR_BYTES*/:
+			pthread_mutex_lock(mutexPedidos);
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					|| cantidadDePaginasLibres() == 0) {
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
@@ -717,8 +721,10 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			}
+			pthread_mutex_unlock(mutexPedidos);
 			break;
 		case 34 /*ALMACENAR_BYTES*/:
+			pthread_mutex_lock(mutexPedidos);
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					|| cantidadDePaginasLibres() == 0) {
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
@@ -741,6 +747,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			}
+			pthread_mutex_unlock(mutexPedidos);
 			break;
 		default:
 			printf("No se pudo identificar la accion de la CPU");
@@ -770,6 +777,8 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 		socketSend(socket, buffer);
 		break;
 	case 20 /*INICIALIZAR_PROGRAMA*/:
+		pthread_mutex_lock(mutexPedidos);
+
 		if (0 == inicializarPrograma(sku->pid, sku->cantPage, sku->data)) {
 			streamAlKerner = newStrUmcKer(UMC_ID,
 					21/*PROGRAMA_NO_INICIALIZADO*/,
@@ -783,12 +792,14 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 			buffer = serializeUmcKer(streamAlKerner);
 			socketSend(socket, buffer);
 		}
-
+		pthread_mutex_unlock(mutexPedidos);
 		break;
 
 //todo hablar con pato el almacenar y leer bytes
 	case 22 /*FINALIZAR_PROGRAMA*/:
+		pthread_mutex_lock(mutexPedidos);
 		finalizarPrograma(sku->pid);
+		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:
 		printf("No se pudo identificar la accion del Kernel");
