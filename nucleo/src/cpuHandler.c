@@ -574,6 +574,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
     break;
 
   }
+  // OJO! EL FREE LO HAGO ACA ABAJO, NO EN CADA CASE
   free(sb);
 }
 
