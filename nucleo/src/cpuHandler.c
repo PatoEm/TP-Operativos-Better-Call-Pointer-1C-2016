@@ -649,3 +649,16 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 	}
 }
 
+int pedirTamanioDePagina(){
+	SocketBuffer * buffer;
+	StrUmcKer * streamUmcKer;
+
+	buffer = socketReceive(umcServer);
+
+	if (buffer == NULL)
+		puts("Error al recibir del cliente");
+
+	streamUmcKer = unserializeUmcKer(buffer);
+
+	return (streamUmcKer->size);
+}
