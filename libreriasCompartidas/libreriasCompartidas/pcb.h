@@ -66,4 +66,7 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 pcb* newEmptyPcb();
 
 char * pedirCodigoAUMC();
+
+void moverProgramCounterPcb(pcb * pcbLoca);
+
 #endif /* LIBRERIASCOMPARTIDAS_PCB_H_ */
