@@ -202,6 +202,8 @@ void eliminarProceso(int pid) {
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
+		if(list_size(listaEspacioAsignado)== nodoActualAReventar)
+			break;
 	}
 }
 

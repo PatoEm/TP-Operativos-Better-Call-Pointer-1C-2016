@@ -25,7 +25,7 @@
 #include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <libreriasCompartidas/pcb.h>
-#include <libreriasCompartidas/pointerStream.h>.h>
+#include <libreriasCompartidas/pointerStream.h>
 #include <unistd.h>
 #include <errno.h>
 #include <sys/types.h>

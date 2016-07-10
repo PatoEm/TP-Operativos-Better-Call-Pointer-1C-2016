@@ -359,6 +359,8 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   Socket* consola_aux;
   Byte * nombreDispositivo;
   int valor_cantidad_tiempo;
+  int valor;
+  char* variable;
 
   	 atributosIO atributos;
   	 atributosWait atributosWait;
@@ -389,10 +391,10 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   case ASIGNAR_VALOR_COMPARTIDA:
 	  log_info(cpuhlog, "CPU pide: ASIGNAR_VALOR_COMPARTIDA");
 	  // Obtener nombre de la variable.
-	  char* variable = stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
+	variable = stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
 
 	  // Obtener nuevo valor TODO que el cpu pase esto así
-	  int valor = in_cpu_msg->logLen;
+	  valor = in_cpu_msg->logLen;
 
 	  // Asigno el valor.
 	  grabar_valor(variable, valor);
@@ -416,7 +418,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
   case OBTENER_VALOR_COMPARTIDA:
 	  log_info(cpuhlog, "CPU pide: OBTENER_VALOR_COMPARTIDA");
 	  // Obtener valor de la variable.
-	  int valor = obtener_valor(stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen));
+	  valor = obtener_valor(stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen));
 
 	  // TODO: Probar, si no anda: Enviar el valor en datalength que es int32u
 	  out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA, in_cpu_msg->pcb, 0, valor, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
@@ -524,7 +526,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   case FINALIZAR_PROGRAMA:
 	  log_info(cpuhlog, "Finalizo el programa %d.", in_cpu_msg->pid);
-	  moverAColaExit(in_cpu_msg->pcb);
+	  moverAColaExit(&in_cpu_msg->pcb);
 
 	  char* mensajeFinalizar = "El programa finalizo correctamente.";
 
@@ -547,7 +549,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
   case ABORTAR_PROGRAMA:
 	  log_info(cpuhlog, "Aborto el programa %d.", in_cpu_msg->pid);
-	  moverAColaExit(in_cpu_msg->pcb);
+	  moverAColaExit(&in_cpu_msg->pcb);
 
 	  char* mensajeAbortar = "El programa fue abortado.";
 

@@ -78,6 +78,9 @@ SocketBuffer* buffer;
 
 int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
+
+	iniciarFunciones();
+
 	if (loadConfig() && socketConnection()) {
 		while (TRUE){
 			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo

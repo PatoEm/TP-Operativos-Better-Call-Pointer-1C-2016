@@ -458,7 +458,9 @@ char * pedirCodigoAUMC() {
 	}
 	return lineaDeCodigoADevolver;
 }
-/*
+
+void iniciarFunciones(){
+
 AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 		.AnSISOP_obtenerPosicionVariable = obtenerPosicionVariable,
 		.AnSISOP_dereferenciar = dereferenciar, .AnSISOP_asignar = asignar,
@@ -471,4 +473,4 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 
 AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 		signal, };
-*/
+}
