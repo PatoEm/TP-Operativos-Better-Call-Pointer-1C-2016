@@ -62,6 +62,8 @@ char* UMCPort;
 int stackSize;
 int tamanioPaginas;
 
+SocketClient * umcServer;
+
 //Otras Variables
 int idProgramas; //Contador de programa
 bool primeraLectura;
