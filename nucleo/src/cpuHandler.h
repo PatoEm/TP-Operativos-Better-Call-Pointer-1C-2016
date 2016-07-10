@@ -36,6 +36,8 @@ void clientHandler(int cliente);
 int cpuCoreInList(t_list* lista, Socket* cliente);
 void cpuClientHandler(Socket* cpuClient, Stream data);
 void newConsoleClient(Socket* consoleClient, Stream dataSerialized);
+int cantidadPaginasArchivo(int longitudArchivo);
+int pedirTamanioDePagina();
 
 // ESTRUCTURAS
 

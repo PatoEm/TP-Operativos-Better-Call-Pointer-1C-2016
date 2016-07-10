@@ -543,6 +543,15 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se envio CERRARCONSOLA.");
 		}
+		StrUmcKer* streamALaUmc;
+		streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+						NULL, 0, pcb_aux->id, 0, 0, 0, 0);
+				sb = serializeUmcKer(streamALaUmc);
+				if (!socketSend(umcServer, sb)) {
+					log_error(cpuhlog, "No se pudo finalizar el programaa umc %d", pcb_aux->id);
+				} else {
+					log_info(cpuhlog, "Se finalizo el programa a umc %d", pcb_aux->id);
+				}
 
 		break;
 
@@ -567,6 +576,17 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se envio CERRARCONSOLA.");
 		}
+		//Envio UMC
+		//StrUmcKer* streamALaUmc;
+				streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+								NULL, 0, pcb_aux->id, 0, 0, 0, 0);
+						sb = serializeUmcKer(streamALaUmc);
+						if (!socketSend(umcServer, sb)) {
+							log_error(cpuhlog, "No se pudo abortar el programaa umc %d", pcb_aux->id);
+						} else {
+							log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
+						}
+
 
 		break;
 
@@ -606,9 +626,25 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 
 		SocketBuffer* buffer;
 		StrUmcKer* streamALaUmc;
+//puto
+//
+//		SocketBuffer * buffer;
+//		StrUmcKer * streamUmcKer;
+//		//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
+//		streamUmcKer=newStrUmcKer(KERNEL_ID,TAMANIO_DE_MARCOS,NULL,0,0,0);
+//		buffer=serializeUmcKer(streamUmcKer);
+//		socketSend(umcServer,buffer);
+//
+//		buffer = socketReceive(umcServer);
+//
+//		if (buffer == NULL)
+//			puts("Error al recibir del cliente");
+//
+//		streamUmcKer = unserializeUmcKer(buffer);
+		//puto
 
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
-				sck->fileContent, sck->fileContentLen, pcb->id, 0, 0, 0, 0);
+				sck->fileContent, sck->fileContentLen, pcb->id, 0, 0, 0, cantidadPaginasArchivo(sck->fileContentLen));
 		buffer = serializeUmcKer(streamALaUmc);
 		if (!socketSend(umcServer, buffer)) {
 			log_error(cpuhlog, "No se pudo inicializar programa %d", pcb->id);
@@ -652,6 +688,10 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 int pedirTamanioDePagina(){
 	SocketBuffer * buffer;
 	StrUmcKer * streamUmcKer;
+	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
+	streamUmcKer=newStrUmcKer(KERNEL_ID,TAMANIO_DE_MARCOS,NULL,0,0,0);
+	buffer=serializeUmcKer(streamUmcKer);
+	socketSend(umcServer,buffer);
 
 	buffer = socketReceive(umcServer);
 
@@ -662,3 +702,19 @@ int pedirTamanioDePagina(){
 
 	return (streamUmcKer->size);
 }
+
+int cantidadPaginasArchivo(int longitudArchivo){
+
+	int aux=(longitudArchivo/tamanioPaginas)+stackSize;
+
+	if(longitudArchivo%tamanioPaginas==0){
+		return aux;
+	}
+	else{
+
+		return aux+1;
+	}
+
+	return 0;
+}
+

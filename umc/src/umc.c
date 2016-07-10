@@ -771,6 +771,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 	SocketBuffer*buffer;
 	switch (sku->action) {
 	case 36 /*TAMANIO_DE_MARCOS*/:
+		//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
 		streamAlKerner = newStrUmcKer(UMC_ID, 36/*TAMANIO_DE_MARCOS*/,
 		NULL, marco_Size, 0, 0);
 		buffer = serializeUmcKer(streamAlKerner);
@@ -1270,7 +1271,7 @@ int tlbLlena() {
 	return 0;
 }
 
-//DEVUeLVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
+//DEVUELVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
 int tlbHabilitada() {
 	if (entradas_TLB == 0) {
 		return 0;

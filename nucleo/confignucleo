@@ -10,4 +10,3 @@ SEM_IDS=[SEM1, SEM2, SEM3]
 SEM_INIT=[1, 2, 5]
 SHARED_VARS=[!Global, !UnaVar, !tiempo3, !colas]
 STACK_SIZE=2;
-MARCO_SIZE=100

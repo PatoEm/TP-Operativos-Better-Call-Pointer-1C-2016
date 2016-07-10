@@ -29,7 +29,6 @@ void setearValores(t_config * archivoConfig) {
 		retardoIO = config_get_array_value(archivoConfig, "IO_SLEEP");
 		idVariableCompartida = config_get_array_value(archivoConfig,
 				"SHARED_VARS");
-		tamanioPaginas = config_get_int_value(archivoConfig, "MARCO_SIZE");
 		stackSize = config_get_int_value(archivoConfig, "STACK_SIZE");
 		primeraLectura = false;
 	}
@@ -394,6 +393,12 @@ int inicializarVariables() {
 
 	// LOG
 	nucleolog = log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO);
+
+	umcServer=socketCreateClient();
+
+	tamanioPaginas=pedirTamanioDePagina();
+
+	socketConnect(umcServer,ipUMC,atoi(UMCPort));
 
 
 	//Variables de lectura de archivo
