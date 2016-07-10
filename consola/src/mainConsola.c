@@ -218,6 +218,7 @@ Boolean realizarImprimirTexto() {
 }
 
 Boolean realizarCierreConsola() {
+	printf("%s\n", stringFromByteArray(skc->log, skc->logLen));
 	return FALSE;
 }
 

@@ -523,8 +523,48 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	break;
 
   case FINALIZAR_PROGRAMA:
+	  log_info(cpuhlog, "Finalizo el programa %d.", in_cpu_msg->pid);
+	  moverAColaExit(in_cpu_msg->pcb);
 
+	  char* mensajeFinalizar = "El programa finalizo correctamente.";
 
+	  // Creo y serializo string kernel a consola.
+	  out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, strlen(mensajeFinalizar), mensajeFinalizar);
+	  sb = serializeKerCon(out_con_msg);
+
+	  // Extraigo el socket de la respectiva consola.
+	  pcb_aux = &(in_cpu_msg->pcb);
+	  consola_aux = pcb_aux->consola;
+
+	  // Envio a la conchola
+	  if (!socketSend(consola_aux, sb)) {
+	        log_error(cpuhlog, "No se pudo cerrar la consola.");
+	      } else {
+	        log_info(cpuhlog, "Se envio CERRARCONSOLA.");
+	      }
+
+	break;
+
+  case ABORTAR_PROGRAMA:
+	  log_info(cpuhlog, "Aborto el programa %d.", in_cpu_msg->pid);
+	  moverAColaExit(in_cpu_msg->pcb);
+
+	  char* mensajeAbortar = "El programa fue abortado.";
+
+	  // Creo y serializo string kernel a consola.
+	  out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, strlen(mensajeAbortar), mensajeAbortar);
+	  sb = serializeKerCon(out_con_msg);
+
+	  // Extraigo el socket de la respectiva consola.
+	  pcb_aux = &(in_cpu_msg->pcb);
+	  consola_aux = pcb_aux->consola;
+
+	  // Envio a la conchola
+	  if (!socketSend(consola_aux, sb)) {
+	        log_error(cpuhlog, "No se pudo cerrar la consola.");
+	      } else {
+	        log_info(cpuhlog, "Se envio CERRARCONSOLA.");
+	      }
 
 
 	break;
