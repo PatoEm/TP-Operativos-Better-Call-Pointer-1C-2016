@@ -368,7 +368,6 @@ void manejoDeConexiones() {
 				while (contadorPaginasRecibidas != streamUmcSwap->cantPage) {
 					ubicacionActual = contadorPaginasRecibidas
 							* atoi(tamPagina);
-					tamanioCodigo = streamUmcSwap->dataLen;
 					while (contador < atoi(tamPagina)
 							&& contador < tamanioCodigo) {
 						guardarPagina[contador] =

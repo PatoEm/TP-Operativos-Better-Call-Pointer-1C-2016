@@ -274,8 +274,16 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	nodoActual->bitDePresencia = 1;
-	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
+	espacioAsignado*nodoSiguiente ;
+	if(contador== list_size(listaEspacioAsignado))
+	nodoSiguiente= (list_get(listaEspacioAsignado,
+			inicio));
+	else
+		nodoSiguiente= (list_get(listaEspacioAsignado,
 			(contador + 1)));
+	if(nodoSiguiente->pid!=pid)
+		nodoSiguiente= (list_get(listaEspacioAsignado,
+					inicio));
 	nodoSiguiente->punteroAPagina = 1;
 	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
 	int inicioLectura = posicionDePaginaLibre * marco_Size;
