@@ -17,7 +17,7 @@ void iniciarEstructurasUMC() {
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
 
-	pthread_mutex_init(mutexPedidos,NULL);
+	// todo ver porqué rompe pthread_mutex_init(mutexPedidos,NULL);
 
 	crearListas();
 	inicioTLB();
@@ -1098,7 +1098,7 @@ void inicioTLB() {
 	if (habilitada == 0) {
 //log_info(logger, "TLB Deshabilitada"); que loguee otro x2 todo
 	} else {
-		log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
+		// todo log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
 		TLB = creoTLB();
 //Inicializo la cantidad de aciertos y accesos
 		aciertosTLB = 0;

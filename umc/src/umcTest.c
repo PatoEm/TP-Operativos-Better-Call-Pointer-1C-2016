@@ -15,7 +15,12 @@
 #include "umc.h"
 
 int main() {
+	t_list * TLB;
+	int accesosTLB;
+	int aciertosTLB;
 	leerArchivoDeConfiguracion("configumc");
+
+	inicioTLB(TLB, aciertosTLB, accesosTLB);
 
 	socketSwap = socketCreateClient();
 
@@ -29,17 +34,17 @@ int main() {
 
 	char* cadena = solicitarBytes(1, 0, 0, 5);
 
-	char* cadena2= solicitarBytes(2, 0, 0, 3);
+	char* cadena2 = solicitarBytes(2, 0, 0, 3);
 
-	almacenarBytes(2, 0,0,3,"no ");
+	almacenarBytes(2, 0, 0, 3, "no ");
 
-	cadena2= solicitarBytes(2, 0, 0, 9);
+	cadena2 = solicitarBytes(2, 0, 0, 9);
 
 	almacenarBytes(2, 1, 0, 3, "gol");
 
-	cadena2= solicitarBytes(2,1,0,3);
+	cadena2 = solicitarBytes(2, 1, 0, 3);
 
-	printf("en la página 1 del proceso 1 hay: %s",cadena);
+	printf("en la página 1 del proceso 1 hay: %s", cadena);
 
 	finalizarPrograma(2);
 
