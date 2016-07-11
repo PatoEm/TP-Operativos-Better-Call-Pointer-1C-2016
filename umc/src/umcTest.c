@@ -15,12 +15,7 @@
 #include "umc.h"
 
 int main() {
-	t_list * TLB;
-	int accesosTLB;
-	int aciertosTLB;
 	leerArchivoDeConfiguracion("configumc");
-
-	inicioTLB(TLB, aciertosTLB, accesosTLB);
 
 	socketSwap = socketCreateClient();
 

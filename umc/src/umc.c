@@ -33,9 +33,9 @@ void crearListas() {
 	listaEspacioAsignado = list_create();
 }
 
-int tamanioCodigo(char*codigo){
-	int contador=0;
-	while(codigo[contador]!='\0'){
+int tamanioCodigo(char*codigo) {
+	int contador = 0;
+	while (codigo[contador] != '\0') {
 		contador++;
 	}
 	return contador;
@@ -49,7 +49,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	pagina.numDePag = 0;
 	//StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, pagina,
-			paginas, codigo, tamanioCodigo(codigo), pid);// SI HAY PROBLEMAS MIRAR TAMANIO CODIGO TODO
+			paginas, codigo, tamanioCodigo(codigo), pid); // SI HAY PROBLEMAS MIRAR TAMANIO CODIGO TODO
 	buffer = serializeUmcSwa(streamUmcSwap);
 	socketSend(socketSwap->ptrSocket, buffer);
 
@@ -63,7 +63,7 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 		pagina->cantPaginasEnMemoria = 0;
 		list_add(listaPaginasPorPrograma, pagina);
 		while (i < paginas) {
-			espacioAsignado*nuevoMarco= malloc(sizeof(espacioAsignado));
+			espacioAsignado*nuevoMarco = malloc(sizeof(espacioAsignado));
 			nuevoMarco->bitDePresencia = 0;
 			nuevoMarco->bitModificado = 0;
 			nuevoMarco->bitUso = 0;
@@ -138,7 +138,7 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 	while ((nodoActual->bitUso) == 1) {
 		nodoActual->bitUso = 0;
 		contador++;
-		if (contador > fin)
+		if (contador == fin)
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
@@ -150,19 +150,15 @@ int reemplazarPaginaClock(int pid, int pagina) {
 
 	//int inicio = lugarAsignadoInicial(pid);
 	//int fin = lugarAsignadoFinal(pid);
-	int contador = encontrarPuntero(pid);
 	int posicionDePaginaLibre;
 	StrUmcSwa*streamUmcSwap;
-	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
+	espacioAsignado*nodoActual;
 	nodoActual = buscarBitDeUsoEn0(pid);
 	while (nodoActual->bitDePresencia == 0) {
 		nodoActual = buscarBitDeUsoEn0(pid);
 	}
 	nodoActual->bitDePresencia = 1;
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
-	espacioAsignado*nodoSiguiente = (list_get(listaEspacioAsignado,
-			(contador + 1)));
-	nodoSiguiente->punteroAPagina = 1;
 	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
 	int inicioLectura = posicionDePaginaLibre * marco_Size;
 	int counter = 0;
@@ -326,6 +322,7 @@ void limpiarPagina(int comienzoDePagina) {
 	int finDePagina = comienzoDePagina + marco_Size;
 	while (contador != finDePagina) {
 		memoriaReal[contador] = '\0';
+		contador++;
 	}
 
 }
@@ -342,6 +339,18 @@ int encontrarPuntero(int pid) {
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
 	nodoActual->punteroAPagina = 0;
+	espacioAsignado*nodoSiguiente;
+	if (listaEspacioAsignado->elements_count == contador + 1) {
+		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
+	} else
+		nodoSiguiente = (list_get(listaEspacioAsignado, (contador + 1)));
+	if (nodoSiguiente->pid == pid)
+		nodoSiguiente->punteroAPagina = 1;
+	else{
+		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
+		nodoSiguiente->punteroAPagina = 1;
+	}
+
 	return contador;
 }
 
@@ -352,7 +361,7 @@ int lugarAsignadoFinal(int pid) {
 	while (nodoFinal->pid == pid) {
 		inicio++;
 		nodoFinal = list_get(listaEspacioAsignado, inicio);
-		if(inicio==list_size(listaEspacioAsignado))
+		if (inicio == list_size(listaEspacioAsignado))
 			return inicio;
 	}
 	return (inicio - 1);
@@ -380,11 +389,11 @@ int paginasOcupadasPorPid(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
-	char*paginaADevolver=malloc(sizeof(char)*cantidad );
+	char*paginaADevolver = malloc(sizeof(char) * cantidad);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina)) ){
+	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina))) {
 		posicionActualDeNodo++;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
@@ -400,7 +409,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		if (tlbHabilitada()) {
 			llevarPaginaATLB(pid, pagina, NULL);
 		}
-		paginaADevolver[cantidad]= '\0';
+		paginaADevolver[cantidad] = '\0';
 		return (paginaADevolver);
 
 	} else {
@@ -445,7 +454,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comCadena++;
 				lugCad++;
 			}
-			paginaADevolver[cantidad]= '\0';
+			paginaADevolver[cantidad] = '\0';
 			return (paginaADevolver);
 		} else {
 			int frame = reemplazarPagina(pid, pagina, 1);
@@ -457,7 +466,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comienzoDeCadena++;
 				lugarDeLaCadena++;
 			}
-			paginaADevolver[cantidad]= '\0';
+			paginaADevolver[cantidad] = '\0';
 			return (paginaADevolver);
 
 		}
@@ -578,7 +587,7 @@ void finalizarPrograma(int pid) {
 		}
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
-		if(list_size(listaEspacioAsignado)>=nodoActualAReventar)
+		if (list_size(listaEspacioAsignado) >= nodoActualAReventar)
 			break;
 		nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
@@ -1235,7 +1244,7 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 					entradaTLB->frameTLB, entradaTLB->pagina);
 			int inicioLectura = entradaTLB->frameTLB * marco_Size + posicion;
 			int i;
-			for (i = 0;  i < tamanio;i++) {
+			for (i = 0; i < tamanio; i++) {
 				buffer[i] = memoriaReal[inicioLectura];
 				inicioLectura++;
 			}
