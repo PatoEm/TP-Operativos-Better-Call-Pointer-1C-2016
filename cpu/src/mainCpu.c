@@ -82,28 +82,31 @@ int main() {
 	iniciarFunciones();
 
 	if (loadConfig() && socketConnection()) {
-		while (TRUE){
+		while (TRUE) {
 			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
-			if(!getNextPcb()) {
+			if (!getNextPcb()) {
 				return TRUE;
 			}
 			seguirEjecutando = TRUE;
 			// proceso el pcb del nucleo
 			Int8U quantum = skc->quantum;
 			while (quantum > 0 && seguirEjecutando) {
-				analizadorLinea(pedirInstruccion(pcbActual), &funciones, &funcionesDeKernel);
+				analizadorLinea(pedirInstruccion(pcbActual), &funciones,
+						&funcionesDeKernel);
 				moverProgramCounterPcb(pcbActual);
 			}
 
 			if (!seguirEjecutando) {
-				if(pcbActual->instruccionesRestantes == 0) {
-					sck = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, pcbActual, 0, 0, NULL, NULL, 0);
+				if (pcbActual->instruccionesRestantes == 0) {
+					sck = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbActual,
+							0, 0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
 					if (!socketSend(umcClient, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				} else {
-					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, pcbActual, 0, 0, NULL, NULL, 0);
+					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbActual, 0,
+							0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
 					if (!socketSend(umcClient, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
@@ -111,22 +114,24 @@ int main() {
 				}
 			}
 
-			if (quantum == 0){
-				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, pcbActual, 0, 0, NULL, NULL, 0);
+			if (quantum == 0) {
+				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbActual, 0, 0,
+				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
 				if (!socketSend(umcClient, buffer)) {
 					puts("No se pudo enviar el buffer al nucleo.");
 				}
 			}
 			seguirEjecutando = TRUE;
-	}
+		}
 
-	config_destroy(tConfig);
-	while(1){
-		puts("Esperando..");
-		sleep(10);
+		config_destroy(tConfig);
+		while (1) {
+			puts("Esperando..");
+			sleep(10);
+		}
+		return FALSE;
 	}
-	return FALSE;
 }
 
 /*****************************************
@@ -139,7 +144,9 @@ Boolean loadConfig() {
 	// Genero tabla de configuracion
 	tConfig = config_create(configFilePath);
 	if (tConfig == NULL) {
-		printf("ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n",configFilePath);
+		printf(
+				"ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n",
+				configFilePath);
 		return FALSE;
 	}
 
@@ -180,7 +187,8 @@ Boolean loadConfig() {
 		printf("Puerto_UMC: %d\nIP_UMC: %s\n", puertoUmc, ipUmc);
 		return TRUE;
 	} else {
-		printf("ERROR: El archivo de configuracion del CPU no tiene todos los campos.\n");
+		printf(
+				"ERROR: El archivo de configuracion del CPU no tiene todos los campos.\n");
 		return FALSE;
 	}
 }
@@ -192,11 +200,11 @@ Boolean socketConnection() {
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int)puertoNucleo);
+		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int) puertoNucleo);
 		sleep(3);
-	} while(!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
+	} while (!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
 
-	if(handshake(nucleoClient, CPU_ID)){
+	if (handshake(nucleoClient, CPU_ID)) {
 		puts("Handshake realizado con exito.");
 	} else {
 		puts("No se pudo realizar el handshake.");
@@ -209,11 +217,11 @@ Boolean socketConnection() {
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con la UMC.");
-		printf("IP: %s, Puerto: %d\n", ipUmc, (int)puertoUmc);
+		printf("IP: %s, Puerto: %d\n", ipUmc, (int) puertoUmc);
 		sleep(3);
-	} while(!socketConnect(umcClient, ipUmc, puertoUmc));
+	} while (!socketConnect(umcClient, ipUmc, puertoUmc));
 
-	if(handshake(umcClient, CPU_ID)){
+	if (handshake(umcClient, CPU_ID)) {
 		puts("Handshake realizado con exito.");
 	} else {
 		puts("No se pudo realizar el handshake.");
@@ -227,7 +235,8 @@ Boolean getNextPcb() {
 
 	if (sck == NULL) {
 		pcbActual = newEmptyPcb();
-		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0,
+				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
 	puts("getNextPcb: Nuevo PCB vacio creado.");
 
@@ -250,17 +259,18 @@ Boolean getNextPcb() {
 		free(skc);
 	}
 
-	skc = unserializeKerCpu((Stream)sb->data);
+	skc = unserializeKerCpu((Stream) sb->data);
 	*pcbActual = skc->pcb;
 
 	return TRUE;
 }
 
-int calcularOffset(pcb *pcbLoco){
+int calcularOffset(pcb *pcbLoco) {
 	arrayBidimensional aux;
 	int contador;
-	while(contador < (pcbLoco->instruccionesTotales)){
-		if(pcbLoco->indiceDeCodigo[contador].comienzo == pcbLoco->programCounter){
+	while (contador < (pcbLoco->instruccionesTotales)) {
+		if (pcbLoco->indiceDeCodigo[contador].comienzo
+				== pcbLoco->programCounter) {
 			aux.comienzo = pcbLoco->indiceDeCodigo[contador].comienzo;
 			aux.longitud = pcbLoco->indiceDeCodigo[contador].longitud;
 		}
@@ -281,7 +291,7 @@ String stringFromByteArray(Byte* data, Int32U size) {
 	return result;
 }
 
-char* pedirInstruccion(pcb* pcbLoco){
+char* pedirInstruccion(pcb* pcbLoco) {
 	char* instruccion = "";
 
 	int tamanioPag;
@@ -295,16 +305,18 @@ char* pedirInstruccion(pcb* pcbLoco){
 
 	int inicioPag = inicio % pagina;
 	int offsetPag;
+	espacioAsignado auxiliar;
 
-	while(offset > 0){
+	while (offset > 0) {
 
 		if ((inicioPag + offset) > tamanioPag) {
-				offsetPag = tamanioPag - inicioPag;
-			} else {
-				offsetPag = offset;
-			}
-
-		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, pagina, offsetPag, 0, NULL, 0);
+			offsetPag = tamanioPag - inicioPag;
+		} else {
+			offsetPag = offset;
+		}
+		auxiliar.numDePag = pagina;
+		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, auxiliar, offsetPag, 0,
+		NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(umcClient, buffer)) {
 			puts("No se pudo enviar tu pedido a la umc.");
@@ -316,25 +328,9 @@ char* pedirInstruccion(pcb* pcbLoco){
 		strcat(instruccion, stringFromByteArray(suc->data, suc->dataLen));
 
 		offset = offset - offsetPag;
-		pagina ++;
+		pagina++;
 		inicioPag = 0;
 	}
 	return instruccion;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
