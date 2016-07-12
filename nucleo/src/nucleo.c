@@ -558,7 +558,7 @@ int inicializarVariables() {
 	umcServer=socketCreateClient();
 	do {
 		puts("**********************************");
-		puts("Intentando conectar con el Nucleo.");
+		puts("Intentando conectar con la UMC ppal.");
 		printf("IP: %s, PUERTO: %d\n", ipUMC, atoi (UMCPort));
 		sleep(3);
 	} while (!socketConnect(umcServer, ipUMC, atoi(UMCPort)));

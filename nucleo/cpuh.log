@@ -225,3 +225,5 @@
 [ERROR] 23:31:51:261 CPUHANDLER/(5471:5478): KERNEL : El Cliente 7 mando ANSISOP
 [INFO] 00:23:02:460 CPUHANDLER/(6817:6822): Server creado con exito y escuchando.
 [INFO] 00:23:02:460 CPUHANDLER/(6817:6822): Server iniciado.
+[INFO] 12:28:41:943 CPUHANDLER/(8399:8428): Server creado con exito y escuchando.
+[INFO] 12:28:43:339 CPUHANDLER/(8399:8428): Server iniciado.

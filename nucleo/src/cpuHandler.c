@@ -710,9 +710,9 @@ int pedirTamanioDePagina(int puerto){
 	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio)
 	streamKerUmc=newStrKerUmc(KERNEL_ID,TAMANIO_DE_MARCOS,"hola",0,0,0,0,0,0);
 	buffer=serializeKerUmc(streamKerUmc);
-//	socketSend(umcServer,buffer);
+	socketSend(umcServer->ptrSocket,buffer);
 
-	buffer = socketReceive(umcServer);
+	buffer = socketReceive(umcServer->ptrSocket);
 
 	if (buffer == NULL)
 		puts("Error al recibir del cliente");

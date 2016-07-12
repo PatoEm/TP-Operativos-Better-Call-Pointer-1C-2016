@@ -68,20 +68,23 @@ void umcThread(){
 		puts("hola, soy el hilo,ahora si");
 		if(sb == NULL) puts("No se pudo recibir del CPU.");
 
-		in_cpu_msg = unserializeCpuUmc(sb);
+		//in_cpu_msg = unserializeCpuUmc(sb);
 
-		Char id = getStreamId(in_cpu_msg);
+		Stream strRecibido = (Stream) sb->data;
+		Char id = getStreamId(strRecibido);
 
-		log_info(umcslog, "ID Nuevo Cliente: %d.",id);
+		//log_info(umcslog, "ID Nuevo Cliente: %d.",id);
 		switch (id) {
 
 			case CPU_ID:
-				log_info(umcslog, "Cliente CPU");
+				in_cpu_msg = unserializeCpuUmc(sb);
+				//log_info(umcslog, "Cliente CPU");
 				manageCpuRequest(cpuClient,in_cpu_msg);
 				break;
 
 			case KERNEL_ID:
-				log_info(umcslog, "Cliente KERNEL");
+				in_cpu_msg = unserializeKerUmc(sb);
+				//log_info(umcslog, "Cliente KERNEL");
 				manageKernelRequest(cpuClient,in_cpu_msg);
 				break;
 		}

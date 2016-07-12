@@ -18,6 +18,7 @@ char * leerProgramaAnSISOP1(char * direccionArchivo);
 int main(void) {
 
 	inicializarVariables();
+	printf("%d",tamanioPaginas);
 	//int tamanioLoco = tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/facil.ansisop");
 	//printf("%d",tamanioLoco);
 	log_info(nucleolog, "Variables inicializadas.");
