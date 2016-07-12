@@ -575,8 +575,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 		} else {
 
 			int frame = reemplazarPagina(pid, pagina, 1);
-			int dondeEscribo = frame * marco_Size
-					+ offset;
+			int dondeEscribo = frame * marco_Size + offset;
 			int enDondeEstoyDeLoQueMeMandaron = 0;
 			int contador = 0;
 			while (contador < tamanio) {
@@ -694,8 +693,8 @@ void manageSocketConnections() {
 		socketClient = socketAcceptClient(s);
 		if (socketClient != NULL) {
 			puts("Alguien se conecto.");
-			pthread_create(&socketConnection, NULL, manageSocketConnection,
-					(void*) socketClient);
+			manageSocketConnection((void*) socketClient);
+
 			list_add(conexionSockets, &socketConnection);
 		}
 	}
@@ -714,15 +713,23 @@ void* manageSocketConnection(void* param) {
 			Char id = getStreamId((Stream) sb->data);
 			StrKerUmc* sku = NULL;
 			StrCpuUmc* scu = NULL;
+			StrUmcCpu * suc = NULL;
+			StrUmcKer * suk = NULL;
 			switch (id) {
 			case KERNEL_ID:
-				sku = unserializeKerUmc((Stream) sb->data);
-				//connected =
-				manageKernelRequest(socket, sku);
+				//sku = unserializeKerUmc((Stream) sb->data);
+				newUmcThread();
+				suk = newStrUmcKer(UMC_ID, HANDSHAKE, NULL, 0, thread_socket,
+						NULL, 0);
+				sb = serializeUmcKer(suc);
+				socketSend(socket, sb);
 				break;
 			case CPU_ID:
-				scu = unserializeCpuUmc((Stream) sb->data);
-				connected = manageCpuRequest(socket, scu);
+				newUmcThread();
+				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, NULL, 0, thread_socket,
+						NULL, 0);
+				sb = serializeUmcCpu(suc);
+				socketSend(socket, sb);
 				break;
 			default:
 				connected = FALSE; //todo loggear algun error.
@@ -736,135 +743,6 @@ void* manageSocketConnection(void* param) {
 	return NULL;
 }
 
-void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
-	int pidActivo;
-	espacioAsignado unaPagina;
-	SocketBuffer*buffer;
-	StrCpuUmc*streamCpuUmc = scu;
-	StrUmcCpu*streamUmcCpu;
-	char* bytes;
-	while (!24/*CIERRE_CONEXION_CPU*/) {
-		switch (streamCpuUmc->action) {
-		case 36 /*TAMANIO_DE_MARCOS*/:
-			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, NULL, 0);
-			buffer = serializeUmcCpu(streamUmcCpu);
-			socketSend(socket, buffer);
-			break;
-		case 23/*CAMBIO_PROCESO_ACTIVO*/:
-			pidActivo = streamCpuUmc->pid;
-			break;
-		case 25/*SOLICITAR_BYTES*/:
-			pthread_mutex_lock(mutexPedidos);
-			if (paginasOcupadasPorPid(pidActivo) == 0
-					|| cantidadDePaginasLibres() == 0) {
-				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
-				buffer = serializeUmcCpu(streamUmcCpu);
-				socketSend(socket, buffer);
-			} else {
-				if (tlbHabilitada()) {
-					bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
-							scu->offset, scu->dataLen);
-				} else
-					bytes = solicitarBytes(pidActivo,
-							scu->pageComienzo.numDePag, scu->offset,
-							scu->dataLen);
-				streamUmcCpu = newStrUmcCpu(UMC_ID, 25/*SOLICITAR_BYTES*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
-				buffer = serializeUmcCpu(streamUmcCpu);
-				socketSend(socket, buffer);
-			}
-			pthread_mutex_unlock(mutexPedidos);
-			break;
-		case 34 /*ALMACENAR_BYTES*/:
-			pthread_mutex_lock(mutexPedidos);
-			if (paginasOcupadasPorPid(pidActivo) == 0
-					|| cantidadDePaginasLibres() == 0) {
-				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
-				buffer = serializeUmcCpu(streamUmcCpu);
-				socketSend(socket, buffer);
-			} else {
-
-				if (tlbHabilitada()) {
-					if (!escribirEnTLB(pidActivo, scu->pageComienzo.numDePag,
-							scu->offset, scu->dataLen, scu->data)) {
-						almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
-								scu->offset, scu->dataLen, scu->data);
-					}
-				} else
-					almacenarBytes(pidActivo, scu->pageComienzo.numDePag,
-							scu->offset, scu->dataLen, scu->data);
-				streamUmcCpu = newStrUmcCpu(UMC_ID, 34 /*ALMACENAR_BYTES*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
-				buffer = serializeUmcCpu(streamUmcCpu);
-				socketSend(socket, buffer);
-			}
-			pthread_mutex_unlock(mutexPedidos);
-			break;
-		default:
-			printf("No se pudo identificar la accion de la CPU");
-			break;
-		}
-		buffer = socketReceive(socket);
-		if (buffer == NULL) {
-			puts("Problemas al recibir del cpu");
-			break;
-		}
-		streamCpuUmc = unserializeCpuUmc(buffer);
-	}
-//StrUmcCpu* suc;/*= newStrUmcCpu();*/
-//Boolean result = sendResponse(CPU_ID, suc, socket);
-
-//return result;
-}
-
-void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
-	StrUmcKer*streamAlKerner;
-	SocketBuffer*buffer;
-	switch (sku->action) {
-	case 36 /*TAMANIO_DE_MARCOS*/:
-		//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
-		streamAlKerner = newStrUmcKer(UMC_ID, 36/*TAMANIO_DE_MARCOS*/,
-		NULL, marco_Size, 0, 0);
-		buffer = serializeUmcKer(streamAlKerner);
-		socketSend(socket, buffer);
-		break;
-	case 20 /*INICIALIZAR_PROGRAMA*/:
-		pthread_mutex_lock(mutexPedidos);
-
-		if (0 == inicializarPrograma(sku->pid, sku->cantPage, sku->data)) {
-			streamAlKerner = newStrUmcKer(UMC_ID,
-					21/*PROGRAMA_NO_INICIALIZADO*/,
-					NULL, 0, 0, 0);
-			buffer = serializeUmcKer(streamAlKerner);
-			socketSend(socket, buffer);
-		} else {
-			streamAlKerner = newStrUmcKer(UMC_ID,
-			PROGRAMA_RECIBIDO,
-			NULL, 0, 0, 0);
-			buffer = serializeUmcKer(streamAlKerner);
-			socketSend(socket, buffer);
-		}
-		pthread_mutex_unlock(mutexPedidos);
-		break;
-
-//todo hablar con pato el almacenar y leer bytes
-	case 22 /*FINALIZAR_PROGRAMA*/:
-		pthread_mutex_lock(mutexPedidos);
-		finalizarPrograma(sku->pid);
-		pthread_mutex_unlock(mutexPedidos);
-		break;
-	default:
-		printf("No se pudo identificar la accion del Kernel");
-		break;
-	}
-
-//StrUmcKer* suk ;/*= newStrUmcKer();*/
-//Boolean result = sendResponse(KERNEL_ID, suk, socket);
-
-//return result;
-}
 
 Boolean sendResponse(Char target, void* stream, Socket* socket) {
 	SocketBuffer* sb = NULL;

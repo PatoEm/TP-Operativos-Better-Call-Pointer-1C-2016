@@ -37,6 +37,7 @@ int aciertosTLB;
 int accesosTLB;
 t_list* conexionSockets ;
 SocketClient * socketSwap;
+int thread_socket= 3030;
 
 pthread_mutex_t* mutexPedidos;
 
