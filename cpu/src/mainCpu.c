@@ -81,10 +81,11 @@ int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
 
 	iniciarFunciones();
-	tamanioPag = pedirTamanioDePagina();
-tamanioPaginaUmc=tamanioPag;
+
 
 	if (loadConfig() && socketConnection()) {
+		tamanioPag = pedirTamanioDePagina();
+		tamanioPaginaUmc=tamanioPag;
 		while (TRUE) {
 			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
 			if (!getNextPcb()) {
@@ -198,31 +199,31 @@ Boolean loadConfig() {
 
 Boolean socketConnection() {
 	// Conexion al nucleo
-	nucleoClient = socketCreateClient();
-
-	do {
-		puts("**********************************");
-		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int) puertoNucleo);
-		sleep(3);
-	} while (!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
-
-	if (handshake(nucleoClient, CPU_ID)) {
-		puts("Handshake realizado con exito.");
-	} else {
-		puts("No se pudo realizar el handshake.");
-		return FALSE;
-	}
+//	nucleoClient = socketCreateClient(); todo descomentar esto
+//
+//	do {
+//		puts("**********************************");
+//		puts("Intentando conectar con el Nucleo.");
+//		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int) puertoNucleo);
+//		sleep(3);
+//	} while (!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
+//
+//	if (handshake(nucleoClient, CPU_ID)) {
+//		puts("Handshake realizado con exito.");
+//	} else {
+//		puts("No se pudo realizar el handshake.");
+//		return FALSE;
+//	}
 
 	// Conexion a la UMC
-	umcClient = socketCreateClient();
-
-	do {
-		puts("**********************************");
-		puts("Intentando conectar con la UMC.");
-		printf("IP: %s, Puerto: %d\n", ipUmc, (int) puertoUmc);
-		sleep(3);
-	} while (!socketConnect(umcClient, ipUmc, puertoUmc));
+//	umcClient = socketCreateClient();
+//
+//	do {
+//		puts("**********************************");
+//		puts("Intentando conectar con la UMC.");
+//		printf("IP: %s, Puerto: %d\n", ipUmc, (int) puertoUmc);
+//		sleep(3);
+//	} while (!socketConnect(umcClient, ipUmc, puertoUmc));
 
 //	if (handshake(umcClient, CPU_ID)) {
 //		puts("Handshake realizado con exito.");
@@ -230,42 +231,81 @@ Boolean socketConnection() {
 //		puts("No se pudo realizar el handshake.");
 //		return FALSE;
 //	}
+//espacioAsignado auxLoco;
+//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+//	StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE,auxLoco,0, 0, "hola", 0);
+//	buffer = serializeCpuUmc(out_umc_msg);
+//
+//	socketSend(umcClient->ptrSocket, buffer);
+//	puts("Mensaje enviado a la UMC ppal.");
+//
+//	buffer = socketReceive(umcClient->ptrSocket);
+//	StrUmcCpu* in_umc_msg = unserializeUmcCpu(buffer);
+//
+//	printf("Nuevo UMC es %d.\n", in_umc_msg->dataLen);
+//
+//	int nuevoPuertoUmc=in_umc_msg->dataLen;
+//
+//	// Conexion a la UMC
+//	umcClient = socketCreateClient();
+//
+//
+//	do {
+//		puts("**********************************");
+//		puts("Intentando conectar con el hilo UMC.");
+//		printf("IP: %s, Puerto: %d\n", ipUmc, (int) nuevoPuertoUmc);
+//		sleep(3);
+//	} while (!socketConnect(umcClient, ipUmc, nuevoPuertoUmc));
+//	espacioAsignado aux;
+//	out_umc_msg = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, "hola", 0);
+//	buffer = serializeCpuUmc(out_umc_msg);
+//	socketSend(umcClient->ptrSocket, buffer);
+//	puts("Le pedi el tamanio de pagina al holo de la UMC que me da servicio.");
+//
+//	buffer = socketReceive(umcClient->ptrSocket);
+//	in_umc_msg = unserializeUmcCpu(buffer);
+//
+//	printf("El tamanio de pagina es: %d.\n", in_umc_msg->dataLen);
+//	tamanioPag = in_umc_msg->dataLen;
+//	tamanioPaginaUmc = tamanioPag;
 
-	StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, 0,0, 0, "hola", 0);
-	buffer = serializeCpuUmc(out_umc_msg);
-
-	socketSend(umcClient->ptrSocket, buffer);
-	puts("Mensaje enviado a la UMC ppal.");
-
-	buffer = socketReceive(umcClient->ptrSocket);
-	StrUmcCpu* in_umc_msg = unserializeUmcCpu(buffer);
-
-	printf("Nuevo UMC es %d.\n", in_umc_msg->dataLen);
-
-	int nuevoPuertoUmc=in_umc_msg->dataLen;
-
-	// Conexion a la UMC
-	umcClient = socketCreateClient();
 
 
-	do {
-		puts("**********************************");
-		puts("Intentando conectar con el hilo UMC.");
-		printf("IP: %s, Puerto: %d\n", ipUmc, (int) nuevoPuertoUmc);
-		sleep(3);
-	} while (!socketConnect(umcClient, ipUmc, nuevoPuertoUmc));
 
-	out_umc_msg = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, 0, 0, 0, "hola", 0);
-	buffer = serializeCpuUmc(out_umc_msg);
-	socketSend(umcClient->ptrSocket, buffer);
-	puts("Le pedi el tamanio de pagina al holo de la UMC que me da servicio.");
 
-	buffer = socketReceive(umcClient->ptrSocket);
-	in_umc_msg = unserializeUmcCpu(buffer);
+	umcClient=socketCreateClient();
+		do {
+			puts("**********************************");
+			puts("Intentando conectar con la UMC ppal.");
+			printf("IP: %s, PUERTO: %d\n", "127.0.0.1", puertoUmc);
+			sleep(3);
+		} while (!socketConnect(umcClient, "127.0.0.1", puertoUmc));
+		espacioAsignado aux;
+		//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+		StrKerUmc* out_umc_msg = newStrCpuUmc(KERNEL_ID, HANDSHAKE, aux, 0, 0, "hola", 0);
+		SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
+		socketSend(umcClient->ptrSocket, sb);
+		puts("Mensaje enviado a la UMC ppal.");
 
-	printf("El tamanio de pagina es: %d.\n", in_umc_msg->dataLen);
-	tamanioPag = in_umc_msg->dataLen;
-	tamanioPaginaUmc = tamanioPag;
+		sb = socketReceive(umcClient->ptrSocket);
+		StrUmcCpu* in_umc_msg = unserializeUmcCpu(sb);
+
+		printf("Nuevo UMC es %d.\n", (int)in_umc_msg->dataLen);
+
+		int nuevoPuertoUmc=(int)in_umc_msg->dataLen;
+
+
+		umcClient=socketCreateClient();
+				do {
+					puts("**********************************");
+					puts("Intentando conectar con la UMC hilo.");
+					printf("IP: %s, PUERTO: %d\n", "127.0.0.1", nuevoPuertoUmc);
+					sleep(3);
+				} while (!socketConnect(umcClient, "127.0.0.1", nuevoPuertoUmc));
+				puts("Me conecte al hilo.");
+
+		//tamanioPaginas=pedirTamanioDePagina(nuevoPuertoUmc);
+
 
 	return TRUE;
 }

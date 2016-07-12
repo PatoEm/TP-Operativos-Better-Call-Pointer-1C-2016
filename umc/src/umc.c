@@ -743,7 +743,8 @@ void* manageSocketConnection(void* param) {
 				break;
 			case CPU_ID:
 				pthread_mutex_lock(mutexThreadSockets);
-				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, NULL, 0);
+				//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, "hola", 0);
 				newUmcThread();
 				sleep(2);
 				pthread_mutex_unlock(mutexThreadSockets);

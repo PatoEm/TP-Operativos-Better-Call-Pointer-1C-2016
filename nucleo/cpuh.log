@@ -318,3 +318,27 @@
 [ERROR] 13:01:50:894 CPUHANDLER/(10857:10865): KERNEL : El Cliente 9 mando ANSISOP
 [INFO] 13:01:50:894 CPUHANDLER/(10857:10865): Se inicializo el programa 1
 [ERROR] 13:01:50:894 CPUHANDLER/(10857:10865): KERNEL : Consola 9 añadida a la lista
+[INFO] 13:11:40:310 CPUHANDLER/(11078:11086): Server creado con exito y escuchando.
+[INFO] 13:11:40:310 CPUHANDLER/(11078:11086): Server iniciado.
+[INFO] 13:13:59:241 CPUHANDLER/(11432:11440): Server creado con exito y escuchando.
+[INFO] 13:13:59:241 CPUHANDLER/(11432:11440): Server iniciado.
+[INFO] 13:18:05:200 CPUHANDLER/(11432:11440): Nueva Conexion detectada, realizando handshake
+[INFO] 13:18:30:651 CPUHANDLER/(11432:11440): ID Nuevo Cliente: 2.
+[INFO] 13:18:30:652 CPUHANDLER/(11432:11440): Nuevo Cliente CPU
+[INFO] 13:18:30:652 CPUHANDLER/(11432:11440): KER-CPU: HANDSHAKE recibido
+[INFO] 13:18:30:652 CPUHANDLER/(11432:11440): KER-CPU: HANDSHAKE enviado
+[INFO] 13:21:35:290 CPUHANDLER/(11432:11440): KERNEL : Se cayo el cliente 9
+[INFO] 13:21:35:290 CPUHANDLER/(11432:11440): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 13:21:35:290 CPUHANDLER/(11432:11440): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 13:22:57:575 CPUHANDLER/(12289:12299): Server creado con exito y escuchando.
+[INFO] 13:22:57:575 CPUHANDLER/(12289:12299): Server iniciado.
+[INFO] 13:23:14:226 CPUHANDLER/(12289:12299): Nueva Conexion detectada, realizando handshake
+[INFO] 13:23:14:226 CPUHANDLER/(12289:12299): ID Nuevo Cliente: 2.
+[INFO] 13:23:14:226 CPUHANDLER/(12289:12299): Nuevo Cliente CPU
+[INFO] 13:23:14:226 CPUHANDLER/(12289:12299): KER-CPU: HANDSHAKE recibido
+[INFO] 13:23:14:226 CPUHANDLER/(12289:12299): KER-CPU: HANDSHAKE enviado
+[INFO] 13:24:19:705 CPUHANDLER/(12289:12299): KERNEL : Se cayo el cliente 9
+[INFO] 13:24:19:705 CPUHANDLER/(12289:12299): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 13:24:19:705 CPUHANDLER/(12289:12299): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 13:54:01:435 CPUHANDLER/(14581:14589): Server creado con exito y escuchando.
+[INFO] 13:54:01:435 CPUHANDLER/(14581:14589): Server iniciado.
