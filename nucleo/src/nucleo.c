@@ -58,9 +58,8 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
 	//todo fijarse que tengo que pedirle a la memoria
-	pcbNuevoPrograma->paginasDeCodigo = cantidadPaginas(tamanioPaginas,
-			tamanioArchivo);
-
+	//pcbNuevoPrograma->paginasDeCodigo = cantidadPaginas(tamanioPaginas,tamanioArchivo);
+	pcbNuevoPrograma->paginasDeCodigo = cantidadPaginasArchivo(tamanioArchivo);
 	//pcbNuevoPrograma.indiceDeCodigo = crearIndiceCodigo(cantidadInstrucciones, instrucciones);
 
 	arrayBidimensional * array = (arrayBidimensional*) malloc(

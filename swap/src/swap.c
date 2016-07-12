@@ -121,7 +121,6 @@ void iniciarEstructurasSwap() {
 	int counter = 0;
 	int inicio = 0;
 	bitMap = malloc(sizeof(bool) * atoi(paginas));
-	swaplog = log_create("swap.log", "SWAP", TRUE, LOG_LEVEL_INFO);
 	crearListas();
 	while (counter != atoi(paginas)) {
 		bitMap[counter] = 0;

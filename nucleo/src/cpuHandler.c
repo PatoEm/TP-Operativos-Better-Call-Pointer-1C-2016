@@ -722,7 +722,7 @@ int cantidadPaginasArchivo(int longitudArchivo){
 
 		return aux+1;
 	}
-
+	//int a=cantidadPaginas(longitudArchivo, tamanioPaginas);
 	return 0;
 }
 
