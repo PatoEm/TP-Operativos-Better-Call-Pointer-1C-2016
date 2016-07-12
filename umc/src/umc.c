@@ -745,6 +745,11 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	char* bytes;
 	while (!24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
+		case 36 /*TAMANIO_DE_MARCOS*/:
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, 0, 0, marco_Size, NULL, 0);
+			buffer = serializeUmcCpu(streamUmcCpu);
+			socketSend(socket, buffer);
+			break;
 		case 23/*CAMBIO_PROCESO_ACTIVO*/:
 			pidActivo = streamCpuUmc->pid;
 			break;

@@ -334,3 +334,19 @@ char* pedirInstruccion(pcb* pcbLoco) {
 	return instruccion;
 }
 
+
+int pedirTamanioDePagina(){
+
+	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, 0, 0, 0, NULL, 0);
+	buffer=serializeCpuUmc(scu);
+	socketSend(umcClient,buffer);
+
+	buffer = socketReceive(umcClient);
+
+	if (buffer == NULL)
+		puts("Error al recibir del cliente");
+
+	suc = unserializeUmcCpu(buffer);
+
+	return (suc->dataLen);
+}
