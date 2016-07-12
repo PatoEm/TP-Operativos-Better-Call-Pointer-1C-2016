@@ -10,6 +10,8 @@ BETTER CALL POINTER PERRO
 
 int main(void) {
 
+	thread_socket= 3030;
+
 	leerArchivoDeConfiguracion("configumc");
 	crearLogger(0);
 
