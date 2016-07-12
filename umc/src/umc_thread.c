@@ -35,10 +35,12 @@ void umcThread(){
 
 	Socket* serverSocket = socketCreateServer(thread_socket);
 	if (serverSocket == NULL) {
+		puts("No se ppuede escuchar el server");
 //		log_error(umcslog, "No se pudo crear el server escucha.");
 		//return FALSE;
 	}
 	if (!socketListen(serverSocket)) {
+		puts("No se pone a escuchar");
 //		log_error(umcslog, "No se pudo poner a escuchar al server.");
 	}
 

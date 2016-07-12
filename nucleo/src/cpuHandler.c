@@ -701,7 +701,7 @@ int pedirTamanioDePagina(int puerto){
 		puts("Intentando conectar con el Nucleo.");
 		printf("IP: %s, PUERTO: %d\n", ipUMC, puerto);
 		sleep(3);
-	} while (!socketConnect(umcServer, ipUMC, puerto));
+	} while (!socketConnect(nuevoSocketUMC, ipUMC, puerto));
 
 	SocketBuffer * buffer;
 	StrUmcKer * streamUmcKer;
