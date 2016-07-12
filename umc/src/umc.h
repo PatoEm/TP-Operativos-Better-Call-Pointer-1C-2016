@@ -41,7 +41,7 @@ t_list* conexionSockets ;
 SocketClient * socketSwap;
 
 pthread_mutex_t* mutexPedidos;
-
+pthread_mutex_t* mutexThreadSockets;
 
   typedef struct{
 	  int pid;

@@ -17,7 +17,16 @@ void iniciarEstructurasUMC() {
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
 
-	// todo ver porqué rompe pthread_mutex_init(mutexPedidos,NULL);
+	mutexPedidos=(pthread_mutex_t*)malloc(sizeof(mutexPedidos));
+	mutexThreadSockets=(pthread_mutex_t*)malloc(sizeof(mutexThreadSockets));
+
+	if (pthread_mutex_init(mutexPedidos, NULL) != 0) {
+			printf("\n init mutexPedidos fallo\n");
+		}
+
+	if (pthread_mutex_init(mutexThreadSockets, NULL) != 0) {
+			printf("\n init mutexThreadSockets fallo\n");
+		}
 
 	crearListas();
 	inicioTLB();
@@ -716,18 +725,28 @@ void* manageSocketConnection(void* param) {
 			StrUmcCpu * suc = NULL;
 			StrUmcKer * suk = NULL;
 			espacioAsignado aux;
+			int thread_socketaux;
 			switch (id) {
 			case KERNEL_ID:
 				//sku = unserializeKerUmc((Stream) sb->data);
+				//umcThread();
+
+				pthread_mutex_lock(mutexThreadSockets);
+				suk = newStrUmcKer(UMC_ID, HANDSHAKE, "hola",thread_socket,0,0);
 				newUmcThread();
-				suk = newStrUmcKer(UMC_ID, HANDSHAKE, NULL,thread_socket,0,
-						0);
-				sb = serializeUmcKer(suc);
+				//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
+				sleep(2);
+				pthread_mutex_unlock(mutexThreadSockets);
+				sb = serializeUmcKer(suk);
 				socketSend(socket, sb);
+
 				break;
 			case CPU_ID:
-				newUmcThread();
+				pthread_mutex_lock(mutexThreadSockets);
 				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, NULL, 0);
+				newUmcThread();
+				sleep(2);
+				pthread_mutex_unlock(mutexThreadSockets);
 				sb = serializeUmcCpu(suc);
 				socketSend(socket, sb);
 				break;

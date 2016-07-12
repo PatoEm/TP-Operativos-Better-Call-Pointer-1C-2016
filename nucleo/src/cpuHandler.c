@@ -693,15 +693,24 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 	}
 }
 
-int pedirTamanioDePagina(){
+int pedirTamanioDePagina(int puerto){
+	Socket* nuevoSocketUMC;
+	nuevoSocketUMC=socketCreateClient();
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con el Nucleo.");
+		printf("IP: %s, PUERTO: %d\n", ipUMC, puerto);
+		sleep(3);
+	} while (!socketConnect(umcServer, ipUMC, puerto));
+
 	SocketBuffer * buffer;
 	StrUmcKer * streamUmcKer;
 	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
-	streamUmcKer=newStrUmcKer(KERNEL_ID,TAMANIO_DE_MARCOS,NULL,0,0,0);
+	streamUmcKer=newStrUmcKer(KERNEL_ID,TAMANIO_DE_MARCOS,"hola",0,0,0);
 	buffer=serializeUmcKer(streamUmcKer);
-	socketSend(umcServer,buffer);
+	socketSend(nuevoSocketUMC,buffer);
 
-	buffer = socketReceive(umcServer);
+	buffer = socketReceive(nuevoSocketUMC);
 
 	if (buffer == NULL)
 		puts("Error al recibir del cliente");

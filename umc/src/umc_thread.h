@@ -16,7 +16,7 @@
 
 
 void newUmcThread();
-bool umcThread();
+void umcThread();
 void manageCpuRequest(Socket* socket, StrCpuUmc* scu);
 void manageKernelRequest(Socket* socket, StrKerUmc* sku);
 

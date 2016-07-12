@@ -572,11 +572,8 @@ int inicializarVariables() {
 
 	printf("Nuevo UMC es %d.\n", in_umc_msg->size);
 
-	while(TRUE){
-		sleep(5);
-	}
-
-	tamanioPaginas=pedirTamanioDePagina();
+	int nuevoPuertoUmc=in_umc_msg->size;
+	tamanioPaginas=pedirTamanioDePagina(nuevoPuertoUmc);
 
 	return 0;
 }

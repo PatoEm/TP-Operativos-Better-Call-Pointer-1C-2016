@@ -16,25 +16,36 @@ void newUmcThread() {
 	// EL HILO VA A HACER SUS COSAS SIEMPRE QUE EL PROCESO PADRE
 	// SIGA VIVO
 
-	pthread_create(&umcst, NULL, umcThread, "nada");
+	//pthread_create(&umcst, NULL, umcThread, NULL);
+
+			pthread_t hiloLoco;
+			pthread_attr_t attrHiloLoco;
+			pthread_attr_init(&attrHiloLoco);
+			pthread_attr_setdetachstate(&attrHiloLoco, PTHREAD_CREATE_DETACHED);
+			pthread_create(&hiloLoco, &attrHiloLoco, &umcThread,
+					NULL);
+			pthread_attr_destroy(&attrHiloLoco);
+
 
 }
 
-bool umcThread(){
+void umcThread(){
 //	*******************************************************************
 //	CREO EL NEUVO SOCKET
 
-	thread_socket ++;
 	Socket* serverSocket = socketCreateServer(thread_socket);
 	if (serverSocket == NULL) {
 //		log_error(umcslog, "No se pudo crear el server escucha.");
-		return FALSE;
+		//return FALSE;
 	}
 	if (!socketListen(serverSocket)) {
 //		log_error(umcslog, "No se pudo poner a escuchar al server.");
 	}
-	log_info(umcslog, "Server creado con exito y escuchando.");
-	return TRUE;
+
+	thread_socket ++;
+
+	//log_info(umcslog, "Server creado con exito y escuchando.");
+	//return TRUE;
 //	*******************************************************************
 
 
@@ -85,7 +96,8 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	while (!24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
-			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, NULL, 0);
+			//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, "hola", 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			break;
@@ -165,7 +177,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 	case 36 /*TAMANIO_DE_MARCOS*/:
 		//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
 		streamAlKerner = newStrUmcKer(UMC_ID, 36/*TAMANIO_DE_MARCOS*/,
-		NULL, marco_Size, 0, 0);
+		"hola", marco_Size, 0, 0);
 		buffer = serializeUmcKer(streamAlKerner);
 		socketSend(socket, buffer);
 		break;
