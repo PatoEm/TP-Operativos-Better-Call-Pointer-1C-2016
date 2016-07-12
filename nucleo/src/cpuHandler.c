@@ -694,30 +694,32 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 }
 
 int pedirTamanioDePagina(int puerto){
-	Socket* nuevoSocketUMC;
-	nuevoSocketUMC=socketCreateClient();
+
+	umcServer=socketCreateClient();
 	do {
 		puts("**********************************");
-		puts("Intentando conectar con el Nucleo.");
+		puts("Intentando conectar con el hilo de la umc.");
 		printf("IP: %s, PUERTO: %d\n", ipUMC, puerto);
 		sleep(3);
-	} while (!socketConnect(nuevoSocketUMC, ipUMC, puerto));
+	} while (!socketConnect(umcServer, ipUMC, puerto));
 
 	SocketBuffer * buffer;
-	StrUmcKer * streamUmcKer;
-	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
-	streamUmcKer=newStrUmcKer(KERNEL_ID,TAMANIO_DE_MARCOS,"hola",0,0,0);
-	buffer=serializeUmcKer(streamUmcKer);
-	socketSend(nuevoSocketUMC,buffer);
+	StrKerUmc * streamKerUmc;
 
-	buffer = socketReceive(nuevoSocketUMC);
+
+	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio)
+	streamKerUmc=newStrKerUmc(KERNEL_ID,TAMANIO_DE_MARCOS,"hola",0,0,0,0,0,0);
+	buffer=serializeKerUmc(streamKerUmc);
+//	socketSend(umcServer,buffer);
+
+	buffer = socketReceive(umcServer);
 
 	if (buffer == NULL)
 		puts("Error al recibir del cliente");
 
-	streamUmcKer = unserializeUmcKer(buffer);
+	streamKerUmc = unserializeUmcKer(buffer);
 
-	return (streamUmcKer->size);
+	return (streamKerUmc->size);
 }
 
 int cantidadPaginasArchivo(int longitudArchivo){

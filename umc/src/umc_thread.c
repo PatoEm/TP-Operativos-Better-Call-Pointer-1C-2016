@@ -39,11 +39,12 @@ void umcThread(){
 //		log_error(umcslog, "No se pudo crear el server escucha.");
 		//return FALSE;
 	}
+	puts("hola, soy el hilo");
 	if (!socketListen(serverSocket)) {
 		puts("No se pone a escuchar");
 //		log_error(umcslog, "No se pudo poner a escuchar al server.");
 	}
-
+	puts("hola, soy el hilo hice el listen");
 	thread_socket ++;
 
 	//log_info(umcslog, "Server creado con exito y escuchando.");
@@ -54,15 +55,17 @@ void umcThread(){
 //	ACEPTO LA CONEXION
 	Socket* cpuClient = socketAcceptClient(serverSocket);
 
+	puts("hola, soy el hilo, hice el accept");
+
 	SocketBuffer* sb;
 	StrCpuUmc* in_cpu_msg;
 
 //	EL PUTO CASE
 
 	while(TRUE){
-
+		puts("hola, soy el hilo,todavia no hice el receive");
 		sb = socketReceive(cpuClient);
-
+		puts("hola, soy el hilo,ahora si");
 		if(sb == NULL) puts("No se pudo recibir del CPU.");
 
 		in_cpu_msg = unserializeCpuUmc(sb);
