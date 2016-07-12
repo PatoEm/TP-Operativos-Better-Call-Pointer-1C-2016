@@ -157,7 +157,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	while (nodoActual->bitDePresencia == 0) {
 		nodoActual = buscarBitDeUsoEn0(pid);
 	}
-	nodoActual->bitDePresencia = 1;
+	nodoActual->bitDePresencia = 0;
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
 	int inicioLectura = posicionDePaginaLibre * marco_Size;
@@ -167,6 +167,15 @@ int reemplazarPaginaClock(int pid, int pagina) {
 		inicioLectura++;
 		counter++;
 	}
+	int i = 0;
+	espacioAsignado*nodoBuscado = list_get(listaEspacioAsignado, i);
+	while (!(nodoBuscado->pid == pid && nodoBuscado->numDePag == pagina)) {
+		i++;
+		nodoBuscado = list_get(listaEspacioAsignado, i);
+	}
+	nodoBuscado->bitUso = 1;
+	nodoBuscado->bitDePresencia = 1;
+	nodoBuscado->IDPaginaInterno = nodoActual->IDPaginaInterno;
 	espacioAsignado pageToSend;
 	pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
 	pageToSend.numDePag = nodoActual->numDePag;
@@ -192,8 +201,6 @@ int reemplazarPaginaClock(int pid, int pagina) {
 		counter++;
 		inicioLectura++;
 	}
-	nodoActual->numDePag = pagina;
-	nodoActual->bitUso = 1;
 	return posicionDePaginaLibre;
 }
 
@@ -204,63 +211,90 @@ int reemplazarPagina(int pid, int pagina, bool lectoEscritura) {
 		return reemplazarPaginaClockModificado(pid, pagina, lectoEscritura);
 }
 
+void actualizarPuntero(espacioAsignado*nodoActual, int contador, int inicio,
+		int pid) {
+	nodoActual->punteroAPagina = 0;
+	espacioAsignado*nodoSiguiente;
+	if (contador + 1 == listaEspacioAsignado->elements_count)
+		nodoSiguiente = (list_get(listaEspacioAsignado, inicio));
+	else
+		nodoSiguiente = (list_get(listaEspacioAsignado, (contador + 1)));
+	if (nodoSiguiente->pid != pid)
+		nodoSiguiente = (list_get(listaEspacioAsignado, inicio));
+	nodoSiguiente->punteroAPagina = 1;
+
+}
+
 espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 	int inicio = lugarAsignadoInicial(pid);
 	int fin = lugarAsignadoFinal(pid);
 	int comienzoDelPuntero = encontrarPuntero(pid);
 	int contador = comienzoDelPuntero;
 	int posicionDePaginaLibre;
-	espacioAsignado*nodoActual;
+	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
 	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0))) {
+		contador++;
+		if (contador == fin)
+			contador = inicio;
+		if (contador == comienzoDelPuntero)
+			break;
+		nodoActual = list_get(listaEspacioAsignado, contador);
+	}
+	if (nodoActual->bitDePresencia == 1
+			&& (((nodoActual->bitUso) == 0)
+					&& ((nodoActual->bitModificado) == 0))) {
+		actualizarPuntero(nodoActual, contador, inicio, pid);
+		return nodoActual;
+	}
 
+	while (!(((nodoActual->bitUso) == 1) && ((nodoActual->bitModificado) == 0))) {
+		nodoActual->bitUso = 0;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
-		if (contador > fin)
+		if (contador == fin)
 			contador = inicio;
 		if (contador == comienzoDelPuntero)
 			break;
 	}
-	if (contador == comienzoDelPuntero) {
-		while (!(((nodoActual->bitUso) == 1)
-				&& ((nodoActual->bitModificado) == 0))) {
-			nodoActual->bitUso = 0;
-			nodoActual = list_get(listaEspacioAsignado, contador);
-			contador++;
-			if (contador > fin)
-				contador = inicio;
-			if (contador == comienzoDelPuntero)
-				break;
-		}
-		if (contador == comienzoDelPuntero) {
-			while (!(((nodoActual->bitUso) == 0)
+	if (nodoActual->bitDePresencia == 1
+			&& (((nodoActual->bitUso) == 0)
 					&& ((nodoActual->bitModificado) == 0))) {
+		actualizarPuntero(nodoActual, contador, inicio, pid);
+		return nodoActual;
 
-				nodoActual = list_get(listaEspacioAsignado, contador);
-				contador++;
-				if (contador > fin)
-					contador = inicio;
-				if (contador == comienzoDelPuntero)
-					break;
-			}
-			if (contador == comienzoDelPuntero) {
-				while (!(((nodoActual->bitUso) == 0)
-						&& ((nodoActual->bitModificado) == 1))) {
-
-					nodoActual = list_get(listaEspacioAsignado, contador);
-					contador++;
-					if (contador > fin)
-						contador = inicio;
-					if (contador == comienzoDelPuntero)
-						break;
-				}
-			}
-		}
 	}
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0))) {
+
+		nodoActual = list_get(listaEspacioAsignado, contador);
+		contador++;
+		if (contador == fin)
+			contador = inicio;
+		if (contador == comienzoDelPuntero)
+			break;
+	}
+	if (nodoActual->bitDePresencia == 1
+			&& (((nodoActual->bitUso) == 0)
+					&& ((nodoActual->bitModificado) == 0))) {
+		actualizarPuntero(nodoActual, contador, inicio, pid);
+		return nodoActual;
+	}
+
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 1))) {
+
+		nodoActual = list_get(listaEspacioAsignado, contador);
+		contador++;
+		if (contador == fin)
+			contador = inicio;
+		if (contador == comienzoDelPuntero)
+			break;
+	}
+	actualizarPuntero(nodoActual, contador, inicio, pid);
 	return nodoActual;
 }
 
 //devuelve el nodo del espacio en memoria. 0 lectura 1 escritura
-int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
+int reemplazarPaginaClockModificado(int pid, int pagina,
+bool lectoEscritura) {
 
 	int inicio = lugarAsignadoInicial(pid);
 	int fin = lugarAsignadoFinal(pid);
@@ -273,18 +307,17 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 		nodoActual = buscarPaginaClockModificado(pid, pagina);
 	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
-	nodoActual->bitDePresencia = 1;
-	espacioAsignado*nodoSiguiente ;
-	if(contador== list_size(listaEspacioAsignado))
-	nodoSiguiente= (list_get(listaEspacioAsignado,
-			inicio));
-	else
-		nodoSiguiente= (list_get(listaEspacioAsignado,
-			(contador + 1)));
-	if(nodoSiguiente->pid!=pid)
-		nodoSiguiente= (list_get(listaEspacioAsignado,
-					inicio));
-	nodoSiguiente->punteroAPagina = 1;
+	nodoActual->bitDePresencia = 0;
+	int i = 0;
+	espacioAsignado*nodoBuscado = list_get(listaEspacioAsignado, i);
+	while (!(nodoBuscado->pid == pid && nodoBuscado->numDePag == pagina)) {
+		i++;
+		nodoBuscado = list_get(listaEspacioAsignado, i);
+	}
+	nodoBuscado->bitUso = 1;
+	nodoBuscado->bitDePresencia = 1;
+	nodoBuscado->IDPaginaInterno = nodoActual->IDPaginaInterno;
+
 	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
 	int inicioLectura = posicionDePaginaLibre * marco_Size;
 	int counter = 0;
@@ -305,8 +338,8 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	pageToSend.numDePag = pagina;
-	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
-			0, nodoActual->pid);
+	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1,
+	NULL, 0, nodoActual->pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
@@ -319,9 +352,8 @@ int reemplazarPaginaClockModificado(int pid, int pagina, bool lectoEscritura) {
 		counter++;
 		inicioLectura++;
 	}
-	nodoActual->numDePag = pagina;
-	nodoActual->bitUso = 1;
-	nodoActual->bitModificado = lectoEscritura;
+	nodoBuscado->bitUso = 1;
+	nodoBuscado->bitModificado = lectoEscritura;
 	return posicionDePaginaLibre;
 }
 
@@ -354,7 +386,7 @@ int encontrarPuntero(int pid) {
 		nodoSiguiente = (list_get(listaEspacioAsignado, (contador + 1)));
 	if (nodoSiguiente->pid == pid)
 		nodoSiguiente->punteroAPagina = 1;
-	else{
+	else {
 		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
 		nodoSiguiente->punteroAPagina = 1;
 	}
@@ -440,9 +472,9 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			espacioAsignado pageToSend;
 			pageToSend.numDePag = pagina;
 			//(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
-			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA,
-					pageToSend, 1,
-					NULL, 0, nodoALeer->pid);
+			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID,
+			LEER_UNA_PAGINA, pageToSend, 1,
+			NULL, 0, nodoALeer->pid);
 			SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
 			if (!socketSend(socketSwap->ptrSocket, buffer))
 				puts("error al enviar al swap");
@@ -518,9 +550,9 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 			nodoALeer->bitDePresencia = 1;
 			espacioAsignado pageToSend;
 			pageToSend.numDePag = pagina;
-			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA,
-					pageToSend, 1,
-					NULL, 0, nodoALeer->pid);
+			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID,
+			LEER_UNA_PAGINA, pageToSend, 1,
+			NULL, 0, nodoALeer->pid);
 			SocketBuffer*buf = serializeUmcSwa(streamUmcSwap);
 			if (!socketSend(socketSwap->ptrSocket, buf))
 				puts("error al enviar al swap");
@@ -542,9 +574,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 			}
 		} else {
 
-			posicionActualDeNodo = reemplazarPagina(pid, pagina, 1);
-			nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
-			int dondeEscribo = (nodoALeer->IDPaginaInterno) * marco_Size
+			int frame = reemplazarPagina(pid, pagina, 1);
+			int dondeEscribo = frame * marco_Size
 					+ offset;
 			int enDondeEstoyDeLoQueMeMandaron = 0;
 			int contador = 0;

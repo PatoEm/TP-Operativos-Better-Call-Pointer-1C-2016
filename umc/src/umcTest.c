@@ -13,7 +13,7 @@
  */
 
 #include "umc.h"
-
+/*
 int main() {
 	leerArchivoDeConfiguracion("configumc");
 
@@ -47,4 +47,4 @@ int main() {
 
 	return 0;
 }
-
+*/
