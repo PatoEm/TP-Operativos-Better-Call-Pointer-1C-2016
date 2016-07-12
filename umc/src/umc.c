@@ -715,6 +715,7 @@ void* manageSocketConnection(void* param) {
 			StrCpuUmc* scu = NULL;
 			StrUmcCpu * suc = NULL;
 			StrUmcKer * suk = NULL;
+			espacioAsignado aux;
 			switch (id) {
 			case KERNEL_ID:
 				//sku = unserializeKerUmc((Stream) sb->data);
@@ -726,8 +727,7 @@ void* manageSocketConnection(void* param) {
 				break;
 			case CPU_ID:
 				newUmcThread();
-				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, NULL, 0, thread_socket,
-						NULL, 0);
+				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, NULL, 0);
 				sb = serializeUmcCpu(suc);
 				socketSend(socket, sb);
 				break;

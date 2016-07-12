@@ -54,7 +54,7 @@ bool umcThread(){
 
 		in_cpu_msg = unserializeCpuUmc(sb);
 
-		Char* id = getStreamId(in_cpu_msg);
+		Char id = getStreamId(in_cpu_msg);
 
 		log_info(umcslog, "ID Nuevo Cliente: %d.",id);
 		switch (id) {
