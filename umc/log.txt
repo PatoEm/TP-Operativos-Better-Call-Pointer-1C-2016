@@ -2,3 +2,14 @@
 [INFO] 15:29:16:922 Elestac/(3807:3807): Memoria real reservada
 [INFO] 23:33:51:340 Elestac/(7834:7834): Inicio Log UMC
 [INFO] 23:33:51:340 Elestac/(7834:7834): Memoria real reservada
+[INFO] 04:32:13:234 Elestac/(3763:3763): Inicio Log UMC
+[INFO] 04:33:10:547 Elestac/(3894:3894): Inicio Log UMC
+[INFO] 04:37:08:485 Elestac/(4130:4130): Inicio Log UMC
+[INFO] 04:37:29:656 Elestac/(4281:4281): Inicio Log UMC
+[INFO] 04:38:52:12 Elestac/(4489:4489): Inicio Log UMC
+[INFO] 04:40:37:327 Elestac/(4689:4689): Inicio Log UMC
+[INFO] 04:42:47:279 Elestac/(4849:4849): Inicio Log UMC
+[INFO] 04:43:43:93 Elestac/(5077:5077): Inicio Log UMC
+[INFO] 04:44:57:117 Elestac/(5267:5267): Inicio Log UMC
+[INFO] 04:55:29:444 Elestac/(5644:5644): Inicio Log UMC
+[INFO] 04:55:40:339 Elestac/(5733:5733): Inicio Log UMC

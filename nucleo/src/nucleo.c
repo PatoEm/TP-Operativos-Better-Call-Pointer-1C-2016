@@ -398,7 +398,7 @@ int inicializarVariables() {
 
 
 
-	tamanioPaginas=pedirTamanioDePagina();
+	//tamanioPaginas=pedirTamanioDePagina();
 
 
 	//Variables de lectura de archivo
@@ -559,7 +559,7 @@ int inicializarVariables() {
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, PUERTO: %d\n", ipUMC, (int) UMCPort);
+		printf("IP: %s, PUERTO: %d\n", ipUMC, atoi (UMCPort));
 		sleep(3);
 	} while (!socketConnect(umcServer, ipUMC, atoi(UMCPort)));
 	StrKerUmc* out_umc_msg = newStrKerUmc(KERNEL_ID, HANDSHAKE, NULL, 0, 0, 0, 0, 0, 0);
@@ -576,7 +576,7 @@ int inicializarVariables() {
 		sleep(5);
 	}
 
-
+	tamanioPaginas=pedirTamanioDePagina();
 
 	return 0;
 }

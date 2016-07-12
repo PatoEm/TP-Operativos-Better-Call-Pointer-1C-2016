@@ -684,7 +684,7 @@ void liberarMemoria(char * memoria_para_liberar) {
 
 void manageSocketConnections() {
 	conexionSockets = list_create();
-	Socket* s = socketCreateServer(puertoEscucha);
+	Socket* s = socketCreateServer(atoi(puertoEscucha));
 	while (TRUE) {
 		pthread_t socketConnection;
 		puts("Escuchando conexiones del Kernel o CPUs.");
