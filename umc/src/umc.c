@@ -746,7 +746,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	while (!24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
-			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, 0, 0, marco_Size, NULL, 0);
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, NULL, 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			break;

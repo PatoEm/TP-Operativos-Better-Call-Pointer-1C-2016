@@ -336,8 +336,10 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 
 int pedirTamanioDePagina(){
+	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+	espacioAsignado aux;
 
-	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, 0, 0, 0, NULL, 0);
+	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, NULL, 0);
 	buffer=serializeCpuUmc(scu);
 	socketSend(umcClient,buffer);
 
