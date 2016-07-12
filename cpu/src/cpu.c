@@ -210,10 +210,6 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	streamUmcCpu = unserializeCpuUmc(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
 		seguirEjecutando = FALSE;
-	/*} else {TODO revisar, no entiendo que es lo que tengo que hacer aca
-		 no se que carajo poner
-		}
-	*/
 }
 
 //void asignar(t_puntero direccion_variable, t_valor_variable valor){
@@ -295,6 +291,7 @@ void finalizar(void) {
 			pcbProceso.id, 0, NULL, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+	seguirEjecutando = FALSE;
 }
 
 /*
@@ -321,11 +318,6 @@ void retornar(t_valor_variable retorno) {
 	streamUmcCpu = unserializeCpuUmc(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
 		seguirEjecutando = FALSE;
-	/*} else {TODO revisar, no entiendo que es lo que tengo que hacer aca
-		 no se que carajo poner
-		}
-	*/
-
 }
 
 /*
@@ -385,13 +377,13 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
  *///MODIFICAR PROGRAMA DESBLOQUEADO y envio
 void wait(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
-	streamCpuKer = newStrCpuKer(CPU_ID, 27 /*WAIT*/, pcbProceso, pcbProceso.id,
+	streamCpuKer = newStrCpuKer(CPU_ID, WAIT_SEM_ANSISOP, pcbProceso, pcbProceso.id,
 			strlen(identificador_semaforo), identificador_semaforo, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
-	if(StreamKerCpu->action == 37 /*WAIT_REALIZADO*/){
+	if(StreamKerCpu->action == WAIT_REALIZADO){
 		//no hago nada, me quedo clavado en el recibe.
 
 	} // ver que hacer

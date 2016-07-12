@@ -16,7 +16,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "cpu.h"
-
 /*****************************************
  * Constantes
  ****************************************/
@@ -58,6 +57,7 @@ pcb* pcbActual = NULL;
 Boolean loadConfig();
 Boolean socketConnection();
 Boolean getNextPcb();
+char* pedirInstruccion(pcb*);
 
 /*****************************************
  * GLOBAL
@@ -87,24 +87,38 @@ int main() {
 			if(!getNextPcb()) {
 				return TRUE;
 			}
+			seguirEjecutando = TRUE;
 			// proceso el pcb del nucleo
 			Int8U quantum = skc->quantum;
-			while (quantum > 0 /*!=contador*/ && seguirEjecutando) {
-				analizadorLinea(1/*linea a ejecutar*/, &funciones, &funcionesDeKernel);
+			while (quantum > 0 && seguirEjecutando) {
+				analizadorLinea(pedirInstruccion(pcbActual), &funciones, &funcionesDeKernel);
 				moverProgramCounterPcb(pcbActual);
-			}	// ver forma de marcar si llegue al final
+			}
 
 			if (!seguirEjecutando) {
-				// abortar programa
-				//si llegue al final del programa, finalizar
+				if(pcbActual->instruccionesRestantes == 0) {
+					sck = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, pcbActual, 0, 0, NULL, NULL, 0);
+					buffer = serializeCpuKer(sck);
+					if (!socketSend(umcClient, buffer)) {
+						puts("No se pudo enviar el buffer al nucleo.");
+					}
+				} else {
+					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, pcbActual, 0, 0, NULL, NULL, 0);
+					buffer = serializeCpuKer(sck);
+					if (!socketSend(umcClient, buffer)) {
+						puts("No se pudo enviar el buffer al nucleo.");
+					}
+				}
 			}
 
-			if (quantum == 1/*contador*/){
-				//mandar PCB
+			if (quantum == 0){
+				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, pcbActual, 0, 0, NULL, NULL, 0);
+				buffer = serializeCpuKer(sck);
+				if (!socketSend(umcClient, buffer)) {
+					puts("No se pudo enviar el buffer al nucleo.");
+				}
 			}
-
-			//volver a pedir otro PCB
-		}
+			seguirEjecutando = TRUE;
 	}
 
 	config_destroy(tConfig);
@@ -210,9 +224,10 @@ Boolean socketConnection() {
 }
 
 Boolean getNextPcb() {
+
 	if (sck == NULL) {
 		pcbActual = newEmptyPcb();
-		sck = newStrCpuKer(CPU_ID, PRIMER_PCB, *pcbActual, 0, 0, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
 	puts("getNextPcb: Nuevo PCB vacio creado.");
 
@@ -240,3 +255,86 @@ Boolean getNextPcb() {
 
 	return TRUE;
 }
+
+int calcularOffset(pcb *pcbLoco){
+	arrayBidimensional aux;
+	int contador;
+	while(contador < (pcbLoco->instruccionesTotales)){
+		if(pcbLoco->indiceDeCodigo[contador].comienzo == pcbLoco->programCounter){
+			aux.comienzo = pcbLoco->indiceDeCodigo[contador].comienzo;
+			aux.longitud = pcbLoco->indiceDeCodigo[contador].longitud;
+		}
+		contador++;
+	}
+	return aux.longitud;
+}
+
+String stringFromByteArray(Byte* data, Int32U size) {
+	int i;
+	String result = malloc(size);
+	char* c = (char*) data;
+	for (i = 0; i < size; i++) {
+		result[i] = *c;
+		c++;
+	}
+	result[size] = '\0';
+	return result;
+}
+
+char* pedirInstruccion(pcb* pcbLoco){
+	char* instruccion = "";
+
+	int tamanioPag;
+	int inicio = pcbLoco->programCounter;
+	int offset = calcularOffset(pcbLoco);
+
+	StrCpuUmc* scu;
+	StrUmcCpu* suc;
+
+	int pagina = inicio / tamanioPag;
+
+	int inicioPag = inicio % pagina;
+	int offsetPag;
+
+	while(offset > 0){
+
+		if ((inicioPag + offset) > tamanioPag) {
+				offsetPag = tamanioPag - inicioPag;
+			} else {
+				offsetPag = offset;
+			}
+
+		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, pagina, offsetPag, 0, NULL, 0);
+		buffer = serializeCpuUmc(scu);
+		if (!socketSend(umcClient, buffer)) {
+			puts("No se pudo enviar tu pedido a la umc.");
+		}
+
+		buffer = socketReceive(umcClient);
+		suc = unserializeUmcCpu(buffer);
+
+		strcat(instruccion, stringFromByteArray(suc->data, suc->dataLen));
+
+		offset = offset - offsetPag;
+		pagina ++;
+		inicioPag = 0;
+	}
+	return instruccion;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

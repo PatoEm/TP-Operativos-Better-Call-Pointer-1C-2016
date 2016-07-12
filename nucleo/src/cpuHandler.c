@@ -590,6 +590,14 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		break;
 
+	case TERMINE_EL_QUANTUM:
+
+		log_info(cpuhlog, "Finalizo el quantum del programa %d.", in_cpu_msg->pid);
+		moverAColaReady(&in_cpu_msg->pcb);
+
+
+		break;
+
 	default:
 		log_error(cpuhlog,
 				"KERNEL : CPU %d ha enviado un action incomprensible",
