@@ -34,6 +34,7 @@ Int32U puertoNucleo;
 String ipNucleo;
 Int32U puertoUmc;
 String ipUmc;
+int tamanioPag;
 
 /*****************************************
  * Socket & Streams
@@ -80,6 +81,8 @@ int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
 
 	iniciarFunciones();
+	tamanioPag = pedirTamanioDePagina();
+tamanioPaginaUmc=tamanioPag;
 
 	if (loadConfig() && socketConnection()) {
 		while (TRUE) {
@@ -293,8 +296,6 @@ String stringFromByteArray(Byte* data, Int32U size) {
 
 char* pedirInstruccion(pcb* pcbLoco) {
 	char* instruccion = "";
-
-	int tamanioPag;
 	int inicio = pcbLoco->programCounter;
 	int offset = calcularOffset(pcbLoco);
 
