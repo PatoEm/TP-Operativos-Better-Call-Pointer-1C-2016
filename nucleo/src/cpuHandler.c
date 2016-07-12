@@ -68,7 +68,7 @@ Boolean initCpuServer() {
 	}
 
 //	INICIO EL SOCKET ESCUCHA
-	serverSocket = socketCreateServer(CPU_HANDLER_SOCKET);
+	serverSocket = socketCreateServer(atoi(puertoPropio));
 	if (serverSocket == NULL) {
 		log_error(cpuhlog, "No se pudo crear el server escucha.");
 		return FALSE;
