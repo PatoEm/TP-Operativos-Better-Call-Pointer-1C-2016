@@ -394,26 +394,6 @@ int inicializarVariables() {
 	nucleolog = log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO);
 
 
-	umcServer=socketCreateClient();
-	do {
-		puts("**********************************");
-		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, PUERTO: %d\n", ipUMC, (int) UMCPort);
-		sleep(3);
-	} while (!socketConnect(umcServer, ipUMC, atoi(UMCPort)));
-	StrKerUmc* out_umc_msg = newStrKerUmc(KERNEL_ID, HANDSHAKE, NULL, 0, 0, 0, 0, 0, 0);
-	SocketBuffer* sb = serializeKerUmc(out_umc_msg);
-	socketSend(umcServer->ptrSocket, sb);
-	puts("Mensaje enviado a la UMC ppal.");
-
-	sb = socketReceive(umcServer->ptrSocket);
-	StrUmcKer* in_umc_msg = unserializeUmcKer(sb);
-
-	printf("Nuevo UMC es %d.\n", in_umc_msg->size);
-
-	while(TRUE){
-		sleep(5);
-	}
 
 
 
@@ -572,6 +552,31 @@ int inicializarVariables() {
 	listaBlock = list_create();
 	listaExit=list_create();
 	//colaExit = queue_create();
+
+
+
+	umcServer=socketCreateClient();
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con el Nucleo.");
+		printf("IP: %s, PUERTO: %d\n", ipUMC, (int) UMCPort);
+		sleep(3);
+	} while (!socketConnect(umcServer, ipUMC, atoi(UMCPort)));
+	StrKerUmc* out_umc_msg = newStrKerUmc(KERNEL_ID, HANDSHAKE, NULL, 0, 0, 0, 0, 0, 0);
+	SocketBuffer* sb = serializeKerUmc(out_umc_msg);
+	socketSend(umcServer->ptrSocket, sb);
+	puts("Mensaje enviado a la UMC ppal.");
+
+	sb = socketReceive(umcServer->ptrSocket);
+	StrUmcKer* in_umc_msg = unserializeUmcKer(sb);
+
+	printf("Nuevo UMC es %d.\n", in_umc_msg->size);
+
+	while(TRUE){
+		sleep(5);
+	}
+
+
 
 	return 0;
 }
