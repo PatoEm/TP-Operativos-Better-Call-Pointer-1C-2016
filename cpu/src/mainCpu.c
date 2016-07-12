@@ -224,12 +224,48 @@ Boolean socketConnection() {
 		sleep(3);
 	} while (!socketConnect(umcClient, ipUmc, puertoUmc));
 
-	if (handshake(umcClient, CPU_ID)) {
-		puts("Handshake realizado con exito.");
-	} else {
-		puts("No se pudo realizar el handshake.");
-		return FALSE;
-	}
+//	if (handshake(umcClient, CPU_ID)) {
+//		puts("Handshake realizado con exito.");
+//	} else {
+//		puts("No se pudo realizar el handshake.");
+//		return FALSE;
+//	}
+
+	StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, 0,0, 0, "hola", 0);
+	buffer = serializeCpuUmc(out_umc_msg);
+
+	socketSend(umcClient->ptrSocket, buffer);
+	puts("Mensaje enviado a la UMC ppal.");
+
+	buffer = socketReceive(umcClient->ptrSocket);
+	StrUmcCpu* in_umc_msg = unserializeUmcCpu(buffer);
+
+	printf("Nuevo UMC es %d.\n", in_umc_msg->dataLen);
+
+	int nuevoPuertoUmc=in_umc_msg->dataLen;
+
+	// Conexion a la UMC
+	umcClient = socketCreateClient();
+
+
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con el hilo UMC.");
+		printf("IP: %s, Puerto: %d\n", ipUmc, (int) nuevoPuertoUmc);
+		sleep(3);
+	} while (!socketConnect(umcClient, ipUmc, nuevoPuertoUmc));
+
+	out_umc_msg = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, 0, 0, 0, "hola", 0);
+	buffer = serializeCpuUmc(out_umc_msg);
+	socketSend(umcClient->ptrSocket, buffer);
+	puts("Le pedi el tamanio de pagina al holo de la UMC que me da servicio.");
+
+	buffer = socketReceive(umcClient->ptrSocket);
+	in_umc_msg = unserializeUmcCpu(buffer);
+
+	printf("El tamanio de pagina es: %d.\n", in_umc_msg->dataLen);
+	tamanioPag = in_umc_msg->dataLen;
+	tamanioPaginaUmc = tamanioPag;
 
 	return TRUE;
 }
