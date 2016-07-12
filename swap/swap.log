@@ -328,3 +328,22 @@
 [INFO] 12:36:14:33 SWAP/(8946:8946): Archivo de particion creado
 [INFO] 12:36:14:33 SWAP/(8946:8946): Server creado y escuchando correctamente
 [ERROR] 12:42:50:935 SWAP/(8946:8946): Al recibir del cliente
+[INFO] 12:49:11:337 SWAP/(10023:10023): Valores del archivo de configuracion seteados
+[INFO] 12:49:11:345 SWAP/(10023:10023): Archivo de particion creado
+[INFO] 12:49:11:345 SWAP/(10023:10023): Server creado y escuchando correctamente
+[ERROR] 12:51:55:916 SWAP/(10023:10023): Al recibir del cliente
+[INFO] 12:52:04:6 SWAP/(10206:10206): Valores del archivo de configuracion seteados
+[INFO] 12:52:04:22 SWAP/(10206:10206): Archivo de particion creado
+[INFO] 12:52:04:22 SWAP/(10206:10206): Server creado y escuchando correctamente
+[ERROR] 12:55:01:638 SWAP/(10206:10206): Al recibir del cliente
+[INFO] 12:55:10:276 SWAP/(10502:10502): Valores del archivo de configuracion seteados
+[INFO] 12:55:10:287 SWAP/(10502:10502): Archivo de particion creado
+[INFO] 12:55:10:287 SWAP/(10502:10502): Server creado y escuchando correctamente
+[INFO] 12:56:18:922 SWAP/(10502:10502): Hay espacio
+[INFO] 12:56:18:922 SWAP/(10502:10502): Espacio reservado correctamente
+[ERROR] 12:58:43:389 SWAP/(10502:10502): Al recibir del cliente
+[INFO] 13:01:00:440 SWAP/(10765:10765): Valores del archivo de configuracion seteados
+[INFO] 13:01:00:452 SWAP/(10765:10765): Archivo de particion creado
+[INFO] 13:01:00:452 SWAP/(10765:10765): Server creado y escuchando correctamente
+[INFO] 13:01:50:894 SWAP/(10765:10765): Hay espacio
+[INFO] 13:01:50:894 SWAP/(10765:10765): Espacio reservado correctamente

@@ -87,3 +87,7 @@
 [INFO] 12:31:27:867 Elestac/(8590:8590): Inicio Log UMC
 [INFO] 12:34:06:688 Elestac/(8791:8791): Inicio Log UMC
 [INFO] 12:36:45:985 Elestac/(8991:8991): Inicio Log UMC
+[INFO] 12:49:22:162 Elestac/(10068:10068): Inicio Log UMC
+[INFO] 12:52:17:493 Elestac/(10251:10251): Inicio Log UMC
+[INFO] 12:55:30:862 Elestac/(10547:10547): Inicio Log UMC
+[INFO] 13:01:07:633 Elestac/(10811:10811): Inicio Log UMC

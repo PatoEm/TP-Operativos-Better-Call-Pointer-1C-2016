@@ -547,7 +547,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
 						NULL, 0, pcb_aux->id, 0, 0, 0, 0);
 				sb = serializeUmcKer(streamALaUmc);
-				if (!socketSend(umcServer, sb)) {
+				if (!socketSend(umcServer->ptrSocket, sb)) {
 					log_error(cpuhlog, "No se pudo finalizar el programaa umc %d", pcb_aux->id);
 				} else {
 					log_info(cpuhlog, "Se finalizo el programa a umc %d", pcb_aux->id);
@@ -581,7 +581,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 				streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
 								NULL, 0, pcb_aux->id, 0, 0, 0, 0);
 						sb = serializeUmcKer(streamALaUmc);
-						if (!socketSend(umcServer, sb)) {
+						if (!socketSend(umcServer->ptrSocket, sb)) {
 							log_error(cpuhlog, "No se pudo abortar el programaa umc %d", pcb_aux->id);
 						} else {
 							log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
@@ -654,7 +654,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
 				sck->fileContent, sck->fileContentLen, pcb->id, 0, 0, 0, cantidadPaginasArchivo(sck->fileContentLen));
 		buffer = serializeUmcKer(streamALaUmc);
-		if (!socketSend(umcServer, buffer)) {
+		if (!socketSend(umcServer->ptrSocket, buffer)) {
 			log_error(cpuhlog, "No se pudo inicializar programa %d", pcb->id);
 		} else {
 			log_info(cpuhlog, "Se inicializo el programa %d", pcb->id);
