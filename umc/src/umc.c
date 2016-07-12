@@ -719,8 +719,8 @@ void* manageSocketConnection(void* param) {
 			case KERNEL_ID:
 				//sku = unserializeKerUmc((Stream) sb->data);
 				newUmcThread();
-				suk = newStrUmcKer(UMC_ID, HANDSHAKE, NULL, 0, thread_socket,
-						NULL, 0);
+				suk = newStrUmcKer(UMC_ID, HANDSHAKE, NULL,thread_socket,0,
+						0);
 				sb = serializeUmcKer(suc);
 				socketSend(socket, sb);
 				break;
