@@ -227,3 +227,35 @@
 [INFO] 00:23:02:460 CPUHANDLER/(6817:6822): Server iniciado.
 [INFO] 12:28:41:943 CPUHANDLER/(8399:8428): Server creado con exito y escuchando.
 [INFO] 12:28:43:339 CPUHANDLER/(8399:8428): Server iniciado.
+[INFO] 12:31:41:449 CPUHANDLER/(8635:8643): Server creado con exito y escuchando.
+[INFO] 12:31:41:449 CPUHANDLER/(8635:8643): Server iniciado.
+[INFO] 12:34:21:581 CPUHANDLER/(8835:8843): Server creado con exito y escuchando.
+[INFO] 12:34:21:581 CPUHANDLER/(8835:8843): Server iniciado.
+[INFO] 12:36:59:813 CPUHANDLER/(9035:9043): Server creado con exito y escuchando.
+[INFO] 12:36:59:813 CPUHANDLER/(9035:9043): Server iniciado.
+[ERROR] 12:42:42:893 CPUHANDLER/(9246:9251): No se pudo crear el server escucha.
+[ERROR] 12:42:42:893 CPUHANDLER/(9246:9251): No se pudo iniciar el server.
+[INFO] 12:42:56:710 CPUHANDLER/(9296:9301): Server creado con exito y escuchando.
+[INFO] 12:42:56:710 CPUHANDLER/(9296:9301): Server iniciado.
+[INFO] 12:44:46:814 CPUHANDLER/(9511:9514): Server creado con exito y escuchando.
+[INFO] 12:44:46:814 CPUHANDLER/(9511:9514): Server iniciado.
+[INFO] 12:45:27:934 CPUHANDLER/(9660:9662): Server creado con exito y escuchando.
+[INFO] 12:45:27:934 CPUHANDLER/(9660:9662): Server iniciado.
+[INFO] 12:45:36:298 CPUHANDLER/(9660:9662): Nueva Conexion detectada, realizando handshake
+[INFO] 12:45:36:298 CPUHANDLER/(9660:9662): ID Nuevo Cliente: 0.
+[INFO] 12:45:36:299 CPUHANDLER/(9660:9662): Nuevo Cliente CONSOLA
+[INFO] 12:45:36:299 CPUHANDLER/(9660:9662): Nuevo Cliente Consola 7 aceptado.
+[INFO] 12:45:36:299 CPUHANDLER/(9660:9662): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 12:45:41:830 CPUHANDLER/(9660:9662): KERNEL : Se cayo el cliente 7
+[INFO] 12:45:41:830 CPUHANDLER/(9660:9662): KERNEL : Se elimina el cliente 7 de la bolsa de descriptores
+[INFO] 12:45:41:830 CPUHANDLER/(9660:9662): KERNEL : Se elimina el descriptor 7 para ese cliente
+[INFO] 12:47:35:885 CPUHANDLER/(9869:9873): Server creado con exito y escuchando.
+[INFO] 12:47:35:885 CPUHANDLER/(9869:9873): Server iniciado.
+[INFO] 12:47:43:480 CPUHANDLER/(9869:9873): Nueva Conexion detectada, realizando handshake
+[INFO] 12:47:43:481 CPUHANDLER/(9869:9873): ID Nuevo Cliente: 0.
+[INFO] 12:47:43:481 CPUHANDLER/(9869:9873): Nuevo Cliente CONSOLA
+[INFO] 12:47:43:481 CPUHANDLER/(9869:9873): Nuevo Cliente Consola 7 aceptado.
+[INFO] 12:47:43:481 CPUHANDLER/(9869:9873): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 12:47:44:960 CPUHANDLER/(9869:9873): KERNEL : Se cayo el cliente 7
+[INFO] 12:47:44:960 CPUHANDLER/(9869:9873): KERNEL : Se elimina el cliente 7 de la bolsa de descriptores
+[INFO] 12:47:44:960 CPUHANDLER/(9869:9873): KERNEL : Se elimina el descriptor 7 para ese cliente
