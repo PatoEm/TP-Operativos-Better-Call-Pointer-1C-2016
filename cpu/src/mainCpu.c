@@ -92,9 +92,7 @@ int main() {
 		//tamanioPaginaUmc=tamanioPag;
 		while (TRUE) {
 			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
-			if (!getNextPcb()) {
-				return TRUE;
-			}
+			getNextPcb();
 			seguirEjecutando = TRUE;
 			// proceso el pcb del nucleo
 			Int8U quantum = skc->quantum;
@@ -271,7 +269,8 @@ Boolean socketConnection() {
 Boolean getNextPcb() {
 
 	if (sck == NULL) {
-		pcbActual = newEmptyPcb();
+
+		pcbActual = malloc(sizeof(pcb));
 		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0,
 				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);

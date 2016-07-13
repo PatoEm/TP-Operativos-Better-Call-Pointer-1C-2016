@@ -44,6 +44,6 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 }
 
 pcb* newEmptyPcb(){
-	return newPcb(NULL, 0, 0, 0, 0, 0,0, 0,0,NULL, NULL, NULL, 0);
+	return newPcb(NULL,0,0,0,0,NULL,"",0,0,0,list_create(),NULL,0);
 }
 

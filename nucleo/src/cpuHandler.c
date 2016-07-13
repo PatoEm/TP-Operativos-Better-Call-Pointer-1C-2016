@@ -310,7 +310,7 @@ void clientHandler(int clientDescriptor) {
 
 void enviarPcbACpu(Socket * cpuClient) {
 
-	if (list_is_empty(listaReady) != 0) {
+	if ((listaReady->elements_count)!= 0) {
 		pthread_mutex_lock(mutexColaReady);
 		pcb* pcbAEnviar = (pcb*) list_get(listaReady, 0);
 		pthread_mutex_unlock(mutexColaReady);
@@ -606,7 +606,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	}
 	// OJO! EL FREE LO HAGO ACA ABAJO, NO EN CADA CASE
-	free(sb);
+	//free(sb);
 }
 
 void consoleClientHandler(Socket *consoleClient, Stream data) {
