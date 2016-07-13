@@ -794,3 +794,13 @@
 [INFO] 19:12:50:366 SWAP/(24402:24402): Valores del archivo de configuracion seteados
 [INFO] 19:12:50:372 SWAP/(24402:24402): Archivo de particion creado
 [INFO] 19:12:50:372 SWAP/(24402:24402): Server creado y escuchando correctamente
+[INFO] 19:13:57:621 SWAP/(24402:24402): Hay espacio
+[INFO] 19:13:57:621 SWAP/(24402:24402): Espacio reservado correctamente
+[ERROR] 19:25:02:138 SWAP/(24402:24402): Al recibir del cliente
+[INFO] 19:25:31:709 SWAP/(24788:24788): Valores del archivo de configuracion seteados
+[INFO] 19:25:31:720 SWAP/(24788:24788): Archivo de particion creado
+[INFO] 19:25:31:720 SWAP/(24788:24788): Server creado y escuchando correctamente
+[ERROR] 19:25:59:704 SWAP/(24788:24788): Al recibir del cliente
+[INFO] 19:26:04:730 SWAP/(24921:24921): Valores del archivo de configuracion seteados
+[INFO] 19:26:04:742 SWAP/(24921:24921): Archivo de particion creado
+[INFO] 19:26:04:743 SWAP/(24921:24921): Server creado y escuchando correctamente
