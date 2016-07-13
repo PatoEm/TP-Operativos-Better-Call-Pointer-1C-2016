@@ -745,11 +745,12 @@ void* manageSocketConnection(void* param) {
 				pthread_mutex_lock(mutexThreadSockets);
 				//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, "hola", 0);
-				sb = serializeUmcCpu(suc);
-				socketSend(socket, sb);
 				newUmcThread();
 				sleep(2);
 				pthread_mutex_unlock(mutexThreadSockets);
+				sb = serializeUmcCpu(suc);
+				socketSend(socket, sb);
+
 
 				break;
 			default:

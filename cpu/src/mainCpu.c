@@ -204,21 +204,21 @@ Boolean loadConfig() {
 
 Boolean socketConnection() {
 	// Conexion al nucleo
-//	nucleoClient = socketCreateClient(); todo descomentar esto
-//
-//	do {
-//		puts("**********************************");
-//		puts("Intentando conectar con el Nucleo.");
-//		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int) puertoNucleo);
-//		sleep(3);
-//	} while (!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
-//
-//	if (handshake(nucleoClient, CPU_ID)) {
-//		puts("Handshake realizado con exito.");
-//	} else {
-//		puts("No se pudo realizar el handshake.");
-//		return FALSE;
-//	}
+	nucleoClient = socketCreateClient();
+
+	do {
+		puts("**********************************");
+		puts("Intentando conectar con el Nucleo.");
+		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int) puertoNucleo);
+		sleep(3);
+	} while (!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
+
+	if (handshake(nucleoClient, CPU_ID)) {
+		puts("Handshake realizado con exito.");
+	} else {
+		puts("No se pudo realizar el handshake.");
+		return FALSE;
+	}
 
 	//SocketClient* umcServer;
 	espacioAsignado aux;
@@ -386,7 +386,7 @@ int pedirTamanioDePagina(){
 	buffer=serializeCpuUmc(scu);
 	socketSend(umcClient->ptrSocket,buffer);
 
-	buffer = socketReceive(umcClient);
+	buffer = socketReceive(umcClient->ptrSocket);
 
 	if (buffer == NULL)
 		puts("Error al recibir del cliente");

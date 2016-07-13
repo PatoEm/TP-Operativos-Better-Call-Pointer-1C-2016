@@ -110,7 +110,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	StrCpuUmc*streamCpuUmc = scu;
 	StrUmcCpu*streamUmcCpu;
 	char* bytes;
-	while (streamCpuUmc->action=!24/*CIERRE_CONEXION_CPU*/) {
+	while ((streamCpuUmc->action)!=24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
 			puts("Me pidieron el tamanio de marcos");
@@ -181,6 +181,8 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			break;
 		}
 		streamCpuUmc = unserializeCpuUmc(buffer);
+
+
 	}
 //StrUmcCpu* suc;/*= newStrUmcCpu();*/
 //Boolean result = sendResponse(CPU_ID, suc, socket);
