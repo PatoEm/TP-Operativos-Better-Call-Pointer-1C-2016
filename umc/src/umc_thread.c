@@ -110,9 +110,10 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	StrCpuUmc*streamCpuUmc = scu;
 	StrUmcCpu*streamUmcCpu;
 	char* bytes;
-	while (!24/*CIERRE_CONEXION_CPU*/) {
+	while (streamCpuUmc->action=!24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
+			puts("Me pidieron el tamanio de marcos");
 			//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, "hola", 0);
 			buffer = serializeUmcCpu(streamUmcCpu);

@@ -260,7 +260,7 @@ Boolean socketConnection() {
 			} while (!socketConnect(umcClient, ipUMC, puertoNuevoUmc));
 			puts("Me conecte al puto hilo");
 
-		//tamanioPag=pedirTamanioDePagina(puertoNuevoUmc);
+		tamanioPag=pedirTamanioDePagina();
 
 
 
@@ -373,18 +373,25 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 int pedirTamanioDePagina(){
 	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-//	espacioAsignado aux;
-//
-//	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, NULL, 0);
-//	buffer=serializeCpuUmc(scu);
-//	socketSend(umcClient,buffer);
-//
-//	buffer = socketReceive(umcClient);
-//
-//	if (buffer == NULL)
-//		puts("Error al recibir del cliente");
-//
-//	suc = unserializeUmcCpu(buffer);
+	espacioAsignado aux;
+		aux.IDPaginaInterno=0;
+		aux.bitDePresencia=0;
+		aux.bitModificado=0;
+		aux.bitUso=0;
+		aux.numDePag=0;
+		aux.pid=0;
+		aux.punteroAPagina=0;
+
+	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, "HOLA", 0);
+	buffer=serializeCpuUmc(scu);
+	socketSend(umcClient->ptrSocket,buffer);
+
+	buffer = socketReceive(umcClient);
+
+	if (buffer == NULL)
+		puts("Error al recibir del cliente");
+
+	suc = unserializeUmcCpu(buffer);
 
 	return (suc->dataLen);
 }
