@@ -391,3 +391,23 @@
 [INFO] 12:30:27:619 CPUHANDLER/(7890:7898): KERNEL : Se cayo el cliente 9
 [INFO] 12:30:27:623 CPUHANDLER/(7890:7898): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
 [INFO] 12:30:27:625 CPUHANDLER/(7890:7898): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 13:23:09:547 CPUHANDLER/(9352:9359): Server creado con exito y escuchando.
+[INFO] 13:23:09:547 CPUHANDLER/(9352:9359): Server iniciado.
+[INFO] 13:23:45:242 CPUHANDLER/(9352:9359): Nueva Conexion detectada, realizando handshake
+[INFO] 13:23:45:242 CPUHANDLER/(9352:9359): ID Nuevo Cliente: 2.
+[INFO] 13:23:45:242 CPUHANDLER/(9352:9359): Nuevo Cliente CPU
+[INFO] 13:23:45:242 CPUHANDLER/(9352:9359): KER-CPU: HANDSHAKE recibido
+[INFO] 13:23:45:243 CPUHANDLER/(9352:9359): KER-CPU: HANDSHAKE enviado
+[INFO] 13:24:38:456 CPUHANDLER/(9352:9359): KERNEL : Se cayo el cliente 9
+[INFO] 13:24:38:457 CPUHANDLER/(9352:9359): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 13:24:38:457 CPUHANDLER/(9352:9359): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 13:25:31:663 CPUHANDLER/(9547:9555): Server creado con exito y escuchando.
+[INFO] 13:25:31:663 CPUHANDLER/(9547:9555): Server iniciado.
+[INFO] 13:25:43:630 CPUHANDLER/(9547:9555): Nueva Conexion detectada, realizando handshake
+[INFO] 13:25:43:630 CPUHANDLER/(9547:9555): ID Nuevo Cliente: 2.
+[INFO] 13:25:43:630 CPUHANDLER/(9547:9555): Nuevo Cliente CPU
+[INFO] 13:25:43:630 CPUHANDLER/(9547:9555): KER-CPU: HANDSHAKE recibido
+[INFO] 13:25:43:630 CPUHANDLER/(9547:9555): KER-CPU: HANDSHAKE enviado
+[INFO] 13:26:08:158 CPUHANDLER/(9547:9555): KERNEL : Se cayo el cliente 9
+[INFO] 13:26:08:158 CPUHANDLER/(9547:9555): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 13:26:08:158 CPUHANDLER/(9547:9555): KERNEL : Se elimina el descriptor 9 para ese cliente

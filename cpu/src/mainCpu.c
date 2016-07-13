@@ -30,17 +30,17 @@
  * Configuracion
  ****************************************/
 t_config* tConfig = NULL;
-Int32U puertoNucleo;
-String ipNucleo;
-String ipUmc;
-Int32U puertoUmc;
-int tamanioPag;
+//Int32U puertoNucleo;
+//String ipNucleo;
+//String ipUmc;
+//Int32U puertoUmc;
+//int tamanioPag;
 
 /*****************************************
  * Socket & Streams
  ****************************************/
-SocketClient* nucleoClient = NULL;
-SocketClient* umcClient = NULL;
+//SocketClient* nucleoClient = NULL;
+//SocketClient* umcClient = NULL;
 
 StrCpuKer* sck = NULL;
 StrCpuUmc* scu = NULL;
@@ -81,10 +81,10 @@ int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
 
 	t_config* tConfig = NULL;
-	puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
-	ipNucleo=(String)malloc(sizeof(ipNucleo));
-	ipUmc=(String)malloc(sizeof(ipUmc));
-	puertoUmc=(Int32U)malloc(sizeof(puertoUmc));
+	//puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
+	//ipNucleo=(String)malloc(sizeof(ipNucleo));
+	//ipUmc=(String)malloc(sizeof(ipUmc));
+	//puertoUmc=(Int32U)malloc(sizeof(puertoUmc));
 
 
 	if (loadConfig() && socketConnection()) {
@@ -109,14 +109,14 @@ int main() {
 					sck = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbActual,
 							0, 0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
-					if (!socketSend(umcClient->ptrSocket, buffer)) {
+					if (!socketSend(socketUMC->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				} else {
 					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbActual, 0,
 							0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
-					if (!socketSend(umcClient->ptrSocket, buffer)) {
+					if (!socketSend(socketUMC->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				}
@@ -126,7 +126,7 @@ int main() {
 				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbActual, 0, 0,
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
-				if (!socketSend(umcClient->ptrSocket, buffer)) {
+				if (!socketSend(socketUMC->ptrSocket, buffer)) {
 					puts("No se pudo enviar el buffer al nucleo.");
 				}
 			}
@@ -163,7 +163,7 @@ Boolean loadConfig() {
 
 		// Verifico que los parametros del nucleo tengan sus valores OK
 		if (config_has_property(tConfig, "PUERTO_NUCLEO")) {
-			puertoNucleo = config_get_int_value(tConfig, "PUERTO_NUCLEO");
+			nucleoPort = config_get_int_value(tConfig, "PUERTO_NUCLEO");
 		} else {
 			printf("ERROR: Falta un parametro PUERTO_NUCLEO. \n");
 			return FALSE;
@@ -177,7 +177,7 @@ Boolean loadConfig() {
 		}
 		// Verifico que los parametros de la UMC tengan sus valores OK
 		if (config_has_property(tConfig, "PUERTO_UMC")) {
-			puertoUmc = config_get_int_value(tConfig, "PUERTO_UMC");
+			umcPort = config_get_int_value(tConfig, "PUERTO_UMC");
 		} else {
 			printf("ERROR: Falta un parametro PUERTO_UMC. \n");
 			return FALSE;
@@ -191,8 +191,8 @@ Boolean loadConfig() {
 		}
 
 		printf("Archivo de config CPU leido\n============\n");
-		printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", puertoNucleo, ipNucleo);
-		printf("Puerto_UMC: %d\nIP_UMC: %s\n", puertoUmc, ipUmc);
+		printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", nucleoPort, ipNucleo);
+		printf("Puerto_UMC: %d\nIP_UMC: %s\n", umcPort, ipUMC);
 		return TRUE;
 	} else {
 		printf(
@@ -203,16 +203,16 @@ Boolean loadConfig() {
 
 Boolean socketConnection() {
 	// Conexion al nucleo
-	nucleoClient = socketCreateClient();
+	socketNucleo = socketCreateClient();
 
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con el Nucleo.");
-		printf("IP: %s, PUERTO: %d\n", ipNucleo, (int) puertoNucleo);
+		printf("IP: %s, PUERTO: %d\n", ipNucleo, nucleoPort);
 		sleep(3);
-	} while (!socketConnect(nucleoClient, ipNucleo, puertoNucleo));
+	} while (!socketConnect(socketNucleo, ipNucleo, nucleoPort));
 
-	if (handshake(nucleoClient, CPU_ID)) {
+	if (handshake(socketNucleo, CPU_ID)) {
 		puts("Handshake realizado con exito.");
 	} else {
 		puts("No se pudo realizar el handshake.");
@@ -228,20 +228,20 @@ Boolean socketConnection() {
 	aux.numDePag=0;
 	aux.pid=0;
 	aux.punteroAPagina=0;
-	umcClient=socketCreateClient();
+	socketUMC=socketCreateClient();
 		do {
 			puts("**********************************");
 			puts("Intentando conectar con la UMC ppal.");
-			printf("IP: %s, PUERTO: %d\n", ipUMC, puertoUmc);
+			printf("IP: %s, PUERTO: %d\n", ipUMC, umcPort);
 			sleep(3);
-		} while (!socketConnect(umcClient, ipUMC, puertoUmc));
+		} while (!socketConnect(socketUMC, ipUMC, umcPort));
 		//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 		StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 		SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
-		socketSend(umcClient->ptrSocket, sb);
+		socketSend(socketUMC->ptrSocket, sb);
 		puts("Mensaje enviado a la UMC ppal.");
 //
-		sb = socketReceive(umcClient->ptrSocket);
+		sb = socketReceive(socketUMC->ptrSocket);
 		StrUmcCpu* in_umc_msg = unserializeUmcCpu(sb);
 
 		int puertoNuevoUmc = in_umc_msg->dataLen;
@@ -250,20 +250,20 @@ Boolean socketConnection() {
 //
 
 
-		umcClient=socketCreateClient();
+		socketUMC=socketCreateClient();
 			do {
 				puts("**********************************");
 				puts("Intentando conectar con el hilo de la umc.");
 				printf("IP: %s, PUERTO: %d\n", ipUMC, puertoNuevoUmc);
 				sleep(3);
-			} while (!socketConnect(umcClient, ipUMC, puertoNuevoUmc));
+			} while (!socketConnect(socketUMC, ipUMC, puertoNuevoUmc));
 			puts("Me conecte al puto hilo");
 
-		tamanioPag=pedirTamanioDePagina();
+		tamanioPaginaUmc=pedirTamanioDePagina();
 
 
 
-		while(1){}
+	//	while(1){}
 
 	return TRUE;
 }
@@ -272,6 +272,7 @@ Boolean getNextPcb() {
 
 	if (sck == NULL) {
 		pcbActual = newEmptyPcb();
+		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0,
 				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
@@ -280,14 +281,14 @@ Boolean getNextPcb() {
 	// serializo y armo el socket
 	SocketBuffer* sb = serializeCpuKer(sck);
 	// envio el socketBuffer
-	if (!socketSend(nucleoClient->ptrSocket, sb)) {
+	if (!socketSend(socketNucleo->ptrSocket, sb)) {
 		printf("No se pudo enviar el stream al nucleo");
 	}
 	free(sb);
 	puts("Obtener siguiente PCB");
 
 	// recibo la respuesta del nucleo y deserealizo
-	if ((sb = socketReceive(nucleoClient->ptrSocket)) == NULL) {
+	if ((sb = socketReceive(socketNucleo->ptrSocket)) == NULL) {
 		puts("No se pudo recibir el stream del nucleo");
 		return FALSE;
 	}
@@ -309,7 +310,7 @@ void enviarTamanioDePagina(int id){
 	StrCpuUmc*scu;
 	scu=newStrCpuUmc(CPU_ID,TAMANIO_DE_MARCOS,pag,0,0,"h",id);
 	SocketBuffer*buff= serializeCpuUmc(scu);
-	socketSend(umcClient->ptrSocket,buff);
+	socketSend(socketUMC->ptrSocket,buff);
 
 }
 
@@ -347,7 +348,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 	StrCpuUmc* scu;
 	StrUmcCpu* suc;
 
-	int pagina = inicio / tamanioPag;
+	int pagina = inicio / tamanioPaginaUmc;
 
 	int inicioPag = inicio % pagina;
 	int offsetPag;
@@ -355,8 +356,8 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 	while (offset > 0) {
 
-		if ((inicioPag + offset) > tamanioPag) {
-			offsetPag = tamanioPag - inicioPag;
+		if ((inicioPag + offset) > tamanioPaginaUmc) {
+			offsetPag = tamanioPaginaUmc - inicioPag;
 		} else {
 			offsetPag = offset;
 		}
@@ -364,11 +365,11 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, auxiliar, offsetPag, 0,
 		NULL, 0);
 		buffer = serializeCpuUmc(scu);
-		if (!socketSend(umcClient, buffer)) {
+		if (!socketSend(socketUMC, buffer)) {
 			puts("No se pudo enviar tu pedido a la umc.");
 		}
 
-		buffer = socketReceive(umcClient);
+		buffer = socketReceive(socketUMC);
 		suc = unserializeUmcCpu(buffer);
 
 		strcat(instruccion, stringFromByteArray(suc->data, suc->dataLen));
@@ -394,9 +395,9 @@ int pedirTamanioDePagina(){
 
 	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, "HOLA", 0);
 	buffer=serializeCpuUmc(scu);
-	socketSend(umcClient->ptrSocket,buffer);
+	socketSend(socketUMC->ptrSocket,buffer);
 
-	buffer = socketReceive(umcClient->ptrSocket);
+	buffer = socketReceive(socketUMC->ptrSocket);
 
 	if (buffer == NULL)
 		puts("Error al recibir del cliente");

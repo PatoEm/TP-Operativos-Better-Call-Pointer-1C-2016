@@ -34,8 +34,8 @@
  * VARIABLES GLOBALES
  *******************************************************/
 char* ipUMC;
-char* umcPort;
-char* nucleoPort;
+int umcPort;
+int nucleoPort;
 char* ipNucleo;
 int clienteNucleo;
 t_list* coreList;
