@@ -32,8 +32,8 @@
 t_config* tConfig = NULL;
 Int32U puertoNucleo;
 String ipNucleo;
-Int32U puertoUmc;
 String ipUmc;
+Int32U puertoUmc;
 int tamanioPag;
 
 /*****************************************
@@ -81,11 +81,16 @@ int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
 
 	iniciarFunciones();
+	t_config* tConfig = NULL;
+	puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
+	ipNucleo=(String)malloc(sizeof(ipNucleo));
+	ipUmc=(String)malloc(sizeof(ipUmc));
+	puertoUmc=(Int32U)malloc(sizeof(puertoUmc));
 
 
 	if (loadConfig() && socketConnection()) {
-		tamanioPag = pedirTamanioDePagina();
-		tamanioPaginaUmc=tamanioPag;
+		//tamanioPag = pedirTamanioDePagina();
+		//tamanioPaginaUmc=tamanioPag;
 		while (TRUE) {
 			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
 			if (!getNextPcb()) {
@@ -158,29 +163,29 @@ Boolean loadConfig() {
 	if (config_keys_amount(tConfig) == PARAM_LENGTH) {
 
 		// Verifico que los parametros del nucleo tengan sus valores OK
-		if (config_has_property(tConfig, PUERTO_NUCLEO)) {
-			puertoNucleo = config_get_int_value(tConfig, PUERTO_NUCLEO);
+		if (config_has_property(tConfig, "PUERTO_NUCLEO")) {
+			puertoNucleo = config_get_int_value(tConfig, "PUERTO_NUCLEO");
 		} else {
 			printf("ERROR: Falta un parametro PUERTO_NUCLEO. \n");
 			return FALSE;
 		}
 
-		if (config_has_property(tConfig, IP_NUCLEO)) {
-			ipNucleo = config_get_string_value(tConfig, IP_NUCLEO);
+		if (config_has_property(tConfig, "IP_NUCLEO")) {
+			ipNucleo = config_get_string_value(tConfig, "IP_NUCLEO");
 		} else {
 			printf("ERROR: Falta un parametro IP_NUCLEO. \n");
 			return FALSE;
 		}
 		// Verifico que los parametros de la UMC tengan sus valores OK
-		if (config_has_property(tConfig, PUERTO_UMC)) {
-			puertoUmc = config_get_int_value(tConfig, PUERTO_UMC);
+		if (config_has_property(tConfig, "PUERTO_UMC")) {
+			puertoUmc = config_get_int_value(tConfig, "PUERTO_UMC");
 		} else {
 			printf("ERROR: Falta un parametro PUERTO_UMC. \n");
 			return FALSE;
 		}
 
-		if (config_has_property(tConfig, IP_UMC)) {
-			ipUmc = config_get_string_value(tConfig, IP_UMC);
+		if (config_has_property(tConfig, "IP_UMC")) {
+			ipUMC = config_get_string_value(tConfig, "IP_UMC");
 		} else {
 			printf("ERROR: Falta un parametro IP_UMC. \n");
 			return FALSE;
@@ -215,97 +220,51 @@ Boolean socketConnection() {
 //		return FALSE;
 //	}
 
-	// Conexion a la UMC
-//	umcClient = socketCreateClient();
-//
-//	do {
-//		puts("**********************************");
-//		puts("Intentando conectar con la UMC.");
-//		printf("IP: %s, Puerto: %d\n", ipUmc, (int) puertoUmc);
-//		sleep(3);
-//	} while (!socketConnect(umcClient, ipUmc, puertoUmc));
-
-//	if (handshake(umcClient, CPU_ID)) {
-//		puts("Handshake realizado con exito.");
-//	} else {
-//		puts("No se pudo realizar el handshake.");
-//		return FALSE;
-//	}
-//espacioAsignado auxLoco;
-//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-//	StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE,auxLoco,0, 0, "hola", 0);
-//	buffer = serializeCpuUmc(out_umc_msg);
-//
-//	socketSend(umcClient->ptrSocket, buffer);
-//	puts("Mensaje enviado a la UMC ppal.");
-//
-//	buffer = socketReceive(umcClient->ptrSocket);
-//	StrUmcCpu* in_umc_msg = unserializeUmcCpu(buffer);
-//
-//	printf("Nuevo UMC es %d.\n", in_umc_msg->dataLen);
-//
-//	int nuevoPuertoUmc=in_umc_msg->dataLen;
-//
-//	// Conexion a la UMC
-//	umcClient = socketCreateClient();
-//
-//
-//	do {
-//		puts("**********************************");
-//		puts("Intentando conectar con el hilo UMC.");
-//		printf("IP: %s, Puerto: %d\n", ipUmc, (int) nuevoPuertoUmc);
-//		sleep(3);
-//	} while (!socketConnect(umcClient, ipUmc, nuevoPuertoUmc));
-//	espacioAsignado aux;
-//	out_umc_msg = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, "hola", 0);
-//	buffer = serializeCpuUmc(out_umc_msg);
-//	socketSend(umcClient->ptrSocket, buffer);
-//	puts("Le pedi el tamanio de pagina al holo de la UMC que me da servicio.");
-//
-//	buffer = socketReceive(umcClient->ptrSocket);
-//	in_umc_msg = unserializeUmcCpu(buffer);
-//
-//	printf("El tamanio de pagina es: %d.\n", in_umc_msg->dataLen);
-//	tamanioPag = in_umc_msg->dataLen;
-//	tamanioPaginaUmc = tamanioPag;
-
-
-
-
-
+	//SocketClient* umcServer;
+	espacioAsignado aux;
+	aux.IDPaginaInterno=0;
+	aux.bitDePresencia=0;
+	aux.bitModificado=0;
+	aux.bitUso=0;
+	aux.numDePag=0;
+	aux.pid=0;
+	aux.punteroAPagina=0;
 	umcClient=socketCreateClient();
 		do {
 			puts("**********************************");
 			puts("Intentando conectar con la UMC ppal.");
-			printf("IP: %s, PUERTO: %d\n", "127.0.0.1", puertoUmc);
+			printf("IP: %s, PUERTO: %d\n", ipUMC, puertoUmc);
 			sleep(3);
-		} while (!socketConnect(umcClient, "127.0.0.1", puertoUmc));
-		espacioAsignado aux;
+		} while (!socketConnect(umcClient, ipUMC, puertoUmc));
 		//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-		StrKerUmc* out_umc_msg = newStrCpuUmc(KERNEL_ID, HANDSHAKE, aux, 0, 0, "hola", 0);
+		StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 		SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
 		socketSend(umcClient->ptrSocket, sb);
 		puts("Mensaje enviado a la UMC ppal.");
-
+//
 		sb = socketReceive(umcClient->ptrSocket);
 		StrUmcCpu* in_umc_msg = unserializeUmcCpu(sb);
 
-		printf("Nuevo UMC es %d.\n", (int)in_umc_msg->dataLen);
-
-		int nuevoPuertoUmc=(int)in_umc_msg->dataLen;
+		int puertoNuevoUmc = in_umc_msg->dataLen;
+//
+		printf("Nuevo hilo UMC  es %d.\n", in_umc_msg->dataLen);
+//
 
 
 		umcClient=socketCreateClient();
-				do {
-					puts("**********************************");
-					puts("Intentando conectar con la UMC hilo.");
-					printf("IP: %s, PUERTO: %d\n", "127.0.0.1", nuevoPuertoUmc);
-					sleep(3);
-				} while (!socketConnect(umcClient, "127.0.0.1", nuevoPuertoUmc));
-				puts("Me conecte al hilo.");
+			do {
+				puts("**********************************");
+				puts("Intentando conectar con el hilo de la umc.");
+				printf("IP: %s, PUERTO: %d\n", ipUMC, puertoNuevoUmc);
+				sleep(3);
+			} while (!socketConnect(umcClient, ipUMC, puertoNuevoUmc));
+			puts("Me conecte al puto hilo");
 
-		//tamanioPaginas=pedirTamanioDePagina(nuevoPuertoUmc);
+		//tamanioPag=pedirTamanioDePagina(puertoNuevoUmc);
 
+
+
+		while(1){}
 
 	return TRUE;
 }
@@ -414,18 +373,18 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 int pedirTamanioDePagina(){
 	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-	espacioAsignado aux;
-
-	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, NULL, 0);
-	buffer=serializeCpuUmc(scu);
-	socketSend(umcClient,buffer);
-
-	buffer = socketReceive(umcClient);
-
-	if (buffer == NULL)
-		puts("Error al recibir del cliente");
-
-	suc = unserializeUmcCpu(buffer);
+//	espacioAsignado aux;
+//
+//	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, NULL, 0);
+//	buffer=serializeCpuUmc(scu);
+//	socketSend(umcClient,buffer);
+//
+//	buffer = socketReceive(umcClient);
+//
+//	if (buffer == NULL)
+//		puts("Error al recibir del cliente");
+//
+//	suc = unserializeUmcCpu(buffer);
 
 	return (suc->dataLen);
 }
