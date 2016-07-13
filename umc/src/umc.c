@@ -714,7 +714,7 @@ void* manageSocketConnection(void* param) {
 	Socket* socket = (Socket*) param;
 	Boolean connected = TRUE;
 	puts("Gestion de conexiones.");
-	while (TRUE) {
+	//while (TRUE) {
 		puts("Esperando el request.");
 		SocketBuffer* sb = socketReceive(socket);
 		puts("Entro el request.");
@@ -760,7 +760,10 @@ void* manageSocketConnection(void* param) {
 		} else {
 			puts("No pudo recibir request, desconectando al cliente.");
 			connected = FALSE;
-		}
+	//	}
+
+
+
 	}
 	return NULL;
 }
