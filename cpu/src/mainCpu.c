@@ -316,7 +316,7 @@ void enviarPidPcb(int id){
 
 int calcularOffset(pcb *pcbLoco) {
 	arrayBidimensional aux;
-	int contador;
+	int contador=0;
 	while (contador < (pcbLoco->instruccionesTotales)) {
 		if (pcbLoco->indiceDeCodigo[contador].comienzo
 				== pcbLoco->programCounter) {
