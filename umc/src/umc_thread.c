@@ -61,6 +61,7 @@ void umcThread(){
 
 	SocketBuffer* sb;
 	StrCpuUmc* in_cpu_msg;
+	StrKerUmc* in_ker_msg;
 
 //	EL PUTO CASE
 
@@ -84,14 +85,16 @@ void umcThread(){
 
 			case CPU_ID:
 				in_cpu_msg = unserializeCpuUmc(sb);
+				printf("HILO %d: Cliente (%d) es un CPU.\n", mi_socket, cpuClient->descriptor);
 				//log_info(umcslog, "Cliente CPU");
 				manageCpuRequest(cpuClient,in_cpu_msg);
 				break;
 
 			case KERNEL_ID:
-				in_cpu_msg = unserializeKerUmc(sb);
+				in_ker_msg = unserializeKerUmc(sb);
+				printf("HILO %d: Cliente (%d) es el KERNEL.\n", mi_socket, cpuClient->descriptor);
 				//log_info(umcslog, "Cliente KERNEL");
-				manageKernelRequest(cpuClient,in_cpu_msg);
+				manageKernelRequest(cpuClient,in_ker_msg);
 				break;
 		}
 	}
