@@ -194,7 +194,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	case HANDSHAKE:
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
 		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, pcb, 0, NULL, 0,
-				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+		NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(skc);
 		if (socketSend(cpuClient, sb)) {
 			log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
@@ -310,28 +310,20 @@ void clientHandler(int clientDescriptor) {
 
 void enviarPcbACpu(Socket * cpuClient) {
 
-	if ((listaReady->elements_count)!= 0) {
-		pthread_mutex_lock(mutexColaReady);
-		pcb* pcbAEnviar = (pcb*) list_get(listaReady, 0);
-		pthread_mutex_unlock(mutexColaReady);
 
-		moverAListaExec(pcbAEnviar);
 
-		pthread_mutex_lock(mutexQuantum);
-		//todo ver envio_pcb
-		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar,
-				quantum, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
-				0 /*LEN NOMBRE DISPOSITIVO*/);
-		pthread_mutex_unlock(mutexQuantum);
+	Socket * punteroACopia=malloc(sizeof(Socket));
 
-		SocketBuffer* sb = serializeKerCpu(skc);
-		if (!socketSend(cpuClient->ptrAddress, sb)) {
-			printf("No se pudo enviar el stream al cpu");
-		} else {
-			printf("Se envio el pcb del programa %d al cpu", pcbAEnviar->id);
-		}
-		free(sb);
-	}
+	memcpy(punteroACopia,cpuClient,sizeof(cpuClient));
+
+	pthread_t hiloCpuAlPedo;
+	pthread_attr_t attrHiloCpuAlPedo;
+	pthread_attr_init(&attrHiloCpuAlPedo);
+	pthread_attr_setdetachstate(&attrHiloCpuAlPedo, PTHREAD_CREATE_DETACHED);
+	pthread_create(&hiloCpuAlPedo, &attrHiloCpuAlPedo, &funcionHiloCpuAlPedo,
+		punteroACopia);
+	pthread_attr_destroy(&attrHiloCpuAlPedo);
+
 	// TODO: Aca iria un else en caso de que no haya en la cola de ready,
 	// Tendría que mandar un mensaje para que el cpu siga pidiendo.
 }
@@ -545,13 +537,14 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		}
 		StrUmcKer* streamALaUmc;
 		streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
-						NULL, 0, pcb_aux->id, 0, 0, 0, 0);
-				sb = serializeUmcKer(streamALaUmc);
-				if (!socketSend(umcServer->ptrSocket, sb)) {
-					log_error(cpuhlog, "No se pudo finalizar el programaa umc %d", pcb_aux->id);
-				} else {
-					log_info(cpuhlog, "Se finalizo el programa a umc %d", pcb_aux->id);
-				}
+		NULL, 0, pcb_aux->id, 0, 0, 0, 0);
+		sb = serializeUmcKer(streamALaUmc);
+		if (!socketSend(umcServer->ptrSocket, sb)) {
+			log_error(cpuhlog, "No se pudo finalizar el programaa umc %d",
+					pcb_aux->id);
+		} else {
+			log_info(cpuhlog, "Se finalizo el programa a umc %d", pcb_aux->id);
+		}
 
 		break;
 
@@ -578,23 +571,23 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		}
 		//Envio UMC
 		//StrUmcKer* streamALaUmc;
-				streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
-								NULL, 0, pcb_aux->id, 0, 0, 0, 0);
-						sb = serializeUmcKer(streamALaUmc);
-						if (!socketSend(umcServer->ptrSocket, sb)) {
-							log_error(cpuhlog, "No se pudo abortar el programaa umc %d", pcb_aux->id);
-						} else {
-							log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
-						}
-
+		streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+		NULL, 0, pcb_aux->id, 0, 0, 0, 0);
+		sb = serializeUmcKer(streamALaUmc);
+		if (!socketSend(umcServer->ptrSocket, sb)) {
+			log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
+					pcb_aux->id);
+		} else {
+			log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
+		}
 
 		break;
 
 	case TERMINE_EL_QUANTUM:
 
-		log_info(cpuhlog, "Finalizo el quantum del programa %d.", in_cpu_msg->pid);
+		log_info(cpuhlog, "Finalizo el quantum del programa %d.",
+				in_cpu_msg->pid);
 		moverAColaReady(&in_cpu_msg->pcb);
-
 
 		break;
 
@@ -652,7 +645,8 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		//puto
 
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
-				sck->fileContent, sck->fileContentLen, pcb->id, 0, 0, 0, cantidadPaginasArchivo(sck->fileContentLen));
+				sck->fileContent, sck->fileContentLen, pcb->id, 0, 0, 0,
+				cantidadPaginasArchivo(sck->fileContentLen));
 		buffer = serializeUmcKer(streamALaUmc);
 		if (!socketSend(umcServer->ptrSocket, buffer)) {
 			log_error(cpuhlog, "No se pudo inicializar programa %d", pcb->id);
@@ -693,9 +687,9 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 	}
 }
 
-int pedirTamanioDePagina(int puerto){
+int pedirTamanioDePagina(int puerto) {
 
-	umcServer=socketCreateClient();
+	umcServer = socketCreateClient();
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con el hilo de la umc.");
@@ -706,11 +700,11 @@ int pedirTamanioDePagina(int puerto){
 	SocketBuffer * buffer;
 	StrKerUmc * streamKerUmc;
 
-
 	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio)
-	streamKerUmc=newStrKerUmc(KERNEL_ID,TAMANIO_DE_MARCOS,"hola",0,0,0,0,0,0);
-	buffer=serializeKerUmc(streamKerUmc);
-	socketSend(umcServer->ptrSocket,buffer);
+	streamKerUmc = newStrKerUmc(KERNEL_ID, TAMANIO_DE_MARCOS, "hola", 0, 0, 0,
+			0, 0, 0);
+	buffer = serializeKerUmc(streamKerUmc);
+	socketSend(umcServer->ptrSocket, buffer);
 
 	buffer = socketReceive(umcServer->ptrSocket);
 
@@ -722,18 +716,45 @@ int pedirTamanioDePagina(int puerto){
 	return (streamKerUmc->size);
 }
 
-int cantidadPaginasArchivo(int longitudArchivo){
+int cantidadPaginasArchivo(int longitudArchivo) {
 
-	int aux=(longitudArchivo/tamanioPaginas)+stackSize;
+	int aux = (longitudArchivo / tamanioPaginas) + stackSize;
 
-	if(longitudArchivo%tamanioPaginas==0){
+	if (longitudArchivo % tamanioPaginas == 0) {
 		return aux;
-	}
-	else{
+	} else {
 
-		return aux+1;
+		return aux + 1;
 	}
 	//int a=cantidadPaginas(longitudArchivo, tamanioPaginas);
 	return 0;
+}
+
+void funcionHiloCpuAlPedo(Socket * cpuLoca) {
+
+	while (listaReady->elements_count == 0) {
+
+	}
+	pthread_mutex_lock(mutexColaReady);
+	pcb* pcbAEnviar = (pcb*) list_get(listaReady, 0);
+	pthread_mutex_unlock(mutexColaReady);
+
+	moverAListaExec(pcbAEnviar);
+
+	pthread_mutex_lock(mutexQuantum);
+	//todo ver envio_pcb
+	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,
+			NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+	pthread_mutex_unlock(mutexQuantum);
+
+	SocketBuffer* sb = serializeKerCpu(skc);
+	if (!socketSend(cpuLoca, sb)) {
+		printf("No se pudo enviar el stream al cpu");
+	} else {
+		printf("Se envio el pcb del programa %d al cpu", pcbAEnviar->id);
+	}
+	free(cpuLoca);
+	free(sb);
+
 }
 
