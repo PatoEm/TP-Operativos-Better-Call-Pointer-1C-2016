@@ -110,14 +110,14 @@ int main() {
 					sck = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbActual,
 							0, 0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
-					if (!socketSend(umcClient, buffer)) {
+					if (!socketSend(umcClient->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				} else {
 					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbActual, 0,
 							0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
-					if (!socketSend(umcClient, buffer)) {
+					if (!socketSend(umcClient->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				}
@@ -127,7 +127,7 @@ int main() {
 				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbActual, 0, 0,
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
-				if (!socketSend(umcClient, buffer)) {
+				if (!socketSend(umcClient->ptrSocket, buffer)) {
 					puts("No se pudo enviar el buffer al nucleo.");
 				}
 			}
@@ -300,7 +300,18 @@ Boolean getNextPcb() {
 	skc = unserializeKerCpu((Stream) sb->data);
 	*pcbActual = skc->pcb;
 
+	enviarTamanioDePagina(skc->pcb.id);
+
 	return TRUE;
+}
+
+void enviarTamanioDePagina(int id){
+	espacioAsignado pag;
+	StrCpuUmc*scu;
+	scu=newStrCpuUmc(CPU_ID,TAMANIO_DE_MARCOS,pag,0,0,"h",id);
+	SocketBuffer*buff= serializeCpuUmc(scu);
+	socketSend(umcClient->ptrSocket,buff);
+
 }
 
 int calcularOffset(pcb *pcbLoco) {
