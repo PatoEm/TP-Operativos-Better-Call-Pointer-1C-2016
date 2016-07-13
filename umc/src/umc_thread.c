@@ -11,6 +11,7 @@ fd_set read_fds;
 t_log* umcslog;
 
 int fdmax;
+int mi_socket;
 
 void newUmcThread() {
 	// EL HILO VA A HACER SUS COSAS SIEMPRE QUE EL PROCESO PADRE
@@ -32,19 +33,20 @@ void newUmcThread() {
 void umcThread(){
 //	*******************************************************************
 //	CREO EL NEUVO SOCKET
-
+	mi_socket = thread_socket;
 	Socket* serverSocket = socketCreateServer(thread_socket);
 	if (serverSocket == NULL) {
 		puts("No se ppuede escuchar el server");
 //		log_error(umcslog, "No se pudo crear el server escucha.");
 		//return FALSE;
 	}
-	puts("hola, soy el hilo");
+	printf("HILO %d: Hilo creado.\n", mi_socket);
 	if (!socketListen(serverSocket)) {
 		puts("No se pone a escuchar");
 //		log_error(umcslog, "No se pudo poner a escuchar al server.");
 	}
-	puts("hola, soy el hilo hice el listen");
+
+	printf("HILO %d: Listening...\n", mi_socket);
 	thread_socket ++;
 
 	//log_info(umcslog, "Server creado con exito y escuchando.");
@@ -55,17 +57,20 @@ void umcThread(){
 //	ACEPTO LA CONEXION
 	Socket* cpuClient = socketAcceptClient(serverSocket);
 
-	puts("hola, soy el hilo, hice el accept");
+	printf("HILO %d: Cliente aceptado (%d).\n", mi_socket, cpuClient->descriptor);
 
 	SocketBuffer* sb;
 	StrCpuUmc* in_cpu_msg;
+	StrKerUmc* in_ker_msg;
 
 //	EL PUTO CASE
 
 	while(TRUE){
-		puts("hola, soy el hilo,todavia no hice el receive");
+
 		sb = socketReceive(cpuClient);
-		puts("hola, soy el hilo,ahora si");
+
+		printf("HILO %d: Buffer recibido de (%d).\n", mi_socket, cpuClient->descriptor);
+
 		if(sb == NULL) puts("No se pudo recibir del CPU.");
 
 		//in_cpu_msg = unserializeCpuUmc(sb);
@@ -73,19 +78,23 @@ void umcThread(){
 		Stream strRecibido = (Stream) sb->data;
 		Char id = getStreamId(strRecibido);
 
+		printf("HILO %d: Buffer ID %d.\n", mi_socket, id);
+
 		//log_info(umcslog, "ID Nuevo Cliente: %d.",id);
 		switch (id) {
 
 			case CPU_ID:
 				in_cpu_msg = unserializeCpuUmc(sb);
+				printf("HILO %d: Cliente (%d) es un CPU.\n", mi_socket, cpuClient->descriptor);
 				//log_info(umcslog, "Cliente CPU");
 				manageCpuRequest(cpuClient,in_cpu_msg);
 				break;
 
 			case KERNEL_ID:
-				in_cpu_msg = unserializeKerUmc(sb);
+				in_ker_msg = unserializeKerUmc(sb);
+				printf("HILO %d: Cliente (%d) es el KERNEL.\n", mi_socket, cpuClient->descriptor);
 				//log_info(umcslog, "Cliente KERNEL");
-				manageKernelRequest(cpuClient,in_cpu_msg);
+				manageKernelRequest(cpuClient,in_ker_msg);
 				break;
 		}
 	}
