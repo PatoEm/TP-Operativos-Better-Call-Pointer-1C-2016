@@ -299,15 +299,16 @@ Boolean getNextPcb() {
 	skc = unserializeKerCpu((Stream) sb->data);
 	*pcbActual = skc->pcb;
 
-	enviarTamanioDePagina(skc->pcb.id);
+	enviarPidPcb(skc->pcb.id);
 
 	return TRUE;
 }
 
-void enviarTamanioDePagina(int id){
+void enviarPidPcb(int id){
 	espacioAsignado pag;
 	StrCpuUmc*scu;
-	scu=newStrCpuUmc(CPU_ID,TAMANIO_DE_MARCOS,pag,0,0,"h",id);
+	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+	scu=newStrCpuUmc(CPU_ID,CAMBIO_PROCESO_ACTIVO,pag,0,0,"h",id);
 	SocketBuffer*buff= serializeCpuUmc(scu);
 	socketSend(socketUMC->ptrSocket,buff);
 

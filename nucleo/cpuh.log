@@ -807,3 +807,29 @@
 [INFO] 17:53:24:712 CPUHANDLER/(20443:20453): KERNEL : Se cayo el cliente 9
 [INFO] 17:53:24:712 CPUHANDLER/(20443:20453): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
 [INFO] 17:53:24:712 CPUHANDLER/(20443:20453): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 18:00:33:766 CPUHANDLER/(20883:20892): Server creado con exito y escuchando.
+[INFO] 18:00:33:766 CPUHANDLER/(20883:20892): Server iniciado.
+[INFO] 18:01:09:948 CPUHANDLER/(20883:20892): Nueva Conexion detectada, realizando handshake
+[INFO] 18:01:09:949 CPUHANDLER/(20883:20892): ID Nuevo Cliente: 2.
+[INFO] 18:01:09:949 CPUHANDLER/(20883:20892): Nuevo Cliente CPU
+[INFO] 18:01:09:949 CPUHANDLER/(20883:20892): KER-CPU: HANDSHAKE recibido
+[INFO] 18:01:09:949 CPUHANDLER/(20883:20892): KER-CPU: HANDSHAKE enviado
+[INFO] 18:01:17:950 CPUHANDLER/(20883:20892): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 18:01:17:952 CPUHANDLER/(20883:20892): KERNEL : El cliente 9 es un CPU
+[INFO] 18:01:17:952 CPUHANDLER/(20883:20892): KERNEL : CPU 9 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 18:01:41:283 CPUHANDLER/(20883:20892): Nueva Conexion detectada, realizando handshake
+[INFO] 18:01:41:290 CPUHANDLER/(20883:20892): ID Nuevo Cliente: 0.
+[INFO] 18:01:41:290 CPUHANDLER/(20883:20892): Nuevo Cliente CONSOLA
+[INFO] 18:01:41:290 CPUHANDLER/(20883:20892): Nuevo Cliente Consola 10 aceptado.
+[INFO] 18:01:41:290 CPUHANDLER/(20883:20892): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 18:01:49:89 CPUHANDLER/(20883:20892): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 18:01:49:90 CPUHANDLER/(20883:20892): KERNEL : El cliente 10 es una consola
+[ERROR] 18:01:49:90 CPUHANDLER/(20883:20892): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 18:01:49:90 CPUHANDLER/(20883:20892): Se inicializo el programa 1
+[ERROR] 18:01:49:90 CPUHANDLER/(20883:20892): KERNEL : Consola 10 añadida a la lista
+[INFO] 18:19:40:529 CPUHANDLER/(20883:20892): KERNEL : Se cayo el cliente 9
+[INFO] 18:19:40:530 CPUHANDLER/(20883:20892): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 18:19:40:530 CPUHANDLER/(20883:20892): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 18:19:43:461 CPUHANDLER/(20883:20892): KERNEL : Se cayo el cliente 10
+[INFO] 18:19:43:462 CPUHANDLER/(20883:20892): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 18:19:43:462 CPUHANDLER/(20883:20892): KERNEL : Se elimina el descriptor 10 para ese cliente
