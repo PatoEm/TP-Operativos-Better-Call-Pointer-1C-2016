@@ -553,3 +553,7 @@
 [INFO] 23:46:51:963 SWAP/(12229:12229): Hay espacio
 [INFO] 23:46:51:963 SWAP/(12229:12229): Espacio reservado correctamente
 [ERROR] 23:48:22:677 SWAP/(12229:12229): Al recibir del cliente
+[INFO] 12:23:28:214 SWAP/(7675:7675): Valores del archivo de configuracion seteados
+[INFO] 12:23:28:462 SWAP/(7675:7675): Archivo de particion creado
+[INFO] 12:23:28:465 SWAP/(7675:7675): Server creado y escuchando correctamente
+[ERROR] 12:30:20:65 SWAP/(7675:7675): Al recibir del cliente

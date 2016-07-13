@@ -80,7 +80,6 @@ SocketBuffer* buffer;
 int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
 
-	iniciarFunciones();
 	t_config* tConfig = NULL;
 	puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
 	ipNucleo=(String)malloc(sizeof(ipNucleo));

@@ -381,3 +381,13 @@
 [ERROR] 23:46:51:963 CPUHANDLER/(12319:12328): KERNEL : El Cliente 10 mando ANSISOP
 [INFO] 23:46:51:963 CPUHANDLER/(12319:12328): Se inicializo el programa 1
 [ERROR] 23:46:51:963 CPUHANDLER/(12319:12328): KERNEL : Consola 10 añadida a la lista
+[INFO] 12:27:34:102 CPUHANDLER/(7890:7898): Server creado con exito y escuchando.
+[INFO] 12:27:34:106 CPUHANDLER/(7890:7898): Server iniciado.
+[INFO] 12:29:41:159 CPUHANDLER/(7890:7898): Nueva Conexion detectada, realizando handshake
+[INFO] 12:29:41:173 CPUHANDLER/(7890:7898): ID Nuevo Cliente: 2.
+[INFO] 12:29:41:176 CPUHANDLER/(7890:7898): Nuevo Cliente CPU
+[INFO] 12:29:41:185 CPUHANDLER/(7890:7898): KER-CPU: HANDSHAKE recibido
+[INFO] 12:29:41:273 CPUHANDLER/(7890:7898): KER-CPU: HANDSHAKE enviado
+[INFO] 12:30:27:619 CPUHANDLER/(7890:7898): KERNEL : Se cayo el cliente 9
+[INFO] 12:30:27:623 CPUHANDLER/(7890:7898): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 12:30:27:625 CPUHANDLER/(7890:7898): KERNEL : Se elimina el descriptor 9 para ese cliente
