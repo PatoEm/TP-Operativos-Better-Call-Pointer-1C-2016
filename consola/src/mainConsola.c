@@ -146,7 +146,7 @@ Boolean callAndSendAnSISOP(String path) {
 	}
 
 	puts("Se reconocio un archivo.AnSISOP");
-	printf("%s\n", buffer);
+	//printf("%s\n", buffer);
 
 	if (sck != NULL) {
 		free(sck);

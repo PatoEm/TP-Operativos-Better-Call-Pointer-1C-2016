@@ -98,7 +98,20 @@ free(array);
 	int oprueba10=(pcbNuevoPrograma->indiceDeCodigo)[4].longitud;
 
 
-	pcbNuevoPrograma->indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
+
+
+	if(metaNuevoPrograma->etiquetas!=NULL){
+	pcbNuevoPrograma->indiceDeEtiquetas=malloc(sizeof(char)*strlen(metaNuevoPrograma->etiquetas+1));
+
+	memcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas, strlen(metaNuevoPrograma->etiquetas)+1);
+	}
+	else{
+		pcbNuevoPrograma->indiceDeEtiquetas=NULL;
+	}
+
+	//strcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas);
+
+	//pcbNuevoPrograma->indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
 	pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
 

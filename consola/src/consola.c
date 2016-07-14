@@ -43,7 +43,7 @@ char * leerProgramaAnSISOP(char * direccionArchivo) {
 	if (fp == NULL)
 		puts("Error al abrir archivo");
 	else {
-		char* buffer = (char *) malloc(tamanio);
+		char* buffer = malloc(tamanio+1);
 		if(buffer == NULL){
 			printf("No se pudo reservar memoria para el archivo");
 			return FALSE;
