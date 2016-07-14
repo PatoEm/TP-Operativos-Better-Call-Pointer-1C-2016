@@ -68,6 +68,8 @@ pcb* newEmptyPcb(){
 	pcbLoco->etiquetaSize=0;
 	pcbLoco->instruccionesRestantes=0;
 	pcbLoco->instruccionesTotales=1;
+
+	pcbLoco->estado=NEW;
 	//free(auxArray);
 	//free(auxSocket);
 //	free(auxIndice);

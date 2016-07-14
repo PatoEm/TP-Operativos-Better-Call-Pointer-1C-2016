@@ -189,8 +189,8 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	printf("Action: %d\n", sck->action);
 	StrKerCpu* skc;
 	SocketBuffer* sb;
-	pcb* pcb = malloc(sizeof(pcb));
-	memcpy (pcb,newEmptyPcb(),sizeof(pcb));
+	pcb* pcb = newEmptyPcb();
+	//memcpy (pcb,newEmptyPcb(),sizeof(pcb));
 	switch (sck->action) {
 	case HANDSHAKE:
 

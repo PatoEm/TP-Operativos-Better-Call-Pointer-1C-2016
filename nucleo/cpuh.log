@@ -1741,3 +1741,23 @@
 [INFO] 05:55:26:943 CPUHANDLER/(26100:26115): Nuevo Cliente CPU
 [INFO] 05:56:30:267 CPUHANDLER/(26100:26115): KER-CPU: HANDSHAKE recibido
 [INFO] 05:56:57:770 CPUHANDLER/(26100:26115): KER-CPU: HANDSHAKE enviado
+[INFO] 05:59:33:738 CPUHANDLER/(26401:26415): Server creado con exito y escuchando.
+[INFO] 05:59:33:738 CPUHANDLER/(26401:26415): Server iniciado.
+[INFO] 05:59:50:422 CPUHANDLER/(26401:26415): Nueva Conexion detectada, realizando handshake
+[INFO] 05:59:50:423 CPUHANDLER/(26401:26415): ID Nuevo Cliente: 2.
+[INFO] 05:59:50:423 CPUHANDLER/(26401:26415): Nuevo Cliente CPU
+[INFO] 06:02:30:708 CPUHANDLER/(26731:26745): Server creado con exito y escuchando.
+[INFO] 06:02:30:708 CPUHANDLER/(26731:26745): Server iniciado.
+[INFO] 06:02:36:626 CPUHANDLER/(26731:26745): Nueva Conexion detectada, realizando handshake
+[INFO] 06:02:36:626 CPUHANDLER/(26731:26745): ID Nuevo Cliente: 2.
+[INFO] 06:02:36:626 CPUHANDLER/(26731:26745): Nuevo Cliente CPU
+[INFO] 06:05:33:826 CPUHANDLER/(27107:27121): Server creado con exito y escuchando.
+[INFO] 06:05:33:826 CPUHANDLER/(27107:27121): Server iniciado.
+[INFO] 06:05:39:307 CPUHANDLER/(27107:27121): Nueva Conexion detectada, realizando handshake
+[INFO] 06:05:39:308 CPUHANDLER/(27107:27121): ID Nuevo Cliente: 2.
+[INFO] 06:05:39:308 CPUHANDLER/(27107:27121): Nuevo Cliente CPU
+[INFO] 06:07:43:114 CPUHANDLER/(27391:27405): Server creado con exito y escuchando.
+[INFO] 06:07:43:114 CPUHANDLER/(27391:27405): Server iniciado.
+[INFO] 06:07:49:78 CPUHANDLER/(27391:27405): Nueva Conexion detectada, realizando handshake
+[INFO] 06:07:49:78 CPUHANDLER/(27391:27405): ID Nuevo Cliente: 2.
+[INFO] 06:07:49:78 CPUHANDLER/(27391:27405): Nuevo Cliente CPU
