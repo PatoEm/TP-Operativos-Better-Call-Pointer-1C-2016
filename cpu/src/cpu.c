@@ -465,3 +465,32 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 
 AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 		signal, };
+
+void senialParaAbortar() {
+	signal(SIGUSR1, abortarCPU);
+}
+
+void mandarElAbortoAKernel(pcb * pcbActual) {
+		SocketBuffer * buffer;
+		StrCpuKer* sck;
+
+		sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbActual, 0, 0, NULL,
+				NULL, 0);
+		buffer = serializeCpuKer(sck);
+		if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+			puts("No se pudo enviar el buffer al nucleo.");
+		}
+}
+
+void abortarCPU(){
+	abortoCPU = 1;
+}
+
+void mirarSenial(pcb * pcbActual){
+	if(abortoCPU == 1){
+		puts("Se recibio senial SIGUSR1\n");
+		mandarElAbortoAKernel(pcbActual);
+		puts("SIGUSR1 se trato correctamente\n");
+		abortoCPU = 0;
+	}
+}

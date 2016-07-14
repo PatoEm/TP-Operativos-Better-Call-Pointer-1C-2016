@@ -87,6 +87,7 @@ int main() {
 	//ipNucleo=(String)malloc(sizeof(ipNucleo));
 	//ipUmc=(String)malloc(sizeof(ipUmc));
 	//puertoUmc=(Int32U)malloc(sizeof(puertoUmc));
+	abortoCPU = 0; //NO BORREN ESTO ASI SE QUEDA ATENTO A LA SEÑAL
 
 
 	if (loadConfig() && socketConnection()) {

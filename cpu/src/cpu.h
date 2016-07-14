@@ -26,6 +26,7 @@
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <commons/collections/list.h>
 #include <libreriasCompartidas/pcb.h>
+#include <signal.h>
 
 #define FAIL -1
 //======================================================
@@ -44,6 +45,7 @@ SocketClient* socketUMC;
 int tamanioPaginaUmc;
 pcb pcbProceso;
 bool seguirEjecutando; //1 SI 0 NO
+int abortoCPU;
 
 //======================================================
 
@@ -136,6 +138,18 @@ void signal(t_nombre_semaforo identificador_semaforo);
 
 
 bool espacioMemoriaVacio(int tamanio, char*bytes);
+
+
+void senialParaAbortar();
+
+
+void mandarElAbortoAKernel(pcb * pcbActual);
+
+
+void abortarCPU();
+
+
+void mirarSenial(pcb * pcbActual);
 
 //======================================================
 
