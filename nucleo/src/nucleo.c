@@ -105,7 +105,7 @@ free(array);
 	memcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas, strlen(metaNuevoPrograma->etiquetas)+1);
 	}
 	else{
-		pcbNuevoPrograma->indiceDeEtiquetas=NULL;
+		pcbNuevoPrograma->indiceDeEtiquetas="MUERTE A WINDOWS";
 	}
 
 	//strcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas);

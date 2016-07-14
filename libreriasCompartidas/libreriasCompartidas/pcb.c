@@ -43,6 +43,27 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 }
 
 pcb* newEmptyPcb(){
-	return newPcb(NULL,0,0,0,0,NULL,"",0,0,0,list_create(),0);
+
+	pcb* pcbLoco;
+	Socket * auxSocket = socketCreate();
+	arrayBidimensional * auxArray = malloc(sizeof(arrayBidimensional));
+	auxArray[0].comienzo=0;
+	auxArray[0].longitud=0;
+
+	memcpy(pcbLoco->consola,auxSocket,sizeof(Socket));
+	pcbLoco->id=0;
+	pcbLoco->tamanioArchivoOriginal=0;
+	pcbLoco->programCounter=0;
+	pcbLoco->paginasDeCodigo=0;
+	pcbLoco->indiceDeCodigo=(arrayBidimensional*)malloc(sizeof(arrayBidimensional));
+	memcpy(&(pcbLoco->indiceDeCodigo[0]),&auxArray[0],sizeof(arrayBidimensional));
+	char * auxIndice="MUERTE A WINDOWS";
+	memcpy((pcbLoco->indiceDeEtiquetas),auxIndice, strlen(auxIndice)+1);
+	pcbLoco->etiquetaSize=0;
+	pcbLoco->instruccionesRestantes=0;
+	pcbLoco->instruccionesTotales=1;
+	free(auxArray);
+	free(auxSocket);
+
 }
 
