@@ -268,9 +268,11 @@ Boolean socketConnection() {
 
 Boolean getNextPcb() {
 
+	pcbActual=newEmptyPcb();
+
 	if (sck == NULL) {
 
-		pcbActual = malloc(sizeof(pcb));
+		//pcbActual = malloc(sizeof(pcb));
 		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0,
 				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);

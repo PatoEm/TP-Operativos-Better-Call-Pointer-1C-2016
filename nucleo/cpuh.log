@@ -1771,3 +1771,30 @@
 [INFO] 06:16:15:755 CPUHANDLER/(27947:27961): Nueva Conexion detectada, realizando handshake
 [INFO] 06:16:15:755 CPUHANDLER/(27947:27961): ID Nuevo Cliente: 2.
 [INFO] 06:16:15:755 CPUHANDLER/(27947:27961): Nuevo Cliente CPU
+[INFO] 06:23:09:817 CPUHANDLER/(28204:28220): Server creado con exito y escuchando.
+[INFO] 06:23:09:817 CPUHANDLER/(28204:28220): Server iniciado.
+[INFO] 06:23:21:347 CPUHANDLER/(28204:28220): Nueva Conexion detectada, realizando handshake
+[INFO] 06:23:21:347 CPUHANDLER/(28204:28220): ID Nuevo Cliente: 2.
+[INFO] 06:23:21:347 CPUHANDLER/(28204:28220): Nuevo Cliente CPU
+[INFO] 06:28:20:608 CPUHANDLER/(28717:28727): Server creado con exito y escuchando.
+[INFO] 06:28:20:608 CPUHANDLER/(28717:28727): Server iniciado.
+[INFO] 06:28:27:735 CPUHANDLER/(28717:28727): Nueva Conexion detectada, realizando handshake
+[INFO] 06:28:27:735 CPUHANDLER/(28717:28727): ID Nuevo Cliente: 2.
+[INFO] 06:28:27:735 CPUHANDLER/(28717:28727): Nuevo Cliente CPU
+[INFO] 06:29:40:838 CPUHANDLER/(28910:28920): Server creado con exito y escuchando.
+[INFO] 06:29:40:838 CPUHANDLER/(28910:28920): Server iniciado.
+[INFO] 06:29:55:8 CPUHANDLER/(28910:28920): Nueva Conexion detectada, realizando handshake
+[INFO] 06:30:28:49 CPUHANDLER/(28910:28920): ID Nuevo Cliente: 2.
+[INFO] 06:30:28:50 CPUHANDLER/(28910:28920): Nuevo Cliente CPU
+[INFO] 06:33:34:309 CPUHANDLER/(29351:29360): Server creado con exito y escuchando.
+[INFO] 06:33:34:309 CPUHANDLER/(29351:29360): Server iniciado.
+[INFO] 06:33:54:764 CPUHANDLER/(29351:29360): Nueva Conexion detectada, realizando handshake
+[INFO] 06:34:13:185 CPUHANDLER/(29351:29360): ID Nuevo Cliente: 2.
+[INFO] 06:34:13:186 CPUHANDLER/(29351:29360): Nuevo Cliente CPU
+[INFO] 06:39:58:913 CPUHANDLER/(29726:29736): Server creado con exito y escuchando.
+[INFO] 06:39:58:913 CPUHANDLER/(29726:29736): Server iniciado.
+[INFO] 06:42:23:370 CPUHANDLER/(29944:29952): Server creado con exito y escuchando.
+[INFO] 06:42:23:370 CPUHANDLER/(29944:29952): Server iniciado.
+[INFO] 06:42:34:238 CPUHANDLER/(29944:29952): Nueva Conexion detectada, realizando handshake
+[INFO] 06:42:34:239 CPUHANDLER/(29944:29952): ID Nuevo Cliente: 2.
+[INFO] 06:42:34:239 CPUHANDLER/(29944:29952): Nuevo Cliente CPU

@@ -31,7 +31,14 @@ void cpuHandlerThread() {
 
 void* cpuHandlerThreadRoutine(void* parametro) {
 
-	cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
+	cpuhlog=malloc(sizeof(t_log));
+
+	memcpy(cpuhlog,log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO), sizeof(t_log));
+	//cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
+
+
+
+
 
 	if (initCpuServer()) {
 		log_info(cpuhlog, "Server iniciado.");

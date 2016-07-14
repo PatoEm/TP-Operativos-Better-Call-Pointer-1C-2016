@@ -431,9 +431,10 @@ void signalAnsisop(char* identificador) {
 int inicializarVariables() {
 
 	// LOG
-	nucleolog = log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO);
+	nucleolog=malloc(sizeof(t_log));
+	//nucleolog = log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO);
 
-
+	memcpy(nucleolog,log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO), sizeof(t_log));
 
 
 
