@@ -1363,3 +1363,24 @@
 [INFO] 01:23:48:866 CPUHANDLER/(4677:4689): KERNEL : El cliente 9 ha enviado un paquete
 [INFO] 01:23:48:866 CPUHANDLER/(4677:4689): KERNEL : El cliente 9 es una consola
 [ERROR] 01:23:48:866 CPUHANDLER/(4677:4689): KERNEL : El Cliente 9 mando ANSISOP
+[INFO] 01:25:48:550 CPUHANDLER/(5072:5082): Server creado con exito y escuchando.
+[INFO] 01:25:48:550 CPUHANDLER/(5072:5082): Server iniciado.
+[INFO] 01:25:56:650 CPUHANDLER/(5072:5082): Nueva Conexion detectada, realizando handshake
+[ERROR] 01:25:56:753 CPUHANDLER/(5072:5082): Error al recibir de Cliente
+[INFO] 01:25:56:753 CPUHANDLER/(5072:5082): KERNEL : Se cayo el cliente 9
+[INFO] 01:25:56:753 CPUHANDLER/(5072:5082): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 01:25:56:753 CPUHANDLER/(5072:5082): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 01:26:43:837 CPUHANDLER/(5427:5437): Server creado con exito y escuchando.
+[INFO] 01:26:43:837 CPUHANDLER/(5427:5437): Server iniciado.
+[INFO] 01:27:00:380 CPUHANDLER/(5427:5437): Nueva Conexion detectada, realizando handshake
+[ERROR] 01:27:00:482 CPUHANDLER/(5427:5437): Error al recibir de Cliente
+[INFO] 01:27:00:482 CPUHANDLER/(5427:5437): KERNEL : Se cayo el cliente 9
+[INFO] 01:27:00:482 CPUHANDLER/(5427:5437): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 01:27:00:482 CPUHANDLER/(5427:5437): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 01:28:06:261 CPUHANDLER/(5782:5792): Server creado con exito y escuchando.
+[INFO] 01:28:06:261 CPUHANDLER/(5782:5792): Server iniciado.
+[INFO] 01:29:17:555 CPUHANDLER/(5782:5792): Nueva Conexion detectada, realizando handshake
+[ERROR] 01:36:26:29 CPUHANDLER/(5782:5792): Error al recibir de Cliente
+[INFO] 01:36:26:29 CPUHANDLER/(5782:5792): KERNEL : Se cayo el cliente 9
+[INFO] 01:36:26:29 CPUHANDLER/(5782:5792): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 01:36:26:29 CPUHANDLER/(5782:5792): KERNEL : Se elimina el descriptor 9 para ese cliente
