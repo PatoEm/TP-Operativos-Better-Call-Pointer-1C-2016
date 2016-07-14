@@ -53,7 +53,6 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->tamanioArchivoOriginal = tamanioArchivo;
 
-	pcbNuevoPrograma->metaProgram = metaNuevoPrograma;
 
 	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
@@ -101,7 +100,7 @@ free(array);
 
 
 	if(metaNuevoPrograma->etiquetas!=NULL){
-	pcbNuevoPrograma->indiceDeEtiquetas=malloc(sizeof(char)*strlen(metaNuevoPrograma->etiquetas+1));
+	pcbNuevoPrograma->indiceDeEtiquetas=malloc(sizeof(char)*(strlen(metaNuevoPrograma->etiquetas)+1));
 
 	memcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas, strlen(metaNuevoPrograma->etiquetas)+1);
 	}

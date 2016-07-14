@@ -1254,3 +1254,112 @@
 [INFO] 23:50:52:276 CPUHANDLER/(348:356): KERNEL : Se cayo el cliente 10
 [INFO] 23:50:52:277 CPUHANDLER/(348:356): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
 [INFO] 23:50:52:277 CPUHANDLER/(348:356): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 00:15:54:594 CPUHANDLER/(1293:1307): Server creado con exito y escuchando.
+[INFO] 00:15:54:594 CPUHANDLER/(1293:1307): Server iniciado.
+[INFO] 00:16:03:116 CPUHANDLER/(1293:1307): Nueva Conexion detectada, realizando handshake
+[INFO] 00:16:03:117 CPUHANDLER/(1293:1307): ID Nuevo Cliente: 0.
+[INFO] 00:16:03:117 CPUHANDLER/(1293:1307): Nuevo Cliente CONSOLA
+[INFO] 00:16:03:117 CPUHANDLER/(1293:1307): Nuevo Cliente Consola 9 aceptado.
+[INFO] 00:16:03:117 CPUHANDLER/(1293:1307): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 00:16:12:962 CPUHANDLER/(1293:1307): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 00:16:12:962 CPUHANDLER/(1293:1307): KERNEL : El cliente 9 es una consola
+[ERROR] 00:16:12:962 CPUHANDLER/(1293:1307): KERNEL : El Cliente 9 mando ANSISOP
+[INFO] 00:16:12:962 CPUHANDLER/(1293:1307): Se inicializo el programa 1
+[ERROR] 00:16:12:963 CPUHANDLER/(1293:1307): KERNEL : Consola 9 añadida a la lista
+[INFO] 00:17:19:875 CPUHANDLER/(1293:1307): KERNEL : Se cayo el cliente 9
+[INFO] 00:17:19:875 CPUHANDLER/(1293:1307): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 00:17:19:875 CPUHANDLER/(1293:1307): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 00:17:44:763 CPUHANDLER/(1293:1307): Nueva Conexion detectada, realizando handshake
+[INFO] 00:17:44:771 CPUHANDLER/(1293:1307): ID Nuevo Cliente: 0.
+[INFO] 00:17:44:771 CPUHANDLER/(1293:1307): Nuevo Cliente CONSOLA
+[INFO] 00:17:44:771 CPUHANDLER/(1293:1307): Nuevo Cliente Consola 9 aceptado.
+[INFO] 00:17:44:771 CPUHANDLER/(1293:1307): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 00:17:53:923 CPUHANDLER/(1293:1307): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 00:17:53:923 CPUHANDLER/(1293:1307): KERNEL : El cliente 9 es una consola
+[ERROR] 00:17:53:923 CPUHANDLER/(1293:1307): KERNEL : El Cliente 9 mando ANSISOP
+[INFO] 00:17:53:924 CPUHANDLER/(1293:1307): Se inicializo el programa 2
+[ERROR] 00:17:53:924 CPUHANDLER/(1293:1307): KERNEL : Consola 9 añadida a la lista
+[INFO] 00:18:25:473 CPUHANDLER/(1293:1307): KERNEL : Se cayo el cliente 9
+[INFO] 00:18:25:473 CPUHANDLER/(1293:1307): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 00:18:25:473 CPUHANDLER/(1293:1307): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 00:20:04:900 CPUHANDLER/(1663:1673): Server creado con exito y escuchando.
+[INFO] 00:20:04:900 CPUHANDLER/(1663:1673): Server iniciado.
+[INFO] 00:20:11:865 CPUHANDLER/(1663:1673): Nueva Conexion detectada, realizando handshake
+[INFO] 00:20:11:865 CPUHANDLER/(1663:1673): ID Nuevo Cliente: 2.
+[INFO] 00:20:11:865 CPUHANDLER/(1663:1673): Nuevo Cliente CPU
+[INFO] 00:20:11:865 CPUHANDLER/(1663:1673): KER-CPU: HANDSHAKE recibido
+[INFO] 00:20:11:866 CPUHANDLER/(1663:1673): KER-CPU: HANDSHAKE enviado
+[INFO] 00:20:19:868 CPUHANDLER/(1663:1673): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 00:20:19:868 CPUHANDLER/(1663:1673): KERNEL : El cliente 9 es un CPU
+[INFO] 00:20:19:868 CPUHANDLER/(1663:1673): KERNEL : CPU 9 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 00:21:10:453 CPUHANDLER/(1663:1673): Nueva Conexion detectada, realizando handshake
+[INFO] 00:21:10:473 CPUHANDLER/(1663:1673): ID Nuevo Cliente: 0.
+[INFO] 00:21:10:474 CPUHANDLER/(1663:1673): Nuevo Cliente CONSOLA
+[INFO] 00:21:10:474 CPUHANDLER/(1663:1673): Nuevo Cliente Consola 10 aceptado.
+[INFO] 00:21:10:474 CPUHANDLER/(1663:1673): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 00:21:15:736 CPUHANDLER/(1663:1673): KERNEL : Se cayo el cliente 10
+[INFO] 00:21:15:736 CPUHANDLER/(1663:1673): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 00:21:15:736 CPUHANDLER/(1663:1673): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 00:21:30:183 CPUHANDLER/(1663:1673): KERNEL : Se cayo el cliente 9
+[INFO] 00:21:30:184 CPUHANDLER/(1663:1673): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 00:21:30:184 CPUHANDLER/(1663:1673): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 00:47:46:863 CPUHANDLER/(2227:2237): Server creado con exito y escuchando.
+[INFO] 00:47:46:863 CPUHANDLER/(2227:2237): Server iniciado.
+[INFO] 00:51:34:58 CPUHANDLER/(2501:2509): Server creado con exito y escuchando.
+[INFO] 00:51:34:58 CPUHANDLER/(2501:2509): Server iniciado.
+[INFO] 00:52:43:801 CPUHANDLER/(2501:2509): Nueva Conexion detectada, realizando handshake
+[INFO] 00:52:43:801 CPUHANDLER/(2501:2509): ID Nuevo Cliente: 2.
+[INFO] 00:52:43:801 CPUHANDLER/(2501:2509): Nuevo Cliente CPU
+[INFO] 00:52:43:801 CPUHANDLER/(2501:2509): KER-CPU: HANDSHAKE recibido
+[INFO] 00:53:27:197 CPUHANDLER/(2836:2844): Server creado con exito y escuchando.
+[INFO] 00:53:27:197 CPUHANDLER/(2836:2844): Server iniciado.
+[INFO] 00:53:34:830 CPUHANDLER/(2836:2844): Nueva Conexion detectada, realizando handshake
+[INFO] 00:53:34:830 CPUHANDLER/(2836:2844): ID Nuevo Cliente: 2.
+[INFO] 00:53:34:830 CPUHANDLER/(2836:2844): Nuevo Cliente CPU
+[INFO] 00:53:34:830 CPUHANDLER/(2836:2844): KER-CPU: HANDSHAKE recibido
+[INFO] 00:55:47:387 CPUHANDLER/(3185:3193): Server creado con exito y escuchando.
+[INFO] 00:55:47:387 CPUHANDLER/(3185:3193): Server iniciado.
+[INFO] 00:55:57:550 CPUHANDLER/(3185:3193): Nueva Conexion detectada, realizando handshake
+[INFO] 00:55:57:550 CPUHANDLER/(3185:3193): ID Nuevo Cliente: 0.
+[INFO] 00:55:57:550 CPUHANDLER/(3185:3193): Nuevo Cliente CONSOLA
+[INFO] 00:55:57:550 CPUHANDLER/(3185:3193): Nuevo Cliente Consola 9 aceptado.
+[INFO] 00:55:57:550 CPUHANDLER/(3185:3193): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 00:56:07:603 CPUHANDLER/(3185:3193): Nueva Conexion detectada, realizando handshake
+[INFO] 00:56:07:603 CPUHANDLER/(3185:3193): ID Nuevo Cliente: 2.
+[INFO] 00:56:07:603 CPUHANDLER/(3185:3193): Nuevo Cliente CPU
+[INFO] 00:56:07:603 CPUHANDLER/(3185:3193): KER-CPU: HANDSHAKE recibido
+[INFO] 01:19:56:733 CPUHANDLER/(4024:4035): Server creado con exito y escuchando.
+[INFO] 01:19:56:733 CPUHANDLER/(4024:4035): Server iniciado.
+[INFO] 01:20:06:973 CPUHANDLER/(4024:4035): Nueva Conexion detectada, realizando handshake
+[INFO] 01:20:06:974 CPUHANDLER/(4024:4035): ID Nuevo Cliente: 2.
+[INFO] 01:20:06:974 CPUHANDLER/(4024:4035): Nuevo Cliente CPU
+[INFO] 01:20:06:974 CPUHANDLER/(4024:4035): KER-CPU: HANDSHAKE recibido
+[INFO] 01:21:29:947 CPUHANDLER/(4397:4450): Server creado con exito y escuchando.
+[INFO] 01:21:29:947 CPUHANDLER/(4397:4450): Server iniciado.
+[INFO] 01:21:32:333 CPUHANDLER/(4397:4450): Nueva Conexion detectada, realizando handshake
+[INFO] 01:21:32:333 CPUHANDLER/(4397:4450): ID Nuevo Cliente: 0.
+[INFO] 01:21:32:333 CPUHANDLER/(4397:4450): Nuevo Cliente CONSOLA
+[INFO] 01:21:32:333 CPUHANDLER/(4397:4450): Nuevo Cliente Consola 9 aceptado.
+[INFO] 01:21:32:333 CPUHANDLER/(4397:4450): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 01:21:43:179 CPUHANDLER/(4397:4450): Nueva Conexion detectada, realizando handshake
+[INFO] 01:21:43:179 CPUHANDLER/(4397:4450): ID Nuevo Cliente: 2.
+[INFO] 01:21:43:179 CPUHANDLER/(4397:4450): Nuevo Cliente CPU
+[INFO] 01:21:43:179 CPUHANDLER/(4397:4450): KER-CPU: HANDSHAKE recibido
+[INFO] 01:22:44:877 CPUHANDLER/(4677:4689): Server creado con exito y escuchando.
+[INFO] 01:22:44:877 CPUHANDLER/(4677:4689): Server iniciado.
+[INFO] 01:22:53:585 CPUHANDLER/(4677:4689): Nueva Conexion detectada, realizando handshake
+[INFO] 01:22:53:585 CPUHANDLER/(4677:4689): ID Nuevo Cliente: 0.
+[INFO] 01:22:53:585 CPUHANDLER/(4677:4689): Nuevo Cliente CONSOLA
+[INFO] 01:22:53:585 CPUHANDLER/(4677:4689): Nuevo Cliente Consola 9 aceptado.
+[INFO] 01:22:53:585 CPUHANDLER/(4677:4689): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 01:22:59:389 CPUHANDLER/(4677:4689): KERNEL : Se cayo el cliente 9
+[INFO] 01:22:59:389 CPUHANDLER/(4677:4689): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 01:22:59:389 CPUHANDLER/(4677:4689): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 01:23:38:240 CPUHANDLER/(4677:4689): Nueva Conexion detectada, realizando handshake
+[INFO] 01:23:38:240 CPUHANDLER/(4677:4689): ID Nuevo Cliente: 0.
+[INFO] 01:23:38:240 CPUHANDLER/(4677:4689): Nuevo Cliente CONSOLA
+[INFO] 01:23:38:240 CPUHANDLER/(4677:4689): Nuevo Cliente Consola 9 aceptado.
+[INFO] 01:23:38:240 CPUHANDLER/(4677:4689): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 01:23:48:866 CPUHANDLER/(4677:4689): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 01:23:48:866 CPUHANDLER/(4677:4689): KERNEL : El cliente 9 es una consola
+[ERROR] 01:23:48:866 CPUHANDLER/(4677:4689): KERNEL : El Cliente 9 mando ANSISOP
