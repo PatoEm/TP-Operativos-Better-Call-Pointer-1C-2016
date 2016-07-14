@@ -200,8 +200,8 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	size += sizeof(skc->pcb.programCounter);
 	size += sizeof(skc->pcb.paginasDeCodigo);
 	size += sizeof(skc->pcb.indiceDeCodigo);
-	size += strlen(skc->pcb.indiceDeEtiquetas) + 1;
-	size += skc->pcb.indiceDeEtiquetas;
+	size += sizeof((char)*(strlen(skc->pcb.indiceDeEtiquetas) + 1));
+	size += (strlen(skc->pcb.indiceDeEtiquetas) + 1);
 	size += sizeof(skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.instruccionesRestantes);
 	size += sizeof(skc->pcb.indiceDelStack);
@@ -258,8 +258,8 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->pcb.programCounter);
 	size += sizeof(sck->pcb.paginasDeCodigo);
 	size += sizeof(sck->pcb.indiceDeCodigo);
-	size += strlen(sck->pcb.indiceDeEtiquetas) + 1;
-	size += sck->pcb.indiceDeEtiquetas;
+	size += sizeof((char)*(strlen(sck->pcb.indiceDeEtiquetas) + 1));
+	size += (strlen(sck->pcb.indiceDeEtiquetas) + 1);
 	size += sizeof(sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.instruccionesRestantes);
 	size += sizeof(sck->pcb.indiceDelStack);
