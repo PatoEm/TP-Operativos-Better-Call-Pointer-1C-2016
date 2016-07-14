@@ -393,7 +393,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 /*
  * signal
  */ // YA ESTA
-void signal(t_nombre_semaforo identificador_semaforo) {
+void signale(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 28 /*SIGNAL*/, pcbProceso,
 			pcbProceso.id, strlen(identificador_semaforo),
@@ -464,7 +464,7 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 		.AnSISOP_imprimirTexto = imprimirTexto, };
 
 AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
-		signal, };
+		signale, };
 
 void senialParaAbortar() {
 	signal(SIGUSR1, abortarCPU);

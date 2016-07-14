@@ -134,7 +134,7 @@ void wait(t_nombre_semaforo identificador_semaforo);
 /*
  * signal
  */
-void signal(t_nombre_semaforo identificador_semaforo);
+void signale(t_nombre_semaforo identificador_semaforo);
 
 
 bool espacioMemoriaVacio(int tamanio, char*bytes);
