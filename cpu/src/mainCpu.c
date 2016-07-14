@@ -109,14 +109,14 @@ int main() {
 					sck = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbActual,
 							0, 0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
-					if (!socketSend(socketUMC->ptrSocket, buffer)) {
+					if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				} else {
 					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbActual, 0,
 							0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
-					if (!socketSend(socketUMC->ptrSocket, buffer)) {
+					if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
 					}
 				}
@@ -126,7 +126,7 @@ int main() {
 				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbActual, 0, 0,
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
-				if (!socketSend(socketUMC->ptrSocket, buffer)) {
+				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 					puts("No se pudo enviar el buffer al nucleo.");
 				}
 			}
