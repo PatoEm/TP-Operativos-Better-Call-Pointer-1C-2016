@@ -912,11 +912,12 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte,
 			sizeof(pcb.indiceDeEtiquetasSize));
 	ptrByte += sizeof(pcb.indiceDeEtiquetasSize);
-	pcb.indiceDeEtiquetas = malloc(sizeof(char) * (pcb.indiceDeEtiquetasSize));
-	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.indiceDeEtiquetasSize));
+
+	pcb.indiceDeEtiquetas = malloc((pcb.indiceDeEtiquetasSize));
+	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.indiceDeEtiquetasSize)); //todo el & NO VA
 	ptrByte += pcb.indiceDeEtiquetasSize;
 
-	pcb.indiceDeEtiquetas[strlen(pcb.indiceDeEtiquetas)] = '\0';
+	pcb.indiceDeEtiquetas[pcb.indiceDeEtiquetasSize] = '\0';
 
 	memcpy(&pcb.instruccionesTotales, ptrByte,
 			sizeof(pcb.instruccionesTotales));
@@ -1063,9 +1064,15 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte,
 			sizeof(pcb.indiceDeEtiquetasSize));
 	ptrByte += sizeof(pcb.indiceDeEtiquetasSize);
-	pcb.indiceDeEtiquetas = malloc(sizeof(char) * (pcb.indiceDeEtiquetasSize));
+
+	pcb.indiceDeEtiquetas = malloc((pcb.indiceDeEtiquetasSize));
 	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.indiceDeEtiquetasSize));
 	ptrByte += pcb.indiceDeEtiquetasSize;
+
+
+//	log = malloc(logLen);
+//	memcpy(log, ptrByte, logLen);
+//	ptrByte += logLen;
 
 	pcb.indiceDeEtiquetas[strlen(pcb.indiceDeEtiquetas)] = '\0';
 

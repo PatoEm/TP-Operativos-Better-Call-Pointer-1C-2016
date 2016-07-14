@@ -79,7 +79,7 @@ SocketBuffer* buffer;
 
 int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
-
+	pcbActual=malloc(sizeof(pcb*));
 	t_config* tConfig = NULL;
 	//puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
 	//ipNucleo=(String)malloc(sizeof(ipNucleo));
@@ -268,7 +268,8 @@ Boolean socketConnection() {
 
 Boolean getNextPcb() {
 
-	pcbActual=newEmptyPcb();
+
+	pcbActual = newEmptyPcb();
 
 	if (sck == NULL) {
 

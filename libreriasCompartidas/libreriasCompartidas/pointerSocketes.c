@@ -265,14 +265,15 @@ Boolean handshake(SocketClient* client, Char id) {
 	StrUmcKer* suk;
 	StrKerCon* skcon;
 	StrKerCpu* skc;
-	pcb* pcb= newEmptyPcb();
+	pcb* pcbLoca=malloc(sizeof(pcb*));
+	pcbLoca = newEmptyPcb();
 	//pcb* pcb = malloc(sizeof(pcb));
 	//memcpy (pcb,newEmptyPcb(),sizeof(pcb));
 	Char action;
 	switch (id) {
 	case CPU_ID:
 		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
-		sck = newStrCpuKer(id, HANDSHAKE, *pcb, 0, 0, NULL, NULL, 0);
+		sck = newStrCpuKer(id, HANDSHAKE, *pcbLoca, 0, 0, NULL, NULL, 0);
 		sb = serializeCpuKer(sck);
 		break;
 	case CONSOLA_ID:
