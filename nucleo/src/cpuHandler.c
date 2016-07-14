@@ -15,6 +15,9 @@ t_log* cpuhlog;
 
 int fdmax;
 
+pcb* pcbVacio=NULL;
+
+
 /*
  *
  * THREAD DEL CPUHANDLER
@@ -27,6 +30,7 @@ void cpuHandlerThread() {
 
 	pthread_create(&cpuht, NULL, cpuHandlerThreadRoutine, "nada");
 
+
 }
 
 void* cpuHandlerThreadRoutine(void* parametro) {
@@ -37,7 +41,8 @@ void* cpuHandlerThreadRoutine(void* parametro) {
 	//cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
 
 
-
+	pcbVacio=malloc(sizeof(pcb*));
+	pcbVacio=newEmptyPcb();
 
 
 	if (initCpuServer()) {
@@ -196,8 +201,8 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	printf("Action: %d\n", sck->action);
 	StrKerCpu* skc;
 	SocketBuffer* sb;
-	pcb* pcbLoca=malloc(sizeof(pcb*));
-	pcbLoca = newEmptyPcb();
+	//pcb* pcbLoca=malloc(sizeof(pcb*));
+	//pcbLoca = newEmptyPcb();
 	//pcb* pcb = newEmptyPcb();
 	//memcpy (pcbLoca,newEmptyPcb(),sizeof(pcb));
 
@@ -207,7 +212,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
 
 		//(Char id, Char action, pcb pcb, Int8U quantum,Byte* data, Int32U dataLen, Byte* nombreDispositivo,Int32U lenNomDispositivo)
-		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbLoca, 0, NULL, 0,
+		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbVacio, 0, NULL, 0,
 		NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(skc);
 		if (socketSend(cpuClient, sb)) {
@@ -356,7 +361,7 @@ String stringFromByteArray(Byte* data, Int32U size) {
 
 void cpuClientHandler(Socket* cpuClient, Stream data) {
 
-	pcb* pcb_aux;
+	pcb* pcb_aux=malloc(sizeof(pcb*));
 	StrCpuKer* in_cpu_msg = unserializeCpuKer(data);
 	StrKerCon* out_con_msg;
 	StrKerCpu* out_cpu_msg;
@@ -617,7 +622,8 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 }
 
 void consoleClientHandler(Socket *consoleClient, Stream data) {
-	pcb *pcb;
+	pcb *pcbLoco=	malloc(sizeof(pcb*));
+
 	StrConKer *sck = unserializeConKer(data);
 	switch (sck->action) {
 	case STD_OUTPUT:
@@ -634,10 +640,10 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 				consoleClient->descriptor);
 
 		//SE GENERA EL NUEVO PCB
-		pcb = crearNuevoPcb(consoleClient, sck->fileContent,
+		pcbLoco = crearNuevoPcb(consoleClient, sck->fileContent,
 				sck->fileContentLen);
 
-		moverAColaReady(pcb);
+		moverAColaReady(pcbLoco);
 
 		SocketBuffer* buffer;
 		StrUmcKer* streamALaUmc;
@@ -659,13 +665,13 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		//puto
 
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
-				sck->fileContent, sck->fileContentLen, pcb->id, 0, 0, 0,
+				sck->fileContent, sck->fileContentLen, pcbLoco->id, 0, 0, 0,
 				cantidadPaginasArchivo(sck->fileContentLen));
 		buffer = serializeUmcKer(streamALaUmc);
 		if (!socketSend(umcServer->ptrSocket, buffer)) {
-			log_error(cpuhlog, "No se pudo inicializar programa %d", pcb->id);
+			log_error(cpuhlog, "No se pudo inicializar programa %d", pcbLoco->id);
 		} else {
-			log_info(cpuhlog, "Se inicializo el programa %d", pcb->id);
+			log_info(cpuhlog, "Se inicializo el programa %d", pcbLoco->id);
 		}
 
 		//createNewPcb(sck);
@@ -677,7 +683,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		Console *clientConsole = malloc(sizeof(Console));
 
 		clientConsole->consoleClient = consoleClient;
-		clientConsole->pcb = pcb;
+		clientConsole->pcb = pcbLoco;
 		clientConsole->data = sck->fileContent;
 		clientConsole->dataLength = sck->fileContentLen;
 

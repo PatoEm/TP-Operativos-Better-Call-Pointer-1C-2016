@@ -78,23 +78,23 @@ for (i = 0; i < cantidadInstrucciones; i++) {
 }
 
 free(array);
-	//memcpy(pcbNuevoPrograma->indiceDeCodigo,array,sizeof(array));
-
-	//pcbNuevoPrograma->indiceDeCodigo = array;
-	int oprueba1=(pcbNuevoPrograma->indiceDeCodigo)[0].comienzo;
-	int oprueba2=(pcbNuevoPrograma->indiceDeCodigo)[0].longitud;
-
-	int oprueba3=(pcbNuevoPrograma->indiceDeCodigo)[1].comienzo;
-	int oprueba4=(pcbNuevoPrograma->indiceDeCodigo)[1].longitud;
-
-	int oprueba5=(pcbNuevoPrograma->indiceDeCodigo)[2].comienzo;
-	int oprueba6=(pcbNuevoPrograma->indiceDeCodigo)[2].longitud;
-
-	int oprueba7=(pcbNuevoPrograma->indiceDeCodigo)[3].comienzo;
-	int oprueba8=(pcbNuevoPrograma->indiceDeCodigo)[3].longitud;
-
-	int oprueba9=(pcbNuevoPrograma->indiceDeCodigo)[4].comienzo;
-	int oprueba10=(pcbNuevoPrograma->indiceDeCodigo)[4].longitud;
+//	//memcpy(pcbNuevoPrograma->indiceDeCodigo,array,sizeof(array));
+//
+//	//pcbNuevoPrograma->indiceDeCodigo = array;
+//	int oprueba1=(pcbNuevoPrograma->indiceDeCodigo)[0].comienzo;
+//	int oprueba2=(pcbNuevoPrograma->indiceDeCodigo)[0].longitud;
+//
+//	int oprueba3=(pcbNuevoPrograma->indiceDeCodigo)[1].comienzo;
+//	int oprueba4=(pcbNuevoPrograma->indiceDeCodigo)[1].longitud;
+//
+//	int oprueba5=(pcbNuevoPrograma->indiceDeCodigo)[2].comienzo;
+//	int oprueba6=(pcbNuevoPrograma->indiceDeCodigo)[2].longitud;
+//
+//	int oprueba7=(pcbNuevoPrograma->indiceDeCodigo)[3].comienzo;
+//	int oprueba8=(pcbNuevoPrograma->indiceDeCodigo)[3].longitud;
+//
+//	int oprueba9=(pcbNuevoPrograma->indiceDeCodigo)[4].comienzo;
+//	int oprueba10=(pcbNuevoPrograma->indiceDeCodigo)[4].longitud;
 
 
 
