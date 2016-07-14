@@ -51,7 +51,7 @@ StrKerCpu* skc = NULL;
  * PCB actual
  ****************************************/
 pcb* pcbActual = NULL;
-
+pcb* pcbVacio = NULL;
 /*****************************************
  * Funciones del main
  ****************************************/
@@ -80,6 +80,8 @@ SocketBuffer* buffer;
 int main() {
 	// cargo variables de configuracion, me conecto al nucleo y a la umc
 	pcbActual=malloc(sizeof(pcb*));
+	pcbVacio=malloc(sizeof(pcb*));
+	pcbVacio=newEmptyPcb();
 	t_config* tConfig = NULL;
 	//puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
 	//ipNucleo=(String)malloc(sizeof(ipNucleo));
@@ -269,13 +271,13 @@ Boolean socketConnection() {
 Boolean getNextPcb() {
 
 
-	pcbActual = newEmptyPcb();
+	//pcbActual = newEmptyPcb();
 
 	if (sck == NULL) {
 
 		//pcbActual = malloc(sizeof(pcb));
 		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
-		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbActual, 0, 0, 0,
+		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbVacio, 0, 0, 0,
 				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
 	puts("getNextPcb: Nuevo PCB vacio creado.");

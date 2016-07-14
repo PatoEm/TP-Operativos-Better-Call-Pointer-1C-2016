@@ -2038,3 +2038,49 @@
 [INFO] 13:55:16:170 CPUHANDLER/(9725:9736): KERNEL : Se cayo el cliente 9
 [INFO] 13:55:16:171 CPUHANDLER/(9725:9736): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
 [INFO] 13:55:16:171 CPUHANDLER/(9725:9736): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 14:23:12:669 CPUHANDLER/(10371:10380): Server creado con exito y escuchando.
+[INFO] 14:23:12:669 CPUHANDLER/(10371:10380): Server iniciado.
+[INFO] 14:23:24:280 CPUHANDLER/(10371:10380): Nueva Conexion detectada, realizando handshake
+[INFO] 14:23:24:281 CPUHANDLER/(10371:10380): ID Nuevo Cliente: 2.
+[INFO] 14:23:24:281 CPUHANDLER/(10371:10380): Nuevo Cliente CPU
+[INFO] 14:23:24:281 CPUHANDLER/(10371:10380): KER-CPU: HANDSHAKE recibido
+[INFO] 14:23:24:281 CPUHANDLER/(10371:10380): KER-CPU: HANDSHAKE enviado
+[INFO] 14:23:41:778 CPUHANDLER/(10371:10380): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 14:23:41:778 CPUHANDLER/(10371:10380): KERNEL : El cliente 9 es un CPU
+[INFO] 14:23:41:778 CPUHANDLER/(10371:10380): KERNEL : CPU 9 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 14:25:48:249 CPUHANDLER/(10371:10380): Nueva Conexion detectada, realizando handshake
+[INFO] 14:25:48:261 CPUHANDLER/(10371:10380): ID Nuevo Cliente: 0.
+[INFO] 14:25:48:261 CPUHANDLER/(10371:10380): Nuevo Cliente CONSOLA
+[INFO] 14:25:48:261 CPUHANDLER/(10371:10380): Nuevo Cliente Consola 11 aceptado.
+[INFO] 14:25:48:261 CPUHANDLER/(10371:10380): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 14:25:56:642 CPUHANDLER/(10371:10380): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 14:25:56:642 CPUHANDLER/(10371:10380): KERNEL : El cliente 11 es una consola
+[ERROR] 14:25:56:642 CPUHANDLER/(10371:10380): KERNEL : El Cliente 11 mando ANSISOP
+[INFO] 14:25:56:642 CPUHANDLER/(10371:10380): Se inicializo el programa 1
+[ERROR] 14:25:56:642 CPUHANDLER/(10371:10380): KERNEL : Consola 11 añadida a la lista
+[INFO] 14:27:17:399 CPUHANDLER/(10371:10380): KERNEL : Se cayo el cliente 11
+[INFO] 14:27:17:399 CPUHANDLER/(10371:10380): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 14:27:17:399 CPUHANDLER/(10371:10380): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 14:27:50:617 CPUHANDLER/(10658:10666): Server creado con exito y escuchando.
+[INFO] 14:27:50:618 CPUHANDLER/(10658:10666): Server iniciado.
+[INFO] 14:27:58:763 CPUHANDLER/(10658:10666): Nueva Conexion detectada, realizando handshake
+[INFO] 14:27:58:763 CPUHANDLER/(10658:10666): ID Nuevo Cliente: 2.
+[INFO] 14:27:58:763 CPUHANDLER/(10658:10666): Nuevo Cliente CPU
+[INFO] 14:27:58:763 CPUHANDLER/(10658:10666): KER-CPU: HANDSHAKE recibido
+[INFO] 14:27:58:763 CPUHANDLER/(10658:10666): KER-CPU: HANDSHAKE enviado
+[INFO] 14:28:58:989 CPUHANDLER/(10658:10666): KERNEL : El cliente 9 ha enviado un paquete
+[INFO] 14:28:58:989 CPUHANDLER/(10658:10666): KERNEL : El cliente 9 es un CPU
+[INFO] 14:28:58:989 CPUHANDLER/(10658:10666): KERNEL : CPU 9 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 14:29:07:861 CPUHANDLER/(10658:10666): Nueva Conexion detectada, realizando handshake
+[INFO] 14:29:07:861 CPUHANDLER/(10658:10666): ID Nuevo Cliente: 0.
+[INFO] 14:29:07:861 CPUHANDLER/(10658:10666): Nuevo Cliente CONSOLA
+[INFO] 14:29:07:861 CPUHANDLER/(10658:10666): Nuevo Cliente Consola 11 aceptado.
+[INFO] 14:29:07:861 CPUHANDLER/(10658:10666): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 14:29:14:97 CPUHANDLER/(10658:10666): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 14:29:14:97 CPUHANDLER/(10658:10666): KERNEL : El cliente 11 es una consola
+[ERROR] 14:29:14:97 CPUHANDLER/(10658:10666): KERNEL : El Cliente 11 mando ANSISOP
+[INFO] 14:29:14:97 CPUHANDLER/(10658:10666): Se inicializo el programa 1
+[ERROR] 14:29:14:98 CPUHANDLER/(10658:10666): KERNEL : Consola 11 añadida a la lista
+[INFO] 14:32:27:62 CPUHANDLER/(10658:10666): KERNEL : Se cayo el cliente 11
+[INFO] 14:32:27:62 CPUHANDLER/(10658:10666): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 14:32:27:62 CPUHANDLER/(10658:10666): KERNEL : Se elimina el descriptor 11 para ese cliente
