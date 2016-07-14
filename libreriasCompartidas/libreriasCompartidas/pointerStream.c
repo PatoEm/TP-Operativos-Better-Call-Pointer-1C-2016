@@ -193,7 +193,21 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	Int32U size = 0;
 	size += sizeof(skc->id);
 	size += sizeof(skc->action);
-	size += sizeof(skc->pcb);
+	// size del pcb
+	size += sizeof(skc->pcb.consola);
+	size += sizeof(skc->pcb.id);
+	size += sizeof(skc->pcb.tamanioArchivoOriginal);
+	size += sizeof(skc->pcb.programCounter);
+	size += sizeof(skc->pcb.paginasDeCodigo);
+	size += sizeof(skc->pcb.indiceDeCodigo);
+	size += sizeof(skc->pcb.indiceDeEtiquetas);
+	size += sizeof(skc->pcb.etiquetaSize);
+	size += sizeof(skc->pcb.instruccionesTotales);
+	size += sizeof(skc->pcb.instruccionesRestantes);
+	size += sizeof(skc->pcb.indiceDelStack);
+	size += sizeof(skc->pcb.metaProgram);
+	size += sizeof(skc->pcb.estado);
+	// fin size pcb
 	size += sizeof(skc->quantum);
 	size += sizeof(skc->dataLen);
 	size += skc->dataLen;
@@ -238,7 +252,21 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	Int32U size = 0;
 	size += sizeof(sck->id);
 	size += sizeof(sck->action);
-	size += sizeof(sck->pcb);
+	// size del pcb
+	size += sizeof(sck->pcb.consola);
+	size += sizeof(sck->pcb.id);
+	size += sizeof(sck->pcb.tamanioArchivoOriginal);
+	size += sizeof(sck->pcb.programCounter);
+	size += sizeof(sck->pcb.paginasDeCodigo);
+	size += sizeof(sck->pcb.indiceDeCodigo);
+	size += sizeof(sck->pcb.indiceDeEtiquetas);
+	size += sizeof(sck->pcb.etiquetaSize);
+	size += sizeof(sck->pcb.instruccionesTotales);
+	size += sizeof(sck->pcb.instruccionesRestantes);
+	size += sizeof(sck->pcb.indiceDelStack);
+	size += sizeof(sck->pcb.metaProgram);
+	size += sizeof(sck->pcb.estado);
+	// fin size pcb
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
 	size += sck->logLen;
@@ -332,7 +360,7 @@ Int32U getSizeSwaUmc(StrSwaUmc* ssu){
 * Serialization Consola-Kernel
 * *****************************/
 SocketBuffer* serializeConKer(StrConKer* sconk){
-	Int8U size = getSizeConKer(sconk);
+	Int32U size = getSizeConKer(sconk);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -362,7 +390,7 @@ SocketBuffer* serializeConKer(StrConKer* sconk){
  * Serialization Kernel-CPU
  **************************/
 SocketBuffer* serializeKerCpu(StrKerCpu* skc){
-	Int8U size = getSizeKerCpu(skc);
+	Int32U size = getSizeKerCpu(skc);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -375,9 +403,47 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	memcpy(ptrData, ptrByte, sizeof(skc->action));
 	ptrData += sizeof(skc->action);
 
-	ptrByte = (Byte*) &skc ->pcb;
-	memcpy(ptrData, ptrByte, sizeof(skc->pcb));
-	ptrData += sizeof(skc->pcb);
+	// comienzo a serializar el pcb
+	ptrByte = (Byte*) &skc ->pcb.consola;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.consola));
+	ptrData += sizeof(skc->pcb.consola);
+	ptrByte = (Byte*) &skc ->pcb.id;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.id));
+	ptrData += sizeof(skc->pcb.id);
+	ptrByte = (Byte*) &skc ->pcb.tamanioArchivoOriginal;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.tamanioArchivoOriginal));
+	ptrData += sizeof(skc->pcb.tamanioArchivoOriginal);
+	ptrByte = (Byte*) &skc ->pcb.programCounter;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.programCounter));
+	ptrData += sizeof(skc->pcb.programCounter);
+	ptrByte = (Byte*) &skc ->pcb.paginasDeCodigo;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.paginasDeCodigo));
+	ptrData += sizeof(skc->pcb.paginasDeCodigo);
+	ptrByte = (Byte*) &skc ->pcb.indiceDeCodigo;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDeCodigo));
+	ptrData += sizeof(skc->pcb.indiceDeCodigo);
+	ptrByte = (Byte*) &skc ->pcb.indiceDeEtiquetas;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDeEtiquetas));
+	ptrData += sizeof(skc->pcb.indiceDeEtiquetas);
+	ptrByte = (Byte*) &skc ->pcb.etiquetaSize;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.etiquetaSize));
+	ptrData += sizeof(skc->pcb.etiquetaSize);
+	ptrByte = (Byte*) &skc ->pcb.instruccionesTotales;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesTotales));
+	ptrData += sizeof(skc->pcb.instruccionesTotales);
+	ptrByte = (Byte*) &skc ->pcb.instruccionesRestantes;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesRestantes));
+	ptrData += sizeof(skc->pcb.instruccionesRestantes);
+	ptrByte = (Byte*) &skc ->pcb.indiceDelStack;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack));
+	ptrData += sizeof(skc->pcb.indiceDelStack);
+	ptrByte = (Byte*) &skc ->pcb.metaProgram;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.metaProgram));
+	ptrData += sizeof(skc->pcb.metaProgram);
+	ptrByte = (Byte*) &skc ->pcb.estado;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.estado));
+	ptrData += sizeof(skc->pcb.estado);
+	// termino de serializar el pcb
 
 	ptrByte = (Byte*) &skc->quantum;
 	memcpy(ptrData, ptrByte, sizeof(skc->quantum));
@@ -458,7 +524,7 @@ SocketBuffer* serializeKerUmc(StrKerUmc* sku){
  * Serialization Kernel-Consola
  *****************************/
 SocketBuffer* serializeKerCon(StrKerCon* skcon){
-	Int8U size = getSizeKerCon(skcon);
+	Int32U size = getSizeKerCon(skcon);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -488,7 +554,7 @@ SocketBuffer* serializeKerCon(StrKerCon* skcon){
  * Serialization CPU-Kernel
  **************************/
 SocketBuffer* serializeCpuKer(StrCpuKer* sck){
-	Int8U size = getSizeCpuKer(sck);
+	Int32U size = getSizeCpuKer(sck);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -501,9 +567,47 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	memcpy(ptrData, ptrByte, sizeof(sck->action));
 	ptrData += sizeof(sck->action);
 
-	ptrByte = (Byte*) &sck->pcb;
-	memcpy(ptrData, ptrByte, sizeof(sck->pcb));
-	ptrData += sizeof(sck->pcb);
+	// comienzo a serializar el pcb
+	ptrByte = (Byte*) &sck ->pcb.consola;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.consola));
+	ptrData += sizeof(sck->pcb.consola);
+	ptrByte = (Byte*) &sck ->pcb.id;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.id));
+	ptrData += sizeof(sck->pcb.id);
+	ptrByte = (Byte*) &sck ->pcb.tamanioArchivoOriginal;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.tamanioArchivoOriginal));
+	ptrData += sizeof(sck->pcb.tamanioArchivoOriginal);
+	ptrByte = (Byte*) &sck ->pcb.programCounter;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.programCounter));
+	ptrData += sizeof(sck->pcb.programCounter);
+	ptrByte = (Byte*) &sck ->pcb.paginasDeCodigo;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.paginasDeCodigo));
+	ptrData += sizeof(sck->pcb.paginasDeCodigo);
+	ptrByte = (Byte*) &sck ->pcb.indiceDeCodigo;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDeCodigo));
+	ptrData += sizeof(sck->pcb.indiceDeCodigo);
+	ptrByte = (Byte*) &sck ->pcb.indiceDeEtiquetas;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDeEtiquetas));
+	ptrData += sizeof(sck->pcb.indiceDeEtiquetas);
+	ptrByte = (Byte*) &sck ->pcb.etiquetaSize;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.etiquetaSize));
+	ptrData += sizeof(sck->pcb.etiquetaSize);
+	ptrByte = (Byte*) &sck ->pcb.instruccionesTotales;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesTotales));
+	ptrData += sizeof(sck->pcb.instruccionesTotales);
+	ptrByte = (Byte*) &sck ->pcb.instruccionesRestantes;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesRestantes));
+	ptrData += sizeof(sck->pcb.instruccionesRestantes);
+	ptrByte = (Byte*) &sck ->pcb.indiceDelStack;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack));
+	ptrData += sizeof(sck->pcb.indiceDelStack);
+	ptrByte = (Byte*) &sck ->pcb.metaProgram;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.metaProgram));
+	ptrData += sizeof(sck->pcb.metaProgram);
+	ptrByte = (Byte*) &sck ->pcb.estado;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.estado));
+	ptrData += sizeof(sck->pcb.estado);
+	// termino de serializar el pcb
 
 	ptrByte = (Byte*) &sck->pid;
 	memcpy(ptrData, ptrByte, sizeof(sck->pid));
@@ -534,7 +638,7 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
  * Serialization CPU-UMC
  ************************/
 SocketBuffer* serializeCpuUmc(StrCpuUmc* scu){
-	Int8U size = getSizeCpuUmc(scu);
+	Int32U size = getSizeCpuUmc(scu);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -576,7 +680,7 @@ SocketBuffer* serializeCpuUmc(StrCpuUmc* scu){
  * Serialization UMC-Kernel
  ***************************/
 SocketBuffer* serializeUmcKer(StrUmcKer* suk){
-	Int8U size = getSizeUmcKer(suk);
+	Int32U size = getSizeUmcKer(suk);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -614,7 +718,7 @@ SocketBuffer* serializeUmcKer(StrUmcKer* suk){
  * Serialization UMC-CPU
  ************************/
 SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
-	Int8U size = getSizeUmcCpu(suc);
+	Int32U size = getSizeUmcCpu(suc);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -655,7 +759,7 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc){
  * Serialization UMC-SWAP
  ************************/
 SocketBuffer* serializeUmcSwa(StrUmcSwa* sus){
-	Int8U size = getSizeUmcSwa(sus);
+	Int32U size = getSizeUmcSwa(sus);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -696,7 +800,7 @@ SocketBuffer* serializeUmcSwa(StrUmcSwa* sus){
  * Serialization SWAP-UMC
  ************************/
 SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu){
-	Int8U size = getSizeSwaUmc(ssu);
+	Int32U size = getSizeSwaUmc(ssu);
 	Stream data = malloc(size);
 	Stream ptrData = data;
 	Byte* ptrByte;
@@ -898,8 +1002,36 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-	memcpy(&pcb, ptrByte, sizeof(pcb));
-	ptrByte += sizeof(pcb);
+
+	// comienzo a deserealizar el pcb
+	memcpy(&pcb.consola, ptrByte, sizeof(pcb.consola));
+	ptrByte += sizeof(pcb.consola);
+	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
+	ptrByte += sizeof(pcb.id);
+	memcpy(&pcb.tamanioArchivoOriginal, ptrByte, sizeof(pcb.tamanioArchivoOriginal));
+	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
+	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
+	ptrByte += sizeof(pcb.programCounter);
+	memcpy(&pcb.paginasDeCodigo, ptrByte, sizeof(pcb.paginasDeCodigo));
+	ptrByte += sizeof(pcb.paginasDeCodigo);
+	memcpy(&pcb.indiceDeCodigo, ptrByte, sizeof(pcb.indiceDeCodigo));
+	ptrByte += sizeof(pcb.indiceDeCodigo);
+	memcpy(&pcb.indiceDeEtiquetas, ptrByte, sizeof(pcb.indiceDeEtiquetas));
+	ptrByte += sizeof(pcb.indiceDeEtiquetas);
+	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
+	ptrByte += sizeof(pcb.etiquetaSize);
+	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
+	ptrByte += sizeof(pcb.instruccionesTotales);
+	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
+	ptrByte += sizeof(pcb.instruccionesRestantes);
+	memcpy(&pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack));
+	ptrByte += sizeof(pcb.indiceDelStack);
+	memcpy(&pcb.metaProgram, ptrByte, sizeof(pcb.metaProgram));
+	ptrByte += sizeof(pcb.metaProgram);
+	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
+	ptrByte += sizeof(pcb.estado);
+	// termino de deserealizar el pcb
+
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
 
