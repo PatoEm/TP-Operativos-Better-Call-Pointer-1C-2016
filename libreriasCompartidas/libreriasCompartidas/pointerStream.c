@@ -200,7 +200,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	size += sizeof(skc->pcb.programCounter);
 	size += sizeof(skc->pcb.paginasDeCodigo);
 	size += sizeof(skc->pcb.indiceDeCodigo);
-	size += sizeof(skc->pcb.etiquetaSize);
+	size += strlen(skc->pcb.indiceDeEtiquetas) + 1;
 	size += skc->pcb.indiceDeEtiquetas;
 	size += sizeof(skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.instruccionesRestantes);
@@ -258,7 +258,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->pcb.programCounter);
 	size += sizeof(sck->pcb.paginasDeCodigo);
 	size += sizeof(sck->pcb.indiceDeCodigo);
-	size += sizeof(sck->pcb.etiquetaSize);
+	size += strlen(sck->pcb.indiceDeEtiquetas) + 1;
 	size += sck->pcb.indiceDeEtiquetas;
 	size += sizeof(sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.instruccionesRestantes);
@@ -421,13 +421,13 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDeCodigo));
 	ptrData += sizeof(skc->pcb.indiceDeCodigo);
 
-	ptrByte = (Byte*) &skc ->pcb.etiquetaSize;
-	memcpy(ptrData, ptrByte, sizeof(skc->pcb.etiquetaSize));
-	ptrData += sizeof(skc->pcb.etiquetaSize);
+	ptrByte = (Byte*) (strlen(&skc ->pcb.indiceDeEtiquetas) + 1);
+	memcpy(ptrData, ptrByte, sizeof(strlen(skc ->pcb.indiceDeEtiquetas) + 1));
+	ptrData += sizeof(strlen(&skc ->pcb.indiceDeEtiquetas) + 1);
 
 	ptrByte = (Byte*) skc ->pcb.indiceDeEtiquetas;
-	memcpy(ptrData, ptrByte, skc->pcb.etiquetaSize);
-	ptrData += skc->pcb.etiquetaSize;
+	memcpy(ptrData, ptrByte, (strlen(skc->pcb.indiceDeEtiquetas) + 1));
+	ptrData += (strlen(skc->pcb.indiceDeEtiquetas) + 1);
 
 	ptrByte = (Byte*) &skc ->pcb.instruccionesTotales;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesTotales));
@@ -585,13 +585,13 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDeCodigo));
 	ptrData += sizeof(sck->pcb.indiceDeCodigo);
 
-	ptrByte = (Byte*) &sck ->pcb.etiquetaSize;
-	memcpy(ptrData, ptrByte, sizeof(sck->pcb.etiquetaSize));
-	ptrData += sizeof(sck->pcb.etiquetaSize);
+	ptrByte = (Byte*) (strlen(&sck ->pcb.indiceDeEtiquetas) + 1);
+	memcpy(ptrData, ptrByte, sizeof(strlen(sck ->pcb.indiceDeEtiquetas) + 1));
+	ptrData += sizeof(strlen(&sck ->pcb.indiceDeEtiquetas) + 1);
 
 	ptrByte = (Byte*) sck ->pcb.indiceDeEtiquetas;
-	memcpy(ptrData, ptrByte, sck->pcb.etiquetaSize);
-	ptrData += sck->pcb.etiquetaSize;
+	memcpy(ptrData, ptrByte, (strlen(sck->pcb.indiceDeEtiquetas) + 1));
+	ptrData += (strlen(sck->pcb.indiceDeEtiquetas) + 1);
 
 	ptrByte = (Byte*) &sck ->pcb.instruccionesTotales;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesTotales));
@@ -903,13 +903,13 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized){
 	memcpy(&pcb.indiceDeCodigo, ptrByte, sizeof(pcb.indiceDeCodigo));
 	ptrByte += sizeof(pcb.indiceDeCodigo);
 
-	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
-	ptrByte += sizeof(pcb.etiquetaSize);
-	pcb.indiceDeEtiquetas = malloc(pcb.etiquetaSize);
-	memcpy(pcb.indiceDeEtiquetas, ptrByte, pcb.etiquetaSize);
-	ptrByte += pcb.etiquetaSize;
+	memcpy(strlen(&pcb.indiceDeEtiquetas) + 1, ptrByte, sizeof(strlen(pcb.indiceDeEtiquetas) + 1));
+	ptrByte += sizeof(strlen(pcb.indiceDeEtiquetas) + 1);
+	pcb.indiceDeEtiquetas = malloc(sizeof(char)*(strlen(pcb.indiceDeEtiquetas) + 1));
+	memcpy(pcb.indiceDeEtiquetas, ptrByte, (strlen(pcb.indiceDeEtiquetas) + 1));
+	ptrByte += strlen(pcb.indiceDeEtiquetas);
 
-	pcb.indiceDeEtiquetas[pcb.etiquetaSize] = '\0';
+	pcb.indiceDeEtiquetas[strlen(pcb.indiceDeEtiquetas)] = '\0';
 
 	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
 	ptrByte += sizeof(pcb.instruccionesTotales);
@@ -1047,14 +1047,13 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	memcpy(&pcb.indiceDeCodigo, ptrByte, sizeof(pcb.indiceDeCodigo));
 	ptrByte += sizeof(pcb.indiceDeCodigo);
 
-	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
-	ptrByte += sizeof(pcb.etiquetaSize);
-	pcb.indiceDeEtiquetas = malloc(pcb.etiquetaSize);
-	memcpy(pcb.indiceDeEtiquetas, ptrByte, pcb.etiquetaSize);
-	ptrByte += pcb.etiquetaSize;
+	memcpy(strlen(&pcb.indiceDeEtiquetas) + 1, ptrByte, sizeof(strlen(pcb.indiceDeEtiquetas) + 1));
+	ptrByte += sizeof(strlen(pcb.indiceDeEtiquetas) + 1);
+	pcb.indiceDeEtiquetas = malloc(sizeof(char)*(strlen(pcb.indiceDeEtiquetas) + 1));
+	memcpy(pcb.indiceDeEtiquetas, ptrByte, (strlen(pcb.indiceDeEtiquetas) + 1));
+	ptrByte += strlen(pcb.indiceDeEtiquetas);
 
-	pcb.indiceDeEtiquetas[pcb.etiquetaSize] = '\0';
-
+	pcb.indiceDeEtiquetas[strlen(pcb.indiceDeEtiquetas)] = '\0';
 
 	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
 	ptrByte += sizeof(pcb.instruccionesTotales);
