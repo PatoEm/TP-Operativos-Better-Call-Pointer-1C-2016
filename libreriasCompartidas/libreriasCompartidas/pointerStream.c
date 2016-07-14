@@ -421,9 +421,9 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDeCodigo));
 	ptrData += sizeof(skc->pcb.indiceDeCodigo);
 
-	ptrByte = (Byte*) (strlen(&skc ->pcb.indiceDeEtiquetas) + 1);
+	ptrByte = (Byte*) (strlen(skc ->pcb.indiceDeEtiquetas) + 1);
 	memcpy(ptrData, ptrByte, sizeof(strlen(skc ->pcb.indiceDeEtiquetas) + 1));
-	ptrData += sizeof(strlen(&skc ->pcb.indiceDeEtiquetas) + 1);
+	ptrData += sizeof(strlen(skc ->pcb.indiceDeEtiquetas) + 1);
 
 	ptrByte = (Byte*) skc ->pcb.indiceDeEtiquetas;
 	memcpy(ptrData, ptrByte, (strlen(skc->pcb.indiceDeEtiquetas) + 1));
@@ -585,9 +585,9 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDeCodigo));
 	ptrData += sizeof(sck->pcb.indiceDeCodigo);
 
-	ptrByte = (Byte*) (strlen(&sck ->pcb.indiceDeEtiquetas) + 1);
+	ptrByte = (Byte*) (strlen(sck ->pcb.indiceDeEtiquetas) + 1);
 	memcpy(ptrData, ptrByte, sizeof(strlen(sck ->pcb.indiceDeEtiquetas) + 1));
-	ptrData += sizeof(strlen(&sck ->pcb.indiceDeEtiquetas) + 1);
+	ptrData += sizeof(strlen(sck ->pcb.indiceDeEtiquetas) + 1);
 
 	ptrByte = (Byte*) sck ->pcb.indiceDeEtiquetas;
 	memcpy(ptrData, ptrByte, (strlen(sck->pcb.indiceDeEtiquetas) + 1));
