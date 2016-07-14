@@ -22,7 +22,7 @@ int i;
 
 pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
 		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas, t_size sizeEti,t_size insTotales,t_size insRestantes,
-		t_list* indiceDelStack, t_metadata_program* metaProgram, estadoPrograma estado) {
+		t_list* indiceDelStack, estadoPrograma estado) {
 
 	pcb* pcb = malloc(sizeof(pcb));
 
@@ -37,13 +37,12 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 	pcb->instruccionesRestantes=insRestantes;
 	pcb->indiceDeEtiquetas = indiceDeEtiquetas;
 	pcb->indiceDelStack = indiceDelStack;
-	pcb->metaProgram = metaProgram;
 	pcb->estado = estado;
 
 	return pcb;
 }
 
 pcb* newEmptyPcb(){
-	return newPcb(NULL,0,0,0,0,NULL,"",0,0,0,list_create(),NULL,0);
+	return newPcb(NULL,0,0,0,0,NULL,"",0,0,0,list_create(),0);
 }
 

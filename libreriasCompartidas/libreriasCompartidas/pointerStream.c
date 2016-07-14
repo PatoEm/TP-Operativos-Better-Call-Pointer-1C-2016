@@ -205,7 +205,6 @@ Int32U getSizeKerCpu(StrKerCpu* skc){
 	size += sizeof(skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.instruccionesRestantes);
 	size += sizeof(skc->pcb.indiceDelStack);
-	size += sizeof(skc->pcb.metaProgram);
 	size += sizeof(skc->pcb.estado);
 	// fin size pcb
 	size += sizeof(skc->quantum);
@@ -264,7 +263,6 @@ Int32U getSizeCpuKer(StrCpuKer* sck){
 	size += sizeof(sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.instruccionesRestantes);
 	size += sizeof(sck->pcb.indiceDelStack);
-	size += sizeof(sck->pcb.metaProgram);
 	size += sizeof(sck->pcb.estado);
 	// fin size pcb
 	size += sizeof(sck->pid);
@@ -437,9 +435,6 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc){
 	ptrByte = (Byte*) &skc ->pcb.indiceDelStack;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack));
 	ptrData += sizeof(skc->pcb.indiceDelStack);
-	ptrByte = (Byte*) &skc ->pcb.metaProgram;
-	memcpy(ptrData, ptrByte, sizeof(skc->pcb.metaProgram));
-	ptrData += sizeof(skc->pcb.metaProgram);
 	ptrByte = (Byte*) &skc ->pcb.estado;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.estado));
 	ptrData += sizeof(skc->pcb.estado);
@@ -601,9 +596,7 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck){
 	ptrByte = (Byte*) &sck ->pcb.indiceDelStack;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack));
 	ptrData += sizeof(sck->pcb.indiceDelStack);
-	ptrByte = (Byte*) &sck ->pcb.metaProgram;
-	memcpy(ptrData, ptrByte, sizeof(sck->pcb.metaProgram));
-	ptrData += sizeof(sck->pcb.metaProgram);
+
 	ptrByte = (Byte*) &sck ->pcb.estado;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.estado));
 	ptrData += sizeof(sck->pcb.estado);
@@ -1026,8 +1019,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized){
 	ptrByte += sizeof(pcb.instruccionesRestantes);
 	memcpy(&pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack));
 	ptrByte += sizeof(pcb.indiceDelStack);
-	memcpy(&pcb.metaProgram, ptrByte, sizeof(pcb.metaProgram));
-	ptrByte += sizeof(pcb.metaProgram);
+
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
 	// termino de deserealizar el pcb

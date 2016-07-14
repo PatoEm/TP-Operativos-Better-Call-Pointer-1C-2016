@@ -887,3 +887,9 @@
 [INFO] 23:06:00:817 SWAP/(31950:31950): Archivo de particion creado
 [INFO] 23:06:00:822 SWAP/(31950:31950): Server creado y escuchando correctamente
 [ERROR] 23:07:05:809 SWAP/(31950:31950): Al recibir del cliente
+[INFO] 23:45:58:392 SWAP/(32639:32639): Valores del archivo de configuracion seteados
+[INFO] 23:45:58:409 SWAP/(32639:32639): Archivo de particion creado
+[INFO] 23:45:58:409 SWAP/(32639:32639): Server creado y escuchando correctamente
+[INFO] 23:48:55:534 SWAP/(32639:32639): Hay espacio
+[INFO] 23:48:55:535 SWAP/(32639:32639): Espacio reservado correctamente
+[ERROR] 23:50:51:44 SWAP/(32639:32639): Al recibir del cliente
