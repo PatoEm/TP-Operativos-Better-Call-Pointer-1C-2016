@@ -46,13 +46,13 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 pcb* newEmptyPcb(){
 
 	pcb* pcbLoco=malloc(sizeof(pcb*));
-	//Socket * auxSocket = socketCreate();
+	Socket * auxSocket = socketCreate();
 	arrayBidimensional * auxArray = malloc(sizeof(arrayBidimensional));
 	auxArray[0].comienzo=0;
 	auxArray[0].longitud=0;
 	pcbLoco->consola=socketCreate();
 
-	//memcpy(pcbLoco->consola,auxSocket,sizeof(Socket));
+	memcpy(pcbLoco->consola,auxSocket,sizeof(Socket));
 	pcbLoco->id=0;
 	pcbLoco->tamanioArchivoOriginal=0;
 	pcbLoco->programCounter=0;
@@ -68,7 +68,7 @@ pcb* newEmptyPcb(){
 	pcbLoco->etiquetaSize=0;
 	pcbLoco->instruccionesRestantes=0;
 	pcbLoco->instruccionesTotales=1;
-	free(auxArray);
+	//free(auxArray);
 	//free(auxSocket);
 //	free(auxIndice);
 	return pcbLoco;

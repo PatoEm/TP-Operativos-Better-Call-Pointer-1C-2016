@@ -259,7 +259,7 @@ Boolean socketDestroy(Socket *ptrSocket) {
 
 Boolean handshake(SocketClient* client, Char id) {
 	SocketBuffer* sb;
-	StrCpuKer* sck=malloc(sizeof(StrCpuKer));
+	StrCpuKer* sck;
 	StrConKer* sconk;
 	StrKerUmc* sku;
 	StrUmcKer* suk;

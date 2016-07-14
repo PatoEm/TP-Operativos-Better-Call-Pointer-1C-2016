@@ -269,7 +269,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	size += sizeof(sck->pcb.paginasDeCodigo);
 	size += sizeof(sck->pcb.indiceDeCodigo);
 	size += sizeof(sck->pcb.indiceDeEtiquetasSize);
-	size += sizeof(sck->pcb.indiceDeEtiquetasSize);
+	size += sck->pcb.indiceDeEtiquetasSize;
 	size += sizeof(sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.instruccionesRestantes);
 	size += sizeof(sck->pcb.indiceDelStack);

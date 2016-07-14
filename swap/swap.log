@@ -1064,3 +1064,10 @@
 [INFO] 05:22:15:150 SWAP/(22812:22812): Valores del archivo de configuracion seteados
 [INFO] 05:22:15:164 SWAP/(22812:22812): Archivo de particion creado
 [INFO] 05:22:15:164 SWAP/(22812:22812): Server creado y escuchando correctamente
+[INFO] 05:27:32:676 SWAP/(23302:23302): Valores del archivo de configuracion seteados
+[INFO] 05:27:32:690 SWAP/(23302:23302): Archivo de particion creado
+[ERROR] 05:27:32:690 SWAP/(23302:23302): No se pudo crear el server
+[ERROR] 05:27:38:181 SWAP/(22812:22812): Al recibir del cliente
+[INFO] 05:27:43:584 SWAP/(23397:23397): Valores del archivo de configuracion seteados
+[INFO] 05:27:43:601 SWAP/(23397:23397): Archivo de particion creado
+[INFO] 05:27:43:601 SWAP/(23397:23397): Server creado y escuchando correctamente
