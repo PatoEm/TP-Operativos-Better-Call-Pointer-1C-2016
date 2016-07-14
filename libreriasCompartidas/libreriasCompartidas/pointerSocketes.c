@@ -258,7 +258,7 @@ Boolean handshake(SocketClient* client, Char id) {
 	StrUmcKer* suk;
 	StrKerCon* skcon;
 	StrKerCpu* skc;
-	pcb* pcb = malloc(sizeof(pcb));
+	pcb* pcb = newEmptyPcb();
 	Char action;
 	switch (id) {
 		case CPU_ID:

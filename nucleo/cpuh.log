@@ -1403,3 +1403,64 @@
 [INFO] 01:47:40:307 CPUHANDLER/(7051:7060): KERNEL : Se cayo el cliente 9
 [INFO] 01:47:40:307 CPUHANDLER/(7051:7060): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
 [INFO] 01:47:40:307 CPUHANDLER/(7051:7060): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:19:28:12 CPUHANDLER/(8333:8341): Server creado con exito y escuchando.
+[INFO] 02:19:28:12 CPUHANDLER/(8333:8341): Server iniciado.
+[INFO] 02:19:35:188 CPUHANDLER/(8333:8341): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:19:35:311 CPUHANDLER/(8333:8341): Error al recibir de Cliente
+[INFO] 02:19:35:311 CPUHANDLER/(8333:8341): KERNEL : Se cayo el cliente 9
+[INFO] 02:19:35:311 CPUHANDLER/(8333:8341): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:19:35:311 CPUHANDLER/(8333:8341): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:20:06:549 CPUHANDLER/(8333:8341): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:21:46:350 CPUHANDLER/(8333:8341): Error al recibir de Cliente
+[INFO] 02:21:46:350 CPUHANDLER/(8333:8341): KERNEL : Se cayo el cliente 9
+[INFO] 02:21:46:350 CPUHANDLER/(8333:8341): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:21:46:350 CPUHANDLER/(8333:8341): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:22:13:608 CPUHANDLER/(8333:8341): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:22:47:329 CPUHANDLER/(8333:8341): Error al recibir de Cliente
+[INFO] 02:22:47:329 CPUHANDLER/(8333:8341): KERNEL : Se cayo el cliente 9
+[INFO] 02:22:47:329 CPUHANDLER/(8333:8341): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:22:47:329 CPUHANDLER/(8333:8341): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:30:04:305 CPUHANDLER/(8333:8341): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:31:09:31 CPUHANDLER/(8333:8341): Error al recibir de Cliente
+[INFO] 02:31:09:31 CPUHANDLER/(8333:8341): KERNEL : Se cayo el cliente 9
+[INFO] 02:31:09:31 CPUHANDLER/(8333:8341): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:31:09:31 CPUHANDLER/(8333:8341): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:31:24:84 CPUHANDLER/(8333:8341): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:31:43:990 CPUHANDLER/(8333:8341): Error al recibir de Cliente
+[INFO] 02:31:43:990 CPUHANDLER/(8333:8341): KERNEL : Se cayo el cliente 9
+[INFO] 02:31:43:990 CPUHANDLER/(8333:8341): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:31:43:990 CPUHANDLER/(8333:8341): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:32:28:659 CPUHANDLER/(9682:9695): Server creado con exito y escuchando.
+[INFO] 02:32:28:660 CPUHANDLER/(9682:9695): Server iniciado.
+[INFO] 02:32:38:209 CPUHANDLER/(9682:9695): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:34:07:779 CPUHANDLER/(9682:9695): Error al recibir de Cliente
+[INFO] 02:34:07:779 CPUHANDLER/(9682:9695): KERNEL : Se cayo el cliente 9
+[INFO] 02:34:07:779 CPUHANDLER/(9682:9695): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:34:07:779 CPUHANDLER/(9682:9695): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:34:18:495 CPUHANDLER/(9682:9695): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:35:05:630 CPUHANDLER/(9682:9695): Error al recibir de Cliente
+[INFO] 02:35:05:630 CPUHANDLER/(9682:9695): KERNEL : Se cayo el cliente 9
+[INFO] 02:35:05:630 CPUHANDLER/(9682:9695): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:35:05:630 CPUHANDLER/(9682:9695): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:35:47:310 CPUHANDLER/(10169:10177): Server creado con exito y escuchando.
+[INFO] 02:35:47:310 CPUHANDLER/(10169:10177): Server iniciado.
+[INFO] 02:36:00:957 CPUHANDLER/(10169:10177): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:36:17:165 CPUHANDLER/(10169:10177): Error al recibir de Cliente
+[INFO] 02:36:17:165 CPUHANDLER/(10169:10177): KERNEL : Se cayo el cliente 9
+[INFO] 02:36:17:165 CPUHANDLER/(10169:10177): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:36:17:165 CPUHANDLER/(10169:10177): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:36:59:419 CPUHANDLER/(10533:10541): Server creado con exito y escuchando.
+[INFO] 02:36:59:419 CPUHANDLER/(10533:10541): Server iniciado.
+[INFO] 02:37:15:298 CPUHANDLER/(10533:10541): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:37:25:593 CPUHANDLER/(10533:10541): Error al recibir de Cliente
+[INFO] 02:37:25:593 CPUHANDLER/(10533:10541): KERNEL : Se cayo el cliente 9
+[INFO] 02:37:25:593 CPUHANDLER/(10533:10541): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:37:25:593 CPUHANDLER/(10533:10541): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:38:37:862 CPUHANDLER/(10905:10914): Server creado con exito y escuchando.
+[INFO] 02:38:37:862 CPUHANDLER/(10905:10914): Server iniciado.
+[INFO] 02:38:44:526 CPUHANDLER/(10905:10914): Nueva Conexion detectada, realizando handshake
+[ERROR] 02:39:44:682 CPUHANDLER/(10905:10914): Error al recibir de Cliente
+[INFO] 02:39:44:682 CPUHANDLER/(10905:10914): KERNEL : Se cayo el cliente 9
+[INFO] 02:39:44:682 CPUHANDLER/(10905:10914): KERNEL : Se elimina el cliente 9 de la bolsa de descriptores
+[INFO] 02:39:44:682 CPUHANDLER/(10905:10914): KERNEL : Se elimina el descriptor 9 para ese cliente
+[INFO] 02:39:53:630 CPUHANDLER/(10905:10914): Nueva Conexion detectada, realizando handshake

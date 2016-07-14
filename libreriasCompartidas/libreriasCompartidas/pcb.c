@@ -57,13 +57,17 @@ pcb* newEmptyPcb(){
 	pcbLoco->paginasDeCodigo=0;
 	pcbLoco->indiceDeCodigo=(arrayBidimensional*)malloc(sizeof(arrayBidimensional));
 	memcpy(&(pcbLoco->indiceDeCodigo[0]),&auxArray[0],sizeof(arrayBidimensional));
-	char * auxIndice="MUERTE A WINDOWS";
-	memcpy((pcbLoco->indiceDeEtiquetas),auxIndice, strlen(auxIndice)+1);
+	pcbLoco->indiceDeEtiquetas=malloc(sizeof(char)*17);
+	//char * auxIndice = malloc(sizeof(char)*17);
+	char * auxIndice;
+	auxIndice="MUERTE A WINDOWS";
+	memcpy(pcbLoco->indiceDeEtiquetas,auxIndice, 17);
 	pcbLoco->etiquetaSize=0;
 	pcbLoco->instruccionesRestantes=0;
 	pcbLoco->instruccionesTotales=1;
 	free(auxArray);
-	free(auxSocket);
-
+	//free(auxSocket);
+//	free(auxIndice);
+	return pcbLoco;
 }
 
