@@ -211,7 +211,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(skc->pcb.paginasDeCodigo);
 	size += sizeof(skc->pcb.indiceDeCodigo);
 	size += sizeof(skc->pcb.indiceDeEtiquetasSize);
-	size += (strlen(skc->pcb.indiceDeEtiquetas) + 1);
+	size += (skc->pcb.indiceDeEtiquetasSize);
 	size += sizeof(skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.instruccionesRestantes);
 	size += sizeof(skc->pcb.indiceDelStack);
@@ -434,8 +434,8 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrData += sizeof(skc->pcb.indiceDeEtiquetasSize);
 
 	ptrByte = (Byte*) &skc->pcb.indiceDeEtiquetas;
-	memcpy(ptrData, ptrByte, (strlen(skc->pcb.indiceDeEtiquetas) + 1));
-	ptrData += (strlen(skc->pcb.indiceDeEtiquetas) + 1);
+	memcpy(ptrData, ptrByte, (skc->pcb.indiceDeEtiquetasSize));
+	ptrData += skc->pcb.indiceDeEtiquetasSize;
 
 	ptrByte = (Byte*) &skc->pcb.instruccionesTotales;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesTotales));

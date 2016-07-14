@@ -189,11 +189,15 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	printf("Action: %d\n", sck->action);
 	StrKerCpu* skc;
 	SocketBuffer* sb;
-	pcb pcb;
+	pcb* pcb = malloc(sizeof(pcb));
+	memcpy (pcb,newEmptyPcb(),sizeof(pcb));
 	switch (sck->action) {
 	case HANDSHAKE:
+
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
-		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, pcb, 0, NULL, 0,
+
+		//(Char id, Char action, pcb pcb, Int8U quantum,Byte* data, Int32U dataLen, Byte* nombreDispositivo,Int32U lenNomDispositivo)
+		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcb, 0, NULL, 0,
 		NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(skc);
 		if (socketSend(cpuClient, sb)) {

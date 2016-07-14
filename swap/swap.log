@@ -1071,3 +1071,21 @@
 [INFO] 05:27:43:584 SWAP/(23397:23397): Valores del archivo de configuracion seteados
 [INFO] 05:27:43:601 SWAP/(23397:23397): Archivo de particion creado
 [INFO] 05:27:43:601 SWAP/(23397:23397): Server creado y escuchando correctamente
+[ERROR] 05:40:24:65 SWAP/(23397:23397): Al recibir del cliente
+[INFO] 05:42:23:216 SWAP/(24729:24729): Valores del archivo de configuracion seteados
+[INFO] 05:42:23:222 SWAP/(24729:24729): Archivo de particion creado
+[INFO] 05:42:23:222 SWAP/(24729:24729): Server creado y escuchando correctamente
+[ERROR] 05:46:50:471 SWAP/(24729:24729): Al recibir del cliente
+[INFO] 05:46:57:547 SWAP/(25249:25249): Valores del archivo de configuracion seteados
+[INFO] 05:46:57:563 SWAP/(25249:25249): Archivo de particion creado
+[INFO] 05:46:57:563 SWAP/(25249:25249): Server creado y escuchando correctamente
+[INFO] 05:47:02:933 SWAP/(25335:25335): Valores del archivo de configuracion seteados
+[INFO] 05:47:02:936 SWAP/(25335:25335): Archivo de particion creado
+[ERROR] 05:47:02:936 SWAP/(25335:25335): No se pudo crear el server
+[INFO] 05:47:11:698 SWAP/(25422:25422): Valores del archivo de configuracion seteados
+[INFO] 05:47:11:727 SWAP/(25422:25422): Archivo de particion creado
+[INFO] 05:47:11:727 SWAP/(25422:25422): Server creado y escuchando correctamente
+[ERROR] 05:54:41:348 SWAP/(25422:25422): Al recibir del cliente
+[INFO] 05:54:57:7 SWAP/(26006:26006): Valores del archivo de configuracion seteados
+[INFO] 05:54:57:15 SWAP/(26006:26006): Archivo de particion creado
+[INFO] 05:54:57:15 SWAP/(26006:26006): Server creado y escuchando correctamente
