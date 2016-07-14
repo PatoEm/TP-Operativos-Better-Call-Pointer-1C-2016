@@ -21,7 +21,7 @@ int i;
 
 
 pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
-		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas, t_size sizeEti,t_size insTotales,t_size insRestantes,
+		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,t_size indiceDeEtiquetasSize ,t_size sizeEti,t_size insTotales,t_size insRestantes,
 		t_list* indiceDelStack, estadoPrograma estado) {
 
 	pcb* pcb = malloc(sizeof(pcb));
@@ -36,6 +36,7 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 	pcb->instruccionesTotales=insTotales;
 	pcb->instruccionesRestantes=insRestantes;
 	pcb->indiceDeEtiquetas = indiceDeEtiquetas;
+	pcb->indiceDeEtiquetasSize=indiceDeEtiquetasSize;
 	pcb->indiceDelStack = indiceDelStack;
 	pcb->estado = estado;
 
@@ -44,13 +45,14 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 
 pcb* newEmptyPcb(){
 
-	pcb* pcbLoco;
-	Socket * auxSocket = socketCreate();
+	pcb* pcbLoco=malloc(sizeof(pcb*));
+	//Socket * auxSocket = socketCreate();
 	arrayBidimensional * auxArray = malloc(sizeof(arrayBidimensional));
 	auxArray[0].comienzo=0;
 	auxArray[0].longitud=0;
+	pcbLoco->consola=socketCreate();
 
-	memcpy(pcbLoco->consola,auxSocket,sizeof(Socket));
+	//memcpy(pcbLoco->consola,auxSocket,sizeof(Socket));
 	pcbLoco->id=0;
 	pcbLoco->tamanioArchivoOriginal=0;
 	pcbLoco->programCounter=0;
@@ -62,6 +64,7 @@ pcb* newEmptyPcb(){
 	char * auxIndice;
 	auxIndice="MUERTE A WINDOWS";
 	memcpy(pcbLoco->indiceDeEtiquetas,auxIndice, 17);
+	pcbLoco->indiceDeEtiquetasSize=17;
 	pcbLoco->etiquetaSize=0;
 	pcbLoco->instruccionesRestantes=0;
 	pcbLoco->instruccionesTotales=1;

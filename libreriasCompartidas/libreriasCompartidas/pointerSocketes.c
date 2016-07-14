@@ -38,8 +38,8 @@ Socket* socketCreate() {
 		return NULL;
 	}
 
-	ptrNewSocket 				= (Socket *)malloc(sizeof(Socket));
-	ptrNewSocket->descriptor 	= socketDescriptor;
+	ptrNewSocket = (Socket *) malloc(sizeof(Socket));
+	ptrNewSocket->descriptor = socketDescriptor;
 
 	return ptrNewSocket;
 
@@ -53,12 +53,14 @@ Socket* socketCreate() {
  */
 Socket* socketGetServerFromAddress(struct sockaddr_in socketAddress) {
 
-	Socket *ptrSocketServer = (Socket *)malloc(sizeof(Socket));
+	Socket *ptrSocketServer = (Socket *) malloc(sizeof(Socket));
 
-	ptrSocketServer->ptrAddress	 					= (struct sockaddr_in *)malloc(sizeof(struct sockaddr_in));
-	ptrSocketServer->ptrAddress->sin_family 		= socketAddress.sin_family;
-	ptrSocketServer->ptrAddress->sin_addr.s_addr	= socketAddress.sin_addr.s_addr;
-	ptrSocketServer->ptrAddress->sin_port 			= socketAddress.sin_port;
+	ptrSocketServer->ptrAddress = (struct sockaddr_in *) malloc(
+			sizeof(struct sockaddr_in));
+	ptrSocketServer->ptrAddress->sin_family = socketAddress.sin_family;
+	ptrSocketServer->ptrAddress->sin_addr.s_addr =
+			socketAddress.sin_addr.s_addr;
+	ptrSocketServer->ptrAddress->sin_port = socketAddress.sin_port;
 
 	return ptrSocketServer;
 }
@@ -70,9 +72,8 @@ Socket* socketGetServerFromAddress(struct sockaddr_in socketAddress) {
  * @PARAMS:
  *		port	: puerto de escucha
  */
-Socket* socketCreateServer(Int32U port)
-{
-	Socket	*ptrSocketServer = NULL;
+Socket* socketCreateServer(Int32U port) {
+	Socket *ptrSocketServer = NULL;
 
 	struct sockaddr_in socketInfo;
 	int optval = 1;
@@ -82,18 +83,19 @@ Socket* socketCreateServer(Int32U port)
 	}
 
 	//HACER QUE EL SO LIBERE LE PUTERO INMEDIATAMENTE LUEGO DE CERRAR EL SOCKET
-	setsockopt(ptrSocketServer->descriptor, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof(optval));
+	setsockopt(ptrSocketServer->descriptor, SOL_SOCKET, SO_REUSEADDR, &optval,
+			sizeof(optval));
 
-	socketInfo.sin_family 		= AF_INET;
-	socketInfo.sin_addr.s_addr 	= INADDR_ANY;
-	socketInfo.sin_port 		= htons(port);
+	socketInfo.sin_family = AF_INET;
+	socketInfo.sin_addr.s_addr = INADDR_ANY;
+	socketInfo.sin_port = htons(port);
 
 	// VINCULAR EL SOCKET CON UNA DIRECCION DE RED ALMACENADA EN 'socketInfo'
 	if (bind(ptrSocketServer->descriptor, (struct sockaddr*) &socketInfo,
 			sizeof(socketInfo)) != 0) {
 
 		free(ptrSocketServer);
-		return NULL ;
+		return NULL;
 
 	}
 
@@ -113,7 +115,8 @@ SocketClient* socketCreateClient() {
 		return NULL;
 	}
 
-	SocketClient *ptrSocketClient = (SocketClient *)malloc(sizeof(SocketClient));
+	SocketClient *ptrSocketClient = (SocketClient *) malloc(
+			sizeof(SocketClient));
 
 	ptrSocketClient->ptrSocket = ptrNewSocket;
 
@@ -145,7 +148,8 @@ Boolean socketListen(Socket *ptrSocket) {
  *		ptrServerAddress	: Direccion IP del server al que desea conectarse
  *		serverPort			: Puerto del server al que desea conectarse
  */
-Boolean socketConnect(SocketClient *ptrSocketClient, String ptrServerAddress, Int32U serverPort) {
+Boolean socketConnect(SocketClient *ptrSocketClient, String ptrServerAddress,
+		Int32U serverPort) {
 
 	struct sockaddr_in socketAddress;
 
@@ -154,12 +158,13 @@ Boolean socketConnect(SocketClient *ptrSocketClient, String ptrServerAddress, In
 	socketAddress.sin_port = htons(serverPort);
 
 	// CONECTA AL SOCKET CON ESA DIRECCION A TRAVES DE ESE PUERTO
-	if (connect(ptrSocketClient->ptrSocket->descriptor, (struct sockaddr*) &socketAddress, sizeof(socketAddress))
-			== -1) {
+	if (connect(ptrSocketClient->ptrSocket->descriptor,
+			(struct sockaddr*) &socketAddress, sizeof(socketAddress)) == -1) {
 		return FALSE; //false,error value
 	}
 
-	ptrSocketClient->ptrSocketServer = socketGetServerFromAddress(socketAddress);
+	ptrSocketClient->ptrSocketServer = socketGetServerFromAddress(
+			socketAddress);
 
 	return TRUE;
 
@@ -173,10 +178,11 @@ Boolean socketConnect(SocketClient *ptrSocketClient, String ptrServerAddress, In
  */
 Socket* socketAcceptClient(Socket* ptrListenSocket) {
 
-	Socket *ptrSocketClient = (Socket *)malloc(sizeof(Socket));
+	Socket *ptrSocketClient = (Socket *) malloc(sizeof(Socket));
 
-	ptrSocketClient->ptrAddress	= (struct sockaddr_in *)malloc( sizeof(struct sockaddr_in) );
-	Int32U addrlen 				= sizeof(struct sockaddr_in);
+	ptrSocketClient->ptrAddress = (struct sockaddr_in *) malloc(
+			sizeof(struct sockaddr_in));
+	Int32U addrlen = sizeof(struct sockaddr_in);
 
 	Int32U newSocketDescriptor;
 
@@ -204,11 +210,12 @@ Socket* socketAcceptClient(Socket* ptrListenSocket) {
  */
 SocketBuffer *socketReceive(Socket *ptrSender) {
 
-	SocketBuffer *ptrBuffer = malloc( sizeof(SocketBuffer) );
+	SocketBuffer *ptrBuffer = malloc(sizeof(SocketBuffer));
 
 	int bytesReceived;
 
-	if ((bytesReceived = recv(ptrSender->descriptor, ptrBuffer->data, BUFF_SIZE, 0)) > 0) {
+	if ((bytesReceived = recv(ptrSender->descriptor, ptrBuffer->data, BUFF_SIZE,
+			0)) > 0) {
 		ptrBuffer->size = bytesReceived;
 		return ptrBuffer;
 	}
@@ -228,7 +235,8 @@ SocketBuffer *socketReceive(Socket *ptrSender) {
  */
 Boolean socketSend(Socket *ptrDestination, SocketBuffer *ptrBuffer) {
 
-	if (send(ptrDestination->descriptor, ptrBuffer->data, ptrBuffer->size, 0) >= 0) {
+	if (send(ptrDestination->descriptor, ptrBuffer->data, ptrBuffer->size, 0)
+			>= 0) {
 		return TRUE;
 	}
 
@@ -241,69 +249,69 @@ Boolean socketSend(Socket *ptrDestination, SocketBuffer *ptrBuffer) {
  * @PARAMS:
  *		ptrSocket	: El descriptor a cerrar
  */
-Boolean socketDestroy(Socket *ptrSocket){
+Boolean socketDestroy(Socket *ptrSocket) {
 
-	if(close(ptrSocket->descriptor) == 0) {
+	if (close(ptrSocket->descriptor) == 0) {
 		return TRUE;
 	}
 	return FALSE;
 }
 
-
 Boolean handshake(SocketClient* client, Char id) {
 	SocketBuffer* sb;
-	StrCpuKer* sck;
+	StrCpuKer* sck=malloc(sizeof(StrCpuKer));
 	StrConKer* sconk;
 	StrKerUmc* sku;
 	StrUmcKer* suk;
 	StrKerCon* skcon;
 	StrKerCpu* skc;
-	pcb* pcb = newEmptyPcb();
+	pcb* pcb = malloc(sizeof(pcb));
+	memcpy (pcb,newEmptyPcb(),sizeof(pcb));
 	Char action;
 	switch (id) {
-		case CPU_ID:
-			sck = newStrCpuKer(id, HANDSHAKE, *pcb, 0, 0, 0, NULL, 0);
-			sb = serializeCpuKer(sck);
-			//newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log)
-			break;
-		case CONSOLA_ID:
-			sconk = newStrConKer(id, HANDSHAKE, NULL, 0);
-			sb = serializeConKer(sconk);
-			break;
-		case KERNEL_ID:
-			sku = newStrKerUmc(id, HANDSHAKE, NULL, 0, 0, 0, 0, 0, 0);
-			sb = serializeKerUmc(sku);
-			break;
-		default:
-			break;
+	case CPU_ID:
+		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
+		sck = newStrCpuKer(id, HANDSHAKE, *pcb, 0, 0, NULL, NULL, 0);
+		sb = serializeCpuKer(sck);
+		break;
+	case CONSOLA_ID:
+		sconk = newStrConKer(id, HANDSHAKE, NULL, 0);
+		sb = serializeConKer(sconk);
+		break;
+	case KERNEL_ID:
+		sku = newStrKerUmc(id, HANDSHAKE, NULL, 0, 0, 0, 0, 0, 0);
+		sb = serializeKerUmc(sku);
+		break;
+	default:
+		break;
 	}
-	
-	if(!socketSend(client->ptrSocket, sb)) {
+
+	if (!socketSend(client->ptrSocket, sb)) {
 		printf("No se pudo realizar el handshake. \n");
 		return FALSE;
 	}
-	
+
 	sb = socketReceive(client->ptrSocket);
 	if (sb == NULL) {
 		return FALSE;
 	} else {
-		switch(id) {
-			case CPU_ID:
-				skc = unserializeKerCpu((Stream) sb->data);
-				action = skc->action;
-				break;
-			case CONSOLA_ID:
-				skcon = unserializeKerCon((Stream) sb->data);
-				action = skcon->action;
-				break;
-			case KERNEL_ID:
-				suk = unserializeUmcKer((Stream) sb->data);
-				action = suk->action;
-				break;
-			default:
-				break;
+		switch (id) {
+		case CPU_ID:
+			skc = unserializeKerCpu((Stream) sb->data);
+			action = skc->action;
+			break;
+		case CONSOLA_ID:
+			skcon = unserializeKerCon((Stream) sb->data);
+			action = skcon->action;
+			break;
+		case KERNEL_ID:
+			suk = unserializeUmcKer((Stream) sb->data);
+			action = suk->action;
+			break;
+		default:
+			break;
 		}
-		
+
 		if (action == HANDSHAKE) {
 			return TRUE;
 		} else {

@@ -103,9 +103,12 @@ free(array);
 	pcbNuevoPrograma->indiceDeEtiquetas=malloc(sizeof(char)*(strlen(metaNuevoPrograma->etiquetas)+1));
 
 	memcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas, strlen(metaNuevoPrograma->etiquetas)+1);
+	pcbNuevoPrograma->indiceDeEtiquetasSize=strlen(metaNuevoPrograma->etiquetas)+1;
 	}
 	else{
 		pcbNuevoPrograma->indiceDeEtiquetas="MUERTE A WINDOWS";
+		pcbNuevoPrograma->indiceDeEtiquetasSize=17;
+
 	}
 
 	//strcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas);
