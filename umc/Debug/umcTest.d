@@ -1,1 +1,0 @@
-umcTest.d: ../umcTest.c

@@ -696,12 +696,12 @@ void manageSocketConnections() {
 	Socket* s = socketCreateServer(atoi(puertoEscucha));
 	while (TRUE) {
 		pthread_t socketConnection;
-		puts("Escuchando conexiones del Kernel o CPUs.");
+		puts("UMC: Escuchando conexiones del Kernel o CPUs.");
 		socketListen(s);
 		Socket* socketClient;
 		socketClient = socketAcceptClient(s);
 		if (socketClient != NULL) {
-			puts("Alguien se conecto.");
+			puts("UMC: Alguien se conecto.");
 			manageSocketConnection((void*) socketClient);
 
 			list_add(conexionSockets, &socketConnection);
@@ -713,11 +713,11 @@ void manageSocketConnections() {
 void* manageSocketConnection(void* param) {
 	Socket* socket = (Socket*) param;
 	Boolean connected = TRUE;
-	puts("Gestion de conexiones.");
+	puts("UMC: Gestion de conexiones.");
 	//while (TRUE) {
-		puts("Esperando el request.");
+		puts("UMC: Esperando el request.");
 		SocketBuffer* sb = socketReceive(socket);
-		puts("Entro el request.");
+		puts("UMC: Entro el request.");
 		if (sb != NULL) {
 			Char id = getStreamId((Stream) sb->data);
 			StrKerUmc* sku = NULL;
@@ -758,7 +758,7 @@ void* manageSocketConnection(void* param) {
 				break;
 			}
 		} else {
-			puts("No pudo recibir request, desconectando al cliente.");
+			puts("UMC: No pudo recibir request, desconectando al cliente.");
 			connected = FALSE;
 	//	}
 

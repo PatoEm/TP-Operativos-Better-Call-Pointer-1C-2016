@@ -71,7 +71,10 @@ void umcThread(){
 
 		printf("HILO %d: Buffer recibido de (%d).\n", mi_socket, cpuClient->descriptor);
 
-		if(sb == NULL) puts("No se pudo recibir del CPU.");
+		if(sb == NULL){
+			("HILO %d: Se cayo el cliente (%d).\n", mi_socket, cpuClient->descriptor);
+			break;
+		}
 
 		//in_cpu_msg = unserializeCpuUmc(sb);
 
@@ -113,7 +116,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	while ((streamCpuUmc->action)!=24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
-			puts("Me pidieron el tamanio de marcos");
+			printf("HILO %d: Me pidieron el tamanio de marcos (%d).\n", mi_socket, socket->descriptor);
 			//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, "hola", 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
@@ -172,12 +175,12 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		default:
-			printf("No se pudo identificar la accion de la CPU");
+			printf("HILO %d: No se pudo identificar la accion del CPU (%d).\n", mi_socket, socket->descriptor);
 			break;
 		}
 		buffer = socketReceive(socket);
 		if (buffer == NULL) {
-			puts("Problemas al recibir del cpu");
+			printf("HILO %d: Se cayo el cliente (%d).\n", mi_socket, socket->descriptor);
 			break;
 		}
 		streamCpuUmc = unserializeCpuUmc(buffer);
