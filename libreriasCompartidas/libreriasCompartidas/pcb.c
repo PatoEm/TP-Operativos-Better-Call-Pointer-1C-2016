@@ -72,8 +72,43 @@ pcb* newEmptyPcb(){
 	pcbLoco->instruccionesTotales=1;
 	pcbLoco->indiceDeCodigo = sizeof(arrayBidimensional)*pcbLoco->instruccionesTotales;
 	pcbLoco->indiceDelStack = list_create();
+
+	 paginaDeStack * aux= malloc(sizeof(paginaDeStack));
+	aux->args.off=0;
+		aux->args.pag=0;
+		aux->args.size=0;
+		aux->pos=0;
+		aux->retPos=0;
+		aux->retVars.id='a';
+		aux->retVars.off=0;
+		aux->retVars.pag=0;
+		aux->retVars.size=0;
+		aux->retVars.id='a';
+		aux->vars.off=0;
+		aux->vars.pag=0;
+		aux->vars.size=0;
+
+		list_add(pcbLoco->indiceDelStack,aux);
+
+		paginaDeStack * aux2= malloc(sizeof(paginaDeStack));
+			aux2->args.off=0;
+				aux2->args.pag=0;
+				aux2->args.size=0;
+				aux2->pos=0;
+				aux2->retPos=0;
+				aux2->retVars.id='a';
+				aux2->retVars.off=0;
+				aux2->retVars.pag=0;
+				aux2->retVars.size=0;
+				aux2->retVars.id='a';
+				aux2->vars.off=0;
+				aux2->vars.pag=0;
+				aux2->vars.size=0;
+
+				list_add(pcbLoco->indiceDelStack,aux);
+
 	pcbLoco->buffer = "Empty";
-	pcbLoco->cantElementsStack = 0;
+	pcbLoco->cantElementsStack = 2;
 
 	pcbLoco->estado=NEW;
 	free(auxArray);

@@ -19,7 +19,6 @@
 /*****************************************
  * Constantes
  ****************************************/
-#define LOGGER_FILE "cpu_log.txt"
 #define CONFIG_FILE "configcpu"
 #define PARAM_LENGTH 4
 #define PUERTO_NUCLEO "PUERTO_NUCLEO"
@@ -334,7 +333,7 @@ void enviarPidPcb(int id){
 	SocketBuffer*buff= serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket,buff)) {
 		printf("No se pudo enviar el ID del nuevo proceso activo al nucleo");
-		return FALSE;
+		//return FALSE;
 	}
 }
 

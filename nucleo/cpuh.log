@@ -2189,3 +2189,27 @@
 [INFO] 01:13:20:135 CPUHANDLER/(8800:8858): Nueva Conexion detectada, realizando handshake
 [INFO] 01:13:20:135 CPUHANDLER/(8800:8858): ID Nuevo Cliente: 0.
 [INFO] 01:13:20:135 CPUHANDLER/(8800:8858): Nuevo Cliente CONSOLA
+[INFO] 02:37:18:539 CPUHANDLER/(8316:8324): Server creado con exito y escuchando.
+[INFO] 02:37:18:539 CPUHANDLER/(8316:8324): Server iniciado.
+[INFO] 02:42:20:743 CPUHANDLER/(8568:8585): Server creado con exito y escuchando.
+[INFO] 02:42:20:743 CPUHANDLER/(8568:8585): Server iniciado.
+[INFO] 02:42:32:762 CPUHANDLER/(8568:8585): Nueva Conexion detectada, realizando handshake
+[INFO] 02:43:56:145 CPUHANDLER/(8568:8585): ID Nuevo Cliente: 2.
+[INFO] 02:44:00:137 CPUHANDLER/(8568:8585): Nuevo Cliente CPU
+[INFO] 02:54:56:422 CPUHANDLER/(9147:9164): Server creado con exito y escuchando.
+[INFO] 02:54:56:422 CPUHANDLER/(9147:9164): Server iniciado.
+[INFO] 02:55:06:847 CPUHANDLER/(9147:9164): Nueva Conexion detectada, realizando handshake
+[INFO] 02:59:11:561 CPUHANDLER/(9147:9164): ID Nuevo Cliente: 2.
+[INFO] 02:59:19:770 CPUHANDLER/(9147:9164): Nuevo Cliente CPU
+[INFO] 03:02:08:520 CPUHANDLER/(9680:9693): Server creado con exito y escuchando.
+[INFO] 03:02:08:520 CPUHANDLER/(9680:9693): Server iniciado.
+[INFO] 03:02:20:678 CPUHANDLER/(9680:9693): Nueva Conexion detectada, realizando handshake
+[INFO] 03:02:56:35 CPUHANDLER/(9680:9693): ID Nuevo Cliente: 2.
+[INFO] 03:02:58:676 CPUHANDLER/(9680:9693): Nuevo Cliente CPU
+[INFO] 03:09:56:846 CPUHANDLER/(10260:10272): Server creado con exito y escuchando.
+[INFO] 03:09:56:846 CPUHANDLER/(10260:10272): Server iniciado.
+[INFO] 03:10:09:268 CPUHANDLER/(10260:10272): Nueva Conexion detectada, realizando handshake
+[ERROR] 03:16:11:220 CPUHANDLER/(10260:10272): Error al recibir de Cliente
+[INFO] 03:16:11:220 CPUHANDLER/(10260:10272): KERNEL : Se cayo el cliente 10
+[INFO] 03:16:11:220 CPUHANDLER/(10260:10272): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 03:16:11:220 CPUHANDLER/(10260:10272): KERNEL : Se elimina el descriptor 10 para ese cliente
