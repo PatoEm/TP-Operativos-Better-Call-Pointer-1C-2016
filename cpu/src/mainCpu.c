@@ -19,6 +19,7 @@
 /*****************************************
  * Constantes
  ****************************************/
+#define LOGGER_FILE "cpu_log.txt"
 #define CONFIG_FILE "configcpu"
 #define PARAM_LENGTH 4
 #define PUERTO_NUCLEO "PUERTO_NUCLEO"
@@ -65,6 +66,9 @@ char* pedirInstruccion(pcb*);
  ****************************************/
 
 SocketBuffer* buffer;
+
+// estructura para loggear
+t_log* logger = NULL;
 
 /*****************************************
  *
