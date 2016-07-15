@@ -112,6 +112,7 @@ int main() {
 					buffer = serializeCpuKer(sck);
 					if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
+						return FALSE;
 					}
 				} else {
 					sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbActual, 0,
@@ -119,6 +120,7 @@ int main() {
 					buffer = serializeCpuKer(sck);
 					if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 						puts("No se pudo enviar el buffer al nucleo.");
+						return FALSE;
 					}
 				}
 			}
@@ -129,6 +131,7 @@ int main() {
 				buffer = serializeCpuKer(sck);
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 					puts("No se pudo enviar el buffer al nucleo.");
+					return FALSE;
 				}
 			}
 			seguirEjecutando = TRUE;
@@ -239,10 +242,18 @@ Boolean socketConnection() {
 		//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 		StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 		SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
-		socketSend(socketUMC->ptrSocket, sb);
-		puts("Mensaje enviado a la UMC ppal.");
+		if(socketSend(socketUMC->ptrSocket, sb)) {
+			puts("Mensaje enviado a la UMC ppal.");
+		} else {
+			puts("No se pudo enviar el mensaje a la UMC ppal.");
+			return FALSE;
+		}
 //
-		sb = socketReceive(socketUMC->ptrSocket);
+		if ((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
+			puts("No se pudo recibir el stream de la UMC");
+			return FALSE;
+		}
+		
 		StrUmcCpu* in_umc_msg = unserializeUmcCpu(sb);
 
 		int puertoNuevoUmc = in_umc_msg->dataLen;
@@ -288,6 +299,7 @@ Boolean getNextPcb() {
 	// envio el socketBuffer
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
 		printf("No se pudo enviar el stream al nucleo");
+		return FALSE;
 	}
 	free(sb);
 	puts("Obtener siguiente PCB");
@@ -318,6 +330,7 @@ void enviarPidPcb(int id){
 	SocketBuffer*buff= serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket,buff)) {
 		printf("No se pudo enviar el ID del nuevo proceso activo al nucleo");
+		return FALSE;
 	}
 }
 
@@ -374,9 +387,14 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC, buffer)) {
 			puts("No se pudo enviar tu pedido a la umc.");
+			return FALSE;
 		}
-
-		buffer = socketReceive(socketUMC);
+		
+		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+			puts("No se pudo recibir la instruccion de la UMC");
+			return FALSE;
+		}
+	
 		suc = unserializeUmcCpu(buffer);
 
 		strcat(instruccion, stringFromByteArray(suc->data, suc->dataLen));
@@ -401,13 +419,21 @@ int pedirTamanioDePagina(){
 		aux.punteroAPagina=0;
 
 	scu = newStrCpuUmc(CPU_ID, TAMANIO_DE_MARCOS, aux, 0, 0, "HOLA", 0);
-	buffer=serializeCpuUmc(scu);
-	socketSend(socketUMC->ptrSocket,buffer);
+	buffer = serializeCpuUmc(scu);
+	
+	if(socketSend(socketUMC->ptrSocket,buffer)) {
+		puts("Mensaje enviado a la UMC ppal.");
+	} else {
+		puts("No se pudo enviar el mensaje a la UMC ppal.");
+		return FALSE;
+	}
 
 	buffer = socketReceive(socketUMC->ptrSocket);
 
-	if (buffer == NULL)
-		puts("Error al recibir del cliente");
+	if (buffer == NULL) {
+		puts("Error al recibir del cliente");	
+	}
+	
 
 	suc = unserializeUmcCpu(buffer);
 
