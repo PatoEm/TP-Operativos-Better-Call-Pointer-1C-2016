@@ -996,13 +996,12 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
 
+	memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //ESTO LO AGREGUE
+	ptrByte += sizeof(pcb.indiceDelStack);
 
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
 
-
-	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
-	ptrByte += sizeof(pcb.estado);
 
 	int bufferLen = (pcb.cantElementsStack)*sizeof(paginaDeStack);
 
@@ -1024,6 +1023,9 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		aux[fin] = '\0';
 		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
 	}
+
+	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
+	ptrByte += sizeof(pcb.estado);
 	// termino de deserealizar el pcb
 
 	memcpy(&quantum, ptrByte, sizeof(quantum));
@@ -1178,13 +1180,12 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
 
+	memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //AGREGUE ESTO
+	ptrByte += sizeof(pcb.indiceDelStack);
 
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
 
-
-	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
-	ptrByte += sizeof(pcb.estado);
 
 	int bufferLen = (pcb.cantElementsStack)*sizeof(paginaDeStack);
 
@@ -1206,6 +1207,10 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		aux[fin] = '\0';
 		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
 	}
+
+	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
+	ptrByte += sizeof(pcb.estado);
+
 	// termino de deserealizar el pcb
 
 	memcpy(&pid, ptrByte, sizeof(pid));
