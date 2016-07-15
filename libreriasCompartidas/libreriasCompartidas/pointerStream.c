@@ -636,13 +636,14 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 
 	int i;
 	paginaDeStack *aux;
-	sck->pcb.buffer = malloc((sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
-	sck->pcb.buffer[0] = '\0';
-	for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
-		aux = list_get(sck->pcb.indiceDelStack, i);
-		strcat(sck->pcb.buffer, (Byte*) &aux);
+	if ((sck->pcb.indiceDelStack->elements_count)!= 0) {
+		sck->pcb.buffer = malloc((sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
+		sck->pcb.buffer[0] = '\0';
+		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
+			aux = list_get(sck->pcb.indiceDelStack, i);
+			strcat(sck->pcb.buffer, (Byte*) &aux);
+		}
 	}
-
 	ptrByte = (Byte*) sck->pcb.buffer;
 	memcpy(ptrData, ptrByte, (sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
 	ptrData += (sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
