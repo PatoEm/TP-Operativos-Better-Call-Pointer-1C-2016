@@ -21,7 +21,6 @@
 #include <commons/log.h>
 #include <pthread.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
-#include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/pcb.h>
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <commons/collections/list.h>

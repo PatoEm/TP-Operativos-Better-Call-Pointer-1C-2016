@@ -18,7 +18,6 @@
 #include <commons/config.h>
 #include <commons/log.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
-#include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/pointerStream.h>
 #include <libreriasCompartidas/paginaAsignada.h>
 #include <arpa/inet.h>
