@@ -43,3 +43,19 @@
 [INFO] 20:28:30:545 cpu/(15380:15380): Mensaje enviado a la UMC ppal.
 [INFO] 20:28:30:545 cpu/(15380:15380): getNextPcb: Nuevo PCB vacio creado.
 [INFO] 20:28:30:545 cpu/(15380:15380): Obtener siguiente PCB
+[INFO] 20:47:14:182 cpu/(3128:3128): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 20:47:14:183 cpu/(3128:3128): Configuracion del IP_NUCLEO leida con exito
+[INFO] 20:47:14:183 cpu/(3128:3128): Configuracion del PUERTO_UMC leida con exito
+[INFO] 20:47:14:184 cpu/(3128:3128): Configuracion del IP_UMC leida con exito
+[INFO] 20:47:14:184 cpu/(3128:3128): **********************************************************************
+[INFO] 20:47:14:184 cpu/(3128:3128): **********************************************************************
+[INFO] 20:47:14:184 cpu/(3128:3128): **********************************************************************
+[INFO] 20:47:14:184 cpu/(3128:3128): Archivo de config CPU leído
+[INFO] 20:47:14:184 cpu/(3128:3128): Se inicializo la cpu.
+[INFO] 20:47:17:214 cpu/(3128:3128): Handshake realizado con exito.
+[INFO] 20:47:20:227 cpu/(3128:3128): Mensaje enviado a la UMC ppal.
+[INFO] 20:47:25:280 cpu/(3128:3128): Me conecte al agradable hilo
+[INFO] 20:47:25:284 cpu/(3128:3128): Mensaje enviado a la UMC ppal.
+[INFO] 20:47:25:296 cpu/(3128:3128): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 20:47:25:297 cpu/(3128:3128): Obtener siguiente PCB
+[ERROR] 20:47:25:307 cpu/(3128:3128): No se pudo enviar tu pedido a la umc.

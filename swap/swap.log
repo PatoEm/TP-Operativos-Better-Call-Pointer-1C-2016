@@ -35,3 +35,8 @@
 [INFO] 20:27:18:33 SWAP/(15227:15227): Server creado y escuchando correctamente
 [INFO] 20:29:04:250 SWAP/(15227:15227): Hay espacio
 [INFO] 20:29:04:250 SWAP/(15227:15227): Espacio reservado correctamente
+[INFO] 20:44:33:71 SWAP/(2591:2591): Valores del archivo de configuracion seteados
+[INFO] 20:44:33:236 SWAP/(2591:2591): Archivo de particion creado
+[INFO] 20:44:33:238 SWAP/(2591:2591): Server creado y escuchando correctamente
+[INFO] 20:46:48:372 SWAP/(2591:2591): Hay espacio
+[INFO] 20:46:48:375 SWAP/(2591:2591): Espacio reservado correctamente
