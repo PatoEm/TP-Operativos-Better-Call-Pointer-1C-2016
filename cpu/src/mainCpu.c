@@ -81,7 +81,7 @@ t_log* logger = NULL;
  ****************************************/
 
 int main() {
-	// cargo variables de configuracion, me conecto al nucleo y a la umc
+	log_debug(getLogger(), "Cargo variables de configuracion, me conecto al nucleo y a la umc");
 	pcbActual=malloc(sizeof(pcb*));
 	pcbVacio=malloc(sizeof(pcb*));
 	pcbVacio=newEmptyPcb();
@@ -97,10 +97,10 @@ int main() {
 		//tamanioPag = pedirTamanioDePagina();
 		//tamanioPaginaUmc=tamanioPag;
 		while (TRUE) {
-			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
+			log_debug(getLogger(), "Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
 			getNextPcb();
 			seguirEjecutando = TRUE;
-			// proceso el pcb del nucleo
+			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int8U quantum = skc->quantum;
 			while (quantum > 0 && seguirEjecutando) {
 				analizadorLinea(pedirInstruccion(pcbActual), &funciones,
@@ -156,17 +156,17 @@ int main() {
 Boolean loadConfig() {
 	String configFilePath = CONFIG_FILE;
 
-	// Genero tabla de configuracion
+	log_debug(getLogger(), "Genero tabla de configuracion");
 	tConfig = config_create(configFilePath);
 	if (tConfig == NULL) {
 		log_error(getLogger(), "ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n", configFilePath);
 		return FALSE;
 	}
 
-	// Verifico consistencia, debe haber 4 campos
+	log_debug(getLogger(), "Verifico consistencia, debe haber 4 campos");
 	if (config_keys_amount(tConfig) == PARAM_LENGTH) {
 
-		// Verifico que los parametros del nucleo tengan sus valores OK
+		log_debug(getLogger(), "Verifico que los parametros del NUCLEO tengan sus valores OK");
 		if (config_has_property(tConfig, "PUERTO_NUCLEO")) {
 			nucleoPort = config_get_int_value(tConfig, "PUERTO_NUCLEO");
 			log_info(getLogger(), "Configuracion del PUERTO_NUCLEO leida con exito");
@@ -182,7 +182,7 @@ Boolean loadConfig() {
 			log_error(getLogger(), "Falta un parametro: IP_NUCLEO. \n");
 			return FALSE;
 		}
-		// Verifico que los parametros de la UMC tengan sus valores OK
+		log_debug(getLogger(), "Verifico que los parametros de la UMC tengan sus valores OK");
 		if (config_has_property(tConfig, "PUERTO_UMC")) {
 			umcPort = config_get_int_value(tConfig, "PUERTO_UMC");
 			log_info(getLogger(), "Configuracion del PUERTO_UMC leida con exito");
@@ -217,7 +217,7 @@ Boolean loadConfig() {
 }
 
 Boolean socketConnection() {
-	// Conexion al nucleo
+	log_debug(getLogger(), "Conexion al NUCLEO");
 	socketNucleo = socketCreateClient();
 
 	do {
@@ -228,9 +228,9 @@ Boolean socketConnection() {
 	} while (!socketConnect(socketNucleo, ipNucleo, nucleoPort));
 
 	if (handshake(socketNucleo, CPU_ID)) {
-		puts("Handshake realizado con exito.");
+		log_info(getLogger(), "Handshake realizado con exito.");
 	} else {
-		puts("No se pudo realizar el handshake.");
+		log_info(getLogger(), "No se pudo realizar el handshake.");
 		return FALSE;
 	}
 
@@ -254,14 +254,14 @@ Boolean socketConnection() {
 		StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 		SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
 		if(socketSend(socketUMC->ptrSocket, sb)) {
-			puts("Mensaje enviado a la UMC ppal.");
+			log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
 		} else {
-			puts("No se pudo enviar el mensaje a la UMC ppal.");
+			log_error(getLogget(), "No se pudo enviar el mensaje a la UMC ppal.");
 			return FALSE;
 		}
 //
 		if ((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
-			puts("No se pudo recibir el stream de la UMC");
+			log_error(getLogger(), "No se pudo recibir el stream de la UMC");
 			return FALSE;
 		}
 		
@@ -280,7 +280,7 @@ Boolean socketConnection() {
 				printf("IP: %s, PUERTO: %d\n", ipUMC, puertoNuevoUmc);
 				sleep(3);
 			} while (!socketConnect(socketUMC, ipUMC, puertoNuevoUmc));
-			puts("Me conecte al puto hilo");
+			log_info(getLogger(), "Me conecte al agradable hilo");
 
 		tamanioPaginaUmc=pedirTamanioDePagina();
 
@@ -303,21 +303,21 @@ Boolean getNextPcb() {
 		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbVacio, 0, 0, 0,
 				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
-	puts("getNextPcb: Nuevo PCB vacio creado.");
+	log_info(getLogger(), "getNextPcb: Nuevo PCB vacio creado.");
 
-	// serializo y armo el socket
+	log_debug(getLogger(), "Serializo y armo el socket");
 	SocketBuffer* sb = serializeCpuKer(sck);
-	// envio el socketBuffer
+	log_debug(getLogger(), "Envio el socketBuffer");
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
-		printf("No se pudo enviar el stream al nucleo");
+		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
 		return FALSE;
 	}
 	free(sb);
-	puts("Obtener siguiente PCB");
+	log_info(getLogger(), "Obtener siguiente PCB");
 
-	// recibo la respuesta del nucleo y deserealizo
+	log_debug(getLogger(), "Recibo la respuesta del nucleo y deserealizo");
 	if ((sb = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-		puts("No se pudo recibir el stream del nucleo");
+		log_error(getLogger(), "No se pudo recibir el stream del nucleo");
 		return FALSE;
 	}
 
@@ -340,8 +340,8 @@ void enviarPidPcb(int id){
 	scu=newStrCpuUmc(CPU_ID,CAMBIO_PROCESO_ACTIVO,pag,0,0,"h",id);
 	SocketBuffer*buff= serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket,buff)) {
-		printf("No se pudo enviar el ID del nuevo proceso activo al nucleo");
-		//return FALSE;
+		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
+		return FALSE;
 	}
 }
 
@@ -397,12 +397,12 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC, buffer)) {
-			puts("No se pudo enviar tu pedido a la umc.");
+			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
 			return FALSE;
 		}
 		
 		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-			puts("No se pudo recibir la instruccion de la UMC");
+			log_error(getLogger(), "No se pudo recibir la instruccion de la UMC");
 			return FALSE;
 		}
 	
@@ -433,16 +433,16 @@ int pedirTamanioDePagina(){
 	buffer = serializeCpuUmc(scu);
 	
 	if(socketSend(socketUMC->ptrSocket,buffer)) {
-		puts("Mensaje enviado a la UMC ppal.");
+		log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
 	} else {
-		puts("No se pudo enviar el mensaje a la UMC ppal.");
+		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC ppal.");
 		return FALSE;
 	}
 
 	buffer = socketReceive(socketUMC->ptrSocket);
 
 	if (buffer == NULL) {
-		puts("Error al recibir del cliente");	
+		log_error(getLogger(), "Error al recibir del cliente");	
 	}
 	
 
