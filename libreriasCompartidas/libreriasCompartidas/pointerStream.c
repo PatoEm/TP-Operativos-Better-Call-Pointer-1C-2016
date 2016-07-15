@@ -460,6 +460,7 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrByte = (Byte*) &skc->pcb.instruccionesRestantes;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesRestantes));
 	ptrData += sizeof(skc->pcb.instruccionesRestantes);
+	ptrByte = (Byte*) &skc->pcb.indiceDelStack;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack));
 	ptrData += sizeof(skc->pcb.indiceDelStack);
 
@@ -651,6 +652,7 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	ptrByte = (Byte*) &sck->pcb.instruccionesRestantes;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesRestantes));
 	ptrData += sizeof(sck->pcb.instruccionesRestantes);
+	ptrByte = (Byte*) &sck->pcb.indiceDelStack;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack));
 	ptrData += sizeof(sck->pcb.indiceDelStack);
 
