@@ -2143,3 +2143,15 @@
 [INFO] 14:47:51:97 CPUHANDLER/(12065:12074): KERNEL : Se cayo el cliente 11
 [INFO] 14:47:51:97 CPUHANDLER/(12065:12074): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
 [INFO] 14:47:51:97 CPUHANDLER/(12065:12074): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 23:12:09:498 CPUHANDLER/(15597:15608): Server creado con exito y escuchando.
+[INFO] 23:12:09:498 CPUHANDLER/(15597:15608): Server iniciado.
+[INFO] 23:12:36:238 CPUHANDLER/(15597:15608): Nueva Conexion detectada, realizando handshake
+[INFO] 23:12:36:238 CPUHANDLER/(15597:15608): ID Nuevo Cliente: 2.
+[INFO] 23:12:36:238 CPUHANDLER/(15597:15608): Nuevo Cliente CPU
+[INFO] 23:12:36:238 CPUHANDLER/(15597:15608): KER-CPU: HANDSHAKE recibido
+[INFO] 23:26:45:466 CPUHANDLER/(16331:16342): Server creado con exito y escuchando.
+[INFO] 23:26:45:466 CPUHANDLER/(16331:16342): Server iniciado.
+[INFO] 23:26:57:203 CPUHANDLER/(16331:16342): Nueva Conexion detectada, realizando handshake
+[INFO] 23:26:57:203 CPUHANDLER/(16331:16342): ID Nuevo Cliente: 2.
+[INFO] 23:26:57:203 CPUHANDLER/(16331:16342): Nuevo Cliente CPU
+[INFO] 23:26:57:203 CPUHANDLER/(16331:16342): KER-CPU: HANDSHAKE recibido

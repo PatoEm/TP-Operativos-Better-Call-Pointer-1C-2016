@@ -206,6 +206,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	//pcb* pcb = newEmptyPcb();
 	//memcpy (pcbLoca,newEmptyPcb(),sizeof(pcb));
 
+
 	switch (sck->action) {
 	case HANDSHAKE:
 
@@ -215,6 +216,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbVacio, 0, NULL, 0,
 		NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(skc);
+
 		if (socketSend(cpuClient, sb)) {
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
 			//AGREGARLO A LA LISTA DE DESCRIPTORES DE CPU  DEL PLANIFICADOR
