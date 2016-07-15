@@ -494,3 +494,12 @@ void mirarSenial(pcb * pcbActual){
 		abortoCPU = 0;
 	}
 }
+
+
+// Devuelve el logger para loggear los logs para poder loggear
+t_log* getLogger() {							
+	if (logger == NULL) {							
+		logger = log_create(LOGGER_FILE, "cpu", FALSE, LOG_LEVEL_INFO);	
+	}									
+	return logger;								
+}
