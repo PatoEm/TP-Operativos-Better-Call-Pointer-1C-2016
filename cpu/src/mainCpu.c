@@ -303,21 +303,21 @@ Boolean getNextPcb() {
 		sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbVacio, 0, 0, 0,
 				NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	}
-	puts("getNextPcb: Nuevo PCB vacio creado.");
+	log_info(getLogger(), "getNextPcb: Nuevo PCB vacio creado.");
 
 	// serializo y armo el socket
 	SocketBuffer* sb = serializeCpuKer(sck);
 	// envio el socketBuffer
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
-		printf("No se pudo enviar el stream al nucleo");
+		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
 		return FALSE;
 	}
 	free(sb);
-	puts("Obtener siguiente PCB");
+	log_info(getLogger(), "Obtener siguiente PCB");
 
 	// recibo la respuesta del nucleo y deserealizo
 	if ((sb = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-		puts("No se pudo recibir el stream del nucleo");
+		log_error(getLogger(), "No se pudo recibir el stream del nucleo");
 		return FALSE;
 	}
 
@@ -340,8 +340,8 @@ void enviarPidPcb(int id){
 	scu=newStrCpuUmc(CPU_ID,CAMBIO_PROCESO_ACTIVO,pag,0,0,"h",id);
 	SocketBuffer*buff= serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket,buff)) {
-		printf("No se pudo enviar el ID del nuevo proceso activo al nucleo");
-		//return FALSE;
+		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
+		return FALSE;
 	}
 }
 
@@ -397,12 +397,12 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC, buffer)) {
-			puts("No se pudo enviar tu pedido a la umc.");
+			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
 			return FALSE;
 		}
 		
 		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-			puts("No se pudo recibir la instruccion de la UMC");
+			log_error(getLogger(), "No se pudo recibir la instruccion de la UMC");
 			return FALSE;
 		}
 	
@@ -433,16 +433,16 @@ int pedirTamanioDePagina(){
 	buffer = serializeCpuUmc(scu);
 	
 	if(socketSend(socketUMC->ptrSocket,buffer)) {
-		puts("Mensaje enviado a la UMC ppal.");
+		log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
 	} else {
-		puts("No se pudo enviar el mensaje a la UMC ppal.");
+		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC ppal.");
 		return FALSE;
 	}
 
 	buffer = socketReceive(socketUMC->ptrSocket);
 
 	if (buffer == NULL) {
-		puts("Error al recibir del cliente");	
+		log_error(getLogger(), "Error al recibir del cliente");	
 	}
 	
 
