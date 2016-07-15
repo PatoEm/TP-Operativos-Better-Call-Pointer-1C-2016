@@ -6,9 +6,6 @@
  */
 
 #include "nucleo.h"
-//#define manejarError(msg) {perror(msg); abort();}
-
-
 
 //testeada
 void setearValores(t_config * archivoConfig) {
@@ -85,27 +82,6 @@ free(array);
 
 pcbNuevoPrograma->indiceDeCodigoSize=cantidadInstrucciones * sizeof(arrayBidimensional);
 
-//	//memcpy(pcbNuevoPrograma->indiceDeCodigo,array,sizeof(array));
-//
-//	//pcbNuevoPrograma->indiceDeCodigo = array;
-//	int oprueba1=(pcbNuevoPrograma->indiceDeCodigo)[0].comienzo;
-//	int oprueba2=(pcbNuevoPrograma->indiceDeCodigo)[0].longitud;
-//
-//	int oprueba3=(pcbNuevoPrograma->indiceDeCodigo)[1].comienzo;
-//	int oprueba4=(pcbNuevoPrograma->indiceDeCodigo)[1].longitud;
-//
-//	int oprueba5=(pcbNuevoPrograma->indiceDeCodigo)[2].comienzo;
-//	int oprueba6=(pcbNuevoPrograma->indiceDeCodigo)[2].longitud;
-//
-//	int oprueba7=(pcbNuevoPrograma->indiceDeCodigo)[3].comienzo;
-//	int oprueba8=(pcbNuevoPrograma->indiceDeCodigo)[3].longitud;
-//
-//	int oprueba9=(pcbNuevoPrograma->indiceDeCodigo)[4].comienzo;
-//	int oprueba10=(pcbNuevoPrograma->indiceDeCodigo)[4].longitud;
-
-
-
-
 	if(metaNuevoPrograma->etiquetas!=NULL){
 	pcbNuevoPrograma->indiceDeEtiquetas=malloc(sizeof(char)*(strlen(metaNuevoPrograma->etiquetas)+1));
 
@@ -117,12 +93,6 @@ pcbNuevoPrograma->indiceDeCodigoSize=cantidadInstrucciones * sizeof(arrayBidimen
 		pcbNuevoPrograma->indiceDeEtiquetasSize=17;
 
 	}
-
-
-
-	//strcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas);
-
-	//pcbNuevoPrograma->indiceDeEtiquetas = metaNuevoPrograma->etiquetas;
 
 	pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
 
@@ -262,8 +232,6 @@ void verificarModificacionesArchivoConfig() {
 	} else {
 
 		printf("El archivo de Configuracion Fue Modificado.\n");
-		//leerArchivoDeConfiguracion("confignucleo");
-		//printf("Valores Seteados Nuevamente.\n");
 	}
 
 	/*actually read return the list of change events happens. Here, read the change event one by one and process it accordingly.*/
@@ -485,18 +453,6 @@ int inicializarVariables() {
 	mutexColaExit=(pthread_mutex_t*)malloc(sizeof(mutexColaExit));
 	mutexListaExec=(pthread_mutex_t*)malloc(sizeof(mutexListaExec));
 	mutexListaBlock=(pthread_mutex_t*)malloc(sizeof(mutexListaBlock));
-
-	//Colas y listas
-
-	//t_queue *colaNew;
-
-	//t_queue *colaReady;
-
-	//t_list *listaExec;
-
-	//t_list *listaBlock;
-
-	//t_queue *colaExit;
 
 
 	primeraLectura = true;

@@ -2155,3 +2155,37 @@
 [INFO] 23:26:57:203 CPUHANDLER/(16331:16342): ID Nuevo Cliente: 2.
 [INFO] 23:26:57:203 CPUHANDLER/(16331:16342): Nuevo Cliente CPU
 [INFO] 23:26:57:203 CPUHANDLER/(16331:16342): KER-CPU: HANDSHAKE recibido
+[INFO] 01:04:14:886 CPUHANDLER/(8214:8264): Server creado con exito y escuchando.
+[INFO] 01:04:14:886 CPUHANDLER/(8214:8264): Server iniciado.
+[INFO] 01:04:17:444 CPUHANDLER/(8214:8264): Nueva Conexion detectada, realizando handshake
+[INFO] 01:04:17:444 CPUHANDLER/(8214:8264): ID Nuevo Cliente: 0.
+[INFO] 01:04:17:444 CPUHANDLER/(8214:8264): Nuevo Cliente CONSOLA
+[INFO] 01:04:17:444 CPUHANDLER/(8214:8264): Nuevo Cliente Consola 10 aceptado.
+[INFO] 01:04:17:444 CPUHANDLER/(8214:8264): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 01:04:29:782 CPUHANDLER/(8214:8264): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 01:04:29:782 CPUHANDLER/(8214:8264): KERNEL : El cliente 10 es una consola
+[ERROR] 01:04:29:782 CPUHANDLER/(8214:8264): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 01:04:29:782 CPUHANDLER/(8214:8264): Se inicializo el programa 1
+[ERROR] 01:04:29:782 CPUHANDLER/(8214:8264): KERNEL : Consola 10 añadida a la lista
+[INFO] 01:04:45:665 CPUHANDLER/(8214:8264): KERNEL : Se cayo el cliente 10
+[INFO] 01:04:45:665 CPUHANDLER/(8214:8264): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 01:04:45:665 CPUHANDLER/(8214:8264): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 01:05:26:985 CPUHANDLER/(8387:8446): Server creado con exito y escuchando.
+[INFO] 01:05:26:985 CPUHANDLER/(8387:8446): Server iniciado.
+[INFO] 01:05:27:672 CPUHANDLER/(8387:8446): Nueva Conexion detectada, realizando handshake
+[INFO] 01:05:27:673 CPUHANDLER/(8387:8446): ID Nuevo Cliente: 0.
+[INFO] 01:05:27:673 CPUHANDLER/(8387:8446): Nuevo Cliente CONSOLA
+[INFO] 01:05:27:673 CPUHANDLER/(8387:8446): Nuevo Cliente Consola 10 aceptado.
+[INFO] 01:05:27:673 CPUHANDLER/(8387:8446): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 01:07:08:779 CPUHANDLER/(8387:8446): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 01:07:08:779 CPUHANDLER/(8387:8446): KERNEL : El cliente 10 es una consola
+[ERROR] 01:07:08:779 CPUHANDLER/(8387:8446): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 01:07:08:779 CPUHANDLER/(8387:8446): Se inicializo el programa 1
+[ERROR] 01:07:08:779 CPUHANDLER/(8387:8446): KERNEL : Consola 10 añadida a la lista
+[INFO] 01:11:50:0 CPUHANDLER/(8619:8671): Server creado con exito y escuchando.
+[INFO] 01:11:50:0 CPUHANDLER/(8619:8671): Server iniciado.
+[INFO] 01:13:18:671 CPUHANDLER/(8800:8858): Server creado con exito y escuchando.
+[INFO] 01:13:18:671 CPUHANDLER/(8800:8858): Server iniciado.
+[INFO] 01:13:20:135 CPUHANDLER/(8800:8858): Nueva Conexion detectada, realizando handshake
+[INFO] 01:13:20:135 CPUHANDLER/(8800:8858): ID Nuevo Cliente: 0.
+[INFO] 01:13:20:135 CPUHANDLER/(8800:8858): Nuevo Cliente CONSOLA

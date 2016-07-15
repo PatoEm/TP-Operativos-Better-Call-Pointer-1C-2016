@@ -32,99 +32,6 @@ int main(void) {
 	/**************************************************/
 
 
-//	char * programita = leerProgramaAnSISOP1("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
-//
-//	int tamanioArchivo32 = tamArchivo("/home/utnso/ansisop-parser/programas-ejemplo/completo.ansisop");
-//
-//
-//
-//	pcb * nuevoPcbPrueba= crearNuevoPcb(programita,tamanioArchivo32);
-//
-//	puts("Ya cree la pcb");
-//
-//
-//	moverAColaReady(nuevoPcbPrueba);
-//
-//	moverAListaExec(nuevoPcbPrueba);
-//
-//	moverAColaReady(nuevoPcbPrueba);
-
-////entrada_salida("Disco",4, nuevoPcbPrueba);
-//
-//puts("Ya hice la IO");
-//
-//int valorVariable;
-//
-//grabar_valor("!Global",54,nuevoPcbPrueba);
-//
-//valorVariable=obtener_valor("!Global",nuevoPcbPrueba);
-//
-//puts("Ya grabe y obtuve valores");
-//
-//
-//wait("SEM3",nuevoPcbPrueba);
-//
-//int valorSem;
-//
-//sem_getvalue(semaforosAnsisop[2],&valorSem);
-//
-//printf("%d \n",valorSem);
-//
-//signal("SEM3",nuevoPcbPrueba);
-//
-//sem_getvalue(semaforosAnsisop[2],&valorSem);
-//
-//printf("%d \n",valorSem);
-//
-//puts("Hice waits y signals");
-
-
-	//Se conecta a la consola. COMENTEMOS QUE HACEMOS
-
-/*
-
- 	int fdSocketConsola = crearSocketServidor(puertoPropio);
-	//int fdSocketConsola = crearSocketServidor("6002");
-	escucharSocket(fdSocketConsola,5);
-	int fdSocketCliente1= aceptarConexiones(fdSocketConsola);
-
-	char* mensaje;
-	mensaje=(char*)malloc(11*sizeof(char));
-	if(mensaje==NULL){
-		puts("falló al reservar la memoria");
-		return -1;
-	}
-	recibirMensaje(fdSocketCliente1,mensaje,11*sizeof(char));
-	puts(mensaje);
-
-	// creo el servidor para el cpu y lo acepto. Author: Dr.Mengueche
-
-	int fdSocketCpu= crearSocketServidor(cpuPort);
-	escucharSocket(fdSocketCpu,5);
-	int fdSocketClienteCpu1=aceptarConexiones(fdSocketCpu);
-	enviarMensaje(fdSocketClienteCpu1,mensaje,11*sizeof(char));
-
-	//Se conecta con la memoria. Author: Dr.Mengueche
-	//Socket UMC testeado by Dr.Mengueche
-	int fdSocketUMC=crearCliente(ipUMC,UMCPort);
-
-*/
-
-	/*
-	puts("hola");
-	char * mensajito = leerProgramaAnSISOP1("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
-	//t_metadata_program * programa1=metadata_desde_literal(mensajito);
-	puts("hola1");
-	int tamanio= tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/stackoverflow.ansisop");
-	puts("hola2");
-	pcb hola = crearNuevoPcb(mensajito,tamanio);
-	puts("hola3");
-	*/
-
-	//Destruyo semaforos sincro
-	//pthread_mutex_destroy(&mutexQuantum);
-
-
 	/* ESTE WAIT ES PARA QUE SIGAN CORRIENDO LOS HILOS */
 	while(1){
 		sleep(5);
@@ -183,12 +90,4 @@ char * leerProgramaAnSISOP1(char * direccionArchivo) {
 	}
 	return "";
 
-
-
-
-
 }
-
-
-
-

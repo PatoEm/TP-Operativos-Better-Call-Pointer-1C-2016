@@ -24,7 +24,6 @@ src/cpuHandler.d: ../src/cpuHandler.c ../src/cpuHandler.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/queue.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h
 
 ../src/cpuHandler.h:
@@ -78,7 +77,5 @@ src/cpuHandler.d: ../src/cpuHandler.c ../src/cpuHandler.h \
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/collections/list.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h:
-
-/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/socket.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h:

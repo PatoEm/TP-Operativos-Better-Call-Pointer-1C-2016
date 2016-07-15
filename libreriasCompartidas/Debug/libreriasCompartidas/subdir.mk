@@ -5,30 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../libreriasCompartidas/archivosYLogsYMas.c \
-../libreriasCompartidas/conexiones.c \
 ../libreriasCompartidas/pcb.c \
 ../libreriasCompartidas/pointerSocketes.c \
-../libreriasCompartidas/pointerStream.c \
-../libreriasCompartidas/selectParaKernel.c \
-../libreriasCompartidas/socket.c 
+../libreriasCompartidas/pointerStream.c 
 
 OBJS += \
 ./libreriasCompartidas/archivosYLogsYMas.o \
-./libreriasCompartidas/conexiones.o \
 ./libreriasCompartidas/pcb.o \
 ./libreriasCompartidas/pointerSocketes.o \
-./libreriasCompartidas/pointerStream.o \
-./libreriasCompartidas/selectParaKernel.o \
-./libreriasCompartidas/socket.o 
+./libreriasCompartidas/pointerStream.o 
 
 C_DEPS += \
 ./libreriasCompartidas/archivosYLogsYMas.d \
-./libreriasCompartidas/conexiones.d \
 ./libreriasCompartidas/pcb.d \
 ./libreriasCompartidas/pointerSocketes.d \
-./libreriasCompartidas/pointerStream.d \
-./libreriasCompartidas/selectParaKernel.d \
-./libreriasCompartidas/socket.d 
+./libreriasCompartidas/pointerStream.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

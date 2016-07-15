@@ -22,7 +22,6 @@
 #include <parser/metadata_program.h>
 #include <parser/parser.h>
 #include <libreriasCompartidas/archivosYLogsYMas.h>
-#include <libreriasCompartidas/socket.h>
 #include <libreriasCompartidas/pointerSocketes.h>
 #include <libreriasCompartidas/pcb.h>
 #include <libreriasCompartidas/pointerStream.h>
