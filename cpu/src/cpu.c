@@ -134,7 +134,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {//NO TOCAR,
 bool espacioMemoriaVacio(int tamanio, char*bytes) {
 	int counter = 0;
 	while (counter < tamanio) {
-		if (bytes[counter != '\0'])
+		if (bytes[counter] != '\0')
 			break;
 		counter++;
 	}
