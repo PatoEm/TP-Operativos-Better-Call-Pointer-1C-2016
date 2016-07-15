@@ -373,15 +373,18 @@ String stringFromByteArray(Byte* data, Int32U size) {
 
 char* pedirInstruccion(pcb* pcbLoco) {
 	char* instruccion = "";
-	int inicio = pcbLoco->programCounter;
-	int offset = calcularOffset(pcbLoco);
+	int inicio = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].comienzo;
+	int offset = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].longitud;
 
 	StrCpuUmc* scu;
 	StrUmcCpu* suc;
 
 	int pagina = inicio / tamanioPaginaUmc;
-
-	int inicioPag = inicio % pagina;
+	int inicioPag ;
+	if(pagina!=0)
+	inicioPag = inicio % pagina;
+	else
+		inicioPag= inicio;
 	int offsetPag;
 	espacioAsignado auxiliar;
 
