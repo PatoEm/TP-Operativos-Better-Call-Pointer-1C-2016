@@ -949,36 +949,67 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	ptrByte += sizeof(pcb.consola);
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
-	memcpy(&pcb.tamanioArchivoOriginal, ptrByte,
-			sizeof(pcb.tamanioArchivoOriginal));
+	memcpy(&pcb.tamanioArchivoOriginal, ptrByte, sizeof(pcb.tamanioArchivoOriginal));
 	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
 	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
 	ptrByte += sizeof(pcb.programCounter);
 	memcpy(&pcb.paginasDeCodigo, ptrByte, sizeof(pcb.paginasDeCodigo));
 	ptrByte += sizeof(pcb.paginasDeCodigo);
-	memcpy(&pcb.indiceDeCodigo, ptrByte, sizeof(pcb.indiceDeCodigo));
-	ptrByte += sizeof(pcb.indiceDeCodigo);
 
-	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte,
-			sizeof(pcb.indiceDeEtiquetasSize));
+
+	memcpy(&pcb.indiceDeCodigoSize, ptrByte, sizeof(pcb.indiceDeCodigoSize));
+	ptrByte += sizeof(pcb.indiceDeCodigoSize);
+
+	pcb.indiceDeCodigo = malloc(pcb.indiceDeCodigoSize);
+	memcpy(pcb.indiceDeCodigo, ptrByte, pcb.indiceDeCodigoSize);
+	ptrByte += pcb.indiceDeCodigoSize;
+
+
+	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte, sizeof(pcb.indiceDeEtiquetasSize));
 	ptrByte += sizeof(pcb.indiceDeEtiquetasSize);
 
 	pcb.indiceDeEtiquetas = malloc((pcb.indiceDeEtiquetasSize));
-	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.indiceDeEtiquetasSize)); //todo el & NO VA
+	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.indiceDeEtiquetasSize));
 	ptrByte += pcb.indiceDeEtiquetasSize;
 
 	pcb.indiceDeEtiquetas[pcb.indiceDeEtiquetasSize] = '\0';
 
-	memcpy(&pcb.instruccionesTotales, ptrByte,
-			sizeof(pcb.instruccionesTotales));
+	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
+	ptrByte += sizeof(pcb.etiquetaSize);
+
+	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
 	ptrByte += sizeof(pcb.instruccionesTotales);
-	memcpy(&pcb.instruccionesRestantes, ptrByte,
-			sizeof(pcb.instruccionesRestantes));
+	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
-	memcpy(&pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack));
-	ptrByte += sizeof(pcb.indiceDelStack);
+
+
+	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
+	ptrByte += sizeof(pcb.cantElementsStack);
+
+
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
+
+	int bufferLen = (pcb.cantElementsStack)*sizeof(paginaDeStack);
+
+	pcb.buffer = malloc(bufferLen);
+	memcpy(pcb.buffer, ptrByte, bufferLen);
+	ptrByte += bufferLen;
+
+	pcb.buffer[bufferLen] = '\0';
+
+	pcb.indiceDelStack = list_create();
+	int i;
+	int inicio;
+	int fin;
+	char* aux = malloc(sizeof(paginaDeStack));
+	for (i = 0; i < pcb.cantElementsStack; i++) {
+		inicio = i * sizeof(paginaDeStack);
+		fin = inicio + sizeof(paginaDeStack);
+		aux = string_substring(pcb.buffer, inicio, fin);
+		aux[fin] = '\0';
+		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
+	}
 	// termino de deserealizar el pcb
 
 	memcpy(&quantum, ptrByte, sizeof(quantum));
@@ -1100,42 +1131,67 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	ptrByte += sizeof(pcb.consola);
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
-	memcpy(&pcb.tamanioArchivoOriginal, ptrByte,
-			sizeof(pcb.tamanioArchivoOriginal));
+	memcpy(&pcb.tamanioArchivoOriginal, ptrByte, sizeof(pcb.tamanioArchivoOriginal));
 	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
 	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
 	ptrByte += sizeof(pcb.programCounter);
 	memcpy(&pcb.paginasDeCodigo, ptrByte, sizeof(pcb.paginasDeCodigo));
 	ptrByte += sizeof(pcb.paginasDeCodigo);
 
-	memcpy(&pcb.indiceDeCodigo, ptrByte, sizeof(pcb.indiceDeCodigo));
-	ptrByte += sizeof(pcb.indiceDeCodigo);
 
-	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte,
-			sizeof(pcb.indiceDeEtiquetasSize));
+	memcpy(&pcb.indiceDeCodigoSize, ptrByte, sizeof(pcb.indiceDeCodigoSize));
+	ptrByte += sizeof(pcb.indiceDeCodigoSize);
+
+	pcb.indiceDeCodigo = malloc(pcb.indiceDeCodigoSize);
+	memcpy(pcb.indiceDeCodigo, ptrByte, pcb.indiceDeCodigoSize);
+	ptrByte += pcb.indiceDeCodigoSize;
+
+
+	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte, sizeof(pcb.indiceDeEtiquetasSize));
 	ptrByte += sizeof(pcb.indiceDeEtiquetasSize);
 
 	pcb.indiceDeEtiquetas = malloc((pcb.indiceDeEtiquetasSize));
 	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.indiceDeEtiquetasSize));
 	ptrByte += pcb.indiceDeEtiquetasSize;
 
+	pcb.indiceDeEtiquetas[pcb.indiceDeEtiquetasSize] = '\0';
 
-//	log = malloc(logLen);
-//	memcpy(log, ptrByte, logLen);
-//	ptrByte += logLen;
+	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
+	ptrByte += sizeof(pcb.etiquetaSize);
 
-	pcb.indiceDeEtiquetas[strlen(pcb.indiceDeEtiquetas)] = '\0';
-
-	memcpy(&pcb.instruccionesTotales, ptrByte,
-			sizeof(pcb.instruccionesTotales));
+	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
 	ptrByte += sizeof(pcb.instruccionesTotales);
-	memcpy(&pcb.instruccionesRestantes, ptrByte,
-			sizeof(pcb.instruccionesRestantes));
+	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
-	memcpy(&pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack));
-	ptrByte += sizeof(pcb.indiceDelStack);
+
+
+	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
+	ptrByte += sizeof(pcb.cantElementsStack);
+
+
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
+
+	int bufferLen = (pcb.cantElementsStack)*sizeof(paginaDeStack);
+
+	pcb.buffer = malloc(bufferLen);
+	memcpy(pcb.buffer, ptrByte, bufferLen);
+	ptrByte += bufferLen;
+
+	pcb.buffer[bufferLen] = '\0';
+
+	pcb.indiceDelStack = list_create();
+	int i;
+	int inicio;
+	int fin;
+	char* aux = malloc(sizeof(paginaDeStack));
+	for (i = 0; i < pcb.cantElementsStack; i++) {
+		inicio = i * sizeof(paginaDeStack);
+		fin = inicio + sizeof(paginaDeStack);
+		aux = string_substring(pcb.buffer, inicio, fin);
+		aux[fin] = '\0';
+		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
+	}
 	// termino de deserealizar el pcb
 
 	memcpy(&pid, ptrByte, sizeof(pid));
