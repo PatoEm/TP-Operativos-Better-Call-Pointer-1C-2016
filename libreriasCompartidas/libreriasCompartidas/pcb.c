@@ -15,14 +15,13 @@ int i;
 			pcbLoca->instruccionesRestantes-=1;
 		}
 	}
-	pcbLoca->indiceDeCodigo[1].comienzo;
 }
 
 
 
 pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
 		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,t_size indiceDeEtiquetasSize ,t_size sizeEti,t_size insTotales,t_size insRestantes,
-		t_list* indiceDelStack, estadoPrograma estado) {
+		t_list* indiceDelStack, estadoPrograma estado, t_size indiceDeCodigoSize, Byte* buffer) {
 
 	pcb* pcb = malloc(sizeof(pcb));
 
@@ -39,6 +38,8 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 	pcb->indiceDeEtiquetasSize=indiceDeEtiquetasSize;
 	pcb->indiceDelStack = indiceDelStack;
 	pcb->estado = estado;
+	pcb->indiceDeCodigoSize = indiceDeCodigoSize;
+	pcb->buffer = buffer;
 
 	return pcb;
 }
@@ -68,6 +69,9 @@ pcb* newEmptyPcb(){
 	pcbLoco->etiquetaSize=0;
 	pcbLoco->instruccionesRestantes=0;
 	pcbLoco->instruccionesTotales=1;
+	pcbLoco->indiceDeCodigo = sizeof(arrayBidimensional)*pcbLoco->instruccionesTotales;
+	pcbLoco->indiceDelStack = list_create();
+	pcbLoco->buffer = "Empty";
 
 	pcbLoco->estado=NEW;
 	free(auxArray);

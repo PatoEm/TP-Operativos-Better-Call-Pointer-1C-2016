@@ -56,6 +56,8 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
+	pcbNuevoPrograma->buffer = "Empty";
+
 	//todo fijarse que tengo que pedirle a la memoria
 	//pcbNuevoPrograma->paginasDeCodigo = cantidadPaginas(tamanioPaginas,tamanioArchivo);
 	pcbNuevoPrograma->paginasDeCodigo = cantidadPaginasArchivo(tamanioArchivo);
@@ -78,6 +80,9 @@ for (i = 0; i < cantidadInstrucciones; i++) {
 }
 
 free(array);
+
+pcbNuevoPrograma->indiceDeCodigoSize=cantidadInstrucciones * sizeof(arrayBidimensional);
+
 //	//memcpy(pcbNuevoPrograma->indiceDeCodigo,array,sizeof(array));
 //
 //	//pcbNuevoPrograma->indiceDeCodigo = array;
@@ -110,6 +115,8 @@ free(array);
 		pcbNuevoPrograma->indiceDeEtiquetasSize=17;
 
 	}
+
+
 
 	//strcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas);
 
