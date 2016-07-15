@@ -228,9 +228,9 @@ Boolean socketConnection() {
 	} while (!socketConnect(socketNucleo, ipNucleo, nucleoPort));
 
 	if (handshake(socketNucleo, CPU_ID)) {
-		puts("Handshake realizado con exito.");
+		log_info(getLogger(), "Handshake realizado con exito.");
 	} else {
-		puts("No se pudo realizar el handshake.");
+		log_info(getLogger(), "No se pudo realizar el handshake.");
 		return FALSE;
 	}
 
@@ -254,14 +254,14 @@ Boolean socketConnection() {
 		StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 		SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
 		if(socketSend(socketUMC->ptrSocket, sb)) {
-			puts("Mensaje enviado a la UMC ppal.");
+			log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
 		} else {
-			puts("No se pudo enviar el mensaje a la UMC ppal.");
+			log_error(getLogget(), "No se pudo enviar el mensaje a la UMC ppal.");
 			return FALSE;
 		}
 //
 		if ((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
-			puts("No se pudo recibir el stream de la UMC");
+			log_error(getLogger(), "No se pudo recibir el stream de la UMC");
 			return FALSE;
 		}
 		
@@ -280,7 +280,7 @@ Boolean socketConnection() {
 				printf("IP: %s, PUERTO: %d\n", ipUMC, puertoNuevoUmc);
 				sleep(3);
 			} while (!socketConnect(socketUMC, ipUMC, puertoNuevoUmc));
-			puts("Me conecte al puto hilo");
+			log_info(getLogger(), "Me conecte al agradable hilo");
 
 		tamanioPaginaUmc=pedirTamanioDePagina();
 
