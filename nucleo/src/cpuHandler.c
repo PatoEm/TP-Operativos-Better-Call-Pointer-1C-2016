@@ -41,7 +41,7 @@ void* cpuHandlerThreadRoutine(void* parametro) {
 	//cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
 
 
-	pcbVacio=malloc(sizeof(pcb*));
+	pcbVacio=malloc(sizeof(pcb));
 	pcbVacio=newEmptyPcb();
 
 

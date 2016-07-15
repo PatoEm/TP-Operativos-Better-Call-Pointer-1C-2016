@@ -49,18 +49,14 @@ pcb* newEmptyPcb(){
 
 	pcb* pcbLoco=malloc(sizeof(pcb));
 	//Socket * auxSocket = socketCreate();
-	arrayBidimensional * auxArray = malloc(sizeof(arrayBidimensional));
-	auxArray[0].comienzo=0;
-	auxArray[0].longitud=0;
 	pcbLoco->consola=socketCreate();
 
-	//memcpy(pcbLoco->consola,auxSocket,sizeof(Socket));
 	pcbLoco->id=0;
 	pcbLoco->tamanioArchivoOriginal=0;
 	pcbLoco->programCounter=0;
 	pcbLoco->paginasDeCodigo=0;
-	pcbLoco->indiceDeCodigo=(arrayBidimensional*)malloc(sizeof(arrayBidimensional));
-	memcpy(&(pcbLoco->indiceDeCodigo[0]),&auxArray[0],sizeof(arrayBidimensional));
+
+	pcbLoco->indiceDeCodigoSize=(sizeof(arrayBidimensional));
 	pcbLoco->indiceDeEtiquetas=malloc(sizeof(char)*17);
 	//char * auxIndice = malloc(sizeof(char)*17);
 	char * auxIndice;
@@ -111,9 +107,19 @@ pcb* newEmptyPcb(){
 	pcbLoco->cantElementsStack = 2;
 
 	pcbLoco->estado=NEW;
-	free(auxArray);
+
+	arrayBidimensional * auxArray = (arrayBidimensional*)malloc(sizeof(arrayBidimensional));
+	//arrayBidimensional auxArray;
+	auxArray[0].comienzo=0;
+	auxArray[0].longitud=0;
+	pcbLoco->indiceDeCodigo=(arrayBidimensional*)malloc(sizeof(arrayBidimensional));
+	memcpy(&(pcbLoco->indiceDeCodigo[0]),&auxArray[0],sizeof(arrayBidimensional));
+
+	//free(auxArray);
 	//free(auxSocket);
 //	free(auxIndice);
+	puts("Cree un pcb Vacio");
+
 	return pcbLoco;
 }
 

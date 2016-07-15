@@ -82,8 +82,8 @@ t_log* logger = NULL;
 
 int main() {
 	log_debug(getLogger(), "Cargo variables de configuracion, me conecto al nucleo y a la umc");
-	pcbActual=malloc(sizeof(pcb*));
-	pcbVacio=malloc(sizeof(pcb*));
+	pcbActual=malloc(sizeof(pcb));
+	pcbVacio=malloc(sizeof(pcb));
 	pcbVacio=newEmptyPcb();
 	t_config* tConfig = NULL;
 	//puertoNucleo=(Int32U)malloc(sizeof(puertoNucleo));
