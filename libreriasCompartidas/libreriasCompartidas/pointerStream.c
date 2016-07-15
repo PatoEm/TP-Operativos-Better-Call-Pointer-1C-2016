@@ -453,13 +453,21 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesRestantes));
 	ptrData += sizeof(skc->pcb.instruccionesRestantes);
 
+	skc->pcb.cantElementsStack = (skc->pcb.indiceDelStack->elements_count);
+
+	ptrByte = (Byte*) &skc->pcb.indiceDelStack->elements_count;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack->elements_count));
+	ptrData += sizeof(skc->pcb.indiceDelStack->elements_count);
+
 	int i;
 	paginaDeStack *aux;
-	skc->pcb.buffer = malloc((skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
-	skc->pcb.buffer[0] = '\0';
-	for (i = 0; i < (skc->pcb.indiceDelStack->elements_count); i++) {
-		aux = list_get(skc->pcb.indiceDelStack, i);
-		strcat(skc->pcb.buffer, (Byte*) &aux);
+	if ((skc->pcb.indiceDelStack->elements_count)!= 0) {
+		skc->pcb.buffer = malloc((skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
+		skc->pcb.buffer[0] = '\0';
+		for (i = 0; i < (skc->pcb.indiceDelStack->elements_count); i++) {
+			aux = list_get(skc->pcb.indiceDelStack, i);
+			strcat(skc->pcb.buffer, (Byte*) &aux);
+		}
 	}
 
 	ptrByte = (Byte*) skc->pcb.buffer;
@@ -633,6 +641,12 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	ptrByte = (Byte*) &sck->pcb.instruccionesRestantes;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesRestantes));
 	ptrData += sizeof(sck->pcb.instruccionesRestantes);
+
+	sck->pcb.cantElementsStack = (sck->pcb.indiceDelStack->elements_count);
+
+	ptrByte = (Byte*) &sck->pcb.indiceDelStack->elements_count;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack->elements_count));
+	ptrData += sizeof(sck->pcb.indiceDelStack->elements_count);
 
 	int i;
 	paginaDeStack *aux;

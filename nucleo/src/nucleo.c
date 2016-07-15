@@ -58,6 +58,8 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->buffer = "Empty";
 
+	pcbNuevoPrograma->cantElementsStack = 0;
+
 	//todo fijarse que tengo que pedirle a la memoria
 	//pcbNuevoPrograma->paginasDeCodigo = cantidadPaginas(tamanioPaginas,tamanioArchivo);
 	pcbNuevoPrograma->paginasDeCodigo = cantidadPaginasArchivo(tamanioArchivo);
