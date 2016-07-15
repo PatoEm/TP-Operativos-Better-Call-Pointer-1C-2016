@@ -211,8 +211,7 @@ Boolean loadConfig() {
 		
 		return TRUE;
 	} else {
-		printf(
-				log_error(getLogger(), "El archivo de configuracion del CPU no tiene todos los campos.\n");
+		log_error(getLogger(), "El archivo de configuracion del CPU no tiene todos los campos.\n");
 		return FALSE;
 	}
 }
