@@ -81,7 +81,7 @@ t_log* logger = NULL;
  ****************************************/
 
 int main() {
-	// cargo variables de configuracion, me conecto al nucleo y a la umc
+	log_debug(getLogger(), "Cargo variables de configuracion, me conecto al nucleo y a la umc");
 	pcbActual=malloc(sizeof(pcb*));
 	pcbVacio=malloc(sizeof(pcb*));
 	pcbVacio=newEmptyPcb();
@@ -97,10 +97,10 @@ int main() {
 		//tamanioPag = pedirTamanioDePagina();
 		//tamanioPaginaUmc=tamanioPag;
 		while (TRUE) {
-			// devuelvo el pcb procesado y obtengo uno nuevo del nucleo
+			log_debug(getLogger(), "Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
 			getNextPcb();
 			seguirEjecutando = TRUE;
-			// proceso el pcb del nucleo
+			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int8U quantum = skc->quantum;
 			while (quantum > 0 && seguirEjecutando) {
 				analizadorLinea(pedirInstruccion(pcbActual), &funciones,
@@ -156,17 +156,17 @@ int main() {
 Boolean loadConfig() {
 	String configFilePath = CONFIG_FILE;
 
-	// Genero tabla de configuracion
+	log_debug(getLogger(), "Genero tabla de configuracion");
 	tConfig = config_create(configFilePath);
 	if (tConfig == NULL) {
 		log_error(getLogger(), "ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n", configFilePath);
 		return FALSE;
 	}
 
-	// Verifico consistencia, debe haber 4 campos
+	log_debug(getLogger(), "Verifico consistencia, debe haber 4 campos");
 	if (config_keys_amount(tConfig) == PARAM_LENGTH) {
 
-		// Verifico que los parametros del nucleo tengan sus valores OK
+		log_debug(getLogger(), "Verifico que los parametros del NUCLEO tengan sus valores OK");
 		if (config_has_property(tConfig, "PUERTO_NUCLEO")) {
 			nucleoPort = config_get_int_value(tConfig, "PUERTO_NUCLEO");
 			log_info(getLogger(), "Configuracion del PUERTO_NUCLEO leida con exito");
@@ -182,7 +182,7 @@ Boolean loadConfig() {
 			log_error(getLogger(), "Falta un parametro: IP_NUCLEO. \n");
 			return FALSE;
 		}
-		// Verifico que los parametros de la UMC tengan sus valores OK
+		log_debug(getLogger(), "Verifico que los parametros de la UMC tengan sus valores OK");
 		if (config_has_property(tConfig, "PUERTO_UMC")) {
 			umcPort = config_get_int_value(tConfig, "PUERTO_UMC");
 			log_info(getLogger(), "Configuracion del PUERTO_UMC leida con exito");
@@ -217,7 +217,7 @@ Boolean loadConfig() {
 }
 
 Boolean socketConnection() {
-	// Conexion al nucleo
+	log_debug(getLogger(), "Conexion al NUCLEO");
 	socketNucleo = socketCreateClient();
 
 	do {
@@ -305,9 +305,9 @@ Boolean getNextPcb() {
 	}
 	log_info(getLogger(), "getNextPcb: Nuevo PCB vacio creado.");
 
-	// serializo y armo el socket
+	log_debug(getLogger(), "Serializo y armo el socket");
 	SocketBuffer* sb = serializeCpuKer(sck);
-	// envio el socketBuffer
+	log_debug(getLogger(), "Envio el socketBuffer");
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
 		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
 		return FALSE;
@@ -315,7 +315,7 @@ Boolean getNextPcb() {
 	free(sb);
 	log_info(getLogger(), "Obtener siguiente PCB");
 
-	// recibo la respuesta del nucleo y deserealizo
+	log_debug(getLogger(), "Recibo la respuesta del nucleo y deserealizo");
 	if ((sb = socketReceive(socketNucleo->ptrSocket)) == NULL) {
 		log_error(getLogger(), "No se pudo recibir el stream del nucleo");
 		return FALSE;
