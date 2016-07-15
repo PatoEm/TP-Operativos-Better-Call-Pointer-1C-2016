@@ -435,11 +435,11 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrData += sizeof(skc->pcb.paginasDeCodigo);
 
 	ptrByte = (Byte*) &skc->pcb.indiceDeCodigoSize;
-	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDeCodigoSize));
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDeCodigoSize)); //MIRAR ESTO
 	ptrData += sizeof(skc->pcb.indiceDeCodigoSize);
 
 	ptrByte = (Byte*) skc->pcb.indiceDeCodigo;
-	memcpy(ptrData, ptrByte, (skc->pcb.indiceDeCodigoSize));
+	memcpy(ptrData, ptrByte, (skc->pcb.indiceDeCodigoSize)); // MIRAR ESTO
 	ptrData += (skc->pcb.indiceDeCodigoSize);
 
 	ptrByte = (Byte*) &skc->pcb.indiceDeEtiquetasSize;
