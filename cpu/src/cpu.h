@@ -59,6 +59,8 @@ int abortoCPU;
 //} t_core;
 
 //======================================================
+// Prototipo de funcion para loggear
+t_log* getLogger();
 
 /*******************************************************
  * FUNCIONES AnSISOP
