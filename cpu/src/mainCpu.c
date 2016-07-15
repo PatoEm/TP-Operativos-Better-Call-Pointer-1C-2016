@@ -316,8 +316,9 @@ void enviarPidPcb(int id){
 	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	scu=newStrCpuUmc(CPU_ID,CAMBIO_PROCESO_ACTIVO,pag,0,0,"h",id);
 	SocketBuffer*buff= serializeCpuUmc(scu);
-	socketSend(socketUMC->ptrSocket,buff);
-
+	if (!socketSend(socketUMC->ptrSocket,buff)) {
+		printf("No se pudo enviar el ID del nuevo proceso activo al nucleo");
+	}
 }
 
 int calcularOffset(pcb *pcbLoco) {
