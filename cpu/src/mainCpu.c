@@ -256,7 +256,7 @@ Boolean socketConnection() {
 		if(socketSend(socketUMC->ptrSocket, sb)) {
 			log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
 		} else {
-			log_error(getLogget(), "No se pudo enviar el mensaje a la UMC ppal.");
+			log_error(getLogger(), "No se pudo enviar el mensaje a la UMC ppal.");
 			return FALSE;
 		}
 //
@@ -341,7 +341,7 @@ void enviarPidPcb(int id){
 	SocketBuffer*buff= serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket,buff)) {
 		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
-		return FALSE;
+		//return FALSE;
 	}
 }
 
