@@ -235,7 +235,7 @@ SocketBuffer *socketReceive(Socket *ptrSender) {
  */
 Boolean socketSend(Socket *ptrDestination, SocketBuffer *ptrBuffer) {
 
-	if (send(ptrDestination->descriptor, ptrBuffer->data, ptrBuffer->size, 0)
+	if (send(ptrDestination->ptrAddress, ptrBuffer->data, ptrBuffer->size, 0)
 			>= 0) {
 		return TRUE;
 	}
