@@ -114,7 +114,7 @@ int main() {
 							0, 0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
 					if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-						puts("No se pudo enviar el buffer al nucleo.");
+						log_info(getLogger(), "No se pudo enviar el buffer al nucleo.");
 						return FALSE;
 					}
 				} else {
@@ -122,7 +122,7 @@ int main() {
 							0, NULL, NULL, 0);
 					buffer = serializeCpuKer(sck);
 					if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-						puts("No se pudo enviar el buffer al nucleo.");
+						log_info(getLogger(), "No se pudo enviar el buffer al nucleo.");
 						return FALSE;
 					}
 				}
@@ -133,7 +133,7 @@ int main() {
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-					puts("No se pudo enviar el buffer al nucleo.");
+					log_info(getLogger(), "No se pudo enviar el buffer al nucleo.");
 					return FALSE;
 				}
 			}
@@ -159,9 +159,7 @@ Boolean loadConfig() {
 	// Genero tabla de configuracion
 	tConfig = config_create(configFilePath);
 	if (tConfig == NULL) {
-		printf(
-				"ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n",
-				configFilePath);
+		log_error(getLogger(), "ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n", configFilePath);
 		return FALSE;
 	}
 
@@ -171,39 +169,50 @@ Boolean loadConfig() {
 		// Verifico que los parametros del nucleo tengan sus valores OK
 		if (config_has_property(tConfig, "PUERTO_NUCLEO")) {
 			nucleoPort = config_get_int_value(tConfig, "PUERTO_NUCLEO");
+			log_info(getLogger(), "Configuracion del PUERTO_NUCLEO leida con exito");
 		} else {
-			printf("ERROR: Falta un parametro PUERTO_NUCLEO. \n");
+			log_error(getLogger(), "Falta un parametro: PUERTO_NUCLEO. \n");
 			return FALSE;
 		}
 
 		if (config_has_property(tConfig, "IP_NUCLEO")) {
 			ipNucleo = config_get_string_value(tConfig, "IP_NUCLEO");
+			log_info(getLogger(), "Configuracion del IP_NUCLEO leida con exito");
 		} else {
-			printf("ERROR: Falta un parametro IP_NUCLEO. \n");
+			log_error(getLogger(), "Falta un parametro: IP_NUCLEO. \n");
 			return FALSE;
 		}
 		// Verifico que los parametros de la UMC tengan sus valores OK
 		if (config_has_property(tConfig, "PUERTO_UMC")) {
 			umcPort = config_get_int_value(tConfig, "PUERTO_UMC");
+			log_info(getLogger(), "Configuracion del PUERTO_UMC leida con exito");
 		} else {
-			printf("ERROR: Falta un parametro PUERTO_UMC. \n");
+			log_error(getLogger(), "Falta un parametro: PUERTO_UMC. \n");
 			return FALSE;
 		}
 
 		if (config_has_property(tConfig, "IP_UMC")) {
 			ipUMC = config_get_string_value(tConfig, "IP_UMC");
+			log_info(getLogger(), "Configuracion del IP_UMC leida con exito");
 		} else {
-			printf("ERROR: Falta un parametro IP_UMC. \n");
+			log_error(getLogger(), "Falta un parametro: IP_UMC. \n");
 			return FALSE;
 		}
-
+		
+		log_info(getLogger(), "**********************************************************************");
+		log_info(getLogger(), "**********************************************************************");
+		log_info(getLogger(), "**********************************************************************");
+		log_info(getLogger(), "Archivo de config CPU leído");
+		log_info(getLogger(), "Se inicializo la cpu.");
+		
 		printf("Archivo de config CPU leido\n============\n");
 		printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", nucleoPort, ipNucleo);
 		printf("Puerto_UMC: %d\nIP_UMC: %s\n", umcPort, ipUMC);
+		
 		return TRUE;
 	} else {
 		printf(
-				"ERROR: El archivo de configuracion del CPU no tiene todos los campos.\n");
+				log_error(getLogger(), "El archivo de configuracion del CPU no tiene todos los campos.\n");
 		return FALSE;
 	}
 }
