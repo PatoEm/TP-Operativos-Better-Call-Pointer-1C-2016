@@ -216,7 +216,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(skc->pcb.etiquetaSize);
 	size += sizeof(skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.instruccionesRestantes);
-	size += sizeof(skc->pcb.indiceDelStack);
+	//size += sizeof(skc->pcb.indiceDelStack);
 	size += sizeof(skc->pcb.cantElementsStack);
 	size += sizeof(skc->pcb.estado);
 	size += sizeof(skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
@@ -278,7 +278,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	size += sizeof(sck->pcb.etiquetaSize);
 	size += sizeof(sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.instruccionesRestantes);
-	size += sizeof(sck->pcb.indiceDelStack);
+	//size += sizeof(sck->pcb.indiceDelStack);
 	size += sizeof(sck->pcb.cantElementsStack);
 	size += sizeof(sck->pcb.estado);
 	size += sizeof(sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
@@ -460,9 +460,10 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrByte = (Byte*) &skc->pcb.instruccionesRestantes;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesRestantes));
 	ptrData += sizeof(skc->pcb.instruccionesRestantes);
-	ptrByte = (Byte*) &skc->pcb.indiceDelStack;
-	memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack));
-	ptrData += sizeof(skc->pcb.indiceDelStack);
+
+	//ptrByte = (Byte*) &skc->pcb.indiceDelStack;
+	//memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack));
+	//ptrData += sizeof(skc->pcb.indiceDelStack);
 
 	skc->pcb.cantElementsStack = (skc->pcb.indiceDelStack->elements_count);
 
@@ -652,9 +653,10 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	ptrByte = (Byte*) &sck->pcb.instruccionesRestantes;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesRestantes));
 	ptrData += sizeof(sck->pcb.instruccionesRestantes);
-	ptrByte = (Byte*) &sck->pcb.indiceDelStack;
-	memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack));
-	ptrData += sizeof(sck->pcb.indiceDelStack);
+
+	//ptrByte = (Byte*) &sck->pcb.indiceDelStack;
+	//memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack));
+	//ptrData += sizeof(sck->pcb.indiceDelStack);
 
 	sck->pcb.cantElementsStack = (sck->pcb.indiceDelStack->elements_count);
 
@@ -996,8 +998,10 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
 
-	memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //ESTO LO AGREGUE
-	ptrByte += sizeof(pcb.indiceDelStack);
+
+	//pcb.indiceDelStack = malloc(pcb.indiceDelStack); //esto tambien
+	//memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //ESTO LO AGREGUE
+	//ptrByte += sizeof(pcb.indiceDelStack);
 
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
@@ -1180,8 +1184,9 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
 
-	memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //AGREGUE ESTO
-	ptrByte += sizeof(pcb.indiceDelStack);
+	//pcb.indiceDelStack = malloc(pcb.indiceDelStack); //Esto tambien
+	//memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //AGREGUE ESTO
+	//ptrByte += sizeof(pcb.indiceDelStack);
 
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);

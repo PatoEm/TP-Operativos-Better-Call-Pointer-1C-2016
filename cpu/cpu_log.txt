@@ -53,3 +53,98 @@
 [INFO] 18:52:24:822 cpu/(9595:9595): Archivo de config CPU leído
 [INFO] 18:52:24:822 cpu/(9595:9595): Se inicializo la cpu.
 [INFO] 18:59:04:835 cpu/(9595:9595): No se pudo realizar el handshake.
+[INFO] 19:05:30:945 cpu/(9896:9896): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:05:30:945 cpu/(9896:9896): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:05:30:945 cpu/(9896:9896): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:05:30:945 cpu/(9896:9896): Configuracion del IP_UMC leida con exito
+[INFO] 19:05:30:945 cpu/(9896:9896): **********************************************************************
+[INFO] 19:05:30:945 cpu/(9896:9896): **********************************************************************
+[INFO] 19:05:30:945 cpu/(9896:9896): **********************************************************************
+[INFO] 19:05:30:945 cpu/(9896:9896): Archivo de config CPU leído
+[INFO] 19:05:30:945 cpu/(9896:9896): Se inicializo la cpu.
+[INFO] 19:12:18:337 cpu/(10177:10177): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:12:18:337 cpu/(10177:10177): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:12:18:337 cpu/(10177:10177): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:12:18:337 cpu/(10177:10177): Configuracion del IP_UMC leida con exito
+[INFO] 19:12:18:337 cpu/(10177:10177): **********************************************************************
+[INFO] 19:12:18:337 cpu/(10177:10177): **********************************************************************
+[INFO] 19:12:18:337 cpu/(10177:10177): **********************************************************************
+[INFO] 19:12:18:337 cpu/(10177:10177): Archivo de config CPU leído
+[INFO] 19:12:18:338 cpu/(10177:10177): Se inicializo la cpu.
+[INFO] 19:13:22:842 cpu/(10412:10412): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:13:22:842 cpu/(10412:10412): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:13:22:842 cpu/(10412:10412): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:13:22:842 cpu/(10412:10412): Configuracion del IP_UMC leida con exito
+[INFO] 19:13:22:842 cpu/(10412:10412): **********************************************************************
+[INFO] 19:13:22:842 cpu/(10412:10412): **********************************************************************
+[INFO] 19:13:22:842 cpu/(10412:10412): **********************************************************************
+[INFO] 19:13:22:842 cpu/(10412:10412): Archivo de config CPU leído
+[INFO] 19:13:22:842 cpu/(10412:10412): Se inicializo la cpu.
+[INFO] 19:15:51:920 cpu/(10709:10709): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:15:51:920 cpu/(10709:10709): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:15:51:920 cpu/(10709:10709): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:15:51:920 cpu/(10709:10709): Configuracion del IP_UMC leida con exito
+[INFO] 19:15:51:920 cpu/(10709:10709): **********************************************************************
+[INFO] 19:15:51:920 cpu/(10709:10709): **********************************************************************
+[INFO] 19:15:51:920 cpu/(10709:10709): **********************************************************************
+[INFO] 19:15:51:920 cpu/(10709:10709): Archivo de config CPU leído
+[INFO] 19:15:51:920 cpu/(10709:10709): Se inicializo la cpu.
+[INFO] 19:19:05:507 cpu/(10838:10838): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:19:05:507 cpu/(10838:10838): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:19:05:507 cpu/(10838:10838): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:19:05:507 cpu/(10838:10838): Configuracion del IP_UMC leida con exito
+[INFO] 19:19:05:507 cpu/(10838:10838): **********************************************************************
+[INFO] 19:19:05:507 cpu/(10838:10838): **********************************************************************
+[INFO] 19:19:05:507 cpu/(10838:10838): **********************************************************************
+[INFO] 19:19:05:507 cpu/(10838:10838): Archivo de config CPU leído
+[INFO] 19:19:05:507 cpu/(10838:10838): Se inicializo la cpu.
+[INFO] 19:23:00:417 cpu/(11202:11202): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:23:00:417 cpu/(11202:11202): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:23:00:417 cpu/(11202:11202): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:23:00:417 cpu/(11202:11202): Configuracion del IP_UMC leida con exito
+[INFO] 19:23:00:417 cpu/(11202:11202): **********************************************************************
+[INFO] 19:23:00:417 cpu/(11202:11202): **********************************************************************
+[INFO] 19:23:00:417 cpu/(11202:11202): **********************************************************************
+[INFO] 19:23:00:417 cpu/(11202:11202): Archivo de config CPU leído
+[INFO] 19:23:00:417 cpu/(11202:11202): Se inicializo la cpu.
+[INFO] 19:23:03:586 cpu/(11202:11202): No se pudo realizar el handshake.
+[INFO] 19:24:48:358 cpu/(11698:11698): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:24:48:358 cpu/(11698:11698): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:24:48:358 cpu/(11698:11698): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:24:48:358 cpu/(11698:11698): Configuracion del IP_UMC leida con exito
+[INFO] 19:24:48:358 cpu/(11698:11698): **********************************************************************
+[INFO] 19:24:48:358 cpu/(11698:11698): **********************************************************************
+[INFO] 19:24:48:358 cpu/(11698:11698): **********************************************************************
+[INFO] 19:24:48:358 cpu/(11698:11698): Archivo de config CPU leído
+[INFO] 19:24:48:358 cpu/(11698:11698): Se inicializo la cpu.
+[INFO] 19:24:51:527 cpu/(11698:11698): No se pudo realizar el handshake.
+[INFO] 19:25:48:655 cpu/(12018:12018): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:25:48:655 cpu/(12018:12018): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:25:48:655 cpu/(12018:12018): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:25:48:655 cpu/(12018:12018): Configuracion del IP_UMC leida con exito
+[INFO] 19:25:48:655 cpu/(12018:12018): **********************************************************************
+[INFO] 19:25:48:655 cpu/(12018:12018): **********************************************************************
+[INFO] 19:25:48:655 cpu/(12018:12018): **********************************************************************
+[INFO] 19:25:48:655 cpu/(12018:12018): Archivo de config CPU leído
+[INFO] 19:25:48:655 cpu/(12018:12018): Se inicializo la cpu.
+[INFO] 19:26:26:940 cpu/(12018:12018): No se pudo realizar el handshake.
+[INFO] 19:27:01:177 cpu/(12355:12355): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:27:01:177 cpu/(12355:12355): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:27:01:177 cpu/(12355:12355): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:27:01:177 cpu/(12355:12355): Configuracion del IP_UMC leida con exito
+[INFO] 19:27:01:177 cpu/(12355:12355): **********************************************************************
+[INFO] 19:27:01:177 cpu/(12355:12355): **********************************************************************
+[INFO] 19:27:01:177 cpu/(12355:12355): **********************************************************************
+[INFO] 19:27:01:177 cpu/(12355:12355): Archivo de config CPU leído
+[INFO] 19:27:01:177 cpu/(12355:12355): Se inicializo la cpu.
+[INFO] 19:27:16:185 cpu/(12355:12355): No se pudo realizar el handshake.
+[INFO] 19:31:55:710 cpu/(12744:12744): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 19:31:55:710 cpu/(12744:12744): Configuracion del IP_NUCLEO leida con exito
+[INFO] 19:31:55:710 cpu/(12744:12744): Configuracion del PUERTO_UMC leida con exito
+[INFO] 19:31:55:710 cpu/(12744:12744): Configuracion del IP_UMC leida con exito
+[INFO] 19:31:55:710 cpu/(12744:12744): **********************************************************************
+[INFO] 19:31:55:710 cpu/(12744:12744): **********************************************************************
+[INFO] 19:31:55:710 cpu/(12744:12744): **********************************************************************
+[INFO] 19:31:55:710 cpu/(12744:12744): Archivo de config CPU leído
+[INFO] 19:31:55:710 cpu/(12744:12744): Se inicializo la cpu.
+[INFO] 19:32:59:920 cpu/(12744:12744): No se pudo realizar el handshake.
