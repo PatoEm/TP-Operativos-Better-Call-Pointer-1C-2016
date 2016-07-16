@@ -105,3 +105,8 @@
 [INFO] 00:41:40:423 SWAP/(20468:20468): Server creado y escuchando correctamente
 [INFO] 00:42:05:847 SWAP/(20468:20468): Hay espacio
 [INFO] 00:42:05:848 SWAP/(20468:20468): Espacio reservado correctamente
+[INFO] 01:10:06:190 SWAP/(22650:22650): Valores del archivo de configuracion seteados
+[INFO] 01:10:06:201 SWAP/(22650:22650): Archivo de particion creado
+[INFO] 01:10:06:201 SWAP/(22650:22650): Server creado y escuchando correctamente
+[INFO] 01:10:55:73 SWAP/(22650:22650): Hay espacio
+[INFO] 01:10:55:73 SWAP/(22650:22650): Espacio reservado correctamente

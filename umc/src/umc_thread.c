@@ -126,7 +126,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					|| cantidadDePaginasLibres() == 0) {
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+						unaPagina, scu->offset,0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			} else {
@@ -136,9 +136,9 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				} else
 					bytes = solicitarBytes(pidActivo,
 							scu->pageComienzo.numDePag, scu->offset,
-							scu->dataLen);
+							scu->pageComienzo.bitUso);
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 25/*SOLICITAR_BYTES*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+						unaPagina, scu->offset, scu->pageComienzo.bitUso, bytes, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			}
@@ -149,7 +149,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					|| cantidadDePaginasLibres() == 0) {
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
-						unaPagina, scu->offset, scu->dataLen, bytes, pidActivo);
+						unaPagina, scu->offset, 0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			} else {

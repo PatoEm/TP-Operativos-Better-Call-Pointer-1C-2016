@@ -49,9 +49,11 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		pagina = ((pcbProceso.paginasDeCodigo) - 1); //todo ojo acá si explota algo
 		nuevaVariable = malloc(sizeof(paginaDeStack));
 		asignadoVacio->numDePag = ((pcbProceso.paginasDeCodigo) - 1);
+		asignadoVacio->bitUso=4;
 		nuevaVariable->pos = 0;
+		//(Char id, Char action, espacioAsignado pageComienzo,Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-				(tamanioPaginaUmc - 5), 4, NULL, 0);
+				(tamanioPaginaUmc - 5), 0, NULL, 0);
 		buffer = serializeCpuUmc(streamCpuUmc);
 		socketSend(socketUMC->ptrSocket, buffer);
 		buffer = socketReceive(socketUMC->ptrSocket);
@@ -76,8 +78,9 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 				list_size(pcbProceso.indiceDelStack) - 1);
 		if (ultimaPagina->vars.off - 4 < 0) {
 			asignadoVacio->numDePag = ultimaPagina->vars.pag - 1;
+			asignadoVacio->bitUso=4;
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-					tamanioPaginaUmc - 5, 4, 0, 0);
+					tamanioPaginaUmc - 5, 0, 0, 0);
 			buffer = serializeCpuUmc(streamCpuUmc);
 			socketSend(socketUMC->ptrSocket, buffer);
 			buffer = socketReceive(socketUMC->ptrSocket);
@@ -167,12 +170,13 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	//todo Emi chequea esto
 	//espacioAsignado espacio;
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
+	asignadoVacio->bitUso=4;
 	int offset = direccion_variable / tamanioPaginaUmc;
 	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
 	StrCpuUmc* streamCpuUMC;
 	streamCpuUMC = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, offset,
-			4, NULL, 0);
+			0, NULL, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
 	socketSend(socketUMC->ptrSocket, buffer);
 	buffer = socketReceive(socketUMC->ptrSocket);
