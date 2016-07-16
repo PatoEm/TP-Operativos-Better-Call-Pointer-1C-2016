@@ -41,26 +41,31 @@ String stringFromByteArray(Byte*, Int32U);
 t_log* logger = NULL;
 
 int main(void) {
-
+	log_info(getLogger(), "===============================================");
+	log_info(getLogger(), "===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====");
+	log_info(getLogger(), "===============================================");
+	log_info(getLogger(), "                                               ");
+	log_info(getLogger(), "                                               ");
+	log_info(getLogger(), "Leyendo archivo de configuracion y conectandose al NUCLEO");
 	if (loadConfig() && socketConnection()) {
 
 		direccionDeArchivo = (char *) malloc(150);
 		verificarMemoria(direccionDeArchivo);
 
 		do {
-		printf("Ingrese direccion del archivo: ");
+		printf("Ingrese la ruta del archivo: ");
 	    scanf("%s", direccionDeArchivo);
 		} while (access(direccionDeArchivo, R_OK));
 
-
+		log_info(getLogger(), "Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO");
 		if (!callAndSendAnSISOP(direccionDeArchivo)) {
-			puts("No se pudo obtener el archivo y enviarlo al Kernel");
+			log_error(getLogger(), "No se pudo obtener el archivo .AnSISOP y enviarlo al NUCLEO");
 			return FALSE;
 		}
 
 		while (TRUE) {
 			if(!instructionsFromKernel()) {
-				puts("No se recibio instrucciones del Kernel");
+				log_error(getLogger(), "No se recibio instrucciones del NUCLEO");
 				return FALSE;
 			}
 		}
@@ -75,30 +80,32 @@ int main(void) {
 Boolean loadConfig() {
     tConfig = config_create(ARCHIVO_CONF);
     if (tConfig == NULL) {
-    	printf("No se encuentra o falta el archivo de configuracion en la direccion '/%s'.\n", ARCHIVO_CONF);
+    	log_error(getLogger(), "No se encuentra o falta el archivo de configuracion en la ruta '/%s'.\n", ARCHIVO_CONF);
     	return FALSE;
     }
 
     if (config_keys_amount(tConfig) == PARAM_LENGTH) {
     	if (config_has_property(tConfig, PUERTO_NUCLEO)) {
+    		log_info(getLogger(), "El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion");
     		puertoKernel = config_get_int_value(tConfig, PUERTO_NUCLEO);
     	} else {
-    		printf("[ERROR]: Falta un parametro. \n");
+    		log_error(getLogger(), "Falta el parametro: PUERTO_NUCLEO. \n");
     		return FALSE;
     	}
 
     	if (config_has_property(tConfig, IP_NUCLEO)) {
+    		log_info(getLogger(), "El parametro IP_NUCLEO se encontro en el archivo de configuracion");
     		ipKernel = config_get_string_value(tConfig, IP_NUCLEO);
     	} else {
-    		printf("[ERROR]: Falta un parametro. \n");
+    		log_error(getLogger(), "Falta el parametro: IP_NUCLEO. \n");
     		return FALSE;
     	}
 
-    	printf("Archivo de configuracion CONSOLA leido exitosamente\n=============\n");
+    	log_info(getLogger(), "Archivo de configuracion CONSOLA leido exitosamente\n=============\n");
     	printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", puertoKernel, ipKernel);
     	return TRUE;
     } else {
-    	printf("[ERROR]: El archivo de configuracion no tiene todos los campos. \n");
+    	log_error(getLogger(), "El archivo de configuracion no tiene todos los campos. \n");
     	return FALSE;
     }
 }
@@ -113,10 +120,12 @@ Boolean socketConnection() {
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
 
+	log_info(getLogger(), "La CONSOLA se conecto al NUCLEO exitosamente\n=============\n");
+
 	if(handshake(kernelClient, CONSOLA_ID)){
-		puts("Handshake realizado con exito.");
+		log_info(getLogger(), "Handshake realizado con exito.");
 	} else {
-		puts("No se pudo realizar el handshake!!!.");
+		log_error(getLogger(), "No se pudo realizar el handshake!!!.");
 		return FALSE;
 	}
 
@@ -128,7 +137,7 @@ Boolean socketConnection() {
 Boolean callAndSendAnSISOP(String path) {
 
 	if ( path == NULL || string_is_empty(path)) {
-		printf("[ERROR]: La direccion del archivo es vacio. ------- Terminando \n");
+		log_error(getLogger(), "La direccion del archivo es vacio. ------- Terminando \n");
 		return FALSE;
 	}
 
@@ -146,12 +155,12 @@ Boolean callAndSendAnSISOP(String path) {
 	int j;
 	for (j = 0; j < 18; ++j) {
 		if (rutaCodigoAnsisop[j] != cpBuffer[j]){
-			puts("El archivo obtenido no es un .AnSISOP");
+			log_error(getLogger(), "El archivo obtenido no es un .AnSISOP");
 			return FALSE;
 		}
 	}
 
-	puts("Se reconocio un archivo.AnSISOP");
+	log_info(getLogger(), "Se reconocio el archivo como un .AnSISOP");
 	//printf("%s\n", buffer);
 
 	if (sck != NULL) {
@@ -159,20 +168,20 @@ Boolean callAndSendAnSISOP(String path) {
 	}
 
 	sck = newStrConKer((char) CONSOLA_ID, (char) ARCHIVO_ANSISOP, (Byte*) buffer, fileLen);
-	puts("Enviando al Nucleo el archivo");
+	log_info(getLogger(), "Enviando el archivo al NUCLEO");
 	return sendStream();
 }
 
 Boolean sendStream() {
 	if (sck == NULL) {
-		printf("[ERROR] Al tratar de enviar el stream al Kernel sin inicializar. ----- Terminando \n");
+		log_error(getLogger(), "Se trato de enviar el stream al Kernel sin inicializar. ----- Terminando \n");
 		return FALSE;
 	}
 
 	SocketBuffer* sb = serializeConKer(sck);
 
 	if(!socketSend(kernelClient->ptrSocket, sb)) {
-		printf("[ERROR]: No se pudo enviar el stream al Kernel. ----- Ternimando \n");
+		log_error(getLogger(), "No se pudo enviar el stream al NUCLEO. ----- Terminando \n");
 		return FALSE;
 	}
 	free(sb);
@@ -185,27 +194,27 @@ Boolean instructionsFromKernel() {
 	if (skc != NULL) {
 		free(skc);
 	}
-	puts("Esperando al Kernel");
+	log_info(getLogger(), "Esperando instrucciones del NUCLEO");
 
 	if((sb = socketReceive(kernelClient->ptrSocket)) == NULL) {
-		printf("[ERROR]: No se pudo recibir el stream del Kernel. ----- Terminando \n");
+		log_error(getLogger(),"No se pudo recibir el stream del Kernel. ----- Terminando \n");
 		return FALSE;
 	}
-	puts("Instruccion del Kernel recibida");
+	log_info(getLogger(), "Instruccion del NUCLEO recibida");
 	skc = unserializeKerCon((Stream) sb->data);
 
 	switch(skc->action) {
 		case IMPRIMIR:
-			puts("Funcion [IMPRIMIR]");
+			log_info(getLogger(), "Funcion [IMPRIMIR]");
 			return realizarImprimir();
 		case IMPRIMIRTEXTO:
-			puts("Funcion [IMPRIMIRTEXTO]");
+			log_info(getLogger(), "Funcion [IMPRIMIRTEXTO]");
 			return realizarImprimirTexto();
 		case CERRARCONSOLA:
-			puts("Cerrando Consola");
+			log_info(getLogger(), "Cerrando Consola");
 			return realizarCierreConsola();
 		default:
-			printf("Action: %d", skc->action);
+			log_error(getLogger(), "Action: %d", skc->action);
 			return FALSE;
 	}
 	return TRUE;

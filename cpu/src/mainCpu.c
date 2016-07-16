@@ -216,8 +216,8 @@ Boolean loadConfig() {
 				"**********************************************************************");
 		log_info(getLogger(),
 				"**********************************************************************");
-		log_info(getLogger(), "Archivo de config CPU leído");
-		log_info(getLogger(), "Se inicializo la cpu.");
+		log_info(getLogger(), "Archivo de configuracion CPU leido exitosamente\n=============\n");
+		log_info(getLogger(), "Se inicializo la CPU.");
 
 		printf("Archivo de config CPU leido\n============\n");
 		printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", nucleoPort, ipNucleo);
@@ -386,11 +386,10 @@ String stringFromByteArray(Byte* data, Int32U size) {
 
 // esto debería funcionar re piola
 char* pedirInstruccion(pcb* pcbLoco) {
-
+	char* instruccion = "";
 	int inicio = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].comienzo;
 	int offset = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].longitud;
-	char* instruccion = malloc(offset);
-	instruccion[0]='\0';
+
 	StrCpuUmc* scu;
 	StrUmcCpu* suc;
 
