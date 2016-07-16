@@ -875,3 +875,22 @@
 
 [INFO] 03:11:40:671 UMC/(29667:29667): Inicio UMC.
 [INFO] 03:11:40:683 UMC/(29667:29667): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 04:02:08:843 UMC/(802:802): Inicio UMC.
+[INFO] 04:02:08:845 UMC/(802:802): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 04:02:23:223 UMC/(802:802): Alguien se conecto.
+[INFO] 04:02:23:224 UMC/(802:802): Gestor de conexiones.
+[INFO] 04:02:23:224 UMC/(802:802): Esperando el request...
+[INFO] 04:02:23:224 UMC/(802:802): ...Entro el request.
+[INFO] 04:02:23:224 UMC/(802:1445): HILO 3030: Hilo creado.
+
+[INFO] 04:02:23:224 UMC/(802:1445): HILO 3030: Listening...
+
+[INFO] 04:02:25:225 UMC/(802:802): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 04:02:28:225 UMC/(802:1445): HILO 3030: Cliente aceptado (9).
+
+[INFO] 04:02:28:225 UMC/(802:1445): HILO 3030: Buffer recibido de (9).
+
+[INFO] 04:02:28:225 UMC/(802:1445): HILO 3030: Buffer ID 1.
+
+[INFO] 04:02:28:225 UMC/(802:1445): HILO 3030: Cliente (9) es el KERNEL.
+

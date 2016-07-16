@@ -492,3 +492,12 @@
 [INFO] 03:11:21:62 NUCLEO/(29389:29397): KERNEL : Se cayo el cliente 10
 [INFO] 03:11:21:62 NUCLEO/(29389:29397): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
 [INFO] 03:11:21:62 NUCLEO/(29389:29397): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 04:02:28:225 NUCLEO/(1440:1440): Variables inicializadas.
+[INFO] 04:02:28:226 NUCLEO/(1440:1440): Se han creado los threads.
+[INFO] 04:02:28:226 NUCLEO/(1440:1447): Server creado con exito y escuchando.
+[INFO] 04:02:28:226 NUCLEO/(1440:1447): Server iniciado.
+[INFO] 04:02:37:918 NUCLEO/(1440:1447): Nueva Conexion detectada, realizando handshake
+[INFO] 04:02:37:918 NUCLEO/(1440:1447): ID Nuevo Cliente: 0.
+[INFO] 04:02:37:918 NUCLEO/(1440:1447): Nuevo Cliente CONSOLA
+[INFO] 04:02:37:918 NUCLEO/(1440:1447): Nuevo Cliente Consola 10 aceptado.
+[INFO] 04:02:37:918 NUCLEO/(1440:1447): KER-CON: HANDSHAKE se devolvio handshake

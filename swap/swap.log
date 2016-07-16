@@ -258,3 +258,6 @@ begin
 [INFO] 03:11:35:120 SWAP/(29622:29622): Valores del archivo de configuracion seteados
 [INFO] 03:11:35:132 SWAP/(29622:29622): Archivo de particion creado
 [INFO] 03:11:35:132 SWAP/(29622:29622): Server creado y escuchando correctamente
+[INFO] 04:02:00:877 SWAP/(32697:32697): Valores del archivo de configuracion seteados
+[INFO] 04:02:00:888 SWAP/(32697:32697): Archivo de particion creado
+[INFO] 04:02:00:889 SWAP/(32697:32697): Server creado y escuchando correctamente

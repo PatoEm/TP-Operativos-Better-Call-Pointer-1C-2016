@@ -1,0 +1,15 @@
+[INFO] 04:02:34:906 consola/(2100:2100): ===============================================
+[INFO] 04:02:34:917 consola/(2100:2100): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 04:02:34:917 consola/(2100:2100): ===============================================
+[INFO] 04:02:34:917 consola/(2100:2100):                                                
+[INFO] 04:02:34:917 consola/(2100:2100):                                                
+[INFO] 04:02:34:917 consola/(2100:2100): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 04:02:34:917 consola/(2100:2100): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 04:02:34:917 consola/(2100:2100): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 04:02:34:917 consola/(2100:2100): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 04:02:37:918 consola/(2100:2100): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 04:02:37:918 consola/(2100:2100): Handshake realizado con exito.
