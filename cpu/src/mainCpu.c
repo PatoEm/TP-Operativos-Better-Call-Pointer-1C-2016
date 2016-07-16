@@ -409,10 +409,12 @@ char* pedirInstruccion(pcb* pcbLoco) {
 			offsetPag = offset;
 		}
 		auxiliar.numDePag = pagina;
-		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, auxiliar, offsetPag, 0,
+		//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo,
+		//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, auxiliar, inicioPag, offsetPag,
 		NULL, 0);
 		buffer = serializeCpuUmc(scu);
-		if (!socketSend(socketUMC, buffer)) {
+		if (!socketSend(socketUMC->ptrSocket, buffer)) {
 			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
 			return FALSE;
 		}

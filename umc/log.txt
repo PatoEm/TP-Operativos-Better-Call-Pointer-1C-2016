@@ -11,3 +11,5 @@
 [INFO] 20:49:12:595 Elestac/(15795:15795): Inicio Log UMC
 [INFO] 20:52:24:591 Elestac/(16206:16206): Inicio Log UMC
 [INFO] 21:06:29:292 Elestac/(16654:16654): Inicio Log UMC
+[INFO] 21:07:47:521 Elestac/(16932:16932): Inicio Log UMC
+[INFO] 21:10:47:77 Elestac/(17261:17261): Inicio Log UMC

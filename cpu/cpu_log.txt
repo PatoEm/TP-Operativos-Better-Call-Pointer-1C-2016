@@ -74,3 +74,33 @@
 [INFO] 20:50:01:34 cpu/(15946:15946): Mensaje enviado a la UMC ppal.
 [INFO] 20:50:01:35 cpu/(15946:15946): getNextPcb: Nuevo PCB vacio creado.
 [INFO] 20:50:01:35 cpu/(15946:15946): Obtener siguiente PCB
+[INFO] 21:09:23:515 cpu/(17114:17114): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 21:09:23:516 cpu/(17114:17114): Configuracion del IP_NUCLEO leida con exito
+[INFO] 21:09:23:516 cpu/(17114:17114): Configuracion del PUERTO_UMC leida con exito
+[INFO] 21:09:23:516 cpu/(17114:17114): Configuracion del IP_UMC leida con exito
+[INFO] 21:09:23:516 cpu/(17114:17114): **********************************************************************
+[INFO] 21:09:23:516 cpu/(17114:17114): **********************************************************************
+[INFO] 21:09:23:516 cpu/(17114:17114): **********************************************************************
+[INFO] 21:09:23:516 cpu/(17114:17114): Archivo de config CPU leído
+[INFO] 21:09:23:516 cpu/(17114:17114): Se inicializo la cpu.
+[INFO] 21:09:32:139 cpu/(17114:17114): Handshake realizado con exito.
+[INFO] 21:09:35:140 cpu/(17114:17114): Mensaje enviado a la UMC ppal.
+[INFO] 21:09:40:141 cpu/(17114:17114): Me conecte al agradable hilo
+[INFO] 21:09:40:141 cpu/(17114:17114): Mensaje enviado a la UMC ppal.
+[INFO] 21:09:40:141 cpu/(17114:17114): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 21:09:40:141 cpu/(17114:17114): Obtener siguiente PCB
+[INFO] 21:11:17:972 cpu/(17412:17412): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 21:11:17:972 cpu/(17412:17412): Configuracion del IP_NUCLEO leida con exito
+[INFO] 21:11:17:972 cpu/(17412:17412): Configuracion del PUERTO_UMC leida con exito
+[INFO] 21:11:17:972 cpu/(17412:17412): Configuracion del IP_UMC leida con exito
+[INFO] 21:11:17:972 cpu/(17412:17412): **********************************************************************
+[INFO] 21:11:17:972 cpu/(17412:17412): **********************************************************************
+[INFO] 21:11:17:972 cpu/(17412:17412): **********************************************************************
+[INFO] 21:11:17:972 cpu/(17412:17412): Archivo de config CPU leído
+[INFO] 21:11:17:972 cpu/(17412:17412): Se inicializo la cpu.
+[INFO] 21:11:20:973 cpu/(17412:17412): Handshake realizado con exito.
+[INFO] 21:11:23:973 cpu/(17412:17412): Mensaje enviado a la UMC ppal.
+[INFO] 21:11:28:974 cpu/(17412:17412): Me conecte al agradable hilo
+[INFO] 21:11:28:974 cpu/(17412:17412): Mensaje enviado a la UMC ppal.
+[INFO] 21:11:28:974 cpu/(17412:17412): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 21:11:28:974 cpu/(17412:17412): Obtener siguiente PCB
