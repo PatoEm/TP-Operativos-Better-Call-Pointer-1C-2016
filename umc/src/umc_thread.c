@@ -110,6 +110,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	StrUmcCpu*streamUmcCpu;
 	char* bytes;
 	while ((streamCpuUmc->action)!=24/*CIERRE_CONEXION_CPU*/) {
+		scu=streamCpuUmc;
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
 			log_info(umclog, "HILO %d: Me pidieron el tamanio de marcos (%d).\n", mi_socket, socket->descriptor);
