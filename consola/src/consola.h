@@ -30,8 +30,13 @@
 #define IP_NUCLEO "IP_NUCLEO"
 #define PUERTO_NUCLEO "PUERTO_NUCLEO"
 #define ARCHIVO_CONF "configconsola"
+#define LOGGER_FILE "consola_log.txt"
 
 int tamArchivo(char* direccionArchivo);
 char* leerProgramaAnSISOP(char* direccionArchivo);
+
+//======================================================
+// Prototipo de funcion para loggear
+t_log* getLogger();
 
 #endif /* CONSOLA_H_ */
