@@ -409,7 +409,8 @@ char* pedirInstruccion(pcb* pcbLoco) {
 			offsetPag = offset;
 		}
 		asignadoVacio->numDePag = pagina;
-		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag, 0,
+		//(Char id, Char action, espacioAsignado pageComienzo,Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag, offsetPag,
 		NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC->ptrSocket, buffer)) {

@@ -22,7 +22,8 @@ src/mainCpu.d: ../src/mainCpu.c \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/log.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/archivosYLogsYMas.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h \
- /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h
 
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/config.h:
 
@@ -71,3 +72,5 @@ src/mainCpu.d: ../src/mainCpu.c \
 /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/temporal.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h:

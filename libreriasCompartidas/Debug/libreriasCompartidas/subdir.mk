@@ -5,18 +5,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../libreriasCompartidas/archivosYLogsYMas.c \
+../libreriasCompartidas/espacioAsignado.c \
 ../libreriasCompartidas/pcb.c \
 ../libreriasCompartidas/pointerSocketes.c \
 ../libreriasCompartidas/pointerStream.c 
 
 OBJS += \
 ./libreriasCompartidas/archivosYLogsYMas.o \
+./libreriasCompartidas/espacioAsignado.o \
 ./libreriasCompartidas/pcb.o \
 ./libreriasCompartidas/pointerSocketes.o \
 ./libreriasCompartidas/pointerStream.o 
 
 C_DEPS += \
 ./libreriasCompartidas/archivosYLogsYMas.d \
+./libreriasCompartidas/espacioAsignado.d \
 ./libreriasCompartidas/pcb.d \
 ./libreriasCompartidas/pointerSocketes.d \
 ./libreriasCompartidas/pointerStream.d 

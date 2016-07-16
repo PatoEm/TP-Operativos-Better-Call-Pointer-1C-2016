@@ -17,6 +17,7 @@ src/cpu.d: ../src/cpu.c ../src/cpu.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerSocketes.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerTipos.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerSocketes.h \
+ /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerStream.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pcb.h \
  /home/utnso/tp-2016-1c-Better-call-pointer/commons/commons/bitarray.h \
@@ -60,6 +61,8 @@ src/cpu.d: ../src/cpu.c ../src/cpu.h \
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerTipos.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerSocketes.h:
+
+/home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/espacioAsignado.h:
 
 /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/libreriasCompartidas/pointerStream.h:
 
