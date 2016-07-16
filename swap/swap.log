@@ -78,3 +78,9 @@
 [INFO] 21:24:50:747 SWAP/(17932:17932): Hay espacio
 [INFO] 21:24:50:747 SWAP/(17932:17932): Espacio reservado correctamente
 [ERROR] 21:38:49:600 SWAP/(17932:17932): Al recibir del cliente
+[INFO] 21:46:17:396 SWAP/(18350:18350): Valores del archivo de configuracion seteados
+[INFO] 21:46:17:402 SWAP/(18350:18350): Archivo de particion creado
+[INFO] 21:46:17:402 SWAP/(18350:18350): Server creado y escuchando correctamente
+[INFO] 21:50:18:253 SWAP/(18350:18350): Hay espacio
+[INFO] 21:50:18:253 SWAP/(18350:18350): Espacio reservado correctamente
+[ERROR] 22:55:10:48 SWAP/(18350:18350): Al recibir del cliente
