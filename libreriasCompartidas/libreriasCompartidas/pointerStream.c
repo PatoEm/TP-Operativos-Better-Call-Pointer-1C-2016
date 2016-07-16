@@ -724,9 +724,35 @@ SocketBuffer* serializeCpuUmc(StrCpuUmc* scu) {
 	memcpy(ptrData, ptrByte, sizeof(scu->action));
 	ptrData += sizeof(scu->action);
 
-	ptrByte = (Byte*) &scu->pageComienzo;
-	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo));
-	ptrData += sizeof(scu->pageComienzo);
+	// comienzo a serializar el espacioAsignado pageComienzo
+	ptrByte = (Byte*) &scu->pageComienzo.IDPaginaInterno;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.IDPaginaInterno));
+	ptrData += sizeof(scu->pageComienzo.IDPaginaInterno);
+
+	ptrByte = (Byte*) &scu->pageComienzo.pid;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.pid));
+	ptrData += sizeof(scu->pageComienzo.pid);
+
+	ptrByte = (Byte*) &scu->pageComienzo.numDePag;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.numDePag));
+	ptrData += sizeof(scu->pageComienzo.numDePag);
+
+	ptrByte = (Byte*) &scu->pageComienzo.bitUso;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.bitUso));
+	ptrData += sizeof(scu->pageComienzo.bitUso);
+
+	ptrByte = (Byte*) &scu->pageComienzo.bitModificado;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.bitModificado));
+	ptrData += sizeof(scu->pageComienzo.bitModificado);
+
+	ptrByte = (Byte*) &scu->pageComienzo.punteroAPagina;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.punteroAPagina));
+	ptrData += sizeof(scu->pageComienzo.punteroAPagina);
+
+	ptrByte = (Byte*) &scu->pageComienzo.bitDePresencia;
+	memcpy(ptrData, ptrByte, sizeof(scu->pageComienzo.bitDePresencia));
+	ptrData += sizeof(scu->pageComienzo.bitDePresencia);
+	// termino de serializar el espacioAsignado pageComienzo
 
 	ptrByte = (Byte*) &scu->offset;
 	memcpy(ptrData, ptrByte, sizeof(scu->offset));
@@ -802,9 +828,35 @@ SocketBuffer* serializeUmcCpu(StrUmcCpu* suc) {
 	memcpy(ptrData, ptrByte, sizeof(suc->action));
 	ptrData += sizeof(suc->action);
 
-	ptrByte = (Byte*) &suc->pageComienzo;
-	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo));
-	ptrData += sizeof(suc->pageComienzo);
+	// comienzo a serializar el espacioAsignado pageComienzo
+	ptrByte = (Byte*) &suc->pageComienzo.IDPaginaInterno;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.IDPaginaInterno));
+	ptrData += sizeof(suc->pageComienzo.IDPaginaInterno);
+
+	ptrByte = (Byte*) &suc->pageComienzo.pid;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.pid));
+	ptrData += sizeof(suc->pageComienzo.pid);
+
+	ptrByte = (Byte*) &suc->pageComienzo.numDePag;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.numDePag));
+	ptrData += sizeof(suc->pageComienzo.numDePag);
+
+	ptrByte = (Byte*) &suc->pageComienzo.bitUso;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.bitUso));
+	ptrData += sizeof(suc->pageComienzo.bitUso);
+
+	ptrByte = (Byte*) &suc->pageComienzo.bitModificado;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.bitModificado));
+	ptrData += sizeof(suc->pageComienzo.bitModificado);
+
+	ptrByte = (Byte*) &suc->pageComienzo.punteroAPagina;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.punteroAPagina));
+	ptrData += sizeof(suc->pageComienzo.punteroAPagina);
+
+	ptrByte = (Byte*) &suc->pageComienzo.bitDePresencia;
+	memcpy(ptrData, ptrByte, sizeof(suc->pageComienzo.bitDePresencia));
+	ptrData += sizeof(suc->pageComienzo.bitDePresencia);
+	// termino de serializar espacioAsignado pageComienzo
 
 	ptrByte = (Byte*) &suc->offset;
 	memcpy(ptrData, ptrByte, sizeof(suc->offset));
@@ -843,9 +895,35 @@ SocketBuffer* serializeUmcSwa(StrUmcSwa* sus) {
 	memcpy(ptrData, ptrByte, sizeof(sus->action));
 	ptrData += sizeof(sus->action);
 
-	ptrByte = (Byte*) &sus->pageComienzo;
-	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo));
-	ptrData += sizeof(sus->pageComienzo);
+	// comienzo a serializar el espacioAsignado pageComienzo
+	ptrByte = (Byte*) &sus->pageComienzo.IDPaginaInterno;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.IDPaginaInterno));
+	ptrData += sizeof(sus->pageComienzo.IDPaginaInterno);
+
+	ptrByte = (Byte*) &sus->pageComienzo.pid;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.pid));
+	ptrData += sizeof(sus->pageComienzo.pid);
+
+	ptrByte = (Byte*) &sus->pageComienzo.numDePag;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.numDePag));
+	ptrData += sizeof(sus->pageComienzo.numDePag);
+
+	ptrByte = (Byte*) &sus->pageComienzo.bitUso;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.bitUso));
+	ptrData += sizeof(sus->pageComienzo.bitUso);
+
+	ptrByte = (Byte*) &sus->pageComienzo.bitModificado;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.bitModificado));
+	ptrData += sizeof(sus->pageComienzo.bitModificado);
+
+	ptrByte = (Byte*) &sus->pageComienzo.punteroAPagina;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.punteroAPagina));
+	ptrData += sizeof(sus->pageComienzo.punteroAPagina);
+
+	ptrByte = (Byte*) &sus->pageComienzo.bitDePresencia;
+	memcpy(ptrData, ptrByte, sizeof(sus->pageComienzo.bitDePresencia));
+	ptrData += sizeof(sus->pageComienzo.bitDePresencia);
+	// termino de serializar el espacioAsignado pageComienzo
 
 	ptrByte = (Byte*) &sus->cantPage;
 	memcpy(ptrData, ptrByte, sizeof(sus->cantPage));
@@ -884,9 +962,23 @@ SocketBuffer* serializeSwaUmc(StrSwaUmc* ssu) {
 	memcpy(ptrData, ptrByte, sizeof(ssu->action));
 	ptrData += sizeof(ssu->action);
 
-	ptrByte = (Byte*) &ssu->pageComienzo;
-	memcpy(ptrData, ptrByte, sizeof(ssu->pageComienzo));
-	ptrData += sizeof(ssu->pageComienzo);
+	// comienzo de serializar el paginaAsignada pageComienzo
+	ptrByte = (Byte*) &ssu->pageComienzo.IDPaginaInterno;
+	memcpy(ptrData, ptrByte, sizeof(ssu->pageComienzo.IDPaginaInterno));
+	ptrData += sizeof(ssu->pageComienzo.IDPaginaInterno);
+
+	ptrByte = (Byte*) &ssu->pageComienzo.pid;
+	memcpy(ptrData, ptrByte, sizeof(ssu->pageComienzo.pid));
+	ptrData += sizeof(ssu->pageComienzo.pid);
+
+	ptrByte = (Byte*) &ssu->pageComienzo.bitLectura;
+	memcpy(ptrData, ptrByte, sizeof(ssu->pageComienzo.bitLectura));
+	ptrData += sizeof(ssu->pageComienzo.bitLectura);
+
+	ptrByte = (Byte*) &ssu->pageComienzo.numDePag;
+	memcpy(ptrData, ptrByte, sizeof(ssu->pageComienzo.numDePag));
+	ptrData += sizeof(ssu->pageComienzo.numDePag);
+	// termino de serializar el paginaAsignada pageComienzo
 
 	ptrByte = (Byte*) &ssu->cantPage;
 	memcpy(ptrData, ptrByte, sizeof(ssu->cantPage));
@@ -1259,8 +1351,10 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized) {
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+
 	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
 	ptrByte += sizeof(pageComienzo);
+
 	memcpy(&offset, ptrByte, sizeof(offset));
 	ptrByte += sizeof(offset);
 
