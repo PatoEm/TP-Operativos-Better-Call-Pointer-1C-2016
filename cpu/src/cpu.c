@@ -503,7 +503,7 @@ void mirarSenial(pcb * pcbActual) {
 // Devuelve el logger para loggear los logs para poder loggear
 t_log* getLogger() {
 	if (logger == NULL) {
-		logger = log_create(LOGGER_FILE, "cpu", FALSE, LOG_LEVEL_INFO);
+		logger = log_create(LOGGER_FILE, "cpu", TRUE, LOG_LEVEL_INFO);
 	}
 	return logger;
 }
