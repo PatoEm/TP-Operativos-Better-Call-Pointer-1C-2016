@@ -133,7 +133,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			} else {
 				if (tlbHabilitada()) {
 					bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
-							scu->offset, scu->dataLen);
+							scu->offset, scu->pageComienzo.bitUso);
 				} else
 					bytes = solicitarBytes(pidActivo,
 							scu->pageComienzo.numDePag, scu->offset,

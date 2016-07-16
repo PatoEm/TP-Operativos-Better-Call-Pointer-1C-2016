@@ -8,13 +8,16 @@
 #include "pcb.h"
 
 void moverProgramCounterPcb(pcb * pcbLoca){
-int i;
-	for (i = 0; i < pcbLoca->instruccionesTotales; ++i) {
-		if((pcbLoca->indiceDeCodigo[i].comienzo)==(pcbLoca->programCounter)){
-			pcbLoca->programCounter=(pcbLoca->indiceDeCodigo[i].comienzo)+(pcbLoca->indiceDeCodigo[i].longitud)+1;
-			pcbLoca->instruccionesRestantes-=1;
-		}
-	}
+//int i;
+//	for (i = 0; i < pcbLoca->instruccionesTotales; ++i) {
+//		if((pcbLoca->indiceDeCodigo[i].comienzo)==(pcbLoca->programCounter)){
+//			pcbLoca->programCounter=(pcbLoca->indiceDeCodigo[i].comienzo)+(pcbLoca->indiceDeCodigo[i].longitud)+1;
+//			pcbLoca->instruccionesRestantes-=1;
+//		}
+//	}
+
+	pcbLoca->programCounter++;
+
 }
 
 

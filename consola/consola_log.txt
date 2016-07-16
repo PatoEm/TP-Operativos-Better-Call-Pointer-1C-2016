@@ -199,3 +199,302 @@
 [INFO] 05:03:39:912 consola/(6580:6580): Se reconocio el archivo como un .AnSISOP
 [INFO] 05:03:39:912 consola/(6580:6580): Enviando el archivo al NUCLEO
 [INFO] 05:03:39:913 consola/(6580:6580): Esperando instrucciones del NUCLEO
+[INFO] 05:07:27:590 consola/(6876:6876): ===============================================
+[INFO] 05:07:27:591 consola/(6876:6876): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:07:27:591 consola/(6876:6876): ===============================================
+[INFO] 05:07:27:591 consola/(6876:6876):                                                
+[INFO] 05:07:27:591 consola/(6876:6876):                                                
+[INFO] 05:07:27:591 consola/(6876:6876): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:07:27:591 consola/(6876:6876): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:07:27:591 consola/(6876:6876): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:07:27:591 consola/(6876:6876): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:07:30:592 consola/(6876:6876): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:07:30:593 consola/(6876:6876): Handshake realizado con exito.
+[INFO] 05:07:38:435 consola/(6876:6876): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:07:38:435 consola/(6876:6876): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:07:38:435 consola/(6876:6876): Enviando el archivo al NUCLEO
+[INFO] 05:07:38:435 consola/(6876:6876): Esperando instrucciones del NUCLEO
+[ERROR] 05:10:02:527 consola/(6876:6876): No se pudo recibir el stream del Kernel. ----- Terminando 
+
+[ERROR] 05:10:02:527 consola/(6876:6876): No se recibio instrucciones del NUCLEO
+[INFO] 05:10:42:771 consola/(7206:7206): ===============================================
+[INFO] 05:10:42:771 consola/(7206:7206): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:10:42:771 consola/(7206:7206): ===============================================
+[INFO] 05:10:42:771 consola/(7206:7206):                                                
+[INFO] 05:10:42:771 consola/(7206:7206):                                                
+[INFO] 05:10:42:771 consola/(7206:7206): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:10:42:771 consola/(7206:7206): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:10:42:771 consola/(7206:7206): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:10:42:771 consola/(7206:7206): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:10:45:772 consola/(7206:7206): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:10:45:773 consola/(7206:7206): Handshake realizado con exito.
+[INFO] 05:10:54:558 consola/(7206:7206): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:10:54:558 consola/(7206:7206): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:10:54:558 consola/(7206:7206): Enviando el archivo al NUCLEO
+[INFO] 05:10:54:558 consola/(7206:7206): Esperando instrucciones del NUCLEO
+[INFO] 05:11:03:61 consola/(7250:7250): ===============================================
+[INFO] 05:11:03:61 consola/(7250:7250): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:11:03:62 consola/(7250:7250): ===============================================
+[INFO] 05:11:03:62 consola/(7250:7250):                                                
+[INFO] 05:11:03:62 consola/(7250:7250):                                                
+[INFO] 05:11:03:62 consola/(7250:7250): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:11:03:62 consola/(7250:7250): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:11:03:62 consola/(7250:7250): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:11:03:62 consola/(7250:7250): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:11:06:62 consola/(7250:7250): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:11:06:62 consola/(7250:7250): Handshake realizado con exito.
+[ERROR] 05:15:01:728 consola/(7206:7206): No se pudo recibir el stream del Kernel. ----- Terminando 
+
+[ERROR] 05:15:01:728 consola/(7206:7206): No se recibio instrucciones del NUCLEO
+[INFO] 05:16:16:946 consola/(7807:7807): ===============================================
+[INFO] 05:16:16:949 consola/(7807:7807): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:16:16:949 consola/(7807:7807): ===============================================
+[INFO] 05:16:16:957 consola/(7807:7807):                                                
+[INFO] 05:16:16:957 consola/(7807:7807):                                                
+[INFO] 05:16:16:958 consola/(7807:7807): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:16:16:958 consola/(7807:7807): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:16:16:958 consola/(7807:7807): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:16:16:958 consola/(7807:7807): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:16:19:959 consola/(7807:7807): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:16:19:959 consola/(7807:7807): Handshake realizado con exito.
+[INFO] 05:16:29:601 consola/(7807:7807): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:16:29:601 consola/(7807:7807): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:16:29:601 consola/(7807:7807): Enviando el archivo al NUCLEO
+[INFO] 05:16:29:601 consola/(7807:7807): Esperando instrucciones del NUCLEO
+[ERROR] 05:19:51:192 consola/(7807:7807): No se pudo recibir el stream del Kernel. ----- Terminando 
+
+[ERROR] 05:19:51:192 consola/(7807:7807): No se recibio instrucciones del NUCLEO
+[INFO] 05:21:24:691 consola/(8347:8347): ===============================================
+[INFO] 05:21:24:695 consola/(8347:8347): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:21:24:695 consola/(8347:8347): ===============================================
+[INFO] 05:21:24:695 consola/(8347:8347):                                                
+[INFO] 05:21:24:695 consola/(8347:8347):                                                
+[INFO] 05:21:24:695 consola/(8347:8347): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:21:24:695 consola/(8347:8347): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:21:24:695 consola/(8347:8347): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:21:24:695 consola/(8347:8347): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:21:27:696 consola/(8347:8347): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:21:27:698 consola/(8347:8347): Handshake realizado con exito.
+[INFO] 05:21:48:598 consola/(8347:8347): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:21:48:598 consola/(8347:8347): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:21:48:598 consola/(8347:8347): Enviando el archivo al NUCLEO
+[INFO] 05:21:48:598 consola/(8347:8347): Esperando instrucciones del NUCLEO
+[ERROR] 05:29:05:286 consola/(8347:8347): No se pudo recibir el stream del Kernel. ----- Terminando 
+
+[ERROR] 05:29:05:286 consola/(8347:8347): No se recibio instrucciones del NUCLEO
+[INFO] 05:29:44:861 consola/(8905:8905): ===============================================
+[INFO] 05:29:44:861 consola/(8905:8905): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:29:44:861 consola/(8905:8905): ===============================================
+[INFO] 05:29:44:861 consola/(8905:8905):                                                
+[INFO] 05:29:44:861 consola/(8905:8905):                                                
+[INFO] 05:29:44:861 consola/(8905:8905): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:29:44:861 consola/(8905:8905): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:29:44:861 consola/(8905:8905): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:29:44:861 consola/(8905:8905): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:29:47:861 consola/(8905:8905): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:29:47:862 consola/(8905:8905): Handshake realizado con exito.
+[INFO] 05:30:04:216 consola/(8905:8905): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:30:04:217 consola/(8905:8905): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:30:04:217 consola/(8905:8905): Enviando el archivo al NUCLEO
+[INFO] 05:30:04:217 consola/(8905:8905): Esperando instrucciones del NUCLEO
+[INFO] 05:34:30:640 consola/(9431:9431): ===============================================
+[INFO] 05:34:30:654 consola/(9431:9431): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:34:30:654 consola/(9431:9431): ===============================================
+[INFO] 05:34:30:654 consola/(9431:9431):                                                
+[INFO] 05:34:30:654 consola/(9431:9431):                                                
+[INFO] 05:34:30:654 consola/(9431:9431): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:34:30:654 consola/(9431:9431): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:34:30:654 consola/(9431:9431): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:34:30:654 consola/(9431:9431): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:34:33:655 consola/(9431:9431): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:34:33:656 consola/(9431:9431): Handshake realizado con exito.
+[INFO] 05:34:42:537 consola/(9431:9431): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:34:42:538 consola/(9431:9431): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:34:42:538 consola/(9431:9431): Enviando el archivo al NUCLEO
+[INFO] 05:34:42:538 consola/(9431:9431): Esperando instrucciones del NUCLEO
+[INFO] 05:37:36:727 consola/(9830:9830): ===============================================
+[INFO] 05:37:36:727 consola/(9830:9830): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:37:36:727 consola/(9830:9830): ===============================================
+[INFO] 05:37:36:727 consola/(9830:9830):                                                
+[INFO] 05:37:36:728 consola/(9830:9830):                                                
+[INFO] 05:37:36:728 consola/(9830:9830): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:37:36:728 consola/(9830:9830): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:37:36:728 consola/(9830:9830): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:37:36:728 consola/(9830:9830): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:37:39:729 consola/(9830:9830): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:37:39:730 consola/(9830:9830): Handshake realizado con exito.
+[INFO] 05:38:09:98 consola/(9830:9830): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:38:09:98 consola/(9830:9830): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:38:09:98 consola/(9830:9830): Enviando el archivo al NUCLEO
+[INFO] 05:38:09:98 consola/(9830:9830): Esperando instrucciones del NUCLEO
+[INFO] 05:42:27:345 consola/(10162:10162): ===============================================
+[INFO] 05:42:27:353 consola/(10162:10162): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:42:27:353 consola/(10162:10162): ===============================================
+[INFO] 05:42:27:353 consola/(10162:10162):                                                
+[INFO] 05:42:27:353 consola/(10162:10162):                                                
+[INFO] 05:42:27:353 consola/(10162:10162): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:42:27:353 consola/(10162:10162): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:42:27:353 consola/(10162:10162): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:42:27:354 consola/(10162:10162): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:42:30:354 consola/(10162:10162): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:42:30:355 consola/(10162:10162): Handshake realizado con exito.
+[INFO] 05:42:55:706 consola/(10162:10162): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:42:55:706 consola/(10162:10162): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:42:55:706 consola/(10162:10162): Enviando el archivo al NUCLEO
+[INFO] 05:42:55:706 consola/(10162:10162): Esperando instrucciones del NUCLEO
+[INFO] 05:58:21:816 consola/(10736:10736): ===============================================
+[INFO] 05:58:21:818 consola/(10736:10736): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:58:21:818 consola/(10736:10736): ===============================================
+[INFO] 05:58:21:818 consola/(10736:10736):                                                
+[INFO] 05:58:21:818 consola/(10736:10736):                                                
+[INFO] 05:58:21:818 consola/(10736:10736): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:58:21:818 consola/(10736:10736): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:58:21:818 consola/(10736:10736): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:58:21:818 consola/(10736:10736): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:58:24:819 consola/(10736:10736): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:58:24:820 consola/(10736:10736): Handshake realizado con exito.
+[INFO] 05:58:36:250 consola/(10736:10736): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:58:36:250 consola/(10736:10736): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:58:36:250 consola/(10736:10736): Enviando el archivo al NUCLEO
+[INFO] 05:58:36:250 consola/(10736:10736): Esperando instrucciones del NUCLEO
+[INFO] 06:09:52:441 consola/(11114:11114): ===============================================
+[INFO] 06:09:52:441 consola/(11114:11114): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 06:09:52:441 consola/(11114:11114): ===============================================
+[INFO] 06:09:52:441 consola/(11114:11114):                                                
+[INFO] 06:09:52:441 consola/(11114:11114):                                                
+[INFO] 06:09:52:441 consola/(11114:11114): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 06:09:52:441 consola/(11114:11114): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:09:52:441 consola/(11114:11114): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:09:52:441 consola/(11114:11114): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 06:09:58:443 consola/(11114:11114): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 06:09:58:443 consola/(11114:11114): Handshake realizado con exito.
+[INFO] 06:10:27:652 consola/(11114:11114): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 06:10:27:652 consola/(11114:11114): Se reconocio el archivo como un .AnSISOP
+[INFO] 06:10:27:652 consola/(11114:11114): Enviando el archivo al NUCLEO
+[INFO] 06:10:27:652 consola/(11114:11114): Esperando instrucciones del NUCLEO
+[INFO] 06:29:07:43 consola/(11731:11731): ===============================================
+[INFO] 06:29:07:44 consola/(11731:11731): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 06:29:07:44 consola/(11731:11731): ===============================================
+[INFO] 06:29:07:44 consola/(11731:11731):                                                
+[INFO] 06:29:07:44 consola/(11731:11731):                                                
+[INFO] 06:29:07:44 consola/(11731:11731): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 06:29:07:44 consola/(11731:11731): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:29:07:44 consola/(11731:11731): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:29:07:44 consola/(11731:11731): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 06:29:10:44 consola/(11731:11731): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 06:29:10:45 consola/(11731:11731): Handshake realizado con exito.
+[INFO] 06:29:19:861 consola/(11731:11731): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 06:29:19:862 consola/(11731:11731): Se reconocio el archivo como un .AnSISOP
+[INFO] 06:29:19:862 consola/(11731:11731): Enviando el archivo al NUCLEO
+[INFO] 06:29:19:862 consola/(11731:11731): Esperando instrucciones del NUCLEO
+[INFO] 06:33:45:842 consola/(12096:12096): ===============================================
+[INFO] 06:33:45:842 consola/(12096:12096): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 06:33:45:842 consola/(12096:12096): ===============================================
+[INFO] 06:33:45:842 consola/(12096:12096):                                                
+[INFO] 06:33:45:842 consola/(12096:12096):                                                
+[INFO] 06:33:45:843 consola/(12096:12096): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 06:33:45:843 consola/(12096:12096): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:33:45:843 consola/(12096:12096): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:33:45:843 consola/(12096:12096): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 06:33:48:843 consola/(12096:12096): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 06:33:48:844 consola/(12096:12096): Handshake realizado con exito.
+[INFO] 06:33:56:810 consola/(12096:12096): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 06:33:56:810 consola/(12096:12096): Se reconocio el archivo como un .AnSISOP
+[INFO] 06:33:56:810 consola/(12096:12096): Enviando el archivo al NUCLEO
+[INFO] 06:33:56:810 consola/(12096:12096): Esperando instrucciones del NUCLEO
+[ERROR] 06:36:10:16 consola/(12096:12096): No se pudo recibir el stream del Kernel. ----- Terminando 
+
+[ERROR] 06:36:10:16 consola/(12096:12096): No se recibio instrucciones del NUCLEO
+[INFO] 06:37:33:512 consola/(12379:12379): ===============================================
+[INFO] 06:37:33:513 consola/(12379:12379): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 06:37:33:513 consola/(12379:12379): ===============================================
+[INFO] 06:37:33:513 consola/(12379:12379):                                                
+[INFO] 06:37:33:513 consola/(12379:12379):                                                
+[INFO] 06:37:33:513 consola/(12379:12379): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 06:37:33:513 consola/(12379:12379): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:37:33:513 consola/(12379:12379): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:37:33:513 consola/(12379:12379): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 06:37:36:514 consola/(12379:12379): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 06:37:36:515 consola/(12379:12379): Handshake realizado con exito.
+[INFO] 06:37:45:399 consola/(12379:12379): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 06:37:45:400 consola/(12379:12379): Se reconocio el archivo como un .AnSISOP
+[INFO] 06:37:45:400 consola/(12379:12379): Enviando el archivo al NUCLEO
+[INFO] 06:37:45:400 consola/(12379:12379): Esperando instrucciones del NUCLEO
+[ERROR] 06:40:07:511 consola/(12379:12379): No se pudo recibir el stream del Kernel. ----- Terminando 
+
+[ERROR] 06:40:07:511 consola/(12379:12379): No se recibio instrucciones del NUCLEO
+[INFO] 06:40:29:802 consola/(12646:12646): ===============================================
+[INFO] 06:40:29:802 consola/(12646:12646): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 06:40:29:802 consola/(12646:12646): ===============================================
+[INFO] 06:40:29:802 consola/(12646:12646):                                                
+[INFO] 06:40:29:802 consola/(12646:12646):                                                
+[INFO] 06:40:29:802 consola/(12646:12646): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 06:40:29:802 consola/(12646:12646): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:40:29:803 consola/(12646:12646): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 06:40:29:803 consola/(12646:12646): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 06:40:35:803 consola/(12646:12646): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 06:40:35:803 consola/(12646:12646): Handshake realizado con exito.
+[INFO] 06:40:55:423 consola/(12646:12646): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 06:40:55:424 consola/(12646:12646): Se reconocio el archivo como un .AnSISOP
+[INFO] 06:40:55:424 consola/(12646:12646): Enviando el archivo al NUCLEO
+[INFO] 06:40:55:424 consola/(12646:12646): Esperando instrucciones del NUCLEO
