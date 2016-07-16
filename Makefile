@@ -9,6 +9,10 @@
 RM := rm -rf
 
 all:
+	-cd /home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) clean
+	-cd /home/utnso/tp-2016-1c-Better-call-pointer/commons/Debug && $(MAKE) all
+	-cd /home/utnso/tp-2016-1c-Better-call-pointer/parser/Debug && $(MAKE) clean
+	-cd /home/utnso/tp-2016-1c-Better-call-pointer/parser/Debug && $(MAKE) all
 	-cd /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug && $(MAKE) clean
 	-cd /home/utnso/tp-2016-1c-Better-call-pointer/libreriasCompartidas/Debug && $(MAKE) all
 	-cd /home/utnso/tp-2016-1c-Better-call-pointer/swap/Debug && $(MAKE) clean
