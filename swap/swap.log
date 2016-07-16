@@ -66,3 +66,15 @@
 [INFO] 21:11:12:73 SWAP/(17216:17216): Hay espacio
 [INFO] 21:11:12:74 SWAP/(17216:17216): Espacio reservado correctamente
 [ERROR] 21:19:01:768 SWAP/(17216:17216): Al recibir del cliente
+[INFO] 21:19:35:585 SWAP/(17621:17621): Valores del archivo de configuracion seteados
+[INFO] 21:19:35:599 SWAP/(17621:17621): Archivo de particion creado
+[INFO] 21:19:35:600 SWAP/(17621:17621): Server creado y escuchando correctamente
+[INFO] 21:22:35:400 SWAP/(17621:17621): Hay espacio
+[INFO] 21:22:35:400 SWAP/(17621:17621): Espacio reservado correctamente
+[ERROR] 21:23:50:619 SWAP/(17621:17621): Al recibir del cliente
+[INFO] 21:23:59:307 SWAP/(17932:17932): Valores del archivo de configuracion seteados
+[INFO] 21:23:59:314 SWAP/(17932:17932): Archivo de particion creado
+[INFO] 21:23:59:314 SWAP/(17932:17932): Server creado y escuchando correctamente
+[INFO] 21:24:50:747 SWAP/(17932:17932): Hay espacio
+[INFO] 21:24:50:747 SWAP/(17932:17932): Espacio reservado correctamente
+[ERROR] 21:38:49:600 SWAP/(17932:17932): Al recibir del cliente
