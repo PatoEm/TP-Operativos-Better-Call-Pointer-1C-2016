@@ -79,6 +79,15 @@ t_log* logger = NULL;
  ****************************************/
 
 int main() {
+
+
+//	pcb * pcbVacioLoco=newEmptyPcb();
+//	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
+//	SocketBuffer *bufferLoco =serializeCpuKer(hola);
+//	bufferLoco->data;
+//	hola=unserializeCpuKer(bufferLoco->data);
+
+
   asignadoVacio=newEspacioAsignado();
   log_debug(getLogger(),
       "Cargo variables de configuracion, me conecto al nucleo y a la umc");

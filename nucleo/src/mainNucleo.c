@@ -17,6 +17,15 @@ char * leerProgramaAnSISOP1(char * direccionArchivo);
 
 int main(void) {
 
+//	pcb * pcbVacioLoco=newEmptyPcb();
+//	StrKerCpu *hola = newStrKerCpu(KERNEL_ID,PRIMER_PCB,*pcbVacioLoco,8,"hola",0,"hola",0);
+//	SocketBuffer *bufferLoco =serializeKerCpu(hola);
+//	bufferLoco->data;
+//	hola=unserializeKerCpu(bufferLoco->data);
+
+
+
+
 	inicializarVariables();
 	printf("%d",tamanioPaginas);
 	//int tamanioLoco = tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/facil.ansisop");

@@ -209,7 +209,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(skc->pcb.tamanioArchivoOriginal);
 	size += sizeof(skc->pcb.programCounter);
 	size += sizeof(skc->pcb.paginasDeCodigo);
-	size += sizeof(arrayBidimensional)*(skc->pcb.instruccionesTotales);
+	size += sizeof(arrayBidimensional) * (skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.indiceDeCodigoSize);
 	size += sizeof(skc->pcb.indiceDeEtiquetasSize);
 	size += skc->pcb.indiceDeEtiquetasSize;
@@ -219,7 +219,8 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	//size += sizeof(skc->pcb.indiceDelStack);
 	size += sizeof(skc->pcb.cantElementsStack);
 	size += sizeof(skc->pcb.estado);
-	size += sizeof(skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
+	//size += sizeof(skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
+	size += ((skc->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo piola
 	// fin size pcb
 	size += sizeof(skc->quantum);
 	size += sizeof(skc->dataLen);
@@ -271,7 +272,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	size += sizeof(sck->pcb.tamanioArchivoOriginal);
 	size += sizeof(sck->pcb.programCounter);
 	size += sizeof(sck->pcb.paginasDeCodigo);
-	size += sizeof(arrayBidimensional)*(sck->pcb.instruccionesTotales);
+	size += sizeof(arrayBidimensional) * (sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.indiceDeCodigoSize);
 	size += sizeof(sck->pcb.indiceDeEtiquetasSize);
 	size += sck->pcb.indiceDeEtiquetasSize;
@@ -281,7 +282,9 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	//size += sizeof(sck->pcb.indiceDelStack);
 	size += sizeof(sck->pcb.cantElementsStack);
 	size += sizeof(sck->pcb.estado);
-	size += sizeof(sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
+	//size += sizeof(sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
+	size += ((sck->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo groso
+
 	// fin size pcb
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
@@ -483,10 +486,6 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.instruccionesRestantes));
 	ptrData += sizeof(skc->pcb.instruccionesRestantes);
 
-	//ptrByte = (Byte*) &skc->pcb.indiceDelStack;
-	//memcpy(ptrData, ptrByte, sizeof(skc->pcb.indiceDelStack));
-	//ptrData += sizeof(skc->pcb.indiceDelStack);
-
 	skc->pcb.cantElementsStack = (skc->pcb.indiceDelStack->elements_count);
 
 	ptrByte = (Byte*) &skc->pcb.cantElementsStack;
@@ -495,18 +494,35 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 
 	int i;
 	paginaDeStack *aux;
-	if ((skc->pcb.indiceDelStack->elements_count)!= 0) {
-		skc->pcb.buffer = malloc((skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
+	if ((skc->pcb.indiceDelStack->elements_count) != 0) {
+		//skc->pcb.buffer = malloc((skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
+		skc->pcb.buffer = malloc(
+				((skc->pcb.indiceDelStack->elements_count) * (46))); //HARDCORE
 		skc->pcb.buffer[0] = '\0';
 		for (i = 0; i < (skc->pcb.indiceDelStack->elements_count); i++) {
 			aux = list_get(skc->pcb.indiceDelStack, i);
-			strcat(skc->pcb.buffer, (Byte*) &aux);
+			strcat(skc->pcb.buffer, (Byte*) &aux->pos);
+			strcat(skc->pcb.buffer, (Byte*) &aux->args.pag);
+			strcat(skc->pcb.buffer, (Byte*) &aux->args.off);
+			strcat(skc->pcb.buffer, (Byte*) &aux->args.size);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars.id);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars.pag);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars.off);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars.size);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retPos);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.id);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.pag);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.off);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.size);
+			//strcat(skc->pcb.buffer, (Byte*) &aux);
 		}
+
 	}
 
 	ptrByte = (Byte*) skc->pcb.buffer;
-	memcpy(ptrData, ptrByte, (skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
-	ptrData += (skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
+	memcpy(ptrData, ptrByte,
+			((skc->pcb.indiceDelStack->elements_count) * (46)));
+	ptrData += (((skc->pcb.indiceDelStack->elements_count) * (46)));
 
 	ptrByte = (Byte*) &skc->pcb.estado;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.estado));
@@ -676,10 +692,6 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.instruccionesRestantes));
 	ptrData += sizeof(sck->pcb.instruccionesRestantes);
 
-	//ptrByte = (Byte*) &sck->pcb.indiceDelStack;
-	//memcpy(ptrData, ptrByte, sizeof(sck->pcb.indiceDelStack));
-	//ptrData += sizeof(sck->pcb.indiceDelStack);
-
 	sck->pcb.cantElementsStack = (sck->pcb.indiceDelStack->elements_count);
 
 	ptrByte = (Byte*) &sck->pcb.cantElementsStack;
@@ -688,17 +700,36 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 
 	int i;
 	paginaDeStack *aux;
-	if ((sck->pcb.indiceDelStack->elements_count)!= 0) {
-		sck->pcb.buffer = malloc((sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
+	if ((sck->pcb.indiceDelStack->elements_count) != 0) {
+		Byte * punteroABuffer;
+		sck->pcb.buffer = malloc(
+				((sck->pcb.indiceDelStack->elements_count) * (46))); //HARDCORE
 		sck->pcb.buffer[0] = '\0';
 		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
 			aux = list_get(sck->pcb.indiceDelStack, i);
-			strcat(sck->pcb.buffer, (Byte*) &aux);
+			strcat(sck->pcb.buffer, (Byte*) &aux->pos);
+			strcat(sck->pcb.buffer, (Byte*) &aux->args.pag);
+			strcat(sck->pcb.buffer, (Byte*) &aux->args.off);
+			strcat(sck->pcb.buffer, (Byte*) &aux->args.size);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars.id);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars.pag);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars.off);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars.size);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retPos);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.id);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.pag);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.off);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.size);
+
 		}
+		//sck->pcb.buffer[46+1]='\0';
+
 	}
+
 	ptrByte = (Byte*) sck->pcb.buffer;
-	memcpy(ptrData, ptrByte, (sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
-	ptrData += (sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
+	memcpy(ptrData, ptrByte,
+			((sck->pcb.indiceDelStack->elements_count) * (46)));
+	ptrData += (((sck->pcb.indiceDelStack->elements_count) * (46)));
 
 	ptrByte = (Byte*) &sck->pcb.estado;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.estado));
@@ -1079,13 +1110,13 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	ptrByte += sizeof(pcb.consola);
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
-	memcpy(&pcb.tamanioArchivoOriginal, ptrByte, sizeof(pcb.tamanioArchivoOriginal));
+	memcpy(&pcb.tamanioArchivoOriginal, ptrByte,
+			sizeof(pcb.tamanioArchivoOriginal));
 	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
 	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
 	ptrByte += sizeof(pcb.programCounter);
 	memcpy(&pcb.paginasDeCodigo, ptrByte, sizeof(pcb.paginasDeCodigo));
 	ptrByte += sizeof(pcb.paginasDeCodigo);
-
 
 	memcpy(&pcb.indiceDeCodigoSize, ptrByte, sizeof(pcb.indiceDeCodigoSize));
 	ptrByte += sizeof(pcb.indiceDeCodigoSize);
@@ -1094,8 +1125,8 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(pcb.indiceDeCodigo, ptrByte, pcb.indiceDeCodigoSize);
 	ptrByte += pcb.indiceDeCodigoSize;
 
-
-	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte, sizeof(pcb.indiceDeEtiquetasSize));
+	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte,
+			sizeof(pcb.indiceDeEtiquetasSize));
 	ptrByte += sizeof(pcb.indiceDeEtiquetasSize);
 
 	pcb.indiceDeEtiquetas = malloc(pcb.indiceDeEtiquetasSize);
@@ -1107,40 +1138,77 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
 	ptrByte += sizeof(pcb.etiquetaSize);
 
-	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
+	memcpy(&pcb.instruccionesTotales, ptrByte,
+			sizeof(pcb.instruccionesTotales));
 	ptrByte += sizeof(pcb.instruccionesTotales);
-	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
+	memcpy(&pcb.instruccionesRestantes, ptrByte,
+			sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
-
-
-	//pcb.indiceDelStack = malloc(pcb.indiceDelStack); //esto tambien
-	//memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //ESTO LO AGREGUE
-	//ptrByte += sizeof(pcb.indiceDelStack);
 
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
 
-
-	int bufferLen = (pcb.cantElementsStack)*sizeof(paginaDeStack);
+	int bufferLen = (((pcb.cantElementsStack) * (46)));
 
 	pcb.buffer = malloc(bufferLen);
 	memcpy(pcb.buffer, ptrByte, bufferLen);
 	ptrByte += bufferLen;
 
-	pcb.buffer[bufferLen] = '\0';
+	//pcb.buffer[bufferLen] = '\0';
 
 	pcb.indiceDelStack = list_create();
 	int i;
-	int inicio;
-	int fin;
-	char* aux = malloc(sizeof(paginaDeStack));
+	int inicio = 0;
+	int longitud = 3;
+	//0x80512e8 "\001\002\003\004b\006\a\b\ta\v\f\r\001\002\003\004a\006\a\b\tb\v\f\r"
+	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
 	for (i = 0; i < pcb.cantElementsStack; i++) {
-		inicio = i * sizeof(paginaDeStack);
-		fin = inicio + sizeof(paginaDeStack);
-		aux = string_substring(pcb.buffer, inicio, fin);
-	//	aux[fin] = '\0';
-		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
+		inicio = 0;
+		longitud = 3;
+		aux->pos = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->args.pag = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->args.off = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->args.size = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 1;
+		aux->vars.id = (char) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->vars.pag = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->vars.off = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->vars.size = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->retPos = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 1;
+		aux->retVars.id = (char) *string_substring(pcb.buffer, inicio,
+				longitud);
+		inicio++;
+		longitud = 3;
+		aux->retVars.pag = (int) *string_substring(pcb.buffer, inicio,
+				longitud);
+		inicio++;
+		longitud = 3;
+		aux->retVars.off = (int) *string_substring(pcb.buffer, inicio,
+				longitud);
+		inicio++;
+		longitud = 3;
+		aux->retVars.size = (int) *string_substring(pcb.buffer, inicio,
+				longitud);
+		list_add(pcb.indiceDelStack, aux);
 	}
+
 
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
@@ -1265,13 +1333,13 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	ptrByte += sizeof(pcb.consola);
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
-	memcpy(&pcb.tamanioArchivoOriginal, ptrByte, sizeof(pcb.tamanioArchivoOriginal));
+	memcpy(&pcb.tamanioArchivoOriginal, ptrByte,
+			sizeof(pcb.tamanioArchivoOriginal));
 	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
 	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
 	ptrByte += sizeof(pcb.programCounter);
 	memcpy(&pcb.paginasDeCodigo, ptrByte, sizeof(pcb.paginasDeCodigo));
 	ptrByte += sizeof(pcb.paginasDeCodigo);
-
 
 	memcpy(&pcb.indiceDeCodigoSize, ptrByte, sizeof(pcb.indiceDeCodigoSize));
 	ptrByte += sizeof(pcb.indiceDeCodigoSize);
@@ -1280,8 +1348,8 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(pcb.indiceDeCodigo, ptrByte, pcb.indiceDeCodigoSize);
 	ptrByte += pcb.indiceDeCodigoSize;
 
-
-	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte, sizeof(pcb.indiceDeEtiquetasSize));
+	memcpy(&pcb.indiceDeEtiquetasSize, ptrByte,
+			sizeof(pcb.indiceDeEtiquetasSize));
 	ptrByte += sizeof(pcb.indiceDeEtiquetasSize);
 
 	pcb.indiceDeEtiquetas = malloc(pcb.indiceDeEtiquetasSize);
@@ -1293,39 +1361,85 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(&pcb.etiquetaSize, ptrByte, sizeof(pcb.etiquetaSize));
 	ptrByte += sizeof(pcb.etiquetaSize);
 
-	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
+	memcpy(&pcb.instruccionesTotales, ptrByte,
+			sizeof(pcb.instruccionesTotales));
 	ptrByte += sizeof(pcb.instruccionesTotales);
-	memcpy(&pcb.instruccionesRestantes, ptrByte, sizeof(pcb.instruccionesRestantes));
+	memcpy(&pcb.instruccionesRestantes, ptrByte,
+			sizeof(pcb.instruccionesRestantes));
 	ptrByte += sizeof(pcb.instruccionesRestantes);
-
-	//pcb.indiceDelStack = malloc(pcb.indiceDelStack); //Esto tambien
-	//memcpy(pcb.indiceDelStack, ptrByte, sizeof(pcb.indiceDelStack)); //AGREGUE ESTO
-	//ptrByte += sizeof(pcb.indiceDelStack);
 
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
 
 
-	int bufferLen = (pcb.cantElementsStack)*sizeof(paginaDeStack);
+
+
+	int bufferLen = (((pcb.cantElementsStack) * (46)));
 
 	pcb.buffer = malloc(bufferLen);
 	memcpy(pcb.buffer, ptrByte, bufferLen);
 	ptrByte += bufferLen;
 
-	pcb.buffer[bufferLen] = '\0';
+	//pcb.buffer[bufferLen] = '\0';
 
 	pcb.indiceDelStack = list_create();
 	int i;
-	int inicio;
-	int fin;
-	char* aux = malloc(sizeof(paginaDeStack));
+	int inicio = 0;
+	int longitud = 3;
+	//0x80512e8 "\001\002\003\004b\006\a\b\ta\v\f\r\001\002\003\004a\006\a\b\tb\v\f\r"
+	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
 	for (i = 0; i < pcb.cantElementsStack; i++) {
-		inicio = i * sizeof(paginaDeStack);
-		fin = inicio + sizeof(paginaDeStack);
-		aux = string_substring(pcb.buffer, inicio, fin);
-		//aux[fin] = '\0';
-		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
+		inicio = 0;
+		longitud = 3;
+		aux->pos = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->args.pag = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->args.off = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->args.size = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 1;
+		aux->vars.id = (char) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->vars.pag = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->vars.off = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->vars.size = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 3;
+		aux->retPos = (int) *string_substring(pcb.buffer, inicio, longitud);
+		inicio++;
+		longitud = 1;
+		aux->retVars.id = (char) *string_substring(pcb.buffer, inicio,
+				longitud);
+		inicio++;
+		longitud = 3;
+		aux->retVars.pag = (int) *string_substring(pcb.buffer, inicio,
+				longitud);
+		inicio++;
+		longitud = 3;
+		aux->retVars.off = (int) *string_substring(pcb.buffer, inicio,
+				longitud);
+		inicio++;
+		longitud = 3;
+		aux->retVars.size = (int) *string_substring(pcb.buffer, inicio,
+				longitud);
+		list_add(pcb.indiceDelStack, aux);
 	}
+
+
+
+
+
+
 
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
@@ -1375,7 +1489,8 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized) {
 	ptrByte += sizeof(action);
 
 	// comienzo a unserializar espacioAsignado pageComienzo
-	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte,
+			sizeof(pageComienzo.IDPaginaInterno));
 	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
 
 	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
@@ -1387,13 +1502,16 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized) {
 	memcpy(&pageComienzo.bitUso, ptrByte, sizeof(pageComienzo.bitUso));
 	ptrByte += sizeof(pageComienzo.bitUso);
 
-	memcpy(&pageComienzo.bitModificado, ptrByte, sizeof(pageComienzo.bitModificado));
+	memcpy(&pageComienzo.bitModificado, ptrByte,
+			sizeof(pageComienzo.bitModificado));
 	ptrByte += sizeof(pageComienzo.bitModificado);
 
-	memcpy(&pageComienzo.punteroAPagina, ptrByte, sizeof(pageComienzo.punteroAPagina));
+	memcpy(&pageComienzo.punteroAPagina, ptrByte,
+			sizeof(pageComienzo.punteroAPagina));
 	ptrByte += sizeof(pageComienzo.punteroAPagina);
 
-	memcpy(&pageComienzo.bitDePresencia, ptrByte, sizeof(pageComienzo.bitDePresencia));
+	memcpy(&pageComienzo.bitDePresencia, ptrByte,
+			sizeof(pageComienzo.bitDePresencia));
 	ptrByte += sizeof(pageComienzo.bitDePresencia);
 	// termino de unserializar espacioAsignado pageComienzo
 
@@ -1468,7 +1586,8 @@ StrUmcCpu* unserializeUmcCpu(Stream dataSerialized) {
 	ptrByte += sizeof(action);
 
 	// comienzo a unserializar espacioAsignado pageComienzo
-	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte,
+			sizeof(pageComienzo.IDPaginaInterno));
 	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
 
 	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
@@ -1480,13 +1599,16 @@ StrUmcCpu* unserializeUmcCpu(Stream dataSerialized) {
 	memcpy(&pageComienzo.bitUso, ptrByte, sizeof(pageComienzo.bitUso));
 	ptrByte += sizeof(pageComienzo.bitUso);
 
-	memcpy(&pageComienzo.bitModificado, ptrByte, sizeof(pageComienzo.bitModificado));
+	memcpy(&pageComienzo.bitModificado, ptrByte,
+			sizeof(pageComienzo.bitModificado));
 	ptrByte += sizeof(pageComienzo.bitModificado);
 
-	memcpy(&pageComienzo.punteroAPagina, ptrByte, sizeof(pageComienzo.punteroAPagina));
+	memcpy(&pageComienzo.punteroAPagina, ptrByte,
+			sizeof(pageComienzo.punteroAPagina));
 	ptrByte += sizeof(pageComienzo.punteroAPagina);
 
-	memcpy(&pageComienzo.bitDePresencia, ptrByte, sizeof(pageComienzo.bitDePresencia));
+	memcpy(&pageComienzo.bitDePresencia, ptrByte,
+			sizeof(pageComienzo.bitDePresencia));
 	ptrByte += sizeof(pageComienzo.bitDePresencia);
 	// termino de unserializar espacioAsignado pageComienzo
 
@@ -1526,7 +1648,8 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized) {
 	ptrByte += sizeof(action);
 
 	// comienzo a unserializar espacioAsignado pageComienzo
-	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte,
+			sizeof(pageComienzo.IDPaginaInterno));
 	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
 
 	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
@@ -1538,13 +1661,16 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized) {
 	memcpy(&pageComienzo.bitUso, ptrByte, sizeof(pageComienzo.bitUso));
 	ptrByte += sizeof(pageComienzo.bitUso);
 
-	memcpy(&pageComienzo.bitModificado, ptrByte, sizeof(pageComienzo.bitModificado));
+	memcpy(&pageComienzo.bitModificado, ptrByte,
+			sizeof(pageComienzo.bitModificado));
 	ptrByte += sizeof(pageComienzo.bitModificado);
 
-	memcpy(&pageComienzo.punteroAPagina, ptrByte, sizeof(pageComienzo.punteroAPagina));
+	memcpy(&pageComienzo.punteroAPagina, ptrByte,
+			sizeof(pageComienzo.punteroAPagina));
 	ptrByte += sizeof(pageComienzo.punteroAPagina);
 
-	memcpy(&pageComienzo.bitDePresencia, ptrByte, sizeof(pageComienzo.bitDePresencia));
+	memcpy(&pageComienzo.bitDePresencia, ptrByte,
+			sizeof(pageComienzo.bitDePresencia));
 	ptrByte += sizeof(pageComienzo.bitDePresencia);
 	// termino de unserializar espacioAsignado pageComienzo
 
@@ -1585,7 +1711,8 @@ StrSwaUmc* unserializeSwaUmc(Stream dataSerialized) {
 	ptrByte += sizeof(action);
 
 	// comienzo de unserializar paginaAsignada pageComienzo
-	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte,
+			sizeof(pageComienzo.IDPaginaInterno));
 	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
 
 	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));

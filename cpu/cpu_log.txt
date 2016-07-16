@@ -853,3 +853,2785 @@
 [INFO] 07:06:07:685 cpu/(13583:13583): Obtener siguiente PCB
 [INFO] 07:08:58:544 cpu/(13583:13583): getNextPcb: Nuevo PCB vacio creado.
 [INFO] 07:08:58:544 cpu/(13583:13583): Obtener siguiente PCB
+[INFO] 12:39:40:465 cpu/(15867:15867): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 12:39:40:465 cpu/(15867:15867): Configuracion del IP_NUCLEO leida con exito
+[INFO] 12:39:40:465 cpu/(15867:15867): Configuracion del PUERTO_UMC leida con exito
+[INFO] 12:39:40:465 cpu/(15867:15867): Configuracion del IP_UMC leida con exito
+[INFO] 12:39:40:465 cpu/(15867:15867): **********************************************************************
+[INFO] 12:39:40:465 cpu/(15867:15867): **********************************************************************
+[INFO] 12:39:40:465 cpu/(15867:15867): **********************************************************************
+[INFO] 12:39:40:465 cpu/(15867:15867): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 12:39:40:465 cpu/(15867:15867): Se inicializo la CPU.
+[INFO] 12:42:21:94 cpu/(16234:16234): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 12:42:21:94 cpu/(16234:16234): Configuracion del IP_NUCLEO leida con exito
+[INFO] 12:42:21:94 cpu/(16234:16234): Configuracion del PUERTO_UMC leida con exito
+[INFO] 12:42:21:94 cpu/(16234:16234): Configuracion del IP_UMC leida con exito
+[INFO] 12:42:21:94 cpu/(16234:16234): **********************************************************************
+[INFO] 12:42:21:94 cpu/(16234:16234): **********************************************************************
+[INFO] 12:42:21:94 cpu/(16234:16234): **********************************************************************
+[INFO] 12:42:21:94 cpu/(16234:16234): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 12:42:21:94 cpu/(16234:16234): Se inicializo la CPU.
+[INFO] 12:52:15:765 cpu/(17081:17081): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 12:52:15:766 cpu/(17081:17081): Configuracion del IP_NUCLEO leida con exito
+[INFO] 12:52:15:766 cpu/(17081:17081): Configuracion del PUERTO_UMC leida con exito
+[INFO] 12:52:15:766 cpu/(17081:17081): Configuracion del IP_UMC leida con exito
+[INFO] 12:52:15:766 cpu/(17081:17081): **********************************************************************
+[INFO] 12:52:15:766 cpu/(17081:17081): **********************************************************************
+[INFO] 12:52:15:766 cpu/(17081:17081): **********************************************************************
+[INFO] 12:52:15:766 cpu/(17081:17081): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 12:52:15:766 cpu/(17081:17081): Se inicializo la CPU.
+[INFO] 12:52:52:190 cpu/(17125:17125): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 12:52:52:190 cpu/(17125:17125): Configuracion del IP_NUCLEO leida con exito
+[INFO] 12:52:52:190 cpu/(17125:17125): Configuracion del PUERTO_UMC leida con exito
+[INFO] 12:52:52:190 cpu/(17125:17125): Configuracion del IP_UMC leida con exito
+[INFO] 12:52:52:190 cpu/(17125:17125): **********************************************************************
+[INFO] 12:52:52:190 cpu/(17125:17125): **********************************************************************
+[INFO] 12:52:52:190 cpu/(17125:17125): **********************************************************************
+[INFO] 12:52:52:190 cpu/(17125:17125): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 12:52:52:190 cpu/(17125:17125): Se inicializo la CPU.
+[INFO] 12:54:21:17 cpu/(17339:17339): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 12:54:21:17 cpu/(17339:17339): Configuracion del IP_NUCLEO leida con exito
+[INFO] 12:54:21:17 cpu/(17339:17339): Configuracion del PUERTO_UMC leida con exito
+[INFO] 12:54:21:17 cpu/(17339:17339): Configuracion del IP_UMC leida con exito
+[INFO] 12:54:21:17 cpu/(17339:17339): **********************************************************************
+[INFO] 12:54:21:17 cpu/(17339:17339): **********************************************************************
+[INFO] 12:54:21:17 cpu/(17339:17339): **********************************************************************
+[INFO] 12:54:21:17 cpu/(17339:17339): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 12:54:21:17 cpu/(17339:17339): Se inicializo la CPU.
+[INFO] 12:59:29:631 cpu/(18038:18038): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 12:59:29:631 cpu/(18038:18038): Configuracion del IP_NUCLEO leida con exito
+[INFO] 12:59:29:631 cpu/(18038:18038): Configuracion del PUERTO_UMC leida con exito
+[INFO] 12:59:29:631 cpu/(18038:18038): Configuracion del IP_UMC leida con exito
+[INFO] 12:59:29:631 cpu/(18038:18038): **********************************************************************
+[INFO] 12:59:29:631 cpu/(18038:18038): **********************************************************************
+[INFO] 12:59:29:631 cpu/(18038:18038): **********************************************************************
+[INFO] 12:59:29:631 cpu/(18038:18038): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 12:59:29:631 cpu/(18038:18038): Se inicializo la CPU.
+[INFO] 13:01:45:960 cpu/(18313:18313): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 13:01:45:960 cpu/(18313:18313): Configuracion del IP_NUCLEO leida con exito
+[INFO] 13:01:45:960 cpu/(18313:18313): Configuracion del PUERTO_UMC leida con exito
+[INFO] 13:01:45:960 cpu/(18313:18313): Configuracion del IP_UMC leida con exito
+[INFO] 13:01:45:960 cpu/(18313:18313): **********************************************************************
+[INFO] 13:01:45:960 cpu/(18313:18313): **********************************************************************
+[INFO] 13:01:45:960 cpu/(18313:18313): **********************************************************************
+[INFO] 13:01:45:960 cpu/(18313:18313): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 13:01:45:960 cpu/(18313:18313): Se inicializo la CPU.
+[INFO] 13:01:48:961 cpu/(18313:18313): Handshake realizado con exito.
+[INFO] 13:01:51:961 cpu/(18313:18313): Mensaje enviado a la UMC ppal.
+[INFO] 13:01:56:962 cpu/(18313:18313): Me conecte al agradable hilo
+[INFO] 13:01:56:962 cpu/(18313:18313): Mensaje enviado a la UMC ppal.
+[INFO] 13:01:56:962 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:01:56:962 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:542 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:542 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:584 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:584 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:621 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:621 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:668 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:668 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:710 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:710 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:749 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:749 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:789 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:789 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:830 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:830 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:869 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:869 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:909 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:909 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:949 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:950 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:07:989 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:07:989 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:29 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:29 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:69 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:69 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:109 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:109 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:153 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:153 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:196 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:196 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:233 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:233 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:273 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:273 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:313 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:313 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:352 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:352 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:393 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:393 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:434 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:434 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:473 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:473 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:552 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:552 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:593 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:593 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:633 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:633 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:673 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:673 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:713 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:713 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:753 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:753 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:793 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:793 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:834 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:834 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:873 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:873 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:912 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:913 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:953 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:953 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:08:992 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:08:993 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:34 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:34 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:73 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:73 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:113 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:113 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:153 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:153 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:193 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:193 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:233 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:233 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:273 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:273 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:312 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:313 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:353 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:353 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:392 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:393 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:435 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:435 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:473 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:473 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:553 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:553 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:592 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:592 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:633 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:633 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:673 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:673 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:719 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:719 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:756 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:757 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:797 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:797 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:836 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:836 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:877 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:877 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:917 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:917 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:957 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:957 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:09:997 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:09:997 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:37 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:37 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:77 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:77 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:117 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:117 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:156 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:156 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:197 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:197 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:237 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:319 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:319 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:357 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:357 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:397 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:397 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:436 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:437 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:517 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:597 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:597 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:637 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:637 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:717 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:717 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:757 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:757 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:797 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:797 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:837 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:837 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:915 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:915 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:955 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:955 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:10:992 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:10:993 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:33 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:33 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:73 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:73 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:112 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:113 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:153 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:153 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:193 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:193 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:233 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:233 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:273 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:273 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:313 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:313 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:352 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:353 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:392 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:392 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:433 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:433 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:473 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:473 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:553 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:553 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:593 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:593 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:632 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:633 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:672 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:673 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:713 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:713 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:753 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:753 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:795 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:795 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:833 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:833 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:873 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:873 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:913 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:913 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:953 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:953 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:11:993 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:11:993 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:33 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:33 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:81 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:81 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:121 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:121 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:161 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:161 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:201 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:201 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:240 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:240 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:282 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:282 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:321 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:321 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:361 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:361 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:401 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:401 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:441 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:441 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:481 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:481 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:521 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:521 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:561 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:561 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:601 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:601 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:644 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:644 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:681 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:681 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:721 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:721 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:761 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:761 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:801 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:801 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:841 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:841 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:881 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:881 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:921 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:921 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:960 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:960 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:12:1 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:12:1 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:41 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:41 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:81 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:81 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:121 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:121 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:160 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:160 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:201 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:201 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:241 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:241 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:283 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:283 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:320 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:321 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:361 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:361 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:401 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:401 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:441 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:441 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:481 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:481 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:520 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:521 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:561 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:561 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:601 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:601 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:641 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:641 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:680 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:680 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:721 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:721 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:760 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:761 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:800 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:801 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:841 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:841 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:881 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:881 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:926 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:926 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:13:965 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:13:965 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:5 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:5 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:45 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:45 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:85 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:85 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:125 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:125 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:164 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:165 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:205 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:205 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:245 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:245 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:285 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:285 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:329 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:329 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:369 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:369 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:412 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:412 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:449 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:449 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:489 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:489 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:529 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:529 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:569 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:569 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:609 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:609 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:648 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:648 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:689 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:689 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:729 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:729 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:768 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:769 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:809 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:809 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:848 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:849 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:889 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:889 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:928 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:928 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:14:971 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:14:971 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:9 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:9 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:49 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:49 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:89 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:89 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:129 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:129 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:170 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:170 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:209 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:209 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:249 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:249 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:289 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:289 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:329 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:329 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:369 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:369 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:409 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:409 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:449 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:449 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:489 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:489 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:529 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:529 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:569 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:569 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:608 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:608 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:649 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:649 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:689 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:689 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:728 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:729 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:769 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:769 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:809 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:809 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:849 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:849 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:888 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:888 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:929 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:929 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:15:968 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:15:968 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:9 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:9 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:49 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:49 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:93 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:93 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:133 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:133 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:172 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:173 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:213 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:213 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:257 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:257 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:296 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:297 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:337 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:337 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:377 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:377 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:417 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:417 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:457 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:457 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:497 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:497 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:537 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:537 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:576 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:576 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:617 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:617 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:657 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:657 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:699 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:699 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:737 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:737 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:777 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:777 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:816 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:817 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:857 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:857 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:897 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:897 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:937 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:937 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:16:977 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:16:977 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:17 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:17 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:57 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:57 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:97 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:97 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:137 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:137 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:177 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:177 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:217 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:217 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:257 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:257 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:297 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:297 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:339 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:339 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:377 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:377 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:417 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:417 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:457 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:457 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:496 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:497 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:537 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:537 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:577 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:577 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:619 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:619 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:656 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:657 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:697 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:697 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:737 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:737 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:776 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:776 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:817 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:817 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:856 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:856 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:897 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:897 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:937 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:937 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:17:977 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:17:977 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:17 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:17 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:56 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:57 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:97 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:97 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:136 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:137 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:177 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:177 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:217 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:217 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:257 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:257 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:299 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:299 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:338 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:338 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:377 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:377 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:416 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:417 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:457 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:457 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:497 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:497 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:537 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:537 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:577 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:577 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:617 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:617 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:657 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:657 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:697 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:697 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:737 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:737 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:776 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:777 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:820 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:820 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:859 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:859 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:897 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:897 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:937 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:937 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:18:977 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:18:977 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:17 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:17 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:56 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:57 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:97 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:97 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:137 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:137 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:177 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:177 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:217 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:217 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:256 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:257 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:297 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:297 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:337 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:337 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:380 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:380 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:421 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:421 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:461 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:461 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:545 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:545 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:590 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:590 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:629 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:629 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:669 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:669 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:708 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:709 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:749 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:749 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:788 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:789 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:829 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:829 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:869 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:869 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:908 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:909 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:949 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:949 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:19:992 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:19:992 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:33 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:33 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:74 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:74 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:113 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:113 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:152 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:152 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:196 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:196 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:236 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:317 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:317 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:357 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:357 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:397 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:397 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:439 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:439 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:517 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:597 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:597 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:637 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:637 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:717 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:717 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:756 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:756 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:797 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:797 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:837 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:837 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:877 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:877 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:916 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:917 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:957 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:957 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:20:997 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:20:997 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:36 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:37 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:80 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:80 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:117 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:117 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:157 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:157 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:197 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:197 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:237 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:317 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:317 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:357 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:357 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:396 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:397 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:437 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:437 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:517 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:597 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:597 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:637 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:637 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:720 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:720 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:766 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:766 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:808 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:808 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:845 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:845 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:885 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:885 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:925 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:925 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:21:965 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:21:965 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:5 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:5 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:45 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:45 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:85 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:85 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:125 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:125 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:169 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:169 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:209 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:209 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:249 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:249 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:289 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:289 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:328 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:329 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:369 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:369 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:409 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:409 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:449 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:449 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:489 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:489 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:529 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:529 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:569 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:569 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:609 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:609 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:649 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:649 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:689 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:689 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:729 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:729 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:770 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:770 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:809 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:809 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:849 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:849 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:889 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:889 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:929 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:929 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:22:968 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:22:969 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:9 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:9 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:49 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:49 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:89 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:89 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:129 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:129 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:170 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:170 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:209 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:209 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:249 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:249 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:289 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:289 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:328 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:329 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:368 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:368 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:409 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:409 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:449 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:449 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:489 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:489 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:532 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:532 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:573 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:573 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:613 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:613 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:653 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:653 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:692 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:693 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:733 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:733 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:773 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:773 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:813 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:813 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:853 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:853 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:893 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:893 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:933 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:933 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:23:973 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:23:973 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:13 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:13 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:53 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:53 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:93 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:93 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:133 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:133 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:177 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:177 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:217 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:217 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:258 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:259 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:297 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:297 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:337 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:337 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:377 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:377 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:417 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:417 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:457 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:457 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:497 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:497 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:537 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:537 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:577 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:577 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:616 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:617 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:657 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:657 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:697 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:697 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:737 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:738 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:777 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:777 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:817 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:817 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:857 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:857 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:897 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:897 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:937 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:937 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:24:977 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:24:977 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:17 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:17 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:61 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:61 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:101 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:101 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:141 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:141 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:181 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:181 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:221 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:221 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:261 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:261 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:301 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:301 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:341 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:341 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:381 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:381 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:421 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:421 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:461 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:461 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:501 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:501 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:541 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:541 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:581 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:581 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:621 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:621 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:661 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:661 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:703 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:703 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:741 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:741 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:781 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:781 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:821 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:821 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:861 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:861 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:901 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:901 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:941 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:941 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:25:983 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:25:983 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:21 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:21 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:61 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:61 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:101 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:101 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:140 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:141 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:181 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:181 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:221 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:221 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:261 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:261 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:301 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:301 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:341 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:341 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:381 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:381 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:420 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:420 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:461 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:461 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:501 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:501 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:546 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:546 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:585 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:585 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:625 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:625 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:665 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:665 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:705 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:705 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:744 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:745 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:784 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:784 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:825 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:825 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:865 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:865 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:905 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:905 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:949 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:949 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:26:989 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:26:989 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:29 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:29 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:69 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:69 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:109 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:109 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:154 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:154 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:193 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:193 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:233 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:233 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:273 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:273 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:313 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:313 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:353 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:353 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:393 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:393 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:433 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:433 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:473 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:473 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:552 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:553 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:593 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:593 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:633 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:633 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:673 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:673 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:715 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:715 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:753 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:753 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:793 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:793 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:833 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:833 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:872 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:872 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:913 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:913 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:953 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:953 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:27:995 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:27:995 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:33 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:33 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:73 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:73 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:113 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:113 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:152 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:152 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:193 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:193 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:232 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:232 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:274 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:274 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:313 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:313 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:353 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:353 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:393 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:393 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:433 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:433 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:473 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:473 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:512 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:512 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:555 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:555 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:593 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:593 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:633 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:633 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:673 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:673 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:713 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:713 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:753 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:753 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:793 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:793 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:833 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:833 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:873 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:873 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:913 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:913 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:953 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:953 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:28:993 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:28:993 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:33 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:33 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:72 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:73 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:113 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:113 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:153 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:153 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:193 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:193 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:233 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:233 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:273 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:273 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:313 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:313 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:353 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:353 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:399 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:399 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:437 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:437 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:517 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:597 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:597 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:636 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:636 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:717 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:717 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:757 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:757 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:797 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:797 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:837 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:837 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:877 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:877 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:917 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:917 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:958 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:958 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:29:997 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:29:997 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:37 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:37 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:77 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:77 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:117 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:117 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:157 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:157 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:197 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:197 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:237 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:317 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:317 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:357 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:357 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:397 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:397 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:437 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:437 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:517 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:599 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:599 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:637 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:637 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:716 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:716 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:756 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:756 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:797 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:797 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:837 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:837 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:884 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:884 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:920 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:920 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:961 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:961 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:30:1 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:30:1 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:40 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:41 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:81 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:81 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:121 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:121 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:161 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:161 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:200 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:201 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:241 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:241 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:281 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:281 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:321 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:321 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:361 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:361 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:401 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:401 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:442 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:442 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:481 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:481 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:521 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:521 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:560 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:561 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:600 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:600 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:641 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:641 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:681 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:681 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:724 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:724 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:761 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:761 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:801 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:801 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:841 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:841 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:881 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:881 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:921 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:921 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:31:961 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:31:961 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:8 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:8 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:45 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:45 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:85 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:85 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:125 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:126 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:165 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:165 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:205 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:205 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:257 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:257 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:300 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:300 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:350 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:350 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:405 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:405 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:450 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:450 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:492 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:492 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:537 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:537 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:577 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:577 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:617 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:617 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:661 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:661 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:701 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:701 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:740 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:740 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:781 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:781 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:821 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:821 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:861 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:861 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:906 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:906 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:944 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:945 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:32:985 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:32:985 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:25 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:25 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:65 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:65 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:105 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:105 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:145 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:145 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:185 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:185 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:225 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:225 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:265 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:265 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:310 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:310 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:349 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:349 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:390 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:390 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:429 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:429 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:469 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:469 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:553 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:553 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:593 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:593 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:633 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:633 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:672 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:673 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:713 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:713 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:753 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:753 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:793 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:793 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:833 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:833 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:873 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:873 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:915 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:915 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:953 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:953 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:33:993 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:33:993 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:33 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:33 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:73 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:73 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:113 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:113 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:153 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:153 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:199 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:199 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:237 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:317 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:317 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:357 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:357 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:397 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:397 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:437 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:437 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:516 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:597 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:597 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:637 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:637 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:717 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:717 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:756 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:757 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:796 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:796 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:838 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:838 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:877 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:877 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:917 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:917 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:957 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:957 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:34:997 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:34:997 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:36 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:37 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:77 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:77 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:117 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:117 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:157 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:157 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:197 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:197 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:237 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:317 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:317 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:363 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:363 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:401 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:401 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:441 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:441 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:481 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:481 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:521 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:521 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:561 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:561 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:601 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:601 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:641 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:641 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:681 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:681 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:728 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:728 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:769 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:769 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:816 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:816 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:856 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:856 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:897 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:897 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:938 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:938 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:35:976 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:35:976 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:17 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:17 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:57 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:57 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:97 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:97 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:137 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:137 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:177 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:177 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:217 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:217 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:257 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:257 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:297 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:297 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:337 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:337 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:377 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:377 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:417 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:417 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:458 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:458 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:497 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:497 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:537 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:537 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:577 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:577 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:617 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:617 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:657 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:657 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:697 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:697 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:737 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:737 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:777 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:777 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:817 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:817 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:857 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:857 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:901 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:901 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:941 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:941 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:36:981 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:36:981 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:21 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:21 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:61 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:61 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:101 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:101 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:141 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:141 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:181 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:181 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:221 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:221 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:261 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:261 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:301 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:301 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:341 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:341 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:381 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:381 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:422 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:422 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:461 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:461 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:501 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:501 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:541 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:541 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:581 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:581 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:621 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:621 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:661 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:661 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:701 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:701 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:741 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:741 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:781 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:781 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:821 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:821 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:861 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:861 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:900 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:901 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:940 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:941 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:37:982 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:37:982 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:21 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:21 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:61 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:61 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:101 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:101 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:141 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:141 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:181 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:181 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:221 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:221 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:261 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:261 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:301 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:301 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:350 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:350 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:389 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:389 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:429 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:429 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:468 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:469 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:508 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:509 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:549 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:549 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:589 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:589 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:630 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:630 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:669 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:669 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:709 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:709 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:749 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:749 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:789 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:789 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:829 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:829 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:870 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:870 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:910 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:910 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:949 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:949 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:38:989 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:38:989 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:29 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:29 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:69 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:69 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:109 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:109 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:148 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:149 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:192 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:192 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:229 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:229 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:269 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:269 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:309 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:309 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:349 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:349 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:389 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:389 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:429 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:429 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:469 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:469 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:513 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:513 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:553 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:553 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:593 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:593 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:636 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:636 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:677 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:677 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:718 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:718 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:757 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:757 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:797 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:797 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:836 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:836 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:877 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:877 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:917 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:917 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:957 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:957 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:39:997 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:39:997 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:37 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:37 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:77 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:77 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:116 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:116 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:157 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:157 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:197 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:197 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:237 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:237 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:277 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:277 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:317 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:317 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:360 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:360 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:397 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:397 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:437 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:437 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:477 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:477 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:516 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:517 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:557 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:557 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:597 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:597 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:643 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:643 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:681 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:681 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:721 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:721 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:760 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:761 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:801 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:801 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:841 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:841 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:881 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:881 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:921 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:921 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:961 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:961 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:40:1 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:40:1 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:41 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:41 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:82 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:82 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:121 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:121 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:161 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:161 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:201 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:201 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:241 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:241 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:281 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:281 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:321 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:321 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:361 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:361 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:401 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:401 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:441 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:441 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:481 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:481 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:521 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:521 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:561 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:561 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:601 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:601 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:642 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:642 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:681 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:681 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:721 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:721 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:761 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:761 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:801 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:801 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:841 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:841 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:881 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:881 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:04:41:927 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:04:41:927 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:05:21:637 cpu/(18313:18313): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:05:36:368 cpu/(18313:18313): Obtener siguiente PCB
+[INFO] 13:08:58:331 cpu/(19633:19633): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 13:08:58:331 cpu/(19633:19633): Configuracion del IP_NUCLEO leida con exito
+[INFO] 13:08:58:331 cpu/(19633:19633): Configuracion del PUERTO_UMC leida con exito
+[INFO] 13:08:58:331 cpu/(19633:19633): Configuracion del IP_UMC leida con exito
+[INFO] 13:08:58:331 cpu/(19633:19633): **********************************************************************
+[INFO] 13:08:58:331 cpu/(19633:19633): **********************************************************************
+[INFO] 13:08:58:331 cpu/(19633:19633): **********************************************************************
+[INFO] 13:08:58:331 cpu/(19633:19633): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 13:08:58:331 cpu/(19633:19633): Se inicializo la CPU.
+[INFO] 13:09:01:332 cpu/(19633:19633): Handshake realizado con exito.
+[INFO] 13:09:04:332 cpu/(19633:19633): Mensaje enviado a la UMC ppal.
+[INFO] 13:09:09:333 cpu/(19633:19633): Me conecte al agradable hilo
+[INFO] 13:09:09:333 cpu/(19633:19633): Mensaje enviado a la UMC ppal.
+[INFO] 13:09:09:333 cpu/(19633:19633): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:09:09:333 cpu/(19633:19633): Obtener siguiente PCB
+[INFO] 13:11:32:49 cpu/(19633:19633): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:11:32:49 cpu/(19633:19633): Obtener siguiente PCB
+[ERROR] 13:13:24:768 cpu/(19633:19633): No se pudo recibir el stream del nucleo
+[INFO] 13:17:05:988 cpu/(20100:20100): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 13:17:05:988 cpu/(20100:20100): Configuracion del IP_NUCLEO leida con exito
+[INFO] 13:17:05:988 cpu/(20100:20100): Configuracion del PUERTO_UMC leida con exito
+[INFO] 13:17:05:988 cpu/(20100:20100): Configuracion del IP_UMC leida con exito
+[INFO] 13:17:05:988 cpu/(20100:20100): **********************************************************************
+[INFO] 13:17:05:988 cpu/(20100:20100): **********************************************************************
+[INFO] 13:17:05:988 cpu/(20100:20100): **********************************************************************
+[INFO] 13:17:05:988 cpu/(20100:20100): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 13:17:05:988 cpu/(20100:20100): Se inicializo la CPU.
+[INFO] 13:17:08:988 cpu/(20100:20100): Handshake realizado con exito.
+[INFO] 13:17:11:988 cpu/(20100:20100): Mensaje enviado a la UMC ppal.
+[INFO] 13:17:16:990 cpu/(20100:20100): Me conecte al agradable hilo
+[INFO] 13:17:16:990 cpu/(20100:20100): Mensaje enviado a la UMC ppal.
+[INFO] 13:17:16:990 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:16:990 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:29 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:29 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:68 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:69 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:132 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:132 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:169 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:169 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:209 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:209 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:248 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:248 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:292 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:292 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:329 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:329 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:368 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:368 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:409 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:409 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:448 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:449 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:488 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:488 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:529 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:529 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:568 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:568 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:608 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:608 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:648 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:649 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:689 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:689 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:728 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:729 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:768 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:769 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:809 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:809 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:848 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:848 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:888 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:888 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:929 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:929 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:17:969 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:17:969 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:8 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:8 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:54 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:54 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:93 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:93 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:135 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:135 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:173 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:173 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:212 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:213 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:253 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:253 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:293 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:293 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:333 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:333 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:373 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:373 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:413 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:413 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:453 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:453 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:492 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:493 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:532 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:533 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:573 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:573 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:613 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:613 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:653 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:653 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:698 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:698 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:737 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:737 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:777 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:777 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:817 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:817 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:856 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:857 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:897 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:897 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:937 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:937 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:18:977 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:18:977 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:17 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:17 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:56 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:56 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:97 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:97 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:137 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:137 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:176 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:177 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:217 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:217 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:256 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:257 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:299 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:299 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:337 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:337 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:377 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:377 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:417 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:417 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:462 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:462 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:501 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:501 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:545 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:545 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:585 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:585 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:625 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:625 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:665 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:665 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:704 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:704 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:745 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:745 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:784 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:785 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:825 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:825 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:864 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:865 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:904 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:905 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:945 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:945 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:19:984 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:19:985 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:25 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:25 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:64 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:65 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:105 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:105 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:144 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:145 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:184 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:185 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:225 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:225 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:264 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:264 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:305 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:305 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:355 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:355 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:393 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:393 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:432 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:433 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:473 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:473 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:512 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:513 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:552 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:553 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:593 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:593 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:632 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:632 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:673 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:673 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:718 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:718 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:757 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:757 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:797 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:797 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:839 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:839 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:876 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:877 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:917 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:917 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:957 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:957 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:20:997 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:20:997 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:45 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:45 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:84 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:85 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:125 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:125 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:177 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:177 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:216 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:217 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:262 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:262 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:300 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:301 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:341 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:341 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:380 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:380 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:422 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:422 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:460 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:461 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:501 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:501 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:541 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:541 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:581 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:581 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:621 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:621 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:661 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:661 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:700 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:701 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:742 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:742 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:780 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:781 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:820 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:821 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:860 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:861 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:900 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:901 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:941 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:941 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:21:980 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:21:980 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:21 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:21 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:60 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:61 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:100 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:101 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:141 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:141 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:181 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:181 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:221 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:221 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:261 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:261 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:301 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:301 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:340 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:340 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:381 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:381 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:421 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:421 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:461 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:461 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:501 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:501 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:540 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:540 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:581 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:581 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:620 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:620 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:661 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:661 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:701 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:701 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:741 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:741 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:781 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:781 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:820 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:821 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:860 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:861 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:901 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:901 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:940 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:940 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:22:981 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:22:981 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:21 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:21 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:61 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:61 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:100 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:100 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:141 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:141 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:181 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:181 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:220 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:220 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:269 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:269 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:309 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:309 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:349 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:349 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:389 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:389 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:428 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:429 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:469 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:469 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:508 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:509 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:549 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:549 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:589 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:589 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:629 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:629 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:669 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:669 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:709 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:709 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:749 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:749 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:789 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:789 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:829 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:829 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:869 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:869 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:908 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:908 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:949 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:949 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:23:988 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:23:989 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:30 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:30 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:69 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:69 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:108 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:108 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:149 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:149 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:188 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:189 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:229 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:229 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:274 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:274 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:313 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:313 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:352 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:353 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:393 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:393 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:433 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:433 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:478 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:478 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:516 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:517 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:557 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:557 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:596 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:597 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:637 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:637 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:677 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:677 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:716 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:717 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:757 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:757 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:797 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:797 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:837 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:837 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:877 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:877 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:917 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:917 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:957 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:957 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:24:996 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:24:996 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:37 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:37 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:77 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:77 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:116 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:116 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:157 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:157 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:196 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:197 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:237 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:237 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:282 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:282 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:321 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:321 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:363 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:363 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:401 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:401 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:440 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:441 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:485 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:485 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:525 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:525 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:565 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:565 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:605 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:605 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:644 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:644 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:685 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:685 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:725 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:725 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:773 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:773 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:813 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:813 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:853 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:853 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:897 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:897 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:937 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:937 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:25:977 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:25:977 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:18 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:18 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:57 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:57 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:97 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:97 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:136 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:136 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:177 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:177 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:217 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:217 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:257 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:257 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:297 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:297 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:337 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:337 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:377 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:377 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:416 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:416 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:457 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:457 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:496 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:497 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:537 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:537 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:577 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:577 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:617 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:617 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:657 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:657 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:703 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:703 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:741 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:741 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:780 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:781 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:821 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:821 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:861 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:861 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:908 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:908 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:949 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:949 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:26:989 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:26:989 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:28 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:29 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:68 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:68 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:109 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:109 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:148 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:148 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:189 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:189 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:229 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:229 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:269 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:269 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:308 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:309 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:349 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:349 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:389 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:389 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:428 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:428 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:468 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:468 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:509 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:509 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:549 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:549 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:593 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:593 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:633 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:633 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:673 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:673 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:712 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:713 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:752 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:752 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:793 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:793 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:833 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:833 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:873 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:873 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:913 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:913 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:953 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:953 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:27:992 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:27:993 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:33 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:33 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:73 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:73 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:112 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:112 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:153 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:153 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:193 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:193 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:236 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:236 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:273 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:273 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:313 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:313 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:352 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:353 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:393 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:393 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:433 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:433 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:473 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:473 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:513 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:513 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:553 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:553 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:593 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:593 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:633 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:633 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:673 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:673 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:713 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:713 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:752 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:752 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:793 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:793 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:833 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:833 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:873 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:873 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:913 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:913 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:953 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:953 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:28:993 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:28:993 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:38 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:38 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:77 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:77 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:117 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:117 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:157 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:157 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:197 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:197 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:247 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:247 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:285 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:285 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:325 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:325 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:364 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:364 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:405 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:405 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:444 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:445 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:485 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:485 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:525 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:525 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:565 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:565 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:605 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:605 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:651 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:651 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:689 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:689 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:729 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:729 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:769 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:769 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:808 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:808 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:857 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:857 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:897 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:897 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:937 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:937 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:29:977 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:29:977 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:17 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:17 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:57 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:57 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:97 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:97 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:137 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:137 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:176 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:176 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:217 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:217 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:257 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:257 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:297 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:297 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:337 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:337 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:377 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:377 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:417 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:417 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:457 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:457 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:497 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:497 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:537 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:537 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:577 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:577 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:617 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:617 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:656 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:656 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:697 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:697 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:737 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:737 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:784 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:784 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:821 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:821 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:861 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:861 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:901 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:901 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:941 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:941 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:30:981 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:30:981 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:21 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:21 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:61 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:61 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:101 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:101 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:140 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:141 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:181 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:181 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:220 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:221 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:260 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:261 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:301 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:301 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:341 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:341 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:381 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:381 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:421 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:421 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:461 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:461 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:501 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:501 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:541 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:541 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:581 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:581 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:621 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:621 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:669 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:669 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:709 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:709 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:749 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:749 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:789 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:789 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:829 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:829 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:869 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:869 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:909 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:909 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:949 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:949 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:31:995 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:31:995 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:33 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:33 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:75 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:75 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:113 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:113 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:152 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:152 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:197 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:197 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:237 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:237 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:277 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:277 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:317 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:317 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:357 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:357 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:397 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:397 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:437 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:437 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:477 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:477 cpu/(20100:20100): Obtener siguiente PCB
+[INFO] 13:17:32:517 cpu/(20100:20100): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:17:32:517 cpu/(20100:20100): Obtener siguiente PCB
+[ERROR] 13:17:32:551 cpu/(20100:20100): No se pudo recibir el stream del nucleo
+[INFO] 13:21:26:8 cpu/(20697:20697): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 13:21:26:8 cpu/(20697:20697): Configuracion del IP_NUCLEO leida con exito
+[INFO] 13:21:26:8 cpu/(20697:20697): Configuracion del PUERTO_UMC leida con exito
+[INFO] 13:21:26:8 cpu/(20697:20697): Configuracion del IP_UMC leida con exito
+[INFO] 13:21:26:8 cpu/(20697:20697): **********************************************************************
+[INFO] 13:21:26:8 cpu/(20697:20697): **********************************************************************
+[INFO] 13:21:26:8 cpu/(20697:20697): **********************************************************************
+[INFO] 13:21:26:8 cpu/(20697:20697): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 13:21:26:8 cpu/(20697:20697): Se inicializo la CPU.
+[INFO] 13:22:02:567 cpu/(20697:20697): Handshake realizado con exito.
+[INFO] 13:22:05:567 cpu/(20697:20697): Mensaje enviado a la UMC ppal.
+[INFO] 13:22:10:568 cpu/(20697:20697): Me conecte al agradable hilo
+[INFO] 13:22:10:568 cpu/(20697:20697): Mensaje enviado a la UMC ppal.
+[INFO] 13:22:10:569 cpu/(20697:20697): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 13:22:10:569 cpu/(20697:20697): Obtener siguiente PCB
+[ERROR] 13:22:59:891 cpu/(20697:20697): No se pudo recibir el stream del nucleo
+[INFO] 13:29:39:196 cpu/(21142:21142): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 13:29:39:196 cpu/(21142:21142): Configuracion del IP_NUCLEO leida con exito
+[INFO] 13:29:39:196 cpu/(21142:21142): Configuracion del PUERTO_UMC leida con exito
+[INFO] 13:29:39:196 cpu/(21142:21142): Configuracion del IP_UMC leida con exito
+[INFO] 13:29:39:196 cpu/(21142:21142): **********************************************************************
+[INFO] 13:29:39:196 cpu/(21142:21142): **********************************************************************
+[INFO] 13:29:39:196 cpu/(21142:21142): **********************************************************************
+[INFO] 13:29:39:196 cpu/(21142:21142): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 13:29:39:196 cpu/(21142:21142): Se inicializo la CPU.
+[INFO] 13:43:14:3 cpu/(21142:21142): No se pudo realizar el handshake.
+[INFO] 13:43:37:834 cpu/(21345:21345): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 13:43:37:834 cpu/(21345:21345): Configuracion del IP_NUCLEO leida con exito
+[INFO] 13:43:37:834 cpu/(21345:21345): Configuracion del PUERTO_UMC leida con exito
+[INFO] 13:43:37:834 cpu/(21345:21345): Configuracion del IP_UMC leida con exito
+[INFO] 13:43:37:834 cpu/(21345:21345): **********************************************************************
+[INFO] 13:43:37:834 cpu/(21345:21345): **********************************************************************
+[INFO] 13:43:37:834 cpu/(21345:21345): **********************************************************************
+[INFO] 13:43:37:834 cpu/(21345:21345): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 13:43:37:834 cpu/(21345:21345): Se inicializo la CPU.
+[INFO] 14:02:31:291 cpu/(22245:22245): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 14:02:31:291 cpu/(22245:22245): Configuracion del IP_NUCLEO leida con exito
+[INFO] 14:02:31:291 cpu/(22245:22245): Configuracion del PUERTO_UMC leida con exito
+[INFO] 14:02:31:291 cpu/(22245:22245): Configuracion del IP_UMC leida con exito
+[INFO] 14:02:31:291 cpu/(22245:22245): **********************************************************************
+[INFO] 14:02:31:291 cpu/(22245:22245): **********************************************************************
+[INFO] 14:02:31:291 cpu/(22245:22245): **********************************************************************
+[INFO] 14:02:31:291 cpu/(22245:22245): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 14:02:31:291 cpu/(22245:22245): Se inicializo la CPU.
+[INFO] 14:02:34:406 cpu/(22245:22245): No se pudo realizar el handshake.
+[INFO] 14:11:15:905 cpu/(22439:22439): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 14:11:15:905 cpu/(22439:22439): Configuracion del IP_NUCLEO leida con exito
+[INFO] 14:11:15:905 cpu/(22439:22439): Configuracion del PUERTO_UMC leida con exito
+[INFO] 14:11:15:905 cpu/(22439:22439): Configuracion del IP_UMC leida con exito
+[INFO] 14:11:15:905 cpu/(22439:22439): **********************************************************************
+[INFO] 14:11:15:905 cpu/(22439:22439): **********************************************************************
+[INFO] 14:11:15:905 cpu/(22439:22439): **********************************************************************
+[INFO] 14:11:15:905 cpu/(22439:22439): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 14:11:15:905 cpu/(22439:22439): Se inicializo la CPU.
+[INFO] 14:12:20:841 cpu/(22439:22439): No se pudo realizar el handshake.
+[INFO] 14:22:13:670 cpu/(22727:22727): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 14:22:13:670 cpu/(22727:22727): Configuracion del IP_NUCLEO leida con exito
+[INFO] 14:22:13:670 cpu/(22727:22727): Configuracion del PUERTO_UMC leida con exito
+[INFO] 14:22:13:670 cpu/(22727:22727): Configuracion del IP_UMC leida con exito
+[INFO] 14:22:13:670 cpu/(22727:22727): **********************************************************************
+[INFO] 14:22:13:670 cpu/(22727:22727): **********************************************************************
+[INFO] 14:22:13:670 cpu/(22727:22727): **********************************************************************
+[INFO] 14:22:13:670 cpu/(22727:22727): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 14:22:13:670 cpu/(22727:22727): Se inicializo la CPU.
+[INFO] 14:31:58:541 cpu/(22727:22727): No se pudo realizar el handshake.
+[INFO] 14:34:50:980 cpu/(23316:23316): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 14:34:50:980 cpu/(23316:23316): Configuracion del IP_NUCLEO leida con exito
+[INFO] 14:34:50:980 cpu/(23316:23316): Configuracion del PUERTO_UMC leida con exito
+[INFO] 14:34:50:980 cpu/(23316:23316): Configuracion del IP_UMC leida con exito
+[INFO] 14:34:50:980 cpu/(23316:23316): **********************************************************************
+[INFO] 14:34:50:981 cpu/(23316:23316): **********************************************************************
+[INFO] 14:34:50:981 cpu/(23316:23316): **********************************************************************
+[INFO] 14:34:50:981 cpu/(23316:23316): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 14:34:50:981 cpu/(23316:23316): Se inicializo la CPU.
+[INFO] 15:35:50:965 cpu/(23316:23316): No se pudo realizar el handshake.
+[INFO] 15:37:20:584 cpu/(25259:25259): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 15:37:20:584 cpu/(25259:25259): Configuracion del IP_NUCLEO leida con exito
+[INFO] 15:37:20:584 cpu/(25259:25259): Configuracion del PUERTO_UMC leida con exito
+[INFO] 15:37:20:584 cpu/(25259:25259): Configuracion del IP_UMC leida con exito
+[INFO] 15:37:20:584 cpu/(25259:25259): **********************************************************************
+[INFO] 15:37:20:584 cpu/(25259:25259): **********************************************************************
+[INFO] 15:37:20:584 cpu/(25259:25259): **********************************************************************
+[INFO] 15:37:20:584 cpu/(25259:25259): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 15:37:20:584 cpu/(25259:25259): Se inicializo la CPU.
+[INFO] 15:37:23:699 cpu/(25259:25259): No se pudo realizar el handshake.
+[INFO] 15:39:44:213 cpu/(25443:25443): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 15:39:44:213 cpu/(25443:25443): Configuracion del IP_NUCLEO leida con exito
+[INFO] 15:39:44:213 cpu/(25443:25443): Configuracion del PUERTO_UMC leida con exito
+[INFO] 15:39:44:213 cpu/(25443:25443): Configuracion del IP_UMC leida con exito
+[INFO] 15:39:44:213 cpu/(25443:25443): **********************************************************************
+[INFO] 15:39:44:213 cpu/(25443:25443): **********************************************************************
+[INFO] 15:39:44:213 cpu/(25443:25443): **********************************************************************
+[INFO] 15:39:44:213 cpu/(25443:25443): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 15:39:44:213 cpu/(25443:25443): Se inicializo la CPU.
+[INFO] 15:49:33:215 cpu/(25970:25970): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 15:49:33:215 cpu/(25970:25970): Configuracion del IP_NUCLEO leida con exito
+[INFO] 15:49:33:215 cpu/(25970:25970): Configuracion del PUERTO_UMC leida con exito
+[INFO] 15:49:33:215 cpu/(25970:25970): Configuracion del IP_UMC leida con exito
+[INFO] 15:49:33:215 cpu/(25970:25970): **********************************************************************
+[INFO] 15:49:33:215 cpu/(25970:25970): **********************************************************************
+[INFO] 15:49:33:215 cpu/(25970:25970): **********************************************************************
+[INFO] 15:49:33:215 cpu/(25970:25970): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 15:49:33:215 cpu/(25970:25970): Se inicializo la CPU.
+[INFO] 15:51:36:693 cpu/(25970:25970): No se pudo realizar el handshake.
+[INFO] 15:52:08:522 cpu/(26281:26281): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 15:52:08:522 cpu/(26281:26281): Configuracion del IP_NUCLEO leida con exito
+[INFO] 15:52:08:522 cpu/(26281:26281): Configuracion del PUERTO_UMC leida con exito
+[INFO] 15:52:08:522 cpu/(26281:26281): Configuracion del IP_UMC leida con exito
+[INFO] 15:52:08:522 cpu/(26281:26281): **********************************************************************
+[INFO] 15:52:08:522 cpu/(26281:26281): **********************************************************************
+[INFO] 15:52:08:522 cpu/(26281:26281): **********************************************************************
+[INFO] 15:52:08:522 cpu/(26281:26281): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 15:52:08:522 cpu/(26281:26281): Se inicializo la CPU.
+[INFO] 15:54:50:808 cpu/(26281:26281): No se pudo realizar el handshake.
+[INFO] 15:57:56:61 cpu/(26686:26686): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 15:57:56:61 cpu/(26686:26686): Configuracion del IP_NUCLEO leida con exito
+[INFO] 15:57:56:61 cpu/(26686:26686): Configuracion del PUERTO_UMC leida con exito
+[INFO] 15:57:56:61 cpu/(26686:26686): Configuracion del IP_UMC leida con exito
+[INFO] 15:57:56:61 cpu/(26686:26686): **********************************************************************
+[INFO] 15:57:56:61 cpu/(26686:26686): **********************************************************************
+[INFO] 15:57:56:61 cpu/(26686:26686): **********************************************************************
+[INFO] 15:57:56:61 cpu/(26686:26686): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 15:57:56:61 cpu/(26686:26686): Se inicializo la CPU.
+[INFO] 15:59:56:316 cpu/(26686:26686): No se pudo realizar el handshake.
+[INFO] 16:00:19:775 cpu/(26990:26990): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 16:00:19:775 cpu/(26990:26990): Configuracion del IP_NUCLEO leida con exito
+[INFO] 16:00:19:775 cpu/(26990:26990): Configuracion del PUERTO_UMC leida con exito
+[INFO] 16:00:19:775 cpu/(26990:26990): Configuracion del IP_UMC leida con exito
+[INFO] 16:00:19:775 cpu/(26990:26990): **********************************************************************
+[INFO] 16:00:19:775 cpu/(26990:26990): **********************************************************************
+[INFO] 16:00:19:775 cpu/(26990:26990): **********************************************************************
+[INFO] 16:00:19:775 cpu/(26990:26990): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 16:00:19:775 cpu/(26990:26990): Se inicializo la CPU.
+[INFO] 16:04:48:213 cpu/(26990:26990): No se pudo realizar el handshake.
+[INFO] 16:05:19:185 cpu/(27505:27505): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 16:05:19:186 cpu/(27505:27505): Configuracion del IP_NUCLEO leida con exito
+[INFO] 16:05:19:186 cpu/(27505:27505): Configuracion del PUERTO_UMC leida con exito
+[INFO] 16:05:19:186 cpu/(27505:27505): Configuracion del IP_UMC leida con exito
+[INFO] 16:05:19:186 cpu/(27505:27505): **********************************************************************
+[INFO] 16:05:19:186 cpu/(27505:27505): **********************************************************************
+[INFO] 16:05:19:186 cpu/(27505:27505): **********************************************************************
+[INFO] 16:05:19:186 cpu/(27505:27505): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 16:05:19:186 cpu/(27505:27505): Se inicializo la CPU.
+[INFO] 16:08:18:807 cpu/(27505:27505): No se pudo realizar el handshake.
+[INFO] 16:09:10:72 cpu/(27992:27992): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 16:09:10:72 cpu/(27992:27992): Configuracion del IP_NUCLEO leida con exito
+[INFO] 16:09:10:72 cpu/(27992:27992): Configuracion del PUERTO_UMC leida con exito
+[INFO] 16:09:10:72 cpu/(27992:27992): Configuracion del IP_UMC leida con exito
+[INFO] 16:09:10:72 cpu/(27992:27992): **********************************************************************
+[INFO] 16:09:10:72 cpu/(27992:27992): **********************************************************************
+[INFO] 16:09:10:72 cpu/(27992:27992): **********************************************************************
+[INFO] 16:09:10:72 cpu/(27992:27992): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 16:09:10:72 cpu/(27992:27992): Se inicializo la CPU.
