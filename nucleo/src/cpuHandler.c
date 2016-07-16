@@ -665,9 +665,11 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 //
 //		streamUmcKer = unserializeUmcKer(buffer);
 		//puto
-
+		//(Char id, Char action, Byte* data, Int32U size,
+			//	Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset,
+				//Int32U tamanio)
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
-				sck->fileContent, sck->fileContentLen, pcbLoco->id, 0, 0, 0,
+				sck->fileContent, sck->fileContentLen, pcbLoco->id, pcbLoco->paginasDeCodigo, 0, 0,
 				cantidadPaginasArchivo(sck->fileContentLen));
 		buffer = serializeUmcKer(streamALaUmc);
 		if (!socketSend(umcServer->ptrSocket, buffer)) {

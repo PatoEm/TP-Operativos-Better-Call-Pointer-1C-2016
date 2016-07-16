@@ -206,3 +206,36 @@
 [INFO] 02:34:12:409 SWAP/(27401:27401): Hay espacio
 [INFO] 02:34:12:409 SWAP/(27401:27401): Espacio reservado correctamente
 [ERROR] 02:35:14:213 SWAP/(27401:27401): Al recibir del cliente
+[INFO] 02:42:03:521 SWAP/(27711:27711): Valores del archivo de configuracion seteados
+[INFO] 02:42:03:536 SWAP/(27711:27711): Archivo de particion creado
+[INFO] 02:42:03:536 SWAP/(27711:27711): Server creado y escuchando correctamente
+[INFO] 02:43:04:960 SWAP/(27711:27711): Hay espacio
+[INFO] 02:43:04:960 SWAP/(27711:27711): Espacio reservado correctamente
+[ERROR] 02:44:45:25 SWAP/(27711:27711): Al recibir del cliente
+[INFO] 02:45:13:131 SWAP/(28009:28009): Valores del archivo de configuracion seteados
+[INFO] 02:45:13:163 SWAP/(28009:28009): Archivo de particion creado
+[INFO] 02:45:13:163 SWAP/(28009:28009): Server creado y escuchando correctamente
+[INFO] 02:45:59:294 SWAP/(28009:28009): Hay espacio
+[INFO] 02:45:59:294 SWAP/(28009:28009): Espacio reservado correctamente
+[ERROR] 02:50:36:102 SWAP/(28009:28009): Al recibir del cliente
+[INFO] 02:50:50:175 SWAP/(28270:28270): Valores del archivo de configuracion seteados
+[INFO] 02:50:50:195 SWAP/(28270:28270): Archivo de particion creado
+[INFO] 02:50:50:195 SWAP/(28270:28270): Server creado y escuchando correctamente
+[INFO] 02:51:02:990 SWAP/(28315:28315): Valores del archivo de configuracion seteados
+[INFO] 02:51:02:996 SWAP/(28315:28315): Archivo de particion creado
+[INFO] 02:51:02:996 SWAP/(28315:28315): Server creado y escuchando correctamente
+[ERROR] 02:52:36:868 SWAP/(28315:28315): Al recibir del cliente
+[INFO] 02:53:17:838 SWAP/(28510:28510): Valores del archivo de configuracion seteados
+[INFO] 02:53:17:863 SWAP/(28510:28510): Archivo de particion creado
+[INFO] 02:53:17:864 SWAP/(28510:28510): Server creado y escuchando correctamente
+[ERROR] 02:58:36:380 SWAP/(28510:28510): Al recibir del cliente
+[INFO] 03:00:58:445 SWAP/(28916:28916): Valores del archivo de configuracion seteados
+[INFO] 03:00:58:455 SWAP/(28916:28916): Archivo de particion creado
+[INFO] 03:00:58:455 SWAP/(28916:28916): Server creado y escuchando correctamente
+[INFO] 03:02:44:756 SWAP/(28916:28916): Hay espacio
+[INFO] 03:02:44:757 SWAP/(28916:28916): Espacio reservado correctamente
+[INFO] 03:02:44:757 SWAP/(28916:28916): Pagina esctira con exito
+[INFO] 03:02:44:757 SWAP/(28916:28916): Pagina esctira con exito
+[INFO] 03:02:44:757 SWAP/(28916:28916): Pagina esctira con exito
+[INFO] 03:02:44:757 SWAP/(28916:28916): Pagina esctira con exito
+[ERROR] 03:04:20:664 SWAP/(28916:28916): Al recibir del cliente
