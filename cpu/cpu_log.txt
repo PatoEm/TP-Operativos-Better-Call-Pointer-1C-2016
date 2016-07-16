@@ -448,3 +448,54 @@
 [INFO] 03:07:31:863 cpu/(29502:29502): Mensaje enviado a la UMC ppal.
 [INFO] 03:07:31:863 cpu/(29502:29502): getNextPcb: Nuevo PCB vacio creado.
 [INFO] 03:07:31:863 cpu/(29502:29502): Obtener siguiente PCB
+[INFO] 04:06:44:466 cpu/(3119:3119): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 04:06:44:466 cpu/(3119:3119): Configuracion del IP_NUCLEO leida con exito
+[INFO] 04:06:44:466 cpu/(3119:3119): Configuracion del PUERTO_UMC leida con exito
+[INFO] 04:06:44:466 cpu/(3119:3119): Configuracion del IP_UMC leida con exito
+[INFO] 04:06:44:466 cpu/(3119:3119): **********************************************************************
+[INFO] 04:06:44:466 cpu/(3119:3119): **********************************************************************
+[INFO] 04:06:44:466 cpu/(3119:3119): **********************************************************************
+[INFO] 04:06:44:467 cpu/(3119:3119): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 04:06:44:467 cpu/(3119:3119): Se inicializo la CPU.
+[INFO] 04:06:47:467 cpu/(3119:3119): Handshake realizado con exito.
+[INFO] 04:06:50:467 cpu/(3119:3119): Mensaje enviado a la UMC ppal.
+[INFO] 04:06:55:468 cpu/(3119:3119): Me conecte al agradable hilo
+[INFO] 04:06:55:468 cpu/(3119:3119): Mensaje enviado a la UMC ppal.
+[INFO] 04:06:55:469 cpu/(3119:3119): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 04:06:55:469 cpu/(3119:3119): Obtener siguiente PCB
+[INFO] 04:11:30:305 cpu/(3510:3510): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 04:11:30:305 cpu/(3510:3510): Configuracion del IP_NUCLEO leida con exito
+[INFO] 04:11:30:305 cpu/(3510:3510): Configuracion del PUERTO_UMC leida con exito
+[INFO] 04:11:30:305 cpu/(3510:3510): Configuracion del IP_UMC leida con exito
+[INFO] 04:11:30:305 cpu/(3510:3510): **********************************************************************
+[INFO] 04:11:30:305 cpu/(3510:3510): **********************************************************************
+[INFO] 04:11:30:305 cpu/(3510:3510): **********************************************************************
+[INFO] 04:11:30:305 cpu/(3510:3510): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 04:11:30:305 cpu/(3510:3510): Se inicializo la CPU.
+[INFO] 04:11:33:306 cpu/(3510:3510): Handshake realizado con exito.
+[INFO] 04:11:36:306 cpu/(3510:3510): Mensaje enviado a la UMC ppal.
+[INFO] 04:11:41:308 cpu/(3510:3510): Me conecte al agradable hilo
+[INFO] 04:11:41:308 cpu/(3510:3510): Mensaje enviado a la UMC ppal.
+[INFO] 04:11:41:308 cpu/(3510:3510): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 04:11:41:308 cpu/(3510:3510): Obtener siguiente PCB
+[INFO] 04:23:57:329 cpu/(3992:3992): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 04:23:57:329 cpu/(3992:3992): Configuracion del IP_NUCLEO leida con exito
+[INFO] 04:23:57:329 cpu/(3992:3992): Configuracion del PUERTO_UMC leida con exito
+[INFO] 04:23:57:329 cpu/(3992:3992): Configuracion del IP_UMC leida con exito
+[INFO] 04:23:57:329 cpu/(3992:3992): **********************************************************************
+[INFO] 04:23:57:329 cpu/(3992:3992): **********************************************************************
+[INFO] 04:23:57:329 cpu/(3992:3992): **********************************************************************
+[INFO] 04:23:57:329 cpu/(3992:3992): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 04:23:57:329 cpu/(3992:3992): Se inicializo la CPU.
+[INFO] 04:24:00:330 cpu/(3992:3992): Handshake realizado con exito.
+[INFO] 04:24:03:330 cpu/(3992:3992): Mensaje enviado a la UMC ppal.
+[INFO] 04:24:08:331 cpu/(3992:3992): Me conecte al agradable hilo
+[INFO] 04:24:08:331 cpu/(3992:3992): Mensaje enviado a la UMC ppal.
+[INFO] 04:24:08:331 cpu/(3992:3992): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 04:24:08:331 cpu/(3992:3992): Obtener siguiente PCB

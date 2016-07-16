@@ -261,3 +261,65 @@ begin
 [INFO] 04:02:00:877 SWAP/(32697:32697): Valores del archivo de configuracion seteados
 [INFO] 04:02:00:888 SWAP/(32697:32697): Archivo de particion creado
 [INFO] 04:02:00:889 SWAP/(32697:32697): Server creado y escuchando correctamente
+[INFO] 04:07:13:122 SWAP/(32697:32697): Hay espacio
+[INFO] 04:07:13:122 SWAP/(32697:32697): Espacio reservado correctamente
+[INFO] 04:07:13:122 SWAP/(32697:32697): Pagina esctira con exito
+[INFO] 04:07:13:122 SWAP/(32697:32697): Pagina esctira con exito
+[INFO] 04:07:13:122 SWAP/(32697:32697): Pagina esctira con exito
+[INFO] 04:07:13:122 SWAP/(32697:32697): Pagina esctira con exito
+[INFO] 04:07:13:164 SWAP/(32697:32697): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 04:09:55:867 SWAP/(3232:3232): Valores del archivo de configuracion seteados
+[INFO] 04:09:55:878 SWAP/(3232:3232): Archivo de particion creado
+[INFO] 04:09:55:879 SWAP/(3232:3232): Server creado y escuchando correctamente
+[ERROR] 04:10:12:300 SWAP/(3232:3232): Al recibir del cliente
+[INFO] 04:10:19:33 SWAP/(3320:3320): Valores del archivo de configuracion seteados
+[INFO] 04:10:19:40 SWAP/(3320:3320): Archivo de particion creado
+[INFO] 04:10:19:40 SWAP/(3320:3320): Server creado y escuchando correctamente
+[INFO] 04:11:19:10 SWAP/(3320:3320): Hay espacio
+[INFO] 04:11:19:10 SWAP/(3320:3320): Espacio reservado correctamente
+[INFO] 04:11:19:10 SWAP/(3320:3320): Pagina esctira con exito
+[INFO] 04:11:19:10 SWAP/(3320:3320): Pagina esctira con exito
+[INFO] 04:11:19:10 SWAP/(3320:3320): Pagina esctira con exito
+[INFO] 04:11:19:10 SWAP/(3320:3320): Pagina esctira con exito
+[INFO] 04:12:03:175 SWAP/(3320:3320): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 04:15:55:156 SWAP/(3320:3320): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[ERROR] 04:17:46:156 SWAP/(3320:3320): Al recibir del cliente
+[INFO] 04:19:31:443 SWAP/(3765:3765): Valores del archivo de configuracion seteados
+[INFO] 04:19:31:475 SWAP/(3765:3765): Archivo de particion creado
+[INFO] 04:19:31:475 SWAP/(3765:3765): Server creado y escuchando correctamente
+[INFO] 04:19:45:468 SWAP/(3811:3811): Valores del archivo de configuracion seteados
+[INFO] 04:19:45:470 SWAP/(3811:3811): Archivo de particion creado
+[INFO] 04:19:45:470 SWAP/(3811:3811): Server creado y escuchando correctamente
+[INFO] 04:23:05:828 SWAP/(3811:3811): Hay espacio
+[INFO] 04:23:05:828 SWAP/(3811:3811): Espacio reservado correctamente
+[INFO] 04:23:05:828 SWAP/(3811:3811): Pagina esctira con exito
+[INFO] 04:23:05:828 SWAP/(3811:3811): Pagina esctira con exito
+[INFO] 04:23:05:828 SWAP/(3811:3811): Pagina esctira con exito
+[INFO] 04:23:05:828 SWAP/(3811:3811): Pagina esctira con exito
+[INFO] 04:24:38:177 SWAP/(3811:3811): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 04:30:08:494 SWAP/(4168:4168): Valores del archivo de configuracion seteados
+[INFO] 04:30:08:496 SWAP/(4168:4168): Archivo de particion creado
+[INFO] 04:30:08:496 SWAP/(4168:4168): Server creado y escuchando correctamente
+[INFO] 04:31:14:606 SWAP/(4168:4168): Hay espacio
+[INFO] 04:31:14:606 SWAP/(4168:4168): Espacio reservado correctamente
+[INFO] 04:34:14:864 SWAP/(4168:4168): Pagina esctira con exito
