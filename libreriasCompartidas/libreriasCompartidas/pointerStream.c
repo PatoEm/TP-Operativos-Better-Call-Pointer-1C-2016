@@ -1352,8 +1352,28 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized) {
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
 
-	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
-	ptrByte += sizeof(pageComienzo);
+	// comienzo a unserializar espacioAsignado pageComienzo
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
+
+	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
+	ptrByte += sizeof(pageComienzo.pid);
+
+	memcpy(&pageComienzo.numDePag, ptrByte, sizeof(pageComienzo.numDePag));
+	ptrByte += sizeof(pageComienzo.numDePag);
+
+	memcpy(&pageComienzo.bitUso, ptrByte, sizeof(pageComienzo.bitUso));
+	ptrByte += sizeof(pageComienzo.bitUso);
+
+	memcpy(&pageComienzo.bitModificado, ptrByte, sizeof(pageComienzo.bitModificado));
+	ptrByte += sizeof(pageComienzo.bitModificado);
+
+	memcpy(&pageComienzo.punteroAPagina, ptrByte, sizeof(pageComienzo.punteroAPagina));
+	ptrByte += sizeof(pageComienzo.punteroAPagina);
+
+	memcpy(&pageComienzo.bitDePresencia, ptrByte, sizeof(pageComienzo.bitDePresencia));
+	ptrByte += sizeof(pageComienzo.bitDePresencia);
+	// termino de unserializar espacioAsignado pageComienzo
 
 	memcpy(&offset, ptrByte, sizeof(offset));
 	ptrByte += sizeof(offset);
@@ -1424,8 +1444,30 @@ StrUmcCpu* unserializeUmcCpu(Stream dataSerialized) {
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
-	ptrByte += sizeof(pageComienzo);
+
+	// comienzo a unserializar espacioAsignado pageComienzo
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
+
+	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
+	ptrByte += sizeof(pageComienzo.pid);
+
+	memcpy(&pageComienzo.numDePag, ptrByte, sizeof(pageComienzo.numDePag));
+	ptrByte += sizeof(pageComienzo.numDePag);
+
+	memcpy(&pageComienzo.bitUso, ptrByte, sizeof(pageComienzo.bitUso));
+	ptrByte += sizeof(pageComienzo.bitUso);
+
+	memcpy(&pageComienzo.bitModificado, ptrByte, sizeof(pageComienzo.bitModificado));
+	ptrByte += sizeof(pageComienzo.bitModificado);
+
+	memcpy(&pageComienzo.punteroAPagina, ptrByte, sizeof(pageComienzo.punteroAPagina));
+	ptrByte += sizeof(pageComienzo.punteroAPagina);
+
+	memcpy(&pageComienzo.bitDePresencia, ptrByte, sizeof(pageComienzo.bitDePresencia));
+	ptrByte += sizeof(pageComienzo.bitDePresencia);
+	// termino de unserializar espacioAsignado pageComienzo
+
 	memcpy(&offset, ptrByte, sizeof(offset));
 	ptrByte += sizeof(offset);
 
@@ -1460,8 +1502,30 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized) {
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
-	ptrByte += sizeof(pageComienzo);
+
+	// comienzo a unserializar espacioAsignado pageComienzo
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
+
+	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
+	ptrByte += sizeof(pageComienzo.pid);
+
+	memcpy(&pageComienzo.numDePag, ptrByte, sizeof(pageComienzo.numDePag));
+	ptrByte += sizeof(pageComienzo.numDePag);
+
+	memcpy(&pageComienzo.bitUso, ptrByte, sizeof(pageComienzo.bitUso));
+	ptrByte += sizeof(pageComienzo.bitUso);
+
+	memcpy(&pageComienzo.bitModificado, ptrByte, sizeof(pageComienzo.bitModificado));
+	ptrByte += sizeof(pageComienzo.bitModificado);
+
+	memcpy(&pageComienzo.punteroAPagina, ptrByte, sizeof(pageComienzo.punteroAPagina));
+	ptrByte += sizeof(pageComienzo.punteroAPagina);
+
+	memcpy(&pageComienzo.bitDePresencia, ptrByte, sizeof(pageComienzo.bitDePresencia));
+	ptrByte += sizeof(pageComienzo.bitDePresencia);
+	// termino de unserializar espacioAsignado pageComienzo
+
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
 
@@ -1497,8 +1561,21 @@ StrSwaUmc* unserializeSwaUmc(Stream dataSerialized) {
 	ptrByte += sizeof(id);
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
-	memcpy(&pageComienzo, ptrByte, sizeof(pageComienzo));
-	ptrByte += sizeof(pageComienzo);
+
+	// comienzo de unserializar paginaAsignada pageComienzo
+	memcpy(&pageComienzo.IDPaginaInterno, ptrByte, sizeof(pageComienzo.IDPaginaInterno));
+	ptrByte += sizeof(pageComienzo.IDPaginaInterno);
+
+	memcpy(&pageComienzo.pid, ptrByte, sizeof(pageComienzo.pid));
+	ptrByte += sizeof(pageComienzo.pid);
+
+	memcpy(&pageComienzo.bitLectura, ptrByte, sizeof(pageComienzo.bitLectura));
+	ptrByte += sizeof(pageComienzo.bitLectura);
+
+	memcpy(&pageComienzo.numDePag, ptrByte, sizeof(pageComienzo.numDePag));
+	ptrByte += sizeof(pageComienzo.numDePag);
+	// termino de unserializar paginaAsignada pageComienzo
+
 	memcpy(&cantPage, ptrByte, sizeof(cantPage));
 	ptrByte += sizeof(cantPage);
 
