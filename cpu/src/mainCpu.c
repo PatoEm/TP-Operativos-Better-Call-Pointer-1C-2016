@@ -80,6 +80,7 @@ t_log* logger = NULL;
  ****************************************/
 
 int main() {
+	asignadoVacio=newEspacioAsignado();
 	log_debug(getLogger(),
 			"Cargo variables de configuracion, me conecto al nucleo y a la umc");
 	pcbActual = malloc(sizeof(pcb));
@@ -399,7 +400,6 @@ char* pedirInstruccion(pcb* pcbLoco) {
 	else
 		inicioPag = inicio;
 	int offsetPag;
-	espacioAsignado auxiliar;
 
 	while (offset > 0) {
 
@@ -408,8 +408,8 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		} else {
 			offsetPag = offset;
 		}
-		auxiliar.numDePag = pagina;
-		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, auxiliar, inicioPag, 0,
+		asignadoVacio->numDePag = pagina;
+		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag, 0,
 		NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC->ptrSocket, buffer)) {

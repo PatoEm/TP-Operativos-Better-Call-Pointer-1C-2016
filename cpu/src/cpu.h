@@ -26,6 +26,7 @@
 #include <commons/collections/list.h>
 #include <libreriasCompartidas/pcb.h>
 #include <signal.h>
+#include <libreriasCompartidas/espacioAsignado.h>
 
 #define FAIL -1
 #define LOGGER_FILE "cpu_log.txt"
@@ -46,6 +47,7 @@ int tamanioPaginaUmc;
 pcb pcbProceso;
 bool seguirEjecutando; //1 SI 0 NO
 int abortoCPU;
+espacioAsignado * asignadoVacio;
 
 //======================================================
 
