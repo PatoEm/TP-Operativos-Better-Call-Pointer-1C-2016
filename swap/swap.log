@@ -660,3 +660,29 @@ end
 
 
 
+[ERROR] 07:01:47:31 SWAP/(12512:12512): Al recibir del cliente
+[INFO] 07:02:38:403 SWAP/(13168:13168): Valores del archivo de configuracion seteados
+[INFO] 07:02:38:423 SWAP/(13168:13168): Archivo de particion creado
+[INFO] 07:02:38:423 SWAP/(13168:13168): Server creado y escuchando correctamente
+[ERROR] 07:05:08:533 SWAP/(13168:13168): Al recibir del cliente
+[INFO] 07:05:22:418 SWAP/(13403:13403): Valores del archivo de configuracion seteados
+[INFO] 07:05:22:425 SWAP/(13403:13403): Archivo de particion creado
+[INFO] 07:05:22:425 SWAP/(13403:13403): Server creado y escuchando correctamente
+[INFO] 07:05:50:80 SWAP/(13403:13403): Hay espacio
+[INFO] 07:05:50:80 SWAP/(13403:13403): Espacio reservado correctamente
+[INFO] 07:05:50:80 SWAP/(13403:13403): Pagina esctira con exito
+[INFO] 07:05:50:80 SWAP/(13403:13403): Pagina esctira con exito
+[INFO] 07:05:50:80 SWAP/(13403:13403): Pagina esctira con exito
+[INFO] 07:05:50:80 SWAP/(13403:13403): Pagina esctira con exito
+[INFO] 07:06:11:529 SWAP/(13403:13403): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 07:07:07:42 SWAP/(13403:13403): Pagina leida correctamente: 
+[INFO] 07:09:05:153 SWAP/(13403:13403): Pagina leida correctamente: 12
+end
+
+
+

@@ -1138,7 +1138,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		inicio = i * sizeof(paginaDeStack);
 		fin = inicio + sizeof(paginaDeStack);
 		aux = string_substring(pcb.buffer, inicio, fin);
-		aux[fin] = '\0';
+	//	aux[fin] = '\0';
 		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
 	}
 
@@ -1323,7 +1323,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		inicio = i * sizeof(paginaDeStack);
 		fin = inicio + sizeof(paginaDeStack);
 		aux = string_substring(pcb.buffer, inicio, fin);
-		aux[fin] = '\0';
+		//aux[fin] = '\0';
 		list_add(pcb.indiceDelStack, (paginaDeStack*) aux);
 	}
 
