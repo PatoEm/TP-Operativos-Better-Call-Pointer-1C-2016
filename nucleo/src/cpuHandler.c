@@ -37,7 +37,7 @@ void* cpuHandlerThreadRoutine(void* parametro) {
 
 	cpuhlog=malloc(sizeof(t_log));
 
-	memcpy(cpuhlog,log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO), sizeof(t_log));
+	memcpy(cpuhlog,log_create("nucleo.log", "NUCLEO", TRUE, LOG_LEVEL_INFO), sizeof(t_log));
 	//cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
 
 
