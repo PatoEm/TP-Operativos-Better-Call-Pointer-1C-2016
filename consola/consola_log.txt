@@ -180,3 +180,22 @@
 [ERROR] 05:02:39:952 consola/(6166:6166): No se pudo recibir el stream del Kernel. ----- Terminando 
 
 [ERROR] 05:02:39:952 consola/(6166:6166): No se recibio instrucciones del NUCLEO
+[INFO] 05:03:29:920 consola/(6580:6580): ===============================================
+[INFO] 05:03:29:921 consola/(6580:6580): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 05:03:29:921 consola/(6580:6580): ===============================================
+[INFO] 05:03:29:921 consola/(6580:6580):                                                
+[INFO] 05:03:29:921 consola/(6580:6580):                                                
+[INFO] 05:03:29:921 consola/(6580:6580): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 05:03:29:921 consola/(6580:6580): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:03:29:921 consola/(6580:6580): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 05:03:29:921 consola/(6580:6580): Archivo de configuracion CONSOLA leido exitosamente
+=============
+
+[INFO] 05:03:32:922 consola/(6580:6580): La CONSOLA se conecto al NUCLEO exitosamente
+=============
+
+[INFO] 05:03:32:923 consola/(6580:6580): Handshake realizado con exito.
+[INFO] 05:03:39:912 consola/(6580:6580): Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO
+[INFO] 05:03:39:912 consola/(6580:6580): Se reconocio el archivo como un .AnSISOP
+[INFO] 05:03:39:912 consola/(6580:6580): Enviando el archivo al NUCLEO
+[INFO] 05:03:39:913 consola/(6580:6580): Esperando instrucciones del NUCLEO

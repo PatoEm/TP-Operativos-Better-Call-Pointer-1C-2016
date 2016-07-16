@@ -391,3 +391,20 @@ begin
 	a = b + 
 [INFO] 05:01:23:198 SWAP/(6031:6031): Pagina leida correctamente: 
 [ERROR] 05:02:41:440 SWAP/(6031:6031): Al recibir del cliente
+[INFO] 05:03:04:96 SWAP/(6445:6445): Valores del archivo de configuracion seteados
+[INFO] 05:03:04:105 SWAP/(6445:6445): Archivo de particion creado
+[INFO] 05:03:04:105 SWAP/(6445:6445): Server creado y escuchando correctamente
+[INFO] 05:03:39:912 SWAP/(6445:6445): Hay espacio
+[INFO] 05:03:39:912 SWAP/(6445:6445): Espacio reservado correctamente
+[INFO] 05:03:39:912 SWAP/(6445:6445): Pagina esctira con exito
+[INFO] 05:03:39:912 SWAP/(6445:6445): Pagina esctira con exito
+[INFO] 05:03:39:913 SWAP/(6445:6445): Pagina esctira con exito
+[INFO] 05:03:39:913 SWAP/(6445:6445): Pagina esctira con exito
+[INFO] 05:04:04:835 SWAP/(6445:6445): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 05:04:04:835 SWAP/(6445:6445): Pagina leida correctamente: 
+[ERROR] 05:05:50:265 SWAP/(6445:6445): Al recibir del cliente
