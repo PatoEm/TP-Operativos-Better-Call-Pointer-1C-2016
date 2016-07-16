@@ -37,6 +37,9 @@ Boolean realizarImprimirTexto();
 Boolean realizarCierreConsola();
 String stringFromByteArray(Byte*, Int32U);
 
+// estructura para loggear
+t_log* logger = NULL;
+
 int main(void) {
 
 	if (loadConfig() && socketConnection()) {

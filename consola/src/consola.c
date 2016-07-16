@@ -60,3 +60,11 @@ char * leerProgramaAnSISOP(char * direccionArchivo) {
 	}
 	return FALSE;
 }
+
+// Devuelve el logger para loggear los logs para poder loggear
+t_log* getLogger() {
+	if (logger == NULL) {
+		logger = log_create(LOGGER_FILE, "consola", TRUE, LOG_LEVEL_INFO);
+	}
+	return logger;
+}
