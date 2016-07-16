@@ -386,10 +386,11 @@ String stringFromByteArray(Byte* data, Int32U size) {
 
 // esto debería funcionar re piola
 char* pedirInstruccion(pcb* pcbLoco) {
-	char* instruccion = "";
+
 	int inicio = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].comienzo;
 	int offset = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].longitud;
-
+	char* instruccion = malloc(offset);
+	instruccion[0]='\0';
 	StrCpuUmc* scu;
 	StrUmcCpu* suc;
 
