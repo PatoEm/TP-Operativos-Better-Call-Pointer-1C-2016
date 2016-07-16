@@ -58,6 +58,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		socketSend(socketUMC->ptrSocket, buffer);
 		buffer = socketReceive(socketUMC->ptrSocket);
 		streamUmcCpu = unserializeCpuUmc(buffer);
+
 		if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 			seguirEjecutando = FALSE;
 		} else {
