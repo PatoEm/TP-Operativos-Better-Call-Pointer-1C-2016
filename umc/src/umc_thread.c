@@ -125,7 +125,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 		case 25/*SOLICITAR_BYTES*/:
 			pthread_mutex_lock(mutexPedidos);
 			if (paginasOcupadasPorPid(pidActivo) == 0
-					|| cantidadDePaginasLibres() == 0) {
+					&& cantidadDePaginasLibres() == 0) {
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
 						unaPagina, scu->offset,0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
