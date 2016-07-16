@@ -310,6 +310,7 @@ Int32U getSizeCpuUmc(StrCpuUmc* scu) {
 	size += sizeof(scu->dataLen);
 	size += scu->dataLen;
 	return size;
+	// a ver si se ve ahora
 }
 
 /*******************************
