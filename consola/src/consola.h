@@ -20,6 +20,8 @@
 #include "libreriasCompartidas/pointerSocketes.h"
 #include "libreriasCompartidas/pointerStream.h"
 #include <commons/string.h>
+#include <unistd.h>
+
 
 /*
  * Defines

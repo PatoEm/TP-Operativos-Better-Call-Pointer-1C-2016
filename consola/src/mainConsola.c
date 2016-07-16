@@ -43,8 +43,11 @@ int main(void) {
 
 		direccionDeArchivo = (char *) malloc(150);
 		verificarMemoria(direccionDeArchivo);
+
+		do {
 		printf("Ingrese direccion del archivo: ");
 	    scanf("%s", direccionDeArchivo);
+		} while (access(direccionDeArchivo, R_OK));
 
 
 		if (!callAndSendAnSISOP(direccionDeArchivo)) {
