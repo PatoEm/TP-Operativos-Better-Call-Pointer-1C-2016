@@ -38,7 +38,7 @@ int aciertosTLB;
 int accesosTLB;
 t_list* conexionSockets ;
 SocketClient * socketSwap;
-
+t_log* umclog;
 pthread_mutex_t* mutexPedidos;
 pthread_mutex_t* mutexThreadSockets;
 

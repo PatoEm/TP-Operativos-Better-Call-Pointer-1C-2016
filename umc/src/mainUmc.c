@@ -12,11 +12,12 @@ int main(void) {
 
 	thread_socket= 3030;
 
+	umclog=malloc(sizeof(t_log));
+	memcpy(umclog,log_create("umc.log", "UMC", TRUE, LOG_LEVEL_TRACE), sizeof(t_log));
+
 	leerArchivoDeConfiguracion("configumc");
 	crearLogger(0);
-
-	puts("Inicio UMC");
-	log_info(logger, "Inicio Log UMC", NULL);
+	log_info(umclog, "Inicio UMC.");
 
 	pthread_t hiloComandos;
 	pthread_attr_t attrhiloComandos;

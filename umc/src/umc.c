@@ -696,12 +696,12 @@ void manageSocketConnections() {
 	Socket* s = socketCreateServer(atoi(puertoEscucha));
 	while (TRUE) {
 		pthread_t socketConnection;
-		puts("UMC: Escuchando conexiones del Kernel o CPUs.");
+		log_info(umclog, "> Escuchando conexiones del Kernel o CPUs.");
 		socketListen(s);
 		Socket* socketClient;
 		socketClient = socketAcceptClient(s);
 		if (socketClient != NULL) {
-			puts("UMC: Alguien se conecto.");
+			log_info(umclog, "Alguien se conecto.");
 			manageSocketConnection((void*) socketClient);
 
 			list_add(conexionSockets, &socketConnection);
@@ -713,11 +713,11 @@ void manageSocketConnections() {
 void* manageSocketConnection(void* param) {
 	Socket* socket = (Socket*) param;
 	Boolean connected = TRUE;
-	puts("UMC: Gestion de conexiones.");
+	log_info(umclog, "Gestor de conexiones.");
 	//while (TRUE) {
-		puts("UMC: Esperando el request.");
+		log_info(umclog, "Esperando el request...");
 		SocketBuffer* sb = socketReceive(socket);
-		puts("UMC: Entro el request.");
+		log_info(umclog, "...Entro el request.");
 		if (sb != NULL) {
 			Char id = getStreamId((Stream) sb->data);
 			StrKerUmc* sku = NULL;
@@ -758,7 +758,7 @@ void* manageSocketConnection(void* param) {
 				break;
 			}
 		} else {
-			puts("UMC: No pudo recibir request, desconectando al cliente.");
+			log_error(umclog, "Gestor de conexiones: No pudo recibir request, desconectando al cliente.");
 			connected = FALSE;
 	//	}
 
@@ -817,7 +817,7 @@ void comandosUMC() {
 		puts("Opcion 3: Flush");
 		puts("*************************\n");
 
-		printf("Ingrese la opción: ");
+		printf("Ingrese la opción: \n\n");
 		scanf("%d", &opcionPrincipal);
 
 		switch (opcionPrincipal) {

@@ -36,28 +36,24 @@ void umcThread(){
 	mi_socket = thread_socket;
 	Socket* serverSocket = socketCreateServer(thread_socket);
 	if (serverSocket == NULL) {
-		puts("No se ppuede escuchar el server");
-//		log_error(umcslog, "No se pudo crear el server escucha.");
+		log_error(umclog, "No se puede escuchar el server");
 		//return FALSE;
 	}
-	printf("HILO %d: Hilo creado.\n", mi_socket);
+	log_info(umclog, "HILO %d: Hilo creado.\n", mi_socket);
 	if (!socketListen(serverSocket)) {
-		puts("No se pone a escuchar");
-//		log_error(umcslog, "No se pudo poner a escuchar al server.");
+		log_error(umclog, "No se pudo poner a escuchar al server.");
 	}
 
-	printf("HILO %d: Listening...\n", mi_socket);
+	log_info(umclog, "HILO %d: Listening...\n", mi_socket);
 	thread_socket ++;
 
-	//log_info(umcslog, "Server creado con exito y escuchando.");
-	//return TRUE;
 //	*******************************************************************
 
 
 //	ACEPTO LA CONEXION
 	Socket* cpuClient = socketAcceptClient(serverSocket);
 
-	printf("HILO %d: Cliente aceptado (%d).\n", mi_socket, cpuClient->descriptor);
+	log_info(umclog, "HILO %d: Cliente aceptado (%d).\n", mi_socket, cpuClient->descriptor);
 
 	SocketBuffer* sb;
 	StrCpuUmc* in_cpu_msg;
@@ -69,10 +65,10 @@ void umcThread(){
 
 		sb = socketReceive(cpuClient);
 
-		printf("HILO %d: Buffer recibido de (%d).\n", mi_socket, cpuClient->descriptor);
+		log_info(umclog, "HILO %d: Buffer recibido de (%d).\n", mi_socket, cpuClient->descriptor);
 
 		if(sb == NULL){
-			("HILO %d: Se cayo el cliente (%d).\n", mi_socket, cpuClient->descriptor);
+			log_error(umclog, "HILO %d: Se cayo el cliente (%d).\n", mi_socket, cpuClient->descriptor);
 			break;
 		}
 
@@ -81,21 +77,21 @@ void umcThread(){
 		Stream strRecibido = (Stream) sb->data;
 		Char id = getStreamId(strRecibido);
 
-		printf("HILO %d: Buffer ID %d.\n", mi_socket, id);
+		log_info(umclog, "HILO %d: Buffer ID %d.\n", mi_socket, id);
 
 		//log_info(umcslog, "ID Nuevo Cliente: %d.",id);
 		switch (id) {
 
 			case CPU_ID:
 				in_cpu_msg = unserializeCpuUmc(sb);
-				printf("HILO %d: Cliente (%d) es un CPU.\n", mi_socket, cpuClient->descriptor);
+				log_info(umclog, "HILO %d: Cliente (%d) es un CPU.\n", mi_socket, cpuClient->descriptor);
 				//log_info(umcslog, "Cliente CPU");
 				manageCpuRequest(cpuClient,in_cpu_msg);
 				break;
 
 			case KERNEL_ID:
 				in_ker_msg = unserializeKerUmc(sb);
-				printf("HILO %d: Cliente (%d) es el KERNEL.\n", mi_socket, cpuClient->descriptor);
+				log_info(umclog, "HILO %d: Cliente (%d) es el KERNEL.\n", mi_socket, cpuClient->descriptor);
 				//log_info(umcslog, "Cliente KERNEL");
 				manageKernelRequest(cpuClient,in_ker_msg);
 				break;
@@ -116,7 +112,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	while ((streamCpuUmc->action)!=24/*CIERRE_CONEXION_CPU*/) {
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
-			printf("HILO %d: Me pidieron el tamanio de marcos (%d).\n", mi_socket, socket->descriptor);
+			log_info(umclog, "HILO %d: Me pidieron el tamanio de marcos (%d).\n", mi_socket, socket->descriptor);
 			//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0, marco_Size, "hola", 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
@@ -175,12 +171,12 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		default:
-			printf("HILO %d: No se pudo identificar la accion del CPU (%d).\n", mi_socket, socket->descriptor);
+			log_error(umclog, "HILO %d: No se pudo identificar la accion del CPU (%d).\n", mi_socket, socket->descriptor);
 			break;
 		}
 		buffer = socketReceive(socket);
 		if (buffer == NULL) {
-			printf("HILO %d: Se cayo el cliente (%d).\n", mi_socket, socket->descriptor);
+			log_error(umclog, "HILO %d: Se cayo el cliente (%d).\n", mi_socket, socket->descriptor);
 			break;
 		}
 		streamCpuUmc = unserializeCpuUmc(buffer);
@@ -230,7 +226,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:
-		printf("No se pudo identificar la accion del Kernel");
+		log_error(umclog, "No se pudo identificar la accion del Kernel");
 		break;
 	}
 
