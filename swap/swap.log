@@ -50,3 +50,7 @@
 [INFO] 20:52:16:676 SWAP/(16119:16119): Archivo de particion creado
 [INFO] 20:52:16:676 SWAP/(16119:16119): Server creado y escuchando correctamente
 [ERROR] 20:53:25:891 SWAP/(16119:16119): Al recibir del cliente
+[INFO] 21:06:24:190 SWAP/(16567:16567): Valores del archivo de configuracion seteados
+[INFO] 21:06:24:193 SWAP/(16567:16567): Archivo de particion creado
+[INFO] 21:06:24:193 SWAP/(16567:16567): Server creado y escuchando correctamente
+[ERROR] 21:07:06:624 SWAP/(16567:16567): Al recibir del cliente
