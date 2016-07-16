@@ -229,11 +229,11 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
-	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA) {
+	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)
 		return (atoi(streamKerCpu->data));
-	} else {
-		return -1234;
-	}
+	else
+		seguirEjecutando=FALSE;
+	return -1;
 }
 
 /*
@@ -250,11 +250,11 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable, t_valor_va
 			strlen(variable) /*LEN NOMBRE DISPOSITIVO*/);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
-	if (streamKerCpu->action == ASIGNAR_VALOR_COMPARTIDA) {
+	if (streamKerCpu->action == ASIGNAR_VALOR_COMPARTIDA)
 		return atoi(streamKerCpu->lenNomDispositivo);
-	}
 	else {
-		return -1234;
+		seguirEjecutando=FALSE;
+		return -1;
 	}
 }
 
@@ -384,9 +384,9 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
 	if(StreamKerCpu->action == WAIT_REALIZADO){
-		//no hago nada, me quedo clavado en el recibe.
-
-	} // ver que hacer
+		seguirEjecutando=TRUE;
+	} else
+		seguirEjecutando=FALSE;
 
 }
 
