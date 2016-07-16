@@ -73,7 +73,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 				seguirEjecutando = FALSE;
 		}
 	}
-	if (list_size(pcbProceso.indiceDelStack) != 0) {
+	else {
 
 		paginaDeStack*ultimaPagina = list_get(pcbProceso.indiceDelStack,
 				list_size(pcbProceso.indiceDelStack) - 1);
@@ -103,8 +103,13 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			}
 		} else {
 			asignadoVacio->numDePag = ultimaPagina->vars.pag;
+			asignadoVacio->bitUso=4;
+			//(Char id, Char action, espacioAsignado pageComienzo,
+			//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+
+
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-					ultimaPagina->vars.off - 4, 4, 0, 0);
+					ultimaPagina->vars.off - 4, 0, 0, 0);
 			buffer = serializeCpuUmc(streamCpuUmc);
 			socketSend(socketUMC->ptrSocket, buffer);
 			buffer = socketReceive(socketUMC->ptrSocket);
