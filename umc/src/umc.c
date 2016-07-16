@@ -809,10 +809,15 @@ void comandosUMC() {
 	int procesoQueElijo; //Los declaro aca porque no podes declarar algo adentro de un case de un switch
 
 	while (1) {
-		puts("Opcion 1: Retardo\n");
-		puts("Opcion 2: Dump\n");
-		puts("Opcion 3: Flush\n");
+		puts("\n*************************");
+		puts("   CONSOLA UMC");
+		puts("*************************");
+		puts("Opcion 1: Retardo");
+		puts("Opcion 2: Dump");
+		puts("Opcion 3: Flush");
+		puts("*************************\n");
 
+		printf("Ingrese la opción: ");
 		scanf("%d", &opcionPrincipal);
 
 		switch (opcionPrincipal) {
