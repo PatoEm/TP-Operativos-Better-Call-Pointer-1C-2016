@@ -30,7 +30,7 @@ int main(void) {
 
 	paginaDeStack paginita;
 	paginita.pos=0;
-	paginita.
+	//paginita.
 
 
 	//int tamanioLoco = tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/facil.ansisop");
