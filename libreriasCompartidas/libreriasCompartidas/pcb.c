@@ -49,6 +49,24 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal,
 	return pcb;
 }
 
+paginaDeStack*crearPaginaDeStackVaciaPiola(){
+	paginaDeStack* soyUnaPaginaDeStackVacia= malloc(sizeof (paginaDeStack));
+	soyUnaPaginaDeStackVacia->pos=0;
+	soyUnaPaginaDeStackVacia->args.pag=0;
+	soyUnaPaginaDeStackVacia->args.off=0;
+	soyUnaPaginaDeStackVacia->args.size=0;
+	soyUnaPaginaDeStackVacia->retPos=0;
+	soyUnaPaginaDeStackVacia->vars.id='a';
+	soyUnaPaginaDeStackVacia->vars.off=0;
+	soyUnaPaginaDeStackVacia->vars.pag=0;
+	soyUnaPaginaDeStackVacia->vars.size=0;
+	soyUnaPaginaDeStackVacia->retVars.id='2';
+	soyUnaPaginaDeStackVacia->retVars.off=0;
+	soyUnaPaginaDeStackVacia->retVars.pag=0;
+	soyUnaPaginaDeStackVacia->retVars.size=0;
+	return soyUnaPaginaDeStackVacia;
+}
+
 pcb* newEmptyPcb() {
 
 	pcb* pcbLoco = malloc(sizeof(pcb));

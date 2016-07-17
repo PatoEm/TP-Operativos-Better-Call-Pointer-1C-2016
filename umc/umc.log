@@ -2843,3 +2843,82 @@
 
 [ERROR] 16:22:36:743 UMC/(27855:27930): HILO 3030: Se cayo el cliente (9).
 
+[INFO] 20:40:58:25 UMC/(3895:3895): Inicio UMC.
+[INFO] 20:40:58:42 UMC/(3895:3895): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 20:42:40:981 UMC/(3895:3895): Alguien se conecto.
+[INFO] 20:42:40:993 UMC/(3895:3895): Gestor de conexiones.
+[INFO] 20:42:40:999 UMC/(3895:3895): Esperando el request...
+[INFO] 20:42:40:1 UMC/(3895:3895): ...Entro el request.
+[INFO] 20:42:41:8 UMC/(3895:4439): HILO 3030: Hilo creado.
+
+[INFO] 20:42:41:10 UMC/(3895:4439): HILO 3030: Listening...
+
+[INFO] 20:42:43:11 UMC/(3895:3895): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 20:42:46:14 UMC/(3895:4439): HILO 3030: Cliente aceptado (9).
+
+[INFO] 20:42:46:32 UMC/(3895:4439): HILO 3030: Buffer recibido de (9).
+
+[INFO] 20:42:46:39 UMC/(3895:4439): HILO 3030: Buffer ID 1.
+
+[INFO] 20:42:46:42 UMC/(3895:4439): HILO 3030: Cliente (9) es el KERNEL.
+
+[INFO] 20:44:25:145 UMC/(3895:4439): HILO 3030: Buffer recibido de (9).
+
+[INFO] 20:44:25:147 UMC/(3895:4439): HILO 3030: Buffer ID 1.
+
+[INFO] 20:44:25:147 UMC/(3895:4439): HILO 3030: Cliente (9) es el KERNEL.
+
+[INFO] 20:46:17:485 UMC/(3895:3895): Alguien se conecto.
+[INFO] 20:46:17:492 UMC/(3895:3895): Gestor de conexiones.
+[INFO] 20:46:17:495 UMC/(3895:3895): Esperando el request...
+[INFO] 20:46:17:499 UMC/(3895:3895): ...Entro el request.
+[INFO] 20:46:17:530 UMC/(3895:5351): HILO 3031: Hilo creado.
+
+[INFO] 20:46:17:533 UMC/(3895:5351): HILO 3031: Listening...
+
+[INFO] 20:46:19:533 UMC/(3895:3895): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 20:46:22:538 UMC/(3895:5351): HILO 3031: Cliente aceptado (12).
+
+[INFO] 20:46:22:545 UMC/(3895:5351): HILO 3031: Buffer recibido de (12).
+
+[INFO] 20:46:22:550 UMC/(3895:5351): HILO 3031: Buffer ID 2.
+
+[INFO] 20:46:22:553 UMC/(3895:5351): HILO 3031: Cliente (12) es un CPU.
+
+[INFO] 20:46:22:556 UMC/(3895:5351): HILO 3031: Me pidieron el tamanio de marcos (12).
+
+[INFO] 20:48:02:154 UMC/(3895:4439): HILO 3031: Buffer recibido de (9).
+
+[ERROR] 20:48:02:159 UMC/(3895:4439): HILO 3031: Se cayo el cliente (9).
+
+[ERROR] 20:50:50:500 UMC/(3895:5351): HILO 3031: Se cayo el cliente (12).
+
+[INFO] 20:50:50:503 UMC/(3895:5351): HILO 3031: Buffer recibido de (12).
+
+[ERROR] 20:50:50:505 UMC/(3895:5351): HILO 3031: Se cayo el cliente (12).
+
+[INFO] 20:54:18:645 UMC/(6503:6503): Inicio UMC.
+[INFO] 20:54:18:671 UMC/(6503:6503): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 20:56:10:692 UMC/(6503:6503): Alguien se conecto.
+[INFO] 20:56:10:706 UMC/(6503:6503): Gestor de conexiones.
+[INFO] 20:56:10:707 UMC/(6503:6503): Esperando el request...
+[INFO] 20:56:10:708 UMC/(6503:6503): ...Entro el request.
+[INFO] 20:56:10:716 UMC/(6503:7025): HILO 3030: Hilo creado.
+
+[INFO] 20:56:10:716 UMC/(6503:7025): HILO 3030: Listening...
+
+[INFO] 20:56:12:721 UMC/(6503:6503): > Escuchando conexiones del Kernel o CPUs.
+[INFO] 20:56:15:739 UMC/(6503:7025): HILO 3030: Cliente aceptado (9).
+
+[INFO] 20:56:15:746 UMC/(6503:7025): HILO 3030: Buffer recibido de (9).
+
+[INFO] 20:56:15:749 UMC/(6503:7025): HILO 3030: Buffer ID 1.
+
+[INFO] 20:56:15:753 UMC/(6503:7025): HILO 3030: Cliente (9) es el KERNEL.
+
+[INFO] 20:59:03:966 UMC/(6503:7025): HILO 3030: Buffer recibido de (9).
+
+[INFO] 20:59:03:968 UMC/(6503:7025): HILO 3030: Buffer ID 1.
+
+[INFO] 20:59:03:970 UMC/(6503:7025): HILO 3030: Cliente (9) es el KERNEL.
+

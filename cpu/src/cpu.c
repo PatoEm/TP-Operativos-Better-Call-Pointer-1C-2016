@@ -41,7 +41,7 @@ void cuerpoDelCpu() {
  */
 t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR, YA ESTA TERMINADA
 	int pagina;
-	paginaDeStack*nuevaVariable = malloc(sizeof(paginaDeStack));
+	paginaDeStack*nuevaVariable = crearPaginaDeStackVaciaPiola();
 	StrCpuUmc*streamCpuUmc;
 	SocketBuffer*buffer;
 	StrUmcCpu*streamUmcCpu;
