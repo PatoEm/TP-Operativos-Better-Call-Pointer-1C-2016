@@ -99,36 +99,36 @@ pcb* newEmptyPcb() {
 	aux->args.off = 3;
 	aux->args.size = 4;
 
-	aux->vars.id = 'b';
-	aux->vars.pag = 6;
-	aux->vars.off = 7;
-	aux->vars.size = 8;
+	aux->vars.id = 'a';
+	aux->vars.pag = 5;
+	aux->vars.off = 6;
+	aux->vars.size = 7;
 
-	aux->retPos = 9;
-	aux->retVars.id = 'a';
-	aux->retVars.pag = 11;
-	aux->retVars.off = 12;
-	aux->retVars.size = 13;
+	aux->retPos = 8;
+	aux->retVars.id = 'b';
+	aux->retVars.pag = 9;
+	aux->retVars.off = 10;
+	aux->retVars.size = 11;
 
 	list_add(pcbLoco->indiceDelStack, aux);
 
 	paginaDeStack * aux2 = malloc(sizeof(paginaDeStack));
-	aux2->pos = 1;
+	aux2->pos = 12;
 
-	aux2->args.pag = 2;
-	aux2->args.off = 3;
-	aux2->args.size = 4;
+	aux2->args.pag = 13;
+	aux2->args.off = 14;
+	aux2->args.size = 14;
 
-	aux2->vars.id = 'a';
-	aux2->vars.pag = 6;
-	aux2->vars.off = 7;
-	aux2->vars.size = 8;
+	aux2->vars.id = 'c';
+	aux2->vars.pag = 15;
+	aux2->vars.off = 16;
+	aux2->vars.size = 17;
 
-	aux2->retPos = 9;
-	aux2->retVars.id = 'b';
-	aux2->retVars.pag = 11;
-	aux2->retVars.off = 12;
-	aux2->retVars.size = 13;
+	aux2->retPos = 18;
+	aux2->retVars.id = 'd';
+	aux2->retVars.pag = 19;
+	aux2->retVars.off = 20;
+	aux2->retVars.size = 21;
 	list_add(pcbLoco->indiceDelStack, aux2);
 
 	pcbLoco->buffer = "Empty";

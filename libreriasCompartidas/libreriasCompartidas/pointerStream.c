@@ -1161,10 +1161,11 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	int inicio = 0;
 	int longitud = 3;
 	//0x80512e8 "\001\002\003\004b\006\a\b\ta\v\f\r\001\002\003\004a\006\a\b\tb\v\f\r"
-	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
+	paginaDeStack* aux ;
 	for (i = 0; i < pcb.cantElementsStack; i++) {
-		inicio = 0;
-		longitud = 3;
+		aux = malloc(sizeof(paginaDeStack));
+//		inicio = 0;
+//		longitud = 3;
 		aux->pos = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
@@ -1206,9 +1207,10 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		longitud = 3;
 		aux->retVars.size = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
+		inicio++;
+		longitud = 3;
 		list_add(pcb.indiceDelStack, aux);
 	}
-
 
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
@@ -1371,9 +1373,6 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
 
-
-
-
 	int bufferLen = (((pcb.cantElementsStack) * (46)));
 
 	pcb.buffer = malloc(bufferLen);
@@ -1387,10 +1386,12 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	int inicio = 0;
 	int longitud = 3;
 	//0x80512e8 "\001\002\003\004b\006\a\b\ta\v\f\r\001\002\003\004a\006\a\b\tb\v\f\r"
-	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
+	//0x80502f0 "\001\002\003\004a\005\006\a\bb\t\n\v\f\r\016\016c\017\020\021\022d\023\024\025"
+	paginaDeStack* aux;
 	for (i = 0; i < pcb.cantElementsStack; i++) {
-		inicio = 0;
-		longitud = 3;
+		aux= malloc(sizeof(paginaDeStack));
+//		inicio = 0;
+//		longitud = 3;
 		aux->pos = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
@@ -1432,14 +1433,10 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		longitud = 3;
 		aux->retVars.size = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
+		inicio++;
+		longitud = 3;
 		list_add(pcb.indiceDelStack, aux);
 	}
-
-
-
-
-
-
 
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);

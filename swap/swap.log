@@ -900,3 +900,94 @@ end
 [INFO] 21:19:48:52 SWAP/(10720:10720): Archivo de particion creado
 [INFO] 21:19:48:54 SWAP/(10720:10720): Server creado y escuchando correctamente
 [ERROR] 21:24:57:690 SWAP/(10720:10720): Al recibir del cliente
+[INFO] 21:30:29:553 SWAP/(6203:6203): Valores del archivo de configuracion seteados
+[INFO] 21:30:29:588 SWAP/(6203:6203): Archivo de particion creado
+[INFO] 21:30:29:588 SWAP/(6203:6203): Server creado y escuchando correctamente
+[INFO] 21:32:02:391 SWAP/(6203:6203): Hay espacio
+[INFO] 21:32:02:391 SWAP/(6203:6203): Espacio reservado correctamente
+[INFO] 21:32:02:391 SWAP/(6203:6203): Pagina esctira con exito
+[INFO] 21:32:02:391 SWAP/(6203:6203): Pagina esctira con exito
+[INFO] 21:32:02:391 SWAP/(6203:6203): Pagina esctira con exito
+[INFO] 21:32:02:391 SWAP/(6203:6203): Pagina esctira con exito
+[INFO] 21:32:33:27 SWAP/(6203:6203): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 21:32:34:362 SWAP/(6203:6203): Pagina leida correctamente: 
+[INFO] 21:34:23:73 SWAP/(6203:6203): Pagina leida correctamente: 12
+end
+
+
+
+[ERROR] 21:41:30:583 SWAP/(6203:6203): Al recibir del cliente
+[INFO] 21:41:45:136 SWAP/(8734:8734): Valores del archivo de configuracion seteados
+[INFO] 21:41:45:163 SWAP/(8734:8734): Archivo de particion creado
+[INFO] 21:41:45:163 SWAP/(8734:8734): Server creado y escuchando correctamente
+[ERROR] 21:44:26:471 SWAP/(8734:8734): Al recibir del cliente
+[INFO] 21:44:39:649 SWAP/(9783:9783): Valores del archivo de configuracion seteados
+[INFO] 21:44:39:670 SWAP/(9783:9783): Archivo de particion creado
+[INFO] 21:44:39:671 SWAP/(9783:9783): Server creado y escuchando correctamente
+[INFO] 21:46:02:850 SWAP/(9783:9783): Hay espacio
+[INFO] 21:46:02:850 SWAP/(9783:9783): Espacio reservado correctamente
+[INFO] 21:46:02:850 SWAP/(9783:9783): Pagina esctira con exito
+[INFO] 21:46:02:850 SWAP/(9783:9783): Pagina esctira con exito
+[INFO] 21:46:02:850 SWAP/(9783:9783): Pagina esctira con exito
+[INFO] 21:46:02:850 SWAP/(9783:9783): Pagina esctira con exito
+[INFO] 21:47:45:623 SWAP/(9783:9783): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 21:49:11:322 SWAP/(9783:9783): Pagina leida correctamente: 
+[ERROR] 22:00:33:36 SWAP/(9783:9783): Al recibir del cliente
+[INFO] 22:00:42:976 SWAP/(12329:12329): Valores del archivo de configuracion seteados
+[INFO] 22:00:42:993 SWAP/(12329:12329): Archivo de particion creado
+[INFO] 22:00:42:993 SWAP/(12329:12329): Server creado y escuchando correctamente
+[ERROR] 22:02:06:248 SWAP/(12329:12329): Al recibir del cliente
+[INFO] 22:02:29:379 SWAP/(12604:12604): Valores del archivo de configuracion seteados
+[INFO] 22:02:29:393 SWAP/(12604:12604): Archivo de particion creado
+[INFO] 22:02:29:393 SWAP/(12604:12604): Server creado y escuchando correctamente
+[INFO] 22:04:32:665 SWAP/(12604:12604): Hay espacio
+[INFO] 22:04:32:665 SWAP/(12604:12604): Espacio reservado correctamente
+[INFO] 22:04:32:665 SWAP/(12604:12604): Pagina esctira con exito
+[INFO] 22:04:32:665 SWAP/(12604:12604): Pagina esctira con exito
+[INFO] 22:04:32:665 SWAP/(12604:12604): Pagina esctira con exito
+[INFO] 22:04:32:665 SWAP/(12604:12604): Pagina esctira con exito
+[INFO] 22:04:59:640 SWAP/(12604:12604): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 22:05:00:670 SWAP/(12604:12604): Pagina leida correctamente: 
+[INFO] 22:05:35:529 SWAP/(12604:12604): Pagina leida correctamente: 12
+end
+
+
+
+[ERROR] 22:06:01:483 SWAP/(12604:12604): Al recibir del cliente
+[INFO] 22:06:10:523 SWAP/(13094:13094): Valores del archivo de configuracion seteados
+[INFO] 22:06:10:540 SWAP/(13094:13094): Archivo de particion creado
+[INFO] 22:06:10:540 SWAP/(13094:13094): Server creado y escuchando correctamente
+[INFO] 22:07:49:531 SWAP/(13094:13094): Hay espacio
+[INFO] 22:07:49:531 SWAP/(13094:13094): Espacio reservado correctamente
+[INFO] 22:07:49:531 SWAP/(13094:13094): Pagina esctira con exito
+[INFO] 22:07:49:531 SWAP/(13094:13094): Pagina esctira con exito
+[INFO] 22:07:49:531 SWAP/(13094:13094): Pagina esctira con exito
+[INFO] 22:07:49:531 SWAP/(13094:13094): Pagina esctira con exito
+[INFO] 22:08:15:383 SWAP/(13094:13094): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 22:08:16:531 SWAP/(13094:13094): Pagina leida correctamente: 
+[INFO] 22:08:55:108 SWAP/(13094:13094): Pagina leida correctamente: 12
+end
+
+
+
+[ERROR] 22:10:27:405 SWAP/(13094:13094): Al recibir del cliente

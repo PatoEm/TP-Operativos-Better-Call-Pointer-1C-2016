@@ -8,7 +8,6 @@
  ============================================================================
  */
 
-
 #include "nucleo.h"
 
 char * leerProgramaAnSISOP1(char * direccionArchivo);
@@ -17,32 +16,30 @@ char * leerProgramaAnSISOP1(char * direccionArchivo);
 
 int main(void) {
 
-//	pcb * pcbVacioLoco=newEmptyPcb();
-//	StrKerCpu *hola = newStrKerCpu(KERNEL_ID,PRIMER_PCB,*pcbVacioLoco,8,"hola",0,"hola",0);
-//	SocketBuffer *bufferLoco =serializeKerCpu(hola);
-//	bufferLoco->data;
-//	hola=unserializeKerCpu(bufferLoco->data);
+	pcb * pcbVacioLoco=newEmptyPcb();
+	StrKerCpu *hola = newStrKerCpu(KERNEL_ID,PRIMER_PCB,*pcbVacioLoco,8,"hola",0,"hola",0);
+	SocketBuffer *bufferLoco =serializeKerCpu(hola);
+	bufferLoco->data;
+	hola=unserializeKerCpu(bufferLoco->data);
 
-
-
+	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
+	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
 
 	inicializarVariables();
-	printf("%d",tamanioPaginas);
+	printf("%d", tamanioPaginas);
 	//int tamanioLoco = tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/facil.ansisop");
 	//printf("%d",tamanioLoco);
 	log_info(nucleolog, "Variables inicializadas.");
 
 	/**************************************************/
 	//Creacion de Hilos
-
 	crearHilos();
 	log_info(nucleolog, "Se han creado los threads.");
 
 	/**************************************************/
 
-
 	/* ESTE WAIT ES PARA QUE SIGAN CORRIENDO LOS HILOS */
-	while(1){
+	while (1) {
 		sleep(5);
 	}
 	/***************************************************/
@@ -51,12 +48,11 @@ int main(void) {
 	return EXIT_SUCCESS;
 }
 
-
 int tamArchivo(char * direccionArchivo) {
 
 	FILE * fp;
 	int tamanio;
-     fp = fopen(direccionArchivo, "r");
+	fp = fopen(direccionArchivo, "r");
 	if (fp == NULL)
 		puts("Error al abrir archivo");
 	else {
@@ -71,7 +67,7 @@ int tamArchivo(char * direccionArchivo) {
 
 char * leerProgramaAnSISOP1(char * direccionArchivo) {
 
-	int tamanio=tamArchivo(direccionArchivo);
+	int tamanio = tamArchivo(direccionArchivo);
 
 	FILE * fp;
 
@@ -81,11 +77,11 @@ char * leerProgramaAnSISOP1(char * direccionArchivo) {
 		puts("Error al abrir archivo");
 	else {
 		char* buffer = (char *) malloc(tamanio);
-			if(buffer==NULL){
-				printf("no se pudo reservar memoria para el archivo");
-				//return -1;
-			}
-		 fseek(fp, 0, 0);
+		if (buffer == NULL) {
+			printf("no se pudo reservar memoria para el archivo");
+			//return -1;
+		}
+		fseek(fp, 0, 0);
 		int n = 0;
 		while (!feof(fp)) {
 			buffer[n] = getc(fp);
