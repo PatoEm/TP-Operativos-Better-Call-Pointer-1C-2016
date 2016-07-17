@@ -9093,3 +9093,7 @@
 [INFO] 22:10:25:215 NUCLEO/(13267:13275): KERNEL : Se cayo el cliente 10
 [INFO] 22:10:25:215 NUCLEO/(13267:13275): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
 [INFO] 22:10:25:215 NUCLEO/(13267:13275): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 17:27:47:365 NUCLEO/(9181:9181): Variables inicializadas.
+[INFO] 17:27:47:365 NUCLEO/(9181:9181): Se han creado los threads.
+[INFO] 17:27:47:365 NUCLEO/(9181:9188): Server creado con exito y escuchando.
+[INFO] 17:27:47:365 NUCLEO/(9181:9188): Server iniciado.

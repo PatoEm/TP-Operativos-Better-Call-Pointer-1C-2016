@@ -24,15 +24,12 @@ int main(void) {
 //
 //	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
 //	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
+
+
+
 	inicializarVariables();
 	printf("%d", tamanioPaginas);
-	paginaDeStack paginita;
-	paginita.pos=0;
-	//paginita.
 
-
-	//int tamanioLoco = tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/facil.ansisop");
-	//printf("%d",tamanioLoco);
 	log_info(nucleolog, "Variables inicializadas.");
 
 	/**************************************************/

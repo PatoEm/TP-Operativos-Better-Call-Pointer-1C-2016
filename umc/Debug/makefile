@@ -26,8 +26,8 @@ endif
 all: umc
 
 dependents:
-	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/commons/Debug && $(MAKE) clean all
-	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/libreriasCompartidas/Debug && $(MAKE) clean all
+	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/commons/Debug && $(MAKE) all
+	-cd /home/utnso/tp-2016-1c-Better-Call-pointer/libreriasCompartidas/Debug && $(MAKE) all
 
 # Tool invocations
 umc: $(OBJS) $(USER_OBJS) /home/utnso/tp-2016-1c-Better-Call-pointer/commons/Debug/libcommons.so /home/utnso/tp-2016-1c-Better-Call-pointer/libreriasCompartidas/Debug/liblibreriasCompartidas.so

@@ -994,3 +994,6 @@ end
 [INFO] 15:52:46:148 SWAP/(4577:4577): Valores del archivo de configuracion seteados
 [INFO] 15:52:46:652 SWAP/(4577:4577): Archivo de particion creado
 [INFO] 15:52:46:652 SWAP/(4577:4577): Server creado y escuchando correctamente
+[INFO] 17:27:28:883 SWAP/(9092:9092): Valores del archivo de configuracion seteados
+[INFO] 17:27:28:897 SWAP/(9092:9092): Archivo de particion creado
+[INFO] 17:27:28:897 SWAP/(9092:9092): Server creado y escuchando correctamente
