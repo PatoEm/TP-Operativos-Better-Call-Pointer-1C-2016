@@ -3759,3 +3759,14 @@
 =============
 
 [INFO] 22:23:24:90 cpu/(13838:13838): Se inicializo la CPU.
+[INFO] 15:43:09:25 cpu/(3841:3841): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 15:43:09:26 cpu/(3841:3841): Configuracion del IP_NUCLEO leida con exito
+[INFO] 15:43:09:26 cpu/(3841:3841): Configuracion del PUERTO_UMC leida con exito
+[INFO] 15:43:09:26 cpu/(3841:3841): Configuracion del IP_UMC leida con exito
+[INFO] 15:43:09:26 cpu/(3841:3841): **********************************************************************
+[INFO] 15:43:09:26 cpu/(3841:3841): **********************************************************************
+[INFO] 15:43:09:26 cpu/(3841:3841): **********************************************************************
+[INFO] 15:43:09:26 cpu/(3841:3841): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 15:43:09:26 cpu/(3841:3841): Se inicializo la CPU.

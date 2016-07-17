@@ -18,15 +18,24 @@ typedef struct {
 } arrayBidimensional;
 
 typedef struct {
-	char id;
-	int pag;
-	int off;
-	int size;
+	char idVar;
+	int pagVar;
+	int offVar;
+	int sizeVar;
 } variables;
+
+
 typedef struct {
-	int pag;
-	int off;
-	int size;
+	char idVarRet;
+	int pagVarRet;
+	int offVarRet;
+	int sizeVarRet;
+} variablesRetorno;
+
+typedef struct {
+	int pagArg;
+	int offArgs;
+	int sizeArgs;
 } argumentos;
 
 typedef struct {
@@ -34,7 +43,7 @@ typedef struct {
 	argumentos args;
 	variables vars;
 	int retPos;
-	variables retVars;
+	variablesRetorno retVars;
 
 } paginaDeStack;
 

@@ -991,3 +991,6 @@ end
 
 
 [ERROR] 22:10:27:405 SWAP/(13094:13094): Al recibir del cliente
+[INFO] 15:52:46:148 SWAP/(4577:4577): Valores del archivo de configuracion seteados
+[INFO] 15:52:46:652 SWAP/(4577:4577): Archivo de particion creado
+[INFO] 15:52:46:652 SWAP/(4577:4577): Server creado y escuchando correctamente

@@ -798,3 +798,14 @@
 [INFO] 22:07:49:530 consola/(13358:13358): Se reconocio el archivo como un .AnSISOP
 [INFO] 22:07:49:530 consola/(13358:13358): Enviando el archivo al NUCLEO
 [INFO] 22:07:49:530 consola/(13358:13358): Esperando instrucciones del NUCLEO
+[INFO] 15:51:35:356 consola/(4398:4398): ===============================================
+[INFO] 15:51:35:356 consola/(4398:4398): ===== BIENVENIDO A LA CONSOLA DEL SISTEMA =====
+[INFO] 15:51:35:356 consola/(4398:4398): ===============================================
+[INFO] 15:51:35:356 consola/(4398:4398):                                                
+[INFO] 15:51:35:356 consola/(4398:4398):                                                
+[INFO] 15:51:35:356 consola/(4398:4398): Leyendo archivo de configuracion y conectandose al NUCLEO
+[INFO] 15:51:35:356 consola/(4398:4398): El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion
+[INFO] 15:51:35:359 consola/(4398:4398): El parametro IP_NUCLEO se encontro en el archivo de configuracion
+[INFO] 15:51:35:359 consola/(4398:4398): Archivo de configuracion CONSOLA leido exitosamente
+=============
+

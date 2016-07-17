@@ -3240,3 +3240,5 @@
 
 [ERROR] 22:10:26:310 UMC/(13181:13272): HILO 3031: Se cayo el cliente (9).
 
+[INFO] 15:52:38:424 UMC/(4532:4532): Inicio UMC.
+[INFO] 15:52:38:425 UMC/(4532:4532): > Escuchando conexiones del Kernel o CPUs.
