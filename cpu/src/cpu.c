@@ -47,7 +47,6 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 	StrUmcCpu*streamUmcCpu;
 	if (0 == list_size(pcbProceso.indiceDelStack)) {
 		pagina = ((pcbProceso.paginasDeCodigo) - 1); //todo ojo acá si explota algo
-		nuevaVariable = malloc(sizeof(paginaDeStack));
 		asignadoVacio->numDePag = ((pcbProceso.paginasDeCodigo) - 1);
 		asignadoVacio->bitUso = 4;
 		nuevaVariable->pos = 0;
