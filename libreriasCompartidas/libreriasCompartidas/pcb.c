@@ -51,19 +51,26 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal,
 
 paginaDeStack*crearPaginaDeStackVaciaPiola(){
 	paginaDeStack* soyUnaPaginaDeStackVacia= malloc(sizeof (paginaDeStack));
+	variables *variablesLocas=malloc(sizeof(variables));
+	variablesRetorno *variablesConRetornoLocas=malloc(sizeof(variablesRetorno));
+	argumentos *argumentosLocos = malloc(sizeof(argumentos));
+	soyUnaPaginaDeStackVacia->vars=variablesLocas;
+	soyUnaPaginaDeStackVacia->retVars=variablesConRetornoLocas;
+	soyUnaPaginaDeStackVacia->args=argumentosLocos;
+
 	soyUnaPaginaDeStackVacia->pos=0;
-	soyUnaPaginaDeStackVacia->args.pagArg=0;
-	soyUnaPaginaDeStackVacia->args.offArgs=0;
-	soyUnaPaginaDeStackVacia->args.sizeArgs=0;
+	soyUnaPaginaDeStackVacia->args->pagArg=0;
+	soyUnaPaginaDeStackVacia->args->offArgs=0;
+	soyUnaPaginaDeStackVacia->args->sizeArgs=0;
 	soyUnaPaginaDeStackVacia->retPos=0;
-	soyUnaPaginaDeStackVacia->vars.idVar='a';
-	soyUnaPaginaDeStackVacia->vars.offVar=0;
-	soyUnaPaginaDeStackVacia->vars.pagVar=0;
-	soyUnaPaginaDeStackVacia->vars.sizeVar=0;
-	soyUnaPaginaDeStackVacia->retVars.idVarRet='2';
-	soyUnaPaginaDeStackVacia->retVars.offVarRet=0;
-	soyUnaPaginaDeStackVacia->retVars.pagVarRet=0;
-	soyUnaPaginaDeStackVacia->retVars.sizeVarRet=0;
+	soyUnaPaginaDeStackVacia->vars->idVar='a';
+	soyUnaPaginaDeStackVacia->vars->offVar=0;
+	soyUnaPaginaDeStackVacia->vars->pagVar=0;
+	soyUnaPaginaDeStackVacia->vars->sizeVar=0;
+	soyUnaPaginaDeStackVacia->retVars->idVarRet='2';
+	soyUnaPaginaDeStackVacia->retVars->offVarRet=0;
+	soyUnaPaginaDeStackVacia->retVars->pagVarRet=0;
+	soyUnaPaginaDeStackVacia->retVars->sizeVarRet=0;
 	return soyUnaPaginaDeStackVacia;
 }
 
@@ -92,43 +99,43 @@ pcb* newEmptyPcb() {
 			* pcbLoco->instruccionesTotales;
 	pcbLoco->indiceDelStack = list_create();
 
-	paginaDeStack * aux = malloc(sizeof(paginaDeStack));
+	paginaDeStack * aux = crearPaginaDeStackVaciaPiola();
 	aux->pos = 1;
 
-	aux->args.pagArg = 2;
-	aux->args.offArgs = 3;
-	aux->args.sizeArgs = 4;
+	aux->args->pagArg = 2;
+	aux->args->offArgs = 3;
+	aux->args->sizeArgs = 4;
 
-	aux->vars.idVar = 'a';
-	aux->vars.pagVar = 5;
-	aux->vars.offVar = 6;
-	aux->vars.sizeVar = 7;
+	aux->vars->idVar = 'a';
+	aux->vars->pagVar = 5;
+	aux->vars->offVar = 6;
+	aux->vars->sizeVar = 7;
 
 	aux->retPos = 8;
-	aux->retVars.idVarRet = 'b';
-	aux->retVars.pagVarRet = 9;
-	aux->retVars.offVarRet = 10;
-	aux->retVars.sizeVarRet = 11;
+	aux->retVars->idVarRet = 'b';
+	aux->retVars->pagVarRet = 9;
+	aux->retVars->offVarRet = 10;
+	aux->retVars->sizeVarRet = 11;
 
 	list_add(pcbLoco->indiceDelStack, aux);
 
-	paginaDeStack * aux2 = malloc(sizeof(paginaDeStack));
+	paginaDeStack * aux2 = crearPaginaDeStackVaciaPiola();
 	aux2->pos = 12;
 
-	aux2->args.pagArg = 13;
-	aux2->args.offArgs = 14;
-	aux2->args.sizeArgs = 14;
+	aux2->args->pagArg = 13;
+	aux2->args->offArgs = 14;
+	aux2->args->sizeArgs = 14;
 
-	aux2->vars.idVar = 'c';
-	aux2->vars.pagVar = 15;
-	aux2->vars.offVar = 16;
-	aux2->vars.sizeVar = 17;
+	aux2->vars->idVar = 'c';
+	aux2->vars->pagVar = 15;
+	aux2->vars->offVar = 16;
+	aux2->vars->sizeVar = 17;
 
 	aux2->retPos = 18;
-	aux2->retVars.idVarRet = 'd';
-	aux2->retVars.pagVarRet = 19;
-	aux2->retVars.offVarRet = 20;
-	aux2->retVars.sizeVarRet = 21;
+	aux2->retVars->idVarRet = 'd';
+	aux2->retVars->pagVarRet = 19;
+	aux2->retVars->offVarRet = 20;
+	aux2->retVars->sizeVarRet = 21;
 	list_add(pcbLoco->indiceDelStack, aux2);
 
 	pcbLoco->buffer = "Empty";

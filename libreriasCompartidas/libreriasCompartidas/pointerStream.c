@@ -493,7 +493,7 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrData += sizeof(skc->pcb.cantElementsStack);
 
 	int i;
-	paginaDeStack *aux;
+	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
 	if ((skc->pcb.indiceDelStack->elements_count) != 0) {
 		//skc->pcb.buffer = malloc((skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack));
 		skc->pcb.buffer = malloc(
@@ -502,18 +502,18 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 		for (i = 0; i < (skc->pcb.indiceDelStack->elements_count); i++) {
 			aux = list_get(skc->pcb.indiceDelStack, i);
 			strcat(skc->pcb.buffer, (Byte*) &aux->pos);
-			strcat(skc->pcb.buffer, (Byte*) &aux->args.pagArg);
-			strcat(skc->pcb.buffer, (Byte*) &aux->args.offArgs);
-			strcat(skc->pcb.buffer, (Byte*) &aux->args.sizeArgs);
-			strcat(skc->pcb.buffer, (Byte*) &aux->vars.idVar);
-			strcat(skc->pcb.buffer, (Byte*) &aux->vars.pagVar);
-			strcat(skc->pcb.buffer, (Byte*) &aux->vars.offVar);
-			strcat(skc->pcb.buffer, (Byte*) &aux->vars.sizeVar);
+			strcat(skc->pcb.buffer, (Byte*) &aux->args->pagArg);
+			strcat(skc->pcb.buffer, (Byte*) &aux->args->offArgs);
+			strcat(skc->pcb.buffer, (Byte*) &aux->args->sizeArgs);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars->idVar);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars->pagVar);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars->offVar);
+			strcat(skc->pcb.buffer, (Byte*) &aux->vars->sizeVar);
 			strcat(skc->pcb.buffer, (Byte*) &aux->retPos);
-			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.idVarRet);
-			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.pagVarRet);
-			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.offVarRet);
-			strcat(skc->pcb.buffer, (Byte*) &aux->retVars.sizeVarRet);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars->idVarRet);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars->pagVarRet);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars->offVarRet);
+			strcat(skc->pcb.buffer, (Byte*) &aux->retVars->sizeVarRet);
 			//strcat(skc->pcb.buffer, (Byte*) &aux);
 		}
 
@@ -699,7 +699,7 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	ptrData += sizeof(sck->pcb.cantElementsStack);
 
 	int i;
-	paginaDeStack *aux;
+	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
 	if ((sck->pcb.indiceDelStack->elements_count) != 0) {
 		Byte * punteroABuffer;
 		sck->pcb.buffer = malloc(
@@ -708,18 +708,18 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
 			aux = list_get(sck->pcb.indiceDelStack, i);
 			strcat(sck->pcb.buffer, (Byte*) &aux->pos);
-			strcat(sck->pcb.buffer, (Byte*) &aux->args.pagArg);
-			strcat(sck->pcb.buffer, (Byte*) &aux->args.offArgs);
-			strcat(sck->pcb.buffer, (Byte*) &aux->args.sizeArgs);
-			strcat(sck->pcb.buffer, (Byte*) &aux->vars.idVar);
-			strcat(sck->pcb.buffer, (Byte*) &aux->vars.pagVar);
-			strcat(sck->pcb.buffer, (Byte*) &aux->vars.offVar);
-			strcat(sck->pcb.buffer, (Byte*) &aux->vars.sizeVar);
+			strcat(sck->pcb.buffer, (Byte*) &aux->args->pagArg);
+			strcat(sck->pcb.buffer, (Byte*) &aux->args->offArgs);
+			strcat(sck->pcb.buffer, (Byte*) &aux->args->sizeArgs);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars->idVar);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars->pagVar);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars->offVar);
+			strcat(sck->pcb.buffer, (Byte*) &aux->vars->sizeVar);
 			strcat(sck->pcb.buffer, (Byte*) &aux->retPos);
-			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.idVarRet);
-			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.pagVarRet);
-			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.offVarRet);
-			strcat(sck->pcb.buffer, (Byte*) &aux->retVars.sizeVarRet);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars->idVarRet);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars->pagVarRet);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars->offVarRet);
+			strcat(sck->pcb.buffer, (Byte*) &aux->retVars->sizeVarRet);
 
 		}
 		//sck->pcb.buffer[46+1]='\0';
@@ -1163,49 +1163,49 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	//0x80512e8 "\001\002\003\004b\006\a\b\ta\v\f\r\001\002\003\004a\006\a\b\tb\v\f\r"
 	paginaDeStack* aux ;
 	for (i = 0; i < pcb.cantElementsStack; i++) {
-		aux = malloc(sizeof(paginaDeStack));
+		aux = crearPaginaDeStackVaciaPiola();
 //		inicio = 0;
 //		longitud = 3;
 		aux->pos = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->args.pagArg = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->args->pagArg = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->args.offArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->args->offArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->args.sizeArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->args->sizeArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 1;
-		aux->vars.idVar = (char) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->idVar = (char) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->vars.pagVar = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->pagVar = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->vars.offVar = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->offVar = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->vars.sizeVar = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->sizeVar = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
 		aux->retPos = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 1;
-		aux->retVars.idVarRet = (char) *string_substring(pcb.buffer, inicio,
+		aux->retVars->idVarRet = (char) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
-		aux->retVars.pagVarRet = (int) *string_substring(pcb.buffer, inicio,
+		aux->retVars->pagVarRet = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
-		aux->retVars.offVarRet = (int) *string_substring(pcb.buffer, inicio,
+		aux->retVars->offVarRet = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
-		aux->retVars.sizeVarRet = (int) *string_substring(pcb.buffer, inicio,
+		aux->retVars->sizeVarRet = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
@@ -1389,49 +1389,49 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	//0x80502f0 "\001\002\003\004a\005\006\a\bb\t\n\v\f\r\016\016c\017\020\021\022d\023\024\025"
 	paginaDeStack* aux;
 	for (i = 0; i < pcb.cantElementsStack; i++) {
-		aux= malloc(sizeof(paginaDeStack));
+		aux= crearPaginaDeStackVaciaPiola();
 //		inicio = 0;
 //		longitud = 3;
 		aux->pos = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->args.pagArg = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->args->pagArg = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->args.offArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->args->offArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->args.sizeArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->args->sizeArgs = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 1;
-		aux->vars.idVar = (char) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->idVar = (char) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->vars.pagVar = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->pagVar = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->vars.offVar = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->offVar = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
-		aux->vars.sizeVar = (int) *string_substring(pcb.buffer, inicio, longitud);
+		aux->vars->sizeVar = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 3;
 		aux->retPos = (int) *string_substring(pcb.buffer, inicio, longitud);
 		inicio++;
 		longitud = 1;
-		aux->retVars.idVarRet = (char) *string_substring(pcb.buffer, inicio,
+		aux->retVars->idVarRet = (char) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
-		aux->retVars.pagVarRet = (int) *string_substring(pcb.buffer, inicio,
+		aux->retVars->pagVarRet = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
-		aux->retVars.offVarRet = (int) *string_substring(pcb.buffer, inicio,
+		aux->retVars->offVarRet = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
-		aux->retVars.sizeVarRet = (int) *string_substring(pcb.buffer, inicio,
+		aux->retVars->sizeVarRet = (int) *string_substring(pcb.buffer, inicio,
 				longitud);
 		inicio++;
 		longitud = 3;
