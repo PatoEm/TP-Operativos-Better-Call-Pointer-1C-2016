@@ -24,16 +24,12 @@ int main(void) {
 //
 //	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
 //	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
-
-<<<<<<< HEAD
 	inicializarVariables();
 	printf("%d", tamanioPaginas);
-=======
 	paginaDeStack paginita;
 	paginita.pos=0;
 	//paginita.
 
->>>>>>> branch 'master' of https://github.com/sisoputnfrba/tp-2016-1c-Better-call-pointer.git
 
 	//int tamanioLoco = tamArchivo("/home/utnso/tp-2016-1c-Better-call-pointer/consola/programasEjemplo/facil.ansisop");
 	//printf("%d",tamanioLoco);
