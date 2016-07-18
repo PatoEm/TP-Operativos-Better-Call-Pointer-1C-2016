@@ -1137,3 +1137,25 @@ end
 
 
 [ERROR] 00:12:21:838 SWAP/(17872:17872): Al recibir del cliente
+[INFO] 08:59:50:106 SWAP/(3435:3435): Valores del archivo de configuracion seteados
+[INFO] 08:59:50:131 SWAP/(3435:3435): Archivo de particion creado
+[INFO] 08:59:50:131 SWAP/(3435:3435): Server creado y escuchando correctamente
+[INFO] 09:00:36:518 SWAP/(3435:3435): Hay espacio
+[INFO] 09:00:36:518 SWAP/(3435:3435): Espacio reservado correctamente
+[INFO] 09:00:36:519 SWAP/(3435:3435): Pagina esctira con exito
+[INFO] 09:00:36:519 SWAP/(3435:3435): Pagina esctira con exito
+[INFO] 09:00:36:519 SWAP/(3435:3435): Pagina esctira con exito
+[INFO] 09:00:36:519 SWAP/(3435:3435): Pagina esctira con exito
+[INFO] 09:02:10:367 SWAP/(3435:3435): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 09:02:10:367 SWAP/(3435:3435): Pagina leida correctamente: 
+[INFO] 09:02:28:524 SWAP/(3435:3435): Pagina leida correctamente: 12
+end
+
+
+
+[ERROR] 09:09:07:233 SWAP/(3435:3435): Al recibir del cliente
