@@ -704,15 +704,16 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.cantElementsStack));
 	ptrData += sizeof(sck->pcb.cantElementsStack);
 
+/* COMENTADO LO QUE ESTABA ANTES
 	int i;
 	char charAux[2];
 	charAux[1] = '\0';
 	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
 	if ((sck->pcb.indiceDelStack->elements_count) != 0) {
-		Byte * punteroABuffer;
-		sck->pcb.buffer = malloc(
-				((sck->pcb.indiceDelStack->elements_count) * (46))); //HARDCORE
-		sck->pcb.buffer[0] = '\0';
+//		Byte * punteroABuffer;
+//		sck->pcb.buffer = malloc(
+//				((sck->pcb.indiceDelStack->elements_count) * (46))); //HARDCORE
+//		sck->pcb.buffer[0] = '\0';
 		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
 			aux = list_get(sck->pcb.indiceDelStack, i);
 			strcat(sck->pcb.buffer, (Byte*) &aux->pos);
@@ -735,12 +736,73 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 
 		}
 		//sck->pcb.buffer[46+1]='\0';
+	}
+*/// HASTA ACA COMENTADO LO DE ANTES
 
+	int i;
+	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
+	if ((sck->pcb.indiceDelStack->elements_count) != 0) {
+		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
+			aux = list_get(sck->pcb.indiceDelStack, i);
+
+			// ------------------------------------------------------------------
+			ptrByte = (Byte*) &aux->pos;
+			memcpy(ptrData, ptrByte, sizeof(aux->pos));
+			ptrData += sizeof(aux->pos);
+			// ------------------------------------------------------------------
+			ptrByte = (Byte*) &aux->args->pagArg;
+			memcpy(ptrData, ptrByte, sizeof(aux->args->pagArg));
+			ptrData += sizeof(aux->args->pagArg);
+
+			ptrByte = (Byte*) &aux->args->offArgs;
+			memcpy(ptrData, ptrByte, sizeof(aux->args->offArgs));
+			ptrData += sizeof(aux->args->offArgs);
+
+			ptrByte = (Byte*) &aux->args->sizeArgs;
+			memcpy(ptrData, ptrByte, sizeof(aux->args->sizeArgs));
+			ptrData += sizeof(aux->args->sizeArgs);
+			// ------------------------------------------------------------------
+			ptrByte = (Byte*) &aux->vars->idVar;
+			memcpy(ptrData, ptrByte, sizeof(aux->vars->idVar));
+			ptrData += sizeof(aux->vars->idVar);
+
+			ptrByte = (Byte*) &aux->vars->pagVar;
+			memcpy(ptrData, ptrByte, sizeof(aux->vars->pagVar));
+			ptrData += sizeof(aux->vars->pagVar);
+
+			ptrByte = (Byte*) &aux->vars->offVar;
+			memcpy(ptrData, ptrByte, sizeof(aux->vars->offVar));
+			ptrData += sizeof(aux->vars->offVar);
+
+			ptrByte = (Byte*) &aux->vars->sizeVar;
+			memcpy(ptrData, ptrByte, sizeof(aux->vars->sizeVar));
+			ptrData += sizeof(aux->vars->sizeVar);
+			// ------------------------------------------------------------------
+			ptrByte = (Byte*) &aux->retPos;
+			memcpy(ptrData, ptrByte, sizeof(aux->retPos));
+			ptrData += sizeof(aux->retPos);
+			// ------------------------------------------------------------------
+			ptrByte = (Byte*) &aux->retVars->idVarRet;
+			memcpy(ptrData, ptrByte, sizeof(aux->retVars->idVarRet));
+			ptrData += sizeof(aux->retVars->idVarRet);
+
+			ptrByte = (Byte*) &aux->retVars->pagVarRet;
+			memcpy(ptrData, ptrByte, sizeof(aux->retVars->pagVarRet));
+			ptrData += sizeof(aux->retVars->pagVarRet);
+
+			ptrByte = (Byte*) &aux->retVars->offVarRet;
+			memcpy(ptrData, ptrByte, sizeof(aux->retVars->offVarRet));
+			ptrData += sizeof(aux->retVars->offVarRet);
+
+			ptrByte = (Byte*) &aux->retVars->sizeVarRet;
+			memcpy(ptrData, ptrByte, sizeof(aux->retVars->sizeVarRet));
+			ptrData += sizeof(aux->retVars->sizeVarRet);
+			// ------------------------------------------------------------------
+		}
 	}
 
 	ptrByte = (Byte*) sck->pcb.buffer;
-	memcpy(ptrData, ptrByte,
-			((sck->pcb.indiceDelStack->elements_count) * (46)));
+	memcpy(ptrData, ptrByte, ((sck->pcb.indiceDelStack->elements_count) * (46)));
 	ptrData += (((sck->pcb.indiceDelStack->elements_count) * (46)));
 
 	ptrByte = (Byte*) &sck->pcb.estado;
@@ -1162,6 +1224,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 
 	int bufferLen = (((pcb.cantElementsStack) * (46)));
 
+	/* COMENTO LO QUE ESTABA ANTES
 	pcb.buffer = malloc(bufferLen);
 	memcpy(pcb.buffer, ptrByte, bufferLen);
 	ptrByte += bufferLen;
@@ -1230,6 +1293,56 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 				longitud);
 		inicio++;
 		longitud = 3;
+		list_add(pcb.indiceDelStack, aux);
+	}
+	*/// DEJO DE COMENTAR LO QUE ESTABA ANTES
+
+	pcb.indiceDelStack = list_create();
+	int i;
+	paginaDeStack* aux;
+	for (i = 0; i < pcb.cantElementsStack; i++) {
+		aux = crearPaginaDeStackVaciaPiola();
+
+		// ------------------------------------------------------------------
+		memcpy(&aux->pos, ptrByte, sizeof(aux->pos));
+		ptrByte += sizeof(aux->pos);
+		// ------------------------------------------------------------------
+		memcpy(&aux->args->pagArg, ptrByte, sizeof(aux->args->pagArg));
+		ptrByte += sizeof(aux->args->pagArg);
+
+		memcpy(&aux->args->offArgs, ptrByte, sizeof(aux->args->offArgs));
+		ptrByte += sizeof(aux->args->offArgs);
+
+		memcpy(&aux->args->sizeArgs, ptrByte, sizeof(aux->args->sizeArgs));
+		ptrByte += sizeof(aux->args->sizeArgs);
+		// ------------------------------------------------------------------
+		memcpy(&aux->vars->idVar, ptrByte, sizeof(aux->vars->idVar));
+		ptrByte += sizeof(aux->vars->idVar);
+
+		memcpy(&aux->vars->pagVar, ptrByte, sizeof(aux->vars->pagVar));
+		ptrByte += sizeof(aux->vars->pagVar);
+
+		memcpy(&aux->vars->offVar, ptrByte, sizeof(aux->vars->offVar));
+		ptrByte += sizeof(aux->vars->offVar);
+
+		memcpy(&aux->vars->sizeVar, ptrByte, sizeof(aux->vars->sizeVar));
+		ptrByte += sizeof(aux->vars->sizeVar);
+		// ------------------------------------------------------------------
+		memcpy(&aux->retPos, ptrByte, sizeof(aux->retPos));
+		ptrByte += sizeof(aux->retPos);
+		// ------------------------------------------------------------------
+		memcpy(&aux->retVars->idVarRet, ptrByte, sizeof(aux->retVars->idVarRet));
+		ptrByte += sizeof(aux->retVars->idVarRet);
+
+		memcpy(&aux->retVars->pagVarRet, ptrByte, sizeof(aux->retVars->pagVarRet));
+		ptrByte += sizeof(aux->retVars->pagVarRet);
+
+		memcpy(&aux->retVars->offVarRet, ptrByte, sizeof(aux->retVars->offVarRet));
+		ptrByte += sizeof(aux->retVars->offVarRet);
+
+		memcpy(&aux->retVars->sizeVarRet, ptrByte, sizeof(aux->retVars->sizeVarRet));
+		ptrByte += sizeof(aux->retVars->sizeVarRet);
+		// ------------------------------------------------------------------
 		list_add(pcb.indiceDelStack, aux);
 	}
 
