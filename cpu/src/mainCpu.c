@@ -81,14 +81,14 @@ t_log* logger = NULL;
 int main() {
 
 
-//	pcb * pcbVacioLoco=newEmptyPcb();
-//	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
-//	SocketBuffer *bufferLoco =serializeCpuKer(hola);
-//	bufferLoco->data;
-//	hola=unserializeCpuKer(bufferLoco->data);
-//
-//	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
-//	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
+	pcb * pcbVacioLoco=newEmptyPcb();
+	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
+	SocketBuffer *bufferLoco =serializeCpuKer(hola);
+	bufferLoco->data;
+	hola=unserializeCpuKer(bufferLoco->data);
+
+	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
+	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
 
   asignadoVacio=newEspacioAsignado();
   log_debug(getLogger(),

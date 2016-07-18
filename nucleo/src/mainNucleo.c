@@ -16,15 +16,15 @@ char * leerProgramaAnSISOP1(char * direccionArchivo);
 
 int main(void) {
 
-//	pcb * pcbVacioLoco=newEmptyPcb();
-//	StrKerCpu *hola = newStrKerCpu(KERNEL_ID,PRIMER_PCB,*pcbVacioLoco,8,"hola",0,"hola",0);
-//	SocketBuffer *bufferLoco =serializeKerCpu(hola);
-//	bufferLoco->data;
-//	hola=unserializeKerCpu(bufferLoco->data);
-//
-//	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
-//	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
-//
+	pcb * pcbVacioLoco=newEmptyPcb();
+	StrKerCpu *hola = newStrKerCpu(KERNEL_ID,PRIMER_PCB,*pcbVacioLoco,8,"hola",0,"hola",0);
+	SocketBuffer *bufferLoco =serializeKerCpu(hola);
+	bufferLoco->data;
+	hola=unserializeKerCpu(bufferLoco->data);
+
+	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
+	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
+
 
 
 	inicializarVariables();
