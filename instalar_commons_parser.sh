@@ -1,4 +1,5 @@
-#! /bin/bash
+#!/bin/bash
+#Scrpit para instalar las commons y el parser perro
 
 echo ">>> Ingrese contraseña:"
 sudo echo ">>> Gracias."
