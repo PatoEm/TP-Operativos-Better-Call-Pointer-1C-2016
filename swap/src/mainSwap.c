@@ -2,7 +2,7 @@
 
 int main(void) {
 	swaplog = log_create("swap.log", "SWAP", TRUE, LOG_LEVEL_INFO);
-	leerArchivoDeConfiguracion("swapconfig");
+	leerArchivoDeConfiguracion("/home/utnso/tp-2016-1c-Better-call-pointer/swap/swapconfig");
 	tamPaginaLoca=atoi(tamPagina);
 	iniciarEstructurasSwap();
 	archivoMappeado = crearArchivo(tamArchivo, nombreSwap);

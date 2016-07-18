@@ -15,7 +15,7 @@ t_log * logger;
 
 int verificarMemoria(void*algo);
 
-void leerArchivoDeConfiguracion(const char * direccionArchivo);
+void leerArchivoDeConfiguracion(char * direccionArchivo);
 
 int verificarExistenciaDeArchivo(char* rutaArchivoConfig);
 

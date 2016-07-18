@@ -459,7 +459,7 @@ int inicializarVariables() {
 	int i;
 
 	//Leo el archivo de configuracion
-	leerArchivoDeConfiguracion("confignucleo");
+	leerArchivoDeConfiguracion("/home/utnso/tp-2016-1c-Better-call-pointer/nucleo/confignucleo");
 
 
 	//Inicio Semaforos
