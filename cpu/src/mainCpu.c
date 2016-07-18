@@ -113,6 +113,8 @@ int main() {
             &funcionesDeKernel);
         moverProgramCounterPcb(&pcbProceso);
         quantum--;
+        if(pcbProceso->instruccionesRestantes==0)
+        	seguirEjecutando=FALSE;
       }
 
       if (!seguirEjecutando) {

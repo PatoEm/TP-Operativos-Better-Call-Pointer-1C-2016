@@ -17,6 +17,7 @@ void moverProgramCounterPcb(pcb * pcbLoca) {
 //	}
 
 	pcbLoca->programCounter++;
+	pcbLoca->instruccionesRestantes--;
 
 }
 

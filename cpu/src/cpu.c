@@ -191,7 +191,7 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 		seguirEjecutando = FALSE;
 		return 0;
 	} else
-		return atoi(streamCpuUMC->data);
+		return atoi(streamUmcCpu->data);
 
 }
 
