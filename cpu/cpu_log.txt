@@ -3932,3 +3932,64 @@
 
 [INFO] 23:26:51:500 cpu/(15750:15750): Se inicializo la CPU.
 [INFO] 23:26:54:675 cpu/(15750:15750): No se pudo realizar el handshake.
+[INFO] 23:32:02:801 cpu/(16122:16122): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 23:32:02:802 cpu/(16122:16122): Configuracion del IP_NUCLEO leida con exito
+[INFO] 23:32:02:802 cpu/(16122:16122): Configuracion del PUERTO_UMC leida con exito
+[INFO] 23:32:02:802 cpu/(16122:16122): Configuracion del IP_UMC leida con exito
+[INFO] 23:32:02:802 cpu/(16122:16122): **********************************************************************
+[INFO] 23:32:02:802 cpu/(16122:16122): **********************************************************************
+[INFO] 23:32:02:802 cpu/(16122:16122): **********************************************************************
+[INFO] 23:32:02:802 cpu/(16122:16122): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 23:32:02:802 cpu/(16122:16122): Se inicializo la CPU.
+[INFO] 23:34:37:508 cpu/(16608:16608): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 23:34:37:508 cpu/(16608:16608): Configuracion del IP_NUCLEO leida con exito
+[INFO] 23:34:37:508 cpu/(16608:16608): Configuracion del PUERTO_UMC leida con exito
+[INFO] 23:34:37:508 cpu/(16608:16608): Configuracion del IP_UMC leida con exito
+[INFO] 23:34:37:508 cpu/(16608:16608): **********************************************************************
+[INFO] 23:34:37:508 cpu/(16608:16608): **********************************************************************
+[INFO] 23:34:37:508 cpu/(16608:16608): **********************************************************************
+[INFO] 23:34:37:508 cpu/(16608:16608): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 23:34:37:508 cpu/(16608:16608): Se inicializo la CPU.
+[INFO] 23:34:40:747 cpu/(16608:16608): No se pudo realizar el handshake.
+[INFO] 23:38:09:564 cpu/(17133:17133): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 23:38:09:566 cpu/(17133:17133): Configuracion del IP_NUCLEO leida con exito
+[INFO] 23:38:09:566 cpu/(17133:17133): Configuracion del PUERTO_UMC leida con exito
+[INFO] 23:38:09:566 cpu/(17133:17133): Configuracion del IP_UMC leida con exito
+[INFO] 23:38:09:566 cpu/(17133:17133): **********************************************************************
+[INFO] 23:38:09:566 cpu/(17133:17133): **********************************************************************
+[INFO] 23:38:09:566 cpu/(17133:17133): **********************************************************************
+[INFO] 23:38:09:566 cpu/(17133:17133): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 23:38:09:566 cpu/(17133:17133): Se inicializo la CPU.
+[INFO] 23:38:12:628 cpu/(17133:17133): Handshake realizado con exito.
+[INFO] 23:38:15:632 cpu/(17133:17133): Mensaje enviado a la UMC ppal.
+[INFO] 23:38:20:633 cpu/(17133:17133): Me conecte al agradable hilo
+[INFO] 23:38:20:633 cpu/(17133:17133): Mensaje enviado a la UMC ppal.
+[INFO] 23:38:20:633 cpu/(17133:17133): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 23:38:20:634 cpu/(17133:17133): Obtener siguiente PCB
+[INFO] 23:38:20:688 cpu/(17133:17133): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 23:38:20:689 cpu/(17133:17133): Obtener siguiente PCB
+[INFO] 00:11:34:385 cpu/(18222:18222): Configuracion del PUERTO_NUCLEO leida con exito
+[INFO] 00:11:34:385 cpu/(18222:18222): Configuracion del IP_NUCLEO leida con exito
+[INFO] 00:11:34:385 cpu/(18222:18222): Configuracion del PUERTO_UMC leida con exito
+[INFO] 00:11:34:385 cpu/(18222:18222): Configuracion del IP_UMC leida con exito
+[INFO] 00:11:34:385 cpu/(18222:18222): **********************************************************************
+[INFO] 00:11:34:385 cpu/(18222:18222): **********************************************************************
+[INFO] 00:11:34:385 cpu/(18222:18222): **********************************************************************
+[INFO] 00:11:34:385 cpu/(18222:18222): Archivo de configuracion CPU leido exitosamente
+=============
+
+[INFO] 00:11:34:385 cpu/(18222:18222): Se inicializo la CPU.
+[INFO] 00:11:37:388 cpu/(18222:18222): Handshake realizado con exito.
+[INFO] 00:11:40:389 cpu/(18222:18222): Mensaje enviado a la UMC ppal.
+[INFO] 00:11:45:390 cpu/(18222:18222): Me conecte al agradable hilo
+[INFO] 00:11:45:390 cpu/(18222:18222): Mensaje enviado a la UMC ppal.
+[INFO] 00:11:45:390 cpu/(18222:18222): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 00:11:45:390 cpu/(18222:18222): Obtener siguiente PCB
+[INFO] 00:11:45:427 cpu/(18222:18222): getNextPcb: Nuevo PCB vacio creado.
+[INFO] 00:11:45:428 cpu/(18222:18222): Obtener siguiente PCB

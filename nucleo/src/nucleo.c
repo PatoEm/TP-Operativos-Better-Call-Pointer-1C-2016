@@ -77,7 +77,7 @@ pcbNuevoPrograma->indiceDeCodigo=(arrayBidimensional*) malloc(cantidadInstruccio
 for (i = 0; i < cantidadInstrucciones; i++) {
 	memcpy(&(pcbNuevoPrograma->indiceDeCodigo[i]),&array[i],sizeof(arrayBidimensional));
 }
-free(array);
+//free(array);
 
 pcbNuevoPrograma->indiceDeCodigoSize=cantidadInstrucciones * sizeof(arrayBidimensional);
 

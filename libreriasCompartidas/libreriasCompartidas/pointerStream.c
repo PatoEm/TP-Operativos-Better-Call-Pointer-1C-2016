@@ -1092,7 +1092,7 @@ StrConKer* unserializeConKer(Stream dataSerialized) {
 	memcpy(fileContent, ptrByte, fileContentLen);
 	ptrByte += fileContentLen;
 
-	fileContent[fileContentLen] = '\0';
+	//fileContent[fileContentLen] = '\0';
 
 	free(dataSerialized);
 	return newStrConKer(id, action, fileContent, fileContentLen);
@@ -1400,7 +1400,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(pcb.buffer, ptrByte, bufferLen);
 	ptrByte += bufferLen;
 
-	pcb.buffer[bufferLen] = '\0';
+	//pcb.buffer[bufferLen] = '\0';
 
 	//"\001\002\003\004a\005\006\a\bb\t\n\v\f\r\016\016c\017\020\021\022d\023\024\025"
 	//"\001\002\003\004a\005\006\a\bb\t\n\v\f\r\016\016c\017\020\021\022d\023\024\025"
