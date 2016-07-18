@@ -15,7 +15,7 @@ int main(void) {
 	umclog=malloc(sizeof(t_log));
 	memcpy(umclog,log_create("umc.log", "UMC", TRUE, LOG_LEVEL_TRACE), sizeof(t_log));
 
-	leerArchivoDeConfiguracion("configumc");
+	leerArchivoDeConfiguracion("/home/utnso/tp-2016-1c-Better-call-pointer/umc/configumc");
 	crearLogger(0);
 	log_info(umclog, "Inicio UMC.");
 

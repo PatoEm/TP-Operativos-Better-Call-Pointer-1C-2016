@@ -16,7 +16,7 @@ int verificarMemoria(void*algo){
 	return 0;
 }
 
-void leerArchivoDeConfiguracion(const char * direccionArchivo) {
+void leerArchivoDeConfiguracion(char * direccionArchivo) {
              t_config* archivoDeConfiguracion;
              char*configPath = direccionArchivo;
            if (verificarExistenciaDeArchivo(configPath) == FAIL)
