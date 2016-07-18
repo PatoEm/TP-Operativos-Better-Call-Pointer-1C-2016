@@ -80,7 +80,7 @@ t_log* logger = NULL;
 
 int main() {
 
-//
+
 //	pcb * pcbVacioLoco=newEmptyPcb();
 //	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
 //	SocketBuffer *bufferLoco =serializeCpuKer(hola);

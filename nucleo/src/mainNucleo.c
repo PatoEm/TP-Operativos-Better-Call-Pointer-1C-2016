@@ -24,7 +24,7 @@ int main(void) {
 //
 //	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
 //	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
-
+//
 
 
 	inicializarVariables();
