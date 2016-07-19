@@ -77,7 +77,7 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 		dondeEscribo++;
 		enDondeEstoyDeLoQueMeMandaron++;
 	}
-	log_info(swaplog, "Pagina esctira con exito");
+	log_info(swaplog, "Pagina escrita con exito");
 	return TRUE;
 }
 

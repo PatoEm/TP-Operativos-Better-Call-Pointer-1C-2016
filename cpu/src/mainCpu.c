@@ -102,6 +102,7 @@ int main() {
 	if (loadConfig() && socketConnection()) {
 
 		while (TRUE) {
+			finalizoCorrectamente=FALSE;
 			log_debug(getLogger(),
 					"Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
 			getNextPcb();
@@ -115,17 +116,24 @@ int main() {
 				quantum--;
 			}
 
+			if(finalizoCorrectamente){
+
+				log_info(getLogger(), "Finalice el programa");
+
+			}
 			if (!seguirEjecutando) {
 
 				sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, pcbProceso, 0, 0,
 						NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
+
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 					log_info(getLogger(),
 							"No se pudo enviar el buffer al nucleo.");
 					return FALSE;
 
 				}
+				log_info(getLogger(), "Aborte el programa");
 			}
 
 			if (quantum == 0) {
@@ -137,6 +145,7 @@ int main() {
 							"No se pudo enviar el buffer al nucleo.");
 					return FALSE;
 				}
+				log_info(getLogger(), "Termine el quantum");
 			}
 			seguirEjecutando = TRUE;
 		}

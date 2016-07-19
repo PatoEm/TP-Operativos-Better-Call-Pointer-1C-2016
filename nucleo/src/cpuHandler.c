@@ -536,7 +536,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		break;
 
 	case FINALIZAR_PROGRAMA:
-		log_info(cpuhlog, "Finalizo el programa %d.", in_cpu_msg->pid);
+		log_info(cpuhlog, "Finalizo el programa %d.", in_cpu_msg->pcb.id);
 		moverAColaExit(&in_cpu_msg->pcb);
 
 		char* mensajeFinalizar = "El programa finalizo correctamente.";
@@ -570,7 +570,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		break;
 
 	case ABORTAR_PROGRAMA:
-		log_info(cpuhlog, "Aborto el programa %d.", in_cpu_msg->pid);
+		log_info(cpuhlog, "Aborto el programa %d.", in_cpu_msg->pcb.id);
 		moverAColaExit(&in_cpu_msg->pcb);
 
 		char* mensajeAbortar = "El programa fue abortado.";
@@ -607,7 +607,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	case TERMINE_EL_QUANTUM:
 
 		log_info(cpuhlog, "Finalizo el quantum del programa %d.",
-				in_cpu_msg->pid);
+				in_cpu_msg->pcb.id);
 		moverAColaReady(&in_cpu_msg->pcb);
 
 		break;
@@ -638,7 +638,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 
 	case ARCHIVO_ANSISOP:
 
-		log_error(cpuhlog, "KERNEL : El Cliente %d mando ANSISOP",
+		log_info(cpuhlog, "KERNEL : El Cliente %d mando ANSISOP",
 				consoleClient->descriptor);
 
 		//SE GENERA EL NUEVO PCB
@@ -695,7 +695,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		list_add(consoleList, clientConsole);
 
 //			mtxUnlock(&mtxConsoleList);
-		log_error(cpuhlog, "KERNEL : Consola %d añadida a la lista",
+		log_info(cpuhlog, "KERNEL : Consola %d añadida a la lista",
 				consoleClient->descriptor);
 
 		//MUEVO EL NUEVO PCB A LA COLA DE NEW
