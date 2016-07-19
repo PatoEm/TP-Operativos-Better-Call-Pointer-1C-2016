@@ -19,7 +19,6 @@ Int32U puertoKernel = 0;
 String ipKernel;
 t_config* tConfig;
 SocketClient* kernelClient = NULL;
-
 StrConKer* sck = NULL;
 StrKerCon* skc = NULL;
 String direccionDeArchivo;
@@ -37,7 +36,9 @@ Boolean realizarImprimirTexto();
 Boolean realizarCierreConsola();
 String stringFromByteArray(Byte*, Int32U);
 
-// estructura para loggear
+/*
+ * Estructura para Logger
+ */
 t_log* logger = NULL;
 
 int main(void) {
@@ -73,6 +74,7 @@ int main(void) {
 	config_destroy(tConfig);
 	return TRUE;
 }
+
 
 /*
  * Implementacion de Funciones
@@ -115,7 +117,7 @@ Boolean socketConnection() {
 
 	do {
 		puts("**********************************");
-		puts("Intentando conectar con el Nucleo.");
+		puts("Intentando conectar con el NUCLEO.");
 		printf("IP: %s, Puerto: %d\n", ipKernel, (int)puertoKernel);
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
@@ -131,8 +133,6 @@ Boolean socketConnection() {
 
 	return TRUE;
 }
-
-
 
 Boolean callAndSendAnSISOP(String path) {
 
@@ -174,7 +174,7 @@ Boolean callAndSendAnSISOP(String path) {
 
 Boolean sendStream() {
 	if (sck == NULL) {
-		log_error(getLogger(), "Se trato de enviar el stream al Kernel sin inicializar. ----- Terminando \n");
+		log_error(getLogger(), "Se trato de enviar el stream al NUCLEO sin inicializar. ----- Terminando \n");
 		return FALSE;
 	}
 
@@ -197,7 +197,7 @@ Boolean instructionsFromKernel() {
 	log_info(getLogger(), "Esperando instrucciones del NUCLEO");
 
 	if((sb = socketReceive(kernelClient->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream del Kernel. ----- Terminando \n");
+		log_error(getLogger(),"No se pudo recibir el stream del NUCLEO. ----- Terminando \n");
 		return FALSE;
 	}
 	log_info(getLogger(), "Instruccion del NUCLEO recibida");
@@ -211,7 +211,7 @@ Boolean instructionsFromKernel() {
 			log_info(getLogger(), "Funcion [IMPRIMIRTEXTO]");
 			return realizarImprimirTexto();
 		case CERRARCONSOLA:
-			log_info(getLogger(), "Cerrando Consola");
+			log_info(getLogger(), "Cerrando CONSOLA");
 			return realizarCierreConsola();
 		default:
 			log_error(getLogger(), "Action: %d", skc->action);

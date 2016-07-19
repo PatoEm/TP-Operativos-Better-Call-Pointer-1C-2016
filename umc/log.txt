@@ -23,3 +23,6 @@
 [INFO] 00:23:38:535 Elestac/(11573:11573): Memoria real reservada
 [INFO] 00:25:30:960 Elestac/(11666:11666): Memoria real reservada
 [INFO] 00:26:30:976 Elestac/(11768:11768): Memoria real reservada
+[INFO] 00:29:34:148 Elestac/(11945:11945): Memoria real reservada
+[INFO] 00:30:51:116 Elestac/(12294:12294): Memoria real reservada
+[INFO] 00:34:09:261 Elestac/(12823:12823): Memoria real reservada

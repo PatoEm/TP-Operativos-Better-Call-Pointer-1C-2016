@@ -22,7 +22,6 @@
 #include <commons/string.h>
 #include <unistd.h>
 
-
 /*
  * Defines
  */
@@ -32,11 +31,11 @@
 #define ARCHIVO_CONF "configconsola"
 #define LOGGER_FILE "consola_log.txt"
 
+/*
+ * Prototipos de Funciones del consola.c
+ */
 int tamArchivo(char* direccionArchivo);
 char* leerProgramaAnSISOP(char* direccionArchivo);
-
-//======================================================
-// Prototipo de funcion para loggear
 t_log* getLogger();
 
 #endif /* CONSOLA_H_ */
