@@ -8,70 +8,57 @@
 #include "pcb.h"
 
 void moverProgramCounterPcb(pcb * pcbLoca) {
-//int i;
-//	for (i = 0; i < pcbLoca->instruccionesTotales; ++i) {
-//		if((pcbLoca->indiceDeCodigo[i].comienzo)==(pcbLoca->programCounter)){
-//			pcbLoca->programCounter=(pcbLoca->indiceDeCodigo[i].comienzo)+(pcbLoca->indiceDeCodigo[i].longitud)+1;
-//			pcbLoca->instruccionesRestantes-=1;
-//		}
-//	}
-
 	pcbLoca->programCounter++;
 	pcbLoca->instruccionesRestantes--;
 
 }
 
-pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal,
-		t_puntero_instruccion programCounter, int paginasDeCodigo,
-		arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,
-		t_size indiceDeEtiquetasSize, t_size sizeEti, t_size insTotales,
-		t_size insRestantes, t_list* indiceDelStack, estadoPrograma estado,
-		t_size indiceDeCodigoSize, Byte* buffer, t_size cantElementsStack) {
+pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter, int paginasDeCodigo,
+	arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas, t_size indiceDeEtiquetasSize, t_size sizeEti, t_size insTotales,
+	t_size insRestantes, t_list* indiceDelStack, estadoPrograma estado, t_size indiceDeCodigoSize, t_size cantElementsStack) {
 
-	pcb* pcb = malloc(sizeof(pcb));
+		pcb* pcb = malloc(sizeof(pcb));
 
-	pcb->consola = consola;
-	pcb->id = id;
-	pcb->tamanioArchivoOriginal = tamanioArchivoOriginal;
-	pcb->programCounter = programCounter;
-	pcb->paginasDeCodigo = paginasDeCodigo;
-	pcb->indiceDeCodigo = indiceDeCodigo;
-	pcb->etiquetaSize = sizeEti;
-	pcb->instruccionesTotales = insTotales;
-	pcb->instruccionesRestantes = insRestantes;
-	pcb->indiceDeEtiquetas = indiceDeEtiquetas;
-	pcb->indiceDeEtiquetasSize = indiceDeEtiquetasSize;
-	pcb->indiceDelStack = indiceDelStack;
-	pcb->estado = estado;
-	pcb->indiceDeCodigoSize = indiceDeCodigoSize;
-	pcb->buffer = buffer;
-	pcb->cantElementsStack = cantElementsStack;
-
-	return pcb;
+		pcb->consola = consola;
+		pcb->id = id;
+		pcb->tamanioArchivoOriginal = tamanioArchivoOriginal;
+		pcb->programCounter = programCounter;
+		pcb->paginasDeCodigo = paginasDeCodigo;
+		pcb->indiceDeCodigo = indiceDeCodigo;
+		pcb->etiquetaSize = sizeEti;
+		pcb->instruccionesTotales = insTotales;
+		pcb->instruccionesRestantes = insRestantes;
+		pcb->indiceDeEtiquetas = indiceDeEtiquetas;
+		pcb->indiceDeEtiquetasSize = indiceDeEtiquetasSize;
+		pcb->indiceDelStack = indiceDelStack;
+		pcb->estado = estado;
+		pcb->indiceDeCodigoSize = indiceDeCodigoSize;
+		pcb->cantElementsStack = cantElementsStack;
+		return pcb;
 }
 
 paginaDeStack*crearPaginaDeStackVaciaPiola(){
-	paginaDeStack* soyUnaPaginaDeStackVacia= malloc(sizeof (paginaDeStack));
-	variables *variablesLocas=malloc(sizeof(variables));
-	variablesRetorno *variablesConRetornoLocas=malloc(sizeof(variablesRetorno));
+	paginaDeStack* soyUnaPaginaDeStackVacia = malloc(sizeof (paginaDeStack));
+	variables *variablesLocas = malloc(sizeof(variables));
+	variablesRetorno *variablesConRetornoLocas = malloc(sizeof(variablesRetorno));
 	argumentos *argumentosLocos = malloc(sizeof(argumentos));
-	soyUnaPaginaDeStackVacia->vars=variablesLocas;
-	soyUnaPaginaDeStackVacia->retVars=variablesConRetornoLocas;
-	soyUnaPaginaDeStackVacia->args=argumentosLocos;
+	soyUnaPaginaDeStackVacia->vars = variablesLocas;
+	soyUnaPaginaDeStackVacia->retVars = variablesConRetornoLocas;
+	soyUnaPaginaDeStackVacia->args = argumentosLocos;
 
-	soyUnaPaginaDeStackVacia->pos=0;
-	soyUnaPaginaDeStackVacia->args->pagArg=0;
-	soyUnaPaginaDeStackVacia->args->offArgs=0;
-	soyUnaPaginaDeStackVacia->args->sizeArgs=0;
-	soyUnaPaginaDeStackVacia->retPos=0;
-	soyUnaPaginaDeStackVacia->vars->idVar='a';
-	soyUnaPaginaDeStackVacia->vars->offVar=0;
-	soyUnaPaginaDeStackVacia->vars->pagVar=0;
-	soyUnaPaginaDeStackVacia->vars->sizeVar=0;
-	soyUnaPaginaDeStackVacia->retVars->idVarRet='2';
-	soyUnaPaginaDeStackVacia->retVars->offVarRet=0;
-	soyUnaPaginaDeStackVacia->retVars->pagVarRet=0;
-	soyUnaPaginaDeStackVacia->retVars->sizeVarRet=0;
+	soyUnaPaginaDeStackVacia->pos = 0;
+	soyUnaPaginaDeStackVacia->args->pagArg = 0;
+	soyUnaPaginaDeStackVacia->args->offArgs = 0;
+	soyUnaPaginaDeStackVacia->args->sizeArgs = 0;
+	soyUnaPaginaDeStackVacia->retPos = 0;
+	soyUnaPaginaDeStackVacia->vars->idVar = 'a';
+	soyUnaPaginaDeStackVacia->vars->offVar = 0;
+	soyUnaPaginaDeStackVacia->vars->pagVar = 0;
+	soyUnaPaginaDeStackVacia->vars->sizeVar = 0;
+	soyUnaPaginaDeStackVacia->retVars->idVarRet = '2';
+	soyUnaPaginaDeStackVacia->retVars->offVarRet = 0;
+	soyUnaPaginaDeStackVacia->retVars->pagVarRet = 0;
+	soyUnaPaginaDeStackVacia->retVars->sizeVarRet = 0;
 	return soyUnaPaginaDeStackVacia;
 }
 
@@ -139,7 +126,6 @@ pcb* newEmptyPcb() {
 	aux2->retVars->sizeVarRet = 21;
 	list_add(pcbLoco->indiceDelStack, aux2);
 
-	pcbLoco->buffer = "Empty";
 	pcbLoco->cantElementsStack = 2;
 
 	pcbLoco->estado = NEW;
@@ -156,7 +142,7 @@ pcb* newEmptyPcb() {
 
 	//free(auxArray);
 	//free(auxSocket);
-//	free(auxIndice);
+	//free(auxIndice);
 	puts("Cree un pcb Vacio");
 
 	return pcbLoco;

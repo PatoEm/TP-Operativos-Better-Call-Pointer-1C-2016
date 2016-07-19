@@ -67,14 +67,11 @@ typedef struct {
 	t_list* indiceDelStack;
 	t_size cantElementsStack;
 	estadoPrograma estado;
-	Byte* buffer;
-
-
 } pcb;
 
 pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
 		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,t_size indiceDeEtiquetasSize,t_size etiquetas,t_size instruccionesTotales,t_size instruccionesRestantes,
-		t_list* indiceDelStack, estadoPrograma estado, t_size indiceDeCodigoSize, Byte* buffer, t_size cantElementsStack);
+		t_list* indiceDelStack, estadoPrograma estado, t_size indiceDeCodigoSize, t_size cantElementsStack);
 pcb* newEmptyPcb();
 
 char * pedirCodigoAUMC();
