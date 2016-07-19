@@ -1333,3 +1333,10 @@ begin
 	
 	wait b
 		!colas = !colas
+[INFO] 00:12:32:177 SWAP/(11054:11054): Valores del archivo de configuracion seteados
+[INFO] 00:12:32:184 SWAP/(11054:11054): Archivo de particion creado
+[INFO] 00:12:32:185 SWAP/(11054:11054): Server creado y escuchando correctamente
+[INFO] 00:15:46:500 SWAP/(11287:11287): Valores del archivo de configuracion seteados
+[INFO] 00:15:46:510 SWAP/(11287:11287): Archivo de particion creado
+[INFO] 00:15:46:510 SWAP/(11287:11287): Server creado y escuchando correctamente
+[ERROR] 00:17:08:650 SWAP/(11287:11287): Al recibir del cliente

@@ -20,3 +20,6 @@
 [INFO] 00:34:42:365 Elestac/(19904:19904): Inicio Log UMC
 [INFO] 00:38:48:465 Elestac/(20221:20221): Inicio Log UMC
 [INFO] 00:41:42:598 Elestac/(20513:20513): Inicio Log UMC
+[INFO] 00:23:38:535 Elestac/(11573:11573): Memoria real reservada
+[INFO] 00:25:30:960 Elestac/(11666:11666): Memoria real reservada
+[INFO] 00:26:30:976 Elestac/(11768:11768): Memoria real reservada
