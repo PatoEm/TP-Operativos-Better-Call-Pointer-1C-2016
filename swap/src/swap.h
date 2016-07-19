@@ -46,6 +46,7 @@
 #define FRAGMENTACION_EXTERNA -2
 #define TRUE 1
 #define FALSE 0
+#define LOGGER_FILE "swap_log.txt"
 
 //variables
 char* ipUMC;
@@ -65,7 +66,7 @@ Socket * umcClient;
 StrUmcSwa * streamUmcSwap;
 StrSwaUmc * streamSwapUmc;
 
-t_log * swaplog;
+//t_log * swaplog;
 
 //estructuras
 
@@ -110,5 +111,7 @@ void crearListas();
 void compactarSwap();
 
 void manejoDeConexiones();
+
+t_log* getLogger();
 
 #endif /* SWAP_H_ */
