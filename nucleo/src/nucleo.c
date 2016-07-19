@@ -53,8 +53,6 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
-	pcbNuevoPrograma->buffer = "Empty";
-
 	pcbNuevoPrograma->cantElementsStack = 0;
 
 	//todo fijarse que tengo que pedirle a la memoria
