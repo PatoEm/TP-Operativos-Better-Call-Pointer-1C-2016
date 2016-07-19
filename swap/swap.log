@@ -1381,3 +1381,69 @@ end
 [INFO] 03:20:59:245 SWAP/(8121:8121): Proceso (PID 1) eliminado correctamente
 [INFO] 03:20:59:245 SWAP/(8121:8121): Proceso eliminado con exito
 [ERROR] 03:21:13:400 SWAP/(8121:8121): Al recibir del cliente
+[INFO] 04:09:59:76 SWAP/(28827:28827): Valores del archivo de configuracion seteados
+[INFO] 04:09:59:88 SWAP/(28827:28827): Archivo de particion creado
+[INFO] 04:09:59:88 SWAP/(28827:28827): Server creado y escuchando correctamente
+[INFO] 04:10:38:404 SWAP/(28827:28827): Hay espacio
+[INFO] 04:10:38:404 SWAP/(28827:28827): Espacio reservado correctamente
+[INFO] 04:10:38:404 SWAP/(28827:28827): Pagina esctira con exito
+[INFO] 04:10:38:404 SWAP/(28827:28827): Pagina esctira con exito
+[INFO] 04:10:38:404 SWAP/(28827:28827): Pagina esctira con exito
+[INFO] 04:10:38:404 SWAP/(28827:28827): Pagina esctira con exito
+[INFO] 04:10:53:546 SWAP/(28827:28827): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 04:10:53:546 SWAP/(28827:28827): Pagina leida correctamente: 
+[INFO] 04:10:53:639 SWAP/(28827:28827): Pagina leida correctamente: 12
+end
+
+
+
+[INFO] 04:10:53:641 SWAP/(28827:28827): Proceso (PID 1) eliminado correctamente
+[INFO] 04:10:53:641 SWAP/(28827:28827): Proceso eliminado con exito
+[ERROR] 04:11:20:113 SWAP/(28827:28827): Al recibir del cliente
+[INFO] 04:15:58:884 SWAP/(29200:29200): Valores del archivo de configuracion seteados
+[INFO] 04:15:58:902 SWAP/(29200:29200): Archivo de particion creado
+[INFO] 04:15:58:902 SWAP/(29200:29200): Server creado y escuchando correctamente
+[INFO] 04:16:43:920 SWAP/(29200:29200): Hay espacio
+[INFO] 04:16:43:920 SWAP/(29200:29200): Espacio reservado correctamente
+[INFO] 04:16:43:920 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:920 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:920 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:920 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:921 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:921 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:921 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:921 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:921 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:16:43:921 SWAP/(29200:29200): Pagina esctira con exito
+[INFO] 04:17:00:498 SWAP/(29200:29200): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 04:17:00:498 SWAP/(29200:29200): Pagina leida correctamente: 
+[INFO] 04:18:15:260 SWAP/(29421:29421): Valores del archivo de configuracion seteados
+[INFO] 04:18:15:277 SWAP/(29421:29421): Archivo de particion creado
+[INFO] 04:18:15:277 SWAP/(29421:29421): Server creado y escuchando correctamente
+[ERROR] 04:21:18:745 SWAP/(29421:29421): Al recibir del cliente
+[INFO] 04:21:25:686 SWAP/(29631:29631): Valores del archivo de configuracion seteados
+[INFO] 04:21:25:688 SWAP/(29631:29631): Archivo de particion creado
+[INFO] 04:21:25:688 SWAP/(29631:29631): Server creado y escuchando correctamente
+[INFO] 04:22:46:643 SWAP/(29631:29631): Hay espacio
+[INFO] 04:22:46:643 SWAP/(29631:29631): Espacio reservado correctamente
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[INFO] 04:22:46:643 SWAP/(29631:29631): Pagina esctira con exito
+[ERROR] 04:24:14:412 SWAP/(29631:29631): Al recibir del cliente
