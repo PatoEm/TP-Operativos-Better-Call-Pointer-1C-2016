@@ -17,8 +17,6 @@ void iniciarEstructurasUMC() {
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
 
-	crearListas();
-
 	mutexPedidos=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 	mutexThreadSockets=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 
@@ -30,7 +28,7 @@ void iniciarEstructurasUMC() {
 			printf("\n init mutexThreadSockets fallo\n");
 		}
 
-
+	crearListas();
 	inicioTLB();
 	listaPaginasPorPrograma = list_create();
 	while (counter != marcos) {
@@ -673,7 +671,7 @@ void setearValores(t_config * archivoConfig) {
 
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	char * memory = calloc(1, cantidadFrames * capacidadFrames);
-	log_info(logger, "Memoria real reservada", NULL);
+//todo	log_info(logger, "Memoria real reservada", NULL);
 	return memory;
 }
 

@@ -469,9 +469,9 @@ int inicializarVariables() {
 	//sem_t semaforoPrueba;
 	//sem_init(&semaforoPrueba, 0, 4);
 
-	//semaforosAnsisop=malloc(sizeof(char));
+	semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
 
-semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
+
 
 	for (i = 0; i < cantSemaforos; i++) {
 		valorInicial=viSemaforos[i];
@@ -489,7 +489,6 @@ semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
 	//inicio cantIO
 
 	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
-	//mutexIO=malloc(sizeof(char));
 	mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
 
 	for (i = 0; i < cantIO; i++) {
@@ -509,7 +508,6 @@ semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
 		for (i = 0; i < cantVarCompartidas; i++) {
 			variableCompartidaValor[i] = 0;
 		}
-		//mutexVariables=malloc(sizeof(char));
 		mutexVariables=malloc(sizeof(pthread_mutex_t)*cantVarCompartidas);
 	for (i = 0; i < cantVarCompartidas; i++) {
 		mutexVariables[i]=malloc(sizeof(pthread_mutex_t));
