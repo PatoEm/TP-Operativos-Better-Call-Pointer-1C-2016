@@ -338,7 +338,7 @@ void grabar_valor(char* identificador, int valor) {
 
 }
 //testeada
-void waitAnsisop(char * identificador, pcb *pcbPrograma, Socket* cpuSocket) {
+void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
@@ -351,9 +351,9 @@ void waitAnsisop(char * identificador, pcb *pcbPrograma, Socket* cpuSocket) {
 
 
 
-	for (i = 0; (idSemaforos[i] != '\0'); i++) {
+	for (i = 0; (i < cantSemaforos); i++) {
 
-		if ((strcmp(idSemaforos[i], identificador)) == 0) {
+		if ((strcmp(&*idSemaforos[i], identificador)) == 0) { //todo chequear esta asquerosidad
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
 				socketSend(cpuSocket,buffer);
@@ -623,8 +623,8 @@ entrada_salida(atributos.identificador,atributos.cantidad,atributos.pcbLoca);
 
 }
 
-void funcionHiloWait(atributosWait atributos){
+void funcionHiloWait(atributosWait* atributos){
 
-waitAnsisop(atributos.identificador,atributos.pcbLoca,atributos.cpuSocket);
+waitAnsisop(atributos->identificador,&atributos->pcbLoca,atributos->cpuSocket);
 
 }

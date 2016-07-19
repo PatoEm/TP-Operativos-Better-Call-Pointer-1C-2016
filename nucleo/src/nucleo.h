@@ -110,7 +110,7 @@ typedef struct  {
 typedef struct  {
 	Socket* cpuSocket;
 	char* identificador;
-	pcb* pcbLoca;
+	pcb pcbLoca;
 
 } atributosWait;
 
@@ -137,6 +137,6 @@ void crearHilos();
 void enviarPcbACpu(Socket *);
 void *buscarYEliminarPCBEnLista(t_list *, pcb* );
 void funcionHiloIO(atributosIO);
-void funcionHiloWait(atributosWait );
+void funcionHiloWait(atributosWait* );
 
 #endif /* NUCLEO_H_ */

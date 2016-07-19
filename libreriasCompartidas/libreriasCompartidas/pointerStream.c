@@ -1486,6 +1486,9 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 			list_add(pcb.indiceDelStack, aux);
 		}
 
+		memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
+		ptrByte += sizeof(pcb.estado);
+
 	// termino de deserealizar el pcb
 
 	memcpy(&pid, ptrByte, sizeof(pid));
