@@ -72,6 +72,7 @@ int main(void) {
 		}
 	}
 	config_destroy(tConfig);
+	log_destroy(logger);
 	return TRUE;
 }
 
