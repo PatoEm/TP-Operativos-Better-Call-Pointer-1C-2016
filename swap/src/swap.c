@@ -7,7 +7,6 @@
 
 #include "swap.h"
 
-//#define manejarError(msg) {perror(msg); abort();}
 
 //Genero mi archivo de Swap y lo devuelvo mappeado en memoria DRMENGUECHE
 char* crearArchivo(char* tamanio, char* nombre) {
@@ -473,4 +472,11 @@ void manejoDeConexiones() {
 			break;
 		}
 	}
+}
+
+t_log* getLogger() {
+	if (logger == NULL) {
+		logger = log_create(LOGGER_FILE, "swap", TRUE, LOG_LEVEL_INFO);
+	}
+	return logger;
 }
