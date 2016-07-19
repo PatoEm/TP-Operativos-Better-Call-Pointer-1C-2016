@@ -443,13 +443,13 @@ int inicializarVariables() {
 	//Sincronizacion
 	//pthread_mutex_t** mutexIO;
 	//pthread_mutex_t** mutexVariables;
-	mutexQuantum=malloc(sizeof(mutexQuantum));
+	mutexQuantum=malloc(sizeof(pthread_mutex_t));
 
-	mutexColaNew=(pthread_mutex_t*)malloc(sizeof(mutexColaNew));
-	mutexColaReady=(pthread_mutex_t*)malloc(sizeof(mutexColaReady));
-	mutexColaExit=(pthread_mutex_t*)malloc(sizeof(mutexColaExit));
-	mutexListaExec=(pthread_mutex_t*)malloc(sizeof(mutexListaExec));
-	mutexListaBlock=(pthread_mutex_t*)malloc(sizeof(mutexListaBlock));
+	mutexColaNew=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	mutexColaReady=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	mutexColaExit=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	mutexListaExec=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	mutexListaBlock=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 
 
 	primeraLectura = true;
@@ -469,9 +469,9 @@ int inicializarVariables() {
 	//sem_t semaforoPrueba;
 	//sem_init(&semaforoPrueba, 0, 4);
 
-	semaforosAnsisop=malloc(sizeof(char));
+	//semaforosAnsisop=malloc(sizeof(char));
 
-
+semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
 
 	for (i = 0; i < cantSemaforos; i++) {
 		valorInicial=viSemaforos[i];
@@ -489,7 +489,8 @@ int inicializarVariables() {
 	//inicio cantIO
 
 	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
-	mutexIO=malloc(sizeof(char));
+	//mutexIO=malloc(sizeof(char));
+	mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
 
 	for (i = 0; i < cantIO; i++) {
 
@@ -508,7 +509,8 @@ int inicializarVariables() {
 		for (i = 0; i < cantVarCompartidas; i++) {
 			variableCompartidaValor[i] = 0;
 		}
-		mutexVariables=malloc(sizeof(char));
+		//mutexVariables=malloc(sizeof(char));
+		mutexVariables=malloc(sizeof(pthread_mutex_t)*cantVarCompartidas);
 	for (i = 0; i < cantVarCompartidas; i++) {
 		mutexVariables[i]=malloc(sizeof(pthread_mutex_t));
 		if (pthread_mutex_init(mutexVariables[i], NULL) != 0) {

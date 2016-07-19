@@ -19,8 +19,8 @@ void iniciarEstructurasUMC() {
 
 	crearListas();
 
-	mutexPedidos=(pthread_mutex_t*)malloc(sizeof(mutexPedidos));
-	mutexThreadSockets=(pthread_mutex_t*)malloc(sizeof(mutexThreadSockets));
+	mutexPedidos=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	mutexThreadSockets=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
 
 	if (pthread_mutex_init(mutexPedidos, NULL) != 0) {
 			printf("\n init mutexPedidos fallo\n");

@@ -26,3 +26,10 @@
 [INFO] 00:29:34:148 Elestac/(11945:11945): Memoria real reservada
 [INFO] 00:30:51:116 Elestac/(12294:12294): Memoria real reservada
 [INFO] 00:34:09:261 Elestac/(12823:12823): Memoria real reservada
+[INFO] 02:10:51:708 Elestac/(25041:25041): Memoria real reservada
+[INFO] 02:20:29:611 Elestac/(26233:26233): Memoria real reservada
+[INFO] 02:25:16:329 Elestac/(29147:29147): Memoria real reservada
+[INFO] 02:30:15:968 Elestac/(32240:32240): Memoria real reservada
+[INFO] 02:32:30:312 Elestac/(2300:2300): Memoria real reservada
+[INFO] 02:36:06:639 Elestac/(4865:4865): Memoria real reservada
+[INFO] 02:39:47:424 Elestac/(7264:7264): Memoria real reservada
