@@ -120,7 +120,8 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 					nuevaVariable->vars->idVar = identificador_variable;
 					nuevaVariable->vars->pagVar = asignadoVacio->numDePag;
 					nuevaVariable->vars->sizeVar = 4;
-					nuevaVariable->vars->offVar = ultimaPagina->vars->offVar - 4;
+					nuevaVariable->vars->offVar = ultimaPagina->vars->offVar
+							- 4;
 					t_list * lista = pcbProceso.indiceDelStack;
 					list_add((pcbProceso.indiceDelStack), nuevaVariable);
 				} else {
@@ -173,7 +174,7 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	//todo Emi chequea esto
 	//espacioAsignado espacio;
 	paginaDeStack*paginaDeMadrugada = list_get(pcbProceso.indiceDelStack,
-				direccion_variable);
+			direccion_variable);
 	asignadoVacio->numDePag = paginaDeMadrugada->vars->pagVar;
 	asignadoVacio->bitUso = 4;
 	int offset = paginaDeMadrugada->vars->offVar;
@@ -473,8 +474,8 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 		.AnSISOP_asignarValorCompartida = asignarValorCompartida,
 		.AnSISOP_irAlLabel = irAlLabel, .AnSISOP_llamarConRetorno =
 				llamarConRetorno, .AnSISOP_retornar = retornar,
-		.AnSISOP_entradaSalida = entradaSalida, .AnSISOP_imprimir = imprimir,
-		.AnSISOP_imprimirTexto = imprimirTexto, };
+		.AnSISOP_finalizar = finalizar, .AnSISOP_entradaSalida = entradaSalida,
+		.AnSISOP_imprimir = imprimir, .AnSISOP_imprimirTexto = imprimirTexto, };
 
 AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 		signale, };

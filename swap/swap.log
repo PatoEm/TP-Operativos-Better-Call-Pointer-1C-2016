@@ -1252,3 +1252,45 @@ begin
 	b = 5
 	a = b + 
 [INFO] 14:01:40:847 SWAP/(14089:14089): Pagina leida correctamente: 
+[INFO] 22:14:48:652 SWAP/(2833:2833): Valores del archivo de configuracion seteados
+[INFO] 22:14:48:720 SWAP/(2833:2833): Archivo de particion creado
+[INFO] 22:14:48:721 SWAP/(2833:2833): Server creado y escuchando correctamente
+[INFO] 22:15:46:840 SWAP/(3419:3419): Valores del archivo de configuracion seteados
+[INFO] 22:15:46:962 SWAP/(3419:3419): Archivo de particion creado
+[ERROR] 22:15:46:965 SWAP/(3419:3419): No se pudo crear el server
+[INFO] 22:28:17:763 SWAP/(2833:2833): Hay espacio
+[INFO] 22:28:17:765 SWAP/(2833:2833): Espacio reservado correctamente
+[INFO] 22:28:17:767 SWAP/(2833:2833): Pagina esctira con exito
+[INFO] 22:28:17:770 SWAP/(2833:2833): Pagina esctira con exito
+[INFO] 22:28:17:773 SWAP/(2833:2833): Pagina esctira con exito
+[INFO] 22:28:17:775 SWAP/(2833:2833): Pagina esctira con exito
+[INFO] 22:29:02:641 SWAP/(2833:2833): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 22:29:02:647 SWAP/(2833:2833): Pagina leida correctamente: 
+[INFO] 22:29:34:765 SWAP/(2833:2833): Pagina leida correctamente: 12
+end
+
+
+
+[ERROR] 22:33:41:724 SWAP/(2833:2833): Al recibir del cliente
+[INFO] 22:33:58:588 SWAP/(5761:5761): Valores del archivo de configuracion seteados
+[INFO] 22:33:58:700 SWAP/(5761:5761): Archivo de particion creado
+[INFO] 22:33:58:703 SWAP/(5761:5761): Server creado y escuchando correctamente
+[INFO] 22:35:16:841 SWAP/(5761:5761): Hay espacio
+[INFO] 22:35:16:842 SWAP/(5761:5761): Espacio reservado correctamente
+[INFO] 22:35:16:842 SWAP/(5761:5761): Pagina esctira con exito
+[INFO] 22:35:16:844 SWAP/(5761:5761): Pagina esctira con exito
+[INFO] 22:35:16:846 SWAP/(5761:5761): Pagina esctira con exito
+[INFO] 22:35:16:850 SWAP/(5761:5761): Pagina esctira con exito
+[INFO] 22:36:22:108 SWAP/(5761:5761): Pagina leida correctamente: #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 22:36:22:116 SWAP/(5761:5761): Pagina leida correctamente: 
+[ERROR] 22:37:04:346 SWAP/(5761:5761): Al recibir del cliente
