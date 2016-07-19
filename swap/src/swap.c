@@ -101,7 +101,9 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 		posicionDeChar++;
 		lugarDeLaCadena++;
 	}
-	log_info(getLogger(), "Pagina leida correctamente: %s", punteroADevolver);
+	log_info(getLogger(), "Pagina leida correctamente: ");
+	log_info(getLogger(), "%s", punteroADevolver);
+
 	return (punteroADevolver);
 }
 
