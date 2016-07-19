@@ -349,16 +349,21 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	buffer=serializeKerCpu(StrKernelCpu);
 
-
+	char* aux;
 
 	for (i = 0; (i < cantSemaforos); i++) {
+		aux=malloc(100);
+		aux[0]='\0';
+		strcat(aux,&*idSemaforos[i]); //pueden creer que así se accede? que asco
+		strcat(aux,"\n");
 
-		if ((strcmp(&*idSemaforos[i], identificador)) == 0) { //todo chequear esta asquerosidad
+
+		if ((strcmp(aux, identificador)) == 0) {
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
 				socketSend(cpuSocket,buffer);
 
-				moverAColaReady(pcbPrograma);
+				//moverAColaReady(pcbPrograma);
 
 
 			} else {
@@ -366,12 +371,12 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 				moverAListaBlock(pcbPrograma);
 				sem_wait(semaforosAnsisop[i]);
 				socketSend(cpuSocket,buffer);
-				moverAColaReady(pcbPrograma);
+				moverAListaExec(pcbPrograma);
 				//todo avisar a cpu que se bloqueo
 			}
 
 			abortar++;
-
+			free (aux);
 		}
 
 	}

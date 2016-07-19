@@ -390,6 +390,9 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
  */	//MODIFICAR PROGRAMA DESBLOQUEADO y envio
 void wait(t_nombre_semaforo identificador_semaforo) {
 	StrCpuKer*streamCpuKer;
+//	(Char id, Char action, pcb pcb, Int32U pid,
+//			Int32U logLen, Byte* log, Byte* nombreDispositivo,
+//			Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, WAIT_SEM_ANSISOP, pcbProceso,
 			pcbProceso.id, strlen(identificador_semaforo),
 			identificador_semaforo, NULL /*NOMBRE DISPOSITIVO*/,

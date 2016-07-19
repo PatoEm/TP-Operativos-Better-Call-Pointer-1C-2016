@@ -97,3 +97,146 @@ end
 [INFO] 14:54:45:874 swap/(3115:3115): Proceso (PID 1) eliminado correctamente
 [INFO] 14:54:45:874 swap/(3115:3115): Proceso eliminado con exito
 [ERROR] 14:54:48:729 swap/(3115:3115): Al recibir del cliente
+[INFO] 15:32:37:53 swap/(15194:15194): Valores del archivo de configuracion seteados
+[INFO] 15:32:37:83 swap/(15194:15194): Archivo de particion creado
+[INFO] 15:32:37:83 swap/(15194:15194): Server creado y escuchando correctamente
+[INFO] 15:33:43:570 swap/(15194:15194): Hay espacio
+[INFO] 15:33:43:570 swap/(15194:15194): Espacio reservado correctamente
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:33:43:570 swap/(15194:15194): Pagina escrita con exito
+[INFO] 15:34:15:945 swap/(15194:15194): Pagina leida correctamente: 
+[INFO] 15:34:15:945 swap/(15194:15194): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colastame
+[INFO] 15:44:17:74 swap/(15760:15760): Valores del archivo de configuracion seteados
+[INFO] 15:44:17:82 swap/(15760:15760): Archivo de particion creado
+[INFO] 15:44:17:82 swap/(15760:15760): Server creado y escuchando correctamente
+[INFO] 15:45:36:529 swap/(15760:15760): Hay espacio
+[INFO] 15:45:36:529 swap/(15760:15760): Espacio reservado correctamente
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:36:529 swap/(15760:15760): Pagina escrita con exito
+[INFO] 15:45:53:265 swap/(15760:15760): Pagina leida correctamente: 
+[INFO] 15:45:53:265 swap/(15760:15760): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colastame
+[INFO] 15:56:16:675 swap/(16103:16103): Valores del archivo de configuracion seteados
+[INFO] 15:56:16:687 swap/(16103:16103): Archivo de particion creado
+[INFO] 15:56:16:687 swap/(16103:16103): Server creado y escuchando correctamente
+[ERROR] 15:56:49:790 swap/(16103:16103): Al recibir del cliente
+[INFO] 15:57:07:110 swap/(16196:16196): Valores del archivo de configuracion seteados
+[INFO] 15:57:07:126 swap/(16196:16196): Archivo de particion creado
+[INFO] 15:57:07:126 swap/(16196:16196): Server creado y escuchando correctamente
+[INFO] 15:57:53:433 swap/(16196:16196): Hay espacio
+[INFO] 15:57:53:433 swap/(16196:16196): Espacio reservado correctamente
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:57:53:433 swap/(16196:16196): Pagina escrita con exito
+[INFO] 15:58:10:140 swap/(16196:16196): Pagina leida correctamente: 
+[INFO] 15:58:10:140 swap/(16196:16196): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colastame
+[ERROR] 15:58:33:234 swap/(16196:16196): Al recibir del cliente
+[INFO] 15:58:52:258 swap/(16475:16475): Valores del archivo de configuracion seteados
+[INFO] 15:58:52:260 swap/(16475:16475): Archivo de particion creado
+[INFO] 15:58:52:261 swap/(16475:16475): Server creado y escuchando correctamente
+[INFO] 15:59:52:534 swap/(16475:16475): Hay espacio
+[INFO] 15:59:52:534 swap/(16475:16475): Espacio reservado correctamente
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 15:59:52:534 swap/(16475:16475): Pagina escrita con exito
+[INFO] 16:00:10:103 swap/(16475:16475): Pagina leida correctamente: 
+[INFO] 16:00:10:104 swap/(16475:16475): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colastame
+[INFO] 16:02:04:607 swap/(16475:16475): Pagina leida correctamente: 
+[INFO] 16:02:04:608 swap/(16475:16475):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 16:03:43:339 swap/(16475:16475): Al recibir del cliente
+[INFO] 16:05:19:944 swap/(16872:16872): Valores del archivo de configuracion seteados
+[INFO] 16:05:19:956 swap/(16872:16872): Archivo de particion creado
+[INFO] 16:05:19:956 swap/(16872:16872): Server creado y escuchando correctamente
+[ERROR] 16:05:42:132 swap/(16872:16872): Al recibir del cliente
+[INFO] 16:05:49:198 swap/(17006:17006): Valores del archivo de configuracion seteados
+[INFO] 16:05:49:202 swap/(17006:17006): Archivo de particion creado
+[INFO] 16:05:49:203 swap/(17006:17006): Server creado y escuchando correctamente
+[INFO] 16:06:32:346 swap/(17006:17006): Hay espacio
+[INFO] 16:06:32:346 swap/(17006:17006): Espacio reservado correctamente
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:06:32:346 swap/(17006:17006): Pagina escrita con exito
+[INFO] 16:10:03:596 swap/(17006:17006): Pagina leida correctamente: 
+[INFO] 16:10:03:596 swap/(17006:17006): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colastame
+[INFO] 16:10:22:107 swap/(17006:17006): Pagina leida correctamente: 
+[INFO] 16:10:22:108 swap/(17006:17006):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 16:11:25:93 swap/(17006:17006): Al recibir del cliente
