@@ -61,12 +61,8 @@ char* pedirInstruccion(pcb*);
 /*****************************************
  * GLOBAL
  ****************************************/
-
 SocketBuffer* buffer;
-
-// estructura para loggear
 t_log* logger = NULL;
-
 /*****************************************
  *
  *
@@ -92,7 +88,7 @@ int main() {
 
 	asignadoVacio = newEspacioAsignado();
 	log_debug(getLogger(),
-			"Cargo variables de configuracion, me conecto al nucleo y a la umc");
+			"Cargo variables de configuracion, me conecto al NUCLEO y a la UMC");
 	pcbVacio = malloc(sizeof(pcb));
 	pcbVacio = newEmptyPcb();
 	t_config* tConfig = NULL;
@@ -103,10 +99,10 @@ int main() {
 
 		while (TRUE) {
 			log_debug(getLogger(),
-					"Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
+					"Devuelvo el PCB procesado y obtengo uno nuevo del NUCLEO");
 			getNextPcb();
 			seguirEjecutando = TRUE;
-			log_debug(getLogger(), "Proceso el pcb del nucleo");
+			log_debug(getLogger(), "Proceso el PCB del NUCLEO");
 			Int8U quantum = skc->quantum;
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
 				analizadorLinea(pedirInstruccion(&pcbProceso), &funciones,
@@ -122,7 +118,7 @@ int main() {
 				buffer = serializeCpuKer(sck);
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 					log_info(getLogger(),
-							"No se pudo enviar el buffer al nucleo.");
+							"No se pudo enviar el buffer al NUCLEO.");
 					return FALSE;
 
 				}
@@ -134,7 +130,7 @@ int main() {
 				buffer = serializeCpuKer(sck);
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 					log_info(getLogger(),
-							"No se pudo enviar el buffer al nucleo.");
+							"No se pudo enviar el buffer al NUCLEO.");
 					return FALSE;
 				}
 			}
@@ -161,21 +157,17 @@ Boolean loadConfig() {
 	log_debug(getLogger(), "Genero tabla de configuracion");
 	tConfig = config_create(configFilePath);
 	if (tConfig == NULL) {
-		log_error(getLogger(),
-				"ERROR: no se encuentra o falta el archivo de configuracion en la direccion '%s'.\n",
-				configFilePath);
+		log_error(getLogger(), "No se encuentra o falta el archivo de configuracion en la direccion '%s'.\n", configFilePath);
 		return FALSE;
 	}
 
 	log_debug(getLogger(), "Verifico consistencia, debe haber 4 campos");
 	if (config_keys_amount(tConfig) == PARAM_LENGTH) {
 
-		log_debug(getLogger(),
-				"Verifico que los parametros del NUCLEO tengan sus valores OK");
+		log_debug(getLogger(), "Verifico que los parametros del NUCLEO tengan sus valores OK");
 		if (config_has_property(tConfig, "PUERTO_NUCLEO")) {
 			nucleoPort = config_get_int_value(tConfig, "PUERTO_NUCLEO");
-			log_info(getLogger(),
-					"Configuracion del PUERTO_NUCLEO leida con exito");
+			log_info(getLogger(), "Configuracion del PUERTO_NUCLEO leida con exito");
 		} else {
 			log_error(getLogger(), "Falta un parametro: PUERTO_NUCLEO. \n");
 			return FALSE;
@@ -183,8 +175,7 @@ Boolean loadConfig() {
 
 		if (config_has_property(tConfig, "IP_NUCLEO")) {
 			ipNucleo = config_get_string_value(tConfig, "IP_NUCLEO");
-			log_info(getLogger(),
-					"Configuracion del IP_NUCLEO leida con exito");
+			log_info(getLogger(), "Configuracion del IP_NUCLEO leida con exito");
 		} else {
 			log_error(getLogger(), "Falta un parametro: IP_NUCLEO. \n");
 			return FALSE;
@@ -193,8 +184,7 @@ Boolean loadConfig() {
 				"Verifico que los parametros de la UMC tengan sus valores OK");
 		if (config_has_property(tConfig, "PUERTO_UMC")) {
 			umcPort = config_get_int_value(tConfig, "PUERTO_UMC");
-			log_info(getLogger(),
-					"Configuracion del PUERTO_UMC leida con exito");
+			log_info(getLogger(), "Configuracion del PUERTO_UMC leida con exito");
 		} else {
 			log_error(getLogger(), "Falta un parametro: PUERTO_UMC. \n");
 			return FALSE;
@@ -214,18 +204,16 @@ Boolean loadConfig() {
 				"**********************************************************************");
 		log_info(getLogger(),
 				"**********************************************************************");
-		log_info(getLogger(),
-				"Archivo de configuracion CPU leido exitosamente\n=============\n");
+		log_info(getLogger(), "Archivo de configuracion CPU leido exitosamente\n=============\n");
 		log_info(getLogger(), "Se inicializo la CPU.");
 
-		printf("Archivo de config CPU leido\n============\n");
+		printf("Archivo de configuracion de CPU leido\n============\n");
 		printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", nucleoPort, ipNucleo);
 		printf("Puerto_UMC: %d\nIP_UMC: %s\n", umcPort, ipUMC);
 
 		return TRUE;
 	} else {
-		log_error(getLogger(),
-				"El archivo de configuracion del CPU no tiene todos los campos.\n");
+		log_error(getLogger(), "El archivo de configuracion del CPU no tiene todos los campos.\n");
 		return FALSE;
 	}
 }
@@ -236,7 +224,7 @@ Boolean socketConnection() {
 
 	do {
 		puts("**********************************");
-		puts("Intentando conectar con el Nucleo.");
+		puts("Intentando conectar con el NUCLEO.");
 		printf("IP: %s, PUERTO: %d\n", ipNucleo, nucleoPort);
 		sleep(3);
 	} while (!socketConnect(socketNucleo, ipNucleo, nucleoPort));
@@ -260,20 +248,19 @@ Boolean socketConnection() {
 	socketUMC = socketCreateClient();
 	do {
 		puts("**********************************");
-		puts("Intentando conectar con la UMC ppal.");
+		puts("Intentando conectar con la UMC.");
 		printf("IP: %s, PUERTO: %d\n", ipUMC, umcPort);
 		sleep(3);
 	} while (!socketConnect(socketUMC, ipUMC, umcPort));
-	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 	SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
 	if (socketSend(socketUMC->ptrSocket, sb)) {
-		log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
+		log_info(getLogger(), "Mensaje enviado a la UMC.");
 	} else {
-		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC ppal.");
+		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC.");
 		return FALSE;
 	}
-//
+
 	if ((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
 		log_error(getLogger(), "No se pudo recibir el stream de la UMC");
 		return FALSE;
@@ -282,14 +269,14 @@ Boolean socketConnection() {
 	StrUmcCpu* in_umc_msg = unserializeUmcCpu(sb);
 
 	int puertoNuevoUmc = in_umc_msg->dataLen;
-//
+
 	printf("Nuevo hilo UMC  es %d.\n", in_umc_msg->dataLen);
-//
+
 
 	socketUMC = socketCreateClient();
 	do {
 		puts("**********************************");
-		puts("Intentando conectar con el hilo de la umc.");
+		puts("Intentando conectar con el hilo de la UMC.");
 		printf("IP: %s, PUERTO: %d\n", ipUMC, puertoNuevoUmc);
 		sleep(3);
 	} while (!socketConnect(socketUMC, ipUMC, puertoNuevoUmc));
@@ -307,9 +294,8 @@ Boolean getNextPcb() {
 	//pcbProceso = newEmptyPcb();
 
 	//pcbProceso = malloc(sizeof(pcb));
-	//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
-	sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbVacio, 0, 0, 0,
-	NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+
+	sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbVacio, 0, 0, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 
 	log_info(getLogger(), "getNextPcb: Nuevo PCB vacio creado.");
 
@@ -317,15 +303,15 @@ Boolean getNextPcb() {
 	SocketBuffer* sb = serializeCpuKer(sck);
 	log_debug(getLogger(), "Envio el socketBuffer");
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
-		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
+		log_error(getLogger(), "No se pudo enviar el stream al NUCLEO");
 		return FALSE;
 	}
 	free(sb);
 	log_info(getLogger(), "Obtener siguiente PCB");
 
-	log_debug(getLogger(), "Recibo la respuesta del nucleo y deserealizo");
+	log_debug(getLogger(), "Recibo la respuesta del NUCLEO y deserealizo");
 	if ((sb = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-		log_error(getLogger(), "No se pudo recibir el stream del nucleo");
+		log_error(getLogger(), "No se pudo recibir el stream del NUCLEO");
 		return FALSE;
 	}
 
@@ -344,13 +330,10 @@ Boolean getNextPcb() {
 void enviarPidPcb(int id) {
 	espacioAsignado pag;
 	StrCpuUmc*scu;
-	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	scu = newStrCpuUmc(CPU_ID, CAMBIO_PROCESO_ACTIVO, pag, 0, 0, "h", id);
 	SocketBuffer*buff = serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket, buff)) {
-		log_error(getLogger(),
-				"No se pudo enviar el ID del nuevo proceso activo al nucleo");
-		//return FALSE;
+		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al NUCLEO");
 	}
 }
 
@@ -380,7 +363,6 @@ String stringFromByteArray(Byte* data, Int32U size) {
 	return result;
 }
 
-// esto debería funcionar re piola
 char* pedirInstruccion(pcb* pcbLoco) {
 
 	int inicio = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].comienzo;
@@ -407,13 +389,13 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		}
 		asignadoVacio->numDePag = pagina;
 		asignadoVacio->bitUso = offsetPag;
-		//(Char id, Char action, espacioAsignado pageComienzo,Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+
 		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag,
 				0,
 				NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC->ptrSocket, buffer)) {
-			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
+			log_error(getLogger(), "No se pudo enviar tu pedido a la UMC.");
 		}
 
 		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
@@ -434,7 +416,6 @@ char* pedirInstruccion(pcb* pcbLoco) {
 }
 
 int pedirTamanioDePagina() {
-	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	espacioAsignado aux;
 	aux.IDPaginaInterno = 0;
 	aux.bitDePresencia = 0;
@@ -448,9 +429,9 @@ int pedirTamanioDePagina() {
 	buffer = serializeCpuUmc(scu);
 
 	if (socketSend(socketUMC->ptrSocket, buffer)) {
-		log_info(getLogger(), "Mensaje enviado a la UMC ppal.");
+		log_info(getLogger(), "Mensaje enviado a la UMC.");
 	} else {
-		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC ppal.");
+		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC.");
 		return FALSE;
 	}
 
