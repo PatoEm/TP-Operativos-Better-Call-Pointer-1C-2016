@@ -16,6 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "cpu.h"
+
 /*****************************************
  * Constantes
  ****************************************/
@@ -50,6 +51,7 @@ StrKerCpu* skc = NULL;
  * PCB actual
  ****************************************/
 pcb* pcbVacio = NULL;
+
 /*****************************************
  * Funciones del main
  ****************************************/
@@ -61,10 +63,7 @@ char* pedirInstruccion(pcb*);
 /*****************************************
  * GLOBAL
  ****************************************/
-
 SocketBuffer* buffer;
-
-// estructura para loggear
 t_log* logger = NULL;
 
 /*****************************************
@@ -157,6 +156,7 @@ int main() {
 		}
 		return FALSE;
 	}
+	log_destroy(logger);
 	return TRUE;
 }
 
@@ -273,7 +273,7 @@ Boolean socketConnection() {
 		printf("IP: %s, PUERTO: %d\n", ipUMC, umcPort);
 		sleep(3);
 	} while (!socketConnect(socketUMC, ipUMC, umcPort));
-	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+	
 	StrCpuUmc* out_umc_msg = newStrCpuUmc(CPU_ID, HANDSHAKE, aux, 0, 0, "", 0);
 	SocketBuffer* sb = serializeCpuUmc(out_umc_msg);
 	if (socketSend(socketUMC->ptrSocket, sb)) {
@@ -282,7 +282,7 @@ Boolean socketConnection() {
 		log_error(getLogger(), "No se pudo enviar el mensaje a la UMC ppal.");
 		return FALSE;
 	}
-//
+
 	if ((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
 		log_error(getLogger(), "No se pudo recibir el stream de la UMC");
 		return FALSE;
@@ -291,9 +291,9 @@ Boolean socketConnection() {
 	StrUmcCpu* in_umc_msg = unserializeUmcCpu(sb);
 
 	int puertoNuevoUmc = in_umc_msg->dataLen;
-//
+
 	printf("Nuevo hilo UMC  es %d.\n", in_umc_msg->dataLen);
-//
+
 
 	socketUMC = socketCreateClient();
 	do {
@@ -316,7 +316,7 @@ Boolean getNextPcb() {
 	//pcbProceso = newEmptyPcb();
 
 	//pcbProceso = malloc(sizeof(pcb));
-	//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
+	
 	sck = newStrCpuKer(CPU_ID, RECIBIR_NUEVO_PROGRAMA, *pcbVacio, 0, 0, 0,
 	NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 
@@ -353,13 +353,13 @@ Boolean getNextPcb() {
 void enviarPidPcb(int id) {
 	espacioAsignado pag;
 	StrCpuUmc*scu;
-	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+
 	scu = newStrCpuUmc(CPU_ID, CAMBIO_PROCESO_ACTIVO, pag, 0, 0, "h", id);
 	SocketBuffer*buff = serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket, buff)) {
 		log_error(getLogger(),
 				"No se pudo enviar el ID del nuevo proceso activo al nucleo");
-		//return FALSE;
+	
 	}
 }
 
@@ -416,7 +416,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		}
 		asignadoVacio->numDePag = pagina;
 		asignadoVacio->bitUso = offsetPag;
-		//(Char id, Char action, espacioAsignado pageComienzo,Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+		
 		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag,
 				0,
 				NULL, 0);
@@ -443,7 +443,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 }
 
 int pedirTamanioDePagina() {
-	//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+	
 	espacioAsignado aux;
 	aux.IDPaginaInterno = 0;
 	aux.bitDePresencia = 0;
