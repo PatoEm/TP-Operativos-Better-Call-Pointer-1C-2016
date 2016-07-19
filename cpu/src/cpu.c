@@ -303,7 +303,7 @@ void finalizar(void) {
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
-	seguirEjecutando = FALSE;
+	finalizoCorrectamente=TRUE;
 }
 
 /*
