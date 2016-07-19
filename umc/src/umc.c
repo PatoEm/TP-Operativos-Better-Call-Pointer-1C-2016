@@ -17,16 +17,16 @@ void iniciarEstructurasUMC() {
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
 
-	mutexPedidos=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	mutexThreadSockets=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
+	mutexPedidos = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+	mutexThreadSockets = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 
 	if (pthread_mutex_init(mutexPedidos, NULL) != 0) {
-			printf("\n init mutexPedidos fallo\n");
-		}
+		printf("\n init mutexPedidos fallo\n");
+	}
 
 	if (pthread_mutex_init(mutexThreadSockets, NULL) != 0) {
-			printf("\n init mutexThreadSockets fallo\n");
-		}
+		printf("\n init mutexThreadSockets fallo\n");
+	}
 
 	crearListas();
 	inicioTLB();
@@ -504,6 +504,9 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				lugCad++;
 			}
 			paginaADevolver[cantidad] = '\0';
+			if (tlbHabilitada()) {
+				llevarPaginaATLB(pid, pagina, NULL);
+			}
 			return (paginaADevolver);
 		} else {
 			int frame = reemplazarPagina(pid, pagina, 1);
@@ -516,6 +519,9 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				lugarDeLaCadena++;
 			}
 			paginaADevolver[cantidad] = '\0';
+			if (tlbHabilitada()) {
+				llevarPaginaATLB(pid, pagina, NULL);
+			}
 			return (paginaADevolver);
 
 		}
@@ -595,11 +601,11 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 				contador++;
 			}
 		}
-		if (tlbHabilitada()) {
-			llevarPaginaATLB(pid, pagina, NULL);
-		}
-
 	}
+	if (tlbHabilitada()) {
+		llevarPaginaATLB(pid, pagina, NULL);
+	}
+
 }
 
 void finalizarPrograma(int pid) {
@@ -715,59 +721,57 @@ void* manageSocketConnection(void* param) {
 	Boolean connected = TRUE;
 	log_info(umclog, "Gestor de conexiones.");
 	//while (TRUE) {
-		log_info(umclog, "Esperando el request...");
-		SocketBuffer* sb = socketReceive(socket);
-		log_info(umclog, "...Entro el request.");
-		if (sb != NULL) {
-			Char id = getStreamId((Stream) sb->data);
-			StrKerUmc* sku = NULL;
-			StrCpuUmc* scu = NULL;
-			StrUmcCpu * suc = NULL;
-			StrUmcKer * suk = NULL;
-			espacioAsignado aux;
-			int thread_socketaux;
-			switch (id) {
-			case KERNEL_ID:
-				//sku = unserializeKerUmc((Stream) sb->data);
-				//umcThread();
+	log_info(umclog, "Esperando el request...");
+	SocketBuffer* sb = socketReceive(socket);
+	log_info(umclog, "...Entro el request.");
+	if (sb != NULL) {
+		Char id = getStreamId((Stream) sb->data);
+		StrKerUmc* sku = NULL;
+		StrCpuUmc* scu = NULL;
+		StrUmcCpu * suc = NULL;
+		StrUmcKer * suk = NULL;
+		espacioAsignado aux;
+		int thread_socketaux;
+		switch (id) {
+		case KERNEL_ID:
+			//sku = unserializeKerUmc((Stream) sb->data);
+			//umcThread();
 
-				pthread_mutex_lock(mutexThreadSockets);
-				suk = newStrUmcKer(UMC_ID, HANDSHAKE, "hola",thread_socket,0,0);
-				newUmcThread();
-				//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
-				sleep(2);
-				pthread_mutex_unlock(mutexThreadSockets);
-				sb = serializeUmcKer(suk);
-				socketSend(socket, sb);
+			pthread_mutex_lock(mutexThreadSockets);
+			suk = newStrUmcKer(UMC_ID, HANDSHAKE, "hola", thread_socket, 0, 0);
+			newUmcThread();
+			//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
+			sleep(2);
+			pthread_mutex_unlock(mutexThreadSockets);
+			sb = serializeUmcKer(suk);
+			socketSend(socket, sb);
 
-				break;
-			case CPU_ID:
-				pthread_mutex_lock(mutexThreadSockets);
-				//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-				suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, "hola", 0);
-				newUmcThread();
-				sleep(2);
-				pthread_mutex_unlock(mutexThreadSockets);
-				sb = serializeUmcCpu(suc);
-				socketSend(socket, sb);
+			break;
+		case CPU_ID:
+			pthread_mutex_lock(mutexThreadSockets);
+			//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
+			suc = newStrUmcCpu(UMC_ID, HANDSHAKE, aux, 0, thread_socket, "hola",
+					0);
+			newUmcThread();
+			sleep(2);
+			pthread_mutex_unlock(mutexThreadSockets);
+			sb = serializeUmcCpu(suc);
+			socketSend(socket, sb);
 
-
-				break;
-			default:
-				connected = FALSE; //todo loggear algun error.
-				break;
-			}
-		} else {
-			log_error(umclog, "Gestor de conexiones: No pudo recibir request, desconectando al cliente.");
-			connected = FALSE;
-	//	}
-
-
+			break;
+		default:
+			connected = FALSE; //todo loggear algun error.
+			break;
+		}
+	} else {
+		log_error(umclog,
+				"Gestor de conexiones: No pudo recibir request, desconectando al cliente.");
+		connected = FALSE;
+		//	}
 
 	}
 	return NULL;
 }
-
 
 Boolean sendResponse(Char target, void* stream, Socket* socket) {
 	SocketBuffer* sb = NULL;
@@ -1115,6 +1119,7 @@ int buscarFrameEnMemoria(int PID, int pagina) {
 				return paginas->IDPaginaInterno;
 			}
 		}
+		i++;
 	}
 
 }
@@ -1169,14 +1174,18 @@ int reemplazarPaginaLRU() {
 //nodo ordenado por PID
 void insertarNodoOrdenadoEnTLB(t_tlb*unNodo) {
 	int contador = 0;
-	t_tlb*nodoActual = list_get(TLB, contador);
-	while (nodoActual->pid < unNodo->pid && contador < list_size(TLB)) {
-		contador++;
-		nodoActual = list_get(TLB, contador);
+	if (list_size(TLB) == 0)
+		list_add(TLB, unNodo);
+	else {
+		t_tlb*nodoActual = list_get(TLB, contador);
+		while (nodoActual->pid < unNodo->pid && contador < list_size(TLB)) {
+			contador++;
+			if (contador == list_size(TLB))
+				nodoActual = list_get(TLB, contador);
+		}
+		list_add_in_index(TLB, contador, unNodo);
 	}
-	list_add_in_index(TLB, contador, unNodo);
 }
-
 int buscarPaginaVaciaEnTLB() {
 	int i = 0;
 	while (bitMapTLB[i] != 0) {
@@ -1189,6 +1198,12 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 	accesosTLB++;
 	int habilitada = tlbHabilitada();
 	char* buffer = malloc(sizeof(char) * tamanio);
+	int j=0;
+	while(j!=tamanio){
+		buffer[j]='\0';
+		j++;
+	}
+
 	if (habilitada != 0) {
 		t_tlb * entradaTLB = buscarEnTLB(PID, pagina);
 		if (entradaTLB != NULL) {

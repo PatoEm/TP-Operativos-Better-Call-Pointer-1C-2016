@@ -20,3 +20,11 @@
 [INFO] 00:34:42:365 Elestac/(19904:19904): Inicio Log UMC
 [INFO] 00:38:48:465 Elestac/(20221:20221): Inicio Log UMC
 [INFO] 00:41:42:598 Elestac/(20513:20513): Inicio Log UMC
+[INFO] 05:25:28:264 Elestac/(976:1130): Acierto de TLB en el frame 1 y pagina 9
+[INFO] 05:26:24:82 Elestac/(976:1130): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 05:39:00:248 Elestac/(1988:2143): Acierto de TLB en el frame 1 y pagina 9
+[INFO] 05:40:15:155 Elestac/(1988:2143): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 05:41:45:980 Elestac/(1988:2143): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 05:42:41:649 Elestac/(1988:2143): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 05:44:11:522 Elestac/(1988:2143): Acierto de TLB en el frame 1 y pagina 9
+[INFO] 05:44:59:846 Elestac/(1988:2143): Acierto de TLB en el frame 0 y pagina 1

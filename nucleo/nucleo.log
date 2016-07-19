@@ -9772,3 +9772,305 @@
 [INFO] 04:24:07:284 NUCLEO/(29720:29752): KERNEL : Se cayo el cliente 11
 [INFO] 04:24:07:285 NUCLEO/(29720:29752): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
 [INFO] 04:24:07:285 NUCLEO/(29720:29752): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 04:32:02:663 NUCLEO/(30006:30006): Variables inicializadas.
+[INFO] 04:32:02:663 NUCLEO/(30006:30006): Se han creado los threads.
+[INFO] 04:32:02:663 NUCLEO/(30006:30058): Server creado con exito y escuchando.
+[INFO] 04:32:02:663 NUCLEO/(30006:30058): Server iniciado.
+[INFO] 04:32:04:139 NUCLEO/(30006:30058): Nueva Conexion detectada, realizando handshake
+[INFO] 04:32:04:139 NUCLEO/(30006:30058): ID Nuevo Cliente: 0.
+[INFO] 04:32:04:139 NUCLEO/(30006:30058): Nuevo Cliente CONSOLA
+[INFO] 04:32:04:139 NUCLEO/(30006:30058): Nuevo Cliente Consola 10 aceptado.
+[INFO] 04:32:04:140 NUCLEO/(30006:30058): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 04:32:16:508 NUCLEO/(30006:30058): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 04:32:16:508 NUCLEO/(30006:30058): KERNEL : El cliente 10 es una consola
+[ERROR] 04:32:16:508 NUCLEO/(30006:30058): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 04:32:16:508 NUCLEO/(30006:30058): Se inicializo el programa 1
+[ERROR] 04:32:16:508 NUCLEO/(30006:30058): KERNEL : Consola 10 añadida a la lista
+[INFO] 04:32:31:185 NUCLEO/(30006:30058): Nueva Conexion detectada, realizando handshake
+[INFO] 04:32:31:186 NUCLEO/(30006:30058): ID Nuevo Cliente: 2.
+[INFO] 04:32:31:186 NUCLEO/(30006:30058): Nuevo Cliente CPU
+[INFO] 04:32:31:186 NUCLEO/(30006:30058): KER-CPU: HANDSHAKE recibido
+[INFO] 04:32:31:186 NUCLEO/(30006:30058): KER-CPU: HANDSHAKE enviado
+[INFO] 04:33:36:838 NUCLEO/(30006:30058): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:33:36:838 NUCLEO/(30006:30058): KERNEL : El cliente 11 es un CPU
+[INFO] 04:33:36:838 NUCLEO/(30006:30058): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 04:39:34:221 NUCLEO/(30006:30058): KERNEL : Se cayo el cliente 11
+[INFO] 04:39:34:222 NUCLEO/(30006:30058): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 04:39:34:222 NUCLEO/(30006:30058): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 04:39:40:476 NUCLEO/(30006:30058): KERNEL : Se cayo el cliente 10
+[INFO] 04:39:40:477 NUCLEO/(30006:30058): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 04:39:40:477 NUCLEO/(30006:30058): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 04:40:16:782 NUCLEO/(30503:30503): Variables inicializadas.
+[INFO] 04:40:16:782 NUCLEO/(30503:30503): Se han creado los threads.
+[INFO] 04:40:16:786 NUCLEO/(30503:30525): Server creado con exito y escuchando.
+[INFO] 04:40:16:786 NUCLEO/(30503:30525): Server iniciado.
+[INFO] 04:40:20:603 NUCLEO/(30503:30525): Nueva Conexion detectada, realizando handshake
+[INFO] 04:40:20:604 NUCLEO/(30503:30525): ID Nuevo Cliente: 0.
+[INFO] 04:40:20:604 NUCLEO/(30503:30525): Nuevo Cliente CONSOLA
+[INFO] 04:40:20:604 NUCLEO/(30503:30525): Nuevo Cliente Consola 10 aceptado.
+[INFO] 04:40:20:604 NUCLEO/(30503:30525): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 04:40:26:668 NUCLEO/(30503:30525): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 04:40:26:668 NUCLEO/(30503:30525): KERNEL : El cliente 10 es una consola
+[ERROR] 04:40:26:668 NUCLEO/(30503:30525): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 04:40:26:668 NUCLEO/(30503:30525): Se inicializo el programa 1
+[ERROR] 04:40:26:668 NUCLEO/(30503:30525): KERNEL : Consola 10 añadida a la lista
+[INFO] 04:40:37:356 NUCLEO/(30503:30525): Nueva Conexion detectada, realizando handshake
+[INFO] 04:40:37:356 NUCLEO/(30503:30525): ID Nuevo Cliente: 2.
+[INFO] 04:40:37:356 NUCLEO/(30503:30525): Nuevo Cliente CPU
+[INFO] 04:40:37:356 NUCLEO/(30503:30525): KER-CPU: HANDSHAKE recibido
+[INFO] 04:40:37:356 NUCLEO/(30503:30525): KER-CPU: HANDSHAKE enviado
+[INFO] 04:41:01:39 NUCLEO/(30503:30525): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:41:01:39 NUCLEO/(30503:30525): KERNEL : El cliente 11 es un CPU
+[INFO] 04:41:01:39 NUCLEO/(30503:30525): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 04:49:02:260 NUCLEO/(30503:30525): KERNEL : Se cayo el cliente 11
+[INFO] 04:49:02:260 NUCLEO/(30503:30525): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 04:49:02:260 NUCLEO/(30503:30525): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 04:49:58:21 NUCLEO/(31137:31137): Variables inicializadas.
+[INFO] 04:49:58:22 NUCLEO/(31137:31137): Se han creado los threads.
+[INFO] 04:49:58:22 NUCLEO/(31137:31189): Server creado con exito y escuchando.
+[INFO] 04:49:58:22 NUCLEO/(31137:31189): Server iniciado.
+[INFO] 04:50:00:507 NUCLEO/(31137:31189): Nueva Conexion detectada, realizando handshake
+[INFO] 04:50:00:508 NUCLEO/(31137:31189): ID Nuevo Cliente: 0.
+[INFO] 04:50:00:508 NUCLEO/(31137:31189): Nuevo Cliente CONSOLA
+[INFO] 04:50:00:508 NUCLEO/(31137:31189): Nuevo Cliente Consola 10 aceptado.
+[INFO] 04:50:00:508 NUCLEO/(31137:31189): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 04:50:05:819 NUCLEO/(31137:31189): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 04:50:05:819 NUCLEO/(31137:31189): KERNEL : El cliente 10 es una consola
+[ERROR] 04:50:05:819 NUCLEO/(31137:31189): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 04:50:05:819 NUCLEO/(31137:31189): Se inicializo el programa 1
+[ERROR] 04:50:05:820 NUCLEO/(31137:31189): KERNEL : Consola 10 añadida a la lista
+[INFO] 04:50:14:760 NUCLEO/(31137:31189): Nueva Conexion detectada, realizando handshake
+[INFO] 04:50:14:761 NUCLEO/(31137:31189): ID Nuevo Cliente: 2.
+[INFO] 04:50:14:761 NUCLEO/(31137:31189): Nuevo Cliente CPU
+[INFO] 04:50:14:761 NUCLEO/(31137:31189): KER-CPU: HANDSHAKE recibido
+[INFO] 04:50:14:761 NUCLEO/(31137:31189): KER-CPU: HANDSHAKE enviado
+[INFO] 04:50:22:763 NUCLEO/(31137:31189): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:50:22:763 NUCLEO/(31137:31189): KERNEL : El cliente 11 es un CPU
+[INFO] 04:50:22:763 NUCLEO/(31137:31189): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 04:50:22:802 NUCLEO/(31137:31189): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:50:22:802 NUCLEO/(31137:31189): KERNEL : El cliente 11 es un CPU
+[INFO] 04:50:22:803 NUCLEO/(31137:31189): Finalizo el quantum del programa 2.
+[INFO] 04:50:22:842 NUCLEO/(31137:31189): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:50:22:842 NUCLEO/(31137:31189): KERNEL : El cliente 11 es un CPU
+[INFO] 04:50:22:842 NUCLEO/(31137:31189): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 04:50:22:932 NUCLEO/(31137:31189): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:50:22:933 NUCLEO/(31137:31189): KERNEL : El cliente 11 es un CPU
+[INFO] 04:50:22:933 NUCLEO/(31137:31189): Finalizo el programa 2.
+[INFO] 04:50:22:933 NUCLEO/(31137:31189): Se envio CERRARCONSOLA.
+[INFO] 04:50:22:939 NUCLEO/(31137:31189): Se finalizo el programa a umc 1
+[INFO] 04:50:22:939 NUCLEO/(31137:31189): KERNEL : Se cayo el cliente 10
+[INFO] 04:50:22:939 NUCLEO/(31137:31189): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 04:50:22:939 NUCLEO/(31137:31189): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 04:50:22:970 NUCLEO/(31137:31189): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:50:22:970 NUCLEO/(31137:31189): KERNEL : El cliente 11 es un CPU
+[INFO] 04:50:22:970 NUCLEO/(31137:31189): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 04:51:12:336 NUCLEO/(31137:31189): KERNEL : Se cayo el cliente 11
+[INFO] 04:51:12:337 NUCLEO/(31137:31189): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 04:51:12:337 NUCLEO/(31137:31189): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 04:53:03:741 NUCLEO/(31389:31389): Variables inicializadas.
+[INFO] 04:53:03:741 NUCLEO/(31389:31389): Se han creado los threads.
+[INFO] 04:53:03:741 NUCLEO/(31389:31398): Server creado con exito y escuchando.
+[INFO] 04:53:03:741 NUCLEO/(31389:31398): Server iniciado.
+[INFO] 04:56:51:626 NUCLEO/(31389:31398): Nueva Conexion detectada, realizando handshake
+[INFO] 04:56:51:627 NUCLEO/(31389:31398): ID Nuevo Cliente: 0.
+[INFO] 04:56:51:627 NUCLEO/(31389:31398): Nuevo Cliente CONSOLA
+[INFO] 04:56:51:627 NUCLEO/(31389:31398): Nuevo Cliente Consola 10 aceptado.
+[INFO] 04:56:51:627 NUCLEO/(31389:31398): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 04:57:13:372 NUCLEO/(31389:31398): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 04:57:13:372 NUCLEO/(31389:31398): KERNEL : El cliente 10 es una consola
+[ERROR] 04:57:13:372 NUCLEO/(31389:31398): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 04:57:13:372 NUCLEO/(31389:31398): Se inicializo el programa 1
+[ERROR] 04:57:13:373 NUCLEO/(31389:31398): KERNEL : Consola 10 añadida a la lista
+[INFO] 04:57:22:567 NUCLEO/(31389:31398): Nueva Conexion detectada, realizando handshake
+[INFO] 04:57:22:568 NUCLEO/(31389:31398): ID Nuevo Cliente: 0.
+[INFO] 04:57:22:568 NUCLEO/(31389:31398): Nuevo Cliente CONSOLA
+[INFO] 04:57:22:568 NUCLEO/(31389:31398): Nuevo Cliente Consola 11 aceptado.
+[INFO] 04:57:22:568 NUCLEO/(31389:31398): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 04:57:31:426 NUCLEO/(31389:31398): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 04:57:31:426 NUCLEO/(31389:31398): KERNEL : El cliente 11 es una consola
+[ERROR] 04:57:31:426 NUCLEO/(31389:31398): KERNEL : El Cliente 11 mando ANSISOP
+[INFO] 04:57:31:426 NUCLEO/(31389:31398): Se inicializo el programa 2
+[ERROR] 04:57:31:426 NUCLEO/(31389:31398): KERNEL : Consola 11 añadida a la lista
+[INFO] 04:58:01:854 NUCLEO/(31389:31398): Nueva Conexion detectada, realizando handshake
+[INFO] 04:58:01:855 NUCLEO/(31389:31398): ID Nuevo Cliente: 2.
+[INFO] 04:58:01:855 NUCLEO/(31389:31398): Nuevo Cliente CPU
+[INFO] 04:58:01:855 NUCLEO/(31389:31398): KER-CPU: HANDSHAKE recibido
+[INFO] 04:58:01:855 NUCLEO/(31389:31398): KER-CPU: HANDSHAKE enviado
+[INFO] 04:58:09:858 NUCLEO/(31389:31398): KERNEL : El cliente 12 ha enviado un paquete
+[INFO] 04:58:09:858 NUCLEO/(31389:31398): KERNEL : El cliente 12 es un CPU
+[INFO] 04:58:09:858 NUCLEO/(31389:31398): KERNEL : CPU 12 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 04:58:09:894 NUCLEO/(31389:31398): KERNEL : El cliente 12 ha enviado un paquete
+[INFO] 04:58:09:894 NUCLEO/(31389:31398): KERNEL : El cliente 12 es un CPU
+[INFO] 05:02:55:81 NUCLEO/(31831:31831): Variables inicializadas.
+[INFO] 05:02:55:82 NUCLEO/(31831:31831): Se han creado los threads.
+[INFO] 05:02:55:82 NUCLEO/(31831:31839): Server creado con exito y escuchando.
+[INFO] 05:02:55:82 NUCLEO/(31831:31839): Server iniciado.
+[INFO] 05:03:05:382 NUCLEO/(31831:31839): Nueva Conexion detectada, realizando handshake
+[INFO] 05:03:05:383 NUCLEO/(31831:31839): ID Nuevo Cliente: 0.
+[INFO] 05:03:05:383 NUCLEO/(31831:31839): Nuevo Cliente CONSOLA
+[INFO] 05:03:05:383 NUCLEO/(31831:31839): Nuevo Cliente Consola 10 aceptado.
+[INFO] 05:03:05:383 NUCLEO/(31831:31839): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 05:03:17:580 NUCLEO/(31831:31839): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 05:03:17:580 NUCLEO/(31831:31839): KERNEL : El cliente 10 es una consola
+[ERROR] 05:03:17:580 NUCLEO/(31831:31839): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 05:03:17:581 NUCLEO/(31831:31839): Se inicializo el programa 1
+[ERROR] 05:03:17:581 NUCLEO/(31831:31839): KERNEL : Consola 10 añadida a la lista
+[INFO] 05:03:27:163 NUCLEO/(31831:31839): Nueva Conexion detectada, realizando handshake
+[INFO] 05:03:27:163 NUCLEO/(31831:31839): ID Nuevo Cliente: 2.
+[INFO] 05:03:27:163 NUCLEO/(31831:31839): Nuevo Cliente CPU
+[INFO] 05:03:27:163 NUCLEO/(31831:31839): KER-CPU: HANDSHAKE recibido
+[INFO] 05:03:27:163 NUCLEO/(31831:31839): KER-CPU: HANDSHAKE enviado
+[INFO] 05:03:42:674 NUCLEO/(31831:31839): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:03:42:674 NUCLEO/(31831:31839): KERNEL : El cliente 11 es un CPU
+[INFO] 05:03:42:674 NUCLEO/(31831:31839): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:07:10:595 NUCLEO/(31831:31839): KERNEL : Se cayo el cliente 11
+[INFO] 05:07:10:595 NUCLEO/(31831:31839): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 05:07:10:595 NUCLEO/(31831:31839): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 05:08:43:510 NUCLEO/(32554:32554): Variables inicializadas.
+[INFO] 05:08:43:510 NUCLEO/(32554:32554): Se han creado los threads.
+[INFO] 05:08:43:510 NUCLEO/(32554:32605): Server creado con exito y escuchando.
+[INFO] 05:08:43:510 NUCLEO/(32554:32605): Server iniciado.
+[INFO] 05:08:43:783 NUCLEO/(32554:32605): Nueva Conexion detectada, realizando handshake
+[INFO] 05:08:43:783 NUCLEO/(32554:32605): ID Nuevo Cliente: 0.
+[INFO] 05:08:43:783 NUCLEO/(32554:32605): Nuevo Cliente CONSOLA
+[INFO] 05:08:43:783 NUCLEO/(32554:32605): Nuevo Cliente Consola 10 aceptado.
+[INFO] 05:08:43:783 NUCLEO/(32554:32605): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 05:08:58:157 NUCLEO/(32554:32605): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 05:08:58:157 NUCLEO/(32554:32605): KERNEL : El cliente 10 es una consola
+[ERROR] 05:08:58:157 NUCLEO/(32554:32605): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 05:08:58:157 NUCLEO/(32554:32605): Se inicializo el programa 1
+[ERROR] 05:08:58:157 NUCLEO/(32554:32605): KERNEL : Consola 10 añadida a la lista
+[INFO] 05:09:29:263 NUCLEO/(32554:32605): Nueva Conexion detectada, realizando handshake
+[INFO] 05:09:29:263 NUCLEO/(32554:32605): ID Nuevo Cliente: 2.
+[INFO] 05:09:29:263 NUCLEO/(32554:32605): Nuevo Cliente CPU
+[INFO] 05:09:29:263 NUCLEO/(32554:32605): KER-CPU: HANDSHAKE recibido
+[INFO] 05:09:29:263 NUCLEO/(32554:32605): KER-CPU: HANDSHAKE enviado
+[INFO] 05:09:37:267 NUCLEO/(32554:32605): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:09:37:267 NUCLEO/(32554:32605): KERNEL : El cliente 11 es un CPU
+[INFO] 05:09:37:267 NUCLEO/(32554:32605): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:18:36:899 NUCLEO/(32554:32605): KERNEL : Se cayo el cliente 11
+[INFO] 05:18:36:899 NUCLEO/(32554:32605): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 05:18:36:899 NUCLEO/(32554:32605): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 05:19:17:226 NUCLEO/(685:685): Variables inicializadas.
+[INFO] 05:19:17:226 NUCLEO/(685:685): Se han creado los threads.
+[INFO] 05:19:17:226 NUCLEO/(685:693): Server creado con exito y escuchando.
+[INFO] 05:19:17:226 NUCLEO/(685:693): Server iniciado.
+[INFO] 05:19:34:531 NUCLEO/(685:693): Nueva Conexion detectada, realizando handshake
+[INFO] 05:19:34:532 NUCLEO/(685:693): ID Nuevo Cliente: 0.
+[INFO] 05:19:34:532 NUCLEO/(685:693): Nuevo Cliente CONSOLA
+[INFO] 05:19:34:532 NUCLEO/(685:693): Nuevo Cliente Consola 10 aceptado.
+[INFO] 05:19:34:532 NUCLEO/(685:693): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 05:19:44:46 NUCLEO/(685:693): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 05:19:44:46 NUCLEO/(685:693): KERNEL : El cliente 10 es una consola
+[ERROR] 05:19:44:46 NUCLEO/(685:693): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 05:19:44:47 NUCLEO/(685:693): Se inicializo el programa 1
+[ERROR] 05:19:44:47 NUCLEO/(685:693): KERNEL : Consola 10 añadida a la lista
+[INFO] 05:19:52:633 NUCLEO/(685:693): Nueva Conexion detectada, realizando handshake
+[INFO] 05:19:52:634 NUCLEO/(685:693): ID Nuevo Cliente: 2.
+[INFO] 05:19:52:634 NUCLEO/(685:693): Nuevo Cliente CPU
+[INFO] 05:19:52:634 NUCLEO/(685:693): KER-CPU: HANDSHAKE recibido
+[INFO] 05:19:52:634 NUCLEO/(685:693): KER-CPU: HANDSHAKE enviado
+[INFO] 05:20:00:638 NUCLEO/(685:693): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:20:00:638 NUCLEO/(685:693): KERNEL : El cliente 11 es un CPU
+[INFO] 05:20:00:638 NUCLEO/(685:693): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:22:21:927 NUCLEO/(685:693): KERNEL : Se cayo el cliente 11
+[INFO] 05:22:21:927 NUCLEO/(685:693): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 05:22:21:927 NUCLEO/(685:693): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 05:23:14:345 NUCLEO/(1030:1030): Variables inicializadas.
+[INFO] 05:23:14:345 NUCLEO/(1030:1030): Se han creado los threads.
+[INFO] 05:23:14:345 NUCLEO/(1030:1038): Server creado con exito y escuchando.
+[INFO] 05:23:14:345 NUCLEO/(1030:1038): Server iniciado.
+[INFO] 05:23:19:551 NUCLEO/(1030:1038): Nueva Conexion detectada, realizando handshake
+[INFO] 05:23:19:552 NUCLEO/(1030:1038): ID Nuevo Cliente: 0.
+[INFO] 05:23:19:552 NUCLEO/(1030:1038): Nuevo Cliente CONSOLA
+[INFO] 05:23:19:552 NUCLEO/(1030:1038): Nuevo Cliente Consola 10 aceptado.
+[INFO] 05:23:19:552 NUCLEO/(1030:1038): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 05:23:30:696 NUCLEO/(1030:1038): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 05:23:30:696 NUCLEO/(1030:1038): KERNEL : El cliente 10 es una consola
+[ERROR] 05:23:30:696 NUCLEO/(1030:1038): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 05:23:30:696 NUCLEO/(1030:1038): Se inicializo el programa 1
+[ERROR] 05:23:30:696 NUCLEO/(1030:1038): KERNEL : Consola 10 añadida a la lista
+[INFO] 05:23:40:413 NUCLEO/(1030:1038): Nueva Conexion detectada, realizando handshake
+[INFO] 05:23:40:413 NUCLEO/(1030:1038): ID Nuevo Cliente: 2.
+[INFO] 05:23:40:413 NUCLEO/(1030:1038): Nuevo Cliente CPU
+[INFO] 05:23:40:413 NUCLEO/(1030:1038): KER-CPU: HANDSHAKE recibido
+[INFO] 05:23:40:413 NUCLEO/(1030:1038): KER-CPU: HANDSHAKE enviado
+[INFO] 05:23:48:418 NUCLEO/(1030:1038): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:23:48:418 NUCLEO/(1030:1038): KERNEL : El cliente 11 es un CPU
+[INFO] 05:23:48:419 NUCLEO/(1030:1038): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:27:35:884 NUCLEO/(1030:1038): KERNEL : Se cayo el cliente 11
+[INFO] 05:27:35:884 NUCLEO/(1030:1038): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 05:27:35:884 NUCLEO/(1030:1038): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 05:28:53:755 NUCLEO/(1030:1038): KERNEL : Se cayo el cliente 10
+[INFO] 05:28:53:755 NUCLEO/(1030:1038): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 05:28:53:755 NUCLEO/(1030:1038): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 05:29:45:340 NUCLEO/(1655:1655): Variables inicializadas.
+[INFO] 05:29:45:340 NUCLEO/(1655:1655): Se han creado los threads.
+[INFO] 05:29:45:340 NUCLEO/(1655:1663): Server creado con exito y escuchando.
+[INFO] 05:29:45:340 NUCLEO/(1655:1663): Server iniciado.
+[INFO] 05:29:57:676 NUCLEO/(1655:1663): Nueva Conexion detectada, realizando handshake
+[INFO] 05:29:57:677 NUCLEO/(1655:1663): ID Nuevo Cliente: 0.
+[INFO] 05:29:57:677 NUCLEO/(1655:1663): Nuevo Cliente CONSOLA
+[INFO] 05:29:57:677 NUCLEO/(1655:1663): Nuevo Cliente Consola 10 aceptado.
+[INFO] 05:29:57:677 NUCLEO/(1655:1663): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 05:30:08:143 NUCLEO/(1655:1663): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 05:30:08:143 NUCLEO/(1655:1663): KERNEL : El cliente 10 es una consola
+[ERROR] 05:30:08:143 NUCLEO/(1655:1663): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 05:30:08:143 NUCLEO/(1655:1663): Se inicializo el programa 1
+[ERROR] 05:30:08:143 NUCLEO/(1655:1663): KERNEL : Consola 10 añadida a la lista
+[INFO] 05:30:21:92 NUCLEO/(1655:1663): Nueva Conexion detectada, realizando handshake
+[INFO] 05:30:21:92 NUCLEO/(1655:1663): ID Nuevo Cliente: 2.
+[INFO] 05:30:21:92 NUCLEO/(1655:1663): Nuevo Cliente CPU
+[INFO] 05:30:21:92 NUCLEO/(1655:1663): KER-CPU: HANDSHAKE recibido
+[INFO] 05:30:21:92 NUCLEO/(1655:1663): KER-CPU: HANDSHAKE enviado
+[INFO] 05:30:29:97 NUCLEO/(1655:1663): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:30:29:97 NUCLEO/(1655:1663): KERNEL : El cliente 11 es un CPU
+[INFO] 05:30:29:97 NUCLEO/(1655:1663): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:30:56:637 NUCLEO/(1655:1663): KERNEL : Se cayo el cliente 11
+[INFO] 05:30:56:637 NUCLEO/(1655:1663): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 05:30:56:637 NUCLEO/(1655:1663): KERNEL : Se elimina el descriptor 11 para ese cliente
+[INFO] 05:31:00:85 NUCLEO/(1655:1663): KERNEL : Se cayo el cliente 10
+[INFO] 05:31:00:86 NUCLEO/(1655:1663): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 05:31:00:86 NUCLEO/(1655:1663): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 05:31:31:513 NUCLEO/(2034:2034): Variables inicializadas.
+[INFO] 05:31:31:513 NUCLEO/(2034:2034): Se han creado los threads.
+[INFO] 05:31:31:513 NUCLEO/(2034:2122): Server creado con exito y escuchando.
+[INFO] 05:31:31:513 NUCLEO/(2034:2122): Server iniciado.
+[INFO] 05:31:32:889 NUCLEO/(2034:2122): Nueva Conexion detectada, realizando handshake
+[INFO] 05:31:32:890 NUCLEO/(2034:2122): ID Nuevo Cliente: 0.
+[INFO] 05:31:32:890 NUCLEO/(2034:2122): Nuevo Cliente CONSOLA
+[INFO] 05:31:32:890 NUCLEO/(2034:2122): Nuevo Cliente Consola 10 aceptado.
+[INFO] 05:31:32:890 NUCLEO/(2034:2122): KER-CON: HANDSHAKE se devolvio handshake
+[INFO] 05:31:34:967 NUCLEO/(2034:2122): Nueva Conexion detectada, realizando handshake
+[INFO] 05:31:34:967 NUCLEO/(2034:2122): ID Nuevo Cliente: 2.
+[INFO] 05:31:34:967 NUCLEO/(2034:2122): Nuevo Cliente CPU
+[INFO] 05:31:34:967 NUCLEO/(2034:2122): KER-CPU: HANDSHAKE recibido
+[INFO] 05:31:34:967 NUCLEO/(2034:2122): KER-CPU: HANDSHAKE enviado
+[INFO] 05:31:42:971 NUCLEO/(2034:2122): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:31:42:971 NUCLEO/(2034:2122): KERNEL : El cliente 11 es un CPU
+[INFO] 05:31:42:971 NUCLEO/(2034:2122): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:32:02:438 NUCLEO/(2034:2122): KERNEL : El cliente 10 ha enviado un paquete
+[INFO] 05:32:02:438 NUCLEO/(2034:2122): KERNEL : El cliente 10 es una consola
+[ERROR] 05:32:02:438 NUCLEO/(2034:2122): KERNEL : El Cliente 10 mando ANSISOP
+[INFO] 05:32:02:438 NUCLEO/(2034:2122): Se inicializo el programa 1
+[ERROR] 05:32:02:438 NUCLEO/(2034:2122): KERNEL : Consola 10 añadida a la lista
+[INFO] 05:42:24:710 NUCLEO/(2034:2122): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:42:24:710 NUCLEO/(2034:2122): KERNEL : El cliente 11 es un CPU
+[INFO] 05:42:24:710 NUCLEO/(2034:2122): Finalizo el quantum del programa 2.
+[INFO] 05:42:24:710 NUCLEO/(2034:2122): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:42:24:710 NUCLEO/(2034:2122): KERNEL : El cliente 11 es un CPU
+[INFO] 05:42:24:710 NUCLEO/(2034:2122): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): KERNEL : El cliente 11 es un CPU
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): Finalizo el programa 2.
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): Se envio CERRARCONSOLA.
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): Se finalizo el programa a umc 1
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): KERNEL : Se cayo el cliente 10
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): KERNEL : Se elimina el cliente 10 de la bolsa de descriptores
+[INFO] 05:44:59:847 NUCLEO/(2034:2122): KERNEL : Se elimina el descriptor 10 para ese cliente
+[INFO] 05:44:59:886 NUCLEO/(2034:2122): KERNEL : El cliente 11 ha enviado un paquete
+[INFO] 05:44:59:886 NUCLEO/(2034:2122): KERNEL : El cliente 11 es un CPU
+[INFO] 05:44:59:886 NUCLEO/(2034:2122): KERNEL : CPU 11 ha enviado RECIBIR_NUEVO_PROGRAMA
+[INFO] 05:49:09:316 NUCLEO/(2034:2122): KERNEL : Se cayo el cliente 11
+[INFO] 05:49:09:316 NUCLEO/(2034:2122): KERNEL : Se elimina el cliente 11 de la bolsa de descriptores
+[INFO] 05:49:09:316 NUCLEO/(2034:2122): KERNEL : Se elimina el descriptor 11 para ese cliente
