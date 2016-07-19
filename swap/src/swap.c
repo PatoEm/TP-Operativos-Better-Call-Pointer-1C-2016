@@ -17,7 +17,7 @@ char* crearArchivo(char* tamanio, char* nombre) {
 	string_append(&paraSistema, tamanio);
 	string_append(&paraSistema, " count=1 \n");
 	system(paraSistema);
-	log_info(swaplog, "Archivo de particion creado");
+	log_info(getLogger(), "Archivo de particion creado");
 	return mappearArchivo(nombre);
 }
 
@@ -32,16 +32,16 @@ void* mappearArchivo(char* filename) {
 
 	fd = open(filename, O_RDWR);
 	if (fd == -1)
-		log_error(swaplog, "Error al abrir el archivo");
+		log_error(getLogger(), "Error al abrir el archivo");
 
 	if (fstat(fd, &sb) == -1) /* To obtain file size */
-		log_error(swaplog, "Error al obtener tamanio archivo");
+		log_error(getLogger(), "Error al obtener tamanio archivo");
 
 	length = sb.st_size;
 	addr = mmap(NULL, length, PROT_READ | PROT_WRITE,
 	MAP_SHARED | MAP_NORESERVE, fd, 0);
 	if (addr == MAP_FAILED)
-		log_error(swaplog, "Error al mappear memoria");
+		log_error(getLogger(), "Error al mappear memoria");
 	return addr;
 
 }
@@ -54,7 +54,7 @@ void setearValores(t_config * archivoConfig) {
 	retCompactacion = config_get_string_value(archivoConfig,
 			"RETARDO_COMPACTACION");
 	tamArchivo = config_get_string_value(archivoConfig, "TAMANIO_ARCHIVO");
-	log_info(swaplog, "Valores del archivo de configuracion seteados");
+	log_info(getLogger(), "Valores del archivo de configuracion seteados");
 }
 
 bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
@@ -76,7 +76,7 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 		dondeEscribo++;
 		enDondeEstoyDeLoQueMeMandaron++;
 	}
-	log_info(swaplog, "Pagina escrita con exito");
+	log_info(getLogger(), "Pagina escrita con exito");
 	return TRUE;
 }
 
@@ -101,7 +101,7 @@ char* leerUnaPagina(int pid, int numeroDePagina) {
 		posicionDeChar++;
 		lugarDeLaCadena++;
 	}
-	log_info(swaplog, "Pagina leida correctamente: %s", punteroADevolver);
+	log_info(getLogger(), "Pagina leida correctamente: %s", punteroADevolver);
 	return (punteroADevolver);
 }
 
@@ -141,10 +141,10 @@ bool verificarSiHayEspacio(int cantidadDePaginas) {
 		contador++;
 	}
 	if (cantidad >= cantidadDePaginas) {
-		log_info(swaplog, "Hay espacio");
+		log_info(getLogger(), "Hay espacio");
 		return TRUE;
 	} else {
-		log_info(swaplog, "No hay espacio");
+		log_info(getLogger(), "No hay espacio");
 		return FALSE;
 	}
 }
@@ -209,7 +209,7 @@ void eliminarProceso(int pid) {
 		if (list_size(listaEspacioAsignado) == nodoActualAReventar)
 			break;
 	}
-	log_info(swaplog, "Proceso (PID %d) eliminado correctamente", pid);
+	log_info(getLogger(), "Proceso (PID %d) eliminado correctamente", pid);
 }
 
 void reservarPaginas(int paginaDeComienzo, int pid, int cantidadDePaginas,
@@ -263,16 +263,16 @@ bool recibirNuevoPrograma(int pid, int cantidadDePaginasAGuardar,
 			compactarSwap(); //Tengo que seguir desde acá DR Mengueche
 			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),
 					pid, cantidadDePaginasAGuardar, pgDeComienzo);
-			log_info(swaplog, "Espacio reservado correctamente");
+			log_info(getLogger(), "Espacio reservado correctamente");
 			return TRUE;
 		} else {
 			reservarPaginas(paginasContiguasDeSwap(cantidadDePaginasAGuardar),
 					pid, cantidadDePaginasAGuardar, pgDeComienzo);
-			log_info(swaplog, "Espacio reservado correctamente");
+			log_info(getLogger(), "Espacio reservado correctamente");
 			return TRUE;
 		}
 	} else {
-		log_info(swaplog, "No se pudo reservar el espacio");
+		log_info(getLogger(), "No se pudo reservar el espacio");
 		return FALSE;
 	}
 }
@@ -325,7 +325,7 @@ int tamanioCod(char*codigo) {
 	while (codigo[i] != '\0') {
 		i++;
 	}
-	log_info(swaplog, "Tamanio del codigo: %d", i);
+	log_info(getLogger(), "Tamanio del codigo: %d", i);
 	return i;
 }
 
@@ -336,15 +336,15 @@ void manejoDeConexiones() {
 
 	if (serverSwap == NULL) {
 		puts("Error no se pudo crear el server");
-		log_error(swaplog, "No se pudo crear el server");
+		log_error(getLogger(), "No se pudo crear el server");
 	}
 
 	if (!socketListen(serverSwap)) {
 		puts("No me pude poner a escuchar");
-		log_error(swaplog, "No me pude poner a escuchar");
+		log_error(getLogger(), "No me pude poner a escuchar");
 	} else {
 		puts("Server creado y escuchando correctamente");
-		log_info(swaplog, "Server creado y escuchando correctamente");
+		log_info(getLogger(), "Server creado y escuchando correctamente");
 	}
 
 	umcClient = socketAcceptClient(serverSwap);
@@ -354,7 +354,7 @@ void manejoDeConexiones() {
 		buffer = socketReceive(umcClient);
 		if (buffer == NULL){
 			puts("Error al recibir del cliente");
-			log_error(swaplog,"Al recibir del cliente");
+			log_error(getLogger(),"Al recibir del cliente");
 		}
 
 		streamUmcSwap = unserializeUmcSwa(buffer);
@@ -378,7 +378,7 @@ void manejoDeConexiones() {
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer)){
 					puts("Error al enviar el paquete");
-					log_error(swaplog,"Al enviar el paquete");
+					log_error(getLogger(),"Al enviar el paquete");
 				}
 			} else {
 				tamanioCodigo = streamUmcSwap->dataLen;
@@ -410,7 +410,7 @@ void manejoDeConexiones() {
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer)){
 					puts("Error al enviar el paquete");
-					log_error(swaplog,"Al enviar el paquete");
+					log_error(getLogger(),"Al enviar el paquete");
 				}
 			}
 
@@ -434,7 +434,7 @@ void manejoDeConexiones() {
 			buffer = serializeSwaUmc(streamSwapUmc);
 			if (!socketSend(umcClient, buffer)){
 				puts("Error al enviar el paquete");
-				log_error(swaplog,"Al enviar el paquete");
+				log_error(getLogger(),"Al enviar el paquete");
 			}
 
 			break;
@@ -454,7 +454,7 @@ void manejoDeConexiones() {
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer)){
 					puts("Error al enviar");
-					log_error(swaplog,"Al enviar paquete");
+					log_error(getLogger(),"Al enviar paquete");
 				}
 			}
 
@@ -463,12 +463,12 @@ void manejoDeConexiones() {
 		case ELIMINAR_PROCESO:
 
 			eliminarProceso(streamUmcSwap->pid);
-			log_info(swaplog,"Proceso eliminado con exito");
+			log_info(getLogger(),"Proceso eliminado con exito");
 
 			break;
 
 		default:
-			log_error(swaplog,"El action no es valido");
+			log_error(getLogger(),"El action no es valido");
 			break;
 		}
 	}
