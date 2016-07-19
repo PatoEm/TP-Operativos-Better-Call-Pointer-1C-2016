@@ -66,8 +66,6 @@ Socket * umcClient;
 StrUmcSwa * streamUmcSwap;
 StrSwaUmc * streamSwapUmc;
 
-//t_log * swaplog;
-
 //estructuras
 
 bool*bitMap;
