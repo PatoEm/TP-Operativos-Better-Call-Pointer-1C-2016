@@ -497,16 +497,16 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		// Envio a la conchola
 		if (!socketSend(consola_aux, sb)) {
-			log_error(cpuhlog, "No se pudo mandar IMPRMIRTEXTO a la consola.");
+			log_error(cpuhlog, "No se pudo mandar IMPRIMIRTEXTO a la consola.");
 		} else {
-			log_info(cpuhlog, "Se envio IMPRMIRTEXTO a la consola.");
+			log_info(cpuhlog, "Se envio IMPRIMIRTEXTO a la consola.");
 		}
 
 		break;
 
 	case IMPRIMIR:
 		// Creo y serializo string kernel a consola.
-		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, in_cpu_msg->logLen,
+		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIR, in_cpu_msg->logLen,
 				in_cpu_msg->log);
 		sb = serializeKerCon(out_con_msg);
 
@@ -516,9 +516,9 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		// Envio a la conchola
 		if (!socketSend(consola_aux, sb)) {
-			log_error(cpuhlog, "No se pudo mandar IMPRMIR a la consola.");
+			log_error(cpuhlog, "No se pudo mandar IMPRIMIR a la consola.");
 		} else {
-			log_info(cpuhlog, "Se envio IMPRMIR a la consola.");
+			log_info(cpuhlog, "Se envio IMPRIMIR a la consola.");
 		}
 
 		break;
