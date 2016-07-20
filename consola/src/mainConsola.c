@@ -88,7 +88,7 @@ int main(void) {
 Boolean loadConfig() {
     tConfig = config_create(ARCHIVO_CONF);
     if (tConfig == NULL) {
-    	log_error(getLogger(), "No se encuentra o falta el archivo de configuracion en la ruta '/%s'.\n", ARCHIVO_CONF);
+    	log_error(getLogger(), "No se encuentra o falta el archivo de configuracion en la ruta '/%s'.", ARCHIVO_CONF);
     	return FALSE;
     }
 
@@ -97,7 +97,7 @@ Boolean loadConfig() {
     		log_info(getLogger(), "El parametro PUERTO_NUCLEO se encontro en el archivo de configuracion");
     		puertoKernel = config_get_int_value(tConfig, PUERTO_NUCLEO);
     	} else {
-    		log_error(getLogger(), "Falta el parametro: PUERTO_NUCLEO. \n");
+    		log_error(getLogger(), "Falta el parametro: PUERTO_NUCLEO.");
     		return FALSE;
     	}
 
@@ -105,15 +105,15 @@ Boolean loadConfig() {
     		log_info(getLogger(), "El parametro IP_NUCLEO se encontro en el archivo de configuracion");
     		ipKernel = config_get_string_value(tConfig, IP_NUCLEO);
     	} else {
-    		log_error(getLogger(), "Falta el parametro: IP_NUCLEO. \n");
+    		log_error(getLogger(), "Falta el parametro: IP_NUCLEO.");
     		return FALSE;
     	}
 
-    	log_info(getLogger(), "Archivo de configuracion CONSOLA leido exitosamente\n=============\n");
+    	log_info(getLogger(), "Archivo de configuracion CONSOLA leido exitosamente\n=============");
     	printf("PUERTO_NUCLEO: %d\nIP_NUCLEO: %s\n", puertoKernel, ipKernel);
     	return TRUE;
     } else {
-    	log_error(getLogger(), "El archivo de configuracion no tiene todos los campos. \n");
+    	log_error(getLogger(), "El archivo de configuracion no tiene todos los campos.");
     	return FALSE;
     }
 }
@@ -128,7 +128,7 @@ Boolean socketConnection() {
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
 
-	log_info(getLogger(), "La CONSOLA se conecto al NUCLEO exitosamente\n=============\n");
+	log_info(getLogger(), "La CONSOLA se conecto al NUCLEO exitosamente\n=============");
 
 	if(handshake(kernelClient, CONSOLA_ID)){
 		log_info(getLogger(), "Handshake realizado con exito.");
@@ -143,7 +143,7 @@ Boolean socketConnection() {
 Boolean callAndSendAnSISOP(String path) {
 
 	if ( path == NULL || string_is_empty(path)) {
-		log_error(getLogger(), "La direccion del archivo es vacio. ------- Terminando \n");
+		log_error(getLogger(), "La direccion del archivo es vacio. ------- Terminando.");
 		return FALSE;
 	}
 
@@ -180,14 +180,14 @@ Boolean callAndSendAnSISOP(String path) {
 
 Boolean sendStream() {
 	if (sck == NULL) {
-		log_error(getLogger(), "Se trato de enviar el stream al NUCLEO sin inicializar. ----- Terminando \n");
+		log_error(getLogger(), "Se trato de enviar el stream al NUCLEO sin inicializar. ----- Terminando.");
 		return FALSE;
 	}
 
 	SocketBuffer* sb = serializeConKer(sck);
 
 	if(!socketSend(kernelClient->ptrSocket, sb)) {
-		log_error(getLogger(), "No se pudo enviar el stream al NUCLEO. ----- Terminando \n");
+		log_error(getLogger(), "No se pudo enviar el stream al NUCLEO. ----- Terminando.");
 		return FALSE;
 	}
 	free(sb);
@@ -203,7 +203,7 @@ Boolean instructionsFromKernel() {
 	log_info(getLogger(), "Esperando instrucciones del NUCLEO");
 
 	if((sb = socketReceive(kernelClient->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream del NUCLEO. ----- Terminando \n");
+		log_error(getLogger(),"No se pudo recibir el stream del NUCLEO. ----- Terminando.");
 		return FALSE;
 	}
 	log_info(getLogger(), "Instruccion del NUCLEO recibida");
