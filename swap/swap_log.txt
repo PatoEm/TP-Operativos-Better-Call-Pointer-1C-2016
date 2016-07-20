@@ -240,3 +240,122 @@ end
 
 
 [ERROR] 16:11:25:93 swap/(17006:17006): Al recibir del cliente
+[INFO] 21:19:17:988 swap/(2640:2640): Valores del archivo de configuracion seteados
+[INFO] 21:19:18:115 swap/(2640:2640): Archivo de particion creado
+[INFO] 21:19:18:116 swap/(2640:2640): Server creado y escuchando correctamente
+[INFO] 21:20:59:332 swap/(2640:2640): Hay espacio
+[INFO] 21:20:59:334 swap/(2640:2640): Espacio reservado correctamente
+[INFO] 21:20:59:335 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:335 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:336 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:338 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:344 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:346 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:346 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:346 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:347 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:20:59:347 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:21:26:730 swap/(2640:2640): Pagina leida correctamente: 
+[INFO] 21:21:26:732 swap/(2640:2640): #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 21:21:26:737 swap/(2640:2640): Pagina leida correctamente: 
+[INFO] 21:21:26:738 swap/(2640:2640): 
+[INFO] 21:21:26:852 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:21:26:892 swap/(2640:2640): Pagina leida correctamente: 
+[INFO] 21:21:26:898 swap/(2640:2640): 12
+end
+
+
+
+[INFO] 21:21:26:920 swap/(2640:2640): Proceso (PID 1) eliminado correctamente
+[INFO] 21:21:26:923 swap/(2640:2640): Proceso eliminado con exito
+[INFO] 21:22:19:802 swap/(2640:2640): Hay espacio
+[INFO] 21:22:19:804 swap/(2640:2640): Espacio reservado correctamente
+[INFO] 21:22:19:806 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:809 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:816 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:819 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:845 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:845 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:848 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:848 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:848 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:848 swap/(2640:2640): Pagina escrita con exito
+[INFO] 21:22:19:868 swap/(2640:2640): Pagina leida correctamente: 
+[INFO] 21:22:19:868 swap/(2640:2640): #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + gina)
+[ERROR] 21:22:20:679 swap/(2640:2640): Al recibir del cliente
+[INFO] 21:24:19:478 swap/(3209:3209): Valores del archivo de configuracion seteados
+[INFO] 21:24:19:699 swap/(3209:3209): Archivo de particion creado
+[INFO] 21:24:19:705 swap/(3209:3209): Server creado y escuchando correctamente
+[INFO] 21:26:20:871 swap/(3209:3209): Hay espacio
+[INFO] 21:26:20:873 swap/(3209:3209): Espacio reservado correctamente
+[INFO] 21:26:20:875 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:876 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:878 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:881 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:884 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:885 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:887 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:890 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:894 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:20:895 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:54:100 swap/(3209:3209): Pagina leida correctamente: 
+[INFO] 21:26:54:101 swap/(3209:3209): #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 21:26:54:107 swap/(3209:3209): Pagina leida correctamente: 
+[INFO] 21:26:54:108 swap/(3209:3209): 
+[INFO] 21:26:54:212 swap/(3209:3209): Pagina escrita con exito
+[INFO] 21:26:54:251 swap/(3209:3209): Pagina leida correctamente: 
+[INFO] 21:26:54:252 swap/(3209:3209): 12
+end
+
+
+
+[INFO] 21:27:19:418 swap/(3209:3209): Proceso (PID 1) eliminado correctamente
+[INFO] 21:27:19:419 swap/(3209:3209): Proceso eliminado con exito
+[ERROR] 21:29:10:138 swap/(3209:3209): Al recibir del cliente
+[INFO] 21:30:28:912 swap/(3547:3547): Valores del archivo de configuracion seteados
+[INFO] 21:30:29:44 swap/(3547:3547): Archivo de particion creado
+[INFO] 21:30:29:47 swap/(3547:3547): Server creado y escuchando correctamente
+[INFO] 21:32:18:481 swap/(3547:3547): Hay espacio
+[INFO] 21:32:18:483 swap/(3547:3547): Espacio reservado correctamente
+[INFO] 21:32:18:484 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:485 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:490 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:491 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:494 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:497 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:500 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:501 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:511 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:18:518 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:34:458 swap/(3547:3547): Pagina leida correctamente: 
+[INFO] 21:32:34:460 swap/(3547:3547): #!/usr/bin/ansisop
+begin
+	variables a, b
+	a = 3
+	b = 5
+	a = b + 
+[INFO] 21:32:34:464 swap/(3547:3547): Pagina leida correctamente: 
+[INFO] 21:32:34:466 swap/(3547:3547): 
+[INFO] 21:32:34:564 swap/(3547:3547): Pagina escrita con exito
+[INFO] 21:32:34:603 swap/(3547:3547): Pagina leida correctamente: 
+[INFO] 21:32:34:607 swap/(3547:3547): 12
+end
+
+
+
+[ERROR] 21:34:35:962 swap/(3547:3547): Al recibir del cliente

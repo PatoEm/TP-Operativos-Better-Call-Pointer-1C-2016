@@ -610,8 +610,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 
 void finalizarPrograma(int pid) {
 	StrUmcSwa*streamUmcSwa;
-	espacioAsignado pagina;
-	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, pagina, NULL,
+	espacioAsignado* pagina=newEspacioAsignado();
+	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, *pagina, NULL,
 	NULL,
 	NULL, pid);
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwa);
@@ -640,7 +640,7 @@ void finalizarPrograma(int pid) {
 		}
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
-		if (list_size(listaEspacioAsignado) >= nodoActualAReventar)
+		if (listaEspacioAsignado->elements_count== nodoActualAReventar)
 			break;
 		nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
