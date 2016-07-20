@@ -54,6 +54,7 @@ void setearValores(t_config * archivoConfig) {
 	retCompactacion = config_get_string_value(archivoConfig,
 			"RETARDO_COMPACTACION");
 	tamArchivo = config_get_string_value(archivoConfig, "TAMANIO_ARCHIVO");
+	retAcceso = config_get_int_value(archivoConfig, "RETARDO_ACCESO");
 	log_info(getLogger(), "Valores del archivo de configuracion seteados");
 }
 
@@ -320,7 +321,7 @@ void compactarSwap() {
 		paginasContiguas++;
 
 	}
-	//usleep(1000 * atoi(retCompactacion)); todo
+	usleep(1000 * atoi(retCompactacion));
 }
 int tamanioCod(char*codigo) {
 	int i = 0;
@@ -419,7 +420,7 @@ void manejoDeConexiones() {
 			break;
 
 		case LEER_UNA_PAGINA:
-
+			usleep(1000 * retAcceso);
 			paginaLoca = leerUnaPagina(streamUmcSwap->pid,
 					streamUmcSwap->pageComienzo.numDePag);
 			//paginaLoca[atoi(tamPagina)]='\0';//todo aca me falta asignarlo a algo para los if que siguen
@@ -442,7 +443,7 @@ void manejoDeConexiones() {
 			break;
 
 		case ESCRIBIR_UNA_PAGINA:
-
+			usleep(1000 * retAcceso);
 			escribirPagina2 = escribirPagina(streamUmcSwap->pid,
 					streamUmcSwap->pageComienzo.numDePag, streamUmcSwap->data);
 			if (escribirPagina2 == 0) {

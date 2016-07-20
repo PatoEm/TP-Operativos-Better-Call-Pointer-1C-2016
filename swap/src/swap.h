@@ -59,6 +59,7 @@ int tamPaginaLoca;
 char* retCompactacion;
 char* tamArchivo;
 char* archivoMappeado;
+int retAcceso;
 
 Socket * serverSwap;
 SocketBuffer * buffer;

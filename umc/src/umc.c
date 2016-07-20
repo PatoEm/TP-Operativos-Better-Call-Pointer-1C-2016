@@ -53,11 +53,11 @@ int tamanioCodigo(char*codigo) {
 bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	SocketBuffer*buffer;
 	StrUmcSwa*streamUmcSwap;
-	espacioAsignado pagina;
+	espacioAsignado* pagina= newEspacioAsignado();
 	StrSwaUmc * streamSwapUmc;
-	pagina.numDePag = 0;
+	pagina->numDePag = 0;
 	//StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
-	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, pagina,
+	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, *pagina,
 			paginas, codigo, tamanioCodigo(codigo), pid); // SI HAY PROBLEMAS MIRAR TAMANIO CODIGO TODO
 	buffer = serializeUmcSwa(streamUmcSwap);
 	socketSend(socketSwap->ptrSocket, buffer);
@@ -642,7 +642,7 @@ void finalizarPrograma(int pid) {
 		free(nodoAReventar);
 		if (listaEspacioAsignado->elements_count== nodoActualAReventar)
 			break;
-		nodoActualAReventar++;
+		//nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
 }
