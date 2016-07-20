@@ -647,6 +647,13 @@ void finalizarPrograma(int pid) {
 		//nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
+	int j=0;
+	paginasPorPrograma*unaPaginaParaZafar=list_get(listaPaginasPorPrograma,j);
+	while(unaPaginaParaZafar->pid!=pid){
+		j++;
+		unaPaginaParaZafar=list_get(listaPaginasPorPrograma,j);
+	}
+	list_remove(listaPaginasPorPrograma,j);
 }
 
 //Funcion básica del tp
