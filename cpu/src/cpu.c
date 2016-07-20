@@ -260,6 +260,8 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 			valor, 0 /*LOGLEN*/,
 			NULL /*LOG*/, variable /*NOMBRE DISPOSITIVO*/,
 			strlen(variable) /*LEN NOMBRE DISPOSITIVO*/);
+	buffer = serializeCpuKer(streamCpuKer);
+	socketSend(socketNucleo->ptrSocket, buffer);
 //	(Char id, Char action, pcb pcb, Int32U pid,
 //			Int32U logLen, Byte* log, Byte* nombreDispositivo,
 //			Int32U lenNomDispositivo)
