@@ -315,7 +315,7 @@ void grabar_valor(char* identificador, int valor) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
-	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
+	for (i = 0; i<cantVarCompartidas; i++) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {

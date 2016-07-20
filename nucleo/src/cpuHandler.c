@@ -15,8 +15,7 @@ t_log* cpuhlog;
 
 int fdmax;
 
-pcb* pcbVacio=NULL;
-
+pcb* pcbVacio = NULL;
 
 /*
  *
@@ -30,20 +29,18 @@ void cpuHandlerThread() {
 
 	pthread_create(&cpuht, NULL, cpuHandlerThreadRoutine, "nada");
 
-
 }
 
 void* cpuHandlerThreadRoutine(void* parametro) {
 
-	cpuhlog=malloc(sizeof(t_log));
+	cpuhlog = malloc(sizeof(t_log));
 
-	memcpy(cpuhlog,log_create("nucleo.log", "NUCLEO", TRUE, LOG_LEVEL_INFO), sizeof(t_log));
+	memcpy(cpuhlog, log_create("nucleo.log", "NUCLEO", TRUE, LOG_LEVEL_INFO),
+			sizeof(t_log));
 	//cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
 
-
-	pcbVacio=malloc(sizeof(pcb));
-	pcbVacio=newEmptyPcb();
-
+	pcbVacio = malloc(sizeof(pcb));
+	pcbVacio = newEmptyPcb();
 
 	if (initCpuServer()) {
 		log_info(cpuhlog, "Server iniciado.");
@@ -206,7 +203,6 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 	//pcb* pcb = newEmptyPcb();
 	//memcpy (pcbLoca,newEmptyPcb(),sizeof(pcb));
 
-
 	switch (sck->action) {
 	case HANDSHAKE:
 
@@ -218,7 +214,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 		sb = serializeKerCpu(skc);
 
 		if (socketSend(cpuClient, sb)) {
-		log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
+			log_info(cpuhlog, "KER-CPU: HANDSHAKE enviado");
 			//AGREGARLO A LA LISTA DE DESCRIPTORES DE CPU  DEL PLANIFICADOR
 			cpu = malloc(sizeof(cpu));
 			cpu->cpuClient = cpuClient;
@@ -331,18 +327,16 @@ void clientHandler(int clientDescriptor) {
 
 void enviarPcbACpu(Socket * cpuClient) {
 
+	Socket * punteroACopia = malloc(sizeof(Socket));
 
-
-	Socket * punteroACopia=malloc(sizeof(Socket));
-
-	memcpy(punteroACopia,cpuClient,sizeof(cpuClient));
+	memcpy(punteroACopia, cpuClient, sizeof(cpuClient));
 
 	pthread_t hiloCpuAlPedo;
 	pthread_attr_t attrHiloCpuAlPedo;
 	pthread_attr_init(&attrHiloCpuAlPedo);
 	pthread_attr_setdetachstate(&attrHiloCpuAlPedo, PTHREAD_CREATE_DETACHED);
 	pthread_create(&hiloCpuAlPedo, &attrHiloCpuAlPedo, &funcionHiloCpuAlPedo,
-		punteroACopia);
+			punteroACopia);
 	pthread_attr_destroy(&attrHiloCpuAlPedo);
 
 	// TODO: Aca iria un else en caso de que no haya en la cola de ready,
@@ -363,7 +357,7 @@ String stringFromByteArray(Byte* data, Int32U size) {
 
 void cpuClientHandler(Socket* cpuClient, Stream data) {
 
-	pcb* pcb_aux=malloc(sizeof(pcb*));
+	pcb* pcb_aux = malloc(sizeof(pcb*));
 	StrCpuKer* in_cpu_msg = unserializeCpuKer(data);
 	StrKerCon* out_con_msg;
 	StrKerCpu* out_cpu_msg;
@@ -405,15 +399,19 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 				in_cpu_msg->lenNomDispositivo);
 
 		// Obtener nuevo valor TODO que el cpu pase esto así
-		valor = in_cpu_msg->logLen;
+		valor = in_cpu_msg->pid;
 
 		// Asigno el valor.
 		grabar_valor(variable, valor);
 
 		// Mando el valor asignado en el campo LEN NOMBRE DISPOSITIVO
+//		(Char id, Char action, pcb pcb, Int8U quantum,
+//				Byte* data, Int32U dataLen, Byte* nombreDispositivo,
+//				Int32U lenNomDispositivo)
+
 		out_cpu_msg = newStrKerCpu(KERNEL_ID, ASIGNAR_VALOR_COMPARTIDA,
-				in_cpu_msg->pcb, 0, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
-				valor /*LEN NOMBRE DISPOSITIVO*/);
+				in_cpu_msg->pcb, valor, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
+				0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(out_cpu_msg);
 
 		// Envio al cpu que me hablo
@@ -432,14 +430,17 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 				stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen));
 
 		// TODO: Probar, si no anda: Enviar el valor en datalength que es int32u
+//		(Char id, Char action, pcb pcb, Int8U quantum,
+//				Byte* data, Int32U dataLen, Byte* nombreDispositivo,
+//				Int32U lenNomDispositivo)
 		out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA,
-				in_cpu_msg->pcb, 0, valor, 0, NULL /*NOMBRE DISPOSITIVO*/,
+				in_cpu_msg->pcb, valor, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
 				0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(out_cpu_msg);
 
 		// Envio al cpu que me hablo
 		if (!socketSend(cpuClient, sb)) {
-			log_error(cpuhlog, "Se envio el valor %d al CPU.\n", valor);
+			log_error(cpuhlog, "No se envio el valor %d al CPU.\n", valor);
 		} else {
 			log_info(cpuhlog, "Se envio el valor %d al CPU.\n", valor);
 		}
@@ -447,8 +448,6 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		break;
 
 	case WAIT_SEM_ANSISOP:
-
-
 
 		atributosWaitLoco = malloc(sizeof(atributosWait));
 
@@ -465,6 +464,14 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		pthread_create(&hiloWait, &attrHiloWait, &funcionHiloWait,
 				atributosWaitLoco);
 		pthread_attr_destroy(&attrHiloWait);
+
+		break;
+
+	case SIGNAL_SEM_ANSISOP:
+
+		nombreDispositivo = in_cpu_msg->log;
+
+		signalAnsisop(nombreDispositivo);
 
 		break;
 
@@ -628,7 +635,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 }
 
 void consoleClientHandler(Socket *consoleClient, Stream data) {
-	pcb *pcbLoco=	malloc(sizeof(pcb*));
+	pcb *pcbLoco = malloc(sizeof(pcb*));
 
 	StrConKer *sck = unserializeConKer(data);
 	switch (sck->action) {
@@ -670,14 +677,16 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 //		streamUmcKer = unserializeUmcKer(buffer);
 		//puto
 		//(Char id, Char action, Byte* data, Int32U size,
-			//	Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset,
-				//Int32U tamanio)
+		//	Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset,
+		//Int32U tamanio)
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
-				sck->fileContent, sck->fileContentLen, pcbLoco->id, pcbLoco->paginasDeCodigo, 0, 0,
+				sck->fileContent, sck->fileContentLen, pcbLoco->id,
+				pcbLoco->paginasDeCodigo, 0, 0,
 				cantidadPaginasArchivo(sck->fileContentLen));
 		buffer = serializeUmcKer(streamALaUmc);
 		if (!socketSend(umcServer->ptrSocket, buffer)) {
-			log_error(cpuhlog, "No se pudo inicializar programa %d", pcbLoco->id);
+			log_error(cpuhlog, "No se pudo inicializar programa %d",
+					pcbLoco->id);
 		} else {
 			log_info(cpuhlog, "Se inicializo el programa %d", pcbLoco->id);
 		}
@@ -772,7 +781,7 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 	pthread_mutex_lock(mutexQuantum);
 	//todo ver envio_pcb
 	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,
-			NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+	NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	pthread_mutex_unlock(mutexQuantum);
 
 	SocketBuffer* sb = serializeKerCpu(skc);

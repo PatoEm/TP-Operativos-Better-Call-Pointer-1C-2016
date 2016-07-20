@@ -170,3 +170,9 @@
 [INFO] 22:42:40:470 Elestac/(7918:8068): Acierto de TLB en el frame 0 y pagina 1
 [INFO] 00:18:31:59 Elestac/(27236:28492): Acierto de TLB en el frame 0 y pagina 0
 [INFO] 00:25:00:421 Elestac/(29543:30792): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 00:44:57:685 Elestac/(31888:691): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 00:50:35:433 Elestac/(1979:2969): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 01:03:27:861 Elestac/(3575:3721): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 01:06:19:468 Elestac/(3896:4035): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 01:25:54:641 Elestac/(4394:4587): Acierto de TLB en el frame 0 y pagina 0
+[INFO] 01:33:37:584 Elestac/(4772:4874): Acierto de TLB en el frame 0 y pagina 0
