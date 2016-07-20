@@ -1,5 +1,5 @@
 /*
-  * nucleo.c
+ * nucleo.c
  *
  *  Created on: 23/4/2016
  *      Author: utnso
@@ -40,7 +40,7 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	t_size cantidadInstrucciones = metaNuevoPrograma->instrucciones_size;
 
-	pcb* pcbNuevoPrograma=malloc(sizeof(pcb));
+	pcb* pcbNuevoPrograma = malloc(sizeof(pcb));
 	idProgramas = idProgramas + 1;
 	puts("hola");
 
@@ -49,7 +49,6 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 	pcbNuevoPrograma->id = idProgramas;
 
 	pcbNuevoPrograma->tamanioArchivoOriginal = tamanioArchivo;
-
 
 	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
@@ -69,55 +68,58 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 		array[i].longitud = (instrucciones[i].offset);
 	}
 
-pcbNuevoPrograma->indiceDeCodigo=(arrayBidimensional*) malloc(cantidadInstrucciones * sizeof(arrayBidimensional));
+	pcbNuevoPrograma->indiceDeCodigo = (arrayBidimensional*) malloc(
+			cantidadInstrucciones * sizeof(arrayBidimensional));
 
-
-for (i = 0; i < cantidadInstrucciones; i++) {
-	memcpy(&(pcbNuevoPrograma->indiceDeCodigo[i]),&array[i],sizeof(arrayBidimensional));
-}
+	for (i = 0; i < cantidadInstrucciones; i++) {
+		memcpy(&(pcbNuevoPrograma->indiceDeCodigo[i]), &array[i],
+				sizeof(arrayBidimensional));
+	}
 //free(array);
 
-pcbNuevoPrograma->indiceDeCodigoSize=cantidadInstrucciones * sizeof(arrayBidimensional);
+	pcbNuevoPrograma->indiceDeCodigoSize = cantidadInstrucciones
+			* sizeof(arrayBidimensional);
 
-	if(metaNuevoPrograma->etiquetas!=NULL){
-	pcbNuevoPrograma->indiceDeEtiquetas=malloc(sizeof(char)*(strlen(metaNuevoPrograma->etiquetas)+1));
+	if (metaNuevoPrograma->etiquetas != NULL) {
+		pcbNuevoPrograma->indiceDeEtiquetas = malloc(
+				sizeof(char) * (strlen(metaNuevoPrograma->etiquetas) + 1));
 
-	memcpy((pcbNuevoPrograma->indiceDeEtiquetas),metaNuevoPrograma->etiquetas, strlen(metaNuevoPrograma->etiquetas)+1);
-	pcbNuevoPrograma->indiceDeEtiquetasSize=strlen(metaNuevoPrograma->etiquetas)+1;
-	}
-	else{
-		pcbNuevoPrograma->indiceDeEtiquetas="MUERTE A WINDOWS";
-		pcbNuevoPrograma->indiceDeEtiquetasSize=17;
+		memcpy((pcbNuevoPrograma->indiceDeEtiquetas),
+				metaNuevoPrograma->etiquetas,
+				strlen(metaNuevoPrograma->etiquetas) + 1);
+		pcbNuevoPrograma->indiceDeEtiquetasSize = strlen(
+				metaNuevoPrograma->etiquetas) + 1;
+	} else {
+		pcbNuevoPrograma->indiceDeEtiquetas = "MUERTE A WINDOWS";
+		pcbNuevoPrograma->indiceDeEtiquetasSize = 17;
 
 	}
 
 	pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
 
-	pcbNuevoPrograma->instruccionesTotales=metaNuevoPrograma->instrucciones_size;
+	pcbNuevoPrograma->instruccionesTotales =
+			metaNuevoPrograma->instrucciones_size;
 
-	pcbNuevoPrograma->instruccionesRestantes=metaNuevoPrograma->instrucciones_size;
+	pcbNuevoPrograma->instruccionesRestantes =
+			metaNuevoPrograma->instrucciones_size;
 
 	pcbNuevoPrograma->estado = 0; //NEW
 
 	pcbNuevoPrograma->indiceDelStack = list_create();
 
-
-
 	pthread_mutex_lock(mutexColaNew);
-	list_add(listaNew,pcbNuevoPrograma);
+	list_add(listaNew, pcbNuevoPrograma);
 	pthread_mutex_unlock(mutexColaNew);
 	return pcbNuevoPrograma;
 }
 //testeadas
-
-
 
 void moverAColaReady(pcb * programa) {
 
 	switch (programa->estado) {
 	case NEW:
 		pthread_mutex_lock(mutexColaNew);
-		buscarYEliminarPCBEnLista(listaNew,programa);
+		buscarYEliminarPCBEnLista(listaNew, programa);
 		pthread_mutex_unlock(mutexColaNew);
 		break; //0 NEW
 	case READY:
@@ -137,7 +139,7 @@ void moverAColaReady(pcb * programa) {
 	}
 
 	programa->estado = 1; //1 READY
-	list_add(listaReady,programa);
+	list_add(listaReady, programa);
 }
 void moverAListaBlock(pcb* programa) {
 	pthread_mutex_lock(mutexListaExec);
@@ -153,7 +155,7 @@ void moverAListaBlock(pcb* programa) {
 }
 void moverAListaExec(pcb* programa) {
 	pthread_mutex_lock(mutexColaReady);
-	buscarYEliminarPCBEnLista(listaReady,programa);
+	buscarYEliminarPCBEnLista(listaReady, programa);
 	pthread_mutex_unlock(mutexColaReady);
 
 	programa->estado = EXEC; //2 EXEC
@@ -170,7 +172,7 @@ void moverAColaExit(pcb* programa) {
 	programa->estado = 4; // 4 EXIT
 
 	pthread_mutex_lock(mutexColaExit);
-	list_add(listaExit,programa);
+	list_add(listaExit, programa);
 	pthread_mutex_unlock(mutexColaExit);
 }
 void finalizarProcesosColaExit() {
@@ -182,11 +184,7 @@ void finalizarProcesosColaExit() {
 
 	list_clean(listaExit);
 
-
-
-
 }
-
 
 //Testeada
 void funcionHiloQuantum() {
@@ -255,7 +253,7 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 
 			//retardoPeriferico = (int) retardoIO[i];
 
-			retardoPeriferico = atoi( retardoIO[i]);
+			retardoPeriferico = atoi(retardoIO[i]);
 			abortar++;
 		}
 
@@ -292,7 +290,8 @@ int obtener_valor(char* identificador) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 
-			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {;
+			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
+				;
 				valor = variableCompartidaValor[i];
 				pthread_mutex_unlock(mutexVariables[i]);
 			} else {
@@ -343,40 +342,39 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 
-	 StrKerCpu* StrKernelCpu;
-	 SocketBuffer* buffer;
-	StrKernelCpu= newStrKerCpu(1/*KERNEL_ID*/, 37/*WAIT_REALIZADO*/, *pcbPrograma,0,NULL,0,NULL,0 );
+	StrKerCpu* StrKernelCpu;
+	SocketBuffer* buffer;
+	StrKernelCpu = newStrKerCpu(1/*KERNEL_ID*/, 37/*WAIT_REALIZADO*/,
+			*pcbPrograma, 0, NULL, 0, NULL, 0);
 	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
-	buffer=serializeKerCpu(StrKernelCpu);
+	buffer = serializeKerCpu(StrKernelCpu);
 
 	char* aux;
 
 	for (i = 0; (i < cantSemaforos); i++) {
-		aux=malloc(100);
-		aux[0]='\0';
-		strcat(aux,&*idSemaforos[i]); //pueden creer que así se accede? que asco
-		strcat(aux,"\n");
-
+		aux = malloc(100);
+		aux[0] = '\0';
+		strcat(aux, &*idSemaforos[i]); //pueden creer que así se accede? que asco
+		strcat(aux, "\n");
 
 		if ((strcmp(aux, identificador)) == 0) {
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
-				socketSend(cpuSocket,buffer);
+				socketSend(cpuSocket, buffer);
 
 				//moverAColaReady(pcbPrograma);
-
 
 			} else {
 
 				moverAListaBlock(pcbPrograma);
 				sem_wait(semaforosAnsisop[i]);
-				socketSend(cpuSocket,buffer);
+				socketSend(cpuSocket, buffer);
 				moverAListaExec(pcbPrograma);
 				//todo avisar a cpu que se bloqueo
 			}
 
 			abortar++;
-			free (aux);
+			//free (aux);
 		}
 
 	}
@@ -410,79 +408,73 @@ void signalAnsisop(char* identificador) {
 int inicializarVariables() {
 
 	// LOG
-	nucleolog=malloc(sizeof(t_log));
+	nucleolog = malloc(sizeof(t_log));
 	//nucleolog = log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO);
 
-	memcpy(nucleolog,log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO), sizeof(t_log));
-
-
-
+	memcpy(nucleolog, log_create("nucleo.log", "NUCLEO", 1, LOG_LEVEL_INFO),
+			sizeof(t_log));
 
 	//tamanioPaginas=pedirTamanioDePagina();
 
-
 	//Variables de lectura de archivo
-	puertoPropio=(char*)malloc(sizeof(puertoPropio));
-	cpuPort=(char*)malloc(sizeof(cpuPort));
-	quantum=(int)malloc(sizeof(quantum));
-	quantumSleep=(int)(sizeof(quantumSleep));
-	idSemaforos=(char**)malloc(sizeof(idSemaforos));
-	viSemaforos=(char**)malloc(sizeof(viSemaforos));
-	cantSemaforos=(int)malloc(sizeof(cantSemaforos)); //No se lee por config
-	idIO=(char**)malloc(sizeof(idIO));
-	retardoIO=(char**)malloc(sizeof(retardoIO));
-	int cantIO=(int)malloc(sizeof(cantIO));	//No se lee por config
+	puertoPropio = (char*) malloc(sizeof(puertoPropio));
+	cpuPort = (char*) malloc(sizeof(cpuPort));
+	quantum = (int) malloc(sizeof(quantum));
+	quantumSleep = (int) (sizeof(quantumSleep));
+	idSemaforos = (char**) malloc(sizeof(idSemaforos));
+	viSemaforos = (char**) malloc(sizeof(viSemaforos));
+	cantSemaforos = (int) malloc(sizeof(cantSemaforos)); //No se lee por config
+	idIO = (char**) malloc(sizeof(idIO));
+	retardoIO = (char**) malloc(sizeof(retardoIO));
+	int cantIO = (int) malloc(sizeof(cantIO));	//No se lee por config
 
-	idVariableCompartida=(char**)malloc(sizeof(idVariableCompartida));
-	cantVarCompartidas=(int)malloc(sizeof(cantVarCompartidas));
+	idVariableCompartida = (char**) malloc(sizeof(idVariableCompartida));
+	cantVarCompartidas = (int) malloc(sizeof(cantVarCompartidas));
 	//variableCompartidaValor=(int*)malloc(sizeof(variableCompartidaValor));
-	ipUMC=(char*)malloc((sizeof(ipUMC)));
-	UMCPort=(char*)malloc((sizeof(UMCPort)));
-	stackSize=(int)malloc((sizeof(stackSize)));
-	tamanioPaginas=(int)malloc((sizeof(tamanioPaginas)));
+	ipUMC = (char*) malloc((sizeof(ipUMC)));
+	UMCPort = (char*) malloc((sizeof(UMCPort)));
+	stackSize = (int) malloc((sizeof(stackSize)));
+	tamanioPaginas = (int) malloc((sizeof(tamanioPaginas)));
 
 	//Otras Variables
-	idProgramas=(int)malloc(sizeof(idProgramas)); //Contador de programa
-	primeraLectura=(bool)malloc(sizeof(primeraLectura));
+	idProgramas = (int) malloc(sizeof(idProgramas)); //Contador de programa
+	primeraLectura = (bool) malloc(sizeof(primeraLectura));
 
 	//Sincronizacion
 	//pthread_mutex_t** mutexIO;
 	//pthread_mutex_t** mutexVariables;
-	mutexQuantum=malloc(sizeof(pthread_mutex_t));
+	mutexQuantum = malloc(sizeof(pthread_mutex_t));
 
-	mutexColaNew=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	mutexColaReady=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	mutexColaExit=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	mutexListaExec=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-	mutexListaBlock=(pthread_mutex_t*)malloc(sizeof(pthread_mutex_t));
-
+	mutexColaNew = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+	mutexColaReady = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+	mutexColaExit = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+	mutexListaExec = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+	mutexListaBlock = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 
 	primeraLectura = true;
 
 	int i;
 
 	//Leo el archivo de configuracion
-	leerArchivoDeConfiguracion("/home/utnso/tp-2016-1c-Better-call-pointer/nucleo/confignucleo");
-
+	leerArchivoDeConfiguracion(
+			"/home/utnso/tp-2016-1c-Better-call-pointer/nucleo/confignucleo");
 
 	//Inicio Semaforos
 	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
 	char* valorInicial;
 	//char algo;
-	unsigned int algo2=0;
+	unsigned int algo2 = 0;
 
 	//sem_t semaforoPrueba;
 	//sem_init(&semaforoPrueba, 0, 4);
 
-	semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
-
-
+	//semaforosAnsisop=malloc(sizeof(pthread_mutex_t)*cantSemaforos);
 
 	for (i = 0; i < cantSemaforos; i++) {
-		valorInicial=viSemaforos[i];
+		valorInicial = viSemaforos[i];
 		//algo=*valorInicial;
-		algo2=atoi(valorInicial);
-		semaforosAnsisop[i]=malloc(sizeof(sem_t));
+		algo2 = atoi(valorInicial);
+		semaforosAnsisop[i] = malloc(sizeof(sem_t));
 		if (sem_init((semaforosAnsisop[i]), 0, algo2) != 0) {
 			printf("\n init semaforoAnsisop %d fallo\n", i);
 			return -1;
@@ -494,11 +486,11 @@ int inicializarVariables() {
 	//inicio cantIO
 
 	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
-	mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
+	//mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
 
 	for (i = 0; i < cantIO; i++) {
 
-		mutexIO[i]=malloc(sizeof(pthread_mutex_t));
+		mutexIO[i] = malloc(sizeof(pthread_mutex_t));
 		if (pthread_mutex_init(mutexIO[i], NULL) != 0) {
 			printf("\n init mutexIO %d fallo\n", i);
 			return -1;
@@ -506,16 +498,16 @@ int inicializarVariables() {
 	}
 
 	//inicio cantVarsCompartidas
-		cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
+	cantVarCompartidas = cantidadPalabrasEnArrayDeStrings(idVariableCompartida);
 
-		variableCompartidaValor = (int*) malloc(sizeof(int) * cantVarCompartidas);
+	variableCompartidaValor = (int*) malloc(sizeof(int) * cantVarCompartidas);
 
-		for (i = 0; i < cantVarCompartidas; i++) {
-			variableCompartidaValor[i] = 0;
-		}
-		mutexVariables=malloc(sizeof(pthread_mutex_t)*cantVarCompartidas);
 	for (i = 0; i < cantVarCompartidas; i++) {
-		mutexVariables[i]=malloc(sizeof(pthread_mutex_t));
+		variableCompartidaValor[i] = 0;
+	}
+	//mutexVariables=malloc(sizeof(pthread_mutex_t)*cantVarCompartidas);
+	for (i = 0; i < cantVarCompartidas; i++) {
+		mutexVariables[i] = malloc(sizeof(pthread_mutex_t));
 		if (pthread_mutex_init(mutexVariables[i], NULL) != 0) {
 			printf("\n init mutexVariables %d fallo\n", i);
 			return -1;
@@ -552,25 +544,24 @@ int inicializarVariables() {
 	idProgramas = 0;
 
 	//InicioLasColas
-	listaNew=list_create();
+	listaNew = list_create();
 	//colaNew = queue_create();
-	listaReady=list_create();
+	listaReady = list_create();
 	//colaReady = queue_create();
 	listaExec = list_create();
 	listaBlock = list_create();
-	listaExit=list_create();
+	listaExit = list_create();
 	//colaExit = queue_create();
 
-
-
-	umcServer=socketCreateClient();
+	umcServer = socketCreateClient();
 	do {
 		puts("**********************************");
 		puts("Intentando conectar con la UMC ppal.");
-		printf("IP: %s, PUERTO: %d\n", ipUMC, atoi (UMCPort));
+		printf("IP: %s, PUERTO: %d\n", ipUMC, atoi(UMCPort));
 		sleep(3);
 	} while (!socketConnect(umcServer, ipUMC, atoi(UMCPort)));
-	StrKerUmc* out_umc_msg = newStrKerUmc(KERNEL_ID, HANDSHAKE, NULL, 0, 0, 0, 0, 0, 0);
+	StrKerUmc* out_umc_msg = newStrKerUmc(KERNEL_ID, HANDSHAKE, NULL, 0, 0, 0,
+			0, 0, 0);
 	SocketBuffer* sb = serializeKerUmc(out_umc_msg);
 	socketSend(umcServer->ptrSocket, sb);
 	puts("Mensaje enviado a la UMC ppal.");
@@ -580,24 +571,23 @@ int inicializarVariables() {
 
 	printf("Nuevo UMC es %d.\n", in_umc_msg->size);
 
-	int nuevoPuertoUmc=in_umc_msg->size;
-	tamanioPaginas=pedirTamanioDePagina(nuevoPuertoUmc);
+	int nuevoPuertoUmc = in_umc_msg->size;
+	tamanioPaginas = pedirTamanioDePagina(nuevoPuertoUmc);
 
 	return 0;
 }
 
 //testeada
-void crearHilos(){
+void crearHilos() {
 
-	 	 pthread_t hiloQuantum;
-		 pthread_attr_t attrHiloQuantum;
-		 pthread_attr_init(&attrHiloQuantum);
-		 pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
-		 pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
-		 pthread_attr_destroy(&attrHiloQuantum);
+	pthread_t hiloQuantum;
+	pthread_attr_t attrHiloQuantum;
+	pthread_attr_init(&attrHiloQuantum);
+	pthread_attr_setdetachstate(&attrHiloQuantum, PTHREAD_CREATE_DETACHED);
+	pthread_create(&hiloQuantum, &attrHiloQuantum, &funcionHiloQuantum, NULL);
+	pthread_attr_destroy(&attrHiloQuantum);
 
-		 cpuHandlerThread();
-
+	cpuHandlerThread();
 
 }
 
@@ -622,14 +612,16 @@ void* buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 }
 
-void funcionHiloIO(atributosIO atributos){
+void funcionHiloIO(atributosIO atributos) {
 
-entrada_salida(atributos.identificador,atributos.cantidad,atributos.pcbLoca);
+	entrada_salida(atributos.identificador, atributos.cantidad,
+			atributos.pcbLoca);
 
 }
 
-void funcionHiloWait(atributosWait* atributos){
+void funcionHiloWait(atributosWait* atributos) {
 
-waitAnsisop(atributos->identificador,&atributos->pcbLoca,atributos->cpuSocket);
+	waitAnsisop(atributos->identificador, &atributos->pcbLoca,
+			atributos->cpuSocket);
 
 }

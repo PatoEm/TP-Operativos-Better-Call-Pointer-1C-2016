@@ -375,7 +375,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	char* variable;
 
 	atributosIO atributos;
-	atributosWait * atributosWait;
+	atributosWait * atributosWaitLoco;
 	pthread_t hiloIO;
 	pthread_attr_t attrHiloIO;
 	pthread_t hiloWait;
@@ -448,20 +448,22 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	case WAIT_SEM_ANSISOP:
 
-		atributosWait = malloc(sizeof(atributosWait));
+
+
+		atributosWaitLoco = malloc(sizeof(atributosWait));
 
 		nombreDispositivo = in_cpu_msg->log;
 
-		atributosWait->identificador = nombreDispositivo;
-		atributosWait->pcbLoca = in_cpu_msg->pcb;
-		atributosWait->cpuSocket = cpuClient;
+		atributosWaitLoco->identificador = nombreDispositivo;
+		atributosWaitLoco->pcbLoca = in_cpu_msg->pcb;
+		atributosWaitLoco->cpuSocket = cpuClient;
 
 		pthread_t hiloWait;
 		pthread_attr_t attrHiloWait;
 		pthread_attr_init(&attrHiloWait);
 		pthread_attr_setdetachstate(&attrHiloWait, PTHREAD_CREATE_DETACHED);
 		pthread_create(&hiloWait, &attrHiloWait, &funcionHiloWait,
-				atributosWait);
+				atributosWaitLoco);
 		pthread_attr_destroy(&attrHiloWait);
 
 		break;

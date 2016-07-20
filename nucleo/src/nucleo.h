@@ -69,10 +69,10 @@ bool primeraLectura;
 t_log* nucleolog;
 
 //Sincronizacion
-pthread_mutex_t** mutexIO;
-pthread_mutex_t** mutexVariables;
+pthread_mutex_t* mutexIO[50];
+pthread_mutex_t* mutexVariables[50];
 pthread_mutex_t* mutexQuantum;
-sem_t ** semaforosAnsisop;
+sem_t * semaforosAnsisop[50];
 pthread_mutex_t* mutexColaNew;
 pthread_mutex_t* mutexColaReady;
 pthread_mutex_t* mutexColaExit;
