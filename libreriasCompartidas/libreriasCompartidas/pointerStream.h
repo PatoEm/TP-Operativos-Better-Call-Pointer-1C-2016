@@ -100,7 +100,7 @@ typedef struct strKerCpu {
 	Char id;
 	Char action;
 	pcb pcb;
-	Int8U quantum;
+	Int32U quantum;
 	Byte* data;
 	Int32U dataLen;
 	Byte* nombreDispositivo;
@@ -225,7 +225,7 @@ typedef struct strSwaUmc {
 ***********************************************/
 StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileContentLen);
 
-StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo);
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int32U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo);
 StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio);
 StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log);
 
