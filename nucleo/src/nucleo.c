@@ -286,7 +286,7 @@ int obtener_valor(char* identificador) {
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	int valor;
-	for (i = 0; (idVariableCompartida[i] != '\0'); i++) {
+	for (i = 0; i < cantVarCompartidas; i++) {
 
 		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 
@@ -374,7 +374,7 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 			}
 
 			abortar++;
-			//free (aux);
+			free(aux);
 		}
 
 	}
@@ -388,15 +388,20 @@ void signalAnsisop(char* identificador) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
-	for (i = 0; (idSemaforos[i] != '\0'); i++) {
-
-		if ((strcmp(idSemaforos[i], identificador)) == 0) {
+	char* aux;
+	for (i = 0; i < cantSemaforos; i++) {
+		aux = malloc(100);
+		aux[0] = '\0';
+		strcat(aux, &*idSemaforos[i]); //pueden creer que así se accede? que asco
+		strcat(aux, "\n");
+		if ((strcmp(aux, identificador)) == 0) {
 
 			sem_post(semaforosAnsisop[i]);
 
 			abortar++;
 
 		}
+		free(aux);
 
 	}
 	if (abortar == 0) {

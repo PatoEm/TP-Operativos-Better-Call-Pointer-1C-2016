@@ -670,3 +670,93 @@ end
 [INFO] 22:42:46:798 swap/(7870:7870): Proceso (PID 1) eliminado correctamente
 [INFO] 22:42:46:799 swap/(7870:7870): Proceso eliminado con exito
 [ERROR] 22:44:07:766 swap/(7870:7870): Al recibir del cliente
+[INFO] 23:50:58:950 swap/(24237:24237): Valores del archivo de configuracion seteados
+[INFO] 23:50:58:970 swap/(24237:24237): Archivo de particion creado
+[INFO] 23:50:58:971 swap/(24237:24237): Server creado y escuchando correctamente
+[INFO] 23:59:34:30 swap/(24237:24237): Hay espacio
+[INFO] 23:59:34:30 swap/(24237:24237): Espacio reservado correctamente
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 23:59:34:30 swap/(24237:24237): Pagina escrita con exito
+[INFO] 00:01:32:427 swap/(24237:24237): Pagina leida correctamente: 
+[INFO] 00:01:32:428 swap/(24237:24237): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait c
+		print !colas
+	sagin)
+[INFO] 00:12:26:422 swap/(26727:26727): Valores del archivo de configuracion seteados
+[INFO] 00:12:26:447 swap/(26727:26727): Archivo de particion creado
+[INFO] 00:12:26:448 swap/(26727:26727): Server creado y escuchando correctamente
+[INFO] 00:18:05:142 swap/(26727:26727): Hay espacio
+[INFO] 00:18:05:142 swap/(26727:26727): Espacio reservado correctamente
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:05:142 swap/(26727:26727): Pagina escrita con exito
+[INFO] 00:18:25:272 swap/(26727:26727): Pagina leida correctamente: 
+[INFO] 00:18:25:272 swap/(26727:26727): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasPagi)
+[INFO] 00:18:31:59 swap/(26727:26727): Pagina leida correctamente: 
+[INFO] 00:18:31:59 swap/(26727:26727):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[INFO] 00:20:41:988 swap/(29031:29031): Valores del archivo de configuracion seteados
+[INFO] 00:20:41:991 swap/(29031:29031): Archivo de particion creado
+[INFO] 00:20:41:991 swap/(29031:29031): Server creado y escuchando correctamente
+[INFO] 00:24:40:111 swap/(29031:29031): Hay espacio
+[INFO] 00:24:40:111 swap/(29031:29031): Espacio reservado correctamente
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:24:40:111 swap/(29031:29031): Pagina escrita con exito
+[INFO] 00:25:00:420 swap/(29031:29031): Pagina leida correctamente: 
+[INFO] 00:25:00:420 swap/(29031:29031): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasPagi)
+[INFO] 00:25:00:425 swap/(29031:29031): Pagina leida correctamente: 
+[INFO] 00:25:00:425 swap/(29031:29031):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 00:31:30:868 swap/(29031:29031): Al recibir del cliente
