@@ -1100,3 +1100,109 @@ end
 
 
 [ERROR] 02:17:58:822 swap/(6329:6329): Al recibir del cliente
+[INFO] 02:19:18:363 swap/(6681:6681): Valores del archivo de configuracion seteados
+[INFO] 02:19:18:391 swap/(6681:6681): Archivo de particion creado
+[INFO] 02:19:18:392 swap/(6681:6681): Server creado y escuchando correctamente
+[INFO] 02:20:28:132 swap/(6681:6681): Hay espacio
+[INFO] 02:20:28:132 swap/(6681:6681): Espacio reservado correctamente
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:28:132 swap/(6681:6681): Pagina escrita con exito
+[INFO] 02:20:43:132 swap/(6681:6681): Pagina leida correctamente: 
+[INFO] 02:20:43:132 swap/(6681:6681): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasgina)
+[INFO] 02:20:43:132 swap/(6681:6681): Pagina leida correctamente: 
+[INFO] 02:20:43:132 swap/(6681:6681):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 02:32:01:491 swap/(6681:6681): Al recibir del cliente
+[INFO] 02:32:10:615 swap/(6911:6911): Valores del archivo de configuracion seteados
+[INFO] 02:32:10:632 swap/(6911:6911): Archivo de particion creado
+[INFO] 02:32:10:632 swap/(6911:6911): Server creado y escuchando correctamente
+[ERROR] 03:00:23:697 swap/(6911:6911): Al recibir del cliente
+[INFO] 03:01:42:756 swap/(7135:7135): Valores del archivo de configuracion seteados
+[INFO] 03:01:42:778 swap/(7135:7135): Archivo de particion creado
+[INFO] 03:01:42:778 swap/(7135:7135): Server creado y escuchando correctamente
+[INFO] 03:04:35:903 swap/(7135:7135): Hay espacio
+[INFO] 03:04:35:903 swap/(7135:7135): Espacio reservado correctamente
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:04:35:903 swap/(7135:7135): Pagina escrita con exito
+[INFO] 03:05:53:307 swap/(7135:7135): Pagina leida correctamente: 
+[INFO] 03:05:53:308 swap/(7135:7135): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasgina)
+[INFO] 03:05:53:312 swap/(7135:7135): Pagina leida correctamente: 
+[INFO] 03:05:53:312 swap/(7135:7135):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 03:16:31:306 swap/(7135:7135): Al recibir del cliente
+[INFO] 03:40:34:568 swap/(7683:7683): Valores del archivo de configuracion seteados
+[INFO] 03:40:34:585 swap/(7683:7683): Archivo de particion creado
+[INFO] 03:40:34:585 swap/(7683:7683): Server creado y escuchando correctamente
+[INFO] 03:41:49:118 swap/(7683:7683): Hay espacio
+[INFO] 03:41:49:120 swap/(7683:7683): Espacio reservado correctamente
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:49:120 swap/(7683:7683): Pagina escrita con exito
+[INFO] 03:41:53:174 swap/(7683:7683): Pagina leida correctamente: 
+[INFO] 03:41:53:174 swap/(7683:7683): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasgina)
+[INFO] 03:41:55:628 swap/(7683:7683): Pagina leida correctamente: 
+[INFO] 03:41:55:629 swap/(7683:7683):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 03:46:39:596 swap/(7683:7683): Al recibir del cliente
