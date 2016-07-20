@@ -34,7 +34,7 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent,
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int8U quantum,
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int32U quantum,
 		Byte* data, Int32U dataLen, Byte* nombreDispositivo,
 		Int32U lenNomDispositivo) {
 	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
@@ -1164,7 +1164,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	Char id;
 	Char action;
 	pcb pcb;
-	Int8U quantum;
+	Int32U quantum;
 	Byte* data = NULL;
 	Int32U dataLen;
 	Byte* nombreDispositivo = NULL;
