@@ -438,6 +438,7 @@ int paginasOcupadasPorPid(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
+	usleep(1000*espera);
 	char*paginaADevolver = malloc(sizeof(char) * cantidad);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
@@ -529,6 +530,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 }
 
 void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
+	usleep(1000*espera);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
