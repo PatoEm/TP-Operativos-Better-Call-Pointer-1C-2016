@@ -433,6 +433,12 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 		suc = unserializeUmcCpu(buffer);
 
+		if(suc->action == 35 /* ABORTAR PROGRAMA*/){
+			log_error(getLogger(), "Programa abortado por la UMC.");
+			seguirEjecutando = 0;
+			return FALSE;
+		}
+
 		strcat(instruccion, stringFromByteArray(suc->data, suc->dataLen));
 
 		offset = offset - offsetPag;
