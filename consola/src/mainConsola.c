@@ -13,11 +13,6 @@
 #include "consola.h"
 #include <pthread.h>
 
-#include <string.h>
-#include <arpa/inet.h>
-#include <sys/socket.h>
-#include <commons/config.h>
-
 /*
  * Variables Globales
  */
@@ -64,7 +59,7 @@ int main(void) {
 	pthread_attr_t atributo;
 	pthread_attr_init(&atributo);
 	pthread_attr_setdetachstate(&atributo, PTHREAD_CREATE_DETACHED);
-//	pthread_create(&consolaCorte, &atributo, /*(void*)*/mensajeConsola, NULL);
+	//pthread_create(&consolaCorte, &atributo, /*(void*)*/&mensajeConsola, NULL); TODO esta linea me trae problemas, y no se porque
 
 	if (loadConfig() && socketConnection()) {
 
