@@ -11,6 +11,12 @@
  * Dependencias
  */
 #include "consola.h"
+#include <pthread.h>
+
+#include <string.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <commons/config.h>
 
 /*
  * Variables Globales
@@ -22,6 +28,7 @@ SocketClient* kernelClient = NULL;
 StrConKer* sck = NULL;
 StrKerCon* skc = NULL;
 String direccionDeArchivo;
+int mandoPrograma;
 
 /*
  * Prototipos
@@ -35,6 +42,7 @@ Boolean realizarImprimir();
 Boolean realizarImprimirTexto();
 Boolean realizarCierreConsola();
 String stringFromByteArray(Byte*, Int32U);
+void mensajeConsola();
 
 /*
  * Estructura para Logger
@@ -48,6 +56,16 @@ int main(void) {
 	log_info(getLogger(), "                                               ");
 	log_info(getLogger(), "                                               ");
 	log_info(getLogger(), "Leyendo archivo de configuracion y conectandose al NUCLEO");
+
+	mandoPrograma=0;
+	//Creo hilo de manejo de mensajes por Consola
+
+	pthread_t consolaCorte;
+	pthread_attr_t atributo;
+	pthread_attr_init(&atributo);
+	pthread_attr_setdetachstate(&atributo, PTHREAD_CREATE_DETACHED);
+//	pthread_create(&consolaCorte, &atributo, /*(void*)*/mensajeConsola, NULL);
+
 	if (loadConfig() && socketConnection()) {
 
 		direccionDeArchivo = (char *) malloc(150);
@@ -63,7 +81,7 @@ int main(void) {
 			log_error(getLogger(), "No se pudo obtener el archivo .AnSISOP y enviarlo al NUCLEO");
 			return FALSE;
 		}
-
+		mandoPrograma=1;
 		while (TRUE) {
 			if(!instructionsFromKernel()) {
 				log_error(getLogger(), "No se recibio instrucciones del NUCLEO");
@@ -254,3 +272,28 @@ String stringFromByteArray(Byte* data, Int32U size) {
 	result[size] = '\0';
 	return result;
 }
+
+void mensajeConsola(){
+	while(mandoPrograma == 0);
+		while(1){
+			printf("Si desea finalizar el programa ingrese el #1: \n");
+			int finalizar_Programa;
+			uint32_t id = CONSOLA_ID;
+			uint32_t fin;
+			scanf("%d",&finalizar_Programa);
+			if(finalizar_Programa == 1){
+			void* bufferFin = malloc(sizeof(uint32_t)*3);
+			fin = ABORTAR_PROGRAMA;
+			memcpy(bufferFin, &id,sizeof(uint32_t));
+			memcpy(bufferFin+sizeof(uint32_t), &fin, sizeof(uint32_t));
+			memcpy(bufferFin+(sizeof(uint32_t)*2), &id, sizeof(uint32_t));
+			send(kernelClient, bufferFin, (sizeof(uint32_t)*3), 0);
+			free(bufferFin);
+			fclose(fp);
+			}
+			else{
+				printf("Numero no válido, volver a intentar\n");
+			}
+		}
+}
+

@@ -31,6 +31,8 @@
 #define ARCHIVO_CONF "configconsola"
 #define LOGGER_FILE "consola_log.txt"
 
+FILE * fp;
+
 /*
  * Prototipos de Funciones del consola.c
  */

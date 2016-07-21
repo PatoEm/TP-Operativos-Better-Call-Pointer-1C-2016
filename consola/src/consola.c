@@ -18,7 +18,7 @@ void setearValores(t_config * archivoConfig) {
 
 int tamArchivo(char * direccionArchivo) {
 
-	FILE * fp;
+	//FILE * fp;
 	int tamanio;
      fp = fopen(direccionArchivo, "r");
 	if (fp == NULL)
