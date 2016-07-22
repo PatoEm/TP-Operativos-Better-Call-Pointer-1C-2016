@@ -80,17 +80,15 @@ int main(void) {
 		while (TRUE) {
 			if(!instructionsFromKernel()) {
 				if (lastInstruction) {
+					log_info(getLogger(), "===============================================");
+					log_info(getLogger(), "===== CONSOLA FINALIZADA PARA EL PROGRAMA =====");
+					log_info(getLogger(), "===============================================");
 					return FALSE;
 				}
 				log_error(getLogger(), "No se recibio instrucciones del NUCLEO");
 			}
 		}
 	}
-	
-	log_info(getLogger(), "===============================================");
-	log_info(getLogger(), "===== CONSOLA FINALIZADA PARA EL PROGRAMA =====");
-	log_info(getLogger(), "===============================================");
-
 	config_destroy(tConfig);
 	log_destroy(logger);
 	return TRUE;
