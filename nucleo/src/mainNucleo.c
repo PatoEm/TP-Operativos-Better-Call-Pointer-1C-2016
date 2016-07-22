@@ -14,7 +14,7 @@ char * leerProgramaAnSISOP1(char * direccionArchivo);
 
 // MAIN FUNCHION
 
-int main(void) {
+int main(int argc, char** argv) {
 
 //	pcb * pcbVacioLoco=newEmptyPcb();
 //	StrKerCpu *hola = newStrKerCpu(KERNEL_ID,PRIMER_PCB,*pcbVacioLoco,8,"hola",0,"hola",0);
@@ -26,8 +26,12 @@ int main(void) {
 //	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
 //
 //
+	if(argc != 2){
+		puts("No se ingreso la ruta del archivo de configuracion\n");
+		return 0;
+	}
 
-	inicializarVariables();
+	inicializarVariables(argv[1]);
 	printf("%d", tamanioPaginas);
 
 	log_info(nucleolog, "Variables inicializadas.");
