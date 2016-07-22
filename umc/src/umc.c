@@ -50,10 +50,6 @@ int tamanioCodigo(char*codigo) {
 	return contador;
 }
 
-void eliminarProcesoTLB(int PID){
-	while
-}
-
 bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	SocketBuffer*buffer;
 	StrUmcSwa*streamUmcSwap;
@@ -615,6 +611,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 }
 
 void finalizarPrograma(int pid) {
+	if(tlbHabilitada())
+		eliminarProcesoTLB(pid);
 	StrUmcSwa*streamUmcSwa;
 	espacioAsignado* pagina = newEspacioAsignado();
 	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, *pagina, NULL,
@@ -1263,6 +1261,19 @@ int tlbLlena() {
 	}
 
 	return 0;
+}
+
+void eliminarProcesoTLB(int PID) {
+	int i = 0;
+	if (list_size(TLB) != 0) {
+		while (i != list_size(TLB)) {
+			t_tlb*unNodoDeLaTelebe = list_get(TLB, i);
+			if (unNodoDeLaTelebe->pid == PID)
+				list_remove(TLB, i);
+			else
+				i++;
+		}
+	}
 }
 
 //DEVUELVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0

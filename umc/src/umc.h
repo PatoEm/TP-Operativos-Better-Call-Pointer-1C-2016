@@ -42,6 +42,7 @@ t_log* umclog;
 pthread_mutex_t* mutexPedidos;
 pthread_mutex_t* mutexThreadSockets;
 
+
   typedef struct{
 	  int pid;
 	  int pagina;
@@ -131,6 +132,8 @@ void flushTLB ();
 void flushMemory ();
 
 void liberarMemoria(char * );
+
+void eliminarProcesoTLB(int PID) ;
 
 void escuchoMuchasConexiones();
 
