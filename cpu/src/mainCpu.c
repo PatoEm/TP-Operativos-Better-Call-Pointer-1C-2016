@@ -79,6 +79,7 @@ t_log* logger = NULL;
 
 int main() {
 	finalizoCorrectamente = FALSE;
+	saltoDeLinea=FALSE;
 //
 //	pcb * pcbVacioLoco=newEmptyPcb();
 //	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
@@ -111,7 +112,10 @@ int main() {
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
 				analizadorLinea(pedirInstruccion(&pcbProceso), &funciones,
 						&funcionesDeKernel);
+				if(saltoDeLinea==FALSE){
 				moverProgramCounterPcb(&pcbProceso);
+				}
+				saltoDeLinea=FALSE;
 				quantum--;
 			}
 

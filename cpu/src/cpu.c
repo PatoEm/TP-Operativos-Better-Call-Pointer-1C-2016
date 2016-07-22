@@ -235,8 +235,8 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  *///YA ESTA TERMINADO
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 
-char* variableMod = malloc(strlen(variable));
-variableMod=sinEspacioAlFinal(variable,strlen(variable));
+	char* variableMod = malloc(strlen(variable));
+	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, OBTENER_VALOR_COMPARTIDA, pcbProceso,
@@ -259,9 +259,8 @@ variableMod=sinEspacioAlFinal(variable,strlen(variable));
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
 
-	char* variableMod=malloc(strlen(variable));
-	variableMod=sinEspacioAlFinal(variable,strlen(variable));
-
+	char* variableMod = malloc(strlen(variable));
+	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
 	char* buffer;
 	StrCpuKer*streamCpuKer;
@@ -289,21 +288,21 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  */	// YA ESTA TERMINADA
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
-	char* etiquetaMod=malloc(strlen(etiqueta));
-	etiquetaMod=sinEspacioAlFinal(etiqueta,strlen(etiqueta));
-
+	char* etiquetaMod = malloc(strlen(etiqueta));
+	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
+
+	saltoDeLinea = TRUE;
 }
 
-char* sinEspacioAlFinal(char* linea, int tamanio){
+char* sinEspacioAlFinal(char* linea, int tamanio) {
 
-	if(isspace(linea[tamanio-1])){
-		linea[tamanio-1]='\0';
+	if (isspace(linea[tamanio - 1])) {
+		linea[tamanio - 1] = '\0';
 		return linea;
-	}
-	else
+	} else
 		return linea;
 
 }
@@ -313,8 +312,8 @@ char* sinEspacioAlFinal(char* linea, int tamanio){
  */	// ESTÁ TERMINADA
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
-	char* etiquetaMod=malloc(strlen(etiqueta));
-	etiquetaMod=sinEspacioAlFinal(etiqueta,strlen(etiqueta));
+	char* etiquetaMod = malloc(strlen(etiqueta));
+	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
 	aux->retVars->pagVarRet = donde_retornar / tamanioPaginaUmc;
@@ -324,6 +323,8 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
+
+	saltoDeLinea=TRUE;
 }
 
 /*
@@ -336,7 +337,7 @@ void finalizar(void) {
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
-	finalizoCorrectamente=TRUE;
+	finalizoCorrectamente = TRUE;
 }
 
 /*
@@ -349,6 +350,9 @@ void retornar(t_valor_variable retorno) {
 	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,
 			(pcbProceso.indiceDelStack->elements_count) - 1);
 	pcbProceso.programCounter = aux->retPos;
+
+	saltoDeLinea=TRUE;
+
 	StrCpuUmc*streamCpuUmc;
 	asignadoVacio->numDePag = aux->retVars->pagVarRet;
 	streamCpuUmc = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio,
@@ -370,19 +374,17 @@ void retornar(t_valor_variable retorno) {
 int imprimir(t_valor_variable valor_mostrar) {
 
 	StrCpuKer*streamCpuKer;
-	Byte* aux=malloc(100);
+	Byte* aux = malloc(100);
 	sprintf(aux, "%d", valor_mostrar);
 
 	//(Char id, Char action, pcb pcb, Int32U pid,
-			//Int32U logLen, Byte* log, Byte* nombreDispositivo,
-			//Int32U lenNomDispositivo)
+	//Int32U logLen, Byte* log, Byte* nombreDispositivo,
+	//Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
 			strlen(aux), aux, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
-
-
 
 	return strlen(aux);
 }
@@ -406,7 +408,7 @@ int imprimirTexto(char* texto) {
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 
 	char* identificadorMod = malloc(strlen(dispositivo));
-	identificadorMod=sinEspacioAlFinal(dispositivo,strlen(dispositivo));
+	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
 
 	Byte * auxTiempo;
 	sprintf(auxTiempo, "%d", tiempo);
@@ -427,16 +429,16 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 void wait(t_nombre_semaforo identificador_semaforo) {
 
 	char* identificadorMod = malloc(strlen(identificador_semaforo));
-	identificadorMod = sinEspacioAlFinal(identificador_semaforo,strlen(identificador_semaforo));
+	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
+			strlen(identificador_semaforo));
 
 	StrCpuKer*streamCpuKer;
 //	(Char id, Char action, pcb pcb, Int32U pid,
 //			Int32U logLen, Byte* log, Byte* nombreDispositivo,
 //			Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, WAIT_SEM_ANSISOP, pcbProceso,
-			pcbProceso.id, strlen(identificadorMod),
-			identificadorMod, NULL /*NOMBRE DISPOSITIVO*/,
-			0 /*LEN NOMBRE DISPOSITIVO*/);
+			pcbProceso.id, strlen(identificadorMod), identificadorMod,
+			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
@@ -454,13 +456,13 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 void signale(t_nombre_semaforo identificador_semaforo) {
 
 	char* identificadorMod = malloc(strlen(identificadorMod));
-	identificadorMod=sinEspacioAlFinal(identificador_semaforo,strlen(identificador_semaforo));
+	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
+			strlen(identificador_semaforo));
 
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, 28 /*SIGNAL*/, pcbProceso,
-			pcbProceso.id, strlen(identificadorMod),
-			identificadorMod, NULL /*NOMBRE DISPOSITIVO*/,
-			0 /*LEN NOMBRE DISPOSITIVO*/);
+			pcbProceso.id, strlen(identificadorMod), identificadorMod,
+			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 }

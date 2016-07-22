@@ -49,6 +49,7 @@ bool seguirEjecutando; //1 SI 0 NO
 int abortoCPU;
 espacioAsignado * asignadoVacio;
 bool finalizoCorrectamente;
+bool saltoDeLinea;
 
 //======================================================
 
