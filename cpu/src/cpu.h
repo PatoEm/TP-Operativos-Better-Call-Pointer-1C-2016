@@ -156,6 +156,7 @@ void abortarCPU();
 
 void mirarSenial(pcb * pcbActual);
 
+char* sinEspacioAlFinal(char* linea, int tamanio);
 //======================================================
 
 AnSISOP_funciones funciones;

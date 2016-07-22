@@ -287,16 +287,11 @@ int obtener_valor(char* identificador) {
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	int valor;
-	char* aux;
+
 
 	for (i = 0; i < cantVarCompartidas; i++) {
 
-			aux = malloc(100);
-			aux[0] = '\0';
-			strcat(aux, &*idVariableCompartida[i]); //pueden creer que así se accede? que asco
-			strcat(aux, "\n");
-
-		if ((strcmp(aux, identificador)) == 0) {
+		if ((strcmp(&*idVariableCompartida[i], identificador)) == 0) {
 
 			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
 				;
@@ -310,7 +305,6 @@ int obtener_valor(char* identificador) {
 			abortar++;
 
 		}
-		free(aux);
 	}
 	if (abortar == 0) {
 		//todo MATAR
@@ -357,15 +351,12 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	buffer = serializeKerCpu(StrKernelCpu);
 
-	char* aux;
+	//char* aux;
 
 	for (i = 0; (i < cantSemaforos); i++) {
-		aux = malloc(100);
-		aux[0] = '\0';
-		strcat(aux, &*idSemaforos[i]); //pueden creer que así se accede? que asco
-		strcat(aux, "\n");
 
-		if ((strcmp(aux, identificador)) == 0) {
+
+		if ((strcmp(&*idSemaforos[i], identificador)) == 0) {
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
 				socketSend(cpuSocket, buffer);
@@ -382,7 +373,6 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 			}
 
 			abortar++;
-			free(aux);
 		}
 
 	}
@@ -396,20 +386,14 @@ void signalAnsisop(char* identificador) {
 
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
-	char* aux;
 	for (i = 0; i < cantSemaforos; i++) {
-		aux = malloc(100);
-		aux[0] = '\0';
-		strcat(aux, &*idSemaforos[i]); //pueden creer que así se accede? que asco
-		strcat(aux, "\n");
-		if ((strcmp(aux, identificador)) == 0) {
+		if ((strcmp(&*idSemaforos[i], identificador)) == 0) {
 
 			sem_post(semaforosAnsisop[i]);
 
 			abortar++;
 
 		}
-		free(aux);
 
 	}
 	if (abortar == 0) {
