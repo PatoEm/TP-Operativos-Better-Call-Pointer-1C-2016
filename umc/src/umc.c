@@ -255,7 +255,7 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 	int contador = comienzoDelPuntero;
 	int posicionDePaginaLibre;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0))) {
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0)&&nodoActual->bitDePresencia == 1)) {
 		contador++;
 		if (contador == fin)
 			contador = inicio;
@@ -270,7 +270,7 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 		return nodoActual;
 	}
 
-	while (!(((nodoActual->bitUso) == 1) && ((nodoActual->bitModificado) == 0))) {
+	while (!(((nodoActual->bitUso) == 1) && ((nodoActual->bitModificado) == 0)&&nodoActual->bitDePresencia == 1)) {
 		nodoActual->bitUso = 0;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
@@ -286,7 +286,7 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 		return nodoActual;
 
 	}
-	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0))) {
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0)&&nodoActual->bitDePresencia == 1)) {
 
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
@@ -302,7 +302,7 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 		return nodoActual;
 	}
 
-	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 1))) {
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 1)&&nodoActual->bitDePresencia == 1)) {
 
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
