@@ -53,7 +53,15 @@ void setearValores(t_config * archivoConfig) {
 	tamPagina = config_get_string_value(archivoConfig, "TAMANIO_PAGINA");
 	retCompactacion = config_get_string_value(archivoConfig,
 			"RETARDO_COMPACTACION");
-	tamArchivo = atoi(tamPagina)*atoi(paginas);
+
+	int nro1 = atoi(tamPagina);
+	int nro2 = atoi(paginas);
+	int resultado = nro1*nro2;
+	tamArchivo = malloc(100);
+	//itoa(atoi(tamPagina)*atoi(paginas), tamArchivo);
+
+	sprintf(tamArchivo, "%d", resultado);
+
 	retAcceso = config_get_int_value(archivoConfig, "RETARDO_ACCESO");
 	log_info(getLogger(), "Valores del archivo de configuracion seteados");
 }
@@ -482,4 +490,33 @@ t_log* getLogger() {
 		logger = log_create(LOGGER_FILE, "swap", TRUE, LOG_LEVEL_INFO);
 	}
 	return logger;
+}
+
+/* itoa:  convert n to characters in s */
+void itoa(int n, char s[])
+{
+     int i, sign;
+
+     if ((sign = n) < 0)  /* record sign */
+         n = -n;          /* make n positive */
+     i = 0;
+     do {       /* generate digits in reverse order */
+         s[i++] = n % 10 + '0';   /* get next digit */
+     } while ((n /= 10) > 0);     /* delete it */
+     if (sign < 0)
+         s[i++] = '-';
+     s[i] = '\0';
+     reverse(s);
+}
+
+void reverse(char s[])
+{
+     int i, j;
+     char c;
+
+     for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
+         c = s[i];
+         s[i] = s[j];
+         s[j] = c;
+     }
 }
