@@ -147,7 +147,7 @@ void checkCpuConnections() {
 
 					} else {
 						//NO, ENTONCES GESTIONO EL SOCKET QUE HABLO...
-						clientHandler((Socket*) i);
+						clientHandler((int) i);
 					}
 				}
 			}
@@ -335,8 +335,7 @@ void enviarPcbACpu(Socket * cpuClient) {
 	pthread_attr_t attrHiloCpuAlPedo;
 	pthread_attr_init(&attrHiloCpuAlPedo);
 	pthread_attr_setdetachstate(&attrHiloCpuAlPedo, PTHREAD_CREATE_DETACHED);
-	pthread_create(&hiloCpuAlPedo, &attrHiloCpuAlPedo, &funcionHiloCpuAlPedo,
-			punteroACopia);
+	pthread_create(&hiloCpuAlPedo, &attrHiloCpuAlPedo, (void*) &funcionHiloCpuAlPedo, punteroACopia);
 	pthread_attr_destroy(&attrHiloCpuAlPedo);
 
 	// TODO: Aca iria un else en caso de que no haya en la cola de ready,
@@ -429,10 +428,6 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		valor = obtener_valor(
 				stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen));
 
-		// TODO: Probar, si no anda: Enviar el valor en datalength que es int32u
-//		(Char id, Char action, pcb pcb, Int8U quantum,
-//				Byte* data, Int32U dataLen, Byte* nombreDispositivo,
-//				Int32U lenNomDispositivo)
 		out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA,
 				in_cpu_msg->pcb, valor, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
 				0 /*LEN NOMBRE DISPOSITIVO*/);
@@ -453,7 +448,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		nombreDispositivo = in_cpu_msg->log;
 
-		atributosWaitLoco->identificador = nombreDispositivo;
+		atributosWaitLoco->identificador = (char*)nombreDispositivo;
 		atributosWaitLoco->pcbLoca = in_cpu_msg->pcb;
 		atributosWaitLoco->cpuSocket = cpuClient;
 
@@ -461,8 +456,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		pthread_attr_t attrHiloWait;
 		pthread_attr_init(&attrHiloWait);
 		pthread_attr_setdetachstate(&attrHiloWait, PTHREAD_CREATE_DETACHED);
-		pthread_create(&hiloWait, &attrHiloWait, &funcionHiloWait,
-				atributosWaitLoco);
+		pthread_create(&hiloWait, &attrHiloWait, (void*) &funcionHiloWait, atributosWaitLoco);
 		pthread_attr_destroy(&attrHiloWait);
 
 		break;
@@ -471,7 +465,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		nombreDispositivo = in_cpu_msg->log;
 
-		signalAnsisop(nombreDispositivo);
+		signalAnsisop((char*) nombreDispositivo);
 
 		break;
 
@@ -526,21 +520,18 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	case ENTRADA_SALIDA:
 
 //	  TODO: Proba esto para obtener el string.
-		nombreDispositivo = stringFromByteArray(in_cpu_msg->nombreDispositivo,
-				in_cpu_msg->lenNomDispositivo);
+		nombreDispositivo = stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
 //	  nombreDispositivo=in_cpu_msg->nombreDispositivo;
 		valor_cantidad_tiempo = atoi(in_cpu_msg->log);
 
-		atributos.identificador = nombreDispositivo;
+		atributos.identificador = (char*)nombreDispositivo;
 		atributos.cantidad = valor_cantidad_tiempo;
 		atributos.pcbLoca = pcb_aux;
 
 		pthread_attr_init(&attrHiloIO);
 		pthread_attr_setdetachstate(&attrHiloIO, PTHREAD_CREATE_DETACHED);
-		pthread_create(&hiloIO, &attrHiloIO, &funcionHiloIO, &atributos);
+		pthread_create(&hiloIO, &attrHiloIO, (void*)&funcionHiloIO, &atributos);
 		pthread_attr_destroy(&attrHiloIO);
-
-//		 todo testear hilos IO
 
 		log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
 
@@ -553,8 +544,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		char* mensajeFinalizar = "El programa finalizo correctamente.";
 
 		// Creo y serializo string kernel a consola.
-		out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA,
-				strlen(mensajeFinalizar), mensajeFinalizar);
+		out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, strlen(mensajeFinalizar), (Byte*)mensajeFinalizar);
 		sb = serializeKerCon(out_con_msg);
 
 		// Extraigo el socket de la respectiva consola.
@@ -636,7 +626,8 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 void consoleClientHandler(Socket *consoleClient, Stream data) {
 	pcb *pcbLoco = malloc(sizeof(pcb*));
-
+	SocketBuffer* sb;
+	StrKerUmc* sku;
 	StrConKer *sck = unserializeConKer(data);
 	switch (sck->action) {
 	case STD_OUTPUT:
@@ -653,8 +644,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 				consoleClient->descriptor);
 
 		//SE GENERA EL NUEVO PCB
-		pcbLoco = crearNuevoPcb(consoleClient, sck->fileContent,
-				sck->fileContentLen);
+		pcbLoco = crearNuevoPcb(consoleClient, (char*)sck->fileContent, sck->fileContentLen);
 
 		moverAColaReady(pcbLoco);
 
@@ -716,6 +706,28 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 
 		break;
 
+	case ABORTAR_PROGRAMA: //TODO HACER
+		printf("Se pidio ABORTAR programa para consola.\n");
+		pthread_mutex_lock(mutexListaExec);
+		pcbLoco = buscarPCBPorConsola(listaExec, consoleClient);
+		pthread_mutex_unlock(mutexListaExec);
+
+		if(pcbLoco != NULL){
+			moverAColaExit(pcbLoco);
+
+
+		sku = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+		NULL, 0, pcbLoco->id, 0, 0, 0, 0);
+		sb = serializeUmcKer(sku);
+		if (!socketSend(umcServer->ptrSocket, sb)) {
+			log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
+					pcbLoco->id);
+		} else {
+			log_info(cpuhlog, "Se aborto el programa a umc %d", pcbLoco->id);
+		}
+		}
+		puts("PROGRAMA ABORTADO.");
+		break;
 	default:
 		log_error(cpuhlog,
 				"KERNEL : No se pudo determinar el action del cliente CONSOLA");
@@ -736,10 +748,9 @@ int pedirTamanioDePagina(int puerto) {
 
 	SocketBuffer * buffer;
 	StrKerUmc * streamKerUmc;
-
+	StrUmcKer * streamUmcKer;
 	//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio)
-	streamKerUmc = newStrKerUmc(KERNEL_ID, TAMANIO_DE_MARCOS, "hola", 0, 0, 0,
-			0, 0, 0);
+	streamKerUmc = newStrKerUmc(KERNEL_ID, TAMANIO_DE_MARCOS, (Byte*)"hola", 0, 0, 0, 0, 0, 0);
 	buffer = serializeKerUmc(streamKerUmc);
 	socketSend(umcServer->ptrSocket, buffer);
 
@@ -748,9 +759,9 @@ int pedirTamanioDePagina(int puerto) {
 	if (buffer == NULL)
 		puts("Error al recibir del cliente");
 
-	streamKerUmc = unserializeUmcKer(buffer);
+	streamUmcKer = unserializeUmcKer((Stream)buffer);
 
-	return (streamKerUmc->size);
+	return (streamUmcKer->size);
 }
 
 int cantidadPaginasArchivo(int longitudArchivo) {

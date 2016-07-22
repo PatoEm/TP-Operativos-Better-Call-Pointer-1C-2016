@@ -30,15 +30,17 @@ void cpuHandlerThread();
 void* cpuHandlerThreadRoutine(void*);
 Boolean initCpuServer();
 void checkCpuConnections();
-void newClientHandler(Socket* client);
-void newCpuClient(Socket* cpuClient, Stream dataSerialized);
-void clientHandler(int cliente);
-int cpuCoreInList(t_list* lista, Socket* cliente);
-void cpuClientHandler(Socket* cpuClient, Stream data);
-void newConsoleClient(Socket* consoleClient, Stream dataSerialized);
-int cantidadPaginasArchivo(int longitudArchivo);
-int pedirTamanioDePagina(int puerto);
-void funcionHiloCpuAlPedo(Socket * cpuLoca);
+void newClientHandler(Socket*);
+void newCpuClient(Socket*, Stream);
+void clientHandler(int);
+int cpuCoreInList(t_list* , Socket*);
+void cpuClientHandler(Socket*, Stream);
+void newConsoleClient(Socket*, Stream);
+int cantidadPaginasArchivo(int);
+int pedirTamanioDePagina(int);
+void funcionHiloCpuAlPedo(Socket*);
+void consoleClientHandler(Socket*, Stream);
+
 
 // ESTRUCTURAS
 

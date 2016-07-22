@@ -136,6 +136,7 @@ int inicializarVariables();
 void crearHilos();
 void enviarPcbACpu(Socket *);
 void *buscarYEliminarPCBEnLista(t_list *, pcb* );
+pcb* buscarPCBPorConsola(t_list *, Socket*);
 void funcionHiloIO(atributosIO);
 void funcionHiloWait(atributosWait* );
 

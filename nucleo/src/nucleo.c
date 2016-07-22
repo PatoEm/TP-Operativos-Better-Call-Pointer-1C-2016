@@ -623,6 +623,27 @@ void* buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 }
 
+pcb* buscarPCBPorConsola(t_list * lista, Socket* consola) {
+
+	int i;
+
+	pcb * pcbComparar;
+	for (i = 0; i < list_size(lista); i++) {
+
+		pcbComparar = ((pcb*) list_get(lista, i));
+
+		if ((int)(pcbComparar->consola->descriptor) == (int)(consola->descriptor)) {
+
+			return list_get(lista, i);
+
+		}
+
+	}
+
+	return NULL;
+
+}
+
 void funcionHiloIO(atributosIO atributos) {
 
 	entrada_salida(atributos.identificador, atributos.cantidad,
