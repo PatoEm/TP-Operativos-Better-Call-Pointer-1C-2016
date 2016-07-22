@@ -240,7 +240,7 @@ Boolean instructionsFromKernel() {
 Boolean realizarImprimir() {
 	t_valor_variable valor_mostrar;
 	valor_mostrar = skc->log;
-	printf("%d\n", valor_mostrar);
+	printf("%s\n", valor_mostrar);
 	return TRUE;
 }
 
@@ -283,6 +283,8 @@ void funcionHiloConsola(pthread_t hiloConsola){
 
 				if(!socketSend(kernelClient->ptrSocket, sbthread)) {
 					log_error(getLogger(), "No se pudo enviar el stream al NUCLEO. ----- Terminando.");
+				} else {
+					log_info(getLogger(), "Se aborto el programa por CONSOLA");
 				}
 				free(sbthread);
 				fclose(fp);

@@ -683,7 +683,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 				sck->fileContent, sck->fileContentLen, pcbLoco->id,
 				pcbLoco->paginasDeCodigo, 0, 0,
 				cantidadPaginasArchivo(sck->fileContentLen));
-		buffer = serializeUmcKer(streamALaUmc);
+		buffer = serializeKerUmc(streamALaUmc);
 		if (!socketSend(umcServer->ptrSocket, buffer)) {
 			log_error(cpuhlog, "No se pudo inicializar programa %d",
 					pcbLoco->id);

@@ -113,4 +113,8 @@ void manejoDeConexiones();
 
 t_log* getLogger();
 
+void itoa(int n, char s[]);
+
+void reverse(char s[]);
+
 #endif /* SWAP_H_ */

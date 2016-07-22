@@ -286,9 +286,16 @@ int obtener_valor(char* identificador) {
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	int valor;
+	char* aux;
+
 	for (i = 0; i < cantVarCompartidas; i++) {
 
-		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
+			aux = malloc(100);
+			aux[0] = '\0';
+			strcat(aux, &*idVariableCompartida[i]); //pueden creer que así se accede? que asco
+			strcat(aux, "\n");
+
+		if ((strcmp(aux, identificador)) == 0) {
 
 			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
 				;
@@ -302,7 +309,7 @@ int obtener_valor(char* identificador) {
 			abortar++;
 
 		}
-
+		free(aux);
 	}
 	if (abortar == 0) {
 		//todo MATAR
@@ -410,7 +417,7 @@ void signalAnsisop(char* identificador) {
 
 }
 //testeada
-int inicializarVariables() {
+int inicializarVariables(char* ruta) {
 
 	// LOG
 	nucleolog = malloc(sizeof(t_log));
@@ -461,8 +468,7 @@ int inicializarVariables() {
 	int i;
 
 	//Leo el archivo de configuracion
-	leerArchivoDeConfiguracion(
-			"/home/utnso/tp-2016-1c-Better-call-pointer/nucleo/confignucleo");
+	leerArchivoDeConfiguracion(ruta);
 
 	//Inicio Semaforos
 	cantSemaforos = cantidadPalabrasEnArrayDeStrings(idSemaforos);
