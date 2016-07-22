@@ -82,20 +82,21 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	if (metaNuevoPrograma->etiquetas != NULL) {
 		pcbNuevoPrograma->indiceDeEtiquetas = malloc(
-				sizeof(char) * (strlen(metaNuevoPrograma->etiquetas) + 1));
+				sizeof(char) * (metaNuevoPrograma->etiquetas_size));
 
 		memcpy((pcbNuevoPrograma->indiceDeEtiquetas),
 				metaNuevoPrograma->etiquetas,
-				strlen(metaNuevoPrograma->etiquetas) + 1);
+				(metaNuevoPrograma->etiquetas_size));
 		pcbNuevoPrograma->indiceDeEtiquetasSize = strlen(
 				metaNuevoPrograma->etiquetas) + 1;
+		pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
 	} else {
 		pcbNuevoPrograma->indiceDeEtiquetas = "MUERTE A WINDOWS";
 		pcbNuevoPrograma->indiceDeEtiquetasSize = 17;
-
+		pcbNuevoPrograma->etiquetaSize=17;
 	}
 
-	pcbNuevoPrograma->etiquetaSize = metaNuevoPrograma->etiquetas_size;
+
 
 	pcbNuevoPrograma->instruccionesTotales =
 			metaNuevoPrograma->instrucciones_size;
