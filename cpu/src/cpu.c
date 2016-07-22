@@ -300,7 +300,11 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  */	// YA ESTA TERMINADA
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
+<<<<<<< HEAD
+	etiquetaMod = malloc(strlen(etiqueta));
+=======
 	char* etiquetaMod;
+>>>>>>> 18794edeb9ee71705f84deab65a5576e04c02e0a
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,

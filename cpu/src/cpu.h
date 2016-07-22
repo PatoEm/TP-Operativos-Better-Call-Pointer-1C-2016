@@ -37,6 +37,7 @@
  *******************************************************/
 char* ipUMC;
 int umcPort;
+char* etiquetaMod;
 int nucleoPort;
 char* ipNucleo;
 int clienteNucleo;
