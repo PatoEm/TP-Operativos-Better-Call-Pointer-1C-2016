@@ -781,7 +781,7 @@ int cantidadPaginasArchivo(int longitudArchivo) {
 void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 
 	while (listaReady->elements_count == 0) {
-
+		sleep(1);
 	}
 	pthread_mutex_lock(mutexColaReady);
 	pcb* pcbAEnviar = (pcb*) list_get(listaReady, 0);

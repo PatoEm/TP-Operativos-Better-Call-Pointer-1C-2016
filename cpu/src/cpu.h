@@ -120,7 +120,7 @@ void retornar(t_valor_variable retorno);
 /*
  * imprimir
  */
-int imprimir(t_valor_variable valor_mostrar);
+void imprimir(t_valor_variable valor_mostrar);
 
 /*
  * imprimirTexto

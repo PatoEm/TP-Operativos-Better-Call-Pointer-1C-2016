@@ -130,7 +130,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			}
 		}
 	}
-
+	//free(buffer);
 	return nuevaVariable->pos;
 }
 
@@ -217,6 +217,8 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
 	socketSend(socketUMC->ptrSocket, buffer);
 	buffer = socketReceive(socketUMC->ptrSocket);
+
+	free(dataAMandar);
 	//////////////////////////////////////////////////////////////////
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeCpuUmc(buffer);
@@ -235,7 +237,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  *///YA ESTA TERMINADO
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 
-	char* variableMod = malloc(strlen(variable));
+	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
 	StrCpuKer*streamCpuKer;
@@ -245,12 +247,18 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
+
+	free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
+
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)
 		return (streamKerCpu->quantum);
 	else
 		seguirEjecutando = FALSE;
 	return -1;
+
+
+
 }
 
 /*
@@ -259,7 +267,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
 
-	char* variableMod = malloc(strlen(variable));
+	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
 	char* buffer;
@@ -275,12 +283,16 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 //			Int32U lenNomDispositivo)
 	buffer = socketReceive(socketNucleo->ptrSocket);
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
+	free(variableMod);
 	if (streamKerCpu->action == ASIGNAR_VALOR_COMPARTIDA)
 		return streamKerCpu->quantum;
 	else {
 		seguirEjecutando = FALSE;
 		return -1;
 	}
+
+
+	//free(buffer);
 }
 
 /*
@@ -288,22 +300,28 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  */	// YA ESTA TERMINADA
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
-	char* etiquetaMod = malloc(strlen(etiqueta));
+	char* etiquetaMod;
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
+
+	free(etiquetaMod);
 
 	saltoDeLinea = TRUE;
 }
 
 char* sinEspacioAlFinal(char* linea, int tamanio) {
 
-	if (isspace(linea[tamanio - 1])) {
-		linea[tamanio - 1] = '\0';
-		return linea;
+	char* lineaLoca =(char*) malloc(tamanio);
+
+	memcpy(lineaLoca,linea,tamanio);
+
+	if (isspace(lineaLoca[tamanio - 1])) {
+		lineaLoca[tamanio - 1] = '\0';
+		return lineaLoca;
 	} else
-		return linea;
+		return lineaLoca;
 
 }
 
@@ -324,6 +342,8 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
+
+	free(etiquetaMod);
 	saltoDeLinea=TRUE;
 }
 
@@ -371,7 +391,7 @@ void retornar(t_valor_variable retorno) {
 /*
  * imprimir
  */	// YA ESTA
-int imprimir(t_valor_variable valor_mostrar) {
+void imprimir(t_valor_variable valor_mostrar) {
 
 	StrCpuKer*streamCpuKer;
 	Byte* aux = malloc(100);
@@ -385,8 +405,7 @@ int imprimir(t_valor_variable valor_mostrar) {
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
-
-	return strlen(aux);
+	free(aux);
 }
 
 /*
@@ -410,7 +429,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	char* identificadorMod = malloc(strlen(dispositivo));
 	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
 
-	Byte * auxTiempo;
+	Byte * auxTiempo=malloc(100);
 	sprintf(auxTiempo, "%d", tiempo);
 	StrCpuKer*streamCpuKer;
 //(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
@@ -420,6 +439,10 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 			strlen(identificadorMod) /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+
+	free(identificadorMod);
+	free(auxTiempo);
+
 	seguirEjecutando = FALSE;
 }
 
@@ -448,6 +471,8 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	} else
 		seguirEjecutando = FALSE;
 
+	free(identificadorMod);
+
 }
 
 /*
@@ -465,6 +490,8 @@ void signale(t_nombre_semaforo identificador_semaforo) {
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+
+	free(identificadorMod);
 }
 
 char * pedirCodigoAUMC() {
