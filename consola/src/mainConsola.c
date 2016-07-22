@@ -24,6 +24,7 @@ StrConKer* sckthread = NULL;
 StrKerCon* skc = NULL;
 String direccionDeArchivo;
 int mandoPrograma;
+Boolean lastInstruction;
 
 /*
  * Prototipos
@@ -74,11 +75,14 @@ int main(void) {
 			log_error(getLogger(), "No se pudo obtener el archivo .AnSISOP y enviarlo al NUCLEO");
 			return FALSE;
 		}
-		mandoPrograma=1;
+		mandoPrograma = 1;
+		lastInstruction = FALSE;
 		while (TRUE) {
 			if(!instructionsFromKernel()) {
+				if (lastInstruction) {
+					return FALSE;
+				}
 				log_error(getLogger(), "No se recibio instrucciones del NUCLEO");
-				return FALSE;
 			}
 		}
 	}
@@ -251,6 +255,7 @@ Boolean realizarImprimirTexto() {
 
 Boolean realizarCierreConsola() {
 	printf("%s\n", stringFromByteArray(skc->log, skc->logLen));
+	lastInstruction = TRUE;
 	return FALSE;
 }
 
