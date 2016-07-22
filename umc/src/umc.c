@@ -154,11 +154,23 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 	return nodoActual;
 }
 
+void sacarPaginaDeTelebe(int pid, int pg) {
+	t_tlb* unaPaginaDeTelebe;
+	int i = 0;
+	while (i != list_size(TLB)) {
+		unaPaginaDeTelebe=list_get(TLB,i);
+		if (pid==unaPaginaDeTelebe->pid && pg==unaPaginaDeTelebe->pagina)
+			list_remove(TLB,i);
+		else
+			i++;
+	}
+}
+
 //devuelve el nodo del espacio en memoria
 int reemplazarPaginaClock(int pid, int pagina) {
 
-	//int inicio = lugarAsignadoInicial(pid);
-	//int fin = lugarAsignadoFinal(pid);
+//int inicio = lugarAsignadoInicial(pid);
+//int fin = lugarAsignadoFinal(pid);
 	int posicionDePaginaLibre;
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual;
@@ -167,6 +179,8 @@ int reemplazarPaginaClock(int pid, int pagina) {
 		nodoActual = buscarBitDeUsoEn0(pid);
 	}
 	nodoActual->bitDePresencia = 0;
+	if (tlbHabilitada())
+		sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	char* paginaAEnviar = malloc(sizeof(char) * marco_Size);
 	int inicioLectura = posicionDePaginaLibre * marco_Size;
@@ -317,6 +331,8 @@ bool lectoEscritura) {
 	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	nodoActual->bitDePresencia = 0;
+	if (tlbHabilitada())
+			sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
 	int i = 0;
 	espacioAsignado*nodoBuscado = list_get(listaEspacioAsignado, i);
 	while (!(nodoBuscado->pid == pid && nodoBuscado->numDePag == pagina)) {
@@ -611,7 +627,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 }
 
 void finalizarPrograma(int pid) {
-	if(tlbHabilitada())
+	if (tlbHabilitada())
 		eliminarProcesoTLB(pid);
 	StrUmcSwa*streamUmcSwa;
 	espacioAsignado* pagina = newEspacioAsignado();
@@ -622,7 +638,7 @@ void finalizarPrograma(int pid) {
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
 	espacioAsignado*nodoAReventar;
-	//int enDondeAgregarEspacio = 0;
+//int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
 	nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	while ((nodoAReventar->pid) != pid) {
@@ -732,7 +748,7 @@ void* manageSocketConnection(void* param) {
 	Socket* socket = (Socket*) param;
 	Boolean connected = TRUE;
 	log_info(umclog, "UMC: Gestor de conexiones.");
-	//while (TRUE) {
+//while (TRUE) {
 	log_info(umclog, "UMC: Esperando el request...");
 	SocketBuffer* sb = socketReceive(socket);
 	log_info(umclog, "UMC: ...Entro el request.");
@@ -1167,7 +1183,7 @@ int reemplazarPaginaLRU() {
 	int contadorPrimerMomento = 0;
 	t_tlb*paginaAComparar;
 	t_tlb*paginaAMatar;
-	//char* buffer = malloc(sizeof(char) * marco_Size);
+//char* buffer = malloc(sizeof(char) * marco_Size);
 	paginaAMatar = list_get(TLB, contadorPrimerMomento);
 	int lugarDePaginaAMatar = 0;
 	for (contadorPrimerMomento = 0; contadorPrimerMomento < list_size(TLB);
@@ -1276,7 +1292,7 @@ void eliminarProcesoTLB(int PID) {
 	}
 }
 
-//DEVUELVE 1 SI ESTA HABILITADA, SI NO ESTA HBILITADA DEVUELVE 0
+//DEVUELVE 1 SI ESTA HABILITADA, SI NO ESTA HABILITADA DEVUELVE 0
 int tlbHabilitada() {
 	if (entradas_TLB == 0) {
 		return 0;

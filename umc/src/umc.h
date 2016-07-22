@@ -91,6 +91,8 @@ void agregarEspacioLibre(int inicio);
 
 void iniciarTLB();
 
+void sacarPaginaDeTelebe(int pid, int pg) ;
+
 int calcularIDPagina(int inicio);
 
 void iniciarEstructurasUMC();
