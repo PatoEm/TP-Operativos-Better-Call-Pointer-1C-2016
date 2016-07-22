@@ -53,7 +53,7 @@ void setearValores(t_config * archivoConfig) {
 	tamPagina = config_get_string_value(archivoConfig, "TAMANIO_PAGINA");
 	retCompactacion = config_get_string_value(archivoConfig,
 			"RETARDO_COMPACTACION");
-	tamArchivo = config_get_string_value(archivoConfig, "TAMANIO_ARCHIVO");
+	tamArchivo = atoi(tamPagina)*atoi(paginas);
 	retAcceso = config_get_int_value(archivoConfig, "RETARDO_ACCESO");
 	log_info(getLogger(), "Valores del archivo de configuracion seteados");
 }
