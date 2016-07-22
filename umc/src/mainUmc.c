@@ -8,14 +8,19 @@ BETTER CALL POINTER PERRO
 
 #include "umc.h"
 
-int main(void) {
+int main(int argc, char** argv) {
+
+	if(argc != 2){
+		puts("No se ingreso la ruta del archivo de configuracion\n");
+		return 0;
+	}
 
 	thread_socket= 3030;
 
 	umclog=malloc(sizeof(t_log));
 	memcpy(umclog,log_create("umc.log", "UMC", TRUE, LOG_LEVEL_TRACE), sizeof(t_log));
 
-	leerArchivoDeConfiguracion("/home/utnso/tp-2016-1c-Better-call-pointer/umc/configumc");
+	leerArchivoDeConfiguracion(argv[1]);
 	crearLogger(0);
 	log_info(umclog, "Inicio UMC.");
 

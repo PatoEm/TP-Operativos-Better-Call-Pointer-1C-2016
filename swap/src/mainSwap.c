@@ -2,9 +2,14 @@
 
 t_log* logger = NULL;
 
-int main(void) {
+int main(int argc, char** argv) {
 
-	leerArchivoDeConfiguracion("/home/utnso/tp-2016-1c-Better-call-pointer/swap/swapconfig");
+	if(argc != 2){
+		puts("No se ingreso la ruta del archivo de configuracion\n");
+		return 0;
+	}
+
+	leerArchivoDeConfiguracion(argv[1]);
 	tamPaginaLoca=atoi(tamPagina);
 	iniciarEstructurasSwap();
 	archivoMappeado = crearArchivo(tamArchivo, nombreSwap);
