@@ -53,7 +53,7 @@ int tamanioCodigo(char*codigo) {
 bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	SocketBuffer*buffer;
 	StrUmcSwa*streamUmcSwap;
-	espacioAsignado* pagina= newEspacioAsignado();
+	espacioAsignado* pagina = newEspacioAsignado();
 	StrSwaUmc * streamSwapUmc;
 	pagina->numDePag = 0;
 	//StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
@@ -438,7 +438,7 @@ int paginasOcupadasPorPid(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
-	usleep(1000*espera);
+	usleep(1000 * espera);
 	char*paginaADevolver = malloc(sizeof(char) * cantidad);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
@@ -530,7 +530,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 }
 
 void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
-	usleep(1000*espera);
+	usleep(1000 * espera);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -612,7 +612,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 
 void finalizarPrograma(int pid) {
 	StrUmcSwa*streamUmcSwa;
-	espacioAsignado* pagina=newEspacioAsignado();
+	espacioAsignado* pagina = newEspacioAsignado();
 	streamUmcSwa = newStrUmcSwa(UMC_ID, ELIMINAR_PROCESO, *pagina, NULL,
 	NULL,
 	NULL, pid);
@@ -642,18 +642,19 @@ void finalizarPrograma(int pid) {
 		}
 		nodoAReventar = list_remove(listaEspacioAsignado, nodoActualAReventar);
 		free(nodoAReventar);
-		if (listaEspacioAsignado->elements_count== nodoActualAReventar)
+		if (listaEspacioAsignado->elements_count == nodoActualAReventar)
 			break;
 		//nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
-	int j=0;
-	paginasPorPrograma*unaPaginaParaZafar=list_get(listaPaginasPorPrograma,j);
-	while(unaPaginaParaZafar->pid!=pid){
+	int j = 0;
+	paginasPorPrograma*unaPaginaParaZafar = list_get(listaPaginasPorPrograma,
+			j);
+	while (unaPaginaParaZafar->pid != pid) {
 		j++;
-		unaPaginaParaZafar=list_get(listaPaginasPorPrograma,j);
+		unaPaginaParaZafar = list_get(listaPaginasPorPrograma, j);
 	}
-	list_remove(listaPaginasPorPrograma,j);
+	list_remove(listaPaginasPorPrograma, j);
 }
 
 //Funcion básica del tp
@@ -711,12 +712,12 @@ void manageSocketConnections() {
 	Socket* s = socketCreateServer(atoi(puertoEscucha));
 	while (TRUE) {
 		pthread_t socketConnection;
-		log_info(umclog, "> Escuchando conexiones del Kernel o CPUs.");
+		log_info(umclog, "UMC: Escuchando conexiones del Kernel o CPUs.");
 		socketListen(s);
 		Socket* socketClient;
 		socketClient = socketAcceptClient(s);
 		if (socketClient != NULL) {
-			log_info(umclog, "Alguien se conecto.");
+			log_info(umclog, "UMC: Alguien se conecto.");
 			manageSocketConnection((void*) socketClient);
 
 			list_add(conexionSockets, &socketConnection);
@@ -728,11 +729,11 @@ void manageSocketConnections() {
 void* manageSocketConnection(void* param) {
 	Socket* socket = (Socket*) param;
 	Boolean connected = TRUE;
-	log_info(umclog, "Gestor de conexiones.");
+	log_info(umclog, "UMC: Gestor de conexiones.");
 	//while (TRUE) {
-	log_info(umclog, "Esperando el request...");
+	log_info(umclog, "UMC: Esperando el request...");
 	SocketBuffer* sb = socketReceive(socket);
-	log_info(umclog, "...Entro el request.");
+	log_info(umclog, "UMC: ...Entro el request.");
 	if (sb != NULL) {
 		Char id = getStreamId((Stream) sb->data);
 		StrKerUmc* sku = NULL;
@@ -774,7 +775,7 @@ void* manageSocketConnection(void* param) {
 		}
 	} else {
 		log_error(umclog,
-				"Gestor de conexiones: No pudo recibir request, desconectando al cliente.");
+				"UMC: Gestor de conexiones: No pudo recibir request, desconectando al cliente.");
 		connected = FALSE;
 		//	}
 
@@ -1187,12 +1188,16 @@ void insertarNodoOrdenadoEnTLB(t_tlb*unNodo) {
 		list_add(TLB, unNodo);
 	else {
 		t_tlb*nodoActual = list_get(TLB, contador);
-		while (nodoActual->pid < unNodo->pid && contador < list_size(TLB)) {
+		while (!(nodoActual->pid < unNodo->pid || contador < list_size(TLB))) {
 			contador++;
-			if (contador == list_size(TLB))
-				nodoActual = list_get(TLB, contador);
+			if (contador == list_size(TLB)) {
+				list_add(TLB, unNodo);
+				break;
+			}
+			nodoActual = list_get(TLB, contador);
 		}
-		list_add_in_index(TLB, contador, unNodo);
+		if (contador != list_size(TLB))
+			list_add_in_index(TLB, contador, unNodo);
 	}
 }
 int buscarPaginaVaciaEnTLB() {
@@ -1207,9 +1212,9 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 	accesosTLB++;
 	int habilitada = tlbHabilitada();
 	char* buffer = malloc(sizeof(char) * tamanio);
-	int j=0;
-	while(j!=tamanio){
-		buffer[j]='\0';
+	int j = 0;
+	while (j != tamanio) {
+		buffer[j] = '\0';
 		j++;
 	}
 
