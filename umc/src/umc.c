@@ -50,6 +50,10 @@ int tamanioCodigo(char*codigo) {
 	return contador;
 }
 
+void eliminarProcesoTLB(int PID){
+	while
+}
+
 bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	SocketBuffer*buffer;
 	StrUmcSwa*streamUmcSwap;
