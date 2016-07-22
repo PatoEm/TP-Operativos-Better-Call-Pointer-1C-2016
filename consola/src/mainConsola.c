@@ -11,7 +11,6 @@
  * Dependencias
  */
 #include "consola.h"
-#include <pthread.h>
 
 /*
  * Variables Globales
@@ -21,6 +20,7 @@ String ipKernel;
 t_config* tConfig;
 SocketClient* kernelClient = NULL;
 StrConKer* sck = NULL;
+StrConKer* sckthread = NULL;
 StrKerCon* skc = NULL;
 String direccionDeArchivo;
 int mandoPrograma;
@@ -37,7 +37,8 @@ Boolean realizarImprimir();
 Boolean realizarImprimirTexto();
 Boolean realizarCierreConsola();
 String stringFromByteArray(Byte*, Int32U);
-void mensajeConsola();
+void crearHiloConsola();
+
 
 /*
  * Estructura para Logger
@@ -52,14 +53,6 @@ int main(void) {
 	log_info(getLogger(), "                                               ");
 	log_info(getLogger(), "Leyendo archivo de configuracion y conectandose al NUCLEO");
 
-	mandoPrograma=0;
-	//Creo hilo de manejo de mensajes por Consola
-
-	pthread_t consolaCorte;
-	pthread_attr_t atributo;
-	pthread_attr_init(&atributo);
-	pthread_attr_setdetachstate(&atributo, PTHREAD_CREATE_DETACHED);
-	//pthread_create(&consolaCorte, &atributo, /*(void*)*/&mensajeConsola, NULL); TODO esta linea me trae problemas, y no se porque
 
 	if (loadConfig() && socketConnection()) {
 
@@ -70,6 +63,11 @@ int main(void) {
 		printf("Ingrese la ruta del archivo: ");
 	    scanf("%s", direccionDeArchivo);
 		} while (access(direccionDeArchivo, R_OK));
+
+		mandoPrograma=0;
+		//Creo hilo de manejo de mensajes por Consola
+
+		crearHiloConsola();
 
 		log_info(getLogger(), "Obteniendo el archivo .AnSISOP y enviandolo al NUCLEO");
 		if (!callAndSendAnSISOP(direccionDeArchivo)) {
@@ -242,7 +240,7 @@ Boolean instructionsFromKernel() {
 Boolean realizarImprimir() {
 	t_valor_variable valor_mostrar;
 	valor_mostrar = skc->log;
-	printf("%d\n", valor_mostrar);
+	printf("%s\n", valor_mostrar);
 	return TRUE;
 }
 
@@ -268,27 +266,39 @@ String stringFromByteArray(Byte* data, Int32U size) {
 	return result;
 }
 
-void mensajeConsola(){
+void funcionHiloConsola(pthread_t hiloConsola){
 	while(mandoPrograma == 0);
-		while(1){
-			printf("Si desea finalizar el programa ingrese el #1: \n");
+		while(TRUE){
+			printf("Si desea finalizar el programa ingrese 1: \n");
 			int finalizar_Programa;
-			uint32_t id = CONSOLA_ID;
-			uint32_t fin;
 			scanf("%d",&finalizar_Programa);
 			if(finalizar_Programa == 1){
-			void* bufferFin = malloc(sizeof(uint32_t)*3);
-			fin = ABORTAR_PROGRAMA;
-			memcpy(bufferFin, &id,sizeof(uint32_t));
-			memcpy(bufferFin+sizeof(uint32_t), &fin, sizeof(uint32_t));
-			memcpy(bufferFin+(sizeof(uint32_t)*2), &id, sizeof(uint32_t));
-			send(kernelClient, bufferFin, (sizeof(uint32_t)*3), 0);
-			free(bufferFin);
-			fclose(fp);
-			}
-			else{
-				printf("Numero no válido, volver a intentar\n");
+				sckthread = newStrConKer((char) CONSOLA_ID, (char) ABORTAR_PROGRAMA, NULL, 0);
+
+				if (sckthread == NULL) {
+					log_error(getLogger(), "Se trato de enviar el stream al NUCLEO sin inicializar. ----- Terminando.");
+				}
+
+				SocketBuffer* sbthread = serializeConKer(sckthread);
+
+				if(!socketSend(kernelClient->ptrSocket, sbthread)) {
+					log_error(getLogger(), "No se pudo enviar el stream al NUCLEO. ----- Terminando.");
+				} else {
+					log_info(getLogger(), "Se aborto el programa por CONSOLA");
+				}
+				free(sbthread);
+				fclose(fp);
+			} else {
+				printf("Numero no válido\n");
 			}
 		}
 }
 
+void crearHiloConsola() {
+	pthread_t hiloConsola;
+	pthread_attr_t attrHiloConsola;
+	pthread_attr_init(&attrHiloConsola);
+	pthread_attr_setdetachstate(&attrHiloConsola, PTHREAD_CREATE_DETACHED);
+	pthread_create(&hiloConsola, &attrHiloConsola, &funcionHiloConsola, NULL);
+	pthread_attr_destroy(&attrHiloConsola);
+}

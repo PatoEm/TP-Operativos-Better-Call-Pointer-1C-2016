@@ -21,6 +21,7 @@
 #include "libreriasCompartidas/pointerStream.h"
 #include <commons/string.h>
 #include <unistd.h>
+#include <pthread.h>
 
 /*
  * Defines
@@ -39,5 +40,6 @@ FILE * fp;
 int tamArchivo(char* direccionArchivo);
 char* leerProgramaAnSISOP(char* direccionArchivo);
 t_log* getLogger();
+void funcionHiloConsola();
 
 #endif /* CONSOLA_H_ */
