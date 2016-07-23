@@ -800,11 +800,20 @@ int cantidadPaginasArchivo(int longitudArchivo) {
 void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 
 
-	pthread_mutex_lock(mutexColaReady);
+	bool seguirBuscando = TRUE;
 
-	while (listaReady->elements_count == 0) {
-		sleep(1);
+	while(seguirBuscando){
+		pthread_mutex_lock(mutexColaReady);
+
+		if(listaReady->elements_count == 0){
+			printf("La CPU %d esta al re pedo.\n", cpuLoca->descriptor);
+			pthread_mutex_unlock(mutexColaReady);
+			sleep(1);
+		} else {
+			seguirBuscando = FALSE;
+		}
 	}
+
 
 	pcb* pcbAEnviar = (pcb*) list_get(listaReady, 0);
 	buscarYEliminarPCBEnLista(listaReady, pcbAEnviar);
