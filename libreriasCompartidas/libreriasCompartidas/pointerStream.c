@@ -1288,7 +1288,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
-	data[dataLen] = '\0';
+	//data[dataLen] = '\0';
 
 	memcpy(&lenNomDispositivo, ptrByte, sizeof(lenNomDispositivo));
 	ptrByte += sizeof(lenNomDispositivo);
@@ -1297,7 +1297,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(nombreDispositivo, ptrByte, lenNomDispositivo);
 	ptrByte += lenNomDispositivo;
 
-	nombreDispositivo[lenNomDispositivo] = '\0';
+	//nombreDispositivo[lenNomDispositivo] = '\0';
 
 	free(dataSerialized);
 	return newStrKerCpu(id, action, pcb, quantum, data, dataLen,
@@ -1330,7 +1330,7 @@ StrKerUmc* unserializeKerUmc(Stream dataSerialized) {
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
 
-	data[size] = '\0';
+	//data[size] = '\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1374,7 +1374,7 @@ StrKerCon* unserializeKerCon(Stream dataSerialized) {
 	memcpy(log, ptrByte, logLen);
 	ptrByte += logLen;
 
-	log[logLen] = '\0';
+	//log[logLen] = '\0';
 
 	free(dataSerialized);
 	return newStrKerCon(id, action, logLen, log);
@@ -1505,7 +1505,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(log, ptrByte, logLen);
 	ptrByte += logLen;
 
-	log[logLen] = '\0';
+	//log[logLen] = '\0';
 
 	memcpy(&lenNomDispositivo, ptrByte, sizeof(lenNomDispositivo));
 	ptrByte += sizeof(lenNomDispositivo);
@@ -1513,7 +1513,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(nombreDispositivo, ptrByte, lenNomDispositivo);
 	ptrByte += lenNomDispositivo;
 
-	nombreDispositivo[lenNomDispositivo] = '\0';
+	//nombreDispositivo[lenNomDispositivo] = '\0';
 
 	free(dataSerialized);
 	return newStrCpuKer(id, action, pcb, pid, logLen, log, nombreDispositivo,
@@ -1574,7 +1574,7 @@ StrCpuUmc* unserializeCpuUmc(Stream dataSerialized) {
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
-	data[dataLen] = '\0';
+	//data[dataLen] = '\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1606,7 +1606,7 @@ StrUmcKer* unserializeUmcKer(Stream dataSerialized) {
 	memcpy(data, ptrByte, size);
 	ptrByte += size;
 
-	data[size] = '\0';
+	//data[size] = '\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1670,7 +1670,7 @@ StrUmcCpu* unserializeUmcCpu(Stream dataSerialized) {
 	data = malloc(dataLen);
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
-	data[dataLen] = '\0';
+	//data[dataLen] = '\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1733,7 +1733,7 @@ StrUmcSwa* unserializeUmcSwa(Stream dataSerialized) {
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
-	data[dataLen] = '\0';
+	//data[dataLen] = '\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
@@ -1784,7 +1784,7 @@ StrSwaUmc* unserializeSwaUmc(Stream dataSerialized) {
 	memcpy(data, ptrByte, dataLen);
 	ptrByte += dataLen;
 
-	data[dataLen] = '\0';
+	//data[dataLen] = '\0';
 
 	memcpy(&pid, ptrByte, sizeof(pid));
 	ptrByte += sizeof(pid);
