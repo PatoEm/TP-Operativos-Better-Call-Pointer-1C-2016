@@ -799,14 +799,25 @@ int cantidadPaginasArchivo(int longitudArchivo) {
 
 void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 
+
+	pthread_mutex_lock(mutexColaReady);
+
 	while (listaReady->elements_count == 0) {
 		sleep(1);
 	}
-	pthread_mutex_lock(mutexColaReady);
+
 	pcb* pcbAEnviar = (pcb*) list_get(listaReady, 0);
+	buscarYEliminarPCBEnLista(listaReady, pcbAEnviar);
 	pthread_mutex_unlock(mutexColaReady);
 
-	moverAListaExec(pcbAEnviar);
+	pcbAEnviar->estado = EXEC; //2 EXEC
+
+	pthread_mutex_lock(mutexListaExec);
+	list_add(listaExec, pcbAEnviar);
+	pthread_mutex_unlock(mutexListaExec);
+
+//	Esto lo hago a manopla arroba, para no liberar el patito.
+//	moverAListaExec(pcbAEnviar);
 
 	pthread_mutex_lock(mutexQuantum);
 	//todo ver envio_pcb
