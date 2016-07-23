@@ -40,6 +40,7 @@ void cuerpoDelCpu() {
  * definirVariable
  */
 t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR, YA ESTA TERMINADA
+	puts("CPU: Pido DEFINIR VARIABLE");
 	int pagina;
 	paginaDeStack*nuevaVariable = crearPaginaDeStackVaciaPiola();
 	StrCpuUmc*streamCpuUmc;
@@ -152,6 +153,7 @@ bool espacioMemoriaVacio(int tamanio, char*bytes) {
  * obtenerPosicionVariable
  */ //NO TOCAR YA ESTÁ TERMINADA
 t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
+	puts("CPU: Pido OBTENER POSICION VARIABLE");
 	if (list_size(pcbProceso.indiceDelStack) != 0) {
 		int i;
 		paginaDeStack* aux;
@@ -171,6 +173,7 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
  * dereferenciar
  */
 t_valor_variable dereferenciar(t_puntero direccion_variable) {
+	puts("CPU: Pido DEREFERENCIAR");
 	//todo Emi chequea esto
 	//espacioAsignado espacio;
 	paginaDeStack*paginaDeMadrugada = list_get(pcbProceso.indiceDelStack,
@@ -200,6 +203,7 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
  * asignar
  */
 void asignar(t_puntero direccion_variable, t_valor_variable valor) {
+	puts("CPU: Pido ASIGNAR");
 	paginaDeStack*paginaDeMadrugada = list_get(pcbProceso.indiceDelStack,
 			direccion_variable);
 	asignadoVacio->numDePag = paginaDeMadrugada->vars->pagVar;
@@ -236,7 +240,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  * obtenerValorCompartida
  *///YA ESTA TERMINADO
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
-
+	puts("CPU: Pido OBTENER VALOR COMPARTIDA");
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -266,7 +270,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
  */	// YA ESTÁ TERMINADA
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
-
+	puts("CPU: Pido ASIGNAR VALOR COMPARTIDA");
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -300,7 +304,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  */	// YA ESTA TERMINADA
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
-
+	puts("CPU: Pido IR A LABEL");
 
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
@@ -353,6 +357,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
  * finalizar
  */	// FINALIZAR SOLO SI EL PROGRAMA TERMINA BIEN
 void finalizar(void) {
+	puts("CPU: Pido FINALIZAR");
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, pcbProceso,
 			pcbProceso.id, 0, NULL, NULL /*NOMBRE DISPOSITIVO*/,
@@ -394,7 +399,7 @@ void retornar(t_valor_variable retorno) {
  * imprimir
  */	// YA ESTA
 void imprimir(t_valor_variable valor_mostrar) {
-
+	puts("CPU: Pido IMPRIMIR");
 	StrCpuKer*streamCpuKer;
 	Byte* aux = malloc(100);
 	sprintf(aux, "%d", valor_mostrar);
@@ -414,6 +419,7 @@ void imprimir(t_valor_variable valor_mostrar) {
  * imprimirTexto
  */	// ya esta
 int imprimirTexto(char* texto) {
+	puts("CPU: Pido IMPRIMIR TEXTO");
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIRTEXTO, pcbProceso,
 			pcbProceso.id, strlen(texto), texto, NULL /*NOMBRE DISPOSITIVO*/,
