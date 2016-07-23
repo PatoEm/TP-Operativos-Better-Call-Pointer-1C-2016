@@ -248,7 +248,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 
-	free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
+	//free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
 
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)

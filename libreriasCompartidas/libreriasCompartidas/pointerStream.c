@@ -1214,7 +1214,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.etiquetaSize));
 	ptrByte += pcb.etiquetaSize;
 
-	pcb.indiceDeEtiquetas[pcb.etiquetaSize] = '\0';
+	//pcb.indiceDeEtiquetas[pcb.etiquetaSize] = '\0';
 
 
 	memcpy(&pcb.instruccionesTotales, ptrByte, sizeof(pcb.instruccionesTotales));
@@ -1430,7 +1430,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(pcb.indiceDeEtiquetas, ptrByte, (pcb.etiquetaSize));
 	ptrByte += pcb.etiquetaSize;
 
-	pcb.indiceDeEtiquetas[pcb.etiquetaSize] = '\0';
+	//pcb.indiceDeEtiquetas[pcb.etiquetaSize] = '\0';
 
 	memcpy(&pcb.instruccionesTotales, ptrByte,
 			sizeof(pcb.instruccionesTotales));
