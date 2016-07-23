@@ -97,7 +97,7 @@ int main() {
 	pcbVacio = newEmptyPcb();
 	t_config* tConfig = NULL;
 
-	abortoCPU = 0; //NO BORREN ESTO ASI SE QUEDA ATENTO A LA SEÑAL
+	signal(SIGUSR1, abortarCPU);
 
 	if (loadConfig() && socketConnection()) {
 
