@@ -221,7 +221,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	free(dataAMandar);
 	//////////////////////////////////////////////////////////////////
 	StrUmcCpu*streamUmcCpu;
-	streamUmcCpu = unserializeCpuUmc(buffer);
+	streamUmcCpu = unserializeUmcCpu(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
 		seguirEjecutando = FALSE;
 }
@@ -248,7 +248,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	socketSend(socketNucleo->ptrSocket, buffer);
 	buffer = socketReceive(socketNucleo->ptrSocket);
 
-	//free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
+	free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
 
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)
@@ -301,19 +301,20 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
 
-	etiquetaMod = malloc(strlen(etiqueta));
 
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	pcbProceso.programCounter   = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
+	free(etiquetaMod);
+
 	saltoDeLinea = TRUE;
 }
 
 char* sinEspacioAlFinal(char* linea, int tamanio) {
 
-	char* lineaLoca =(char*) malloc(tamanio);
+	char* lineaLoca =(char*) malloc(100);
 
 	memcpy(lineaLoca,linea,tamanio);
 	lineaLoca[tamanio]='\0';
@@ -331,7 +332,7 @@ char* sinEspacioAlFinal(char* linea, int tamanio) {
  */	// ESTÁ TERMINADA
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
-	char* etiquetaMod = malloc(strlen(etiqueta));
+	char* etiquetaMod;
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
@@ -427,7 +428,7 @@ int imprimirTexto(char* texto) {
  */
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 
-	char* identificadorMod = malloc(strlen(dispositivo));
+	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
 
 	Byte * auxTiempo=malloc(100);
@@ -452,7 +453,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
  */	//MODIFICAR PROGRAMA DESBLOQUEADO y envio
 void wait(t_nombre_semaforo identificador_semaforo) {
 
-	char* identificadorMod = malloc(strlen(identificador_semaforo));
+	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
 			strlen(identificador_semaforo));
 
@@ -481,7 +482,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
  */ // YA ESTA
 void signale(t_nombre_semaforo identificador_semaforo) {
 
-	char* identificadorMod = malloc(strlen(identificadorMod));
+	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
 			strlen(identificador_semaforo));
 
