@@ -609,7 +609,26 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		log_info(cpuhlog, "Finalizo el quantum del programa %d.",
 				in_cpu_msg->pcb.id);
-		moverAColaReady(&in_cpu_msg->pcb);
+
+		if(buscarPCB(listaExec, &in_cpu_msg->pcb)){
+			moverAColaReady(&in_cpu_msg->pcb);
+		} else { //TODO asdasd
+
+			pcb_aux = &in_cpu_msg->pcb;
+
+			log_info(cpuhlog, "Este programa esta abortado (%d).",
+					in_cpu_msg->pcb.id);
+			streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+			NULL, 0, pcb_aux->id, 0, 0, 0, 0);
+			sb = serializeUmcKer(streamALaUmc);
+			if (!socketSend(umcServer->ptrSocket, sb)) {
+				log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
+						pcb_aux->id);
+			} else {
+				log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
+			}
+
+		}
 
 		break;
 
@@ -716,15 +735,15 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 			moverAColaExit(pcbLoco);
 
 
-		sku = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
-		NULL, 0, pcbLoco->id, 0, 0, 0, 0);
-		sb = serializeUmcKer(sku);
-		if (!socketSend(umcServer->ptrSocket, sb)) {
-			log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
-					pcbLoco->id);
-		} else {
-			log_info(cpuhlog, "Se aborto el programa a umc %d", pcbLoco->id);
-		}
+//		sku = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+//		NULL, 0, pcbLoco->id, 0, 0, 0, 0);
+//		sb = serializeUmcKer(sku);
+//		if (!socketSend(umcServer->ptrSocket, sb)) {
+//			log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
+//					pcbLoco->id);
+//		} else {
+//			log_info(cpuhlog, "Se aborto el programa a umc %d", pcbLoco->id);
+//		}
 		}
 		puts("PROGRAMA ABORTADO.");
 		break;

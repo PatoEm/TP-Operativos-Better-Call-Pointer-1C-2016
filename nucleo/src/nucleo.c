@@ -608,6 +608,27 @@ void* buscarYEliminarPCBEnLista(t_list * lista, pcb* pcbLoco) {
 
 }
 
+bool buscarPCB(t_list * lista, pcb* pcbLoco) {
+
+	int i;
+
+	pcb * pcbComparar;
+	for (i = 0; i < list_size(lista); i++) {
+
+		pcbComparar = ((pcb*) list_get(lista, i));
+
+		if ((pcbComparar->id) == (pcbLoco->id)) {
+
+			return TRUE;
+
+		}
+
+	}
+
+	return FALSE;
+
+}
+
 pcb* buscarPCBPorConsola(t_list * lista, Socket* consola) {
 
 	int i;

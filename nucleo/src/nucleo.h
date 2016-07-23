@@ -139,5 +139,6 @@ void *buscarYEliminarPCBEnLista(t_list *, pcb* );
 pcb* buscarPCBPorConsola(t_list *, Socket*);
 void funcionHiloIO(atributosIO);
 void funcionHiloWait(atributosWait* );
+bool buscarPCB(t_list *, pcb*);
 
 #endif /* NUCLEO_H_ */
