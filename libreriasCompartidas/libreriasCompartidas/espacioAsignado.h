@@ -22,4 +22,6 @@ typedef struct {
 	bool bitDePresencia;
 } espacioAsignado;
 
+espacioAsignado espacioAsignadoSinAsterisco();
+espacioAsignado*newEspacioAsignado();
 #endif /* LIBRERIASCOMPARTIDAS_ESPACIOASIGNADO_H_ */

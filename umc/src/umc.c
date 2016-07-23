@@ -199,18 +199,18 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	nodoBuscado->bitUso = 1;
 	nodoBuscado->bitDePresencia = 1;
 	nodoBuscado->IDPaginaInterno = nodoActual->IDPaginaInterno;
-	espacioAsignado pageToSend;
-	pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
-	pageToSend.numDePag = nodoActual->numDePag;
-	pageToSend.pid = nodoActual->pid;
-	streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA, pageToSend, 1,
+	espacioAsignado* pageToSend=newEspacioAsignado();
+	pageToSend->IDPaginaInterno = nodoActual->IDPaginaInterno;
+	pageToSend->numDePag = nodoActual->numDePag;
+	pageToSend->pid = nodoActual->pid;
+	streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA, *pageToSend, 1,
 			paginaAEnviar, marco_Size, nodoActual->pid);
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
-	pageToSend.numDePag = pagina;
-	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1, NULL,
+	pageToSend->numDePag = pagina;
+	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, *pageToSend, 1, NULL,
 			0, nodoActual->pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
@@ -224,6 +224,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 		counter++;
 		inicioLectura++;
 	}
+	free(pageToSend);
 	return posicionDePaginaLibre;
 }
 
@@ -351,7 +352,7 @@ bool lectoEscritura) {
 		inicioLectura++;
 		counter++;
 	}
-	espacioAsignado pageToSend;
+	espacioAsignado pageToSend = espacioAsignadoSinAsterisco();
 	pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
 	pageToSend.numDePag = nodoActual->numDePag;
 	pageToSend.pid = nodoActual->pid;
