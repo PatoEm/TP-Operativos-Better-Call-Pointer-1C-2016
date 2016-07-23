@@ -1308,3 +1308,2243 @@ end
 [INFO] 22:17:24:509 swap/(5283:5283): Proceso (PID 1) eliminado correctamente
 [INFO] 22:17:24:509 swap/(5283:5283): Proceso eliminado con exito
 [ERROR] 22:17:57:726 swap/(5283:5283): Al recibir del cliente
+[INFO] 01:54:23:174 swap/(16140:16140): Valores del archivo de configuracion seteados
+[INFO] 01:54:23:201 swap/(16140:16140): Archivo de particion creado
+[INFO] 01:54:23:201 swap/(16140:16140): Server creado y escuchando correctamente
+[INFO] 01:55:21:463 swap/(16140:16140): Hay espacio
+[INFO] 01:55:21:463 swap/(16140:16140): Espacio reservado correctamente
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:21:463 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:41:643 swap/(16140:16140): Pagina leida correctamente: 
+[INFO] 01:55:41:643 swap/(16140:16140): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 01:55:41:643 swap/(16140:16140): Pagina leida correctamente: 
+[INFO] 01:55:41:643 swap/(16140:16140): 
+[INFO] 01:55:41:723 swap/(16140:16140): Pagina escrita con exito
+[INFO] 01:55:41:763 swap/(16140:16140): Pagina leida correctamente: 
+[INFO] 01:55:41:763 swap/(16140:16140):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[ERROR] 01:57:41:681 swap/(16140:16140): Al recibir del cliente
+[INFO] 02:03:08:690 swap/(16691:16691): Valores del archivo de configuracion seteados
+[INFO] 02:03:08:705 swap/(16691:16691): Archivo de particion creado
+[INFO] 02:03:08:705 swap/(16691:16691): Server creado y escuchando correctamente
+[INFO] 02:04:03:705 swap/(16691:16691): Hay espacio
+[INFO] 02:04:03:705 swap/(16691:16691): Espacio reservado correctamente
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:03:705 swap/(16691:16691): Pagina escrita con exito
+[INFO] 02:04:20:267 swap/(16691:16691): Pagina leida correctamente: 
+[INFO] 02:04:20:267 swap/(16691:16691): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 02:04:20:267 swap/(16691:16691): Pagina leida correctamente: 
+[INFO] 02:04:20:267 swap/(16691:16691): 
+[ERROR] 02:04:57:412 swap/(16691:16691): Al recibir del cliente
+[INFO] 02:17:32:259 swap/(17258:17258): Valores del archivo de configuracion seteados
+[INFO] 02:17:32:284 swap/(17258:17258): Archivo de particion creado
+[INFO] 02:17:32:284 swap/(17258:17258): Server creado y escuchando correctamente
+[INFO] 02:19:59:988 swap/(17258:17258): Hay espacio
+[INFO] 02:19:59:989 swap/(17258:17258): Espacio reservado correctamente
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:989 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:990 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:990 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:990 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:990 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:19:59:990 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:20:19:587 swap/(17258:17258): Pagina leida correctamente: 
+[INFO] 02:20:19:587 swap/(17258:17258): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 02:20:19:587 swap/(17258:17258): Pagina leida correctamente: 
+[INFO] 02:20:19:587 swap/(17258:17258): 
+[INFO] 02:20:19:667 swap/(17258:17258): Pagina escrita con exito
+[INFO] 02:20:19:707 swap/(17258:17258): Pagina leida correctamente: 
+[INFO] 02:20:19:707 swap/(17258:17258):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[ERROR] 02:26:04:547 swap/(17258:17258): Al recibir del cliente
+[INFO] 02:27:51:0 swap/(17573:17573): Valores del archivo de configuracion seteados
+[INFO] 02:27:51:2 swap/(17573:17573): Archivo de particion creado
+[INFO] 02:27:51:2 swap/(17573:17573): Server creado y escuchando correctamente
+[INFO] 02:30:57:653 swap/(17573:17573): Hay espacio
+[INFO] 02:30:57:653 swap/(17573:17573): Espacio reservado correctamente
+[INFO] 02:30:57:653 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:653 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:653 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:653 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:654 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:695 swap/(17573:17573): Pagina leida correctamente: 
+[INFO] 02:30:57:695 swap/(17573:17573): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 02:30:57:695 swap/(17573:17573): Pagina leida correctamente: 
+[INFO] 02:30:57:695 swap/(17573:17573): 
+[INFO] 02:30:57:783 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:30:57:823 swap/(17573:17573): Pagina leida correctamente: 
+[INFO] 02:30:57:823 swap/(17573:17573):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 02:32:54:178 swap/(17573:17573): Pagina escrita con exito
+[INFO] 02:32:54:216 swap/(17573:17573): Pagina leida correctamente: 
+[INFO] 02:32:54:216 swap/(17573:17573): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[ERROR] 02:44:18:969 swap/(17573:17573): Al recibir del cliente
+[INFO] 02:45:31:738 swap/(18130:18130): Valores del archivo de configuracion seteados
+[INFO] 02:45:31:755 swap/(18130:18130): Archivo de particion creado
+[INFO] 02:45:31:755 swap/(18130:18130): Server creado y escuchando correctamente
+[INFO] 02:46:32:192 swap/(18130:18130): Hay espacio
+[INFO] 02:46:32:192 swap/(18130:18130): Espacio reservado correctamente
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:46:32:192 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:47:14:506 swap/(18130:18130): Pagina leida correctamente: 
+[INFO] 02:47:14:506 swap/(18130:18130): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 02:47:17:598 swap/(18130:18130): Pagina leida correctamente: 
+[INFO] 02:47:17:598 swap/(18130:18130): 
+[INFO] 02:47:47:514 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:47:47:551 swap/(18130:18130): Pagina leida correctamente: 
+[INFO] 02:47:47:551 swap/(18130:18130):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 02:48:28:99 swap/(18130:18130): Pagina escrita con exito
+[INFO] 02:48:28:139 swap/(18130:18130): Pagina leida correctamente: 
+[INFO] 02:48:28:139 swap/(18130:18130): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 02:52:40:973 swap/(18519:18519): Valores del archivo de configuracion seteados
+[INFO] 02:52:40:988 swap/(18519:18519): Archivo de particion creado
+[INFO] 02:52:40:988 swap/(18519:18519): Server creado y escuchando correctamente
+[INFO] 02:54:58:897 swap/(18744:18744): Valores del archivo de configuracion seteados
+[INFO] 02:54:58:911 swap/(18744:18744): Archivo de particion creado
+[INFO] 02:54:58:912 swap/(18744:18744): Server creado y escuchando correctamente
+[INFO] 02:55:39:673 swap/(18744:18744): Hay espacio
+[INFO] 02:55:39:673 swap/(18744:18744): Espacio reservado correctamente
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:39:673 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:55:59:307 swap/(18744:18744): Pagina leida correctamente: 
+[INFO] 02:55:59:307 swap/(18744:18744): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 02:56:01:508 swap/(18744:18744): Pagina leida correctamente: 
+[INFO] 02:56:01:508 swap/(18744:18744): 
+[INFO] 02:56:24:150 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:56:24:190 swap/(18744:18744): Pagina leida correctamente: 
+[INFO] 02:56:24:190 swap/(18744:18744):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 02:57:39:475 swap/(18744:18744): Pagina escrita con exito
+[INFO] 02:57:39:515 swap/(18744:18744): Pagina leida correctamente: 
+[INFO] 02:57:39:515 swap/(18744:18744): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[ERROR] 02:58:56:246 swap/(18744:18744): Al recibir del cliente
+[INFO] 02:59:16:443 swap/(19092:19092): Valores del archivo de configuracion seteados
+[INFO] 02:59:16:447 swap/(19092:19092): Archivo de particion creado
+[INFO] 02:59:16:447 swap/(19092:19092): Server creado y escuchando correctamente
+[INFO] 02:59:53:272 swap/(19092:19092): Hay espacio
+[INFO] 02:59:53:272 swap/(19092:19092): Espacio reservado correctamente
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 02:59:53:272 swap/(19092:19092): Pagina escrita con exito
+[INFO] 03:00:14:61 swap/(19092:19092): Pagina leida correctamente: 
+[INFO] 03:00:14:61 swap/(19092:19092): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 03:00:14:891 swap/(19092:19092): Pagina leida correctamente: 
+[INFO] 03:00:14:891 swap/(19092:19092): 
+[INFO] 03:00:27:801 swap/(19092:19092): Pagina escrita con exito
+[INFO] 03:00:27:839 swap/(19092:19092): Pagina leida correctamente: 
+[INFO] 03:00:27:839 swap/(19092:19092):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 03:00:47:44 swap/(19092:19092): Pagina escrita con exito
+[INFO] 03:00:47:83 swap/(19092:19092): Pagina leida correctamente: 
+[INFO] 03:00:47:83 swap/(19092:19092): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[ERROR] 03:01:57:26 swap/(19092:19092): Al recibir del cliente
+[INFO] 03:02:03:666 swap/(19444:19444): Valores del archivo de configuracion seteados
+[INFO] 03:02:03:670 swap/(19444:19444): Archivo de particion creado
+[INFO] 03:02:03:670 swap/(19444:19444): Server creado y escuchando correctamente
+[INFO] 03:02:38:931 swap/(19444:19444): Hay espacio
+[INFO] 03:02:38:931 swap/(19444:19444): Espacio reservado correctamente
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:38:931 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:02:58:855 swap/(19444:19444): Pagina leida correctamente: 
+[INFO] 03:02:58:855 swap/(19444:19444): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 03:03:00:217 swap/(19444:19444): Pagina leida correctamente: 
+[INFO] 03:03:00:217 swap/(19444:19444): 
+[INFO] 03:03:21:707 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:03:21:746 swap/(19444:19444): Pagina leida correctamente: 
+[INFO] 03:03:21:747 swap/(19444:19444):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 03:03:38:804 swap/(19444:19444): Pagina escrita con exito
+[INFO] 03:03:38:843 swap/(19444:19444): Pagina leida correctamente: 
+[INFO] 03:03:38:843 swap/(19444:19444): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[ERROR] 03:04:12:738 swap/(19444:19444): Al recibir del cliente
+[INFO] 03:04:19:495 swap/(19792:19792): Valores del archivo de configuracion seteados
+[INFO] 03:04:19:514 swap/(19792:19792): Archivo de particion creado
+[INFO] 03:04:19:514 swap/(19792:19792): Server creado y escuchando correctamente
+[INFO] 03:05:28:62 swap/(19792:19792): Hay espacio
+[INFO] 03:05:28:62 swap/(19792:19792): Espacio reservado correctamente
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:28:62 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:36:134 swap/(19792:19792): Pagina leida correctamente: 
+[INFO] 03:05:36:134 swap/(19792:19792): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 03:05:37:265 swap/(19792:19792): Pagina leida correctamente: 
+[INFO] 03:05:37:265 swap/(19792:19792): 
+[INFO] 03:05:52:859 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:05:52:899 swap/(19792:19792): Pagina leida correctamente: 
+[INFO] 03:05:52:899 swap/(19792:19792):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 1979)
+[INFO] 03:06:25:212 swap/(19792:19792): Pagina escrita con exito
+[INFO] 03:06:25:255 swap/(19792:19792): Pagina leida correctamente: 
+[INFO] 03:06:25:255 swap/(19792:19792): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[ERROR] 03:08:01:574 swap/(19792:19792): Al recibir del cliente
+[INFO] 03:08:07:989 swap/(20167:20167): Valores del archivo de configuracion seteados
+[INFO] 03:08:08:2 swap/(20167:20167): Archivo de particion creado
+[INFO] 03:08:08:2 swap/(20167:20167): Server creado y escuchando correctamente
+[INFO] 03:11:02:674 swap/(20167:20167): Hay espacio
+[INFO] 03:11:02:674 swap/(20167:20167): Espacio reservado correctamente
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:674 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:02:675 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:25:617 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:11:25:617 swap/(20167:20167): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 03:11:26:291 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:11:26:291 swap/(20167:20167): 
+[INFO] 03:11:36:671 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:11:36:711 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:11:36:711 swap/(20167:20167):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 03:12:04:194 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:12:04:231 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:12:04:231 swap/(20167:20167): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 03:14:56:552 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:14:56:596 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:14:56:596 swap/(20167:20167): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 03:16:07:236 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:16:07:271 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:16:07:271 swap/(20167:20167): 
+[INFO] 03:16:30:618 swap/(20167:20167): Pagina escrita con exito
+[INFO] 03:16:30:655 swap/(20167:20167): Pagina leida correctamente: 
+[INFO] 03:16:30:655 swap/(20167:20167):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ H
+[ERROR] 03:26:19:270 swap/(20167:20167): Al recibir del cliente
+[INFO] 03:29:01:469 swap/(20624:20624): Valores del archivo de configuracion seteados
+[INFO] 03:29:01:483 swap/(20624:20624): Archivo de particion creado
+[INFO] 03:29:01:483 swap/(20624:20624): Server creado y escuchando correctamente
+[INFO] 03:30:42:627 swap/(20624:20624): Hay espacio
+[INFO] 03:30:42:627 swap/(20624:20624): Espacio reservado correctamente
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:30:42:627 swap/(20624:20624): Pagina escrita con exito
+[INFO] 03:31:08:9 swap/(20624:20624): Pagina leida correctamente: 
+[INFO] 03:31:08:9 swap/(20624:20624): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[ERROR] 03:35:16:832 swap/(20624:20624): Al recibir del cliente
+[INFO] 03:35:23:13 swap/(21001:21001): Valores del archivo de configuracion seteados
+[INFO] 03:35:23:16 swap/(21001:21001): Archivo de particion creado
+[INFO] 03:35:23:16 swap/(21001:21001): Server creado y escuchando correctamente
+[INFO] 03:36:34:810 swap/(21001:21001): Hay espacio
+[INFO] 03:36:34:810 swap/(21001:21001): Espacio reservado correctamente
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:34:810 swap/(21001:21001): Pagina escrita con exito
+[INFO] 03:36:59:387 swap/(21001:21001): Pagina leida correctamente: 
+[INFO] 03:36:59:387 swap/(21001:21001): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 03:38:14:798 swap/(21001:21001): Pagina leida correctamente: 
+[INFO] 03:38:14:798 swap/(21001:21001):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[INFO] 04:04:43:546 swap/(22050:22050): Valores del archivo de configuracion seteados
+[INFO] 04:04:43:554 swap/(22050:22050): Archivo de particion creado
+[INFO] 04:04:43:554 swap/(22050:22050): Server creado y escuchando correctamente
+[INFO] 04:05:29:517 swap/(22050:22050): Hay espacio
+[INFO] 04:05:29:517 swap/(22050:22050): Espacio reservado correctamente
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:517 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:518 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:29:518 swap/(22050:22050): Pagina escrita con exito
+[INFO] 04:05:50:594 swap/(22050:22050): Pagina leida correctamente: 
+[INFO] 04:05:50:594 swap/(22050:22050): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:05:52:734 swap/(22050:22050): Pagina leida correctamente: 
+[INFO] 04:05:52:734 swap/(22050:22050):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:10:39:400 swap/(22050:22050): Al recibir del cliente
+[INFO] 04:10:44:70 swap/(22359:22359): Valores del archivo de configuracion seteados
+[INFO] 04:10:44:91 swap/(22359:22359): Archivo de particion creado
+[INFO] 04:10:44:91 swap/(22359:22359): Server creado y escuchando correctamente
+[INFO] 04:12:53:323 swap/(22359:22359): Hay espacio
+[INFO] 04:12:53:323 swap/(22359:22359): Espacio reservado correctamente
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:12:53:323 swap/(22359:22359): Pagina escrita con exito
+[INFO] 04:13:19:692 swap/(22359:22359): Pagina leida correctamente: 
+[INFO] 04:13:19:692 swap/(22359:22359): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:13:22:270 swap/(22359:22359): Pagina leida correctamente: 
+[INFO] 04:13:22:270 swap/(22359:22359):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:15:04:355 swap/(22359:22359): Al recibir del cliente
+[INFO] 04:15:15:122 swap/(22622:22622): Valores del archivo de configuracion seteados
+[INFO] 04:15:15:132 swap/(22622:22622): Archivo de particion creado
+[INFO] 04:15:15:132 swap/(22622:22622): Server creado y escuchando correctamente
+[INFO] 04:17:10:775 swap/(22622:22622): Hay espacio
+[INFO] 04:17:10:775 swap/(22622:22622): Espacio reservado correctamente
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:10:775 swap/(22622:22622): Pagina escrita con exito
+[INFO] 04:17:13:579 swap/(22622:22622): Pagina leida correctamente: 
+[INFO] 04:17:13:579 swap/(22622:22622): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:17:15:138 swap/(22622:22622): Pagina leida correctamente: 
+[INFO] 04:17:15:138 swap/(22622:22622):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:22:45:411 swap/(22622:22622): Al recibir del cliente
+[INFO] 04:25:24:111 swap/(23172:23172): Valores del archivo de configuracion seteados
+[INFO] 04:25:24:122 swap/(23172:23172): Archivo de particion creado
+[INFO] 04:25:24:122 swap/(23172:23172): Server creado y escuchando correctamente
+[INFO] 04:25:54:577 swap/(23172:23172): Hay espacio
+[INFO] 04:25:54:577 swap/(23172:23172): Espacio reservado correctamente
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:577 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:25:54:578 swap/(23172:23172): Pagina escrita con exito
+[INFO] 04:26:25:626 swap/(23172:23172): Pagina leida correctamente: 
+[INFO] 04:26:25:626 swap/(23172:23172): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:26:29:442 swap/(23172:23172): Pagina leida correctamente: 
+[INFO] 04:26:29:442 swap/(23172:23172):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:28:10:304 swap/(23172:23172): Al recibir del cliente
+[INFO] 04:28:18:870 swap/(23457:23457): Valores del archivo de configuracion seteados
+[INFO] 04:28:18:879 swap/(23457:23457): Archivo de particion creado
+[INFO] 04:28:18:880 swap/(23457:23457): Server creado y escuchando correctamente
+[INFO] 04:29:45:225 swap/(23457:23457): Hay espacio
+[INFO] 04:29:45:225 swap/(23457:23457): Espacio reservado correctamente
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:29:45:225 swap/(23457:23457): Pagina escrita con exito
+[INFO] 04:30:06:171 swap/(23457:23457): Pagina leida correctamente: 
+[INFO] 04:30:06:171 swap/(23457:23457): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:32:05:123 swap/(23457:23457): Pagina leida correctamente: 
+[INFO] 04:32:05:123 swap/(23457:23457):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:40:48:7 swap/(23457:23457): Al recibir del cliente
+[INFO] 04:40:54:869 swap/(23882:23882): Valores del archivo de configuracion seteados
+[INFO] 04:40:54:889 swap/(23882:23882): Archivo de particion creado
+[INFO] 04:40:54:889 swap/(23882:23882): Server creado y escuchando correctamente
+[INFO] 04:41:29:540 swap/(23882:23882): Hay espacio
+[INFO] 04:41:29:540 swap/(23882:23882): Espacio reservado correctamente
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:41:29:540 swap/(23882:23882): Pagina escrita con exito
+[INFO] 04:42:58:746 swap/(23882:23882): Pagina leida correctamente: 
+[INFO] 04:42:58:747 swap/(23882:23882): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:44:31:871 swap/(23882:23882): Pagina leida correctamente: 
+[INFO] 04:44:31:871 swap/(23882:23882):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:49:24:286 swap/(23882:23882): Al recibir del cliente
+[INFO] 04:55:06:665 swap/(24570:24570): Valores del archivo de configuracion seteados
+[INFO] 04:55:06:673 swap/(24570:24570): Archivo de particion creado
+[INFO] 04:55:06:673 swap/(24570:24570): Server creado y escuchando correctamente
+[INFO] 04:55:57:601 swap/(24570:24570): Hay espacio
+[INFO] 04:55:57:601 swap/(24570:24570): Espacio reservado correctamente
+[INFO] 04:55:57:601 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:601 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:55:57:602 swap/(24570:24570): Pagina escrita con exito
+[INFO] 04:56:28:545 swap/(24570:24570): Pagina leida correctamente: 
+[INFO] 04:56:28:545 swap/(24570:24570): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 04:56:32:250 swap/(24570:24570): Pagina leida correctamente: 
+[INFO] 04:56:32:250 swap/(24570:24570):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 04:59:26:11 swap/(24570:24570): Al recibir del cliente
+[INFO] 04:59:32:149 swap/(24882:24882): Valores del archivo de configuracion seteados
+[INFO] 04:59:32:160 swap/(24882:24882): Archivo de particion creado
+[INFO] 04:59:32:160 swap/(24882:24882): Server creado y escuchando correctamente
+[INFO] 05:00:08:329 swap/(24882:24882): Hay espacio
+[INFO] 05:00:08:329 swap/(24882:24882): Espacio reservado correctamente
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:08:329 swap/(24882:24882): Pagina escrita con exito
+[INFO] 05:00:27:523 swap/(24882:24882): Pagina leida correctamente: 
+[INFO] 05:00:27:523 swap/(24882:24882): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 05:00:29:138 swap/(24882:24882): Pagina leida correctamente: 
+[INFO] 05:00:29:138 swap/(24882:24882):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 05:02:47:369 swap/(24882:24882): Al recibir del cliente
+[INFO] 05:02:53:584 swap/(25166:25166): Valores del archivo de configuracion seteados
+[INFO] 05:02:53:593 swap/(25166:25166): Archivo de particion creado
+[INFO] 05:02:53:593 swap/(25166:25166): Server creado y escuchando correctamente
+[INFO] 05:03:23:583 swap/(25166:25166): Hay espacio
+[INFO] 05:03:23:583 swap/(25166:25166): Espacio reservado correctamente
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:23:583 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:03:43:956 swap/(25166:25166): Pagina leida correctamente: 
+[INFO] 05:03:43:957 swap/(25166:25166): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 05:03:46:602 swap/(25166:25166): Pagina leida correctamente: 
+[INFO] 05:03:46:602 swap/(25166:25166):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[INFO] 05:06:56:610 swap/(25166:25166): Hay espacio
+[INFO] 05:06:56:611 swap/(25166:25166): Espacio reservado correctamente
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:06:56:611 swap/(25166:25166): Pagina escrita con exito
+[INFO] 05:07:26:319 swap/(25166:25166): Pagina leida correctamente: 
+[INFO] 05:07:26:319 swap/(25166:25166): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait c
+		print !colas
+	stame)
+[INFO] 05:07:26:320 swap/(25166:25166): Pagina leida correctamente: 
+[INFO] 05:07:26:320 swap/(25166:25166): ignal b
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 05:09:27:530 swap/(25166:25166): Al recibir del cliente
+[INFO] 05:09:33:983 swap/(25544:25544): Valores del archivo de configuracion seteados
+[INFO] 05:09:33:999 swap/(25544:25544): Archivo de particion creado
+[INFO] 05:09:33:999 swap/(25544:25544): Server creado y escuchando correctamente
+[INFO] 05:12:40:610 swap/(25544:25544): Hay espacio
+[INFO] 05:12:40:610 swap/(25544:25544): Espacio reservado correctamente
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:610 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:12:40:663 swap/(25544:25544): Pagina leida correctamente: 
+[INFO] 05:12:40:663 swap/(25544:25544): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 05:12:40:679 swap/(25544:25544): Pagina leida correctamente: 
+[INFO] 05:12:40:679 swap/(25544:25544):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[INFO] 05:13:10:62 swap/(25544:25544): Hay espacio
+[INFO] 05:13:10:62 swap/(25544:25544): Espacio reservado correctamente
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[INFO] 05:13:10:62 swap/(25544:25544): Pagina escrita con exito
+[ERROR] 05:17:02:831 swap/(25544:25544): Al recibir del cliente
+[INFO] 05:21:33:542 swap/(25893:25893): Valores del archivo de configuracion seteados
+[INFO] 05:21:33:546 swap/(25893:25893): Archivo de particion creado
+[INFO] 05:21:33:546 swap/(25893:25893): Server creado y escuchando correctamente
+[ERROR] 05:26:50:895 swap/(25893:25893): Al recibir del cliente
+[INFO] 05:27:02:278 swap/(26029:26029): Valores del archivo de configuracion seteados
+[INFO] 05:27:02:304 swap/(26029:26029): Archivo de particion creado
+[INFO] 05:27:02:304 swap/(26029:26029): Server creado y escuchando correctamente
+[INFO] 05:27:56:73 swap/(26029:26029): Hay espacio
+[INFO] 05:27:56:73 swap/(26029:26029): Espacio reservado correctamente
+[INFO] 05:27:56:73 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:73 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:73 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:73 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:73 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:73 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:27:56:74 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:28:22:339 swap/(26029:26029): Pagina leida correctamente: 
+[INFO] 05:28:22:340 swap/(26029:26029): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 05:28:22:342 swap/(26029:26029): Pagina leida correctamente: 
+[INFO] 05:28:22:342 swap/(26029:26029): 
+[INFO] 05:28:22:345 swap/(26029:26029): Pagina escrita con exito
+[INFO] 05:28:22:383 swap/(26029:26029): Pagina leida correctamente: 
+[INFO] 05:28:22:383 swap/(26029:26029):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 2602)
+[ERROR] 05:28:47:114 swap/(26029:26029): Al recibir del cliente
+[INFO] 11:29:07:104 swap/(26414:26414): Valores del archivo de configuracion seteados
+[INFO] 11:29:07:141 swap/(26414:26414): Archivo de particion creado
+[INFO] 11:29:07:141 swap/(26414:26414): Server creado y escuchando correctamente
+[INFO] 11:34:46:554 swap/(26414:26414): Hay espacio
+[INFO] 11:34:46:554 swap/(26414:26414): Espacio reservado correctamente
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:34:46:554 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:37:24:46 swap/(26414:26414): Pagina leida correctamente: 
+[INFO] 11:37:24:50 swap/(26414:26414): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colasscri)
+[INFO] 11:41:08:765 swap/(26414:26414): Hay espacio
+[INFO] 11:41:08:765 swap/(26414:26414): Espacio reservado correctamente
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:08:765 swap/(26414:26414): Pagina escrita con exito
+[INFO] 11:41:37:306 swap/(26414:26414): Pagina leida correctamente: 
+[INFO] 11:41:37:306 swap/(26414:26414): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait c
+		print !colas
+	sPagi
+[ERROR] 11:44:46:133 swap/(26414:26414): Al recibir del cliente
+[INFO] 11:48:21:554 swap/(26950:26950): Valores del archivo de configuracion seteados
+[INFO] 11:48:21:566 swap/(26950:26950): Archivo de particion creado
+[INFO] 11:48:21:566 swap/(26950:26950): Server creado y escuchando correctamente
+[INFO] 11:49:11:32 swap/(26950:26950): Hay espacio
+[INFO] 11:49:11:32 swap/(26950:26950): Espacio reservado correctamente
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:49:11:32 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:352 swap/(26950:26950): Hay espacio
+[INFO] 11:52:50:352 swap/(26950:26950): Espacio reservado correctamente
+[INFO] 11:52:50:352 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:352 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:352 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:352 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:352 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:352 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:52:50:353 swap/(26950:26950): Pagina escrita con exito
+[INFO] 11:53:09:764 swap/(26950:26950): Pagina leida correctamente: 
+[INFO] 11:53:09:764 swap/(26950:26950): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ on e)
+[INFO] 11:53:09:765 swap/(26950:26950): Pagina leida correctamente: 
+[INFO] 11:53:09:765 swap/(26950:26950): 
+[ERROR] 11:55:23:354 swap/(26950:26950): Al recibir del cliente
+[INFO] 11:55:31:169 swap/(27268:27268): Valores del archivo de configuracion seteados
+[INFO] 11:55:31:181 swap/(27268:27268): Archivo de particion creado
+[INFO] 11:55:31:181 swap/(27268:27268): Server creado y escuchando correctamente
+[INFO] 11:56:13:466 swap/(27268:27268): Hay espacio
+[INFO] 11:56:13:466 swap/(27268:27268): Espacio reservado correctamente
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:13:466 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:56:36:804 swap/(27268:27268): Pagina leida correctamente: 
+[INFO] 11:56:36:804 swap/(27268:27268): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 11:56:38:912 swap/(27268:27268): Pagina leida correctamente: 
+[INFO] 11:56:38:912 swap/(27268:27268): 
+[INFO] 11:57:04:184 swap/(27268:27268): Pagina escrita con exito
+[INFO] 11:57:04:226 swap/(27268:27268): Pagina leida correctamente: 
+[INFO] 11:57:04:226 swap/(27268:27268):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[ERROR] 11:59:43:247 swap/(27268:27268): Al recibir del cliente
+[INFO] 12:02:51:77 swap/(27616:27616): Valores del archivo de configuracion seteados
+[INFO] 12:02:51:83 swap/(27616:27616): Archivo de particion creado
+[INFO] 12:02:51:83 swap/(27616:27616): Server creado y escuchando correctamente
+[INFO] 12:03:39:975 swap/(27616:27616): Hay espacio
+[INFO] 12:03:39:975 swap/(27616:27616): Espacio reservado correctamente
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:39:975 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:03:56:469 swap/(27616:27616): Pagina leida correctamente: 
+[INFO] 12:03:56:469 swap/(27616:27616): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 12:03:57:467 swap/(27616:27616): Pagina leida correctamente: 
+[INFO] 12:03:57:468 swap/(27616:27616): 
+[INFO] 12:04:10:980 swap/(27616:27616): Pagina escrita con exito
+[INFO] 12:04:11:29 swap/(27616:27616): Pagina leida correctamente: 
+[INFO] 12:04:11:29 swap/(27616:27616):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[ERROR] 12:07:28:305 swap/(27616:27616): Al recibir del cliente
+[INFO] 12:15:25:623 swap/(28058:28058): Valores del archivo de configuracion seteados
+[INFO] 12:15:25:638 swap/(28058:28058): Archivo de particion creado
+[INFO] 12:15:25:638 swap/(28058:28058): Server creado y escuchando correctamente
+[INFO] 12:16:09:787 swap/(28058:28058): Hay espacio
+[INFO] 12:16:09:787 swap/(28058:28058): Espacio reservado correctamente
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:09:787 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:34:563 swap/(28058:28058): Pagina leida correctamente: 
+[INFO] 12:16:34:563 swap/(28058:28058): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 12:16:35:899 swap/(28058:28058): Pagina leida correctamente: 
+[INFO] 12:16:35:899 swap/(28058:28058): 
+[INFO] 12:16:48:91 swap/(28058:28058): Pagina escrita con exito
+[INFO] 12:16:48:129 swap/(28058:28058): Pagina leida correctamente: 
+[INFO] 12:16:48:129 swap/(28058:28058):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 12:30:30:630 swap/(28569:28569): Valores del archivo de configuracion seteados
+[INFO] 12:30:30:654 swap/(28569:28569): Archivo de particion creado
+[ERROR] 12:30:30:654 swap/(28569:28569): No se pudo crear el server
+[ERROR] 12:30:37:804 swap/(28058:28058): Al recibir del cliente
+[INFO] 12:30:55:58 swap/(28661:28661): Valores del archivo de configuracion seteados
+[INFO] 12:30:55:60 swap/(28661:28661): Archivo de particion creado
+[INFO] 12:30:55:60 swap/(28661:28661): Server creado y escuchando correctamente
+[INFO] 12:31:58:215 swap/(28661:28661): Hay espacio
+[INFO] 12:31:58:215 swap/(28661:28661): Espacio reservado correctamente
+[INFO] 12:31:58:215 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:215 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:31:58:216 swap/(28661:28661): Pagina escrita con exito
+[INFO] 12:32:17:573 swap/(28661:28661): Pagina leida correctamente: 
+[INFO] 12:32:17:573 swap/(28661:28661): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 12:32:28:419 swap/(28661:28661): Pagina leida correctamente: 
+[INFO] 12:32:28:419 swap/(28661:28661): 
+[ERROR] 12:47:26:181 swap/(28661:28661): Al recibir del cliente
+[INFO] 12:50:40:762 swap/(29043:29043): Valores del archivo de configuracion seteados
+[INFO] 12:50:40:783 swap/(29043:29043): Archivo de particion creado
+[INFO] 12:50:40:783 swap/(29043:29043): Server creado y escuchando correctamente
+[ERROR] 12:52:04:278 swap/(29043:29043): Al recibir del cliente
+[INFO] 12:52:21:148 swap/(29184:29184): Valores del archivo de configuracion seteados
+[INFO] 12:52:21:169 swap/(29184:29184): Archivo de particion creado
+[INFO] 12:52:21:169 swap/(29184:29184): Server creado y escuchando correctamente
+[ERROR] 12:55:18:599 swap/(29184:29184): Al recibir del cliente
+[INFO] 12:55:43:843 swap/(29322:29322): Valores del archivo de configuracion seteados
+[INFO] 12:55:43:845 swap/(29322:29322): Archivo de particion creado
+[INFO] 12:55:43:845 swap/(29322:29322): Server creado y escuchando correctamente
+[INFO] 12:57:18:563 swap/(29412:29412): Valores del archivo de configuracion seteados
+[INFO] 12:57:18:586 swap/(29412:29412): Archivo de particion creado
+[INFO] 12:57:18:586 swap/(29412:29412): Server creado y escuchando correctamente
+[ERROR] 12:59:53:823 swap/(29412:29412): Al recibir del cliente
+[INFO] 13:02:22:486 swap/(29554:29554): Valores del archivo de configuracion seteados
+[INFO] 13:02:22:501 swap/(29554:29554): Archivo de particion creado
+[INFO] 13:02:22:501 swap/(29554:29554): Server creado y escuchando correctamente
+[ERROR] 15:01:23:540 swap/(29554:29554): Al recibir del cliente
+[INFO] 15:09:06:919 swap/(29949:29949): Valores del archivo de configuracion seteados
+[INFO] 15:09:06:931 swap/(29949:29949): Archivo de particion creado
+[INFO] 15:09:06:932 swap/(29949:29949): Server creado y escuchando correctamente
+[INFO] 15:10:52:905 swap/(29949:29949): Hay espacio
+[INFO] 15:10:52:905 swap/(29949:29949): Espacio reservado correctamente
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:10:52:905 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:322 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:322 swap/(29949:29949): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 15:11:18:331 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:331 swap/(29949:29949): 
+[INFO] 15:11:18:354 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:397 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:397 swap/(29949:29949):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:11:18:444 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:481 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:481 swap/(29949:29949): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:11:18:483 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:521 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:522 swap/(29949:29949): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:11:18:534 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:562 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:562 swap/(29949:29949): 
+[INFO] 15:11:18:565 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:601 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:601 swap/(29949:29949):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ H
+[INFO] 15:11:18:656 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:681 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:681 swap/(29949:29949): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:11:18:684 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:721 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:721 swap/(29949:29949): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 5:11)
+[INFO] 15:11:18:722 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:761 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:761 swap/(29949:29949): 
+[INFO] 15:11:18:769 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:801 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:801 swap/(29949:29949):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:11:18:846 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:885 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:885 swap/(29949:29949): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:11:18:888 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:925 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:926 swap/(29949:29949): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:11:18:926 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:18:966 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:18:966 swap/(29949:29949): 
+[INFO] 15:11:18:969 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:19:6 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:19:7 swap/(29949:29949):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+
+[INFO] 15:11:19:46 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:19:86 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:19:86 swap/(29949:29949): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:11:19:89 swap/(29949:29949): Pagina escrita con exito
+[INFO] 15:11:19:125 swap/(29949:29949): Pagina leida correctamente: 
+[INFO] 15:11:19:125 swap/(29949:29949): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ (299
+[ERROR] 15:11:19:251 swap/(29949:29949): Al recibir del cliente
+[INFO] 15:16:58:362 swap/(30283:30283): Valores del archivo de configuracion seteados
+[INFO] 15:16:58:378 swap/(30283:30283): Archivo de particion creado
+[INFO] 15:16:58:378 swap/(30283:30283): Server creado y escuchando correctamente
+[INFO] 15:19:27:475 swap/(30283:30283): Hay espacio
+[INFO] 15:19:27:475 swap/(30283:30283): Espacio reservado correctamente
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[INFO] 15:19:27:475 swap/(30283:30283): Pagina escrita con exito
+[ERROR] 15:24:36:400 swap/(30283:30283): Al recibir del cliente
+[INFO] 15:24:47:793 swap/(30618:30618): Valores del archivo de configuracion seteados
+[INFO] 15:24:47:800 swap/(30618:30618): Archivo de particion creado
+[INFO] 15:24:47:800 swap/(30618:30618): Server creado y escuchando correctamente
+[INFO] 15:26:07:138 swap/(30618:30618): Hay espacio
+[INFO] 15:26:07:138 swap/(30618:30618): Espacio reservado correctamente
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:07:138 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:26:35:717 swap/(30618:30618): Pagina leida correctamente: 
+[INFO] 15:26:35:717 swap/(30618:30618): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 15:26:38:54 swap/(30618:30618): Pagina leida correctamente: 
+[INFO] 15:26:38:54 swap/(30618:30618): 
+[INFO] 15:27:50:633 swap/(30618:30618): Pagina escrita con exito
+[INFO] 15:27:50:670 swap/(30618:30618): Pagina leida correctamente: 
+[INFO] 15:27:50:670 swap/(30618:30618):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[ERROR] 15:28:38:30 swap/(30618:30618): Al recibir del cliente
+[INFO] 15:29:37:513 swap/(30929:30929): Valores del archivo de configuracion seteados
+[INFO] 15:29:37:539 swap/(30929:30929): Archivo de particion creado
+[INFO] 15:29:37:540 swap/(30929:30929): Server creado y escuchando correctamente
+[INFO] 15:31:19:421 swap/(30929:30929): Hay espacio
+[INFO] 15:31:19:421 swap/(30929:30929): Espacio reservado correctamente
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:19:421 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:378 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:378 swap/(30929:30929): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 15:31:46:390 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:390 swap/(30929:30929): 
+[INFO] 15:31:46:411 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:450 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:450 swap/(30929:30929):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:31:46:495 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:534 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:534 swap/(30929:30929): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:31:46:541 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:578 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:578 swap/(30929:30929): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:31:46:579 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:618 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:618 swap/(30929:30929): 
+[INFO] 15:31:46:621 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:658 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:658 swap/(30929:30929):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ H
+[INFO] 15:31:46:699 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:738 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:738 swap/(30929:30929): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:31:46:742 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:782 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:782 swap/(30929:30929): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 5:31)
+[INFO] 15:31:46:785 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:822 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:822 swap/(30929:30929): 
+[INFO] 15:31:46:825 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:862 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:862 swap/(30929:30929):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:31:46:904 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:942 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:942 swap/(30929:30929): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:31:46:944 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:46:983 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:46:983 swap/(30929:30929): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:31:46:984 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:22 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:22 swap/(30929:30929): 
+[INFO] 15:31:47:27 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:66 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:66 swap/(30929:30929):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:31:47:108 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:146 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:146 swap/(30929:30929): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:31:47:148 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:186 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:186 swap/(30929:30929): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:31:47:187 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:227 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:227 swap/(30929:30929): 
+[INFO] 15:31:47:276 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:314 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:314 swap/(30929:30929):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:31:47:355 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:394 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:394 swap/(30929:30929): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:31:47:396 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:434 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:434 swap/(30929:30929): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 15:31:47:435 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:474 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:474 swap/(30929:30929): 
+[INFO] 15:31:47:476 swap/(30929:30929): Pagina escrita con exito
+[INFO] 15:31:47:515 swap/(30929:30929): Pagina leida correctamente: 
+[INFO] 15:31:47:515 swap/(30929:30929): 
+[INFO] 15:40:19:705 swap/(31517:31517): Valores del archivo de configuracion seteados
+[INFO] 15:40:19:711 swap/(31517:31517): Archivo de particion creado
+[ERROR] 15:40:19:711 swap/(31517:31517): No se pudo crear el server
+[ERROR] 15:40:24:734 swap/(30929:30929): Al recibir del cliente
+[INFO] 15:40:31:792 swap/(31565:31565): Valores del archivo de configuracion seteados
+[INFO] 15:40:31:818 swap/(31565:31565): Archivo de particion creado
+[INFO] 15:40:31:819 swap/(31565:31565): Server creado y escuchando correctamente
+[INFO] 15:41:16:4 swap/(31565:31565): Hay espacio
+[INFO] 15:41:16:4 swap/(31565:31565): Espacio reservado correctamente
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:41:16:4 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:42:30:649 swap/(31565:31565): Pagina leida correctamente: 
+[INFO] 15:42:30:649 swap/(31565:31565): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:42:32:556 swap/(31565:31565): Pagina leida correctamente: 
+[INFO] 15:42:32:556 swap/(31565:31565): 
+[INFO] 15:44:03:793 swap/(31565:31565): Pagina escrita con exito
+[INFO] 15:44:03:830 swap/(31565:31565): Pagina leida correctamente: 
+[INFO] 15:44:03:830 swap/(31565:31565):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 3156)
+[ERROR] 15:45:57:455 swap/(31565:31565): Al recibir del cliente
+[INFO] 15:46:05:695 swap/(31904:31904): Valores del archivo de configuracion seteados
+[INFO] 15:46:05:715 swap/(31904:31904): Archivo de particion creado
+[INFO] 15:46:05:715 swap/(31904:31904): Server creado y escuchando correctamente
+[INFO] 15:48:32:466 swap/(31904:31904): Hay espacio
+[INFO] 15:48:32:466 swap/(31904:31904): Espacio reservado correctamente
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:48:32:466 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:49:21:228 swap/(31904:31904): Pagina leida correctamente: 
+[INFO] 15:49:21:228 swap/(31904:31904): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ scri)
+[INFO] 15:49:22:584 swap/(31904:31904): Pagina leida correctamente: 
+[INFO] 15:49:22:584 swap/(31904:31904): 
+[INFO] 15:50:37:163 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:50:37:203 swap/(31904:31904): Pagina leida correctamente: 
+[INFO] 15:50:37:203 swap/(31904:31904):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 
+[INFO] 15:51:16:452 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:51:16:490 swap/(31904:31904): Pagina leida correctamente: 
+[INFO] 15:51:16:490 swap/(31904:31904): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 15:51:28:757 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:51:28:794 swap/(31904:31904): Pagina leida correctamente: 
+[INFO] 15:51:28:794 swap/(31904:31904): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 15:51:33:84 swap/(31904:31904): Pagina escrita con exito
+[INFO] 15:51:33:132 swap/(31904:31904): Pagina leida correctamente: 
+[INFO] 15:51:33:132 swap/(31904:31904): 
+[ERROR] 16:04:31:518 swap/(31904:31904): Al recibir del cliente
+[INFO] 21:33:34:52 swap/(834:834): Valores del archivo de configuracion seteados
+[INFO] 21:33:34:66 swap/(834:834): Archivo de particion creado
+[INFO] 21:33:34:66 swap/(834:834): Server creado y escuchando correctamente
+[ERROR] 21:37:53:467 swap/(834:834): Al recibir del cliente
+[INFO] 23:27:49:78 swap/(3069:3069): Valores del archivo de configuracion seteados
+[INFO] 23:27:49:98 swap/(3069:3069): Archivo de particion creado
+[INFO] 23:27:49:98 swap/(3069:3069): Server creado y escuchando correctamente
+[ERROR] 00:00:12:443 swap/(3069:3069): Al recibir del cliente
+[INFO] 00:00:22:431 swap/(3255:3255): Valores del archivo de configuracion seteados
+[INFO] 00:00:22:444 swap/(3255:3255): Archivo de particion creado
+[INFO] 00:00:22:444 swap/(3255:3255): Server creado y escuchando correctamente
+[ERROR] 00:04:42:143 swap/(3255:3255): Al recibir del cliente
+[INFO] 00:05:13:469 swap/(3448:3448): Valores del archivo de configuracion seteados
+[INFO] 00:05:13:480 swap/(3448:3448): Archivo de particion creado
+[INFO] 00:05:13:480 swap/(3448:3448): Server creado y escuchando correctamente
+[INFO] 00:05:52:541 swap/(3448:3448): Hay espacio
+[INFO] 00:05:52:542 swap/(3448:3448): Espacio reservado correctamente
+[INFO] 00:05:52:542 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:05:52:543 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:15:326 swap/(3448:3448): Pagina leida correctamente: 
+[INFO] 00:08:15:326 swap/(3448:3448): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[INFO] 00:08:17:957 swap/(3448:3448): Pagina leida correctamente: 
+[INFO] 00:08:17:957 swap/(3448:3448):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[INFO] 00:08:33:13 swap/(3448:3448): Hay espacio
+[INFO] 00:08:33:13 swap/(3448:3448): Espacio reservado correctamente
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:08:33:13 swap/(3448:3448): Pagina escrita con exito
+[INFO] 00:09:22:280 swap/(3448:3448): Proceso (PID 1) eliminado correctamente
+[INFO] 00:09:22:280 swap/(3448:3448): Proceso eliminado con exito
+[ERROR] 00:10:00:643 swap/(3448:3448): Al recibir del cliente
+[INFO] 00:10:57:215 swap/(3674:3674): Valores del archivo de configuracion seteados
+[INFO] 00:10:57:244 swap/(3674:3674): Archivo de particion creado
+[INFO] 00:10:57:244 swap/(3674:3674): Server creado y escuchando correctamente
+[ERROR] 00:13:15:850 swap/(3674:3674): Al recibir del cliente
+[INFO] 00:16:10:550 swap/(3874:3874): Valores del archivo de configuracion seteados
+[INFO] 00:16:10:568 swap/(3874:3874): Archivo de particion creado
+[INFO] 00:16:10:568 swap/(3874:3874): Server creado y escuchando correctamente
+[INFO] 00:17:47:64 swap/(3874:3874): Hay espacio
+[INFO] 00:17:47:64 swap/(3874:3874): Espacio reservado correctamente
+[INFO] 00:17:47:64 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:17:47:65 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:18:47:812 swap/(3874:3874): Pagina leida correctamente: 
+[INFO] 00:18:47:812 swap/(3874:3874): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 00:18:51:839 swap/(3874:3874): Pagina leida correctamente: 
+[INFO] 00:18:51:839 swap/(3874:3874): 
+[INFO] 00:19:06:409 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:19:06:456 swap/(3874:3874): Pagina leida correctamente: 
+[INFO] 00:19:06:457 swap/(3874:3874):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 874))
+[INFO] 00:19:20:692 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:19:20:729 swap/(3874:3874): Pagina leida correctamente: 
+[INFO] 00:19:20:729 swap/(3874:3874): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 00:19:35:43 swap/(3874:3874): Pagina escrita con exito
+[INFO] 00:19:35:80 swap/(3874:3874): Pagina leida correctamente: 
+[INFO] 00:19:35:81 swap/(3874:3874): 
+[ERROR] 00:21:30:926 swap/(3874:3874): Al recibir del cliente
+[INFO] 00:21:36:761 swap/(4213:4213): Valores del archivo de configuracion seteados
+[INFO] 00:21:36:775 swap/(4213:4213): Archivo de particion creado
+[INFO] 00:21:36:775 swap/(4213:4213): Server creado y escuchando correctamente
+[INFO] 00:23:06:290 swap/(4213:4213): Hay espacio
+[INFO] 00:23:06:290 swap/(4213:4213): Espacio reservado correctamente
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:06:290 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:10:651 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:23:10:651 swap/(4213:4213): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 00:23:11:485 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:23:11:486 swap/(4213:4213): 
+[INFO] 00:23:27:151 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:27:193 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:23:27:193 swap/(4213:4213):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 213))
+[INFO] 00:23:55:971 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:56:9 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:23:56:9 swap/(4213:4213): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 00:23:58:272 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:23:58:310 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:23:58:311 swap/(4213:4213): 
+[INFO] 00:32:20:249 swap/(4213:4213): Hay espacio
+[INFO] 00:32:20:249 swap/(4213:4213): Espacio reservado correctamente
+[INFO] 00:32:20:249 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:249 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:249 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:249 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:249 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:32:20:250 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:33:07:223 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:33:07:223 swap/(4213:4213): ye
+
+begin
+variables f,  A,  g
+    A = 	0
+    !compartida = 1+A
+ 
+[INFO] 00:33:07:961 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:33:07:961 swap/(4213:4213): 
+[INFO] 00:33:30:19 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:33:30:57 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:33:30:57 swap/(4213:4213):    print !compartida
+    jnz !compartida Siguiente 
+:Proximo
+	
+ 0:33
+[INFO] 00:33:57:986 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:33:58:24 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:33:58:25 swap/(4213:4213): 
+
+:Siguiente	
+	print A+1
+goto Proximo
+
+
+
+[INFO] 00:34:00:315 swap/(4213:4213): Pagina escrita con exito
+[INFO] 00:34:00:354 swap/(4213:4213): Pagina leida correctamente: 
+[INFO] 00:34:00:354 swap/(4213:4213): 
+[ERROR] 00:56:43:916 swap/(4213:4213): Al recibir del cliente
+[INFO] 01:12:21:408 swap/(5200:5200): Valores del archivo de configuracion seteados
+[INFO] 01:12:21:417 swap/(5200:5200): Archivo de particion creado
+[INFO] 01:12:21:417 swap/(5200:5200): Server creado y escuchando correctamente
+[INFO] 01:13:26:122 swap/(5200:5200): Hay espacio
+[INFO] 01:13:26:122 swap/(5200:5200): Espacio reservado correctamente
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:26:122 swap/(5200:5200): Pagina escrita con exito
+[INFO] 01:13:42:81 swap/(5200:5200): Pagina leida correctamente: 
+[INFO] 01:13:42:81 swap/(5200:5200): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[INFO] 01:13:42:82 swap/(5200:5200): Pagina leida correctamente: 
+[INFO] 01:13:42:82 swap/(5200:5200):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 01:14:13:841 swap/(5200:5200): Al recibir del cliente
+[INFO] 01:16:46:447 swap/(5491:5491): Valores del archivo de configuracion seteados
+[INFO] 01:16:46:454 swap/(5491:5491): Archivo de particion creado
+[INFO] 01:16:46:454 swap/(5491:5491): Server creado y escuchando correctamente
+[INFO] 01:17:38:835 swap/(5491:5491): Hay espacio
+[INFO] 01:17:38:835 swap/(5491:5491): Espacio reservado correctamente
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:17:38:835 swap/(5491:5491): Pagina escrita con exito
+[INFO] 01:18:02:832 swap/(5491:5491): Pagina leida correctamente: 
+[INFO] 01:18:02:832 swap/(5491:5491): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 01:22:26:539 swap/(5491:5491): Al recibir del cliente
+[INFO] 01:22:54:635 swap/(5803:5803): Valores del archivo de configuracion seteados
+[INFO] 01:22:54:660 swap/(5803:5803): Archivo de particion creado
+[INFO] 01:22:54:660 swap/(5803:5803): Server creado y escuchando correctamente
+[INFO] 01:23:44:593 swap/(5803:5803): Hay espacio
+[INFO] 01:23:44:593 swap/(5803:5803): Espacio reservado correctamente
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:23:44:593 swap/(5803:5803): Pagina escrita con exito
+[INFO] 01:24:16:319 swap/(5803:5803): Pagina leida correctamente: 
+[INFO] 01:24:16:319 swap/(5803:5803): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 01:26:33:408 swap/(5803:5803): Al recibir del cliente
+[INFO] 01:26:46:736 swap/(6100:6100): Valores del archivo de configuracion seteados
+[INFO] 01:26:46:763 swap/(6100:6100): Archivo de particion creado
+[INFO] 01:26:46:763 swap/(6100:6100): Server creado y escuchando correctamente
+[ERROR] 01:27:27:788 swap/(6100:6100): Al recibir del cliente
+[INFO] 01:27:34:180 swap/(6236:6236): Valores del archivo de configuracion seteados
+[INFO] 01:27:34:194 swap/(6236:6236): Archivo de particion creado
+[INFO] 01:27:34:194 swap/(6236:6236): Server creado y escuchando correctamente
+[ERROR] 01:30:59:515 swap/(6236:6236): Al recibir del cliente
+[INFO] 01:31:11:195 swap/(6461:6461): Valores del archivo de configuracion seteados
+[INFO] 01:31:11:201 swap/(6461:6461): Archivo de particion creado
+[INFO] 01:31:11:201 swap/(6461:6461): Server creado y escuchando correctamente
+[INFO] 01:32:28:433 swap/(6461:6461): Hay espacio
+[INFO] 01:32:28:433 swap/(6461:6461): Espacio reservado correctamente
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:28:433 swap/(6461:6461): Pagina escrita con exito
+[INFO] 01:32:32:373 swap/(6461:6461): Pagina leida correctamente: 
+[INFO] 01:32:32:373 swap/(6461:6461): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 01:35:07:500 swap/(6461:6461): Al recibir del cliente
+[INFO] 01:35:16:949 swap/(6856:6856): Valores del archivo de configuracion seteados
+[INFO] 01:35:16:968 swap/(6856:6856): Archivo de particion creado
+[INFO] 01:35:16:968 swap/(6856:6856): Server creado y escuchando correctamente
+[ERROR] 01:35:56:403 swap/(6856:6856): Al recibir del cliente
+[INFO] 01:36:08:44 swap/(6992:6992): Valores del archivo de configuracion seteados
+[INFO] 01:36:08:78 swap/(6992:6992): Archivo de particion creado
+[INFO] 01:36:08:78 swap/(6992:6992): Server creado y escuchando correctamente
+[INFO] 01:37:44:194 swap/(6992:6992): Hay espacio
+[INFO] 01:37:44:194 swap/(6992:6992): Espacio reservado correctamente
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:44:194 swap/(6992:6992): Pagina escrita con exito
+[INFO] 01:37:51:974 swap/(6992:6992): Pagina leida correctamente: 
+[INFO] 01:37:51:974 swap/(6992:6992): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 01:42:52:606 swap/(6992:6992): Al recibir del cliente
+[INFO] 01:42:59:53 swap/(7282:7282): Valores del archivo de configuracion seteados
+[INFO] 01:42:59:64 swap/(7282:7282): Archivo de particion creado
+[INFO] 01:42:59:64 swap/(7282:7282): Server creado y escuchando correctamente
+[INFO] 01:45:11:608 swap/(7282:7282): Hay espacio
+[INFO] 01:45:11:608 swap/(7282:7282): Espacio reservado correctamente
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:11:608 swap/(7282:7282): Pagina escrita con exito
+[INFO] 01:45:14:870 swap/(7282:7282): Pagina leida correctamente: 
+[INFO] 01:45:14:870 swap/(7282:7282): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[INFO] 01:45:24:573 swap/(7282:7282): Pagina leida correctamente: 
+[INFO] 01:45:24:573 swap/(7282:7282):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 01:49:02:385 swap/(7282:7282): Al recibir del cliente
+[INFO] 01:49:14:783 swap/(7579:7579): Valores del archivo de configuracion seteados
+[INFO] 01:49:14:814 swap/(7579:7579): Archivo de particion creado
+[INFO] 01:49:14:815 swap/(7579:7579): Server creado y escuchando correctamente
+[INFO] 01:50:50:755 swap/(7579:7579): Hay espacio
+[INFO] 01:50:50:755 swap/(7579:7579): Espacio reservado correctamente
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:50:50:756 swap/(7579:7579): Pagina escrita con exito
+[INFO] 01:52:01:275 swap/(7579:7579): Pagina leida correctamente: 
+[INFO] 01:52:01:275 swap/(7579:7579): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[INFO] 01:52:10:320 swap/(7579:7579): Pagina leida correctamente: 
+[INFO] 01:52:10:321 swap/(7579:7579):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 01:56:14:598 swap/(7579:7579): Al recibir del cliente
+[INFO] 01:56:28:330 swap/(7902:7902): Valores del archivo de configuracion seteados
+[INFO] 01:56:28:394 swap/(7902:7902): Archivo de particion creado
+[INFO] 01:56:28:394 swap/(7902:7902): Server creado y escuchando correctamente
+[INFO] 01:58:28:527 swap/(7902:7902): Hay espacio
+[INFO] 01:58:28:528 swap/(7902:7902): Espacio reservado correctamente
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:28:528 swap/(7902:7902): Pagina escrita con exito
+[INFO] 01:58:40:735 swap/(7902:7902): Pagina leida correctamente: 
+[INFO] 01:58:40:735 swap/(7902:7902): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 02:00:26:663 swap/(7902:7902): Al recibir del cliente
+[INFO] 02:00:32:541 swap/(8171:8171): Valores del archivo de configuracion seteados
+[INFO] 02:00:32:545 swap/(8171:8171): Archivo de particion creado
+[INFO] 02:00:32:545 swap/(8171:8171): Server creado y escuchando correctamente
+[INFO] 02:01:02:396 swap/(8171:8171): Hay espacio
+[INFO] 02:01:02:396 swap/(8171:8171): Espacio reservado correctamente
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:02:396 swap/(8171:8171): Pagina escrita con exito
+[INFO] 02:01:05:261 swap/(8171:8171): Pagina leida correctamente: 
+[INFO] 02:01:05:261 swap/(8171:8171): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 02:02:03:381 swap/(8171:8171): Al recibir del cliente
+[INFO] 02:03:20:928 swap/(8559:8559): Valores del archivo de configuracion seteados
+[INFO] 02:03:20:940 swap/(8559:8559): Archivo de particion creado
+[INFO] 02:03:20:940 swap/(8559:8559): Server creado y escuchando correctamente
+[INFO] 02:04:38:455 swap/(8559:8559): Hay espacio
+[INFO] 02:04:38:456 swap/(8559:8559): Espacio reservado correctamente
+[INFO] 02:04:38:456 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:456 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:456 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:456 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:457 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:457 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:457 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:457 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:457 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:38:457 swap/(8559:8559): Pagina escrita con exito
+[INFO] 02:04:41:605 swap/(8559:8559): Pagina leida correctamente: 
+[INFO] 02:04:41:605 swap/(8559:8559): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[ERROR] 02:06:34:821 swap/(8559:8559): Al recibir del cliente
+[INFO] 02:06:50:366 swap/(8866:8866): Valores del archivo de configuracion seteados
+[INFO] 02:06:50:370 swap/(8866:8866): Archivo de particion creado
+[INFO] 02:06:50:370 swap/(8866:8866): Server creado y escuchando correctamente
+[INFO] 02:09:32:812 swap/(8866:8866): Hay espacio
+[INFO] 02:09:32:812 swap/(8866:8866): Espacio reservado correctamente
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:32:812 swap/(8866:8866): Pagina escrita con exito
+[INFO] 02:09:34:816 swap/(8866:8866): Pagina leida correctamente: 
+[INFO] 02:09:34:816 swap/(8866:8866): #!/usr/bin/ansisop
+begin	
+	:etiqueta
+	
+	wait b
+		!colas = !colas
+[INFO] 02:10:18:863 swap/(8866:8866): Pagina leida correctamente: 
+[INFO] 02:10:18:863 swap/(8866:8866):  +1
+	signal c
+	
+	#Ciclar indefinidamente
+	goto etiqueta
+
+end
+
+
+
+[ERROR] 02:11:31:17 swap/(8866:8866): Al recibir del cliente

@@ -305,7 +305,7 @@ void irAlLabel(t_nombre_etiqueta etiqueta) {
 
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
-	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
+	pcbProceso.programCounter   = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
 	saltoDeLinea = TRUE;
@@ -316,7 +316,8 @@ char* sinEspacioAlFinal(char* linea, int tamanio) {
 	char* lineaLoca =(char*) malloc(tamanio);
 
 	memcpy(lineaLoca,linea,tamanio);
-
+	lineaLoca[tamanio]='\0';
+	//"colas´"
 	if (isspace(lineaLoca[tamanio - 1])) {
 		lineaLoca[tamanio - 1] = '\0';
 		return lineaLoca;
