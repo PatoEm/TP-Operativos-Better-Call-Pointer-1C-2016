@@ -1117,7 +1117,7 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	int i = 0;
 	t_tlb*nodoActual = list_get(TLB, i);
 	while (i < list_size(TLB)) {
-
+		nodoActual = list_get(TLB,i);
 		if ((nodoActual->pid) == pid && nodoActual->pagina == pagina)
 			break;
 		i++;
@@ -1128,9 +1128,9 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 		int lugarActual = nodoActual->frameTLB * marco_Size + offset;
 		for (i = 0; i < cantidad; i++) {
 			memoriaReal[lugarActual] = buffer[i];
-			i++;
 			lugarActual++;
 		}
+
 		return 1;
 	}
 
