@@ -47,7 +47,6 @@ SocketClient* socketUMC;
 int tamanioPaginaUmc;
 pcb pcbProceso;
 bool seguirEjecutando; //1 SI 0 NO
-int abortoCPU;
 espacioAsignado * asignadoVacio;
 bool finalizoCorrectamente;
 bool saltoDeLinea;
@@ -147,16 +146,8 @@ void signale(t_nombre_semaforo identificador_semaforo);
 bool espacioMemoriaVacio(int tamanio, char*bytes);
 
 
-void senialParaAbortar();
-
-
-void mandarElAbortoAKernel(pcb * pcbActual);
-
-
 void abortarCPU();
 
-
-void mirarSenial(pcb * pcbActual);
 
 char* sinEspacioAlFinal(char* linea, int tamanio);
 //======================================================
