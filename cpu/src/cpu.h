@@ -157,4 +157,6 @@ AnSISOP_kernel funcionesDeKernel;
 
 void iniciarFunciones();
 
+String intToStr(Int32U integer);
+
 #endif /* CPU_H_ */

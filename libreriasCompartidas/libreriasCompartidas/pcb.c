@@ -39,20 +39,42 @@ pcb* newPcb(Socket* consola, int id, int tamanioArchivoOriginal, t_puntero_instr
 
 paginaDeStack*crearPaginaDeStackVaciaPiola(){
 	paginaDeStack* soyUnaPaginaDeStackVacia = malloc(sizeof (paginaDeStack));
-
-
-	soyUnaPaginaDeStackVacia->pos=0;
-	soyUnaPaginaDeStackVacia->retPos=0;
-	soyUnaPaginaDeStackVacia->cantArgs=0;
-	soyUnaPaginaDeStackVacia->cantVars=0;
-	soyUnaPaginaDeStackVacia->cantRetvars=0;
-
-	soyUnaPaginaDeStackVacia->vars =NULL;
+	soyUnaPaginaDeStackVacia->pos = 0;
+	soyUnaPaginaDeStackVacia->retPos = 0;
+	soyUnaPaginaDeStackVacia->cantArgs = 0;
+	soyUnaPaginaDeStackVacia->cantVars = 0;
+	soyUnaPaginaDeStackVacia->cantRetvars = 0;
+	soyUnaPaginaDeStackVacia->vars = NULL;
 	soyUnaPaginaDeStackVacia->retVars = NULL;
 	soyUnaPaginaDeStackVacia->args = NULL;
-
-
 	return soyUnaPaginaDeStackVacia;
+}
+
+
+argumentos*crearArgumentoVacioPiola(){
+	argumentos* soyUnArgumentoVacio = malloc(sizeof(argumentos));
+	soyUnArgumentoVacio->pagArg = 0;
+	soyUnArgumentoVacio->offArgs = 0;
+	soyUnArgumentoVacio->sizeArgs = 0;
+	return soyUnArgumentoVacio;
+}
+
+variables*crearVariableVacioPiola(){
+	variables* soyUnaVariableVacia = malloc(sizeof(variables));
+	soyUnaVariableVacia->idVar = 0;
+	soyUnaVariableVacia->pagVar = 0;
+	soyUnaVariableVacia->offVar = 0;
+	soyUnaVariableVacia->sizeVar = 0;
+	return soyUnaVariableVacia;
+}
+
+variablesRetorno*crearVariableRetornoVacioPiola(){
+	variablesRetorno* soyUnaVariableRetornoVacia = malloc(sizeof(variablesRetorno));
+	soyUnaVariableRetornoVacia->idVarRet = 0;
+	soyUnaVariableRetornoVacia->pagVarRet = 0;
+	soyUnaVariableRetornoVacia->offVarRet = 0;
+	soyUnaVariableRetornoVacia->sizeVarRet = 0;
+	return soyUnaVariableRetornoVacia;
 }
 
 pcb* newEmptyPcb() {
