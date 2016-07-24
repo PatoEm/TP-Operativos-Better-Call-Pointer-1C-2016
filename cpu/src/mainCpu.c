@@ -90,6 +90,8 @@ int main() {
 	pcbVacio = newEmptyPcb();
 	t_config* tConfig = NULL;
 
+	char * instruccionLoca;
+
 	signal(SIGUSR1, abortarCPU);
 
 	if (loadConfig() && socketConnection()) {
@@ -103,8 +105,12 @@ int main() {
 			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int32U quantum = skc->quantum;
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
-				analizadorLinea(pedirInstruccion(&pcbProceso), &funciones,
+				instruccionLoca = pedirInstruccion(&pcbProceso);
+
+				analizadorLinea(instruccionLoca, &funciones,
 						&funcionesDeKernel);
+
+				free(instruccionLoca);
 				if(saltoDeLinea == FALSE){
 				moverProgramCounterPcb(&pcbProceso);
 				}
@@ -375,7 +381,7 @@ int calcularOffset(pcb *pcbLoco) {
 
 String stringFromByteArray(Byte* data, Int32U size) {
 	int i;
-	String result = malloc(size);
+	String result = malloc(100);
 	char* c = (char*) data;
 	for (i = 0; i < size; i++) {
 		result[i] = *c;
@@ -390,7 +396,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 	int inicio = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].comienzo;
 	int offset = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].longitud;
-	char* instruccion = malloc(offset);
+	char* instruccion = malloc(200);
 	instruccion[0] = '\0';
 	StrCpuUmc* scu;
 	StrUmcCpu* suc;
@@ -435,8 +441,11 @@ char* pedirInstruccion(pcb* pcbLoco) {
 			return FALSE;
 		}
 
-		strcat(instruccion, stringFromByteArray(suc->data, suc->dataLen));
+		char* auxCat;
+		auxCat= stringFromByteArray(suc->data, suc->dataLen);
+		strcat(instruccion, auxCat);
 
+		free(auxCat);
 		offset = offset - offsetPag;
 		pagina++;
 		inicioPag = 0;
