@@ -350,7 +350,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 	paginaDeStack* aux = crearPaginaDeStackVaciaPiola();
 	aux->retVars = list_create();
-	variablesRetorno*dondeRetorno = malloc(variablesRetorno);
+	variablesRetorno*dondeRetorno = malloc(sizeof(variablesRetorno));
 	dondeRetorno->pagVarRet = donde_retornar / tamanioPaginaUmc;
 	dondeRetorno->offVarRet = donde_retornar % tamanioPaginaUmc;
 	dondeRetorno->idVarRet = "";
