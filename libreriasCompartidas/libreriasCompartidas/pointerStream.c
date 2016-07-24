@@ -213,17 +213,37 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(arrayBidimensional) * (skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.indiceDeCodigoSize);
 	size += sizeof(skc->pcb.indiceDeEtiquetasSize);
-	//size += skc->pcb.indiceDeEtiquetasSize;
 	size += sizeof(skc->pcb.etiquetaSize);
 	size += skc->pcb.etiquetaSize;
 	size += sizeof(skc->pcb.instruccionesTotales);
 	size += sizeof(skc->pcb.instruccionesRestantes);
-	//size += sizeof(skc->pcb.indiceDelStack);
 	size += sizeof(skc->pcb.cantElementsStack);
 	size += sizeof(skc->pcb.estado);
-	//size += sizeof(skc->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
-	size += ((skc->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo piola
+
+	int sumadorLoco =0;
+	int i;
+	paginaDeStack *aux;
+
+	if(skc->pcb.indiceDelStack->elements_count!=0){
+
+		for(i=0; i<(skc->pcb.indiceDelStack->elements_count);i++){
+
+		aux=list_get(skc->pcb.indiceDelStack,i);
+
+		sumadorLoco+=20;
+		sumadorLoco+=(aux->args->elements_count)*12;
+		sumadorLoco+=(aux->vars->elements_count)*13;
+		sumadorLoco+=(aux->retVars->elements_count)*13;
+
+
+
+		}
+	}
+
+
+	//size += ((skc->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo piola
 	// fin size pcb
+	size += sumadorLoco;
 	size += sizeof(skc->quantum);
 	size += sizeof(skc->quantumSleep);
 	size += sizeof(skc->dataLen);
@@ -278,16 +298,36 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	size += sizeof(arrayBidimensional) * (sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.indiceDeCodigoSize);
 	size += sizeof(sck->pcb.indiceDeEtiquetasSize);
-	//size += sck->pcb.indiceDeEtiquetasSize;
 	size += sizeof(sck->pcb.etiquetaSize);
 	size += sck->pcb.etiquetaSize;
 	size += sizeof(sck->pcb.instruccionesTotales);
 	size += sizeof(sck->pcb.instruccionesRestantes);
-	//size += sizeof(sck->pcb.indiceDelStack);
 	size += sizeof(sck->pcb.cantElementsStack);
 	size += sizeof(sck->pcb.estado);
-	//size += sizeof(sck->pcb.indiceDelStack->elements_count)*sizeof(paginaDeStack);
-	size += ((sck->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo groso
+
+	//size += ((sck->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo groso
+
+
+	int sumadorLoco =0;
+	int i;
+	paginaDeStack *aux;
+
+	if(sck->pcb.indiceDelStack->elements_count!=0){
+
+		for(i=0; i<(sck->pcb.indiceDelStack->elements_count);i++){
+
+		aux=list_get(sck->pcb.indiceDelStack,i);
+
+		sumadorLoco+=20;
+		sumadorLoco+=(aux->args->elements_count)*12;
+		sumadorLoco+=(aux->vars->elements_count)*13;
+		sumadorLoco+=(aux->retVars->elements_count)*13;
+
+
+
+		}
+	}
+
 
 	// fin size pcb
 	size += sizeof(sck->pid);
