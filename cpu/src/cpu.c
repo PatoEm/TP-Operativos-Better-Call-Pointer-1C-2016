@@ -261,8 +261,6 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 		seguirEjecutando = FALSE;
 	return -1;
 
-
-
 }
 
 /*
@@ -295,7 +293,6 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		return -1;
 	}
 
-
 	//free(buffer);
 }
 
@@ -308,7 +305,7 @@ void irAlLabel(t_nombre_etiqueta etiqueta) {
 
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
-	pcbProceso.programCounter   = metadata_buscar_etiqueta(etiquetaMod,
+	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
 	free(etiquetaMod);
@@ -318,17 +315,16 @@ void irAlLabel(t_nombre_etiqueta etiqueta) {
 
 char* sinEspacioAlFinal(char* linea, int tamanio) {
 
-	char* lineaLoca =(char*) malloc(100);
-
-	memcpy(lineaLoca,linea,tamanio);
-	lineaLoca[tamanio]='\0';
-	//"colas´"
-	if (isspace(lineaLoca[tamanio - 1])) {
-		lineaLoca[tamanio - 1] = '\0';
-		return lineaLoca;
-	} else
-		return lineaLoca;
-
+	char* lineaLoca = (char*) malloc(100);
+	memcpy(lineaLoca, linea, tamanio);
+	lineaLoca[tamanio] = '\0';
+	int i;
+	for (i = tamanio; i > 0; i--) {
+		if (isspace(lineaLoca[i])) {
+			lineaLoca[i] = '\0';
+		}
+	}
+return lineaLoca;
 }
 
 /*
@@ -339,7 +335,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	char* etiquetaMod;
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
-	paginaDeStack* aux = malloc(sizeof(paginaDeStack));
+	paginaDeStack* aux =crearPaginaDeStackVaciaPiola();
 	aux->retVars->pagVarRet = donde_retornar / tamanioPaginaUmc;
 	aux->retVars->offVarRet = donde_retornar % tamanioPaginaUmc;
 	aux->retPos = pcbProceso.programCounter;
@@ -348,9 +344,8 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
 			pcbProceso.indiceDeEtiquetas, pcbProceso.etiquetaSize);
 
-
 	free(etiquetaMod);
-	saltoDeLinea=TRUE;
+	saltoDeLinea = TRUE;
 }
 
 /*
@@ -378,7 +373,7 @@ void retornar(t_valor_variable retorno) {
 			(pcbProceso.indiceDelStack->elements_count) - 1);
 	pcbProceso.programCounter = aux->retPos;
 
-	saltoDeLinea=TRUE;
+	saltoDeLinea = TRUE;
 
 	StrCpuUmc*streamCpuUmc;
 	asignadoVacio->numDePag = aux->retVars->pagVarRet;
@@ -437,7 +432,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
 
-	Byte * auxTiempo=malloc(100);
+	Byte * auxTiempo = malloc(100);
 	sprintf(auxTiempo, "%d", tiempo);
 	StrCpuKer*streamCpuKer;
 //(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
@@ -564,14 +559,12 @@ AnSISOP_funciones funciones = { .AnSISOP_definirVariable = definirVariable,
 AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 		signale, };
 
-
 void abortarCPU() {
-	if(seguirEjecutando){
+	if (seguirEjecutando) {
 		seguirEjecutando = FALSE;
 		puts("Muero por SIGUSR1\n");
 	}
 }
-
 
 // Devuelve el logger para loggear los logs para poder loggear
 t_log* getLogger() {
