@@ -344,8 +344,11 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 
 	StrKerCpu* StrKernelCpu;
 	SocketBuffer* buffer;
+//	(Char id, Char action, pcb pcb, Int32U quantum, Int32U quantumSleep,
+//			Byte* data, Int32U dataLen, Byte* nombreDispositivo,
+//			Int32U lenNomDispositivo)
 	StrKernelCpu = newStrKerCpu(1/*KERNEL_ID*/, 37/*WAIT_REALIZADO*/,
-			*pcbPrograma, 0, NULL, 0, NULL, 0);
+			*pcbPrograma, 0,0 ,NULL, 0, NULL, 0);
 	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	buffer = serializeKerCpu(StrKernelCpu);
 

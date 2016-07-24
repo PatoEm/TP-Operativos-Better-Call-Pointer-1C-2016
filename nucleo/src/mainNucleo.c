@@ -26,6 +26,7 @@ int main(int argc, char** argv) {
 //	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
 //
 //
+
 	if(argc != 2){
 		puts("No se ingreso la ruta del archivo de configuracion\n");
 		return 0;

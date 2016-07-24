@@ -34,7 +34,7 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent,
 /*******************************
  * Constructor Kernel-CPU
  ******************************/
-StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int32U quantum,
+StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int32U quantum, Int32U quantumSleep,
 		Byte* data, Int32U dataLen, Byte* nombreDispositivo,
 		Int32U lenNomDispositivo) {
 	StrKerCpu* skc = malloc(sizeof(StrKerCpu));
@@ -42,6 +42,7 @@ StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int32U quantum,
 	skc->action = action;
 	skc->pcb = pcb;
 	skc->quantum = quantum;
+	skc->quantumSleep=quantumSleep;
 	skc->data = data;
 	skc->dataLen = dataLen;
 	skc->nombreDispositivo = nombreDispositivo;
@@ -224,6 +225,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += ((skc->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo piola
 	// fin size pcb
 	size += sizeof(skc->quantum);
+	size += sizeof(skc->quantumSleep);
 	size += sizeof(skc->dataLen);
 	size += skc->dataLen;
 	size += sizeof(skc->lenNomDispositivo);
@@ -569,6 +571,10 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrByte = (Byte*) &skc->quantum;
 	memcpy(ptrData, ptrByte, sizeof(skc->quantum));
 	ptrData += sizeof(skc->quantum);
+
+	ptrByte = (Byte*) &skc->quantumSleep;
+	memcpy(ptrData, ptrByte, sizeof(skc->quantumSleep));
+	ptrData += sizeof(skc->quantumSleep);
 
 	ptrByte = (Byte*) &skc->dataLen;
 	memcpy(ptrData, ptrByte, sizeof(skc->dataLen));
@@ -1170,6 +1176,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	Char action;
 	pcb pcb;
 	Int32U quantum;
+	Int32U quantumSleep;
 	Byte* data = NULL;
 	Int32U dataLen;
 	Byte* nombreDispositivo = NULL;
@@ -1282,6 +1289,9 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(&quantum, ptrByte, sizeof(quantum));
 	ptrByte += sizeof(quantum);
 
+	memcpy(&quantumSleep, ptrByte, sizeof(quantumSleep));
+		ptrByte += sizeof(quantumSleep);
+
 	memcpy(&dataLen, ptrByte, sizeof(dataLen));
 	ptrByte += sizeof(dataLen);
 	data = malloc(dataLen);
@@ -1300,7 +1310,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	//nombreDispositivo[lenNomDispositivo] = '\0';
 
 	free(dataSerialized);
-	return newStrKerCpu(id, action, pcb, quantum, data, dataLen,
+	return newStrKerCpu(id, action, pcb, quantum, quantumSleep,data, dataLen,
 			nombreDispositivo, lenNomDispositivo);
 }
 
