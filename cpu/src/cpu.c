@@ -47,7 +47,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 	SocketBuffer*buffer;
 	StrUmcCpu*streamUmcCpu;
 	int tam = 100;
-	variables*variable;
+	variables*variable=malloc(sizeof(variables));
 	if (1 == list_size(pcbProceso.indiceDelStack))
 		tam = list_size(pcbProceso.indiceDelStack);
 	if (0 == list_size(pcbProceso.indiceDelStack)
@@ -116,7 +116,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->offVar = (tamanioPaginaUmc - 5);
 					variable->sizeVar = 4;
-					list_add(ultimaPaginaStack, variable);
+					list_add(ultimaPaginaStack->vars, variable);
 				} else
 					seguirEjecutando = FALSE;
 			}
@@ -141,7 +141,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->sizeVar = 4;
 					variable->offVar = ultimaPagina->offVar - 4;
-					list_add(ultimaPaginaStack, variable);
+					list_add(ultimaPaginaStack->vars, variable);
 				} else {
 					seguirEjecutando = FALSE;
 				}
@@ -222,8 +222,8 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	puts("CPU: Pido ASIGNAR");
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
-	asignadoVacio->bitUso = direccion_variable / tamanioPaginaUmc;
-	int offset = direccion_variable / tamanioPaginaUmc;
+	asignadoVacio->bitUso = direccion_variable % tamanioPaginaUmc;
+	int offset = direccion_variable % tamanioPaginaUmc;
 
 	Byte* dataAMandar = malloc(sizeof(char) * 4);
 	sprintf(dataAMandar, "%d", valor);

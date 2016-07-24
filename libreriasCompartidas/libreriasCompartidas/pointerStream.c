@@ -323,6 +323,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	}
 
 	// fin size pcb
+	size +=sumadorLoco;
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
 	size += sck->logLen;
