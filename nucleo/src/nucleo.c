@@ -138,7 +138,20 @@ void moverAColaReady(pcb * programa) {
 	}
 
 	programa->estado = 1; //1 READY
+	pthread_mutex_lock(mutexColaReady);
 	list_add(listaReady, programa);
+	pthread_mutex_unlock(mutexColaReady);
+
+	if(listaCpu->elements_count != 0){
+		puts("PCB READY, HAY UNA CPU AL PEDO");
+		Socket* cpuLoca = list_remove(listaCpu, 0);
+		printf("CPU al pedo removida, LISTACPU = %d\n", listaCpu->elements_count);
+		if(!enviarPcbACpu(cpuLoca)){
+			puts("No se pudo enviar pcb");
+		} else {
+			puts("PCB enviado");
+		}
+	}
 }
 void moverAListaBlock(pcb* programa) {
 	pthread_mutex_lock(mutexListaExec);
@@ -344,11 +357,8 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 
 	StrKerCpu* StrKernelCpu;
 	SocketBuffer* buffer;
-//	(Char id, Char action, pcb pcb, Int32U quantum, Int32U quantumSleep,
-//			Byte* data, Int32U dataLen, Byte* nombreDispositivo,
-//			Int32U lenNomDispositivo)
 	StrKernelCpu = newStrKerCpu(1/*KERNEL_ID*/, 37/*WAIT_REALIZADO*/,
-			*pcbPrograma, 0,0 ,NULL, 0, NULL, 0);
+			*pcbPrograma, 0, NULL, 0, NULL, 0);
 	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	buffer = serializeKerCpu(StrKernelCpu);
 
@@ -448,6 +458,7 @@ int inicializarVariables(char* ruta) {
 	mutexColaExit = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 	mutexListaExec = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 	mutexListaBlock = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
+	mutexListaCpu = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 
 	primeraLectura = true;
 
@@ -511,6 +522,11 @@ int inicializarVariables(char* ruta) {
 		}
 	}
 
+	if (pthread_mutex_init(mutexListaCpu, NULL) != 0) {
+		printf("\n init mutexListaCpu fallo\n");
+		return -1;
+	}
+
 	if (pthread_mutex_init(mutexQuantum, NULL) != 0) {
 		printf("\n init mutexQuamtum fallo\n");
 		return -1;
@@ -549,6 +565,7 @@ int inicializarVariables(char* ruta) {
 	listaBlock = list_create();
 	listaExit = list_create();
 	//colaExit = queue_create();
+	listaCpu = list_create();
 
 	umcServer = socketCreateClient();
 	do {
