@@ -542,7 +542,7 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 
 	int i;
 	int j;
-	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
+	paginaDeStack *aux;
 	argumentos *auxArgs;
 	variables *auxVars;
 	variablesRetorno * auxVarsRet;
@@ -832,7 +832,7 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 
 	int i;
 	int j;
-	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
+	paginaDeStack *aux;
 	argumentos *auxArgs;
 	variables *auxVars;
 	variablesRetorno * auxVarsRet;
@@ -1388,7 +1388,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		aux->args = list_create();
 
 		for (j = 0; j < aux->cantArgs; j++) {
-			auxArgs = malloc(sizeof(argumentos)); //todo
+			auxArgs = crearArgumentoVacioPiola(); //todo
 
 			memcpy(&auxArgs->pagArg, ptrByte, sizeof(auxArgs->pagArg));
 			ptrByte += sizeof(auxArgs->pagArg);
@@ -1409,7 +1409,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		aux->vars = list_create();
 
 		for (j = 0; j < aux->cantVars; j++) {
-			auxVars = malloc(sizeof(variables)); //todo
+			auxVars = crearVariableVacioPiola(); //todo
 
 			memcpy(&auxVars->idVar, ptrByte, sizeof(auxVars->idVar));
 			ptrByte += sizeof(auxVars->idVar);
@@ -1432,7 +1432,7 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		aux->retVars = list_create();
 
 		for (j = 0; j < aux->cantRetvars; j++) {
-			auxVarsRet = malloc(sizeof(variablesRetorno)); //todo
+			auxVarsRet = crearVariableRetornoVacioPiola(); //todo
 
 			memcpy(&auxVarsRet->idVarRet, ptrByte, sizeof(auxVarsRet->idVarRet));
 			ptrByte += sizeof(auxVarsRet->idVarRet);
@@ -1651,7 +1651,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		aux->args = list_create();
 
 		for (j = 0; j < aux->cantArgs; j++) {
-			auxArgs = malloc(sizeof(argumentos)); //todo
+			auxArgs = crearArgumentoVacioPiola(); //todo
 
 			memcpy(&auxArgs->pagArg, ptrByte, sizeof(auxArgs->pagArg));
 			ptrByte += sizeof(auxArgs->pagArg);
@@ -1672,7 +1672,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		aux->vars = list_create();
 
 		for (j = 0; j < aux->cantVars; j++) {
-			auxVars = malloc(sizeof(variables)); //todo
+			auxVars = crearVariableVacioPiola(); //todo
 
 			memcpy(&auxVars->idVar, ptrByte, sizeof(auxVars->idVar));
 			ptrByte += sizeof(auxVars->idVar);
@@ -1695,7 +1695,7 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		aux->retVars = list_create();
 
 		for (j = 0; j < aux->cantRetvars; j++) {
-			auxVarsRet = malloc(sizeof(variablesRetorno)); //todo
+			auxVarsRet = crearVariableRetornoVacioPiola(); //todo
 
 			memcpy(&auxVarsRet->idVarRet, ptrByte, sizeof(auxVarsRet->idVarRet));
 			ptrByte += sizeof(auxVarsRet->idVarRet);
