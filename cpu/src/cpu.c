@@ -424,13 +424,13 @@ String intToStr(Int32U integer) {
 void imprimir(t_valor_variable valor_mostrar) {
 	puts("CPU: Pido IMPRIMIR");
 	StrCpuKer*streamCpuKer;
-	Byte* aux = malloc(100);
-	sprintf(aux, "%d", valor_mostrar);
+	String aux;
+	aux =intToStr(valor_mostrar);
 
 	//(Char id, Char action, pcb pcb, Int32U pid,
 	//Int32U logLen, Byte* log, Byte* nombreDispositivo,
 	//Int32U lenNomDispositivo)
-	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, pcbProceso.id,
+	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, pcbProceso, valor_mostrar,
 			strlen(aux), aux, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);

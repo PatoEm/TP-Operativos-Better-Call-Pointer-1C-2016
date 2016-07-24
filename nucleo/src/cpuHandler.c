@@ -247,7 +247,7 @@ void newConsoleClient(Socket* consoleClient, Stream dataSerialized) {
 	if (sck->action == HANDSHAKE) {
 		log_info(cpuhlog, "Nuevo Cliente Consola %d aceptado.",
 				consoleClient->descriptor);
-		skc = newStrKerCon(KERNEL_ID, HANDSHAKE, 0, NULL);
+		skc = newStrKerCon(KERNEL_ID, HANDSHAKE, 0,0, NULL);
 		sb = serializeKerCon(skc);
 		if (socketSend(consoleClient, sb)) {
 			log_info(cpuhlog, "KER-CON: HANDSHAKE se devolvio handshake");
@@ -477,7 +477,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	case IMPRIMIRTEXTO: // TODO: Probar.
 		// Creo y serializo string kernel a consola.
-		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, in_cpu_msg->logLen,
+		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, 0,in_cpu_msg->logLen,
 				in_cpu_msg->log);
 		sb = serializeKerCon(out_con_msg);
 
@@ -496,7 +496,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	case IMPRIMIR:
 		// Creo y serializo string kernel a consola.
-		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIR, in_cpu_msg->logLen,
+		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIR,in_cpu_msg->pid ,in_cpu_msg->logLen,
 				in_cpu_msg->log);
 		sb = serializeKerCon(out_con_msg);
 
@@ -540,7 +540,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		char* mensajeFinalizar = "El programa finalizo correctamente.";
 
 		// Creo y serializo string kernel a consola.
-		out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, strlen(mensajeFinalizar), (Byte*)mensajeFinalizar);
+		out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, 0,strlen(mensajeFinalizar), (Byte*)mensajeFinalizar);
 		sb = serializeKerCon(out_con_msg);
 
 		// Extraigo el socket de la respectiva consola.
@@ -573,7 +573,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		char* mensajeAbortar = "El programa fue abortado.";
 
 		// Creo y serializo string kernel a consola.
-		out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA,
+		out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA,0,
 				strlen(mensajeAbortar), mensajeAbortar);
 		sb = serializeKerCon(out_con_msg);
 

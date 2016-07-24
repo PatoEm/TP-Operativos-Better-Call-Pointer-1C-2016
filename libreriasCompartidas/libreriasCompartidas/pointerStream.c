@@ -72,10 +72,11 @@ StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size,
 /*******************************
  * Constructor Kernel-Consola
  ******************************/
-StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log) {
+StrKerCon* newStrKerCon(Char id, Char action,Int32U valorImp ,Int32U logLen, Byte* log) {
 	StrKerCon* skcon = malloc(sizeof(StrKerCon));
 	skcon->id = id;
 	skcon->action = action;
+	skcon->valorImp=valorImp;
 	skcon->logLen = logLen;
 	skcon->log = log;
 	return skcon;
@@ -274,6 +275,7 @@ Int32U getSizeKerCon(StrKerCon* skc) {
 	Int32U size = 0;
 	size += sizeof(skc->id);
 	size += sizeof(skc->action);
+	size+= sizeof(skc->logLen);
 	size += sizeof(skc->logLen);
 	size += skc->logLen;
 	return size;
@@ -739,6 +741,10 @@ SocketBuffer* serializeKerCon(StrKerCon* skcon) {
 	ptrByte = (Byte*) &skcon->action;
 	memcpy(ptrData, ptrByte, sizeof(skcon->action));
 	ptrData += sizeof(skcon->action);
+
+	ptrByte = (Byte*) &skcon->valorImp;
+	memcpy(ptrData, ptrByte, sizeof(skcon->valorImp));
+	ptrData += sizeof(skcon->valorImp);
 
 	ptrByte = (Byte*) &skcon->logLen;
 	memcpy(ptrData, ptrByte, sizeof(skcon->logLen));
@@ -1536,6 +1542,7 @@ StrKerCon* unserializeKerCon(Stream dataSerialized) {
 	Stream ptrByte = dataSerialized;
 	Char id;
 	Char action;
+	Int32U valorImp;
 	Int32U logLen;
 	Byte* log = NULL;
 
@@ -1544,6 +1551,9 @@ StrKerCon* unserializeKerCon(Stream dataSerialized) {
 
 	memcpy(&action, ptrByte, sizeof(action));
 	ptrByte += sizeof(action);
+
+	memcpy(&valorImp, ptrByte, sizeof(valorImp));
+	ptrByte += sizeof(valorImp);
 
 	memcpy(&logLen, ptrByte, sizeof(logLen));
 	ptrByte += sizeof(logLen);
@@ -1554,7 +1564,7 @@ StrKerCon* unserializeKerCon(Stream dataSerialized) {
 	//log[logLen] = '\0';
 
 	free(dataSerialized);
-	return newStrKerCon(id, action, logLen, log);
+	return newStrKerCon(id, action,valorImp ,logLen, log);
 }
 
 /***********************************************/

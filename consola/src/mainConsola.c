@@ -241,8 +241,8 @@ Boolean instructionsFromKernel() {
 
 Boolean realizarImprimir() {
 	t_valor_variable valor_mostrar;
-	valor_mostrar = skc->log;
-	printf("%s\n", valor_mostrar);
+	valor_mostrar = skc->valorImp;
+	printf("%d\n", valor_mostrar);
 	return TRUE;
 }
 

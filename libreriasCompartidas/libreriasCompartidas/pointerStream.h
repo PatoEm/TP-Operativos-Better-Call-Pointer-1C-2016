@@ -131,6 +131,7 @@ typedef struct strKerUmc {
 typedef struct strKerCon {
 	Char id;
 	Char action;
+	Int32U valorImp;
 	Int32U logLen;
 	Byte* log;
 } __attribute__((packed)) StrKerCon;
@@ -228,7 +229,7 @@ StrConKer* newStrConKer(Char id, Char action, Byte* fileContent, Int32U fileCont
 
 StrKerCpu* newStrKerCpu(Char id, Char action, pcb pcb, Int32U quantum,Int32U quantumSleep, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo);
 StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset, Int32U tamanio);
-StrKerCon* newStrKerCon(Char id, Char action, Int32U logLen, Byte* log);
+StrKerCon* newStrKerCon(Char id, Char action,Int32U valorImp ,Int32U logLen, Byte* log);
 
 StrCpuKer* newStrCpuKer(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo);
 StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid);
