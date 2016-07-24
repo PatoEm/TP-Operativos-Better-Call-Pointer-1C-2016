@@ -69,7 +69,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		} else {
 			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
 				if (0 == list_size(pcbProceso.indiceDelStack)) {
-					nuevaVariable->vars = list_create();
+					//nuevaVariable->vars = list_create();
 					nuevaVariable->pos = 0;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
@@ -149,6 +149,8 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		}
 	}
 	//free(buffer);
+	free(streamUmcCpu);
+	//free(asignadoVacio);
 	return variable->pagVar * tamanioPaginaUmc + variable->offVar;
 }
 

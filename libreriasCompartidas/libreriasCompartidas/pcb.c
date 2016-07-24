@@ -44,9 +44,9 @@ paginaDeStack*crearPaginaDeStackVaciaPiola(){
 	soyUnaPaginaDeStackVacia->cantArgs = 0;
 	soyUnaPaginaDeStackVacia->cantVars = 0;
 	soyUnaPaginaDeStackVacia->cantRetvars = 0;
-	soyUnaPaginaDeStackVacia->vars = NULL;
-	soyUnaPaginaDeStackVacia->retVars = NULL;
-	soyUnaPaginaDeStackVacia->args = NULL;
+	soyUnaPaginaDeStackVacia->vars = list_create();
+	soyUnaPaginaDeStackVacia->retVars = list_create();
+	soyUnaPaginaDeStackVacia->args = list_create();
 	return soyUnaPaginaDeStackVacia;
 }
 

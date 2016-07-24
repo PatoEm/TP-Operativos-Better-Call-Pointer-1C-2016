@@ -220,26 +220,23 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(skc->pcb.cantElementsStack);
 	size += sizeof(skc->pcb.estado);
 
-	int sumadorLoco =0;
+	int sumadorLoco = 0;
 	int i;
 	paginaDeStack *aux;
 
-	if(skc->pcb.indiceDelStack->elements_count!=0){
+	if (skc->pcb.indiceDelStack->elements_count != 0) {
 
-		for(i=0; i<(skc->pcb.indiceDelStack->elements_count);i++){
+		for (i = 0; i < (skc->pcb.indiceDelStack->elements_count); i++) {
 
-		aux=list_get(skc->pcb.indiceDelStack,i);
+			aux = list_get(skc->pcb.indiceDelStack, i);
 
-		sumadorLoco+=20;
-		sumadorLoco+=(aux->args->elements_count)*12;
-		sumadorLoco+=(aux->vars->elements_count)*13;
-		sumadorLoco+=(aux->retVars->elements_count)*13;
-
-
+			sumadorLoco += 20;
+			sumadorLoco += (aux->args->elements_count) * 12;
+			sumadorLoco += (aux->vars->elements_count) * 13;
+			sumadorLoco += (aux->retVars->elements_count) * 13;
 
 		}
 	}
-
 
 	//size += ((skc->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo piola
 	// fin size pcb
@@ -307,27 +304,23 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 
 	//size += ((sck->pcb.indiceDelStack->elements_count) * (46)); //Hardcodeando a lo groso
 
-
-	int sumadorLoco =0;
+	int sumadorLoco = 0;
 	int i;
 	paginaDeStack *aux;
 
-	if(sck->pcb.indiceDelStack->elements_count!=0){
+	if (sck->pcb.indiceDelStack->elements_count != 0) {
 
-		for(i=0; i<(sck->pcb.indiceDelStack->elements_count);i++){
+		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
 
-		aux=list_get(sck->pcb.indiceDelStack,i);
+			aux = list_get(sck->pcb.indiceDelStack, i);
 
-		sumadorLoco+=20;
-		sumadorLoco+=(aux->args->elements_count)*12;
-		sumadorLoco+=(aux->vars->elements_count)*13;
-		sumadorLoco+=(aux->retVars->elements_count)*13;
-
-
+			sumadorLoco += 20;
+			sumadorLoco += (aux->args->elements_count) * 12;
+			sumadorLoco += (aux->vars->elements_count) * 13;
+			sumadorLoco += (aux->retVars->elements_count) * 13;
 
 		}
 	}
-
 
 	// fin size pcb
 	size += sizeof(sck->pid);
@@ -832,10 +825,10 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 
 	int i;
 	int j;
-	paginaDeStack *aux;
-	argumentos *auxArgs;
-	variables *auxVars;
-	variablesRetorno * auxVarsRet;
+	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
+	argumentos *auxArgs = crearArgumentoVacioPiola();
+	variables *auxVars = crearVariableVacioPiola();
+	variablesRetorno * auxVarsRet = crearVariableRetornoVacioPiola();
 	if ((sck->pcb.indiceDelStack->elements_count) != 0) {
 		for (i = 0; i < (sck->pcb.indiceDelStack->elements_count); i++) {
 			aux = list_get(sck->pcb.indiceDelStack, i);
@@ -1366,10 +1359,10 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	pcb.indiceDelStack = list_create();
 	int i;
 	int j;
-	paginaDeStack* aux;
-	argumentos * auxArgs;
-	variables * auxVars;
-	variablesRetorno * auxVarsRet;
+	paginaDeStack *aux = crearPaginaDeStackVaciaPiola();
+	argumentos *auxArgs = crearArgumentoVacioPiola();
+	variables *auxVars = crearVariableVacioPiola();
+	variablesRetorno * auxVarsRet = crearVariableRetornoVacioPiola();
 	for (i = 0; i < pcb.cantElementsStack; i++) {
 		aux = crearPaginaDeStackVaciaPiola();
 
@@ -1405,7 +1398,6 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		memcpy(&aux->cantVars, ptrByte, sizeof(aux->cantVars));
 		ptrByte += sizeof(aux->cantVars);
 
-
 		aux->vars = list_create();
 
 		for (j = 0; j < aux->cantVars; j++) {
@@ -1434,22 +1426,24 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 		for (j = 0; j < aux->cantRetvars; j++) {
 			auxVarsRet = crearVariableRetornoVacioPiola(); //todo
 
-			memcpy(&auxVarsRet->idVarRet, ptrByte, sizeof(auxVarsRet->idVarRet));
+			memcpy(&auxVarsRet->idVarRet, ptrByte,
+					sizeof(auxVarsRet->idVarRet));
 			ptrByte += sizeof(auxVarsRet->idVarRet);
 
-			memcpy(&auxVarsRet->pagVarRet, ptrByte, sizeof(auxVarsRet->pagVarRet));
+			memcpy(&auxVarsRet->pagVarRet, ptrByte,
+					sizeof(auxVarsRet->pagVarRet));
 			ptrByte += sizeof(auxVarsRet->pagVarRet);
 
-			memcpy(&auxVarsRet->offVarRet, ptrByte, sizeof(auxVarsRet->offVarRet));
+			memcpy(&auxVarsRet->offVarRet, ptrByte,
+					sizeof(auxVarsRet->offVarRet));
 			ptrByte += sizeof(auxVarsRet->offVarRet);
 
-			memcpy(&auxVarsRet->sizeVarRet, ptrByte, sizeof(auxVarsRet->sizeVarRet));
+			memcpy(&auxVarsRet->sizeVarRet, ptrByte,
+					sizeof(auxVarsRet->sizeVarRet));
 			ptrByte += sizeof(auxVarsRet->sizeVarRet);
 
 			list_add(aux->retVars, auxVarsRet);
 		}
-
-
 
 		list_add(pcb.indiceDelStack, aux);
 	}
@@ -1624,8 +1618,6 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	memcpy(&pcb.cantElementsStack, ptrByte, sizeof(pcb.cantElementsStack));
 	ptrByte += sizeof(pcb.cantElementsStack);
 
-
-
 	pcb.indiceDelStack = list_create();
 	int i;
 	int j;
@@ -1668,7 +1660,6 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		memcpy(&aux->cantVars, ptrByte, sizeof(aux->cantVars));
 		ptrByte += sizeof(aux->cantVars);
 
-
 		aux->vars = list_create();
 
 		for (j = 0; j < aux->cantVars; j++) {
@@ -1697,27 +1688,27 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 		for (j = 0; j < aux->cantRetvars; j++) {
 			auxVarsRet = crearVariableRetornoVacioPiola(); //todo
 
-			memcpy(&auxVarsRet->idVarRet, ptrByte, sizeof(auxVarsRet->idVarRet));
+			memcpy(&auxVarsRet->idVarRet, ptrByte,
+					sizeof(auxVarsRet->idVarRet));
 			ptrByte += sizeof(auxVarsRet->idVarRet);
 
-			memcpy(&auxVarsRet->pagVarRet, ptrByte, sizeof(auxVarsRet->pagVarRet));
+			memcpy(&auxVarsRet->pagVarRet, ptrByte,
+					sizeof(auxVarsRet->pagVarRet));
 			ptrByte += sizeof(auxVarsRet->pagVarRet);
 
-			memcpy(&auxVarsRet->offVarRet, ptrByte, sizeof(auxVarsRet->offVarRet));
+			memcpy(&auxVarsRet->offVarRet, ptrByte,
+					sizeof(auxVarsRet->offVarRet));
 			ptrByte += sizeof(auxVarsRet->offVarRet);
 
-			memcpy(&auxVarsRet->sizeVarRet, ptrByte, sizeof(auxVarsRet->sizeVarRet));
+			memcpy(&auxVarsRet->sizeVarRet, ptrByte,
+					sizeof(auxVarsRet->sizeVarRet));
 			ptrByte += sizeof(auxVarsRet->sizeVarRet);
 
 			list_add(aux->retVars, auxVarsRet);
 		}
 
-
-
 		list_add(pcb.indiceDelStack, aux);
 	}
-
-
 
 	memcpy(&pcb.estado, ptrByte, sizeof(pcb.estado));
 	ptrByte += sizeof(pcb.estado);
