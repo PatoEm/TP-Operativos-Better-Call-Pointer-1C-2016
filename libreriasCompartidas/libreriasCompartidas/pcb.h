@@ -40,10 +40,14 @@ typedef struct {
 
 typedef struct {
 	int pos;
-	argumentos* args;
-	variables *vars;
 	int retPos;
-	variablesRetorno* retVars;
+
+	int cantArgs;
+	int cantVars;
+	int cantRetvars;
+	t_list* args;
+	t_list *vars;
+	t_list* retVars;
 
 } paginaDeStack;
 
