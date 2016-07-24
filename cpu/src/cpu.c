@@ -149,8 +149,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		}
 	}
 	//free(buffer);
-	free(streamUmcCpu);
-	//free(asignadoVacio);
+	//free(streamUmcCpu);
 	return variable->pagVar * tamanioPaginaUmc + variable->offVar;
 }
 
@@ -351,7 +350,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	paginaDeStack* aux = crearPaginaDeStackVaciaPiola();
-	aux->retVars = list_create();
+	//aux->retVars = list_create();
 	variablesRetorno*dondeRetorno = malloc(sizeof(variablesRetorno));
 	dondeRetorno->pagVarRet = donde_retornar / tamanioPaginaUmc;
 	dondeRetorno->offVarRet = donde_retornar % tamanioPaginaUmc;
