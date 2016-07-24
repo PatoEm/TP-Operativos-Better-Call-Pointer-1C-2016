@@ -52,6 +52,7 @@ int cantSemaforos; //No se lee por config
 char** idIO;
 char** retardoIO;
 int cantIO;	//No se lee por config
+int * cantidadDispositivosIO;
 
 char** idVariableCompartida;
 int cantVarCompartidas;
@@ -140,7 +141,7 @@ void crearHilos();
 bool enviarPcbACpu(Socket *);
 void *buscarYEliminarPCBEnLista(t_list *, pcb* );
 pcb* buscarPCBPorConsola(t_list *, Socket*);
-void funcionHiloIO(atributosIO);
+void funcionHiloIO(atributosIO*);
 void funcionHiloWait(atributosWait* );
 bool buscarPCB(t_list *, pcb*);
 

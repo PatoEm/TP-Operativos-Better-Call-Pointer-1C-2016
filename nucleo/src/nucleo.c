@@ -258,7 +258,7 @@ void entrada_salida(char * identificador, int cantidad, pcb *pcbPrograma) {
 	int abortar = 0;
 	int retardoPeriferico;
 	int totalRetardo;
-	for (i = 0; (idIO[i] != '\0'); i++) {
+	for (i = 0; i< (*cantidadDispositivosIO); i++) {
 
 		if ((strcmp(idIO[i], identificador)) == 0) {
 			j = i;
@@ -492,8 +492,9 @@ int inicializarVariables(char* ruta) {
 	//Inicio Semaforos de Sincro
 
 	//inicio cantIO
-
+	cantidadDispositivosIO = malloc(sizeof(int));
 	cantIO = cantidadPalabrasEnArrayDeStrings(idIO);
+	memcpy(cantidadDispositivosIO,&cantIO,sizeof(int));
 	//mutexIO=malloc(sizeof(pthread_mutex_t)*cantIO);
 
 	for (i = 0; i < cantIO; i++) {
@@ -668,10 +669,10 @@ pcb* buscarPCBPorConsola(t_list * lista, Socket* consola) {
 
 }
 
-void funcionHiloIO(atributosIO atributos) {
+void funcionHiloIO(atributosIO *atributos) {
 
-	entrada_salida(atributos.identificador, atributos.cantidad,
-			atributos.pcbLoca);
+	entrada_salida(atributos->identificador, atributos->cantidad,
+			atributos->pcbLoca);
 
 }
 

@@ -460,8 +460,8 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
 
-	Byte * auxTiempo = malloc(100);
-	sprintf(auxTiempo, "%d", tiempo);
+	String auxTiempo;
+	auxTiempo=intToStr(tiempo);
 	StrCpuKer*streamCpuKer;
 //(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, ENTRADA_SALIDA, pcbProceso,

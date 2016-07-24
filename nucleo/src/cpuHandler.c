@@ -350,7 +350,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	int valor;
 	char* variable;
 
-	atributosIO atributos;
+	atributosIO * atributos;
 	atributosWait * atributosWaitLoco;
 	pthread_t hiloIO;
 	pthread_attr_t attrHiloIO;
@@ -515,21 +515,22 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	case ENTRADA_SALIDA:
 
+		atributos = malloc(sizeof(atributosIO));
 //	  TODO: Proba esto para obtener el string.
 		nombreDispositivo = stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
 //	  nombreDispositivo=in_cpu_msg->nombreDispositivo;
 		valor_cantidad_tiempo = atoi(in_cpu_msg->log);
 
-		atributos.identificador = (char*)nombreDispositivo;
-		atributos.cantidad = valor_cantidad_tiempo;
-		atributos.pcbLoca = pcb_aux;
+		atributos->identificador = (char*)nombreDispositivo;
+		atributos->cantidad = valor_cantidad_tiempo;
+		atributos->pcbLoca = &in_cpu_msg->pcb;
 
 		pthread_attr_init(&attrHiloIO);
 		pthread_attr_setdetachstate(&attrHiloIO, PTHREAD_CREATE_DETACHED);
-		pthread_create(&hiloIO, &attrHiloIO, (void*)&funcionHiloIO, &atributos);
+		pthread_create(&hiloIO, &attrHiloIO, (void*)&funcionHiloIO, atributos);
 		pthread_attr_destroy(&attrHiloIO);
 
-		log_error(cpuhlog, "KERNEL : El CPU pidio IO.");
+		log_info(cpuhlog, "KERNEL : El CPU pidio IO.");
 
 		break;
 
