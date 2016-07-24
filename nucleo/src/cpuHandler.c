@@ -209,7 +209,7 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 		log_info(cpuhlog, "KER-CPU: HANDSHAKE recibido");
 
 		//(Char id, Char action, pcb pcb, Int8U quantum,Byte* data, Int32U dataLen, Byte* nombreDispositivo,Int32U lenNomDispositivo)
-		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbVacio, 0, NULL, 0,
+		skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbVacio, 0,0 ,NULL, 0,
 		NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(skc);
 
@@ -392,7 +392,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 //				Int32U lenNomDispositivo)
 
 		out_cpu_msg = newStrKerCpu(KERNEL_ID, ASIGNAR_VALOR_COMPARTIDA,
-				in_cpu_msg->pcb, valor, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
+				in_cpu_msg->pcb, valor, 0,NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
 				0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(out_cpu_msg);
 
@@ -412,7 +412,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 				stringFromByteArray(in_cpu_msg->log, in_cpu_msg->logLen));
 
 		out_cpu_msg = newStrKerCpu(KERNEL_ID, OBTENER_VALOR_COMPARTIDA,
-				in_cpu_msg->pcb, valor, NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
+				in_cpu_msg->pcb, valor, 0,NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
 				0 /*LEN NOMBRE DISPOSITIVO*/);
 		sb = serializeKerCpu(out_cpu_msg);
 
@@ -819,7 +819,7 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 
 		pthread_mutex_lock(mutexQuantum);
 		//todo ver envio_pcb
-		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,
+		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,0,
 			NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		pthread_mutex_unlock(mutexQuantum);
 
@@ -886,7 +886,7 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 
 	pthread_mutex_lock(mutexQuantum);
 	//todo ver envio_pcb
-	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,
+	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,0,
 	NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	pthread_mutex_unlock(mutexQuantum);
 
