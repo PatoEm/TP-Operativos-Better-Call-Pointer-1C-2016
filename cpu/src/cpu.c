@@ -68,14 +68,24 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			seguirEjecutando = FALSE;
 		} else {
 			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
-				nuevaVariable->vars = list_create();
+				if (0 == list_size(pcbProceso.indiceDelStack)) {
+					nuevaVariable->vars = list_create();
+					nuevaVariable->pos = 0;
+					variable->idVar = identificador_variable;
+					variable->pagVar = asignadoVacio->numDePag;
+					variable->offVar = (tamanioPaginaUmc - 5);
+					variable->sizeVar = 4;
+					list_add(nuevaVariable->vars, variable);
+					list_add((pcbProceso.indiceDelStack), nuevaVariable);
+				} else {
+					nuevaVariable = list_get(pcbProceso.indiceDelStack, 0);
+					variable->idVar = identificador_variable;
+					variable->pagVar = asignadoVacio->numDePag;
+					variable->offVar = (tamanioPaginaUmc - 5);
+					variable->sizeVar = 4;
+					list_add(nuevaVariable->vars, variable);
+				}
 
-				variable->idVar = identificador_variable;
-				variable->pagVar = asignadoVacio->numDePag;
-				variable->offVar = (tamanioPaginaUmc - 5);
-				variable->sizeVar = 4;
-				list_add(nuevaVariable->vars, variable);
-				list_add((pcbProceso.indiceDelStack), nuevaVariable);
 			} else
 				seguirEjecutando = FALSE;
 		}
@@ -130,7 +140,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->sizeVar = 4;
-					variable->offVar = ultimaPagina -> offVar - 4;
+					variable->offVar = ultimaPagina->offVar - 4;
 					list_add(ultimaPaginaStack, variable);
 				} else {
 					seguirEjecutando = FALSE;
@@ -139,7 +149,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		}
 	}
 	//free(buffer);
-	return variable->pagVar*tamanioPaginaUmc+variable->offVar;
+	return variable->pagVar * tamanioPaginaUmc + variable->offVar;
 }
 
 // devuelve 1 si la página está vacía
@@ -163,12 +173,13 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
 	puts("CPU: Pido OBTENER POSICION VARIABLE");
 	if (list_size(pcbProceso.indiceDelStack) != 0) {
 		int i;
-		paginaDeStack* aux=list_get(pcbProceso.indiceDelStack, list_size(pcbProceso.indiceDelStack)-1);
+		paginaDeStack* aux = list_get(pcbProceso.indiceDelStack,
+				list_size(pcbProceso.indiceDelStack) - 1);
 		variables*varNew;
 		for (i = 0; i < list_size(aux->vars); ++i) {
-			 varNew = list_get(aux->vars, i);
+			varNew = list_get(aux->vars, i);
 			if (varNew->idVar == identificador_variable) {
-				return varNew->pagVar*tamanioPaginaUmc + varNew->offVar;
+				return varNew->pagVar * tamanioPaginaUmc + varNew->offVar;
 			}
 		}
 	} else {
@@ -182,9 +193,9 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
  */
 t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	puts("CPU: Pido DEREFERENCIAR");
-	asignadoVacio->numDePag = direccion_variable/tamanioPaginaUmc;
+	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
 	asignadoVacio->bitUso = 4;
-	int offset = direccion_variable%tamanioPaginaUmc;
+	int offset = direccion_variable % tamanioPaginaUmc;
 	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
 	StrCpuUmc* streamCpuUMC;
@@ -208,9 +219,9 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
  */
 void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	puts("CPU: Pido ASIGNAR");
-	asignadoVacio->numDePag = direccion_variable/tamanioPaginaUmc;
-	asignadoVacio->bitUso = direccion_variable/tamanioPaginaUmc;
-	int offset = direccion_variable/tamanioPaginaUmc;
+	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
+	asignadoVacio->bitUso = direccion_variable / tamanioPaginaUmc;
+	int offset = direccion_variable / tamanioPaginaUmc;
 
 	Byte* dataAMandar = malloc(sizeof(char) * 4);
 	sprintf(dataAMandar, "%d", valor);
@@ -338,10 +349,15 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	paginaDeStack* aux = crearPaginaDeStackVaciaPiola();
-	aux->retVars->pagVarRet = donde_retornar / tamanioPaginaUmc;
-	aux->retVars->offVarRet = donde_retornar % tamanioPaginaUmc;
+	aux->retVars = list_create();
+	variablesRetorno*dondeRetorno = malloc(variablesRetorno);
+	dondeRetorno->pagVarRet = donde_retornar / tamanioPaginaUmc;
+	dondeRetorno->offVarRet = donde_retornar % tamanioPaginaUmc;
+	dondeRetorno->idVarRet = "";
+	dondeRetorno->sizeVarRet = 4;
 	aux->retPos = pcbProceso.programCounter;
-	aux->
+	aux->pos = list_size(pcbProceso.indiceDelStack);
+	list_add(aux->retVars, dondeRetorno);
 	list_add(pcbProceso.indiceDelStack, aux);
 
 	pcbProceso.programCounter = metadata_buscar_etiqueta(etiquetaMod,
@@ -372,16 +388,18 @@ void finalizar(void) {
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
 	//todo EMI REVISA ESTO PORFA
+	asignadoVacio = newEspacioAsignado();
 	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,
 			(pcbProceso.indiceDelStack->elements_count) - 1);
 	pcbProceso.programCounter = aux->retPos;
 
 	saltoDeLinea = TRUE;
 
+	variablesRetorno*dondeVuelvo = list_get(aux->retVars, 0);
 	StrCpuUmc*streamCpuUmc;
-	asignadoVacio->numDePag = aux->retVars->pagVarRet;
+	asignadoVacio->numDePag = dondeVuelvo->pagVarRet;
 	streamCpuUmc = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio,
-			aux->retVars->offVarRet, 4, NULL, 0);
+			dondeVuelvo->offVarRet, 4, intToStr(retorno), 0);
 	SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
 	socketSend(socketUMC->ptrSocket, buffer);
 	//////////////////////////////////////////////////////////////////
@@ -391,6 +409,12 @@ void retornar(t_valor_variable retorno) {
 	streamUmcCpu = unserializeCpuUmc(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
 		seguirEjecutando = FALSE;
+}
+
+String intToStr(Int32U integer) {
+	String result = malloc(sizeof(Byte) * 10);
+	sprintf(result, "%d", integer);
+	return result;
 }
 
 /*
