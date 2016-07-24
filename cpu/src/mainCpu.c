@@ -111,7 +111,7 @@ int main() {
 						&funcionesDeKernel);
 
 				free(instruccionLoca);
-				if(saltoDeLinea == FALSE && seguirEjecutando==TRUE){
+				if(saltoDeLinea == FALSE){
 				moverProgramCounterPcb(&pcbProceso);
 				}
 				saltoDeLinea = FALSE;
