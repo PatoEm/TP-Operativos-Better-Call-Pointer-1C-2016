@@ -35,11 +35,11 @@
 /*******************************************************
  * VARIABLES GLOBALES
  *******************************************************/
-char* ipUMC;
-int umcPort;
+String ipUMC;
+Int32U umcPort;
 char* etiquetaMod;
-int nucleoPort;
-char* ipNucleo;
+Int32U nucleoPort;
+String ipNucleo;
 int clienteNucleo;
 t_list* coreList;
 SocketClient* socketNucleo;
