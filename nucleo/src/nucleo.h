@@ -78,6 +78,7 @@ pthread_mutex_t* mutexColaReady;
 pthread_mutex_t* mutexColaExit;
 pthread_mutex_t* mutexListaExec;
 pthread_mutex_t* mutexListaBlock;
+pthread_mutex_t* mutexListaCpu;
 
 //Colas y listas
 
@@ -94,6 +95,8 @@ t_list *listaExec;
 t_list *listaBlock;
 
 t_list *listaExit;
+
+t_list *listaCpu;
 
 //t_queue *colaExit;
 
@@ -134,7 +137,7 @@ void waitAnsisop(char * , pcb *,Socket*);
 void signalAnsisop(char*);
 int inicializarVariables();
 void crearHilos();
-void enviarPcbACpu(Socket *);
+bool enviarPcbACpu(Socket *);
 void *buscarYEliminarPCBEnLista(t_list *, pcb* );
 pcb* buscarPCBPorConsola(t_list *, Socket*);
 void funcionHiloIO(atributosIO);
