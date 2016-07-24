@@ -31,17 +31,10 @@
  * Configuracion
  ****************************************/
 t_config* tConfig = NULL;
-//Int32U puertoNucleo;
-//String ipNucleo;
-//String ipUmc;
-//Int32U puertoUmc;
-//int tamanioPag;
 
 /*****************************************
  * Socket & Streams
  ****************************************/
-//SocketClient* nucleoClient = NULL;
-//SocketClient* umcClient = NULL;
 StrCpuKer* sck = NULL;
 StrCpuUmc* scu = NULL;
 StrUmcCpu* suc = NULL;
@@ -79,7 +72,7 @@ t_log* logger = NULL;
 
 int main() {
 	finalizoCorrectamente = FALSE;
-	saltoDeLinea=FALSE;
+	saltoDeLinea = FALSE;
 //
 //	pcb * pcbVacioLoco=newEmptyPcb();
 //	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
@@ -102,7 +95,7 @@ int main() {
 	if (loadConfig() && socketConnection()) {
 
 		while (TRUE) {
-			finalizoCorrectamente=FALSE;
+			finalizoCorrectamente = FALSE;
 			log_debug(getLogger(),
 					"Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
 			getNextPcb();
@@ -112,10 +105,10 @@ int main() {
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
 				analizadorLinea(pedirInstruccion(&pcbProceso), &funciones,
 						&funcionesDeKernel);
-				if(saltoDeLinea==FALSE){
+				if(saltoDeLinea == FALSE){
 				moverProgramCounterPcb(&pcbProceso);
 				}
-				saltoDeLinea=FALSE;
+				saltoDeLinea = FALSE;
 				quantum--;
 			}
 
@@ -261,7 +254,6 @@ Boolean socketConnection() {
 		return FALSE;
 	}
 
-	//SocketClient* umcServer;
 	espacioAsignado aux;
 	aux.IDPaginaInterno = 0;
 	aux.bitDePresencia = 0;
@@ -437,7 +429,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 
 		suc = unserializeUmcCpu(buffer);
 
-		if(suc->action == 35 /* ABORTAR PROGRAMA*/){
+		if(suc->action == ABORTAR_PROGRAMA){
 			log_error(getLogger(), "Programa abortado por la UMC.");
 			seguirEjecutando = 0;
 			return FALSE;
