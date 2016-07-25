@@ -354,8 +354,8 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 	variablesRetorno*dondeRetorno = malloc(sizeof(variablesRetorno));
 	dondeRetorno->pagVarRet = donde_retornar / tamanioPaginaUmc;
 	dondeRetorno->offVarRet = donde_retornar % tamanioPaginaUmc;
-	dondeRetorno->idVarRet = "";
-	dondeRetorno->sizeVarRet = 4;
+	dondeRetorno->idVarRet = '\0';
+	dondeRetorno->sizeVarRet = 1;
 	aux->retPos = pcbProceso.programCounter;
 	aux->pos = list_size(pcbProceso.indiceDelStack);
 	list_add(aux->retVars, dondeRetorno);

@@ -206,7 +206,7 @@ void newKernelClient(Socket* kernelClient, Stream dataSerialized) {
 	SocketBuffer* sb;
 	if(sku->action == HANDSHAKE) {
 		log_info(umcslog, "Nuevo Cliente Kernel %d aceptado.",kernelClient->descriptor);
-		suk = newStrKerCon(KERNEL_ID, HANDSHAKE, 0,0);
+		suk = newStrKerCon(KERNEL_ID, HANDSHAKE, 0,0, NULL);
 		sb = serializeKerCon(suk);
 		if (socketSend(kernelClient, sb)) {
 			log_info(umcslog, "UMC-KER: HANDSHAKE se devolvio handshake");
