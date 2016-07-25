@@ -1138,6 +1138,7 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	if (i >= list_size(TLB))
 		return 0;
 	else {
+		nodoActual->momentoEntrada = accesosTLB;
 		int lugarActual = nodoActual->frameTLB * marco_Size + offset;
 		for (i = 0; i < cantidad; i++) {
 			memoriaReal[lugarActual] = buffer[i];
@@ -1254,6 +1255,7 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 		if (entradaTLB != NULL) {
 			log_info(logger, "Acierto de TLB en el frame %d y pagina %d",
 					entradaTLB->frameTLB, entradaTLB->pagina);
+			entradaTLB->momentoEntrada= accesosTLB;
 			int inicioLectura = entradaTLB->frameTLB * marco_Size + posicion;
 			int i;
 			for (i = 0; i < tamanio; i++) {
@@ -1275,6 +1277,7 @@ t_tlb * buscarEnTLB(int PID, int pagina) {
 		t_tlb * entradaTLB = list_get(TLB, i);
 		if (entradaTLB->pid == PID) {
 			if (entradaTLB->pagina == pagina) {
+				entradaTLB->momentoEntrada = accesosTLB;
 				return entradaTLB; //La encontro
 			}
 		}
