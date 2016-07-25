@@ -111,6 +111,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			} else {
 				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
 						streamUmcCpu->data))) {
+					ultimaPaginaStack=list_get(pcbProceso.indiceDelStack,list_size(pcbProceso.indiceDelStack)-1);
 					variables*variable;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
@@ -137,6 +138,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			} else {
 				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
 						streamUmcCpu->data))) {
+					ultimaPaginaStack=list_get(pcbProceso.indiceDelStack,list_size(pcbProceso.indiceDelStack)-1);
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->sizeVar = 4;
@@ -388,13 +390,12 @@ void finalizar(void) {
  */	// FALTA MANEJO DE ABORTO
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
-	//todo EMI REVISA ESTO PORFA
 	asignadoVacio = newEspacioAsignado();
 	paginaDeStack *aux = list_remove(pcbProceso.indiceDelStack,
 			(pcbProceso.indiceDelStack->elements_count) - 1);
 	pcbProceso.programCounter = aux->retPos;
 
-	saltoDeLinea = TRUE;
+	//saltoDeLinea = TRUE; ESTO ERA UNA PIJA PATO
 
 	variablesRetorno*dondeVuelvo = list_get(aux->retVars, 0);
 	StrCpuUmc*streamCpuUmc;
