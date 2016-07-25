@@ -462,7 +462,15 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina))) {
 		posicionActualDeNodo++;
+		if(posicionActualDeNodo==list_size(listaEspacioAsignado))
+			break;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
+
+	}
+	if(posicionActualDeNodo==list_size(listaEspacioAsignado)){
+		sprintf(paginaADevolver,"%s","-1");
+		paginaEncontrada=FALSE;
+		return paginaADevolver;
 	}
 	if (nodoALeer->bitDePresencia == 1) {
 		(nodoALeer->bitUso) = 1;
@@ -553,8 +561,12 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag) == pagina)) {
 		posicionActualDeNodo++;
+		if(posicionActualDeNodo==list_size(listaEspacioAsignado))
+					break;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
+	if(posicionActualDeNodo==list_size(listaEspacioAsignado))
+		paginaEncontrada=FALSE;
 	if (nodoALeer->bitDePresencia == 1) {
 		(nodoALeer->bitUso) = 1;
 		nodoALeer->bitModificado = 1;

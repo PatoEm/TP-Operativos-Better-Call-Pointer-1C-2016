@@ -16,7 +16,7 @@ int main(int argc, char** argv) {
 	}
 
 	thread_socket= 3030;
-
+	paginaEncontrada=TRUE;
 	umclog=malloc(sizeof(t_log));
 	memcpy(umclog,log_create("umc.log", "UMC", TRUE, LOG_LEVEL_TRACE), sizeof(t_log));
 

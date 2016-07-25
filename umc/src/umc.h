@@ -34,6 +34,7 @@ int espera;
 char* memoriaTLB;
 bool*bitMap;
 bool* bitMapTLB;
+bool paginaEncontrada;
 int aciertosTLB;
 int accesosTLB;
 t_list* conexionSockets ;
