@@ -96,8 +96,8 @@ pcb* newEmptyPcb() {
 	char * auxIndice;
 	auxIndice = "MUERTE A WINDOWS";
 	memcpy(pcbLoco->indiceDeEtiquetas, auxIndice, 17);
-	pcbLoco->indiceDeEtiquetasSize = 17;
-	pcbLoco->etiquetaSize = 0;
+	pcbLoco->indiceDeEtiquetasSize = 0;
+	pcbLoco->etiquetaSize = 17;
 	pcbLoco->instruccionesRestantes = 0;
 	pcbLoco->instruccionesTotales = 1;
 //	pcbLoco->indiceDeCodigo = sizeof(arrayBidimensional)
