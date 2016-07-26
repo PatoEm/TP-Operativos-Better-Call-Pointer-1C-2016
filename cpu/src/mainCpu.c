@@ -117,7 +117,7 @@ int main() {
 
 				free(instruccionLoca);
 				if(saltoDeLinea == FALSE){
-				moverProgramCounterPcb(&pcbProceso);
+				moverProgramCounterPcb(pcbProceso);
 				}
 				saltoDeLinea = FALSE;
 				quantum--;
