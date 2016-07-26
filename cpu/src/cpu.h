@@ -150,6 +150,9 @@ void abortarCPU();
 
 
 char* sinEspacioAlFinal(char* linea, int tamanio);
+
+
+void gestionoSIGINT();
 //======================================================
 
 AnSISOP_funciones funciones;

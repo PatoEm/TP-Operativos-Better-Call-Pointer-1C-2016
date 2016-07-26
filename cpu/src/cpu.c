@@ -602,3 +602,15 @@ t_log* getLogger() {
 	}
 	return logger;
 }
+
+void gestionoSIGINT() {
+	StrCpuKer* streamck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0, 0,
+			NULL, NULL, 0);
+	SocketBuffer* bufferr = serializeCpuKer(streamck);
+
+	if (!socketSend(socketNucleo->ptrSocket, bufferr)) {
+		log_info(getLogger(),
+				"No se pudo enviar el buffer al nucleo.");
+	}
+	log_info(getLogger(), "Aborte el programa");
+}
