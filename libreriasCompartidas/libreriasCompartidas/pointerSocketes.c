@@ -275,6 +275,7 @@ Boolean handshake(SocketClient* client, Char id) {
 		//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 		sck = newStrCpuKer(id, HANDSHAKE, *pcbLoca, 0, 0, NULL, NULL, 0);
 		sb = serializeCpuKer(sck);
+		free(pcbLoca);
 		break;
 	case CONSOLA_ID:
 		sconk = newStrConKer(id, HANDSHAKE, NULL, 0);

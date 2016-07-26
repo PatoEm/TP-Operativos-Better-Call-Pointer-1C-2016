@@ -100,8 +100,8 @@ pcb* newEmptyPcb() {
 	pcbLoco->etiquetaSize = 0;
 	pcbLoco->instruccionesRestantes = 0;
 	pcbLoco->instruccionesTotales = 1;
-	pcbLoco->indiceDeCodigo = sizeof(arrayBidimensional)
-			* pcbLoco->instruccionesTotales;
+//	pcbLoco->indiceDeCodigo = sizeof(arrayBidimensional)
+//			* pcbLoco->instruccionesTotales;
 	pcbLoco->indiceDelStack = list_create();
 
 	paginaDeStack * aux = crearPaginaDeStackVaciaPiola();
@@ -128,7 +128,7 @@ pcb* newEmptyPcb() {
 	memcpy(&(pcbLoco->indiceDeCodigo[0]), &auxArray[0],
 			sizeof(arrayBidimensional));
 
-	//free(auxArray);
+	free(auxArray);
 	//free(auxSocket);
 	//free(auxIndice);
 	puts("Cree un pcb Vacio");
