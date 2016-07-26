@@ -83,6 +83,7 @@ pcb* newEmptyPcb() {
 	pcb* pcbLoco = malloc(sizeof(pcb));
 	//Socket * auxSocket = socketCreate();
 	pcbLoco->consola = socketCreate();
+	pcbLoco->cpu = socketCreate();
 
 	pcbLoco->id = 0;
 	pcbLoco->tamanioArchivoOriginal = 0;
