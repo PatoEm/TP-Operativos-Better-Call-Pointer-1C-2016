@@ -341,7 +341,11 @@ Boolean getNextPcb() {
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
 		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
 		return FALSE;
+	}else {
+		log_info(getLogger(), "Pedi un nuevo PCB");
+
 	}
+
 	free(sb);
 	log_info(getLogger(), "Obtener siguiente PCB");
 
@@ -349,6 +353,9 @@ Boolean getNextPcb() {
 	if ((sb = socketReceive(socketNucleo->ptrSocket)) == NULL) {
 		log_error(getLogger(), "No se pudo recibir el stream del nucleo");
 		return FALSE;
+	} else{
+
+		log_info(getLogger(), "Recibi nuevo PCB");
 	}
 
 	if (skc != NULL) {
@@ -441,12 +448,16 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC->ptrSocket, buffer)) {
 			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
+		} else{
+			log_info(getLogger(), "Pedi una instruccion a la UMC");
 		}
 
 		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
 			log_error(getLogger(),
 					"No se pudo recibir la instruccion de la UMC");
 			return FALSE;
+		} else {
+			log_info(getLogger(), "Recibi instruccion de la UMC");
 		}
 
 		suc = unserializeUmcCpu(buffer);

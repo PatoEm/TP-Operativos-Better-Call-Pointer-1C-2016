@@ -27,6 +27,8 @@
 #include <libreriasCompartidas/pcb.h>
 #include <signal.h>
 #include <libreriasCompartidas/espacioAsignado.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 #define FAIL -1
 #define LOGGER_FILE "cpu_log.txt"
