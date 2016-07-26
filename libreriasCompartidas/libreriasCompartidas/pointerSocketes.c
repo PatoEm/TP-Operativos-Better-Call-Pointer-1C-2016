@@ -265,7 +265,7 @@ Boolean handshake(SocketClient* client, Char id) {
 	StrUmcKer* suk;
 	StrKerCon* skcon;
 	StrKerCpu* skc;
-	pcb* pcbLoca=malloc(sizeof(pcb*));
+	pcb* pcbLoca;
 	pcbLoca = newEmptyPcb();
 	//pcb* pcb = malloc(sizeof(pcb));
 	//memcpy (pcb,newEmptyPcb(),sizeof(pcb));
