@@ -110,7 +110,7 @@ int main() {
 			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int32U quantum = skc->quantum;
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
-				instruccionLoca = pedirInstruccion(&pcbProceso);
+				instruccionLoca = pedirInstruccion(pcbProceso);
 
 				analizadorLinea(instruccionLoca, &funciones,
 						&funcionesDeKernel);
