@@ -130,7 +130,7 @@ int main() {
 			}
 			if (!seguirEjecutando) {
 
-				sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, pcbProceso, 0, 0,
+				sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0, 0,
 						NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
 
@@ -144,7 +144,7 @@ int main() {
 			}
 
 			if (quantum == 0) {
-				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, pcbProceso, 0, 0,
+				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbProceso, 0, 0,
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
@@ -153,6 +153,7 @@ int main() {
 					return FALSE;
 				}
 				log_info(getLogger(), "Termine el quantum");
+				free(pcbProceso);
 			}
 			seguirEjecutando = TRUE;
 		}
@@ -351,7 +352,12 @@ Boolean getNextPcb() {
 	}
 
 	skc = unserializeKerCpu((Stream) sb->data);
-	pcbProceso = skc->pcb;
+
+	pcbProceso=malloc(sizeof(pcb));
+
+	memcpy(pcbProceso,&skc->pcb,sizeof(pcb));
+
+	//pcbProceso = skc->pcb;
 
 	enviarPidPcb(skc->pcb.id);
 
