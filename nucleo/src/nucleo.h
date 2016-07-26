@@ -145,5 +145,7 @@ void funcionHiloIO(atributosIO*);
 void funcionHiloWait(atributosWait* );
 bool buscarPCB(t_list *, pcb*);
 bool satisfacerCpuAlPedo();
+pcb* buscarPcbPorDescriptor(t_list*, int);
+bool eliminarCpuPorDescriptorYDevuelveUnBool(t_list*, int);
 
 #endif /* NUCLEO_H_ */

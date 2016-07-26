@@ -285,7 +285,7 @@ void clientHandler(int clientDescriptor) {
 		log_info(cpuhlog, "KERNEL : Se cayo el cliente %d", clientDescriptor);
 
 		//REALIZO EL PROCEDIMIENTO DE CAIDA DE UN CLIENTE
-//		clientDown(clientDescriptor);
+		clientDown(clientDescriptor);
 
 		//ELIMINO EL DESCRIPTOR DEL CONJUNTO
 		FD_CLR(clientDescriptor, &master);
@@ -812,6 +812,7 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 		pthread_mutex_unlock(mutexColaReady);
 
 		pcbAEnviar->estado = EXEC; //2 EXEC
+//		pcbAEnviar->cpu = cpuLoca; //TODO: Activar esto para que mate procesos en exec cuando cae la cpu, ver primero el tema de la umc.
 
 		pthread_mutex_lock(mutexListaExec);
 		list_add(listaExec, pcbAEnviar);
@@ -904,4 +905,59 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 
 }
 
+void clientDown(int descriptor){
+
+  pcb* pcbHuerfano = buscarPcbPorDescriptor(listaExec, descriptor);
+  StrKerCon* out_con_msg;
+  SocketBuffer* sb;
+  StrUmcKer* streamALaUmc;
+  Socket* consola_aux;
+
+  if(pcbHuerfano != NULL){
+    log_error(cpuhlog, "El cliente tenía al PCB %d", pcbHuerfano->id);
+    puts("Pido patito Cola Ready");
+
+    log_info(cpuhlog, "Aborto el programa %d.", pcbHuerfano->id);
+    moverAColaExit(pcbHuerfano);
+
+    char* mensajeAbortar = "El programa fue abortado por cpu.";
+
+    // Creo y serializo string kernel a consola.
+
+    out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA,0,
+    strlen(mensajeAbortar), mensajeAbortar);
+    sb = serializeKerCon(out_con_msg);
+
+    // Extraigo el socket de la respectiva consola.
+    consola_aux = pcbHuerfano->consola;
+
+    // Envio a la conchola
+    if (!socketSend(consola_aux, sb)) {
+      log_error(cpuhlog, "No se pudo cerrar la consola.");
+    } else {
+      log_info(cpuhlog, "Se envio CERRARCONSOLA.");
+    }
+    //Envio UMC
+    //StrUmcKer* streamALaUmc;
+    streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
+    NULL, 0, pcbHuerfano->id, 0, 0, 0, 0);
+    sb = serializeUmcKer(streamALaUmc);
+    if (!socketSend(umcServer->ptrSocket, sb)) {
+      log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
+          pcbHuerfano->id);
+    } else {
+      log_info(cpuhlog, "Se aborto el programa a umc %d", pcbHuerfano->id);
+    }
+
+
+  } else {
+    log_error(cpuhlog, "El cliente no tenía PCBs.");
+
+    pthread_mutex_lock(mutexListaCpu);
+    if(eliminarCpuPorDescriptorYDevuelveUnBool(listaCpu, descriptor)){
+      log_error(cpuhlog, "Se elimino cpu caida, lista de CPUs = %d", listaCpu->elements_count);
+    }
+    pthread_mutex_unlock(mutexListaCpu);
+  }
+}
 
