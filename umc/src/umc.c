@@ -152,6 +152,8 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 	int contador = encontrarPuntero(pid);
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
 	while (acierto == 0) {
+		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1)
+					acierto = 1;
 		if ((nodoActual->bitUso) == 1) {
 			nodoActual->bitUso = 0;
 			contador++;
@@ -159,15 +161,12 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 				contador = inicio;
 			nodoActual = list_get(listaEspacioAsignado, contador);
 		}
-		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1) {
+		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia != 1) {
 			contador++;
 			if (contador == fin)
 				contador = inicio;
 			nodoActual = list_get(listaEspacioAsignado, contador);
 		}
-		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1)
-			acierto = 1;
-
 	}
 	return nodoActual;
 }
