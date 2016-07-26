@@ -112,7 +112,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
 						streamUmcCpu->data))) {
 					ultimaPaginaStack=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso->indiceDelStack)-1);
-					variables*variable;
+					//variables*variable;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->offVar = (tamanioPaginaUmc - 5);
