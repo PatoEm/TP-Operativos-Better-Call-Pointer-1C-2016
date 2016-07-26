@@ -146,16 +146,28 @@ int paginasContiguasDeUMC(int cantidadDePaginas) {
 }
 
 espacioAsignado*buscarBitDeUsoEn0(int pid) {
+	int acierto = 0;
 	int inicio = lugarAsignadoInicial(pid);
 	int fin = lugarAsignadoFinal(pid);
 	int contador = encontrarPuntero(pid);
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while ((nodoActual->bitUso) == 1) {
-		nodoActual->bitUso = 0;
-		contador++;
-		if (contador == fin)
-			contador = inicio;
-		nodoActual = list_get(listaEspacioAsignado, contador);
+	while (acierto == 0) {
+		if ((nodoActual->bitUso) == 1) {
+			nodoActual->bitUso = 0;
+			contador++;
+			if (contador == fin)
+				contador = inicio;
+			nodoActual = list_get(listaEspacioAsignado, contador);
+		}
+		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1) {
+			contador++;
+			if (contador == fin)
+				contador = inicio;
+			nodoActual = list_get(listaEspacioAsignado, contador);
+		}
+		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1)
+			acierto = 1;
+
 	}
 	return nodoActual;
 }
@@ -183,9 +195,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual;
 	nodoActual = buscarBitDeUsoEn0(pid);
-	while (nodoActual->bitDePresencia == 0) {
-		nodoActual = buscarBitDeUsoEn0(pid);
-	}
+	nodoActual = buscarBitDeUsoEn0(pid);
 	nodoActual->bitDePresencia = 0;
 	if (tlbHabilitada())
 		sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
@@ -1094,7 +1104,7 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 
 void flushTLB() {
 	if (entradas_TLB == 0) {
-		log_error(umclog,"TLB esta deshabilitada.");
+		log_error(umclog, "TLB esta deshabilitada.");
 	} else {
 		int i = 0;
 		while (i < TLB->elements_count) {
