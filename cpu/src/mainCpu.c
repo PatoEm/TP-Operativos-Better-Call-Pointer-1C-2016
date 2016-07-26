@@ -86,8 +86,13 @@ int main() {
 	asignadoVacio = newEspacioAsignado();
 	log_debug(getLogger(),
 			"Cargo variables de configuracion, me conecto al nucleo y a la umc");
-	//pcbVacio = malloc(sizeof(pcb));
-	pcbVacio = newEmptyPcb();
+	pcbVacio = malloc(sizeof(pcb));
+
+	memcpy(pcbVacio, newEmptyPcb(), sizeof(pcb));
+
+	//pcbVacio = newEmptyPcb();
+
+
 	t_config* tConfig = NULL;
 
 	char * instruccionLoca;
