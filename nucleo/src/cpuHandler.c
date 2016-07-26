@@ -40,7 +40,7 @@ void* cpuHandlerThreadRoutine(void* parametro) {
 	//cpuhlog = log_create("cpuh.log", "CPUHANDLER", TRUE, LOG_LEVEL_INFO);
 
 	pcbVacio = malloc(sizeof(pcb));
-	pcbVacio = newEmptyPcb();
+	memcpy(pcbVacio, newEmptyPcb(), sizeof(pcb));
 
 	if (initCpuServer()) {
 		log_info(cpuhlog, "Server iniciado.");
