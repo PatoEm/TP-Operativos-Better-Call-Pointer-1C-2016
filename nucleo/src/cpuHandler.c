@@ -116,6 +116,8 @@ void checkCpuConnections() {
 		timeout.tv_sec = 10;
 		timeout.tv_usec = 0;
 
+//		satisfacerCpuAlPedo();
+
 		//HAGO EL SELECT
 		int selectResult = select(fdmax + 1, &read_fds, NULL, NULL, &timeout);
 
@@ -901,4 +903,5 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 	free(sb);
 
 }
+
 

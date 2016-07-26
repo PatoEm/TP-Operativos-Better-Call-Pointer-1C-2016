@@ -142,16 +142,18 @@ void moverAColaReady(pcb * programa) {
 	list_add(listaReady, programa);
 	pthread_mutex_unlock(mutexColaReady);
 
-	if(listaCpu->elements_count != 0){
-		puts("PCB READY, HAY UNA CPU AL PEDO");
-		Socket* cpuLoca = list_remove(listaCpu, 0);
-		printf("CPU al pedo removida, LISTACPU = %d\n", listaCpu->elements_count);
-		if(!enviarPcbACpu(cpuLoca)){
-			puts("No se pudo enviar pcb");
-		} else {
-			puts("PCB enviado");
-		}
-	}
+	satisfacerCpuAlPedo();
+
+//	if(listaCpu->elements_count != 0){
+//		puts("PCB READY, HAY UNA CPU AL PEDO");
+//		Socket* cpuLoca = list_remove(listaCpu, 0);
+//		printf("CPU al pedo removida, LISTACPU = %d\n", listaCpu->elements_count);
+//		if(!enviarPcbACpu(cpuLoca)){
+//			puts("No se pudo enviar pcb");
+//		} else {
+//			puts("PCB enviado");
+//		}
+//	}
 }
 void moverAListaBlock(pcb* programa) {
 	pthread_mutex_lock(mutexListaExec);
@@ -682,3 +684,28 @@ void funcionHiloWait(atributosWait* atributos) {
 			atributos->cpuSocket);
 
 }
+
+bool satisfacerCpuAlPedo(){
+
+	pthread_mutex_lock(mutexListaCpu);
+	puts("Hay CPUs al pedo?");
+	if(listaCpu->elements_count != 0){
+		puts("CPU al pedo encontrada. Intentando enviar PCB.");
+		Socket* cpuLoca = list_remove(listaCpu, 0);
+		printf("CPU al pedo removida, LISTACPU = %d\n", listaCpu->elements_count);
+		if(!enviarPcbACpu(cpuLoca)){
+			puts("No se pudo enviar pcb");
+			list_add(listaCpu, cpuLoca);
+			printf("CPU al pedo añadida, LISTACPU = %d\n", listaCpu->elements_count);
+		} else {
+			puts("PCB enviado");
+		}
+		pthread_mutex_unlock(mutexListaCpu);
+		return TRUE;
+	} else {
+		puts("No hay CPUs al pedo.");
+		pthread_mutex_unlock(mutexListaCpu);
+		return FALSE;
+	}
+}
+

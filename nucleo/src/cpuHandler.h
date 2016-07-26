@@ -42,6 +42,7 @@ void funcionHiloCpuAlPedo(Socket*);
 void consoleClientHandler(Socket*, Stream);
 
 
+
 // ESTRUCTURAS
 
 typedef struct core {

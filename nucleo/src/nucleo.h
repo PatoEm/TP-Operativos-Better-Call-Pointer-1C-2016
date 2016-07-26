@@ -144,5 +144,6 @@ pcb* buscarPCBPorConsola(t_list *, Socket*);
 void funcionHiloIO(atributosIO*);
 void funcionHiloWait(atributosWait* );
 bool buscarPCB(t_list *, pcb*);
+bool satisfacerCpuAlPedo();
 
 #endif /* NUCLEO_H_ */

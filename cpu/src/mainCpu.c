@@ -327,6 +327,7 @@ Boolean getNextPcb() {
 	log_debug(getLogger(), "Serializo y armo el socket");
 	SocketBuffer* sb = serializeCpuKer(sck);
 	log_debug(getLogger(), "Envio el socketBuffer");
+	usleep(300);
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
 		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
 		return FALSE;
