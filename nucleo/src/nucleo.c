@@ -46,6 +46,8 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->consola = consola;
 
+	pcbNuevoPrograma->cpu=consola;
+
 	pcbNuevoPrograma->id = idProgramas;
 
 	pcbNuevoPrograma->tamanioArchivoOriginal = tamanioArchivo;

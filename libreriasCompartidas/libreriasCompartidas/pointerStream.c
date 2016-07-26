@@ -72,11 +72,12 @@ StrKerUmc* newStrKerUmc(Char id, Char action, Byte* data, Int32U size,
 /*******************************
  * Constructor Kernel-Consola
  ******************************/
-StrKerCon* newStrKerCon(Char id, Char action,Int32U valorImp ,Int32U logLen, Byte* log) {
+StrKerCon* newStrKerCon(Char id, Char action, Int32U valorImp, Int32U logLen,
+		Byte* log) {
 	StrKerCon* skcon = malloc(sizeof(StrKerCon));
 	skcon->id = id;
 	skcon->action = action;
-	skcon->valorImp=valorImp;
+	skcon->valorImp = valorImp;
 	skcon->logLen = logLen;
 	skcon->log = log;
 	return skcon;
@@ -207,6 +208,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(skc->action);
 	// size del pcb
 	size += sizeof(skc->pcb.consola);
+	size += sizeof(skc->pcb.cpu);
 	size += sizeof(skc->pcb.id);
 	size += sizeof(skc->pcb.tamanioArchivoOriginal);
 	size += sizeof(skc->pcb.programCounter);
@@ -275,7 +277,7 @@ Int32U getSizeKerCon(StrKerCon* skc) {
 	Int32U size = 0;
 	size += sizeof(skc->id);
 	size += sizeof(skc->action);
-	size+= sizeof(skc->logLen);
+	size += sizeof(skc->logLen);
 	size += sizeof(skc->logLen);
 	size += skc->logLen;
 	return size;
@@ -290,6 +292,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	size += sizeof(sck->action);
 	// size del pcb
 	size += sizeof(sck->pcb.consola);
+	size += sizeof(sck->pcb.cpu);
 	size += sizeof(sck->pcb.id);
 	size += sizeof(sck->pcb.tamanioArchivoOriginal);
 	size += sizeof(sck->pcb.programCounter);
@@ -325,7 +328,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	}
 
 	// fin size pcb
-	size +=sumadorLoco;
+	size += sumadorLoco;
 	size += sizeof(sck->pid);
 	size += sizeof(sck->logLen);
 	size += sck->logLen;
@@ -485,6 +488,10 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrByte = (Byte*) &skc->pcb.consola;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.consola));
 	ptrData += sizeof(skc->pcb.consola);
+
+	ptrByte = (Byte*) &skc->pcb.cpu;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.cpu));
+	ptrData += sizeof(skc->pcb.cpu);
 
 	ptrByte = (Byte*) &skc->pcb.id;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.id));
@@ -779,6 +786,10 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	ptrByte = (Byte*) &sck->pcb.consola;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.consola));
 	ptrData += sizeof(sck->pcb.consola);
+
+	ptrByte = (Byte*) &sck->pcb.cpu;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.cpu));
+	ptrData += sizeof(sck->pcb.cpu);
 
 	ptrByte = (Byte*) &sck->pcb.id;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.id));
@@ -1319,6 +1330,9 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 	memcpy(&pcb.consola, ptrByte, sizeof(pcb.consola));
 	ptrByte += sizeof(pcb.consola);
 
+	memcpy(&pcb.cpu, ptrByte, sizeof(pcb.cpu));
+	ptrByte += sizeof(pcb.cpu);
+
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
 
@@ -1564,7 +1578,7 @@ StrKerCon* unserializeKerCon(Stream dataSerialized) {
 	//log[logLen] = '\0';
 
 	free(dataSerialized);
-	return newStrKerCon(id, action,valorImp ,logLen, log);
+	return newStrKerCon(id, action, valorImp, logLen, log);
 }
 
 /***********************************************/
@@ -1589,6 +1603,8 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	// comienzo a deserealizar el pcb
 	memcpy(&pcb.consola, ptrByte, sizeof(pcb.consola));
 	ptrByte += sizeof(pcb.consola);
+	memcpy(&pcb.cpu, ptrByte, sizeof(pcb.cpu));
+	ptrByte += sizeof(pcb.cpu);
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
 	memcpy(&pcb.tamanioArchivoOriginal, ptrByte,
