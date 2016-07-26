@@ -14,8 +14,10 @@ int calcularIDPagina(int inicio) {
 }
 
 void iniciarEstructurasUMC() {
+	log_info(umclog, "Comienza la inicializacion de estructuras");
 	int counter = 0;
 	bitMap = malloc(sizeof(bool) * marcos);
+	log_info(umclog, "BitMap creado");
 
 	mutexPedidos = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
 	mutexThreadSockets = (pthread_mutex_t*) malloc(sizeof(pthread_mutex_t));
@@ -35,11 +37,12 @@ void iniciarEstructurasUMC() {
 		bitMap[counter] = 0;
 		counter++;
 	}
-
+	log_info(umclog, "Estructuras de la UMC inicializadas con exito");
 }
 
 void crearListas() {
 	listaEspacioAsignado = list_create();
+	log_info(umclog, "Lista de espacio adignado creada");
 }
 
 int tamanioCodigo(char*codigo) {
@@ -47,6 +50,7 @@ int tamanioCodigo(char*codigo) {
 	while (codigo[contador] != '\0') {
 		contador++;
 	}
+	log_info(umclog, "El tamanio del codigo es %d", contador);
 	return contador;
 }
 
@@ -85,9 +89,11 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 			list_add(listaEspacioAsignado, nuevoMarco);
 			i++;
 		}
+		log_info(umclog, "Programa inicializado correctamente PID: %d", pid);
 		return TRUE;
 	} else
-		return FALSE;
+		log_error(umclog, "No se pudo inicializar el programa PID: %d", pid);
+	return FALSE;
 
 }
 
@@ -158,12 +164,14 @@ void sacarPaginaDeTelebe(int pid, int pg) {
 	t_tlb* unaPaginaDeTelebe;
 	int i = 0;
 	while (i != list_size(TLB)) {
-		unaPaginaDeTelebe=list_get(TLB,i);
-		if (pid==unaPaginaDeTelebe->pid && pg==unaPaginaDeTelebe->pagina)
-			list_remove(TLB,i);
+		unaPaginaDeTelebe = list_get(TLB, i);
+		if (pid == unaPaginaDeTelebe->pid && pg == unaPaginaDeTelebe->pagina)
+			list_remove(TLB, i);
 		else
 			i++;
 	}
+	log_info(umclog, "Pagina de proceso: %d, PID: %d sacada de la TLB",
+			unaPaginaDeTelebe->pagina, unaPaginaDeTelebe->pid);
 }
 
 //devuelve el nodo del espacio en memoria
@@ -199,7 +207,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	nodoBuscado->bitUso = 1;
 	nodoBuscado->bitDePresencia = 1;
 	nodoBuscado->IDPaginaInterno = nodoActual->IDPaginaInterno;
-	espacioAsignado* pageToSend=newEspacioAsignado();
+	espacioAsignado* pageToSend = newEspacioAsignado();
 	pageToSend->IDPaginaInterno = nodoActual->IDPaginaInterno;
 	pageToSend->numDePag = nodoActual->numDePag;
 	pageToSend->pid = nodoActual->pid;
@@ -224,6 +232,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 		counter++;
 		inicioLectura++;
 	}
+	log_info(umclog, "Algoritmo CLOCK realizado correctamente");
 	free(pageToSend);
 	return posicionDePaginaLibre;
 }
@@ -256,7 +265,8 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 	int contador = comienzoDelPuntero;
 	int posicionDePaginaLibre;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0)&&nodoActual->bitDePresencia == 1)) {
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0)
+			&& nodoActual->bitDePresencia == 1)) {
 		contador++;
 		if (contador == fin)
 			contador = inicio;
@@ -271,7 +281,8 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 		return nodoActual;
 	}
 
-	while (!(((nodoActual->bitUso) == 1) && ((nodoActual->bitModificado) == 0)&&nodoActual->bitDePresencia == 1)) {
+	while (!(((nodoActual->bitUso) == 1) && ((nodoActual->bitModificado) == 0)
+			&& nodoActual->bitDePresencia == 1)) {
 		nodoActual->bitUso = 0;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
@@ -287,7 +298,8 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 		return nodoActual;
 
 	}
-	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0)&&nodoActual->bitDePresencia == 1)) {
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 0)
+			&& nodoActual->bitDePresencia == 1)) {
 
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
@@ -303,7 +315,8 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 		return nodoActual;
 	}
 
-	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 1)&&nodoActual->bitDePresencia == 1)) {
+	while (!(((nodoActual->bitUso) == 0) && ((nodoActual->bitModificado) == 1)
+			&& nodoActual->bitDePresencia == 1)) {
 
 		nodoActual = list_get(listaEspacioAsignado, contador);
 		contador++;
@@ -333,7 +346,7 @@ bool lectoEscritura) {
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	nodoActual->bitDePresencia = 0;
 	if (tlbHabilitada())
-			sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
+		sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
 	int i = 0;
 	espacioAsignado*nodoBuscado = list_get(listaEspacioAsignado, i);
 	while (!(nodoBuscado->pid == pid && nodoBuscado->numDePag == pagina)) {
@@ -380,6 +393,7 @@ bool lectoEscritura) {
 	}
 	nodoBuscado->bitUso = 1;
 	nodoBuscado->bitModificado = lectoEscritura;
+	log_info(umclog, "Algoritmo CLOCK MODIFICADO realizado correctamente");
 	return posicionDePaginaLibre;
 }
 
@@ -390,7 +404,6 @@ void limpiarPagina(int comienzoDePagina) {
 		memoriaReal[contador] = '\0';
 		contador++;
 	}
-
 }
 
 int encontrarPuntero(int pid) {
@@ -462,14 +475,15 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag == pagina))) {
 		posicionActualDeNodo++;
-		if(posicionActualDeNodo==list_size(listaEspacioAsignado))
+		if (posicionActualDeNodo == list_size(listaEspacioAsignado))
 			break;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 
 	}
-	if(posicionActualDeNodo==list_size(listaEspacioAsignado)){
-		sprintf(paginaADevolver,"%s","-1");
-		paginaEncontrada=FALSE;
+	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
+		sprintf(paginaADevolver, "%s", "-1");
+		paginaEncontrada = FALSE;
+		log_error(umclog, "Segmentation fault, PID: %d", pid);
 		return paginaADevolver;
 	}
 	if (nodoALeer->bitDePresencia == 1) {
@@ -485,6 +499,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			llevarPaginaATLB(pid, pagina, NULL);
 		}
 		paginaADevolver[cantidad] = '\0';
+		log_info(umclog, "Bytes leidos por PID: %d Pagina: %d", pid, pagina);
 		return (paginaADevolver);
 
 	} else {
@@ -533,6 +548,8 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			if (tlbHabilitada()) {
 				llevarPaginaATLB(pid, pagina, NULL);
 			}
+			log_info(umclog, "Bytes leidos por PID: %d Pagina: %d", pid,
+					pagina);
 			return (paginaADevolver);
 		} else {
 			int frame = reemplazarPagina(pid, pagina, 1);
@@ -548,6 +565,8 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			if (tlbHabilitada()) {
 				llevarPaginaATLB(pid, pagina, NULL);
 			}
+			log_info(umclog, "Bytes leidos por PID: %d Pagina: %d", pid,
+					pagina);
 			return (paginaADevolver);
 
 		}
@@ -561,12 +580,13 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	while (!(((nodoALeer->pid) == pid) && (nodoALeer->numDePag) == pagina)) {
 		posicionActualDeNodo++;
-		if(posicionActualDeNodo==list_size(listaEspacioAsignado))
-					break;
+		if (posicionActualDeNodo == list_size(listaEspacioAsignado))
+			break;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if(posicionActualDeNodo==list_size(listaEspacioAsignado))
-		paginaEncontrada=FALSE;
+	if (posicionActualDeNodo == list_size(listaEspacioAsignado))
+		paginaEncontrada = FALSE;
+	log_error(umclog, "Segmentation fault, PID: %d", pid);
 	if (nodoALeer->bitDePresencia == 1) {
 		(nodoALeer->bitUso) = 1;
 		nodoALeer->bitModificado = 1;
@@ -577,6 +597,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 			posicionDeChar++;
 			lugarDeLaCadena++;
 		}
+		log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
+				pagina);
 	} else {
 
 		if (paginasOcupadasPorPid(pid) < marco_x_proc
@@ -618,6 +640,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 				comCadena++;
 				lugCad++;
 			}
+			log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
+					pagina);
 		} else {
 
 			int frame = reemplazarPagina(pid, pagina, 1);
@@ -631,6 +655,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 				enDondeEstoyDeLoQueMeMandaron++;
 				contador++;
 			}
+			log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
+					pagina);
 		}
 	}
 	if (tlbHabilitada()) {
@@ -686,6 +712,7 @@ void finalizarPrograma(int pid) {
 		unaPaginaParaZafar = list_get(listaPaginasPorPrograma, j);
 	}
 	list_remove(listaPaginasPorPrograma, j);
+	log_info(umclog, "Programa (PID: %d) eliminado de la UMC", pid);
 }
 
 //Funcion básica del tp
@@ -718,7 +745,7 @@ void setearValores(t_config * archivoConfig) {
 
 char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 	char * memory = calloc(1, cantidadFrames * capacidadFrames);
-//todo	log_info(logger, "Memoria real reservada", NULL);
+	log_info(umclog, "Memoria real reservada correctamente");
 	return memory;
 }
 
@@ -735,6 +762,7 @@ int cantidadDePaginasLibres() {
 
 void liberarMemoria(char * memoria_para_liberar) {
 	free(memoria_para_liberar);
+	log_info(umclog, "Memoria liberada");
 	puts("Memoria liberada");
 }
 
@@ -950,7 +978,7 @@ void comandosUMC() {
 
 void retardoUMC(int retardo) {
 	espera = retardo;
-	log_info(logger, "El retardo ha sido modificado\n");
+	log_info(umclog, "El retardo ha sido modificado\n");
 }
 
 void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
@@ -964,7 +992,7 @@ void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
 			printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
 			printf("PID: %d\n", nodoActualDeAsignados->pid);
 			printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
-			log_info(logger, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
+			log_info(umclog, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
 					nodoActualDeAsignados->IDPaginaInterno,
 					nodoActualDeAsignados->pid);
 		}
@@ -984,7 +1012,7 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 		printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
 		printf("PID: %d\n", nodoActualDeAsignados->pid);
 		printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
-		log_info(logger, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
+		log_info(umclog, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
 				nodoActualDeAsignados->IDPaginaInterno,
 				nodoActualDeAsignados->pid);
 		i++;
@@ -995,7 +1023,7 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 	while (i < marcos) {
 		if (bitMap[i] == 0) {
 			printf("ID Frame: %d \n", i);
-			log_info(logger, "Frame libre: %d\n", i);
+			log_info(umclog, "Frame libre: %d\n", i);
 		}
 	}
 
@@ -1016,17 +1044,17 @@ void dumpContenidoDeMemoriaTodosLosProcesos() {
 				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
 				nodoActual->numDePag);
 
-		log_info(logger, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
+		log_info(umclog, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
 				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
 				nodoActual->numDePag);
 
 		while (direccionFisica < hastaDondeLeer) {
 			printf("%c", memoriaReal[direccionFisica]);
-			log_info(logger, "%c", memoriaReal[direccionFisica]);
+			log_info(umclog, "%c", memoriaReal[direccionFisica]);
 			direccionFisica++;
 		}
 		printf("\n");
-		log_info(logger, "\n");
+		log_info(umclog, "\n");
 
 		i++;
 	}
@@ -1048,17 +1076,17 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 					nodoActual->IDPaginaInterno, nodoActual->pid,
 					nodoActual->numDePag);
 
-			log_info(logger, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
+			log_info(umclog, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
 					nodoActual->IDPaginaInterno, nodoActual->pid,
 					nodoActual->numDePag);
 
 			while (direccionFisica < hastaDondeLeer) {
 				printf("%c", memoriaReal[direccionFisica]);
-				log_info(logger, "%c", memoriaReal[direccionFisica]);
+				log_info(umclog, "%c", memoriaReal[direccionFisica]);
 				direccionFisica++;
 			}
 			printf("\n");
-			log_info(logger, "\n");
+			log_info(umclog, "\n");
 		}
 		i++;
 	}
@@ -1066,14 +1094,14 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 
 void flushTLB() {
 	if (entradas_TLB == 0) {
-//log_info(logger, "TLB Deshabilitado"); todo que loguee otro
+		log_error(umclog,"TLB esta deshabilitada.");
 	} else {
 		int i = 0;
 		while (i < TLB->elements_count) {
 			elDestructorDeNodosTLB(i);
 			i++;
 		}
-		log_info(logger, "TLB acaba de vaciarse");
+		log_info(umclog, "TLB acaba de vaciarse");
 	}
 }
 
@@ -1085,6 +1113,7 @@ void flushMemory() {
 		nodoAModificar->bitModificado = 1;
 		i++;
 	}
+	log_info(umclog, "Flush de la memoria realizado correctamente");
 }
 
 void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
@@ -1102,9 +1131,9 @@ void menuUMC(pthread_t hiloComandos, pthread_attr_t attrhiloComandos) {
 void inicioTLB() {
 	int habilitada = tlbHabilitada();
 	if (habilitada == 0) {
-//log_info(logger, "TLB Deshabilitada"); que loguee otro x2 todo
+		log_info(umclog, "TLB Deshabilitada");
 	} else {
-		// todo log_info(logger, "TLB Habilitada con %d entradas", entradas_TLB);
+		log_info(umclog, "TLB Habilitada con %d entradas", entradas_TLB);
 		TLB = creoTLB();
 //Inicializo la cantidad de aciertos y accesos
 		aciertosTLB = 0;
@@ -1130,7 +1159,7 @@ bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
 	int i = 0;
 	t_tlb*nodoActual = list_get(TLB, i);
 	while (i < list_size(TLB)) {
-		nodoActual = list_get(TLB,i);
+		nodoActual = list_get(TLB, i);
 		if ((nodoActual->pid) == pid && nodoActual->pagina == pagina)
 			break;
 		i++;
@@ -1178,6 +1207,8 @@ void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 			tlb->momentoEntrada = accesosTLB;
 			tlb->frameTLB = buscarFrameEnMemoria(PID, pagina);
 			insertarNodoOrdenadoEnTLB(tlb);
+			log_info(umclog, "PID: %d, pagina %d llevada a la TLB", PID,
+					pagina);
 
 		} else {
 			t_tlb* tlb = malloc(sizeof(t_tlb));
@@ -1186,6 +1217,8 @@ void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 			tlb->momentoEntrada = accesosTLB;
 			tlb->frameTLB = buscarFrameEnMemoria(PID, pagina);
 			insertarNodoOrdenadoEnTLB(tlb);
+			log_info(umclog, "PID: %d, pagina %d llevada a la TLB", PID,
+					pagina);
 		}
 	}
 
@@ -1209,6 +1242,8 @@ int reemplazarPaginaLRU() {
 		}
 	}
 	paginaLibre = paginaAMatar->frameTLB;
+	log_info(umclog, "TLB: Algoritmo LRU: PID sacado: %d, pagina sacada: %d",
+			paginaAMatar->pid, paginaAMatar->pagina);
 	free(list_remove(TLB, lugarDePaginaAMatar));
 	return paginaLibre;
 }
@@ -1253,9 +1288,9 @@ char* leerEnTLB(int PID, int pagina, int posicion, int tamanio) {
 	if (habilitada != 0) {
 		t_tlb * entradaTLB = buscarEnTLB(PID, pagina);
 		if (entradaTLB != NULL) {
-			log_info(logger, "Acierto de TLB en el frame %d y pagina %d",
+			log_info(umclog, "Acierto de TLB en el frame %d y pagina %d",
 					entradaTLB->frameTLB, entradaTLB->pagina);
-			entradaTLB->momentoEntrada= accesosTLB;
+			entradaTLB->momentoEntrada = accesosTLB;
 			int inicioLectura = entradaTLB->frameTLB * marco_Size + posicion;
 			int i;
 			for (i = 0; i < tamanio; i++) {
@@ -1306,6 +1341,7 @@ void eliminarProcesoTLB(int PID) {
 				i++;
 		}
 	}
+	log_info(umclog, "PID: %d eliminado de TLB", PID);
 }
 
 //DEVUELVE 1 SI ESTA HABILITADA, SI NO ESTA HABILITADA DEVUELVE 0
