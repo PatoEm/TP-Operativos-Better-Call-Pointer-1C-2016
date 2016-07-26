@@ -50,6 +50,8 @@ bool seguirEjecutando; //1 SI 0 NO
 espacioAsignado * asignadoVacio;
 bool finalizoCorrectamente;
 bool saltoDeLinea;
+bool devolverPCB;
+
 
 //======================================================
 

@@ -475,7 +475,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	free(identificadorMod);
 	free(auxTiempo);
 
-	seguirEjecutando = FALSE;
+	devolverPCB = FALSE;
 }
 
 /*

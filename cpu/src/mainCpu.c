@@ -103,6 +103,7 @@ int main() {
 	if (loadConfig() && socketConnection()) {
 
 		while (TRUE) {
+			devolverPCB=FALSE;
 			finalizoCorrectamente = FALSE;
 			log_debug(getLogger(),
 					"Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
@@ -120,6 +121,8 @@ int main() {
 				if(saltoDeLinea == FALSE){
 				moverProgramCounterPcb(pcbProceso);
 				}
+				if(devolverPCB)
+					break;
 				saltoDeLinea = FALSE;
 				quantum--;
 			}
