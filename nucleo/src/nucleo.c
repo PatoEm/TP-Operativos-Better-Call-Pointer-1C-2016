@@ -306,7 +306,7 @@ int obtener_valor(char* identificador) {
 
 	for (i = 0; i < cantVarCompartidas; i++) {
 
-		if ((strcmp(&*idVariableCompartida[i], identificador)) == 0) {
+		if ((strcmp(idVariableCompartida[i], identificador)) == 0) {
 
 			if (pthread_mutex_trylock(mutexVariables[i]) == 0) {
 				;
