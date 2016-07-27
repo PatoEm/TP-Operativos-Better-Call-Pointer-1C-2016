@@ -116,8 +116,8 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					"HILO %d: La CPU [%d] pide CAMBIO_PROCESO_ACTIVO, nuevo proceso es %d.",
 					mi_socket, socket->descriptor, streamCpuUmc->pid);
 			pidActivo = streamCpuUmc->pid;
-			streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0,
-					0, NULL, 0);
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0, 0,
+					NULL, 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			break;
@@ -187,8 +187,8 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					streamUmcCpu = newStrUmcCpu(UMC_ID, ABORTAR_PROGRAMA,
 							unaPagina, 0, 0, NULL, 0);
 				else
-					streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0,
-										0, NULL, 0);
+					streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina,
+							0, 0, NULL, 0);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			}

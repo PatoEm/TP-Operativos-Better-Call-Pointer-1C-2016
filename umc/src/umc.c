@@ -689,6 +689,8 @@ void finalizarPrograma(int pid) {
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwa);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
+	buffer=socketReceive(socketSwap->ptrSocket);
+	StrSwaUmc*desdeUMC=unserializeSwaUmc(buffer);
 	espacioAsignado*nodoAReventar;
 //int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
