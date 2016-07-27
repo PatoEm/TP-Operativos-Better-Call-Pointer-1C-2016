@@ -497,7 +497,7 @@ void imprimir(t_valor_variable valor_mostrar) {
 
 /*
  * imprimirTexto
- */	// ya esta
+ */
 int imprimirTexto(char* texto) {
 	puts("CPU: Pido IMPRIMIR TEXTO");
 	StrCpuKer*streamCpuKer;
@@ -505,7 +505,11 @@ int imprimirTexto(char* texto) {
 			pcbProceso->id, strlen(texto), texto, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar IMPRIMIR TEXTO.");
+		return FALSE;
+	}
 	esperarConfirmacion(socketNucleo);
 	return strlen(texto);
 }
