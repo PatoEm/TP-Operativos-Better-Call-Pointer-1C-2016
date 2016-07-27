@@ -685,7 +685,7 @@ bool esperarConfirmacion(SocketClient* socket){
 	StrKerUmc* in_ker_msg;
 	StrUmcCpu* in_umc_msg;
 
-	if((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
+	if((sb = socketReceive(socket->ptrSocket)) == NULL) {
 		log_error(getLogger(),"No se pudo recibir el stream del socket que me envia.");
 		return FALSE;
 	}

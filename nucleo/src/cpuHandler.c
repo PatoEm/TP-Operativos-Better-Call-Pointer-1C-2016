@@ -966,7 +966,7 @@ bool confirmarCpu(Socket* cpu){
 	SocketBuffer* sb;
 	StrKerCpu* skc;
 
-	skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbVacio, 0,0 ,NULL, 0,
+	skc = newStrKerCpu(KERNEL_ID, TODO_PIOLA, *pcbVacio, 0,0 ,NULL, 0,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);;
 	sb = serializeKerCpu(skc);
 
