@@ -147,7 +147,7 @@ int main() {
 				log_info(getLogger(), "Aborte el programa");
 			}
 
-			if (quantum == 0) {
+			if (quantum == 0 && seguirEjecutando) {
 				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbProceso, 0, 0,
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);

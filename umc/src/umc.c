@@ -153,7 +153,7 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
 	while (acierto == 0) {
 		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1)
-					acierto = 1;
+			acierto = 1;
 		if ((nodoActual->bitUso) == 1) {
 			nodoActual->bitUso = 0;
 			contador++;
@@ -593,9 +593,10 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 			break;
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 	}
-	if (posicionActualDeNodo == list_size(listaEspacioAsignado))
+	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
 		paginaEncontrada = FALSE;
-	log_error(umclog, "Segmentation fault, PID: %d", pid);
+		log_error(umclog, "Segmentation fault, PID: %d", pid);
+	}
 	if (nodoALeer->bitDePresencia == 1) {
 		(nodoALeer->bitUso) = 1;
 		nodoALeer->bitModificado = 1;
