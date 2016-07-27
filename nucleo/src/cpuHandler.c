@@ -451,7 +451,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		nombreDispositivo = in_cpu_msg->log;
 
 		signalAnsisop((char*) nombreDispositivo);
-
+		confirmarCpu(cpuClient);
 		break;
 
 		// ACA VA EL RECONOCIMIENTO DE ACCIONES
@@ -566,7 +566,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se finalizo el programa a umc %d", pcb_aux->id);
 		}
-
+		confirmarCpu(cpuClient);
 		break;
 
 	case ABORTAR_PROGRAMA:
@@ -601,7 +601,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
 		}
-
+		confirmarCpu(cpuClient);
 		break;
 
 	case TERMINE_EL_QUANTUM:
@@ -629,7 +629,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 			}
 
 		}
-
+		confirmarCpu(cpuClient);
 		break;
 
 	default:
