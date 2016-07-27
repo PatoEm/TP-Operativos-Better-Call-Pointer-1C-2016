@@ -40,7 +40,7 @@ void cuerpoDelCpu() {
  * definirVariable
  */
 t_puntero definirVariable(t_nombre_variable identificador_variable) {
-	puts("CPU: Pido DEFINIR VARIABLE");
+	puts("CPU: Pidio DEFINIR VARIABLE");
 	int pagina;
 	paginaDeStack*nuevaVariable = crearPaginaDeStackVaciaPiola();
 	StrCpuUmc*streamCpuUmc;
@@ -198,7 +198,7 @@ bool espacioMemoriaVacio(int tamanio, char*bytes) {
  * obtenerPosicionVariable
  */ //NO TOCAR YA ESTÁ TERMINADA
 t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
-	puts("CPU: Pido OBTENER POSICION VARIABLE");
+	puts("CPU: Pidio OBTENER POSICION VARIABLE");
 	if (list_size(pcbProceso->indiceDelStack) != 0) {
 		int i;
 		paginaDeStack* aux = list_get(pcbProceso->indiceDelStack,
@@ -220,7 +220,7 @@ t_puntero obtenerPosicionVariable(t_nombre_variable identificador_variable) {
  * dereferenciar
  */
 t_valor_variable dereferenciar(t_puntero direccion_variable) {
-	puts("CPU: Pido DEREFERENCIAR");
+	puts("CPU: Pidio DEREFERENCIAR");
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
 	asignadoVacio->bitUso = 4;
 	int offset = direccion_variable % tamanioPaginaUmc;
@@ -257,7 +257,7 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
  * asignar
  */
 void asignar(t_puntero direccion_variable, t_valor_variable valor) {
-	puts("CPU: Pido ASIGNAR");
+	puts("CPU: Pidio ASIGNAR");
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
 	asignadoVacio->bitUso = direccion_variable % tamanioPaginaUmc;
 	int offset = direccion_variable % tamanioPaginaUmc;
@@ -291,7 +291,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  * obtenerValorCompartida
  */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
-	puts("CPU: Pido OBTENER VALOR COMPARTIDA");
+	puts("CPU: Pidio OBTENER VALOR COMPARTIDA");
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -327,7 +327,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
  */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
-	puts("CPU: Pido ASIGNAR VALOR COMPARTIDA");
+	puts("CPU: Pidio ASIGNAR VALOR COMPARTIDA");
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -363,7 +363,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
  */
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
-	puts("CPU: Pido IR A LABEL");
+	puts("CPU: Pidio IR A LABEL");
 
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
@@ -393,6 +393,7 @@ char* sinEspacioAlFinal(char* linea, int tamanio) {
  * llamarConRetorno
  */
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
+	puts("CPU: Pidio LLAMAR CON RETORNO");
 
 	char* etiquetaMod;
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
@@ -419,7 +420,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
  * finalizar
  */
 void finalizar(void) {
-	puts("CPU: Pido FINALIZAR");
+	puts("CPU: Pidio FINALIZAR");
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbProceso,
 			pcbProceso->id, 0, NULL, NULL /*NOMBRE DISPOSITIVO*/,
@@ -441,7 +442,7 @@ void finalizar(void) {
  *
  */
 void retornar(t_valor_variable retorno) {
-	printf("Operacion de retorno");
+	puts("CPU: Pidio RETORNAR");
 	asignadoVacio = newEspacioAsignado();
 	paginaDeStack *aux = list_remove(pcbProceso->indiceDelStack,
 			(pcbProceso->indiceDelStack->elements_count) - 1);
@@ -478,7 +479,7 @@ String intToStr(Int32U integer) {
  * imprimir
  */
 void imprimir(t_valor_variable valor_mostrar) {
-	puts("CPU: Pido IMPRIMIR");
+	puts("CPU: Pidio IMPRIMIR");
 	StrCpuKer*streamCpuKer;
 	String aux;
 	aux = intToStr(valor_mostrar);
@@ -499,7 +500,7 @@ void imprimir(t_valor_variable valor_mostrar) {
  * imprimirTexto
  */
 int imprimirTexto(char* texto) {
-	puts("CPU: Pido IMPRIMIR TEXTO");
+	puts("CPU: Pidio IMPRIMIR TEXTO");
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIRTEXTO, *pcbProceso,
 			pcbProceso->id, strlen(texto), texto, NULL /*NOMBRE DISPOSITIVO*/,
@@ -518,6 +519,7 @@ int imprimirTexto(char* texto) {
  * entradaSalida
  */
 void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
+	puts("CPU: Pidio IO");
 
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
@@ -545,6 +547,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
  * wait
  */
 void wait(t_nombre_semaforo identificador_semaforo) {
+	puts("CPU: Pidio WAIT");
 
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
@@ -577,6 +580,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
  * signal
  */
 void signale(t_nombre_semaforo identificador_semaforo) {
+	puts("CPU: Pidio SIGNAL");
 
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
