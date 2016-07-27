@@ -365,6 +365,8 @@ void enviarPidPcb(int id) {
 		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
 	
 	}
+	if(!esperarConfirmacion(socketUMC))
+		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
 }
 
 int calcularOffset(pcb *pcbLoco) {
