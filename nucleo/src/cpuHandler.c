@@ -493,7 +493,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se envio IMPRIMIRTEXTO a la consola.");
 		}
-
+		confirmarCpu(cpuClient);
 		break;
 
 	case IMPRIMIR:
@@ -512,7 +512,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se envio IMPRIMIR a la consola.");
 		}
-
+		confirmarCpu(cpuClient);
 		break;
 
 	case ENTRADA_SALIDA:
@@ -961,3 +961,19 @@ void clientDown(int descriptor){
   }
 }
 
+bool confirmarCpu(Socket* cpu){
+
+	SocketBuffer* sb;
+	StrKerCpu* skc;
+
+	skc = newStrKerCpu(KERNEL_ID, HANDSHAKE, *pcbVacio, 0,0 ,NULL, 0,
+			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);;
+	sb = serializeKerCpu(skc);
+
+	if (!socketSend(cpu, sb)) {
+		printf("No se pudo enviar confirmación a CPU. \n");
+		return FALSE;
+	}
+	puts("Se envió confirmación a CPU.");
+	return TRUE;
+}

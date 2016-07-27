@@ -73,25 +73,12 @@ t_log* logger = NULL;
 int main() {
 	finalizoCorrectamente = FALSE;
 	saltoDeLinea = FALSE;
-//
-//	pcb * pcbVacioLoco=newEmptyPcb();
-//	StrCpuKer *hola = newStrCpuKer(CPU_ID,PRIMER_PCB,*pcbVacioLoco,0,0,"hola","hola",0);
-//	SocketBuffer *bufferLoco =serializeCpuKer(hola);
-//	bufferLoco->data;
-//	hola=unserializeCpuKer(bufferLoco->data);
-//
-//	paginaDeStack * paginita =list_get(hola->pcb.indiceDelStack,0);
-//	paginaDeStack * paginita2 =list_get(hola->pcb.indiceDelStack,1);
 
 	asignadoVacio = newEspacioAsignado();
-	log_debug(getLogger(),
-			"Cargo variables de configuracion, me conecto al nucleo y a la umc");
+	log_debug(getLogger(), "Cargo variables de configuracion, me conecto al nucleo y a la umc");
 	pcbVacio = malloc(sizeof(pcb));
 
 	memcpy(pcbVacio, newEmptyPcb(), sizeof(pcb));
-
-	//pcbVacio = newEmptyPcb();
-
 
 	t_config* tConfig = NULL;
 
@@ -103,10 +90,9 @@ int main() {
 	if (loadConfig() && socketConnection()) {
 
 		while (TRUE) {
-			devolverPCB=FALSE;
+			devolverPCB = FALSE;
 			finalizoCorrectamente = FALSE;
-			log_debug(getLogger(),
-					"Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
+			log_debug(getLogger(), "Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
 			getNextPcb();
 			seguirEjecutando = TRUE;
 			log_debug(getLogger(), "Proceso el pcb del nucleo");
@@ -114,12 +100,11 @@ int main() {
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
 				instruccionLoca = pedirInstruccion(pcbProceso);
 
-				analizadorLinea(instruccionLoca, &funciones,
-						&funcionesDeKernel);
+				analizadorLinea(instruccionLoca, &funciones, &funcionesDeKernel);
 
 				free(instruccionLoca);
 				if(saltoDeLinea == FALSE){
-				moverProgramCounterPcb(pcbProceso);
+					moverProgramCounterPcb(pcbProceso);
 				}
 				if(devolverPCB)
 					break;
@@ -128,21 +113,17 @@ int main() {
 			}
 
 			if(finalizoCorrectamente){
-
 				log_info(getLogger(), "Finalice el programa");
-
 			}
+
 			if (!seguirEjecutando) {
 
-				sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0, 0,
-						NULL, NULL, 0);
+				sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0, 0, NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
 
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-					log_info(getLogger(),
-							"No se pudo enviar el buffer al nucleo.");
+					log_info(getLogger(), "No se pudo enviar el buffer al nucleo.");
 					return FALSE;
-
 				}
 				log_info(getLogger(), "Aborte el programa");
 			}
@@ -163,7 +144,8 @@ int main() {
 		}
 
 		config_destroy(tConfig);
-		while (1) {
+
+		while (TRUE) {
 			puts("Esperando..");
 			sleep(10);
 		}
@@ -337,13 +319,12 @@ Boolean getNextPcb() {
 	log_debug(getLogger(), "Serializo y armo el socket");
 	SocketBuffer* sb = serializeCpuKer(sck);
 	log_debug(getLogger(), "Envio el socketBuffer");
-	usleep(300);
+	sleep(2);
 	if (!socketSend(socketNucleo->ptrSocket, sb)) {
 		log_error(getLogger(), "No se pudo enviar el stream al nucleo");
 		return FALSE;
 	}else {
 		log_info(getLogger(), "Pedi un nuevo PCB");
-
 	}
 
 	free(sb);
@@ -354,7 +335,6 @@ Boolean getNextPcb() {
 		log_error(getLogger(), "No se pudo recibir el stream del nucleo");
 		return FALSE;
 	} else{
-
 		log_info(getLogger(), "Recibi nuevo PCB");
 	}
 
@@ -364,9 +344,9 @@ Boolean getNextPcb() {
 
 	skc = unserializeKerCpu((Stream) sb->data);
 
-	pcbProceso=malloc(sizeof(pcb));
+	pcbProceso = malloc(sizeof(pcb));
 
-	memcpy(pcbProceso,&skc->pcb,sizeof(pcb));
+	memcpy(pcbProceso, &skc->pcb, sizeof(pcb));
 
 	//pcbProceso = skc->pcb;
 
@@ -382,10 +362,11 @@ void enviarPidPcb(int id) {
 	scu = newStrCpuUmc(CPU_ID, CAMBIO_PROCESO_ACTIVO, pag, 0, 0, "h", id);
 	SocketBuffer*buff = serializeCpuUmc(scu);
 	if (!socketSend(socketUMC->ptrSocket, buff)) {
-		log_error(getLogger(),
-				"No se pudo enviar el ID del nuevo proceso activo al nucleo");
+		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
 	
 	}
+	if(!esperarConfirmacion(socketUMC))
+		log_error(getLogger(), "No se pudo enviar el ID del nuevo proceso activo al nucleo");
 }
 
 int calcularOffset(pcb *pcbLoco) {
@@ -414,7 +395,6 @@ String stringFromByteArray(Byte* data, Int32U size) {
 	return result;
 }
 
-// esto debería funcionar re piola
 char* pedirInstruccion(pcb* pcbLoco) {
 
 	int inicio = pcbLoco->indiceDeCodigo[pcbLoco->programCounter].comienzo;
@@ -442,9 +422,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		asignadoVacio->numDePag = pagina;
 		asignadoVacio->bitUso = offsetPag;
 		
-		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag,
-				0,
-				NULL, 0);
+		scu = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, inicioPag, 0, NULL, 0);
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC->ptrSocket, buffer)) {
 			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
@@ -469,7 +447,7 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		}
 
 		char* auxCat;
-		auxCat= stringFromByteArray(suc->data, suc->dataLen);
+		auxCat = stringFromByteArray(suc->data, suc->dataLen);
 		strcat(instruccion, auxCat);
 
 		free(auxCat);
@@ -501,10 +479,11 @@ int pedirTamanioDePagina() {
 		return FALSE;
 	}
 
-	buffer = socketReceive(socketUMC->ptrSocket);
-
-	if (buffer == NULL) {
-		log_error(getLogger(), "Error al recibir del cliente");
+	if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el tamanio de pagina de la UMC ppal.");
+		return FALSE;
+	} else {
+		log_info(getLogger(), "Recibi OK el tamanio de pagina de la UMC ppal.");
 	}
 
 	suc = unserializeUmcCpu(buffer);

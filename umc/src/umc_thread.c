@@ -116,6 +116,10 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					"HILO %d: La CPU [%d] pide CAMBIO_PROCESO_ACTIVO, nuevo proceso es %d.",
 					mi_socket, socket->descriptor, streamCpuUmc->pid);
 			pidActivo = streamCpuUmc->pid;
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0,
+					0, NULL, 0);
+			buffer = serializeUmcCpu(streamUmcCpu);
+			socketSend(socket, buffer);
 			break;
 		case 25/*SOLICITAR_BYTES*/:
 			log_info(umclog, "HILO %d: La CPU [%d] pide SOLICITAR_BYTES.",
@@ -183,12 +187,12 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					streamUmcCpu = newStrUmcCpu(UMC_ID, ABORTAR_PROGRAMA,
 							unaPagina, 0, 0, NULL, 0);
 				else
-					streamUmcCpu = newStrUmcCpu(UMC_ID, 34 /*ALMACENAR_BYTES*/,
-							unaPagina, scu->offset, scu->dataLen, bytes,
-							pidActivo);
+					streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0,
+										0, NULL, 0);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 			}
+
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		default:
@@ -211,6 +215,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 
 void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 	StrUmcKer*streamAlKerner;
+	StrSwaUmc*streamSwapAUmc;
 	SocketBuffer*buffer;
 	switch (sku->action) {
 	case 36 /*TAMANIO_DE_MARCOS*/:
@@ -251,6 +256,9 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 				mi_socket, socket->descriptor, sku->pid);
 		pthread_mutex_lock(mutexPedidos);
 		finalizarPrograma(sku->pid);
+		buffer = socketReceive(socketSwap->ptrSocket);
+		streamSwapAUmc = unserializeSwaUmc(buffer);
+		streamAlKerner = newStrUmcKer(UMC_ID, TODO_PIOLA, NULL, 0, sku->pid, 0);
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:

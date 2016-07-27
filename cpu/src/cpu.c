@@ -39,7 +39,7 @@ void cuerpoDelCpu() {
 /*
  * definirVariable
  */
-t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR, YA ESTA TERMINADA
+t_puntero definirVariable(t_nombre_variable identificador_variable) {
 	puts("CPU: Pido DEFINIR VARIABLE");
 	int pagina;
 	paginaDeStack*nuevaVariable = crearPaginaDeStackVaciaPiola();
@@ -52,16 +52,24 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		tam = list_size(pcbProceso->indiceDelStack);
 	if (0 == list_size(pcbProceso->indiceDelStack)
 			|| (tam == 0 && 1 == list_size(pcbProceso->indiceDelStack))) {
-		pagina = ((pcbProceso->paginasDeCodigo) - 1); //todo ojo acá si explota algo
+		pagina = ((pcbProceso->paginasDeCodigo) - 1);
 		asignadoVacio->numDePag = ((pcbProceso->paginasDeCodigo) - 1);
 		asignadoVacio->bitUso = 4;
 		nuevaVariable->pos = 0;
-		//(Char id, Char action, espacioAsignado pageComienzo,Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-				(tamanioPaginaUmc - 5), 0, NULL, 0);
+		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, (tamanioPaginaUmc - 5), 0, NULL, 0);
+
 		buffer = serializeCpuUmc(streamCpuUmc);
-		socketSend(socketUMC->ptrSocket, buffer);
-		buffer = socketReceive(socketUMC->ptrSocket);
+
+		if (!socketSend(socketUMC->ptrSocket, buffer)) {
+			log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+			return FALSE;
+		}
+
+		if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+			log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+			return FALSE;
+		}
+
 		streamUmcCpu = unserializeCpuUmc(buffer);
 
 		if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
@@ -69,7 +77,6 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		} else {
 			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
 				if (0 == list_size(pcbProceso->indiceDelStack)) {
-					//nuevaVariable->vars = list_create();
 					nuevaVariable->pos = 0;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
@@ -102,10 +109,22 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			asignadoVacio->bitUso = 4;
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
 					tamanioPaginaUmc - 5, 0, 0, 0);
+
 			buffer = serializeCpuUmc(streamCpuUmc);
-			socketSend(socketUMC->ptrSocket, buffer);
-			buffer = socketReceive(socketUMC->ptrSocket);
+
+			if (!socketSend(socketUMC->ptrSocket, buffer)) {
+				log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+				return FALSE;
+			}
+
+			if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+				log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+				return FALSE;
+			}
+
+
 			streamUmcCpu = unserializeCpuUmc(buffer);
+
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
@@ -124,15 +143,23 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		} else {
 			asignadoVacio->numDePag = ultimaPagina->pagVar;
 			asignadoVacio->bitUso = 4;
-			//(Char id, Char action, espacioAsignado pageComienzo,
-			//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
 					ultimaPagina->offVar - 4, 0, 0, 0);
 			buffer = serializeCpuUmc(streamCpuUmc);
-			socketSend(socketUMC->ptrSocket, buffer);
-			buffer = socketReceive(socketUMC->ptrSocket);
+
+			if (!socketSend(socketUMC->ptrSocket, buffer)) {
+				log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+				return FALSE;
+			}
+
+			if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+				log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+				return FALSE;
+			}
+
 			streamUmcCpu = unserializeCpuUmc(buffer);
+
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
@@ -150,8 +177,6 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			}
 		}
 	}
-	//free(buffer);
-	//free(streamUmcCpu);
 	return variable->pagVar * tamanioPaginaUmc + variable->offVar;
 }
 
@@ -199,16 +224,27 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
 	asignadoVacio->bitUso = 4;
 	int offset = direccion_variable % tamanioPaginaUmc;
-	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
 	StrCpuUmc* streamCpuUMC;
 	streamCpuUMC = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, offset,
 			0, NULL, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket, buffer);
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar DEREFERENCIAR.");
+		return FALSE;
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+		return FALSE;
+	}
+
+
 	StrUmcCpu*streamUmcCpu;
+
 	streamUmcCpu = unserializeCpuUmc(buffer);
+
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 		seguirEjecutando = FALSE;
 		return 0;
@@ -230,31 +266,30 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	sprintf(dataAMandar, "%d", valor);
 
 	StrCpuUmc* streamCpuUMC;
-	//(Char id, Char action, espacioAsignado pageComienzo,
-	//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	streamCpuUMC = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio, offset,
-			4, dataAMandar, 0);	// todo chequear si llego bien o aborta
+			4, dataAMandar, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket, buffer);
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ASIGNAR.");
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	}
 
 	free(dataAMandar);
-	//////////////////////////////////////////////////////////////////
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeUmcCpu(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
 		seguirEjecutando = FALSE;
 }
 
-//void asignar(t_puntero direccion_variable, t_valor_variable valor){
-//	uint32_t pagina = direccion_variable / tamanioPagina;
-//	uint32_t offset = direccion_variable % tamanioPagina;
-//	almacenarBytesUMC(umc, pagina, offset, 4, valor);
-//}
 
 /*
  * obtenerValorCompartida
- *///YA ESTA TERMINADO
+ */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	puts("CPU: Pido OBTENER VALOR COMPARTIDA");
 	char* variableMod;
@@ -265,10 +300,18 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 			pcbProceso->id, strlen(variableMod), variableMod,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
-	buffer = socketReceive(socketNucleo->ptrSocket);
 
-	free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+			log_error(getLogger(), "No se pudo realizar OBTENER VALOR COMPARTIDA.");
+			return FALSE;
+		}
+
+		if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+			log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
+			return FALSE;
+		}
+
+	free(variableMod);
 
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)
@@ -281,7 +324,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 
 /*
  * 	asignarValorCompartida
- */	// YA ESTÁ TERMINADA
+ */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
 	puts("CPU: Pido ASIGNAR VALOR COMPARTIDA");
@@ -295,11 +338,16 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 			NULL /*LOG*/, variableMod /*NOMBRE DISPOSITIVO*/,
 			strlen(variableMod) /*LEN NOMBRE DISPOSITIVO*/);
 	buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
-//	(Char id, Char action, pcb pcb, Int32U pid,
-//			Int32U logLen, Byte* log, Byte* nombreDispositivo,
-//			Int32U lenNomDispositivo)
-	buffer = socketReceive(socketNucleo->ptrSocket);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ASIGNAR VALOR COMPARTIDA.");
+		return FALSE;
+	}
+
+	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
+		return FALSE;
+	}
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	free(variableMod);
 	if (streamKerCpu->action == ASIGNAR_VALOR_COMPARTIDA)
@@ -308,13 +356,11 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		seguirEjecutando = FALSE;
 		return -1;
 	}
-
-	//free(buffer);
 }
 
 /*
  * 	irAlLabel
- */	// YA ESTA TERMINADA
+ */
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
 	puts("CPU: Pido IR A LABEL");
@@ -345,14 +391,13 @@ char* sinEspacioAlFinal(char* linea, int tamanio) {
 
 /*
  * llamarConRetorno
- */	// ESTÁ TERMINADA
+ */
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 	char* etiquetaMod;
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	paginaDeStack* aux = crearPaginaDeStackVaciaPiola();
-	//aux->retVars = list_create();
 	variablesRetorno*dondeRetorno = malloc(sizeof(variablesRetorno));
 	dondeRetorno->pagVarRet = donde_retornar / tamanioPaginaUmc;
 	dondeRetorno->offVarRet = donde_retornar % tamanioPaginaUmc;
@@ -372,22 +417,29 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 /*
  * finalizar
- */	// FINALIZAR SOLO SI EL PROGRAMA TERMINA BIEN
+ */
 void finalizar(void) {
 	puts("CPU: Pido FINALIZAR");
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbProceso,
 			pcbProceso->id, 0, NULL, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
+
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar FINALIZAR.");
+	}
+
+	esperarConfirmacion(socketNucleo);
+
 	finalizoCorrectamente = TRUE;
 }
 
 /*
  * retornar
  *
- */	// FALTA MANEJO DE ABORTO
+ */
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
 	asignadoVacio = newEspacioAsignado();
@@ -395,17 +447,20 @@ void retornar(t_valor_variable retorno) {
 			(pcbProceso->indiceDelStack->elements_count) - 1);
 	pcbProceso->programCounter = aux->retPos;
 
-	//saltoDeLinea = TRUE; ESTO ERA UNA PIJA PATO
-
 	variablesRetorno*dondeVuelvo = list_get(aux->retVars, 0);
 	StrCpuUmc*streamCpuUmc;
 	asignadoVacio->numDePag = dondeVuelvo->pagVarRet;
 	streamCpuUmc = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio,
 			dondeVuelvo->offVarRet, 4, intToStr(retorno), 0);
 	SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
-	socketSend(socketUMC->ptrSocket, buffer);
-	//////////////////////////////////////////////////////////////////
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar RETORNAR.");
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	}
 
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeCpuUmc(buffer);
@@ -421,27 +476,28 @@ String intToStr(Int32U integer) {
 
 /*
  * imprimir
- */	// YA ESTA
+ */
 void imprimir(t_valor_variable valor_mostrar) {
 	puts("CPU: Pido IMPRIMIR");
 	StrCpuKer*streamCpuKer;
 	String aux;
-	aux =intToStr(valor_mostrar);
-
-	//(Char id, Char action, pcb pcb, Int32U pid,
-	//Int32U logLen, Byte* log, Byte* nombreDispositivo,
-	//Int32U lenNomDispositivo)
+	aux = intToStr(valor_mostrar);
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, *pcbProceso, valor_mostrar,
 			strlen(aux), aux, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar IMPRIMIR.");
+	}
+
+	esperarConfirmacion(socketNucleo);
 	free(aux);
 }
 
 /*
  * imprimirTexto
- */	// ya esta
+ */
 int imprimirTexto(char* texto) {
 	puts("CPU: Pido IMPRIMIR TEXTO");
 	StrCpuKer*streamCpuKer;
@@ -449,7 +505,12 @@ int imprimirTexto(char* texto) {
 			pcbProceso->id, strlen(texto), texto, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar IMPRIMIR TEXTO.");
+		return FALSE;
+	}
+	esperarConfirmacion(socketNucleo);
 	return strlen(texto);
 }
 
@@ -464,13 +525,15 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	String auxTiempo;
 	auxTiempo=intToStr(tiempo);
 	StrCpuKer*streamCpuKer;
-//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, ENTRADA_SALIDA, *pcbProceso,
 			pcbProceso->id, strlen(auxTiempo), auxTiempo,
 			identificadorMod /*NOMBRE DISPOSITIVO*/,
 			strlen(identificadorMod) /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ENTRADA SALIDA.");
+	}
 
 	free(identificadorMod);
 	free(auxTiempo);
@@ -616,3 +679,38 @@ void gestionoSIGINT() {
 	int pid = getpid();
 	kill(pid , SIGTERM);
 }
+
+bool esperarConfirmacion(SocketClient* socket){
+	SocketBuffer* sb;
+	StrKerUmc* in_ker_msg;
+	StrUmcCpu* in_umc_msg;
+
+	sb = socketReceive(socket->ptrSocket);
+
+	if (sb == NULL) {
+		return FALSE;
+	}
+
+	Stream strReceived = (Stream) sb->data;
+	Char id = getStreamId(strReceived);
+
+
+	switch (id) {
+	case UMC_ID:
+		in_umc_msg = unserializeUmcCpu((Stream) sb->data);
+		if(in_umc_msg->action == TODO_PIOLA){
+			return TRUE;
+		}
+		break;
+	case KERNEL_ID:
+		in_ker_msg = unserializeKerCpu((Stream) sb->data);
+		if(in_ker_msg ->action == TODO_PIOLA){
+			return TRUE;
+		}
+		break;
+	default:
+		return FALSE;
+		break;
+	}
+}
+

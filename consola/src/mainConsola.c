@@ -135,9 +135,9 @@ Boolean socketConnection() {
 	kernelClient = socketCreateClient();
 
 	do {
-		puts("**********************************");
-		puts("Intentando conectar con el NUCLEO.");
-		printf("IP: %s, Puerto: %d\n", ipKernel, (int)puertoKernel);
+		log_info(getLogger(), "**********************************");
+		log_info(getLogger(), "Intentando conectar con el NUCLEO.");
+		log_info(getLogger(),"IP: %s, Puerto: %d\n", ipKernel, (int)puertoKernel);
 		sleep(3);
 	} while(!socketConnect(kernelClient, ipKernel, puertoKernel));
 

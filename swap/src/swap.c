@@ -7,7 +7,6 @@
 
 #include "swap.h"
 
-
 //Genero mi archivo de Swap y lo devuelvo mappeado en memoria DRMENGUECHE
 char* crearArchivo(char* tamanio, char* nombre) {
 	char* paraSistema = string_new();
@@ -56,7 +55,7 @@ void setearValores(t_config * archivoConfig) {
 
 	int nro1 = atoi(tamPagina);
 	int nro2 = atoi(paginas);
-	int resultado = nro1*nro2;
+	int resultado = nro1 * nro2;
 	tamArchivo = malloc(100);
 	//itoa(atoi(tamPagina)*atoi(paginas), tamArchivo);
 
@@ -363,9 +362,9 @@ void manejoDeConexiones() {
 	while (1) {
 		paginaAsignada paginaAMandar;
 		buffer = socketReceive(umcClient);
-		if (buffer == NULL){
+		if (buffer == NULL) {
 			puts("Error al recibir del cliente");
-			log_error(getLogger(),"Al recibir del cliente");
+			log_error(getLogger(), "Al recibir del cliente");
 		}
 
 		streamUmcSwap = unserializeUmcSwa(buffer);
@@ -387,15 +386,15 @@ void manejoDeConexiones() {
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PROGRAMA_NO_RECIBIDO,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
-				if (!socketSend(umcClient, buffer)){
+				if (!socketSend(umcClient, buffer)) {
 					puts("Error al enviar el paquete");
-					log_error(getLogger(),"Al enviar el paquete");
+					log_error(getLogger(), "Al enviar el paquete");
 				}
 			} else {
 				tamanioCodigo = streamUmcSwap->dataLen;
 				contadorPaginasRecibidas = 0;
 				while (contadorPaginasRecibidas != streamUmcSwap->cantPage) {
-					contador= 0;
+					contador = 0;
 					ubicacionActual = contadorPaginasRecibidas
 							* atoi(tamPagina);
 					while (contador < atoi(tamPagina)
@@ -419,9 +418,9 @@ void manejoDeConexiones() {
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, 26/*PROGRAMA_RECIBIDO*/,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
-				if (!socketSend(umcClient, buffer)){
+				if (!socketSend(umcClient, buffer)) {
 					puts("Error al enviar el paquete");
-					log_error(getLogger(),"Al enviar el paquete");
+					log_error(getLogger(), "Al enviar el paquete");
 				}
 			}
 
@@ -443,9 +442,9 @@ void manejoDeConexiones() {
 					paginaAMandar, 1, paginaLoca, tamPaginaLoca,
 					streamUmcSwap->pid);
 			buffer = serializeSwaUmc(streamSwapUmc);
-			if (!socketSend(umcClient, buffer)){
+			if (!socketSend(umcClient, buffer)) {
 				puts("Error al enviar el paquete");
-				log_error(getLogger(),"Al enviar el paquete");
+				log_error(getLogger(), "Al enviar el paquete");
 			}
 
 			break;
@@ -463,10 +462,24 @@ void manejoDeConexiones() {
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, PAGINA_NO_ESCRITA,
 						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
-				if (!socketSend(umcClient, buffer)){
+				if (!socketSend(umcClient, buffer)) {
 					puts("Error al enviar");
-					log_error(getLogger(),"Al enviar paquete");
+					log_error(getLogger(), "Al enviar paquete");
 				}
+			} else {
+				paginaAMandar.IDPaginaInterno =
+						streamUmcSwap->pageComienzo.IDPaginaInterno;
+				paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
+				paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
+				paginaAMandar.bitLectura = 1;
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA, paginaAMandar,
+						0, NULL, 0, streamUmcSwap->pid);
+				buffer = serializeSwaUmc(streamSwapUmc);
+				if (!socketSend(umcClient, buffer)) {
+					puts("Error al enviar");
+					log_error(getLogger(), "Al enviar paquete");
+				}
+
 			}
 
 			break;
@@ -474,12 +487,24 @@ void manejoDeConexiones() {
 		case ELIMINAR_PROCESO:
 
 			eliminarProceso(streamUmcSwap->pid);
-			log_info(getLogger(),"Proceso eliminado con exito");
+			log_info(getLogger(), "Proceso eliminado con exito");
+			paginaAMandar.IDPaginaInterno =
+					streamUmcSwap->pageComienzo.IDPaginaInterno;
+			paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
+			paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
+			paginaAMandar.bitLectura = 1;
+			streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA, paginaAMandar, 0,
+					NULL, 0, streamUmcSwap->pid);
+			buffer = serializeSwaUmc(streamSwapUmc);
+			if (!socketSend(umcClient, buffer)) {
+				puts("Error al enviar");
+				log_error(getLogger(), "Al enviar paquete");
+			}
 
 			break;
 
 		default:
-			log_error(getLogger(),"El action no es valido");
+			log_error(getLogger(), "El action no es valido");
 			break;
 		}
 	}
@@ -493,30 +518,28 @@ t_log* getLogger() {
 }
 
 /* itoa:  convert n to characters in s */
-void itoa(int n, char s[])
-{
-     int i, sign;
+void itoa(int n, char s[]) {
+	int i, sign;
 
-     if ((sign = n) < 0)  /* record sign */
-         n = -n;          /* make n positive */
-     i = 0;
-     do {       /* generate digits in reverse order */
-         s[i++] = n % 10 + '0';   /* get next digit */
-     } while ((n /= 10) > 0);     /* delete it */
-     if (sign < 0)
-         s[i++] = '-';
-     s[i] = '\0';
-     reverse(s);
+	if ((sign = n) < 0) /* record sign */
+		n = -n; /* make n positive */
+	i = 0;
+	do { /* generate digits in reverse order */
+		s[i++] = n % 10 + '0'; /* get next digit */
+	} while ((n /= 10) > 0); /* delete it */
+	if (sign < 0)
+		s[i++] = '-';
+	s[i] = '\0';
+	reverse(s);
 }
 
-void reverse(char s[])
-{
-     int i, j;
-     char c;
+void reverse(char s[]) {
+	int i, j;
+	char c;
 
-     for (i = 0, j = strlen(s)-1; i<j; i++, j--) {
-         c = s[i];
-         s[i] = s[j];
-         s[j] = c;
-     }
+	for (i = 0, j = strlen(s) - 1; i < j; i++, j--) {
+		c = s[i];
+		s[i] = s[j];
+		s[j] = c;
+	}
 }
