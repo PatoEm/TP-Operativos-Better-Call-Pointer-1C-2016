@@ -66,7 +66,7 @@ char * leerProgramaAnSISOP(char * direccionArchivo) {
 
 t_log* getLogger() {
 	if (logger == NULL) {
-		logger = log_create(LOGGER_FILE, "consola", FALSE, LOG_LEVEL_INFO);
+		logger = log_create(LOGGER_FILE, "CONSOLA", FALSE, LOG_LEVEL_INFO);
 	}
 	return logger;
 }

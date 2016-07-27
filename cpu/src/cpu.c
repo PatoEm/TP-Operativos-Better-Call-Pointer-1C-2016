@@ -557,7 +557,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 
 	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-		log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+		log_error(getLogger(), "No se pudo realizar WAIT.");
 	}
 
 	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
@@ -575,7 +575,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 
 /*
  * signal
- */ // YA ESTA
+ */
 void signale(t_nombre_semaforo identificador_semaforo) {
 
 	char* identificadorMod;
@@ -587,14 +587,18 @@ void signale(t_nombre_semaforo identificador_semaforo) {
 			pcbProceso->id, strlen(identificadorMod), identificadorMod,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar SIGNAL.");
+	}
+
+	esperarConfirmacion(socketNucleo);
 
 	free(identificadorMod);
 }
 
 char * pedirCodigoAUMC() {
 
-//pcbEnEjecucion.programCounter;
 	char*lineaDeCodigoADevolver =
 			malloc(
 					sizeof(char)
@@ -614,9 +618,6 @@ char * pedirCodigoAUMC() {
 			pcbProceso->indiceDeCodigo[pcbProceso->programCounter].longitud;
 
 	if (paginaDeComienzo == paginaDeFin) {
-		//todo pedir pagina con el tamaño que ya tengo de antemano
-		//pcbEnEjecucion.indiceDeCodigo[pcbEnEjecucion.programCounter].longitud
-		//usarPaginaDeComienzo
 	} else {
 		int cantPaginas = paginaDeFin - paginaDeComienzo;
 		int i;
@@ -626,16 +627,12 @@ char * pedirCodigoAUMC() {
 
 			tamanioAPedir = tamanioPaginaUmc - dondeEmpiezo;
 			if (tamanioAPedir > longitudTotalAPedir) {
-				//todo pedir longitudTotalAPedir de paginaActual
 				break;
 			} else {
-				//todo pedir tamanioAPedir de paginaActual
 				longitudTotalAPedir = longitudTotalAPedir - tamanioAPedir;
 				dondeEmpiezo = 0;
 			}
-			//hay que ver como voy agrupando todo lo que pido en una sola cadena char*
 			paginaActual++;
-
 		}
 	}
 	return lineaDeCodigoADevolver;
@@ -664,7 +661,7 @@ void abortarCPU() {
 // Devuelve el logger para loggear los logs para poder loggear
 t_log* getLogger() {
 	if (logger == NULL) {
-		logger = log_create(LOGGER_FILE, "cpu", TRUE, LOG_LEVEL_INFO);
+		logger = log_create(LOGGER_FILE, "CPU", TRUE, LOG_LEVEL_INFO);
 	}
 	return logger;
 }
@@ -688,7 +685,10 @@ bool esperarConfirmacion(SocketClient* socket){
 	StrKerUmc* in_ker_msg;
 	StrUmcCpu* in_umc_msg;
 
-	sb = socketReceive(socket->ptrSocket);
+	if((sb = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream del socket que me envia.");
+		return FALSE;
+	}
 
 	if (sb == NULL) {
 		return FALSE;
@@ -716,4 +716,3 @@ bool esperarConfirmacion(SocketClient* socket){
 		break;
 	}
 }
-
