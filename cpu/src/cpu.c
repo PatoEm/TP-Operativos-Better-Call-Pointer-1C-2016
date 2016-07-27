@@ -417,7 +417,7 @@ void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 /*
  * finalizar
- */	// FINALIZAR SOLO SI EL PROGRAMA TERMINA BIEN
+ */
 void finalizar(void) {
 	puts("CPU: Pido FINALIZAR");
 	StrCpuKer*streamCpuKer;
@@ -439,7 +439,7 @@ void finalizar(void) {
 /*
  * retornar
  *
- */	// FALTA MANEJO DE ABORTO
+ */
 void retornar(t_valor_variable retorno) {
 	printf("Operacion de retorno");
 	asignadoVacio = newEspacioAsignado();
@@ -447,17 +447,21 @@ void retornar(t_valor_variable retorno) {
 			(pcbProceso->indiceDelStack->elements_count) - 1);
 	pcbProceso->programCounter = aux->retPos;
 
-	//saltoDeLinea = TRUE; ESTO ERA UNA PIJA PATO
-
 	variablesRetorno*dondeVuelvo = list_get(aux->retVars, 0);
 	StrCpuUmc*streamCpuUmc;
 	asignadoVacio->numDePag = dondeVuelvo->pagVarRet;
 	streamCpuUmc = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio,
 			dondeVuelvo->offVarRet, 4, intToStr(retorno), 0);
 	SocketBuffer*buffer = serializeCpuUmc(streamCpuUmc);
-	socketSend(socketUMC->ptrSocket, buffer);
-	//////////////////////////////////////////////////////////////////
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar RETORNAR.");
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	}
+
 
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeCpuUmc(buffer);
