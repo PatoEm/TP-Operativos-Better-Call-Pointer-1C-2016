@@ -525,13 +525,15 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	String auxTiempo;
 	auxTiempo=intToStr(tiempo);
 	StrCpuKer*streamCpuKer;
-//(Char id, Char action, pcb pcb, Int32U pid, Int32U logLen, Byte* log, Byte* nombreDispositivo, Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, ENTRADA_SALIDA, *pcbProceso,
 			pcbProceso->id, strlen(auxTiempo), auxTiempo,
 			identificadorMod /*NOMBRE DISPOSITIVO*/,
 			strlen(identificadorMod) /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ENTRADA SALIDA.");
+	}
 
 	free(identificadorMod);
 	free(auxTiempo);
