@@ -138,6 +138,9 @@ int main() {
 					return FALSE;
 				}
 				log_info(getLogger(), "Termine el quantum");
+
+				esperarConfirmacion(socketNucleo);
+
 				free(pcbProceso);
 			}
 			seguirEjecutando = TRUE;
