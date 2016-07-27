@@ -462,7 +462,6 @@ void retornar(t_valor_variable retorno) {
 		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
 	}
 
-
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeCpuUmc(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
@@ -477,21 +476,21 @@ String intToStr(Int32U integer) {
 
 /*
  * imprimir
- */	// YA ESTA
+ */
 void imprimir(t_valor_variable valor_mostrar) {
 	puts("CPU: Pido IMPRIMIR");
 	StrCpuKer*streamCpuKer;
 	String aux;
-	aux =intToStr(valor_mostrar);
-
-	//(Char id, Char action, pcb pcb, Int32U pid,
-	//Int32U logLen, Byte* log, Byte* nombreDispositivo,
-	//Int32U lenNomDispositivo)
+	aux = intToStr(valor_mostrar);
 	streamCpuKer = newStrCpuKer(CPU_ID, IMPRIMIR, *pcbProceso, valor_mostrar,
 			strlen(aux), aux, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar IMPRIMIR.");
+	}
+
 	esperarConfirmacion(socketNucleo);
 	free(aux);
 }
