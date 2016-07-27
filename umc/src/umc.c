@@ -1250,8 +1250,8 @@ void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 int reemplazarPaginaLRU() {
 	int paginaLibre;
 	int contadorPrimerMomento = 0;
-	t_tlb*paginaAComparar=malloc(sizeof(t_tlb)); //todo fijarse si hay que sacar este malloc
-	t_tlb*paginaAMatar=malloc(sizeof(t_tlb));
+	t_tlb*paginaAComparar;//todo fijarse si hay que sacar este malloc
+	t_tlb*paginaAMatar;
 //char* buffer = malloc(sizeof(char) * marco_Size);
 	paginaAMatar = list_get(TLB, contadorPrimerMomento);
 	int lugarDePaginaAMatar = 0;
