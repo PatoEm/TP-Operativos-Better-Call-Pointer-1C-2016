@@ -825,7 +825,7 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 
 		pthread_mutex_lock(mutexQuantum);
 		//todo ver envio_pcb
-		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,0,
+		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum,quantumSleep,
 			NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 		pthread_mutex_unlock(mutexQuantum);
 

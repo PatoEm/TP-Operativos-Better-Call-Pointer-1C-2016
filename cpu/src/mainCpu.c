@@ -97,6 +97,7 @@ int main() {
 			seguirEjecutando = TRUE;
 			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int32U quantum = skc->quantum;
+			Int32U quantumSleep = skc->quantumSleep;
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente && !devolverPCB) {
 				instruccionLoca = pedirInstruccion(pcbProceso);
 
@@ -109,6 +110,7 @@ int main() {
 				if(devolverPCB)
 					break;
 				saltoDeLinea = FALSE;
+				usleep(quantumSleep*1000);
 				quantum--;
 			}
 			if(finalizoCorrectamente){
