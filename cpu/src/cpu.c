@@ -527,6 +527,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	String auxTiempo;
 	auxTiempo=intToStr(tiempo);
 	StrCpuKer*streamCpuKer;
+	moverProgramCounterPcb(pcbProceso);
 	streamCpuKer = newStrCpuKer(CPU_ID, ENTRADA_SALIDA, *pcbProceso,
 			pcbProceso->id, strlen(auxTiempo), auxTiempo,
 			identificadorMod /*NOMBRE DISPOSITIVO*/,
@@ -537,6 +538,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 		log_error(getLogger(), "No se pudo realizar ENTRADA SALIDA.");
 	}
 
+	esperarConfirmacion(socketNucleo);
 	free(identificadorMod);
 	free(auxTiempo);
 

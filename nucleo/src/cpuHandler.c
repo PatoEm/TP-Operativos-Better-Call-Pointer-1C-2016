@@ -523,11 +523,12 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 //	  TODO: Proba esto para obtener el string.
 		nombreDispositivo = stringFromByteArray(in_cpu_msg->nombreDispositivo, in_cpu_msg->lenNomDispositivo);
 //	  nombreDispositivo=in_cpu_msg->nombreDispositivo;
-		valor_cantidad_tiempo = atoi(in_cpu_msg->log);
+		valor_cantidad_tiempo = atoi(stringFromByteArray(in_cpu_msg->log,in_cpu_msg->logLen));
 
 		atributos->identificador = (char*)nombreDispositivo;
 		atributos->cantidad = valor_cantidad_tiempo;
 		atributos->pcbLoca = &in_cpu_msg->pcb;
+
 
 		pthread_attr_init(&attrHiloIO);
 		pthread_attr_setdetachstate(&attrHiloIO, PTHREAD_CREATE_DETACHED);
@@ -535,6 +536,8 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		pthread_attr_destroy(&attrHiloIO);
 
 		log_info(cpuhlog, "KERNEL : El CPU pidio IO.");
+
+		confirmarCpu(cpuClient);
 
 		break;
 
