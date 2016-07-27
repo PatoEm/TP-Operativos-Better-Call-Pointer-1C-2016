@@ -205,7 +205,7 @@ void eliminarProceso(int pid) {
 	int posicion;
 	while ((nodoAReventar->pid) == pid) {
 		contador = 0;
-		posicion = nodoAReventar->pid * atoi(tamPagina);
+		posicion = nodoAReventar->IDPaginaInterno * atoi(tamPagina);
 		while (contador < atoi(tamPagina)) {
 			archivoMappeado[posicion] = '\0';
 			posicion++;
