@@ -224,16 +224,27 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
 	asignadoVacio->bitUso = 4;
 	int offset = direccion_variable % tamanioPaginaUmc;
-	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
 	StrCpuUmc* streamCpuUMC;
 	streamCpuUMC = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, offset,
 			0, NULL, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket, buffer);
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar DEREFERENCIAR.");
+		return FALSE;
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+		return FALSE;
+	}
+
+
 	StrUmcCpu*streamUmcCpu;
+
 	streamUmcCpu = unserializeCpuUmc(buffer);
+
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 		seguirEjecutando = FALSE;
 		return 0;
@@ -255,31 +266,30 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	sprintf(dataAMandar, "%d", valor);
 
 	StrCpuUmc* streamCpuUMC;
-	//(Char id, Char action, espacioAsignado pageComienzo,
-	//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	streamCpuUMC = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio, offset,
-			4, dataAMandar, 0);	// todo chequear si llego bien o aborta
+			4, dataAMandar, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket, buffer);
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ASIGNAR.");
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	}
 
 	free(dataAMandar);
-	//////////////////////////////////////////////////////////////////
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeUmcCpu(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
 		seguirEjecutando = FALSE;
 }
 
-//void asignar(t_puntero direccion_variable, t_valor_variable valor){
-//	uint32_t pagina = direccion_variable / tamanioPagina;
-//	uint32_t offset = direccion_variable % tamanioPagina;
-//	almacenarBytesUMC(umc, pagina, offset, 4, valor);
-//}
 
 /*
  * obtenerValorCompartida
- *///YA ESTA TERMINADO
+ */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	puts("CPU: Pido OBTENER VALOR COMPARTIDA");
 	char* variableMod;
@@ -290,10 +300,18 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 			pcbProceso->id, strlen(variableMod), variableMod,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
-	buffer = socketReceive(socketNucleo->ptrSocket);
 
-	free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+			log_error(getLogger(), "No se pudo realizar OBTENER VALOR COMPARTIDA.");
+			return FALSE;
+		}
+
+		if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+			log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
+			return FALSE;
+		}
+
+	free(variableMod);
 
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)
@@ -676,7 +694,6 @@ bool esperarConfirmacion(SocketClient* socket){
 		}
 		break;
 	default:
-		free(sb);
 		return FALSE;
 		break;
 	}
