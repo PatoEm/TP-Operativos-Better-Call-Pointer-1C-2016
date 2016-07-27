@@ -556,7 +556,8 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
 			strlen(identificador_semaforo));
-
+	moverProgramCounterPcb(pcbProceso);
+	saltoDeLinea=TRUE;
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, WAIT_SEM_ANSISOP, *pcbProceso,
 			pcbProceso->id, strlen(identificadorMod), identificadorMod,
@@ -564,19 +565,20 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 
 	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-		log_error(getLogger(), "No se pudo realizar WAIT.");
+		log_error(getLogger(), "No se pudo enviar el WAIT.");
 	}
 
 	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+		log_error(getLogger(),"No se pudo recibir el stream del Nucleo.");
 	}
 
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
 	if (StreamKerCpu->action == WAIT_REALIZADO) {
 		seguirEjecutando = TRUE;
-	} else
-		seguirEjecutando = FALSE;
-
+	}
+	if ((StreamKerCpu->action == PROGRAMA_BLOQUEADO) ){
+		devolverPCB=TRUE;
+	}
 	free(identificadorMod);
 }
 

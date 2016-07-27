@@ -361,10 +361,8 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 
 	StrKerCpu* StrKernelCpu;
 	SocketBuffer* buffer;
-	StrKernelCpu = newStrKerCpu(1/*KERNEL_ID*/, 37/*WAIT_REALIZADO*/,
-			*pcbPrograma, 0, 0, NULL, 0, NULL, 0);
 	// (Char id, Char action, pcb pcb, Int8U quantum, Byte* data, Int32U dataLen, Byte* nombreDispositivo, Int32U lenNomDispositivo)
-	buffer = serializeKerCpu(StrKernelCpu);
+	//buffer = serializeKerCpu(StrKernelCpu);
 
 	//char* aux;
 
@@ -374,16 +372,24 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
+				StrKernelCpu = newStrKerCpu(1/*KERNEL_ID*/, WAIT_REALIZADO/*WAIT_REALIZADO*/,
+							*pcbPrograma, 0, 0, NULL, 0, NULL, 0);
+				buffer = serializeKerCpu(StrKernelCpu);
 				socketSend(cpuSocket, buffer);
 
 				//moverAColaReady(pcbPrograma);
 
 			} else {
 
+				StrKernelCpu = newStrKerCpu(1/*KERNEL_ID*/, PROGRAMA_BLOQUEADO,
+							*pcbPrograma, 0, 0, NULL, 0, NULL, 0);
+				buffer = serializeKerCpu(StrKernelCpu);
+				socketSend(cpuSocket, buffer);
+
 				moverAListaBlock(pcbPrograma);
 				sem_wait(semaforosAnsisop[i]);
-				socketSend(cpuSocket, buffer);
-				moverAListaExec(pcbPrograma);
+
+				moverAColaReady(pcbPrograma);
 				//todo avisar a cpu que se bloqueo
 			}
 
