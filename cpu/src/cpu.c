@@ -324,7 +324,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 
 /*
  * 	asignarValorCompartida
- */	// YA ESTÁ TERMINADA
+ */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
 	puts("CPU: Pido ASIGNAR VALOR COMPARTIDA");
@@ -338,11 +338,16 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 			NULL /*LOG*/, variableMod /*NOMBRE DISPOSITIVO*/,
 			strlen(variableMod) /*LEN NOMBRE DISPOSITIVO*/);
 	buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
-//	(Char id, Char action, pcb pcb, Int32U pid,
-//			Int32U logLen, Byte* log, Byte* nombreDispositivo,
-//			Int32U lenNomDispositivo)
-	buffer = socketReceive(socketNucleo->ptrSocket);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ASIGNAR VALOR COMPARTIDA.");
+		return FALSE;
+	}
+
+	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
+		return FALSE;
+	}
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	free(variableMod);
 	if (streamKerCpu->action == ASIGNAR_VALOR_COMPARTIDA)
@@ -351,8 +356,6 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		seguirEjecutando = FALSE;
 		return -1;
 	}
-
-	//free(buffer);
 }
 
 /*
@@ -670,7 +673,6 @@ bool esperarConfirmacion(SocketClient* socket){
 	sb = socketReceive(socket->ptrSocket);
 
 	if (sb == NULL) {
-		free(sb);
 		return FALSE;
 	}
 
@@ -682,14 +684,12 @@ bool esperarConfirmacion(SocketClient* socket){
 	case UMC_ID:
 		in_umc_msg = unserializeUmcCpu((Stream) sb->data);
 		if(in_umc_msg->action == TODO_PIOLA){
-			free(sb);
 			return TRUE;
 		}
 		break;
 	case KERNEL_ID:
 		in_ker_msg = unserializeKerCpu((Stream) sb->data);
 		if(in_ker_msg ->action == TODO_PIOLA){
-			free(sb);
 			return TRUE;
 		}
 		break;
