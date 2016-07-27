@@ -153,7 +153,7 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
 	while (acierto == 0) {
 		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia == 1)
-					acierto = 1;
+			acierto = 1;
 		if ((nodoActual->bitUso) == 1) {
 			nodoActual->bitUso = 0;
 			contador++;
@@ -194,7 +194,7 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual;
 	nodoActual = buscarBitDeUsoEn0(pid);
-	nodoActual = buscarBitDeUsoEn0(pid);
+	//nodoActual = buscarBitDeUsoEn0(pid);
 	nodoActual->bitDePresencia = 0;
 	if (tlbHabilitada())
 		sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
@@ -225,6 +225,8 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
+	buffer = socketReceive(socketSwap->ptrSocket);
+	StrSwaUmc*streamSwUm = unserializeSwaUmc(buffer);
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	pageToSend->numDePag = pagina;
 	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, *pageToSend, 1, NULL,
@@ -383,7 +385,8 @@ bool lectoEscritura) {
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
-
+	buffer = socketReceive(socketSwap->ptrSocket);
+	StrSwaUmc*streamSwUm = unserializeSwaUmc(buffer);
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	pageToSend.numDePag = pagina;
 	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1,
