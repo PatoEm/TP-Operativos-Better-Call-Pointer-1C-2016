@@ -107,9 +107,9 @@ int main() {
 				if(saltoDeLinea == FALSE){
 					moverProgramCounterPcb(pcbProceso);
 				}
+				saltoDeLinea = FALSE;
 				if(devolverPCB)
 					break;
-				saltoDeLinea = FALSE;
 				usleep(quantumSleep*1000);
 				quantum--;
 			}
