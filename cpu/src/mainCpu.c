@@ -97,7 +97,7 @@ int main() {
 			seguirEjecutando = TRUE;
 			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int32U quantum = skc->quantum;
-			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente) {
+			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente && !devolverPCB) {
 				instruccionLoca = pedirInstruccion(pcbProceso);
 
 				analizadorLinea(instruccionLoca, &funciones, &funcionesDeKernel);
@@ -111,7 +111,6 @@ int main() {
 				saltoDeLinea = FALSE;
 				quantum--;
 			}
-
 			if(finalizoCorrectamente){
 				log_info(getLogger(), "Finalice el programa");
 			}
@@ -128,7 +127,7 @@ int main() {
 				log_info(getLogger(), "Aborte el programa");
 			}
 
-			if (quantum == 0 && seguirEjecutando) {
+			if (quantum == 0 && seguirEjecutando && !devolverPCB) {
 				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbProceso, 0, 0,
 				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
