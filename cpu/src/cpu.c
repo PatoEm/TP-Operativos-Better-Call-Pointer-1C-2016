@@ -557,7 +557,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 
 	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-		log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+		log_error(getLogger(), "No se pudo realizar WAIT.");
 	}
 
 	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
@@ -575,7 +575,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 
 /*
  * signal
- */ // YA ESTA
+ */
 void signale(t_nombre_semaforo identificador_semaforo) {
 
 	char* identificadorMod;
@@ -587,7 +587,12 @@ void signale(t_nombre_semaforo identificador_semaforo) {
 			pcbProceso->id, strlen(identificadorMod), identificadorMod,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar SIGNAL.");
+	}
+
+	esperarConfirmacion(socketNucleo);
 
 	free(identificadorMod);
 }
