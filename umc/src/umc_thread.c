@@ -211,6 +211,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 
 void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 	StrUmcKer*streamAlKerner;
+	StrSwaUmc*streamSwapAUmc;
 	SocketBuffer*buffer;
 	switch (sku->action) {
 	case 36 /*TAMANIO_DE_MARCOS*/:
@@ -251,6 +252,9 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 				mi_socket, socket->descriptor, sku->pid);
 		pthread_mutex_lock(mutexPedidos);
 		finalizarPrograma(sku->pid);
+		buffer=socketReceive(socketSwap->ptrSocket);
+		streamSwapAUmc=unserializeSwaUmc(buffer);
+		streamAlKerner=newStrUmcKer(UMC_ID,TODO_PIOLA,NULL,0,sku->pid,0);
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:
