@@ -536,9 +536,11 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 
 	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 		log_error(getLogger(), "No se pudo realizar ENTRADA SALIDA.");
+	}else{
+		esperarConfirmacion(socketNucleo);
 	}
 
-	esperarConfirmacion(socketNucleo);
+
 	free(identificadorMod);
 	free(auxTiempo);
 
