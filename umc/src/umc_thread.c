@@ -259,6 +259,7 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 		streamAlKerner = newStrUmcKer(UMC_ID, TODO_PIOLA, NULL, 0, sku->pid, 0);
 		buffer=serializeUmcKer(streamAlKerner);
 		socketSend(socket,buffer);
+		log_info(umclog, "programa PID nro %d fue terminado correctamente",sku->pid);
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:
