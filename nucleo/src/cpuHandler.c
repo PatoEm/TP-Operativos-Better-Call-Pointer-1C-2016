@@ -431,7 +431,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		atributosWaitLoco = malloc(sizeof(atributosWait));
 
-		nombreDispositivo = in_cpu_msg->log;
+		nombreDispositivo = stringFromByteArray(in_cpu_msg->log,in_cpu_msg->logLen);
 
 		atributosWaitLoco->identificador = (char*)nombreDispositivo;
 		atributosWaitLoco->pcbLoca = in_cpu_msg->pcb;
@@ -448,7 +448,9 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 	case SIGNAL_SEM_ANSISOP:
 
-		nombreDispositivo = in_cpu_msg->log;
+		//nombreDispositivo = in_cpu_msg->log;
+
+		nombreDispositivo = stringFromByteArray(in_cpu_msg->log,in_cpu_msg->logLen);
 
 		signalAnsisop((char*) nombreDispositivo);
 		confirmarCpu(cpuClient);

@@ -371,7 +371,7 @@ void waitAnsisop(char * identificador, pcb* pcbPrograma, Socket* cpuSocket) {
 	for (i = 0; (i < cantSemaforos); i++) {
 
 
-		if ((strcmp(&*idSemaforos[i], identificador)) == 0) {
+		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
 			if (sem_trywait(semaforosAnsisop[i]) == 0) {
 				socketSend(cpuSocket, buffer);
@@ -402,7 +402,7 @@ void signalAnsisop(char* identificador) {
 	int i;
 	int abortar = 0; //SI es 0 Aborta.
 	for (i = 0; i < cantSemaforos; i++) {
-		if ((strcmp(&*idSemaforos[i], identificador)) == 0) {
+		if ((strcmp(idSemaforos[i], identificador)) == 0) {
 
 			sem_post(semaforosAnsisop[i]);
 
