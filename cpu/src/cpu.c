@@ -291,7 +291,7 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
  * obtenerValorCompartida
  */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
-	puts("CPU: Pidio OBTENER VALOR COMPARTIDA");
+	printf("CPU: Pidio OBTENER VALOR COMPARTIDA %s\n",variable);
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -327,7 +327,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
  */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
-	puts("CPU: Pidio ASIGNAR VALOR COMPARTIDA");
+	printf("CPU: Pidio ASIGNAR VALOR %d COMPARTIDA %s\n",valor,variable);
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -547,7 +547,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
  * wait
  */
 void wait(t_nombre_semaforo identificador_semaforo) {
-	puts("CPU: Pidio WAIT");
+	printf("CPU: Pidio WAIT semaforo %s", identificador_semaforo);
 
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
@@ -580,7 +580,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
  * signal
  */
 void signale(t_nombre_semaforo identificador_semaforo) {
-	puts("CPU: Pidio SIGNAL");
+	printf("CPU: Pidio SIGNAL semaforo %s", identificador_semaforo);
 
 	char* identificadorMod;
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
