@@ -436,6 +436,7 @@ void imprimir(t_valor_variable valor_mostrar) {
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+	esperarConfirmacion(socketNucleo);
 	free(aux);
 }
 
@@ -450,6 +451,7 @@ int imprimirTexto(char* texto) {
 			0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 	socketSend(socketNucleo->ptrSocket, buffer);
+	esperarConfirmacion(socketNucleo);
 	return strlen(texto);
 }
 
@@ -616,3 +618,42 @@ void gestionoSIGINT() {
 	int pid = getpid();
 	kill(pid , SIGTERM);
 }
+
+bool esperarConfirmacion(SocketClient* socket){
+	SocketBuffer* sb;
+	StrKerUmc* in_ker_msg;
+	StrUmcCpu* in_umc_msg;
+
+	sb = socketReceive(socket->ptrSocket);
+
+	if (sb == NULL) {
+		free(sb);
+		return FALSE;
+	}
+
+	Stream strReceived = (Stream) sb->data;
+	Char id = getStreamId(strReceived);
+
+
+	switch (id) {
+	case UMC_ID:
+		in_umc_msg = unserializeUmcCpu((Stream) sb->data);
+		if(in_umc_msg->action == TODO_PIOLA){
+			free(sb);
+			return TRUE;
+		}
+		break;
+	case KERNEL_ID:
+		in_ker_msg = unserializeKerCpu((Stream) sb->data);
+		if(in_ker_msg ->action == TODO_PIOLA){
+			free(sb);
+			return TRUE;
+		}
+		break;
+	default:
+		free(sb);
+		return FALSE;
+		break;
+	}
+}
+

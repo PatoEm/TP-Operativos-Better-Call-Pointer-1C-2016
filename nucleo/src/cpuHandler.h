@@ -41,7 +41,7 @@ int pedirTamanioDePagina(int);
 void funcionHiloCpuAlPedo(Socket*);
 void consoleClientHandler(Socket*, Stream);
 void clientDown(int);
-
+bool confirmarCpu(Socket* cpu);
 
 // ESTRUCTURAS
 

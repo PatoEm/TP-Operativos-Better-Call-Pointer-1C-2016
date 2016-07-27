@@ -166,4 +166,10 @@ void iniciarFunciones();
 
 String intToStr(Int32U integer);
 
+// OTRAS
+
+bool esperarConfirmacion(SocketClient*);
+
+
+
 #endif /* CPU_H_ */
