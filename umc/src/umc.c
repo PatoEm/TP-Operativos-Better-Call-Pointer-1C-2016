@@ -461,7 +461,7 @@ int lugarAsignadoFinal(int pid) {
 int lugarAsignadoInicial(int pid) {
 	int contador = 0;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while (nodoActual->pid != pid) {
+	while (nodoActual->pid != pid&& contador<list_size(listaPaginasPorPrograma)) { //todo cambie acá fijarse
 		contador++;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
@@ -472,7 +472,7 @@ int paginasOcupadasPorPid(int pid) {
 	int contador = 0;
 	paginasPorPrograma*paginaAEncontrar = list_get(listaPaginasPorPrograma,
 			contador);
-	while (paginaAEncontrar->pid != pid) {
+	while (paginaAEncontrar->pid != pid && contador<list_size(listaPaginasPorPrograma)) { //todo cambie acá fijarse
 		contador++;
 		paginaAEncontrar = list_get(listaPaginasPorPrograma, contador);
 	}
@@ -481,7 +481,8 @@ int paginasOcupadasPorPid(int pid) {
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
 	usleep(1000 * espera);
-	char*paginaADevolver = malloc(sizeof(char) * cantidad);
+	//char*paginaADevolver= malloc(1024);
+	char *paginaADevolver = malloc(sizeof(char) * cantidad); //todo aca cambie, fijarse
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
