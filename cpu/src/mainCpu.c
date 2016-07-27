@@ -85,7 +85,7 @@ int main() {
 	char * instruccionLoca;
 
 	signal(SIGUSR1, abortarCPU);
-	signal(SIGINT, gestionoSIGINT);
+	//signal(SIGINT, gestionoSIGINT);
 
 	if (loadConfig() && socketConnection()) {
 
