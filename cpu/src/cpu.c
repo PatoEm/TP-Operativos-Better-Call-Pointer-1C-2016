@@ -39,7 +39,7 @@ void cuerpoDelCpu() {
 /*
  * definirVariable
  */
-t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR, YA ESTA TERMINADA
+t_puntero definirVariable(t_nombre_variable identificador_variable) {
 	puts("CPU: Pido DEFINIR VARIABLE");
 	int pagina;
 	paginaDeStack*nuevaVariable = crearPaginaDeStackVaciaPiola();
@@ -52,16 +52,24 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		tam = list_size(pcbProceso->indiceDelStack);
 	if (0 == list_size(pcbProceso->indiceDelStack)
 			|| (tam == 0 && 1 == list_size(pcbProceso->indiceDelStack))) {
-		pagina = ((pcbProceso->paginasDeCodigo) - 1); //todo ojo acá si explota algo
+		pagina = ((pcbProceso->paginasDeCodigo) - 1);
 		asignadoVacio->numDePag = ((pcbProceso->paginasDeCodigo) - 1);
 		asignadoVacio->bitUso = 4;
 		nuevaVariable->pos = 0;
-		//(Char id, Char action, espacioAsignado pageComienzo,Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-				(tamanioPaginaUmc - 5), 0, NULL, 0);
+		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, (tamanioPaginaUmc - 5), 0, NULL, 0);
+
 		buffer = serializeCpuUmc(streamCpuUmc);
-		socketSend(socketUMC->ptrSocket, buffer);
-		buffer = socketReceive(socketUMC->ptrSocket);
+
+		if (!socketSend(socketUMC->ptrSocket, buffer)) {
+			log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+			return FALSE;
+		}
+
+		if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+			log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+			return FALSE;
+		}
+
 		streamUmcCpu = unserializeCpuUmc(buffer);
 
 		if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
@@ -69,7 +77,6 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		} else {
 			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
 				if (0 == list_size(pcbProceso->indiceDelStack)) {
-					//nuevaVariable->vars = list_create();
 					nuevaVariable->pos = 0;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
@@ -102,10 +109,22 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			asignadoVacio->bitUso = 4;
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
 					tamanioPaginaUmc - 5, 0, 0, 0);
+
 			buffer = serializeCpuUmc(streamCpuUmc);
-			socketSend(socketUMC->ptrSocket, buffer);
-			buffer = socketReceive(socketUMC->ptrSocket);
+
+			if (!socketSend(socketUMC->ptrSocket, buffer)) {
+				log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+				return FALSE;
+			}
+
+			if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+				log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+				return FALSE;
+			}
+
+
 			streamUmcCpu = unserializeCpuUmc(buffer);
+
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
@@ -124,15 +143,23 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 		} else {
 			asignadoVacio->numDePag = ultimaPagina->pagVar;
 			asignadoVacio->bitUso = 4;
-			//(Char id, Char action, espacioAsignado pageComienzo,
-			//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
 					ultimaPagina->offVar - 4, 0, 0, 0);
 			buffer = serializeCpuUmc(streamCpuUmc);
-			socketSend(socketUMC->ptrSocket, buffer);
-			buffer = socketReceive(socketUMC->ptrSocket);
+
+			if (!socketSend(socketUMC->ptrSocket, buffer)) {
+				log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+				return FALSE;
+			}
+
+			if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+				log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+				return FALSE;
+			}
+
 			streamUmcCpu = unserializeCpuUmc(buffer);
+
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
@@ -150,8 +177,6 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) { //NO TOCAR
 			}
 		}
 	}
-	//free(buffer);
-	//free(streamUmcCpu);
 	return variable->pagVar * tamanioPaginaUmc + variable->offVar;
 }
 
