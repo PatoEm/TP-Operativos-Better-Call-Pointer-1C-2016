@@ -224,16 +224,27 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 	asignadoVacio->numDePag = direccion_variable / tamanioPaginaUmc;
 	asignadoVacio->bitUso = 4;
 	int offset = direccion_variable % tamanioPaginaUmc;
-	//StrCpuUmc* newStrCpuUmc(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid){
 
 	StrCpuUmc* streamCpuUMC;
 	streamCpuUMC = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, offset,
 			0, NULL, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket, buffer);
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar DEREFERENCIAR.");
+		return FALSE;
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+		return FALSE;
+	}
+
+
 	StrUmcCpu*streamUmcCpu;
+
 	streamUmcCpu = unserializeCpuUmc(buffer);
+
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 		seguirEjecutando = FALSE;
 		return 0;
