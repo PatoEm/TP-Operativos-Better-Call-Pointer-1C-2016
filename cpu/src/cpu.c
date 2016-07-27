@@ -266,16 +266,20 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 	sprintf(dataAMandar, "%d", valor);
 
 	StrCpuUmc* streamCpuUMC;
-	//(Char id, Char action, espacioAsignado pageComienzo,
-	//Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
 	streamCpuUMC = newStrCpuUmc(CPU_ID, ALMACENAR_BYTES, *asignadoVacio, offset,
-			4, dataAMandar, 0);	// todo chequear si llego bien o aborta
+			4, dataAMandar, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
-	socketSend(socketUMC->ptrSocket, buffer);
-	buffer = socketReceive(socketUMC->ptrSocket);
+
+
+	if (!socketSend(socketUMC->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar ASIGNAR.");
+	}
+
+	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	}
 
 	free(dataAMandar);
-	//////////////////////////////////////////////////////////////////
 	StrUmcCpu*streamUmcCpu;
 	streamUmcCpu = unserializeUmcCpu(buffer);
 	if (streamUmcCpu->action == ABORTAR_PROGRAMA)
