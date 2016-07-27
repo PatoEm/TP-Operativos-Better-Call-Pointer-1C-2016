@@ -543,7 +543,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 
 /*
  * wait
- */	//MODIFICAR PROGRAMA DESBLOQUEADO y envio
+ */
 void wait(t_nombre_semaforo identificador_semaforo) {
 
 	char* identificadorMod;
@@ -551,15 +551,19 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 			strlen(identificador_semaforo));
 
 	StrCpuKer*streamCpuKer;
-//	(Char id, Char action, pcb pcb, Int32U pid,
-//			Int32U logLen, Byte* log, Byte* nombreDispositivo,
-//			Int32U lenNomDispositivo)
 	streamCpuKer = newStrCpuKer(CPU_ID, WAIT_SEM_ANSISOP, *pcbProceso,
 			pcbProceso->id, strlen(identificadorMod), identificadorMod,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
-	buffer = socketReceive(socketNucleo->ptrSocket);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar DEFINIR VARIABLE.");
+	}
+
+	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	}
+
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
 	if (StreamKerCpu->action == WAIT_REALIZADO) {
 		seguirEjecutando = TRUE;
@@ -567,7 +571,6 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 		seguirEjecutando = FALSE;
 
 	free(identificadorMod);
-
 }
 
 /*
