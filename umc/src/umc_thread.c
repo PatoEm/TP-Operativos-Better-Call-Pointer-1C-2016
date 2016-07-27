@@ -256,9 +256,9 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 				mi_socket, socket->descriptor, sku->pid);
 		pthread_mutex_lock(mutexPedidos);
 		finalizarPrograma(sku->pid);
-		buffer = socketReceive(socketSwap->ptrSocket);
-		streamSwapAUmc = unserializeSwaUmc(buffer);
 		streamAlKerner = newStrUmcKer(UMC_ID, TODO_PIOLA, NULL, 0, sku->pid, 0);
+		buffer=serializeUmcKer(streamAlKerner);
+		socketSend(socket,buffer);
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:
