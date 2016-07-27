@@ -286,15 +286,10 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 		seguirEjecutando = FALSE;
 }
 
-//void asignar(t_puntero direccion_variable, t_valor_variable valor){
-//	uint32_t pagina = direccion_variable / tamanioPagina;
-//	uint32_t offset = direccion_variable % tamanioPagina;
-//	almacenarBytesUMC(umc, pagina, offset, 4, valor);
-//}
 
 /*
  * obtenerValorCompartida
- *///YA ESTA TERMINADO
+ */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	puts("CPU: Pido OBTENER VALOR COMPARTIDA");
 	char* variableMod;
@@ -305,10 +300,18 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 			pcbProceso->id, strlen(variableMod), variableMod,
 			NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
-	buffer = socketReceive(socketNucleo->ptrSocket);
 
-	free(variableMod); //todo EMI SI DESCOMENTAS ESTO, va a seguir un par de lineas y romper
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+			log_error(getLogger(), "No se pudo realizar OBTENER VALOR COMPARTIDA.");
+			return FALSE;
+		}
+
+		if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+			log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
+			return FALSE;
+		}
+
+	free(variableMod);
 
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
 	if (streamKerCpu->action == OBTENER_VALOR_COMPARTIDA)
@@ -691,7 +694,6 @@ bool esperarConfirmacion(SocketClient* socket){
 		}
 		break;
 	default:
-		free(sb);
 		return FALSE;
 		break;
 	}
