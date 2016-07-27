@@ -1001,12 +1001,16 @@ void dumpEstructuraDeMemoriaProcesoEnParticular(int pid) {
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
 		if (nodoActualDeAsignados->pid == pid) {
-			printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
-			printf("PID: %d\n", nodoActualDeAsignados->pid);
-			printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
-			log_info(umclog, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
-					nodoActualDeAsignados->IDPaginaInterno,
-					nodoActualDeAsignados->pid);
+			if (nodoActualDeAsignados->bitDePresencia) {
+				printf("ID Frame: %d\n",
+						nodoActualDeAsignados->IDPaginaInterno);
+				printf("PID: %d\n", nodoActualDeAsignados->pid);
+				printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
+				log_info(umclog,
+						"Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
+						nodoActualDeAsignados->IDPaginaInterno,
+						nodoActualDeAsignados->pid);
+			}
 		}
 		i++;
 	}
@@ -1021,12 +1025,14 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 	puts("Paginas Asignadas:\n");
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
-		printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
-		printf("PID: %d\n", nodoActualDeAsignados->pid);
-		printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
-		log_info(umclog, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
-				nodoActualDeAsignados->IDPaginaInterno,
-				nodoActualDeAsignados->pid);
+		if (nodoActualDeAsignados->bitDePresencia) {
+			printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
+			printf("PID: %d\n", nodoActualDeAsignados->pid);
+			printf("Pagina: %d\n", nodoActualDeAsignados->numDePag);
+			log_info(umclog, "Frame Asignado: %d \nPID: %d\n Pagina: %d\n\n",
+					nodoActualDeAsignados->IDPaginaInterno,
+					nodoActualDeAsignados->pid);
+		}
 		i++;
 	}
 
@@ -1049,25 +1055,25 @@ void dumpContenidoDeMemoriaTodosLosProcesos() {
 
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActual = list_get(listaEspacioAsignado, i);
-		direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
-		hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
+		if (nodoActual->bitDePresencia) {
+			direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
+			hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
 
-		printf("Frame: %d\nPID: %d\nPagina: %d\nContenido:\n",
-				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
-				nodoActual->numDePag);
+			printf("Frame: %d\nPID: %d\nPagina: %d\nContenido:\n",
+					nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
+					nodoActual->numDePag);
 
-		log_info(umclog, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
-				nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
-				nodoActual->numDePag);
-
-		while (direccionFisica < hastaDondeLeer) {
-			printf("%c", memoriaReal[direccionFisica]);
-			log_info(umclog, "%c", memoriaReal[direccionFisica]);
-			direccionFisica++;
+			log_info(umclog, "Frame: %d\nPID: %d\nPagina: %d\nContenido: \n",
+					nodoActual->IDPaginaInterno, nodoActual->pid, nodoActual,
+					nodoActual->numDePag);
+			while (direccionFisica < hastaDondeLeer) {
+				printf("%c", memoriaReal[direccionFisica]);
+				log_info(umclog, "%c", memoriaReal[direccionFisica]);
+				direccionFisica++;
+			}
+			printf("\n");
+			log_info(umclog, "\n");
 		}
-		printf("\n");
-		log_info(umclog, "\n");
-
 		i++;
 	}
 }
@@ -1080,7 +1086,7 @@ void dumpContenidoDeMemoriaProcesoEnParticular(int PID) {
 
 	while (i < list_size(listaEspacioAsignado)) {
 		nodoActual = list_get(listaEspacioAsignado, i);
-		if (nodoActual->pid == PID) {
+		if (nodoActual->pid == PID && nodoActual->bitDePresencia) {
 			direccionFisica = nodoActual->IDPaginaInterno * marco_Size;
 			hastaDondeLeer = (nodoActual->IDPaginaInterno + 1) * marco_Size;
 
@@ -1122,7 +1128,8 @@ void flushMemory() {
 	espacioAsignado*nodoAModificar;
 	while (i < listaEspacioAsignado->elements_count) {
 		nodoAModificar = list_get(listaEspacioAsignado, i);
-		nodoAModificar->bitModificado = 1;
+		if (nodoAModificar->bitDePresencia)
+			nodoAModificar->bitModificado = 1;
 		i++;
 	}
 	log_info(umclog, "Flush de la memoria realizado correctamente");
