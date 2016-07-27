@@ -472,8 +472,8 @@ void manejoDeConexiones() {
 				paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
 				paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
 				paginaAMandar.bitLectura = 1;
-				streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA,
-						paginaAMandar, 0, NULL, 0, streamUmcSwap->pid);
+				streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA, paginaAMandar,
+						0, NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer)) {
 					puts("Error al enviar");
@@ -488,6 +488,18 @@ void manejoDeConexiones() {
 
 			eliminarProceso(streamUmcSwap->pid);
 			log_info(getLogger(), "Proceso eliminado con exito");
+			paginaAMandar.IDPaginaInterno =
+					streamUmcSwap->pageComienzo.IDPaginaInterno;
+			paginaAMandar.numDePag = streamUmcSwap->pageComienzo.numDePag;
+			paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
+			paginaAMandar.bitLectura = 1;
+			streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA, paginaAMandar, 0,
+					NULL, 0, streamUmcSwap->pid);
+			buffer = serializeSwaUmc(streamSwapUmc);
+			if (!socketSend(umcClient, buffer)) {
+				puts("Error al enviar");
+				log_error(getLogger(), "Al enviar paquete");
+			}
 
 			break;
 
