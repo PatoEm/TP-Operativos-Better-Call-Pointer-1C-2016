@@ -125,6 +125,7 @@ int main() {
 					return FALSE;
 				}
 				log_info(getLogger(), "Aborte el programa");
+				esperarConfirmacion(socketNucleo);
 			}
 
 			if (quantum == 0 && seguirEjecutando && !devolverPCB) {
