@@ -360,7 +360,7 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 
 /*
  * 	irAlLabel
- */	// YA ESTA TERMINADA
+ */
 void irAlLabel(t_nombre_etiqueta etiqueta) {
 
 	puts("CPU: Pido IR A LABEL");
@@ -391,14 +391,13 @@ char* sinEspacioAlFinal(char* linea, int tamanio) {
 
 /*
  * llamarConRetorno
- */	// ESTÁ TERMINADA
+ */
 void llamarConRetorno(t_nombre_etiqueta etiqueta, t_puntero donde_retornar) {
 
 	char* etiquetaMod;
 	etiquetaMod = sinEspacioAlFinal(etiqueta, strlen(etiqueta));
 
 	paginaDeStack* aux = crearPaginaDeStackVaciaPiola();
-	//aux->retVars = list_create();
 	variablesRetorno*dondeRetorno = malloc(sizeof(variablesRetorno));
 	dondeRetorno->pagVarRet = donde_retornar / tamanioPaginaUmc;
 	dondeRetorno->offVarRet = donde_retornar % tamanioPaginaUmc;
@@ -425,8 +424,15 @@ void finalizar(void) {
 	streamCpuKer = newStrCpuKer(CPU_ID, FINALIZAR_PROGRAMA, *pcbProceso,
 			pcbProceso->id, 0, NULL, NULL /*NOMBRE DISPOSITIVO*/,
 			0 /*LEN NOMBRE DISPOSITIVO*/);
+
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
-	socketSend(socketNucleo->ptrSocket, buffer);
+
+	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
+		log_error(getLogger(), "No se pudo realizar FINALIZAR.");
+	}
+
+	esperarConfirmacion(socketNucleo);
+
 	finalizoCorrectamente = TRUE;
 }
 
