@@ -233,26 +233,10 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 		} else {
 			log_error(cpuhlog, "KER-CPU: HANDSHAKE fallo al devolver");
 		}
-
-		Stream buffer;
-//		if(buffer=socketReceive(cpuClient)==NULL){
-//					log_error(cpuhlog,"no se pudo recibir el stack size");
-//		}
-//				StrCpuKer*infoQueViene=unserializeCpuKer(buffer);
-//				if(infoQueViene->action==STACK_SIZE){
-		StrKerCpu*stringToCpu = newStrKerCpu(CPU_ID, STACK_SIZE, *pcbVacio,
-				stackSize, 0, NULL, 0, NULL, 0);
-		buffer = serializeKerCpu(stringToCpu);
-		if (!socketSend(cpuClient, buffer)) {
-			log_error(cpuhlog, "no se pudo enviar: stack size al cpu");
-		}
-
 			break;
 			default:
 			log_error(cpuhlog, "Nueva CPU no puedo hacer el Handshake");
 			break;
-			//}
-
 	}
 }
 
@@ -366,6 +350,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	int valor_cantidad_tiempo;
 	int valor;
 	char* variable;
+	StrCpuKer*stringToCpu;
 
 	atributosIO * atributos;
 	atributosWait * atributosWaitLoco;
@@ -654,6 +639,20 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		confirmarCpu(cpuClient);
 		break;
 
+	case STACK_SIZE:
+
+		if((sb = socketReceive(cpuClient)) == NULL) {
+			log_error(cpuhlog,"No se pudo recibir el stack size");
+		}
+		stringToCpu = unserializeCpuKer(sb);
+
+		stringToCpu = newStrKerCpu(CPU_ID, STACK_SIZE, *pcbVacio, stackSize, 0, NULL, 0, NULL, 0);
+		sb = serializeKerCpu(stringToCpu);
+		if (!socketSend(cpuClient, sb)) {
+			log_error(cpuhlog, "no se pudo enviar: stack size al cpu");
+		}
+
+		break;
 	default:
 		log_error(cpuhlog,
 				"KERNEL : CPU %d ha enviado un action incomprensible",
