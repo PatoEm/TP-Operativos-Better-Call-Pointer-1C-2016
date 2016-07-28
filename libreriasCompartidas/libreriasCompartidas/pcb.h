@@ -60,6 +60,7 @@ typedef struct {
 	Socket * cpu;
 	int id;
 	int tamanioArchivoOriginal;
+	int cantPagCod;
 	t_puntero_instruccion programCounter;
 	int paginasDeCodigo;
 	arrayBidimensional * indiceDeCodigo;
@@ -74,7 +75,7 @@ typedef struct {
 	estadoPrograma estado;
 } pcb;
 
-pcb* newPcb(Socket* consola,Socket* cpu, int id, int tamanioArchivoOriginal, t_puntero_instruccion programCounter,
+pcb* newPcb(Socket* consola,Socket* cpu, int id, int tamanioArchivoOriginal,int cantPagCod ,t_puntero_instruccion programCounter,
 		int paginasDeCodigo, arrayBidimensional* indiceDeCodigo, char* indiceDeEtiquetas,t_size indiceDeEtiquetasSize,t_size etiquetas,t_size instruccionesTotales,t_size instruccionesRestantes,
 		t_list* indiceDelStack, estadoPrograma estado, t_size indiceDeCodigoSize, t_size cantElementsStack);
 pcb* newEmptyPcb();

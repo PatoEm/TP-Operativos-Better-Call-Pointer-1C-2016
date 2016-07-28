@@ -211,6 +211,7 @@ Int32U getSizeKerCpu(StrKerCpu* skc) {
 	size += sizeof(skc->pcb.cpu);
 	size += sizeof(skc->pcb.id);
 	size += sizeof(skc->pcb.tamanioArchivoOriginal);
+	size += sizeof(skc->pcb.cantPagCod);
 	size += sizeof(skc->pcb.programCounter);
 	size += sizeof(skc->pcb.paginasDeCodigo);
 	size += sizeof(arrayBidimensional) * (skc->pcb.instruccionesTotales);
@@ -295,6 +296,7 @@ Int32U getSizeCpuKer(StrCpuKer* sck) {
 	size += sizeof(sck->pcb.cpu);
 	size += sizeof(sck->pcb.id);
 	size += sizeof(sck->pcb.tamanioArchivoOriginal);
+	size += sizeof(sck->pcb.cantPagCod);
 	size += sizeof(sck->pcb.programCounter);
 	size += sizeof(sck->pcb.paginasDeCodigo);
 	size += sizeof(arrayBidimensional) * (sck->pcb.instruccionesTotales);
@@ -500,6 +502,10 @@ SocketBuffer* serializeKerCpu(StrKerCpu* skc) {
 	ptrByte = (Byte*) &skc->pcb.tamanioArchivoOriginal;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.tamanioArchivoOriginal));
 	ptrData += sizeof(skc->pcb.tamanioArchivoOriginal);
+
+	ptrByte = (Byte*) &skc->pcb.cantPagCod;
+	memcpy(ptrData, ptrByte, sizeof(skc->pcb.cantPagCod));
+	ptrData += sizeof(skc->pcb.cantPagCod);
 
 	ptrByte = (Byte*) &skc->pcb.programCounter;
 	memcpy(ptrData, ptrByte, sizeof(skc->pcb.programCounter));
@@ -798,6 +804,10 @@ SocketBuffer* serializeCpuKer(StrCpuKer* sck) {
 	ptrByte = (Byte*) &sck->pcb.tamanioArchivoOriginal;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.tamanioArchivoOriginal));
 	ptrData += sizeof(sck->pcb.tamanioArchivoOriginal);
+
+	ptrByte = (Byte*) &sck->pcb.cantPagCod;
+	memcpy(ptrData, ptrByte, sizeof(sck->pcb.cantPagCod));
+	ptrData += sizeof(sck->pcb.cantPagCod);
 
 	ptrByte = (Byte*) &sck->pcb.programCounter;
 	memcpy(ptrData, ptrByte, sizeof(sck->pcb.programCounter));
@@ -1340,6 +1350,10 @@ StrKerCpu* unserializeKerCpu(Stream dataSerialized) {
 			sizeof(pcb.tamanioArchivoOriginal));
 	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
 
+	memcpy(&pcb.cantPagCod, ptrByte,
+			sizeof(pcb.cantPagCod));
+	ptrByte += sizeof(pcb.cantPagCod);
+
 	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
 	ptrByte += sizeof(pcb.programCounter);
 
@@ -1607,9 +1621,15 @@ StrCpuKer* unserializeCpuKer(Stream dataSerialized) {
 	ptrByte += sizeof(pcb.cpu);
 	memcpy(&pcb.id, ptrByte, sizeof(pcb.id));
 	ptrByte += sizeof(pcb.id);
+
 	memcpy(&pcb.tamanioArchivoOriginal, ptrByte,
 			sizeof(pcb.tamanioArchivoOriginal));
 	ptrByte += sizeof(pcb.tamanioArchivoOriginal);
+
+	memcpy(&pcb.cantPagCod, ptrByte,
+				sizeof(pcb.cantPagCod));
+		ptrByte += sizeof(pcb.cantPagCod);
+
 	memcpy(&pcb.programCounter, ptrByte, sizeof(pcb.programCounter));
 	ptrByte += sizeof(pcb.programCounter);
 	memcpy(&pcb.paginasDeCodigo, ptrByte, sizeof(pcb.paginasDeCodigo));
