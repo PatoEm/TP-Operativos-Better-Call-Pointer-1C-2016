@@ -171,6 +171,6 @@ String intToStr(Int32U integer);
 
 bool esperarConfirmacion(SocketClient*);
 
-
+String stringFromByteArray(Byte* data, Int32U size);
 
 #endif /* CPU_H_ */
