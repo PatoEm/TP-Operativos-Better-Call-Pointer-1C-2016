@@ -104,7 +104,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 					list_size(pcbProceso->indiceDelStack) - 2);
 		variables*ultimaPagina = list_get(ultimaPaginaStack->vars,
 				list_size(ultimaPaginaStack->vars) - 1);
-		if (ultimaPagina->offVar + 4 > tamanioPaginaUmc) {
+		if (ultimaPagina->offVar + 4 == tamanioPaginaUmc) {
 			asignadoVacio->numDePag = ultimaPagina->pagVar + 1;
 			asignadoVacio->bitUso = 4;
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
@@ -130,7 +130,6 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			} else {
 				if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod) {
 					ultimaPaginaStack=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso->indiceDelStack)-1);
-					variables*variable;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->offVar = 0;
