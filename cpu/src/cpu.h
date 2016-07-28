@@ -53,6 +53,7 @@ espacioAsignado * asignadoVacio;
 bool finalizoCorrectamente;
 bool saltoDeLinea;
 bool devolverPCB;
+int stackSize;
 
 
 //======================================================
