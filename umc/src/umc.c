@@ -467,7 +467,7 @@ int lugarAsignadoFinal(int pid) {
 		inicio++;
 		nodoFinal = list_get(listaEspacioAsignado, inicio);
 		if (inicio == list_size(listaEspacioAsignado))
-			return inicio - 1;
+			return inicio ;
 	}
 	return (inicio - 1);
 }

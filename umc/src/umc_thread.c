@@ -93,7 +93,7 @@ void umcThread() {
 
 void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 	int pidActivo;
-	espacioAsignado unaPagina;
+	espacioAsignado* unaPagina;
 	SocketBuffer*buffer;
 	StrCpuUmc*streamCpuUmc = scu;
 	StrUmcCpu*streamUmcCpu;
@@ -102,41 +102,46 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 		scu = streamCpuUmc;
 		switch (streamCpuUmc->action) {
 		case 36 /*TAMANIO_DE_MARCOS*/:
+			unaPagina=newEspacioAsignado();
 			log_info(umclog,
 					"HILO %d: La CPU [%d] pide TAMANIO_DE_MARCOS, tamanio es %d.",
 					mi_socket, socket->descriptor, marco_Size);
 			//(Char id, Char action, espacioAsignado pageComienzo, Int32U offset, Int32U dataLen, Byte* data, Int32U pid)
-			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, unaPagina, 0,
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TAMANIO_DE_MARCOS, *unaPagina, 0,
 					marco_Size, (Byte*) "hola", 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			free(streamUmcCpu);
 			free(scu);
+			free(unaPagina);
 			break;
 		case 23/*CAMBIO_PROCESO_ACTIVO*/:
+			unaPagina=newEspacioAsignado();
 			log_info(umclog,
 					"HILO %d: La CPU [%d] pide CAMBIO_PROCESO_ACTIVO, nuevo proceso es %d.",
 					mi_socket, socket->descriptor, streamCpuUmc->pid);
 			pidActivo = streamCpuUmc->pid;
-			streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0, 0,
+			streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, *unaPagina, 0, 0,
 			NULL, 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			free(streamUmcCpu);
 			free(scu);
+			free(unaPagina);
 			break;
 		case 25/*SOLICITAR_BYTES*/:
 			log_info(umclog, "HILO %d: La CPU [%d] pide SOLICITAR_BYTES.",
 					mi_socket, socket->descriptor);
 			pthread_mutex_lock(mutexPedidos);
 			paginaEncontrada = TRUE;
+			unaPagina=newEspacioAsignado();
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					&& cantidadDePaginasLibres() == 0) {
 				log_error(umclog,
 						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d.",
 						mi_socket, socket->descriptor);
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
-						unaPagina, scu->offset, 0, NULL, pidActivo);
+						*unaPagina, scu->offset, 0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 				free(streamUmcCpu);
@@ -151,10 +156,10 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				}
 				if (!paginaEncontrada)
 					streamUmcCpu = newStrUmcCpu(UMC_ID, ABORTAR_PROGRAMA,
-							unaPagina, 0, 0, NULL, 0);
+							*unaPagina, 0, 0, NULL, 0);
 				else
 					streamUmcCpu = newStrUmcCpu(UMC_ID, 25/*SOLICITAR_BYTES*/,
-							unaPagina, scu->offset, scu->pageComienzo.bitUso,
+							*unaPagina, scu->offset, scu->pageComienzo.bitUso,
 							(Byte*) bytes, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
@@ -164,9 +169,11 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				free(streamUmcCpu);
 			}
 			free(scu);
+			free(unaPagina);
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		case ALMACENAR_BYTES:
+			unaPagina=newEspacioAsignado();
 			log_info(umclog, "HILO %d: La CPU [%d] pide ALMACENAR_BYTES.",
 					mi_socket, socket->descriptor);
 			pthread_mutex_lock(mutexPedidos);
@@ -177,7 +184,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d.",
 						mi_socket, socket->descriptor);
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
-						unaPagina, scu->offset, 0, NULL, pidActivo);
+						*unaPagina, scu->offset, 0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 				free(streamUmcCpu);
@@ -194,15 +201,16 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 							scu->offset, scu->dataLen, scu->data);
 				if (!paginaEncontrada)
 					streamUmcCpu = newStrUmcCpu(UMC_ID, ABORTAR_PROGRAMA,
-							unaPagina, 0, 0, NULL, 0);
+							*unaPagina, 0, 0, NULL, 0);
 				else
-					streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina,
+					streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, *unaPagina,
 							0, 0, NULL, 0);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
 				free(streamUmcCpu);
 			}
 			free(scu);
+			free(unaPagina);
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		default:
