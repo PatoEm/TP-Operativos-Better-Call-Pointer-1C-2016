@@ -165,15 +165,11 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 			nodoActual->bitUso = 0;
 			contador++;
 		}
-		if (contador == fin)
+		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia != 1)
+			contador++;
+		if (contador == fin && acierto == 0)
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
-		if (nodoActual->bitUso == 0 && nodoActual->bitDePresencia != 1) {
-			contador++;
-			if (contador == fin)
-				contador = inicio;
-			nodoActual = list_get(listaEspacioAsignado, contador);
-		}
 	}
 	return nodoActual;
 }
@@ -467,7 +463,7 @@ int lugarAsignadoFinal(int pid) {
 		inicio++;
 		nodoFinal = list_get(listaEspacioAsignado, inicio);
 		if (inicio == list_size(listaEspacioAsignado))
-			return inicio ;
+			return inicio;
 	}
 	return (inicio - 1);
 }
