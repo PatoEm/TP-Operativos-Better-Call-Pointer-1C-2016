@@ -147,5 +147,6 @@ bool buscarPCB(t_list *, pcb*);
 bool satisfacerCpuAlPedo();
 pcb* buscarPcbPorDescriptor(t_list*, int);
 bool eliminarCpuPorDescriptorYDevuelveUnBool(t_list*, int);
+int calcularCantPagCod(int longitudArchivo);
 
 #endif /* NUCLEO_H_ */

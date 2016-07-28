@@ -821,6 +821,20 @@ int cantidadPaginasArchivo(int longitudArchivo) {
 	return 0;
 }
 
+int calcularCantPagCod(int longitudArchivo){
+	int aux = (longitudArchivo / tamanioPaginas);
+
+	if (longitudArchivo % tamanioPaginas == 0) {
+		return aux;
+	} else {
+
+		return aux + 1;
+	}
+	//int a=cantidadPaginas(longitudArchivo, tamanioPaginas);
+	return 0;
+
+}
+
 
 String intToStr(Int32U integer) {
 	String result = malloc(sizeof(Byte) * 10);

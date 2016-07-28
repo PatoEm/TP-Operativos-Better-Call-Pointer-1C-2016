@@ -52,7 +52,7 @@ pcb* crearNuevoPcb(Socket* consola, char * programaAnsisop, int tamanioArchivo) 
 
 	pcbNuevoPrograma->tamanioArchivoOriginal = tamanioArchivo;
 
-	pcbNuevoPrograma->cantPagCod=cantidadPaginasArchivo(tamanioArchivo);
+	pcbNuevoPrograma->cantPagCod=calcularCantPagCod(tamanioArchivo);
 
 	pcbNuevoPrograma->programCounter = metaNuevoPrograma->instruccion_inicio;
 
