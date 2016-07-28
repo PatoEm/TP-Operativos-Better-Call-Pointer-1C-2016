@@ -111,6 +111,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			free(streamUmcCpu);
+			free(scu);
 			break;
 		case 23/*CAMBIO_PROCESO_ACTIVO*/:
 			log_info(umclog,
@@ -118,10 +119,11 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					mi_socket, socket->descriptor, streamCpuUmc->pid);
 			pidActivo = streamCpuUmc->pid;
 			streamUmcCpu = newStrUmcCpu(UMC_ID, TODO_PIOLA, unaPagina, 0, 0,
-					NULL, 0);
+			NULL, 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
 			free(streamUmcCpu);
+			free(scu);
 			break;
 		case 25/*SOLICITAR_BYTES*/:
 			log_info(umclog, "HILO %d: La CPU [%d] pide SOLICITAR_BYTES.",
@@ -161,6 +163,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				free(bytes);
 				free(streamUmcCpu);
 			}
+			free(scu);
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		case ALMACENAR_BYTES:
@@ -199,7 +202,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				socketSend(socket, buffer);
 				free(streamUmcCpu);
 			}
-
+			free(scu);
 			pthread_mutex_unlock(mutexPedidos);
 			break;
 		default:
@@ -234,6 +237,8 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 				marco_Size, 0, 0);
 		buffer = serializeUmcKer(streamAlKerner);
 		socketSend(socket, buffer);
+		free(streamAlKerner);
+		free(sku);
 		break;
 	case 20 /*INICIALIZAR_PROGRAMA*/:
 		log_info(umclog,
@@ -254,6 +259,8 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 			buffer = serializeUmcKer(streamAlKerner);
 			socketSend(socket, buffer);
 		}
+		free(streamAlKerner);
+		free(sku);
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 
@@ -264,9 +271,12 @@ void manageKernelRequest(Socket* socket, StrKerUmc* sku) {
 		pthread_mutex_lock(mutexPedidos);
 		finalizarPrograma(sku->pid);
 		streamAlKerner = newStrUmcKer(UMC_ID, TODO_PIOLA, NULL, 0, sku->pid, 0);
-		buffer=serializeUmcKer(streamAlKerner);
-		socketSend(socket,buffer);
-		log_info(umclog, "programa PID nro %d fue terminado correctamente",sku->pid);
+		buffer = serializeUmcKer(streamAlKerner);
+		socketSend(socket, buffer);
+		log_info(umclog, "programa PID nro %d fue terminado correctamente",
+				sku->pid);
+		free(streamAlKerner);
+		free(sku);
 		pthread_mutex_unlock(mutexPedidos);
 		break;
 	default:
