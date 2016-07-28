@@ -350,7 +350,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	int valor_cantidad_tiempo;
 	int valor;
 	char* variable;
-	StrCpuKer*stringToCpu;
+	//StrCpuKer*stringToCpu;
 
 	atributosIO * atributos;
 	atributosWait * atributosWaitLoco;
@@ -639,20 +639,20 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		confirmarCpu(cpuClient);
 		break;
 
-	case STACK_SIZE:
-
-		if((sb = socketReceive(cpuClient)) == NULL) {
-			log_error(cpuhlog,"No se pudo recibir el stack size");
-		}
-		stringToCpu = unserializeCpuKer(sb);
-
-		stringToCpu = newStrKerCpu(CPU_ID, STACK_SIZE, *pcbVacio, stackSize, 0, NULL, 0, NULL, 0);
-		sb = serializeKerCpu(stringToCpu);
-		if (!socketSend(cpuClient, sb)) {
-			log_error(cpuhlog, "no se pudo enviar: stack size al cpu");
-		}
-
-		break;
+//	case STACK_SIZE:
+//
+//		if((sb = socketReceive(cpuClient)) == NULL) {
+//			log_error(cpuhlog,"No se pudo recibir el stack size");
+//		}
+//		stringToCpu = unserializeCpuKer(sb);
+//
+//		stringToCpu = newStrKerCpu(CPU_ID, STACK_SIZE, *pcbVacio, stackSize, 0, NULL, 0, NULL, 0);
+//		sb = serializeKerCpu(stringToCpu);
+//		if (!socketSend(cpuClient, sb)) {
+//			log_error(cpuhlog, "no se pudo enviar: stack size al cpu");
+//		}
+//
+//		break;
 	default:
 		log_error(cpuhlog,
 				"KERNEL : CPU %d ha enviado un action incomprensible",
@@ -821,6 +821,13 @@ int cantidadPaginasArchivo(int longitudArchivo) {
 	return 0;
 }
 
+
+String intToStr(Int32U integer) {
+	String result = malloc(sizeof(Byte) * 10);
+	sprintf(result, "%d", integer);
+	return result;
+}
+
 bool enviarPcbACpu(Socket * cpuLoca) {
 
 	puts("Pido patito Cola Ready");
@@ -844,10 +851,15 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 
 		pthread_mutex_lock(mutexQuantum);
 		//todo ver envio_pcb
+
+
+	char*	auxStackSize = intToStr(stackSize);
+
+
 		StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar,
 				quantum, quantumSleep,
-				NULL, 0, NULL /*NOMBRE DISPOSITIVO*/,
-				0 /*LEN NOMBRE DISPOSITIVO*/);
+				NULL, 0, auxStackSize /*NOMBRE DISPOSITIVO*/,
+				strlen(auxStackSize) /*LEN NOMBRE DISPOSITIVO*/);
 		pthread_mutex_unlock(mutexQuantum);
 
 		SocketBuffer* sb = serializeKerCpu(skc);
@@ -856,6 +868,7 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 		} else {
 			printf("Se envio el pcb del programa %d al cpu", pcbAEnviar->id);
 		}
+		free(auxStackSize);
 		free(cpuLoca);
 		free(sb);
 		return TRUE;

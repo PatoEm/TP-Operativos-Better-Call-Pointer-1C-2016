@@ -42,7 +42,7 @@ void funcionHiloCpuAlPedo(Socket*);
 void consoleClientHandler(Socket*, Stream);
 void clientDown(int);
 bool confirmarCpu(Socket* cpu);
-
+String intToStr(Int32U integer);
 // ESTRUCTURAS
 
 typedef struct core {

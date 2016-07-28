@@ -58,6 +58,7 @@ char* pedirInstruccion(pcb*);
  ****************************************/
 SocketBuffer* buffer;
 t_log* logger = NULL;
+bool pisarStack;
 
 /*****************************************
  *
@@ -71,6 +72,7 @@ t_log* logger = NULL;
  ****************************************/
 
 int main() {
+	pisarStack=TRUE;
 	finalizoCorrectamente = FALSE;
 	saltoDeLinea = FALSE;
 
@@ -88,14 +90,14 @@ int main() {
 	//signal(SIGINT, gestionoSIGINT);
 
 	if (loadConfig() && socketConnection()) {
-		StrCpuKer*stringToKer = newStrCpuKer(CPU_ID, STACK_SIZE, *pcbVacio, 0, 0, NULL, NULL, 0);
-			buffer = serializeCpuKer(stringToKer);
-			if(!socketSend(socketNucleo->ptrSocket, buffer))
-				log_error(getLogger(),"No se pudo enviar: recibir stack size");
-			if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL)
-				log_error(getLogger(),"No se pudo recibir el stack size");
-			StrKerCpu*infoQueViene = unserializeKerCpu(buffer);
-			stackSize = infoQueViene->quantum;//NO ES EL QUANTUM, ES EL STACK SIZE
+//		StrCpuKer*stringToKer = newStrCpuKer(CPU_ID, STACK_SIZE, *pcbVacio, 0, 0, NULL, NULL, 0);
+//			buffer = serializeCpuKer(stringToKer);
+//			if(!socketSend(socketNucleo->ptrSocket, buffer))
+//				log_error(getLogger(),"No se pudo enviar: recibir stack size");
+//			if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL)
+//				log_error(getLogger(),"No se pudo recibir el stack size");
+//			StrKerCpu*infoQueViene = unserializeKerCpu(buffer);
+//			stackSize = infoQueViene->quantum;//NO ES EL QUANTUM, ES EL STACK SIZE
 
 		while (TRUE) {
 			devolverPCB = FALSE;
@@ -361,8 +363,11 @@ Boolean getNextPcb() {
 
 	memcpy(pcbProceso, &skc->pcb, sizeof(pcb));
 
-	//pcbProceso = skc->pcb;
+	if(pisarStack){
 
+	stackSize =atoi( stringFromByteArray(skc->nombreDispositivo,skc->lenNomDispositivo));
+	pisarStack=FALSE;
+	}
 	enviarPidPcb(skc->pcb.id);
 
 	return TRUE;
