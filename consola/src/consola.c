@@ -70,3 +70,4 @@ t_log* getLogger() {
 	}
 	return logger;
 }
+

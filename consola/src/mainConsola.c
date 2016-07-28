@@ -290,7 +290,11 @@ void funcionHiloConsola(pthread_t hiloConsola){
 					log_info(getLogger(), "Se aborto el programa por CONSOLA");
 				}
 				free(sbthread);
-				fclose(fp);
+
+				int pidconsola = getpid();
+				kill(pidconsola, SIGKILL);
+
+				//fclose(fp); esto no va giles
 			} else {
 				printf("Numero no válido\n");
 			}
