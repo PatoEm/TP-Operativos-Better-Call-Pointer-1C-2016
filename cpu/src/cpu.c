@@ -52,11 +52,11 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 		tam = list_size(pcbProceso->indiceDelStack);
 	if (0 == list_size(pcbProceso->indiceDelStack)
 			|| (tam == 0 && 1 == list_size(pcbProceso->indiceDelStack))) {
-		pagina = ((pcbProceso->paginasDeCodigo) - 1);
-		asignadoVacio->numDePag = ((pcbProceso->paginasDeCodigo) - 1);
+		pagina = (pcbProceso->cantPagCod);
+		asignadoVacio->numDePag = (pcbProceso->cantPagCod);
 		asignadoVacio->bitUso = 4;
 		nuevaVariable->pos = 0;
-		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, (tamanioPaginaUmc - 5), 0, NULL, 0);
+		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, 0, 0, NULL, 0);
 
 		buffer = serializeCpuUmc(streamCpuUmc);
 
@@ -75,12 +75,12 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 		if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 			seguirEjecutando = FALSE;
 		} else {
-			if ((espacioMemoriaVacio(streamUmcCpu->dataLen, streamUmcCpu->data))) {
+			if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod ) {
 				if (0 == list_size(pcbProceso->indiceDelStack)) {
 					nuevaVariable->pos = 0;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
-					variable->offVar = (tamanioPaginaUmc - 5);
+					variable->offVar = 0;
 					variable->sizeVar = 4;
 					list_add(nuevaVariable->vars, variable);
 					list_add((pcbProceso->indiceDelStack), nuevaVariable);
@@ -88,7 +88,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 					nuevaVariable = list_get(pcbProceso->indiceDelStack, 0);
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
-					variable->offVar = (tamanioPaginaUmc - 5);
+					variable->offVar = 0;
 					variable->sizeVar = 4;
 					list_add(nuevaVariable->vars, variable);
 				}
@@ -104,11 +104,11 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 					list_size(pcbProceso->indiceDelStack) - 2);
 		variables*ultimaPagina = list_get(ultimaPaginaStack->vars,
 				list_size(ultimaPaginaStack->vars) - 1);
-		if (ultimaPagina->offVar - 4 < 0) {
-			asignadoVacio->numDePag = ultimaPagina->pagVar - 1;
+		if (ultimaPagina->offVar + 4 > tamanioPaginaUmc) {
+			asignadoVacio->numDePag = ultimaPagina->pagVar + 1;
 			asignadoVacio->bitUso = 4;
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-					tamanioPaginaUmc - 5, 0, 0, 0);
+					0, 0, 0, 0);
 
 			buffer = serializeCpuUmc(streamCpuUmc);
 
@@ -128,13 +128,12 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
-				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
-						streamUmcCpu->data))) {
+				if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod) {
 					ultimaPaginaStack=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso->indiceDelStack)-1);
 					variables*variable;
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
-					variable->offVar = (tamanioPaginaUmc - 5);
+					variable->offVar = 0;
 					variable->sizeVar = 4;
 					list_add(ultimaPaginaStack->vars, variable);
 				} else
@@ -145,7 +144,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			asignadoVacio->bitUso = 4;
 
 			streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio,
-					ultimaPagina->offVar - 4, 0, 0, 0);
+					ultimaPagina->offVar + 4, 0, 0, 0);
 			buffer = serializeCpuUmc(streamCpuUmc);
 
 			if (!socketSend(socketUMC->ptrSocket, buffer)) {
@@ -163,13 +162,12 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
-				if ((espacioMemoriaVacio(streamUmcCpu->dataLen,
-						streamUmcCpu->data))) {
+				if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod) {
 					ultimaPaginaStack=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso->indiceDelStack)-1);
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->sizeVar = 4;
-					variable->offVar = ultimaPagina->offVar - 4;
+					variable->offVar = ultimaPagina->offVar + 4;
 					list_add(ultimaPaginaStack->vars, variable);
 				} else {
 					seguirEjecutando = FALSE;
