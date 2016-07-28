@@ -179,7 +179,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			pthread_mutex_lock(mutexPedidos);
 			paginaEncontrada = TRUE;
 			if (paginasOcupadasPorPid(pidActivo) == 0
-					|| cantidadDePaginasLibres() == 0) {
+					&& cantidadDePaginasLibres() == 0) {
 				log_error(umclog,
 						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d.",
 						mi_socket, socket->descriptor);

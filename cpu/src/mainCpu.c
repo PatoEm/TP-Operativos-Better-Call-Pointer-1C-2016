@@ -91,14 +91,6 @@ int main() {
 	//signal(SIGINT, gestionoSIGINT);
 
 	if (loadConfig() && socketConnection()) {
-//		StrCpuKer*stringToKer = newStrCpuKer(CPU_ID, STACK_SIZE, *pcbVacio, 0, 0, NULL, NULL, 0);
-//			buffer = serializeCpuKer(stringToKer);
-//			if(!socketSend(socketNucleo->ptrSocket, buffer))
-//				log_error(getLogger(),"No se pudo enviar: recibir stack size");
-//			if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL)
-//				log_error(getLogger(),"No se pudo recibir el stack size");
-//			StrKerCpu*infoQueViene = unserializeKerCpu(buffer);
-//			stackSize = infoQueViene->quantum;//NO ES EL QUANTUM, ES EL STACK SIZE
 
 		while (TRUE) {
 			devolverPCB = FALSE;
@@ -456,16 +448,11 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		buffer = serializeCpuUmc(scu);
 		if (!socketSend(socketUMC->ptrSocket, buffer)) {
 			log_error(getLogger(), "No se pudo enviar tu pedido a la umc.");
-		} else {
-			log_info(getLogger(), "Pedi una instruccion a la UMC");
 		}
-
 		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
 			log_error(getLogger(),
 					"No se pudo recibir la instruccion de la UMC");
 			return FALSE;
-		} else {
-			log_info(getLogger(), "Recibi instruccion de la UMC");
 		}
 
 		suc = unserializeUmcCpu(buffer);
@@ -485,6 +472,8 @@ char* pedirInstruccion(pcb* pcbLoco) {
 		pagina++;
 		inicioPag = 0;
 	}
+	log_info(getLogger(), "Pedi una instruccion a la UMC");
+	log_info(getLogger(), "Recibi instruccion de la UMC");
 	return instruccion;
 }
 
