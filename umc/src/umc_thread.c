@@ -110,6 +110,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					marco_Size, (Byte*) "hola", 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
+			free(streamUmcCpu);
 			break;
 		case 23/*CAMBIO_PROCESO_ACTIVO*/:
 			log_info(umclog,
@@ -120,6 +121,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 					NULL, 0);
 			buffer = serializeUmcCpu(streamUmcCpu);
 			socketSend(socket, buffer);
+			free(streamUmcCpu);
 			break;
 		case 25/*SOLICITAR_BYTES*/:
 			log_info(umclog, "HILO %d: La CPU [%d] pide SOLICITAR_BYTES.",
@@ -135,6 +137,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 						unaPagina, scu->offset, 0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
+				free(streamUmcCpu);
 			} else {
 				if (tlbHabilitada()) {
 					bytes = leerEnTLB(pidActivo, scu->pageComienzo.numDePag,
@@ -155,6 +158,8 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 				socketSend(socket, buffer);
 				log_info(umclog, "HILO %d: Bytes enviados al CPU [%d].",
 						mi_socket, socket->descriptor);
+				free(bytes);
+				free(streamUmcCpu);
 			}
 			pthread_mutex_unlock(mutexPedidos);
 			break;
@@ -172,6 +177,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 						unaPagina, scu->offset, 0, NULL, pidActivo);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
+				free(streamUmcCpu);
 			} else {
 
 				if (tlbHabilitada()) {
@@ -191,6 +197,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 							0, 0, NULL, 0);
 				buffer = serializeUmcCpu(streamUmcCpu);
 				socketSend(socket, buffer);
+				free(streamUmcCpu);
 			}
 
 			pthread_mutex_unlock(mutexPedidos);

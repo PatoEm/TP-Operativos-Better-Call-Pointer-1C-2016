@@ -90,9 +90,16 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 			i++;
 		}
 		log_info(umclog, "Programa inicializado correctamente PID: %d", pid);
+		//free(buffer);
+		free(streamSwapUmc);
+		free(streamUmcSwap);
+
 		return TRUE;
 	} else
 		log_error(umclog, "No se pudo inicializar el programa PID: %d", pid);
+	//free(buffer);
+	free(streamSwapUmc);
+	free(streamUmcSwap);
 	return FALSE;
 
 }
@@ -176,13 +183,15 @@ void sacarPaginaDeTelebe(int pid, int pg) {
 	int i = 0;
 	while (i != list_size(TLB)) {
 		unaPaginaDeTelebe = list_get(TLB, i);
-		if (pid == unaPaginaDeTelebe->pid && pg == unaPaginaDeTelebe->pagina)
-			list_remove(TLB, i);
+		if (pid == unaPaginaDeTelebe->pid && pg == unaPaginaDeTelebe->pagina){
+			log_info(umclog, "Pagina de proceso: %d, PID: %d sacada de la TLB",
+						unaPaginaDeTelebe->pagina, unaPaginaDeTelebe->pid);
+			free(list_remove(TLB, i));
+		}
 		else
 			i++;
 	}
-	log_info(umclog, "Pagina de proceso: %d, PID: %d sacada de la TLB",
-			unaPaginaDeTelebe->pagina, unaPaginaDeTelebe->pid);
+
 }
 
 //devuelve el nodo del espacio en memoria
@@ -245,6 +254,9 @@ int reemplazarPaginaClock(int pid, int pagina) {
 	}
 	log_info(umclog, "Algoritmo CLOCK realizado correctamente");
 	free(pageToSend);
+	free(streamSwUm);
+	free(streamSwapUmc);
+	free(streamUmcSwap);
 	return posicionDePaginaLibre;
 }
 
@@ -406,6 +418,9 @@ bool lectoEscritura) {
 	nodoBuscado->bitUso = 1;
 	nodoBuscado->bitModificado = lectoEscritura;
 	log_info(umclog, "Algoritmo CLOCK MODIFICADO realizado correctamente");
+	free(streamUmcSwap);
+	free(streamSwUm);
+	free(streamSwapUmc);
 	return posicionDePaginaLibre;
 }
 
@@ -461,7 +476,8 @@ int lugarAsignadoFinal(int pid) {
 int lugarAsignadoInicial(int pid) {
 	int contador = 0;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while (nodoActual->pid != pid&& contador<list_size(listaPaginasPorPrograma)) { //todo cambie acá fijarse
+	while (nodoActual->pid != pid
+			&& contador < list_size(listaPaginasPorPrograma)) { //todo cambie acá fijarse
 		contador++;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
@@ -472,7 +488,8 @@ int paginasOcupadasPorPid(int pid) {
 	int contador = 0;
 	paginasPorPrograma*paginaAEncontrar = list_get(listaPaginasPorPrograma,
 			contador);
-	while (paginaAEncontrar->pid != pid && contador<list_size(listaPaginasPorPrograma)) { //todo cambie acá fijarse
+	while (paginaAEncontrar->pid != pid
+			&& contador < list_size(listaPaginasPorPrograma)) { //todo cambie acá fijarse
 		contador++;
 		paginaAEncontrar = list_get(listaPaginasPorPrograma, contador);
 	}
@@ -511,7 +528,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		if (tlbHabilitada()) {
 			llevarPaginaATLB(pid, pagina, NULL);
 		}
-		paginaADevolver[cantidad] = '\0';
+		//paginaADevolver[cantidad] = '\0';
 		log_info(umclog, "Bytes leidos por PID: %d Pagina: %d", pid, pagina);
 		return (paginaADevolver);
 
@@ -557,12 +574,14 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comCadena++;
 				lugCad++;
 			}
-			paginaADevolver[cantidad] = '\0';
+			//paginaADevolver[cantidad] = '\0';
 			if (tlbHabilitada()) {
 				llevarPaginaATLB(pid, pagina, NULL);
 			}
 			log_info(umclog, "Bytes leidos por PID: %d Pagina: %d", pid,
 					pagina);
+			free(streamSwapUmc);
+			free(streamUmcSwap);
 			return (paginaADevolver);
 		} else {
 			int frame = reemplazarPagina(pid, pagina, 1);
@@ -574,7 +593,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comienzoDeCadena++;
 				lugarDeLaCadena++;
 			}
-			paginaADevolver[cantidad] = '\0';
+			//paginaADevolver[cantidad] = '\0';
 			if (tlbHabilitada()) {
 				llevarPaginaATLB(pid, pagina, NULL);
 			}
@@ -654,6 +673,8 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 				comCadena++;
 				lugCad++;
 			}
+			free(streamSwapUmc);
+			free(streamUmcSwap);
 			log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
 					pagina);
 		} else {
@@ -690,8 +711,8 @@ void finalizarPrograma(int pid) {
 	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwa);
 	if (!socketSend(socketSwap->ptrSocket, buffer))
 		puts("error al enviar al swap");
-	buffer=socketReceive(socketSwap->ptrSocket);
-	StrSwaUmc*desdeUMC=unserializeSwaUmc(buffer);
+	buffer = socketReceive(socketSwap->ptrSocket);
+	StrSwaUmc*desdeUMC = unserializeSwaUmc(buffer);
 	espacioAsignado*nodoAReventar;
 //int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
@@ -727,25 +748,12 @@ void finalizarPrograma(int pid) {
 		j++;
 		unaPaginaParaZafar = list_get(listaPaginasPorPrograma, j);
 	}
-	list_remove(listaPaginasPorPrograma, j);
+	free(list_remove(listaPaginasPorPrograma, j));
 	log_info(umclog, "Programa (PID: %d) eliminado de la UMC", pid);
+	free(pagina);
+	free(streamUmcSwa);
+	free(desdeUMC);
 }
-
-//Funcion básica del tp
-//void cambioDeProcesoActivo(int pid, int fd) {
-//	espacioAsignado*espacio;
-//	int contador = 0;
-//	espacio = list_get(listaEspacioLibre, contador);
-//	while (pid != (espacio->pid)) {
-//		contador++;
-//		espacio = list_get(listaEspacioLibre, contador);
-//	}
-//	while (pid == (espacio->pid)) {
-//		espacio->socket = fd;
-//		contador++;
-//		espacio = list_get(listaEspacioLibre, contador);
-//	}
-//}
 
 void setearValores(t_config * archivoConfig) {
 	puertoEscucha = config_get_string_value(archivoConfig, "PUERTO");
@@ -766,7 +774,7 @@ char * reservarMemoria(int cantidadFrames, int capacidadFrames) {
 }
 
 int cantidadDePaginasLibres() {
-	int contadorDePaginas;
+	int contadorDePaginas = 0;
 	int i = 0;
 	for (i = 0; i < marcos; i++) {
 		if (bitMap[i] == 0) {
@@ -1170,11 +1178,11 @@ t_list * creoTLB() {
 }
 
 void elDestructorDeNodosTLB(int i) {
-	list_remove(TLB, i);
+	free(list_remove(TLB, i));
 }
 
 void elDestructorDeNodosMemoria(int i) {
-	list_remove(listaEspacioAsignado, i);
+	free(list_remove(listaEspacioAsignado, i));
 }
 
 bool escribirEnTLB(int pid, int pagina, int offset, int cantidad, char*buffer) {
@@ -1251,7 +1259,7 @@ void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 int reemplazarPaginaLRU() {
 	int paginaLibre;
 	int contadorPrimerMomento = 0;
-	t_tlb*paginaAComparar;//todo fijarse si hay que sacar este malloc
+	t_tlb*paginaAComparar; //todo fijarse si hay que sacar este malloc
 	t_tlb*paginaAMatar;
 //char* buffer = malloc(sizeof(char) * marco_Size);
 	paginaAMatar = list_get(TLB, contadorPrimerMomento);
@@ -1359,7 +1367,7 @@ void eliminarProcesoTLB(int PID) {
 		while (i != list_size(TLB)) {
 			t_tlb*unNodoDeLaTelebe = list_get(TLB, i);
 			if (unNodoDeLaTelebe->pid == PID)
-				list_remove(TLB, i);
+				free(list_remove(TLB, i));
 			else
 				i++;
 		}
