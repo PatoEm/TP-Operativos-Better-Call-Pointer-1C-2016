@@ -72,6 +72,7 @@ bool pisarStack;
  ****************************************/
 
 int main() {
+	elAbortador = false;
 	pisarStack = TRUE;
 	finalizoCorrectamente = FALSE;
 	saltoDeLinea = FALSE;
@@ -97,13 +98,15 @@ int main() {
 			finalizoCorrectamente = FALSE;
 			log_debug(getLogger(),
 					"Devuelvo el pcb procesado y obtengo uno nuevo del nucleo");
-			getNextPcb();
+			if (!elAbortador) {
+				getNextPcb();
+			}
 			seguirEjecutando = TRUE;
 			log_debug(getLogger(), "Proceso el pcb del nucleo");
 			Int32U quantum = skc->quantum;
 			Int32U quantumSleep = skc->quantumSleep;
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente
-					&& !devolverPCB) {
+					&& !devolverPCB && !elAbortador) {
 				instruccionLoca = pedirInstruccion(pcbProceso);
 
 				analizadorLinea(instruccionLoca, &funciones,
@@ -126,7 +129,7 @@ int main() {
 			if (!seguirEjecutando) {
 
 				sck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0, 0,
-						NULL, NULL, 0);
+				NULL, NULL, 0);
 				buffer = serializeCpuKer(sck);
 
 				if (!socketSend(socketNucleo->ptrSocket, buffer)) {
@@ -138,7 +141,7 @@ int main() {
 				esperarConfirmacion(socketNucleo);
 			}
 
-			if (quantum == 0 && seguirEjecutando && !devolverPCB) {
+			if ((quantum == 0 && seguirEjecutando && !devolverPCB)||elAbortador) {
 				sck = newStrCpuKer(CPU_ID, TERMINE_EL_QUANTUM, *pcbProceso, 0,
 						0,
 						NULL, NULL, 0);
@@ -153,6 +156,10 @@ int main() {
 				esperarConfirmacion(socketNucleo);
 
 				free(pcbProceso);
+
+				if(elAbortador){
+					break;
+				}
 			}
 			seguirEjecutando = TRUE;
 		}
@@ -160,6 +167,10 @@ int main() {
 		config_destroy(tConfig);
 
 		while (TRUE) {
+			if(elAbortador){
+				puts("Me mato SIGUSR1 estoy morido, bye");
+				break;
+			}
 			puts("Esperando..");
 			sleep(10);
 		}

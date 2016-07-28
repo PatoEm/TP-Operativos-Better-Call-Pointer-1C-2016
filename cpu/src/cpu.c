@@ -659,10 +659,11 @@ AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 		signale, };
 
 void abortarCPU() {
-	if (seguirEjecutando) {
-		seguirEjecutando = FALSE;
+//	if (seguirEjecutando) {
+//		seguirEjecutando = FALSE;
+		elAbortador=TRUE;
 		puts("Muero por SIGUSR1\n");
-	}
+	//}
 }
 
 // Devuelve el logger para loggear los logs para poder loggear
