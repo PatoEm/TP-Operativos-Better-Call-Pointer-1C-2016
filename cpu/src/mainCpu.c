@@ -151,8 +151,11 @@ int main() {
 							"No se pudo enviar el buffer al nucleo.");
 					return FALSE;
 				}
+				if(!elAbortador){
 				log_info(getLogger(), "Termine el quantum");
-
+				}else{
+					log_info(getLogger(),"Recibi SIGUSR1, fin de la rafaga");
+				}
 				esperarConfirmacion(socketNucleo);
 
 				free(pcbProceso);
