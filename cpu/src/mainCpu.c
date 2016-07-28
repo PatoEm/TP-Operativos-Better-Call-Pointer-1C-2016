@@ -89,6 +89,7 @@ int main() {
 
 	if (loadConfig() && socketConnection()) {
 
+
 		while (TRUE) {
 			devolverPCB = FALSE;
 			finalizoCorrectamente = FALSE;
@@ -256,7 +257,14 @@ Boolean socketConnection() {
 		log_info(getLogger(), "No se pudo realizar el handshake.");
 		return FALSE;
 	}
-
+	StrCpuKer*stringToKer=newStrCpuKer(CPU_ID,STACK_SIZE,*pcbVacio,0,0,NULL,NULL,0);
+	buffer= serializeCpuKer(stringToKer);
+	if(!socketSend(socketNucleo->ptrSocket,buffer))
+		log_error(getLogger(),"no se pudo enviar: recibir stack size");
+	if(buffer=socketReceive(socketNucleo->ptrSocket)==NULL)
+		log_error(getLogger(),"no se pudo recibir el stack size");
+	StrKerCpu*infoQueViene=unserializeKerCpu(buffer);
+	stackSize=infoQueViene->quantum;//NO ES EL QUANTUM, ES EL STACK SIZE
 	espacioAsignado aux;
 	aux.IDPaginaInterno = 0;
 	aux.bitDePresencia = 0;

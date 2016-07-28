@@ -234,6 +234,22 @@ void newCpuClient(Socket* cpuClient, Stream dataSerialized) {
 			log_error(cpuhlog, "KER-CPU: HANDSHAKE fallo al devolver");
 		}
 
+
+		Stream buffer;
+		if(buffer=socketReceive(cpuClient)==NULL){
+					log_error(getLogger(),"no se pudo recibir el stack size");
+		}
+				StrCpuKer*infoQueViene=unserializeCpuKer(buffer);
+				if(infoQueViene->action==STACK_SIZE){
+		StrKerCpu*stringToCpu=newStrKerCpu(CPU_ID,STACK_SIZE,*pcbVacio,stackSize,0,NULL,0,NULL,0);
+		 buffer= serializeKerCpu(stringToCpu);
+		if(!socketSend(cpuClient,buffer)){
+			log_error(getLogger(),"no se pudo enviar: stack size al cpu");
+		}
+				}else{
+					log_error(getLogger(),"No llego recibir stack size del cpu");
+				}
+
 		break;
 	default:
 		log_error(cpuhlog, "Nueva CPU no puedo hacer el Handshake");

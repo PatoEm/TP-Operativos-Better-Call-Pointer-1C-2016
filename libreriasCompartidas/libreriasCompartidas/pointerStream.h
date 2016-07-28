@@ -68,6 +68,7 @@
 #define TAMANIO_DE_MARCOS 36
 #define WAIT_REALIZADO 37
 #define TERMINE_EL_QUANTUM 38
+#define STACK_SIZE 39
 
 
 #define TODO_PIOLA 69
