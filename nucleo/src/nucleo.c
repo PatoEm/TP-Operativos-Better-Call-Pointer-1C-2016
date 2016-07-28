@@ -211,7 +211,7 @@ void funcionHiloQuantum() {
 
 		verificarModificacionesArchivoConfig();
 		usleep(3);
-		leerArchivoDeConfiguracion("confignucleo");
+		leerArchivoDeConfiguracion(rutaArchivoConfig);
 		printf("Valores Seteados Nuevamente.\n");
 	}
 
@@ -233,7 +233,7 @@ void verificarModificacionesArchivoConfig() {
 	}
 
 	/*adding the “/tmp” directory into watch list. Here, the suggestion is to validate the existence of the directory before adding into monitoring list.*/
-	wd = inotify_add_watch(fd, "confignucleo", IN_MODIFY);
+	wd = inotify_add_watch(fd, rutaArchivoConfig, IN_MODIFY);
 
 	/*read to determine the event change happens on “/tmp” directory. Actually this read blocks until the change event occurs*/
 

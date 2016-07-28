@@ -27,12 +27,18 @@ int main(int argc, char** argv) {
 //
 //
 
+
+
 	if(argc != 2){
 		puts("No se ingreso la ruta del archivo de configuracion\n");
 		return 0;
 	}
 
-	inicializarVariables(argv[1]);
+	//memcpy(rutaArchivoConfig,&*argv[1],strlen(argv[1]));
+
+	rutaArchivoConfig=argv[1];
+
+	inicializarVariables(rutaArchivoConfig);
 	printf("%d", tamanioPaginas);
 
 	log_info(nucleolog, "Variables inicializadas.");

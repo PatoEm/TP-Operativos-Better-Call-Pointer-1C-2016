@@ -42,6 +42,7 @@
 //Variables Globales
 
 //Variables de lectura de archivo
+char* rutaArchivoConfig;
 char* puertoPropio;
 char* cpuPort;
 int quantum;
