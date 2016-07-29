@@ -568,6 +568,17 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se envio CERRARCONSOLA.");
 		}
+
+		// TODO CONFIMACION DE CERRAR CONSOLA
+
+		sb = socketReceive(consola_aux);
+		StrConKer* in_con_msg = unserializeConKer((Stream)sb);
+
+		if(in_con_msg->action == TODO_PIOLA){
+			log_info(cpuhlog, "Consola Cerrada");
+		}
+
+
 		StrUmcKer* streamALaUmc;
 		streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
 		NULL, 0, pcb_aux->id, 0, 0, 0, 0);
@@ -996,6 +1007,7 @@ void clientDown(int descriptor) {
 		} else {
 			log_info(cpuhlog, "Se aborto el programa a umc %d", pcbHuerfano->id);
 		}
+
 
 	} else {
 
