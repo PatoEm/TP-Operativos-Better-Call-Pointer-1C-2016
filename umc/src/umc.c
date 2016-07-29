@@ -171,6 +171,7 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
+	actualizarPuntero(nodoActual,contador,inicio,pid);
 	return nodoActual;
 }
 
@@ -192,13 +193,10 @@ void sacarPaginaDeTelebe(int pid, int pg) {
 //devuelve el nodo del espacio en memoria
 int reemplazarPaginaClock(int pid, int pagina) {
 
-//int inicio = lugarAsignadoInicial(pid);
-//int fin = lugarAsignadoFinal(pid);
 	int posicionDePaginaLibre;
 	StrUmcSwa*streamUmcSwap;
 	espacioAsignado*nodoActual;
 	nodoActual = buscarBitDeUsoEn0(pid);
-	//nodoActual = buscarBitDeUsoEn0(pid);
 	nodoActual->bitDePresencia = 0;
 	if (tlbHabilitada())
 		sacarPaginaDeTelebe(nodoActual->pid, nodoActual->numDePag);
@@ -440,17 +438,17 @@ int encontrarPuntero(int pid) {
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
 	nodoActual->punteroAPagina = 0;
-	espacioAsignado*nodoSiguiente;
-	if (listaEspacioAsignado->elements_count == contador + 1) {
-		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
-	} else
-		nodoSiguiente = (list_get(listaEspacioAsignado, (contador + 1)));
-	if (nodoSiguiente->pid == pid)
-		nodoSiguiente->punteroAPagina = 1;
-	else {
-		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
-		nodoSiguiente->punteroAPagina = 1;
-	}
+//	espacioAsignado*nodoSiguiente;
+//	if (listaEspacioAsignado->elements_count == contador + 1) {
+//		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
+//	} else
+//		nodoSiguiente = (list_get(listaEspacioAsignado, (contador + 1)));
+//	if (nodoSiguiente->pid == pid)
+//		nodoSiguiente->punteroAPagina = 1;
+//	else {
+//		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
+//		nodoSiguiente->punteroAPagina = 1;
+//	}
 
 	return contador;
 }
@@ -495,6 +493,7 @@ int paginasOcupadasPorPid(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
+	puts("solicito bytes");//todo
 	usleep(1000 * espera);
 	//char*paginaADevolver= malloc(1024);
 	char *paginaADevolver = malloc(sizeof(char) * cantidad); //todo aca cambie, fijarse
@@ -508,6 +507,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 
 	}
+	puts("encontré el pid");//todo
 	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
 		sprintf(paginaADevolver, "%s", "-1");
 		paginaEncontrada = FALSE;
@@ -515,6 +515,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		return paginaADevolver;
 	}
 	if (nodoALeer->bitDePresencia == 1) {
+		puts("estoy en memoria perro"); //todo
 		(nodoALeer->bitUso) = 1;
 		int lugarDeLaCadena = 0;
 		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
@@ -534,6 +535,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 
 		if (paginasOcupadasPorPid(pid) < marco_x_proc
 				&& paginasContiguasDeUMC(1) != -1) {
+			puts("me cargo en memoria sin NINGUN algoritmo");//todo
 			int contador = 0;
 			paginasPorPrograma*paginaAEncontrar = list_get(
 					listaPaginasPorPrograma, contador);
@@ -582,7 +584,9 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			free(streamUmcSwap);
 			return (paginaADevolver);
 		} else {
+			puts("voy a reemplazar una página!!!!!");//todo
 			int frame = reemplazarPagina(pid, pagina, 1);
+			puts("reemplaze una pagina, estás hasta la pija");//todo
 			int comienzoDeCadena = frame * marco_Size + offset;
 			int lugarDeLaCadena = 0;
 			while (lugarDeLaCadena < cantidad) {
