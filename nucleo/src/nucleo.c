@@ -704,7 +704,7 @@ bool satisfacerCpuAlPedo(){
 		Socket* cpuLoca = list_remove(listaCpu, 0);
 		printf("CPU al pedo removida, LISTACPU = %d\n", listaCpu->elements_count);
 		if(!enviarPcbACpu(cpuLoca)){
-			puts("No se pudo enviar pcb");
+			puts("No hay PCBs en cola de Ready");
 			list_add(listaCpu, cpuLoca);
 			printf("CPU al pedo añadida, LISTACPU = %d\n", listaCpu->elements_count);
 		} else {
