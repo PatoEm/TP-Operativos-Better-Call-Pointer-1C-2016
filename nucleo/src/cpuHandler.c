@@ -737,7 +737,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		}
 		if(in_umc_msg->action == PROGRAMA_NO_INICIALIZADO){
 			log_error(cpuhlog, "La UMC mando abortar el nuevo programa. :(");
-			char* mensajeAbortar = "\n> La UMC no pudo inicializar programa. <\n";
+			char* mensajeAbortar = "\n> La SWAP no pudo inicializar programa. <\n";
 			StrKerCon* out_con_msg;
 			out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, 0,
 					strlen(mensajeAbortar), mensajeAbortar);
