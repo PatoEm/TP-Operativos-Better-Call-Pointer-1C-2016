@@ -356,9 +356,6 @@ bool lectoEscritura) {
 	int posicionDePaginaLibre;
 	espacioAsignado*nodoActual;
 	nodoActual = buscarPaginaClockModificado(pid, pagina);
-	while (nodoActual->bitDePresencia == 0) {
-		nodoActual = buscarPaginaClockModificado(pid, pagina);
-	}
 	posicionDePaginaLibre = nodoActual->IDPaginaInterno;
 	nodoActual->bitDePresencia = 0;
 	if (tlbHabilitada())
