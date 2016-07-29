@@ -1017,7 +1017,7 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 
 //IMPRIMO EN PANTALLA
 	puts("Paginas Asignadas:\n");
-	while (i < list_size(listaEspacioAsignado)) {
+	while (i < listaEspacioAsignado->elements_count) {
 		nodoActualDeAsignados = list_get(listaEspacioAsignado, i);
 		if (nodoActualDeAsignados->bitDePresencia) {
 			printf("ID Frame: %d\n", nodoActualDeAsignados->IDPaginaInterno);
@@ -1037,6 +1037,7 @@ void dumpEstructuraDeMemoriaTodosLosProcesos() {
 			printf("ID Frame: %d \n", i);
 			log_info(umclog, "Frame libre: %d\n", i);
 		}
+		i++;
 	}
 
 }
