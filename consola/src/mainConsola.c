@@ -231,12 +231,12 @@ Boolean instructionsFromKernel() {
 			return realizarImprimirTexto();
 		case CERRARCONSOLA:
 			log_info(getLogger(), "Cerrando CONSOLA");
-			StrConKer* out_ker_msg = newStrConKer(CONSOLA_ID, TODO_PIOLA, NULL, 0);
-			sb = serializeConKer(out_ker_msg);
-
-			if(!socketSend(kernelClient->ptrSocket, sb)){
-				puts("NO SE PUDO ENVIAR EL MENSAJE!!");
-			}
+//			StrConKer* out_ker_msg = newStrConKer(CONSOLA_ID, TODO_PIOLA, NULL, 0);
+//			sb = serializeConKer(out_ker_msg);
+//
+//			if(!socketSend(kernelClient->ptrSocket, sb)){
+//				puts("NO SE PUDO ENVIAR EL MENSAJE!!");
+//			}
 
 			return realizarCierreConsola();
 		default:

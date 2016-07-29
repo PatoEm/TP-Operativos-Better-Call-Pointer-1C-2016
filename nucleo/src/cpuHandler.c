@@ -571,12 +571,12 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 
 		// TODO CONFIMACION DE CERRAR CONSOLA
 
-		sb = socketReceive(consola_aux);
-		StrConKer* in_con_msg = unserializeConKer((Stream)sb);
-
-		if(in_con_msg->action == TODO_PIOLA){
-			log_info(cpuhlog, "Consola Cerrada");
-		}
+//		sb = socketReceive(consola_aux);
+//		StrConKer* in_con_msg = unserializeConKer((Stream)sb);
+//
+//		if(in_con_msg->action == TODO_PIOLA){
+//			log_info(cpuhlog, "Consola Cerrada");
+//		}
 
 
 		StrUmcKer* streamALaUmc;
