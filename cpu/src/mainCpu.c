@@ -108,11 +108,11 @@ int main() {
 			while (quantum > 0 && seguirEjecutando && !finalizoCorrectamente
 					&& !devolverPCB && !elAbortador) {
 				instruccionLoca = pedirInstruccion(pcbProceso);
-
+				if(seguirEjecutando!=0){
 				analizadorLinea(instruccionLoca, &funciones,
 						&funcionesDeKernel);
-
 				free(instruccionLoca);
+				}
 				if (saltoDeLinea == FALSE) {
 					moverProgramCounterPcb(pcbProceso);
 				}
