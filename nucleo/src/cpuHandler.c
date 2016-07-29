@@ -382,7 +382,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		variable = stringFromByteArray(in_cpu_msg->nombreDispositivo,
 				in_cpu_msg->lenNomDispositivo);
 
-		// Obtener nuevo valor TODO que el cpu pase esto así
+		// Obtener nuevo valor
 		valor = in_cpu_msg->pid;
 
 		// Asigno el valor.
@@ -460,25 +460,31 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		break;
 
 		// ACA VA EL RECONOCIMIENTO DE ACCIONES
-	case RECIBIR_NUEVO_PROGRAMA:
+	case RECIBIR_NUEVO_PROGRAMA: //TODO
 
 		log_info(cpuhlog, "KERNEL : CPU %d ha enviado RECIBIR_NUEVO_PROGRAMA",
 				cpuClient->descriptor);
 
-		if (enviarPcbACpu(cpuClient)) {
-			log_info(cpuhlog, "KERNEL : Programa enviado a CPU %d",
-					cpuClient->descriptor);
-		} else {
-			log_info(cpuhlog, "KERNEL : No hay trabajitos para CPU %d ",
-					cpuClient->descriptor);
-			list_add(listaCpu, (void*) cpuClient);
-			log_info(cpuhlog, "CPU al pedo añadida, LISTACPU = %d",
-					listaCpu->elements_count);
-		}
+//		if (enviarPcbACpu(cpuClient)) {
+//			log_info(cpuhlog, "KERNEL : Programa enviado a CPU %d",
+//					cpuClient->descriptor);
+//		} else {
+//			log_info(cpuhlog, "KERNEL : No hay trabajitos para CPU %d ",
+//					cpuClient->descriptor);
+//			list_add(listaCpu, (void*) cpuClient);
+//			log_info(cpuhlog, "CPU al pedo añadida, LISTACPU = %d",
+//					listaCpu->elements_count);
+//		}
+
+		pthread_mutex_lock(listaCpu);
+		list_add(listaCpu, (void*) cpuClient);
+		pthread_mutex_unlock(listaCpu);
+
+		satisfacerCpuAlPedo();
 
 		break;
 
-	case IMPRIMIRTEXTO: // TODO: Probar.
+	case IMPRIMIRTEXTO:
 		// Creo y serializo string kernel a consola.
 		out_con_msg = newStrKerCon(KERNEL_ID, IMPRIMIRTEXTO, 0,
 				in_cpu_msg->logLen, in_cpu_msg->log);
@@ -519,7 +525,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	case ENTRADA_SALIDA:
 
 		atributos = malloc(sizeof(atributosIO));
-//	  TODO: Proba esto para obtener el string.
+//	 	Proba esto para obtener el string.
 		nombreDispositivo = stringFromByteArray(in_cpu_msg->nombreDispositivo,
 				in_cpu_msg->lenNomDispositivo);
 //	  nombreDispositivo=in_cpu_msg->nombreDispositivo;
@@ -618,7 +624,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		if (buscarPCB(listaExec, &in_cpu_msg->pcb)) {
 			moverAColaReady(&in_cpu_msg->pcb);
 
-		} else { //TODO asdasd
+		} else {
 
 			pcb_aux = &in_cpu_msg->pcb;
 
@@ -749,7 +755,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 
 		break;
 
-	case ABORTAR_PROGRAMA: //TODO HACER
+	case ABORTAR_PROGRAMA:
 		printf("Se pidio ABORTAR programa para consola.\n");
 		pthread_mutex_lock(mutexListaExec);
 		pcbLoco = buscarPCBPorConsola(listaExec, consoleClient);
@@ -854,7 +860,7 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 		pthread_mutex_unlock(mutexColaReady);
 
 		pcbAEnviar->estado = EXEC; //2 EXEC
-//		pcbAEnviar->cpu = cpuLoca; //TODO: Activar esto para que mate procesos en exec cuando cae la cpu, ver primero el tema de la umc.
+//		pcbAEnviar->cpu = cpuLoca; Activar esto para que mate procesos en exec cuando cae la cpu, ver primero el tema de la umc.
 
 		pthread_mutex_lock(mutexListaExec);
 		list_add(listaExec, pcbAEnviar);
@@ -864,7 +870,6 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 //	moverAListaExec(pcbAEnviar);
 
 		pthread_mutex_lock(mutexQuantum);
-		//todo ver envio_pcb
 
 
 	char*	auxStackSize = intToStr(stackSize);
@@ -902,7 +907,7 @@ bool enviarPcbACpu(Socket * cpuLoca) {
 //	pthread_create(&hiloCpuAlPedo, &attrHiloCpuAlPedo, (void*) &funcionHiloCpuAlPedo, punteroACopia);
 //	pthread_attr_destroy(&attrHiloCpuAlPedo);
 
-//	 TODO: Aca iria un else en caso de que no haya en la cola de ready,
+//	 Aca iria un else en caso de que no haya en la cola de ready,
 //	 Tendría que mandar un mensaje para que el cpu siga pidiendo.
 }
 
@@ -936,7 +941,6 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 //	moverAListaExec(pcbAEnviar);
 
 	pthread_mutex_lock(mutexQuantum);
-	//todo ver envio_pcb
 	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum, 0,
 	NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
 	pthread_mutex_unlock(mutexQuantum);
