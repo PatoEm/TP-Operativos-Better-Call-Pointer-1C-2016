@@ -720,7 +720,7 @@ bool satisfacerCpuAlPedo(){
 }
 
 
-pcb* buscarPcbPorDescriptor(t_list* lista, int descriptor){
+pcb* buscarPcbPorCpu(t_list* lista, int descriptor){
   int i;
   pcb * pcbComparar;
   for (i = 0; i < list_size(lista); i++) {
@@ -733,6 +733,17 @@ pcb* buscarPcbPorDescriptor(t_list* lista, int descriptor){
   return NULL;
 }
 
+pcb* buscarPcbPorConsola(t_list* lista, int descriptor){
+  int i;
+  pcb * pcbComparar;
+  for (i = 0; i < list_size(lista); i++) {
+    pcbComparar = ((pcb*) list_get(lista, i));
+    if ((int)(pcbComparar->consola->descriptor) == (int)(descriptor)) {
+      return list_get(lista, i);
+    }
+  }
+  return NULL;
+}
 
 bool eliminarCpuPorDescriptorYDevuelveUnBool(t_list* lista, int descriptor){
   int i;

@@ -953,16 +953,16 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 }
 
 void clientDown(int descriptor) {
-
-	pcb* pcbHuerfano = buscarPcbPorDescriptor(listaExec, descriptor);
 	StrKerCon* out_con_msg;
 	SocketBuffer* sb;
-	StrUmcKer* streamALaUmc;
+	StrKerUmc* out_umc_msg;
 	Socket* consola_aux;
+
+	pcb* pcbHuerfano = buscarPcbPorCpu(listaExec, descriptor);
 
 	if (pcbHuerfano != NULL) {
 		log_error(cpuhlog, "El cliente tenía al PCB %d", pcbHuerfano->id);
-		puts("Pido patito Cola Ready");
+		log_info(cpuhlog, "Pido patito Cola Ready");
 
 		log_info(cpuhlog, "Aborto el programa %d.", pcbHuerfano->id);
 		moverAColaExit(pcbHuerfano);
@@ -986,19 +986,15 @@ void clientDown(int descriptor) {
 		}
 		//Envio UMC
 		//StrUmcKer* streamALaUmc;
-		streamALaUmc = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA,
-		NULL, 0, pcbHuerfano->id, 0, 0, 0, 0);
-		sb = serializeUmcKer(streamALaUmc);
+		out_umc_msg = newStrKerUmc(KERNEL_ID, FINALIZAR_PROGRAMA, NULL, 0, pcbHuerfano->id, 0, 0, 0, 0);
+		sb = (SocketBuffer*)serializeUmcKer(out_umc_msg);
 		if (!socketSend(umcServer->ptrSocket, sb)) {
-			log_error(cpuhlog, "No se pudo abortar el programaa umc %d",
-					pcbHuerfano->id);
+			log_error(cpuhlog, "No se pudo abortar el programaa umc %d", pcbHuerfano->id);
 		} else {
-			log_info(cpuhlog, "Se aborto el programa a umc %d",
-					pcbHuerfano->id);
+			log_info(cpuhlog, "Se aborto el programa a umc %d", pcbHuerfano->id);
 		}
 
 	} else {
-		log_error(cpuhlog, "El cliente no tenía PCBs.");
 
 		pthread_mutex_lock(mutexListaCpu);
 		if (eliminarCpuPorDescriptorYDevuelveUnBool(listaCpu, descriptor)) {
@@ -1006,6 +1002,37 @@ void clientDown(int descriptor) {
 					listaCpu->elements_count);
 		}
 		pthread_mutex_unlock(mutexListaCpu);
+	}
+
+	pcbHuerfano = buscarPcbPorConsola(listaExec, descriptor);
+	if(pcbHuerfano == NULL) pcbHuerfano = buscarPcbPorConsola(listaReady, descriptor);
+	if(pcbHuerfano == NULL) pcbHuerfano = buscarPcbPorConsola(listaBlock, descriptor);
+
+	if(pcbHuerfano != NULL){
+		log_error(cpuhlog, "El cliente era una CONSOLA");
+		log_error(cpuhlog, "El cliente tenía al PCB %d", pcbHuerfano->id);
+		log_info(cpuhlog, "Pido patito Cola Ready");
+
+		puts("Pido patito lista Exec");
+		pthread_mutex_lock(mutexListaExec);
+		buscarYEliminarPCBEnLista(listaExec, pcbHuerfano);
+		pthread_mutex_unlock(mutexListaExec);
+		puts("Doy patito lista Exec");
+
+		puts("Pido patito lista Ready");
+		pthread_mutex_lock(mutexColaReady);
+		buscarYEliminarPCBEnLista(listaReady, pcbHuerfano);
+		pthread_mutex_unlock(mutexColaReady);
+		puts("Doy patito lista Ready");
+
+		puts("Pido patito lista Block");
+		pthread_mutex_lock(mutexListaBlock);
+		buscarYEliminarPCBEnLista(listaBlock, pcbHuerfano);
+		pthread_mutex_unlock(mutexListaBlock);
+		puts("Doy patito lista Block");
+
+		list_add(listaExit, pcbHuerfano);
+
 	}
 }
 

@@ -146,7 +146,8 @@ void funcionHiloIO(atributosIO*);
 void funcionHiloWait(atributosWait* );
 bool buscarPCB(t_list *, pcb*);
 bool satisfacerCpuAlPedo();
-pcb* buscarPcbPorDescriptor(t_list*, int);
+pcb* buscarPcbPorConsola(t_list*, int);
+pcb* buscarPcbPorCpu(t_list*, int);
 bool eliminarCpuPorDescriptorYDevuelveUnBool(t_list*, int);
 int calcularCantPagCod(int longitudArchivo);
 
