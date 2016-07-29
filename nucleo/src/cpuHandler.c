@@ -472,7 +472,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 			log_info(cpuhlog, "KERNEL : No hay trabajitos para CPU %d ",
 					cpuClient->descriptor);
 			list_add(listaCpu, (void*) cpuClient);
-			printf("CPU al pedo añadida, LISTACPU = %d\n",
+			log_info(cpuhlog, "CPU al pedo añadida, LISTACPU = %d",
 					listaCpu->elements_count);
 		}
 
@@ -844,7 +844,7 @@ String intToStr(Int32U integer) {
 
 bool enviarPcbACpu(Socket * cpuLoca) {
 
-	puts("Pido patito Cola Ready");
+	log_info(cpuhlog, "Pido patito Cola Ready");
 	pthread_mutex_lock(mutexColaReady);
 	if (listaReady->elements_count != 0) {
 //		printf("La CPU %d esta al re pedo.\n", cpuLoca->descriptor);
@@ -914,7 +914,7 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 		pthread_mutex_lock(mutexColaReady);
 
 		if (listaReady->elements_count == 0) {
-			printf("La CPU %d esta al re pedo.\n", cpuLoca->descriptor);
+			log_info(cpuhlog, "La CPU %d esta al re pedo.", cpuLoca->descriptor);
 			pthread_mutex_unlock(mutexColaReady);
 			sleep(1);
 		} else {
@@ -1044,6 +1044,6 @@ bool confirmarCpu(Socket* cpu) {
 		printf("No se pudo enviar confirmación a CPU. \n");
 		return FALSE;
 	}
-	puts("Se envió confirmación a CPU.");
+	log_info(cpuhlog, "Se envió confirmación a CPU.");
 	return TRUE;
 }
