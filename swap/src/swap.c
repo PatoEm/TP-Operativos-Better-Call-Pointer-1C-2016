@@ -295,6 +295,13 @@ void crearListas() {
 
 void compactarSwap() {
 
+	log_info(getLogger(), "=====================================\n"
+						  "========EMPECÉ A COMPACTAR!==========\n"
+						  "======== DAME TIEMPO PADRE ==========\n"
+						  "=====================================\n");
+
+
+
 	int paginasContiguas = 0;
 	paginaAsignada* nodoActual = malloc(sizeof(paginaAsignada));
 	int contadorParaCadenaActual;
@@ -329,6 +336,10 @@ void compactarSwap() {
 
 	}
 	usleep(1000 * atoi(retCompactacion));
+	log_info(getLogger(), "=====================================\n"
+						  "========TERMINÉ DE COMPACTAR!========\n"
+						  "======== SEGUÍ TRANQUI PERRO ========\n"
+						  "=====================================\n");
 }
 int tamanioCod(char*codigo) {
 	int i = 0;
@@ -361,6 +372,10 @@ void manejoDeConexiones() {
 
 	while (1) {
 		paginaAsignada paginaAMandar;
+		paginaAMandar.IDPaginaInterno = 0;
+		paginaAMandar.bitLectura = 0;
+		paginaAMandar.numDePag = 0;
+		paginaAMandar.pid = 0;
 		buffer = socketReceive(umcClient);
 		if (buffer == NULL) {
 			puts("Error al recibir del cliente");
@@ -423,7 +438,6 @@ void manejoDeConexiones() {
 					log_error(getLogger(), "Al enviar el paquete");
 				}
 			}
-
 			break;
 
 		case LEER_UNA_PAGINA:
@@ -446,7 +460,6 @@ void manejoDeConexiones() {
 				puts("Error al enviar el paquete");
 				log_error(getLogger(), "Al enviar el paquete");
 			}
-
 			break;
 
 		case ESCRIBIR_UNA_PAGINA:
@@ -481,7 +494,6 @@ void manejoDeConexiones() {
 				}
 
 			}
-
 			break;
 
 		case ELIMINAR_PROCESO:
@@ -494,13 +506,12 @@ void manejoDeConexiones() {
 			paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
 			paginaAMandar.bitLectura = 1;
 			streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA, paginaAMandar, 0,
-					NULL, 0, streamUmcSwap->pid);
+			NULL, 0, streamUmcSwap->pid);
 			buffer = serializeSwaUmc(streamSwapUmc);
 			if (!socketSend(umcClient, buffer)) {
 				puts("Error al enviar");
 				log_error(getLogger(), "Al enviar paquete");
 			}
-
 			break;
 
 		default:
