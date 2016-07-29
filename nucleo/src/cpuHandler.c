@@ -1011,28 +1011,22 @@ void clientDown(int descriptor) {
 	if(pcbHuerfano != NULL){
 		log_error(cpuhlog, "El cliente era una CONSOLA");
 		log_error(cpuhlog, "El cliente tenía al PCB %d", pcbHuerfano->id);
-		log_info(cpuhlog, "Pido patito Cola Ready");
 
-		puts("Pido patito lista Exec");
 		pthread_mutex_lock(mutexListaExec);
 		buscarYEliminarPCBEnLista(listaExec, pcbHuerfano);
 		pthread_mutex_unlock(mutexListaExec);
-		puts("Doy patito lista Exec");
 
-		puts("Pido patito lista Ready");
 		pthread_mutex_lock(mutexColaReady);
 		buscarYEliminarPCBEnLista(listaReady, pcbHuerfano);
 		pthread_mutex_unlock(mutexColaReady);
-		puts("Doy patito lista Ready");
 
-		puts("Pido patito lista Block");
 		pthread_mutex_lock(mutexListaBlock);
 		buscarYEliminarPCBEnLista(listaBlock, pcbHuerfano);
 		pthread_mutex_unlock(mutexListaBlock);
-		puts("Doy patito lista Block");
 
 		list_add(listaExit, pcbHuerfano);
 
+		log_error(cpuhlog, "Se agrego el PCB %d a la lista de EXIT.", pcbHuerfano->id);
 	}
 }
 
