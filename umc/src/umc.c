@@ -431,17 +431,6 @@ int encontrarPuntero(int pid) {
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
 	nodoActual->punteroAPagina = 0;
-//	espacioAsignado*nodoSiguiente;
-//	if (listaEspacioAsignado->elements_count == contador + 1) {
-//		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
-//	} else
-//		nodoSiguiente = (list_get(listaEspacioAsignado, (contador + 1)));
-//	if (nodoSiguiente->pid == pid)
-//		nodoSiguiente->punteroAPagina = 1;
-//	else {
-//		nodoSiguiente = list_get(listaEspacioAsignado, inicio);
-//		nodoSiguiente->punteroAPagina = 1;
-//	}
 
 	return contador;
 }
@@ -462,8 +451,7 @@ int lugarAsignadoFinal(int pid) {
 int lugarAsignadoInicial(int pid) {
 	int contador = 0;
 	espacioAsignado*nodoActual = list_get(listaEspacioAsignado, contador);
-	while (nodoActual->pid != pid
-	/*&& contador < list_size(listaPaginasPorPrograma)*/) { //todo cambie acá fijarse
+	while (nodoActual->pid != pid) { //todo cambie acá fijarse
 		contador++;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
@@ -474,8 +462,7 @@ int paginasOcupadasPorPid(int pid) {
 	int contador = 0;
 	paginasPorPrograma*paginaAEncontrar = list_get(listaPaginasPorPrograma,
 			contador);
-	while (paginaAEncontrar->pid != pid
-	/*&& contador < list_size(listaPaginasPorPrograma)*/) { //todo cambie acá fijarse
+	while (paginaAEncontrar->pid != pid) { //todo cambie acá fijarse
 
 		contador++;
 		if (contador == list_size(listaPaginasPorPrograma))
@@ -615,7 +602,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 		paginaEncontrada = FALSE;
 		log_error(umclog, "Segmentation fault, PID: %d", pid);
 	}
-	if (nodoALeer->bitDePresencia == 1) {
+	if (nodoALeer->bitDePresencia == 1 ) {
 		(nodoALeer->bitUso) = 1;
 		nodoALeer->bitModificado = 1;
 		int lugarDeLaCadena = 0;
