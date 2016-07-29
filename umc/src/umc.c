@@ -349,10 +349,6 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 int reemplazarPaginaClockModificado(int pid, int pagina,
 bool lectoEscritura) {
 
-	//int inicio = lugarAsignadoInicial(pid);
-	//int fin = lugarAsignadoFinal(pid);
-	int comienzoDelPuntero = encontrarPuntero(pid);
-	int contador = comienzoDelPuntero;
 	int posicionDePaginaLibre;
 	espacioAsignado*nodoActual;
 	nodoActual = buscarPaginaClockModificado(pid, pagina);
