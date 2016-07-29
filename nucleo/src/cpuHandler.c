@@ -476,9 +476,9 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 //					listaCpu->elements_count);
 //		}
 
-		pthread_mutex_lock(listaCpu);
+		pthread_mutex_lock(mutexListaCpu);
 		list_add(listaCpu, (void*) cpuClient);
-		pthread_mutex_unlock(listaCpu);
+		pthread_mutex_unlock(mutexListaCpu);
 
 		satisfacerCpuAlPedo();
 
