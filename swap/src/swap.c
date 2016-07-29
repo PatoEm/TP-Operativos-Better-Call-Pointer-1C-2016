@@ -89,8 +89,6 @@ bool escribirPagina(int pid, int numeroDePagina, char*pagina) {
 }
 
 char* leerUnaPagina(int pid, int numeroDePagina) {
-	char paginaLeida[5] = "-2";
-	char*punteroAPaginaLeida = (&paginaLeida[0]);
 	paginaAsignada* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -218,6 +216,7 @@ void eliminarProceso(int pid) {
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 		if (list_size(listaEspacioAsignado) == nodoActualAReventar)
 			break;
+
 	}
 	log_info(getLogger(), "Proceso (PID %d) eliminado correctamente", pid);
 }
