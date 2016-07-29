@@ -138,7 +138,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					&& cantidadDePaginasLibres() == 0) {
 				log_error(umclog,
-						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d.",
+						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d por falta de espacio en la UMC.",
 						mi_socket, socket->descriptor);
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
 						*unaPagina, scu->offset, 0, NULL, pidActivo);
@@ -181,7 +181,7 @@ void manageCpuRequest(Socket* socket, StrCpuUmc* scu) {
 			if (paginasOcupadasPorPid(pidActivo) == 0
 					&& cantidadDePaginasLibres() == 0) {
 				log_error(umclog,
-						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d.",
+						"HILO %d: Se manda ABORTAR_PROGRAMA a la CPU %d por falta de espacio en la UMC.",
 						mi_socket, socket->descriptor);
 				streamUmcCpu = newStrUmcCpu(UMC_ID, 35 /*ABORTAR_PROGRAMA*/,
 						*unaPagina, scu->offset, 0, NULL, pidActivo);
