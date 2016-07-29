@@ -152,7 +152,9 @@ void checkCpuConnections() {
 						clientHandler((int) i);
 					}
 				}
+
 			}
+			//satisfacerCpuAlPedo();
 		}
 	}
 }
@@ -344,6 +346,7 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 	StrCpuKer* in_cpu_msg = unserializeCpuKer(data);
 	StrKerCon* out_con_msg;
 	StrKerCpu* out_cpu_msg;
+	StrUmcKer* in_umc_msg;
 	SocketBuffer* sb;
 	Socket* consola_aux;
 	Byte * nombreDispositivo;
@@ -589,6 +592,14 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se finalizo el programa a umc %d", pcb_aux->id);
 		}
+
+		sb = socketReceive(umcServer->ptrSocket);
+		in_umc_msg = unserializeUmcKer((Stream) sb);
+		if(in_umc_msg->action==TODO_PIOLA){
+			log_info(cpuhlog, "La UMC confirmo la Finalizacion del programa");
+		}
+
+
 		confirmarCpu(cpuClient);
 		break;
 
@@ -624,6 +635,12 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 		} else {
 			log_info(cpuhlog, "Se aborto el programa a umc %d", pcb_aux->id);
 		}
+		sb = socketReceive(umcServer->ptrSocket);
+				 in_umc_msg = unserializeUmcKer((Stream) sb);
+				if(in_umc_msg->action==TODO_PIOLA){
+					log_info(cpuhlog, "La UMC confirmo la Finalizacion del programa");
+				}
+
 		confirmarCpu(cpuClient);
 		break;
 
@@ -651,6 +668,11 @@ void cpuClientHandler(Socket* cpuClient, Stream data) {
 				log_info(cpuhlog, "Se aborto el programa a umc %d",
 						pcb_aux->id);
 			}
+			sb = socketReceive(umcServer->ptrSocket);
+				in_umc_msg = unserializeUmcKer((Stream) sb);
+				if(in_umc_msg->action==TODO_PIOLA){
+					log_info(cpuhlog, "La UMC confirmo la Finalizacion del programa");
+				}
 
 		}
 		confirmarCpu(cpuClient);
@@ -971,6 +993,7 @@ void clientDown(int descriptor) {
 	SocketBuffer* sb;
 	StrKerUmc* out_umc_msg;
 	Socket* consola_aux;
+	StrUmcKer * in_umc_msg;
 
 	pcb* pcbHuerfano = buscarPcbPorCpu(listaExec, descriptor);
 
@@ -1007,7 +1030,11 @@ void clientDown(int descriptor) {
 		} else {
 			log_info(cpuhlog, "Se aborto el programa a umc %d", pcbHuerfano->id);
 		}
-
+		sb = socketReceive(umcServer->ptrSocket);
+			in_umc_msg = unserializeUmcKer((Stream) sb);
+			if(in_umc_msg->action==TODO_PIOLA){
+				log_info(cpuhlog, "La UMC confirmo la Finalizacion del programa");
+			}
 
 	} else {
 
