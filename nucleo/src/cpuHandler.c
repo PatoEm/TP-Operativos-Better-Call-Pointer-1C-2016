@@ -973,8 +973,12 @@ void funcionHiloCpuAlPedo(Socket * cpuLoca) {
 //	moverAListaExec(pcbAEnviar);
 
 	pthread_mutex_lock(mutexQuantum);
-	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum, 0,
-	NULL, 0, NULL /*NOMBRE DISPOSITIVO*/, 0 /*LEN NOMBRE DISPOSITIVO*/);
+
+//	(Char id, Char action, pcb pcb, Int32U quantum,
+//			Int32U quantumSleep, Byte* data, Int32U dataLen,
+//			Byte* nombreDispositivo, Int32U lenNomDispositivo)
+
+	StrKerCpu* skc = newStrKerCpu(KERNEL_ID, ENVIO_PCB, *pcbAEnviar, quantum, quantumSleep,NULL,0,NULL,0);
 	pthread_mutex_unlock(mutexQuantum);
 
 	SocketBuffer* sb = serializeKerCpu(skc);
