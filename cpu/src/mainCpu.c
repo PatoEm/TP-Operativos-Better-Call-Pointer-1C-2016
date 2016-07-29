@@ -167,7 +167,7 @@ int main() {
 			seguirEjecutando = TRUE;
 		}
 
-		config_destroy(tConfig);
+		//config_destroy(tConfig);
 
 		while (TRUE) {
 			if(elAbortador){
