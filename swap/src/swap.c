@@ -50,8 +50,7 @@ void setearValores(t_config * archivoConfig) {
 	nombreSwap = config_get_string_value(archivoConfig, "NOMBRE_SWAP");
 	paginas = config_get_string_value(archivoConfig, "CANTIDAD_PAGINAS");
 	tamPagina = config_get_string_value(archivoConfig, "TAMANIO_PAGINA");
-	retCompactacion = config_get_string_value(archivoConfig,
-			"RETARDO_COMPACTACION");
+	retCompactacion = config_get_string_value(archivoConfig, "RETARDO_COMPACTACION");
 
 	int nro1 = atoi(tamPagina);
 	int nro2 = atoi(paginas);
@@ -294,12 +293,10 @@ void crearListas() {
 
 void compactarSwap() {
 
-	log_info(getLogger(), "=====================================\n"
-						  "========EMPECÉ A COMPACTAR!==========\n"
-						  "======== DAME TIEMPO PADRE ==========\n"
-						  "=====================================\n");
-
-
+	log_info(getLogger(), "=====================================\n");
+	log_info(getLogger(), "========EMPECÉ A COMPACTAR!==========\n");
+	log_info(getLogger(), "======== DAME TIEMPO PADRE ==========\n");
+	log_info(getLogger(), "=====================================\n");
 
 	int paginasContiguas = 0;
 	paginaAsignada* nodoActual = malloc(sizeof(paginaAsignada));
@@ -322,7 +319,6 @@ void compactarSwap() {
 			bitMap[nodoActual->IDPaginaInterno] = 0;
 			(nodoActual->IDPaginaInterno) = paginasContiguas;
 			bitMap[paginasContiguas] = 1;
-
 		}
 		paginasContiguas++;
 		nodoActual = list_get(listaEspacioAsignado, paginasContiguas);
@@ -335,10 +331,10 @@ void compactarSwap() {
 
 	}
 	usleep(1000 * atoi(retCompactacion));
-	log_info(getLogger(), "=====================================\n"
-						  "========TERMINÉ DE COMPACTAR!========\n"
-						  "======== SEGUÍ TRANQUI PERRO ========\n"
-						  "=====================================\n");
+	log_info(getLogger(), "=====================================\n");
+	log_info(getLogger(), "========TERMINÉ DE COMPACTAR!========\n");
+	log_info(getLogger(), "======== SEGUÍ TRANQUI PERRO ========\n");
+	log_info(getLogger(), "=====================================\n");
 }
 int tamanioCod(char*codigo) {
 	int i = 0;
@@ -485,7 +481,8 @@ void manejoDeConexiones() {
 				paginaAMandar.pid = streamUmcSwap->pageComienzo.pid;
 				paginaAMandar.bitLectura = 1;
 				streamSwapUmc = newStrSwaUmc(SWAP_ID, TODO_PIOLA, paginaAMandar,
-						0, NULL, 0, streamUmcSwap->pid);
+						0,
+						NULL, 0, streamUmcSwap->pid);
 				buffer = serializeSwaUmc(streamSwapUmc);
 				if (!socketSend(umcClient, buffer)) {
 					puts("Error al enviar");
