@@ -695,25 +695,7 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 
 		SocketBuffer* buffer;
 		StrUmcKer* streamALaUmc;
-//puto
-//
-//		SocketBuffer * buffer;
-//		StrUmcKer * streamUmcKer;
-//		//(Char id, Char action, Byte* data, Int32U size, Int32U pid, Int32U cantPage)
-//		streamUmcKer=newStrUmcKer(KERNEL_ID,TAMANIO_DE_MARCOS,NULL,0,0,0);
-//		buffer=serializeUmcKer(streamUmcKer);
-//		socketSend(umcServer,buffer);
-//
-//		buffer = socketReceive(umcServer);
-//
-//		if (buffer == NULL)
-//			puts("Error al recibir del cliente");
-//
-//		streamUmcKer = unserializeUmcKer(buffer);
-		//puto
-		//(Char id, Char action, Byte* data, Int32U size,
-		//	Int32U pid, Int32U cantPage, Int32U pagina, Int32U offset,
-		//Int32U tamanio)
+
 		streamALaUmc = newStrKerUmc(KERNEL_ID, INICIALIZAR_PROGRAMA,
 				sck->fileContent, sck->fileContentLen, pcbLoco->id,
 				pcbLoco->paginasDeCodigo, 0, 0,
@@ -726,9 +708,6 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 			log_info(cpuhlog, "Se inicializo el programa %d", pcbLoco->id);
 		}
 
-		//createNewPcb(sck);
-//			log_info(cpuhlog, "KERNEL : El proceso %d comenzara",pcb->id);
-
 		//CARGO LA CONSOLA INGRESADA JUNTO CON EL PCB QUE
 		//TRAJO A LA LISTA DE CONSOLAS QUE VOY A USAR PARA GESTIONAR
 		//LOS SERVICIOS EXPUESTOS A LA CPU
@@ -740,18 +719,38 @@ void consoleClientHandler(Socket *consoleClient, Stream data) {
 		clientConsole->dataLength = sck->fileContentLen;
 
 //			mtxLock(&mtxConsoleList);
-		pthread_mutex_lock(mutexListaExec);
-		list_add(consoleList, clientConsole);
-		pthread_mutex_unlock(mutexListaExec);
+//		pthread_mutex_lock(mutexListaExec);
+//		list_add(consoleList, clientConsole);
+//		pthread_mutex_unlock(mutexListaExec);
 //			mtxUnlock(&mtxConsoleList);
-		log_info(cpuhlog, "KERNEL : Consola %d añadida a la lista",
-				consoleClient->descriptor);
+//		log_info(cpuhlog, "KERNEL : Consola %d añadida a la lista",
+//				consoleClient->descriptor);
 
-		//MUEVO EL NUEVO PCB A LA COLA DE NEW
-//			newProcessesHandlerThread(pcb);
+		// CONFIRMACION DE UMC
 
-//		ACA VEMOS SI HABIA CPUs AL PEDO LO MANDO, SINO A READY
-		moverAColaReady(pcbLoco);
+		buffer = socketReceive(umcServer->ptrSocket);
+		StrUmcKer* in_umc_msg = unserializeUmcKer((Stream) buffer);
+
+		if(in_umc_msg->action == PROGRAMA_RECIBIDO){
+			log_info(cpuhlog, "Programa recbido por la UMC.");
+			moverAColaReady(pcbLoco);
+		}
+		if(in_umc_msg->action == PROGRAMA_NO_INICIALIZADO){
+			log_error(cpuhlog, "La UMC mando abortar el nuevo programa. :(");
+			char* mensajeAbortar = "\n> La UMC no pudo inicializar programa. <\n";
+			StrKerCon* out_con_msg;
+			out_con_msg = newStrKerCon(KERNEL_ID, CERRARCONSOLA, 0,
+					strlen(mensajeAbortar), mensajeAbortar);
+			sb = serializeKerCon(out_con_msg);
+
+			// Envio a la conchola
+			if (!socketSend(consoleClient, sb)) {
+				log_error(cpuhlog, "No se pudo cerrar la consola.");
+			} else {
+				log_info(cpuhlog, "Se envio CERRARCONSOLA.");
+			}
+
+		}
 
 		break;
 
