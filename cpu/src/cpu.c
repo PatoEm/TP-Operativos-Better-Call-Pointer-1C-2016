@@ -47,7 +47,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 	SocketBuffer*buffer;
 	StrUmcCpu*streamUmcCpu;
 	int tam = 100;
-	variables*variable=malloc(sizeof(variables));
+	variables*variable = malloc(sizeof(variables));
 	if (1 == list_size(pcbProceso->indiceDelStack))
 		tam = list_size(pcbProceso->indiceDelStack);
 	if (0 == list_size(pcbProceso->indiceDelStack)
@@ -56,7 +56,8 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 		asignadoVacio->numDePag = (pcbProceso->cantPagCod);
 		asignadoVacio->bitUso = 4;
 		nuevaVariable->pos = 0;
-		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, 0, 0, NULL, 0);
+		streamCpuUmc = newStrCpuUmc(CPU_ID, SOLICITAR_BYTES, *asignadoVacio, 0,
+				0, NULL, 0);
 
 		buffer = serializeCpuUmc(streamCpuUmc);
 
@@ -65,8 +66,8 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			return FALSE;
 		}
 
-		if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-			log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+		if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+			log_error(getLogger(), "No se pudo recibir el stream de la UMC.");
 			return FALSE;
 		}
 
@@ -75,7 +76,7 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 		if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 			seguirEjecutando = FALSE;
 		} else {
-			if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod ) {
+			if (asignadoVacio->numDePag != stackSize + pcbProceso->cantPagCod) {
 				if (0 == list_size(pcbProceso->indiceDelStack)) {
 					nuevaVariable->pos = 0;
 					variable->idVar = identificador_variable;
@@ -117,19 +118,21 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 				return FALSE;
 			}
 
-			if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-				log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+			if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+				log_error(getLogger(),
+						"No se pudo recibir el stream de la UMC.");
 				return FALSE;
 			}
-
 
 			streamUmcCpu = unserializeCpuUmc(buffer);
 
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
-				if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod) {
-					ultimaPaginaStack=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso->indiceDelStack)-1);
+				if (asignadoVacio->numDePag
+						!= stackSize + pcbProceso->cantPagCod) {
+					ultimaPaginaStack = list_get(pcbProceso->indiceDelStack,
+							list_size(pcbProceso->indiceDelStack) - 1);
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->offVar = 0;
@@ -151,8 +154,9 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 				return FALSE;
 			}
 
-			if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-				log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+			if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+				log_error(getLogger(),
+						"No se pudo recibir el stream de la UMC.");
 				return FALSE;
 			}
 
@@ -161,8 +165,10 @@ t_puntero definirVariable(t_nombre_variable identificador_variable) {
 			if (streamUmcCpu->action == ABORTAR_PROGRAMA) {
 				seguirEjecutando = FALSE;
 			} else {
-				if (asignadoVacio->numDePag != stackSize +pcbProceso->cantPagCod) {
-					ultimaPaginaStack=list_get(pcbProceso->indiceDelStack,list_size(pcbProceso->indiceDelStack)-1);
+				if (asignadoVacio->numDePag
+						!= stackSize + pcbProceso->cantPagCod) {
+					ultimaPaginaStack = list_get(pcbProceso->indiceDelStack,
+							list_size(pcbProceso->indiceDelStack) - 1);
 					variable->idVar = identificador_variable;
 					variable->pagVar = asignadoVacio->numDePag;
 					variable->sizeVar = 4;
@@ -232,11 +238,10 @@ t_valor_variable dereferenciar(t_puntero direccion_variable) {
 		return FALSE;
 	}
 
-	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el stream de la UMC.");
 		return FALSE;
 	}
-
 
 	StrUmcCpu*streamUmcCpu;
 
@@ -267,13 +272,12 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 			4, dataAMandar, 0);
 	SocketBuffer* buffer = serializeCpuUmc(streamCpuUMC);
 
-
 	if (!socketSend(socketUMC->ptrSocket, buffer)) {
 		log_error(getLogger(), "No se pudo realizar ASIGNAR.");
 	}
 
-	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el stream de la UMC.");
 	}
 
 	free(dataAMandar);
@@ -283,12 +287,11 @@ void asignar(t_puntero direccion_variable, t_valor_variable valor) {
 		seguirEjecutando = FALSE;
 }
 
-
 /*
  * obtenerValorCompartida
  */
 t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
-	printf("CPU: Pidio OBTENER VALOR COMPARTIDA %s\n",variable);
+	printf("CPU: Pidio OBTENER VALOR COMPARTIDA %s\n", variable);
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -299,14 +302,14 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
 	SocketBuffer*buffer = serializeCpuKer(streamCpuKer);
 
 	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
-			log_error(getLogger(), "No se pudo realizar OBTENER VALOR COMPARTIDA.");
-			return FALSE;
-		}
+		log_error(getLogger(), "No se pudo realizar OBTENER VALOR COMPARTIDA.");
+		return FALSE;
+	}
 
-		if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-			log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
-			return FALSE;
-		}
+	if ((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el stream del NUCLEO.");
+		return FALSE;
+	}
 
 	free(variableMod);
 
@@ -324,7 +327,7 @@ t_valor_variable obtenerValorCompartida(t_nombre_compartida variable) {
  */
 t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		t_valor_variable valor) {
-	printf("CPU: Pidio ASIGNAR VALOR %d COMPARTIDA %s\n",valor,variable);
+	printf("CPU: Pidio ASIGNAR VALOR %d COMPARTIDA %s\n", valor, variable);
 	char* variableMod;
 	variableMod = sinEspacioAlFinal(variable, strlen(variable));
 
@@ -341,8 +344,8 @@ t_valor_variable asignarValorCompartida(t_nombre_compartida variable,
 		return FALSE;
 	}
 
-	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream del NUCLEO.");
+	if ((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el stream del NUCLEO.");
 		return FALSE;
 	}
 	StrKerCpu*streamKerCpu = unserializeKerCpu(buffer);
@@ -456,8 +459,8 @@ void retornar(t_valor_variable retorno) {
 		log_error(getLogger(), "No se pudo realizar RETORNAR.");
 	}
 
-	if((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream de la UMC.");
+	if ((buffer = socketReceive(socketUMC->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el stream de la UMC.");
 	}
 
 	StrUmcCpu*streamUmcCpu;
@@ -522,7 +525,7 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 	identificadorMod = sinEspacioAlFinal(dispositivo, strlen(dispositivo));
 
 	String auxTiempo;
-	auxTiempo=intToStr(tiempo);
+	auxTiempo = intToStr(tiempo);
 	StrCpuKer*streamCpuKer;
 	moverProgramCounterPcb(pcbProceso);
 	streamCpuKer = newStrCpuKer(CPU_ID, ENTRADA_SALIDA, *pcbProceso,
@@ -533,10 +536,9 @@ void entradaSalida(t_nombre_dispositivo dispositivo, int tiempo) {
 
 	if (!socketSend(socketNucleo->ptrSocket, buffer)) {
 		log_error(getLogger(), "No se pudo realizar ENTRADA SALIDA.");
-	}else{
+	} else {
 		esperarConfirmacion(socketNucleo);
 	}
-
 
 	free(identificadorMod);
 	free(auxTiempo);
@@ -554,7 +556,7 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 	identificadorMod = sinEspacioAlFinal(identificador_semaforo,
 			strlen(identificador_semaforo));
 	moverProgramCounterPcb(pcbProceso);
-	saltoDeLinea=TRUE;
+	saltoDeLinea = TRUE;
 	StrCpuKer*streamCpuKer;
 	streamCpuKer = newStrCpuKer(CPU_ID, WAIT_SEM_ANSISOP, *pcbProceso,
 			pcbProceso->id, strlen(identificadorMod), identificadorMod,
@@ -565,16 +567,16 @@ void wait(t_nombre_semaforo identificador_semaforo) {
 		log_error(getLogger(), "No se pudo enviar el WAIT.");
 	}
 
-	if((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream del Nucleo.");
+	if ((buffer = socketReceive(socketNucleo->ptrSocket)) == NULL) {
+		log_error(getLogger(), "No se pudo recibir el stream del Nucleo.");
 	}
 
 	StrKerCpu*StreamKerCpu = unserializeKerCpu(buffer);
 	if (StreamKerCpu->action == WAIT_REALIZADO) {
 		seguirEjecutando = TRUE;
 	}
-	if ((StreamKerCpu->action == PROGRAMA_BLOQUEADO) ){
-		devolverPCB=TRUE;
+	if ((StreamKerCpu->action == PROGRAMA_BLOQUEADO)) {
+		devolverPCB = TRUE;
 	}
 	free(identificadorMod);
 }
@@ -610,7 +612,8 @@ char * pedirCodigoAUMC() {
 			malloc(
 					sizeof(char)
 							* pcbProceso->indiceDeCodigo[pcbProceso->programCounter].longitud);
-	int comienzo = pcbProceso->indiceDeCodigo[pcbProceso->programCounter].comienzo;
+	int comienzo =
+			pcbProceso->indiceDeCodigo[pcbProceso->programCounter].comienzo;
 
 	int paginaDeComienzo = comienzo / tamanioPaginaUmc;
 
@@ -661,8 +664,8 @@ AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 void abortarCPU() {
 //	if (seguirEjecutando) {
 //		seguirEjecutando = FALSE;
-		elAbortador=TRUE;
-		puts("Muero por SIGUSR1\n");
+	log_info(getLogger(), "Recibi SIGUSR1 y muero pero termino esta rafaga");
+	elAbortador = TRUE;
 	//}
 }
 
@@ -675,26 +678,27 @@ t_log* getLogger() {
 }
 
 void gestionoSIGINT() {
-	StrCpuKer* streamck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0, 0,
+	StrCpuKer* streamck = newStrCpuKer(CPU_ID, ABORTAR_PROGRAMA, *pcbProceso, 0,
+			0,
 			NULL, NULL, 0);
 	SocketBuffer* bufferr = serializeCpuKer(streamck);
 
 	if (!socketSend(socketNucleo->ptrSocket, bufferr)) {
-		log_info(getLogger(),
-				"No se pudo enviar el buffer al nucleo.");
+		log_info(getLogger(), "No se pudo enviar el buffer al nucleo.");
 	}
 	log_info(getLogger(), "Aborte el programa por SIGINT");
 	int pid = getpid();
-	kill(pid , SIGTERM);
+	kill(pid, SIGTERM);
 }
 
-bool esperarConfirmacion(SocketClient* socket){
+bool esperarConfirmacion(SocketClient* socket) {
 	SocketBuffer* sb;
 	StrKerUmc* in_ker_msg;
 	StrUmcCpu* in_umc_msg;
 
-	if((sb = socketReceive(socket->ptrSocket)) == NULL) {
-		log_error(getLogger(),"No se pudo recibir el stream del socket que me envia.");
+	if ((sb = socketReceive(socket->ptrSocket)) == NULL) {
+		log_error(getLogger(),
+				"No se pudo recibir el stream del socket que me envia.");
 		return FALSE;
 	}
 
@@ -705,17 +709,16 @@ bool esperarConfirmacion(SocketClient* socket){
 	Stream strReceived = (Stream) sb->data;
 	Char id = getStreamId(strReceived);
 
-
 	switch (id) {
 	case UMC_ID:
 		in_umc_msg = unserializeUmcCpu((Stream) sb->data);
-		if(in_umc_msg->action == TODO_PIOLA){
+		if (in_umc_msg->action == TODO_PIOLA) {
 			return TRUE;
 		}
 		break;
 	case KERNEL_ID:
 		in_ker_msg = unserializeKerCpu((Stream) sb->data);
-		if(in_ker_msg ->action == TODO_PIOLA){
+		if (in_ker_msg->action == TODO_PIOLA) {
 			return TRUE;
 		}
 		break;

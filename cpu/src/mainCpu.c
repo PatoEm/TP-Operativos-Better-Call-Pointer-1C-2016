@@ -154,7 +154,7 @@ int main() {
 				if(!elAbortador){
 				log_info(getLogger(), "Termine el quantum");
 				}else{
-					log_info(getLogger(),"Recibi SIGUSR1, fin de la rafaga");
+					log_info(getLogger(),"Finalice la rafaga y termine por SIGUSR1");
 				}
 				esperarConfirmacion(socketNucleo);
 
@@ -169,14 +169,14 @@ int main() {
 
 		//config_destroy(tConfig);
 
-		while (TRUE) {
-			if(elAbortador){
-				puts("Me mato SIGUSR1 estoy morido, bye");
-				break;
-			}
-			puts("Esperando..");
-			sleep(10);
-		}
+//		while (TRUE) {
+//			if(elAbortador){
+//				puts("Me mato SIGUSR1 estoy morido, bye");
+//				break;
+//			}
+//			puts("Esperando..");
+//			sleep(10);
+//		}
 		return FALSE;
 	}
 	log_destroy(logger);
