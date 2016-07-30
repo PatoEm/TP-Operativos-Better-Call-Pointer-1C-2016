@@ -60,9 +60,8 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 	espacioAsignado* pagina = newEspacioAsignado();
 	StrSwaUmc * streamSwapUmc;
 	pagina->numDePag = 0;
-	//StrUmcSwa* newStrUmcSwa(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 	streamUmcSwap = newStrUmcSwa(UMC_ID, RECIBIR_NUEVO_PROGRAMA, *pagina,
-			paginas, codigo, tamanioCodigo(codigo), pid); // SI HAY PROBLEMAS MIRAR TAMANIO CODIGO TODO
+			paginas, codigo, tamanioCodigo(codigo), pid);
 	buffer = serializeUmcSwa(streamUmcSwap);
 	socketSend(socketSwap->ptrSocket, buffer);
 
@@ -90,14 +89,12 @@ bool inicializarPrograma(int pid, int paginas, char*codigo) {
 			i++;
 		}
 		log_info(umclog, "Programa inicializado correctamente PID: %d", pid);
-		//free(buffer);
 		free(streamSwapUmc);
 		free(streamUmcSwap);
 
 		return TRUE;
 	} else
 		log_error(umclog, "No se pudo inicializar el programa PID: %d", pid);
-	//free(buffer);
 	free(streamSwapUmc);
 	free(streamUmcSwap);
 	return FALSE;
@@ -476,11 +473,9 @@ int paginasOcupadasPorPid(int pid) {
 	return paginaAEncontrar->cantPaginasEnMemoria;
 }
 
-char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
-	puts("solicito bytes"); //todo
+char* solicitarBytes(int pid, int pagina, int offset, int cantidad) {
 	usleep(1000 * espera);
-	//char*paginaADevolver= malloc(1024);
-	char *paginaADevolver = malloc(sizeof(char) * cantidad); //todo aca cambie, fijarse
+	char *paginaADevolver = malloc(sizeof(char) * cantidad);
 	espacioAsignado* nodoALeer;
 	int posicionActualDeNodo = 0;
 	nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
@@ -491,15 +486,15 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 
 	}
-	puts("encontré el pid"); //todo
 	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
 		sprintf(paginaADevolver, "%s", "-1");
 		paginaEncontrada = FALSE;
-		log_error(umclog, "Segmentation fault, PID: %d", pid);
+		log_error(umclog,"=================================================\n");
+		log_error(umclog,"===========Segmentation fault, PID: %d===========\n", pid);
+		log_error(umclog,"=================================================\n");
 		return paginaADevolver;
 	}
 	if (nodoALeer->bitDePresencia == 1) {
-		puts("estoy en memoria perro"); //todo
 		(nodoALeer->bitUso) = 1;
 		int lugarDeLaCadena = 0;
 		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
@@ -511,7 +506,6 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		if (tlbHabilitada()) {
 			llevarPaginaATLB(pid, pagina, NULL);
 		}
-		//paginaADevolver[cantidad] = '\0';
 		log_info(umclog, "Bytes leidos por PID: %d Pagina: %d", pid, pagina);
 		return (paginaADevolver);
 
@@ -519,7 +513,6 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 
 		if (paginasOcupadasPorPid(pid) < marco_x_proc
 				&& paginasContiguasDeUMC(1) != -1) {
-			puts("me cargo en memoria sin NINGUN algoritmo"); //todo
 			int contador = 0;
 			paginasPorPrograma*paginaAEncontrar = list_get(
 					listaPaginasPorPrograma, contador);
@@ -535,7 +528,6 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			nodoALeer->bitDePresencia = 1;
 			espacioAsignado pageToSend;
 			pageToSend.numDePag = pagina;
-			//(Char id, Char action, espacioAsignado pageComienzo, Int32U cantPage, Byte* data, Int32U dataLen, Int32U pid)
 			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID,
 			LEER_UNA_PAGINA, pageToSend, 1,
 			NULL, 0, nodoALeer->pid);
@@ -558,7 +550,6 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comCadena++;
 				lugCad++;
 			}
-			//paginaADevolver[cantidad] = '\0';
 			if (tlbHabilitada()) {
 				llevarPaginaATLB(pid, pagina, NULL);
 			}
@@ -568,9 +559,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			free(streamUmcSwap);
 			return (paginaADevolver);
 		} else {
-			puts("voy a reemplazar una página!!!!!"); //todo
 			int frame = reemplazarPagina(pid, pagina, 1);
-			puts("reemplaze una pagina, estás hasta la pija"); //todo
 			int comienzoDeCadena = frame * marco_Size + offset;
 			int lugarDeLaCadena = 0;
 			while (lugarDeLaCadena < cantidad) {
@@ -579,7 +568,6 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 				comienzoDeCadena++;
 				lugarDeLaCadena++;
 			}
-			//paginaADevolver[cantidad] = '\0';
 			if (tlbHabilitada()) {
 				llevarPaginaATLB(pid, pagina, NULL);
 			}
@@ -604,7 +592,9 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	}
 	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
 		paginaEncontrada = FALSE;
-		log_error(umclog, "Segmentation fault, PID: %d", pid);
+		log_error(umclog,"=================================================\n");
+		log_error(umclog,"===========Segmentation fault, PID: %d===========\n", pid);
+		log_error(umclog,"=================================================\n");
 	} else {
 		if (nodoALeer->bitDePresencia == 1) {
 			(nodoALeer->bitUso) = 1;
@@ -703,7 +693,6 @@ void finalizarPrograma(int pid) {
 	buffer = socketReceive(socketSwap->ptrSocket);
 	StrSwaUmc*desdeUMC = unserializeSwaUmc(buffer);
 	espacioAsignado*nodoAReventar;
-//int enDondeAgregarEspacio = 0;
 	int nodoActualAReventar = 0;
 	nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	while ((nodoAReventar->pid) != pid) {
@@ -727,7 +716,6 @@ void finalizarPrograma(int pid) {
 		free(nodoAReventar);
 		if (listaEspacioAsignado->elements_count == nodoActualAReventar)
 			break;
-		//nodoActualAReventar++;
 		nodoAReventar = list_get(listaEspacioAsignado, nodoActualAReventar);
 	}
 	int j = 0;
@@ -1249,9 +1237,8 @@ void llevarPaginaATLB(int PID, int pagina, char* buffer) {
 int reemplazarPaginaLRU() {
 	int paginaLibre;
 	int contadorPrimerMomento = 0;
-	t_tlb*paginaAComparar; //todo fijarse si hay que sacar este malloc
+	t_tlb*paginaAComparar;
 	t_tlb*paginaAMatar;
-//char* buffer = malloc(sizeof(char) * marco_Size);
 	paginaAMatar = list_get(TLB, contadorPrimerMomento);
 	int lugarDePaginaAMatar = 0;
 	for (contadorPrimerMomento = 0; contadorPrimerMomento < list_size(TLB);
