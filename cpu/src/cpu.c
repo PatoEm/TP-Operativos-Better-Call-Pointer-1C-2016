@@ -664,7 +664,7 @@ AnSISOP_kernel funcionesDeKernel = { .AnSISOP_wait = wait, .AnSISOP_signal =
 void abortarCPU() {
 //	if (seguirEjecutando) {
 //		seguirEjecutando = FALSE;
-	log_info(getLogger(), "Recibi SIGUSR1 y muero pero termino esta rafaga");
+	log_info(getLogger(), "Recibi SIGUSR1");
 	elAbortador = TRUE;
 	//}
 }
