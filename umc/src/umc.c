@@ -171,7 +171,7 @@ espacioAsignado*buscarBitDeUsoEn0(int pid) {
 			contador = inicio;
 		nodoActual = list_get(listaEspacioAsignado, contador);
 	}
-	actualizarPuntero(nodoActual,contador,inicio,pid);
+	actualizarPuntero(nodoActual, contador, inicio, pid);
 	return nodoActual;
 }
 
@@ -349,6 +349,9 @@ espacioAsignado*buscarPaginaClockModificado(int pid, int pagina) {
 int reemplazarPaginaClockModificado(int pid, int pagina,
 bool lectoEscritura) {
 
+	SocketBuffer*buffer;
+	StrUmcSwa*streamUmcSwap;
+	espacioAsignado pageToSend = espacioAsignadoSinAsterisco();
 	int posicionDePaginaLibre;
 	espacioAsignado*nodoActual;
 	nodoActual = buscarPaginaClockModificado(pid, pagina);
@@ -374,17 +377,18 @@ bool lectoEscritura) {
 		inicioLectura++;
 		counter++;
 	}
-	espacioAsignado pageToSend = espacioAsignadoSinAsterisco();
-	pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
-	pageToSend.numDePag = nodoActual->numDePag;
-	pageToSend.pid = nodoActual->pid;
-	StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA,
-			pageToSend, 1, paginaAEnviar, marco_Size, nodoActual->pid);
-	SocketBuffer*buffer = serializeUmcSwa(streamUmcSwap);
-	if (!socketSend(socketSwap->ptrSocket, buffer))
-		puts("error al enviar al swap");
-	buffer = socketReceive(socketSwap->ptrSocket);
-	StrSwaUmc*streamSwUm = unserializeSwaUmc(buffer);
+	if (lectoEscritura) {
+		pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
+		pageToSend.numDePag = nodoActual->numDePag;
+		pageToSend.pid = nodoActual->pid;
+		streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA,
+				pageToSend, 1, paginaAEnviar, marco_Size, nodoActual->pid);
+		buffer = serializeUmcSwa(streamUmcSwap);
+		if (!socketSend(socketSwap->ptrSocket, buffer))
+			puts("error al enviar al swap");
+		buffer = socketReceive(socketSwap->ptrSocket);
+		StrSwaUmc*streamSwUm = unserializeSwaUmc(buffer);
+	}
 	limpiarPagina(nodoActual->IDPaginaInterno * marco_Size);
 	pageToSend.numDePag = pagina;
 	streamUmcSwap = newStrUmcSwa(UMC_ID, LEER_UNA_PAGINA, pageToSend, 1,
@@ -405,7 +409,7 @@ bool lectoEscritura) {
 	nodoBuscado->bitModificado = lectoEscritura;
 	log_info(umclog, "Algoritmo CLOCK MODIFICADO realizado correctamente");
 	free(streamUmcSwap);
-	free(streamSwUm);
+	//free(streamSwUm);
 	free(streamSwapUmc);
 	return posicionDePaginaLibre;
 }
@@ -473,7 +477,7 @@ int paginasOcupadasPorPid(int pid) {
 }
 
 char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver que hago si no puedo pedir
-	puts("solicito bytes");//todo
+	puts("solicito bytes"); //todo
 	usleep(1000 * espera);
 	//char*paginaADevolver= malloc(1024);
 	char *paginaADevolver = malloc(sizeof(char) * cantidad); //todo aca cambie, fijarse
@@ -487,7 +491,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 		nodoALeer = list_get(listaEspacioAsignado, posicionActualDeNodo);
 
 	}
-	puts("encontré el pid");//todo
+	puts("encontré el pid"); //todo
 	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
 		sprintf(paginaADevolver, "%s", "-1");
 		paginaEncontrada = FALSE;
@@ -515,7 +519,7 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 
 		if (paginasOcupadasPorPid(pid) < marco_x_proc
 				&& paginasContiguasDeUMC(1) != -1) {
-			puts("me cargo en memoria sin NINGUN algoritmo");//todo
+			puts("me cargo en memoria sin NINGUN algoritmo"); //todo
 			int contador = 0;
 			paginasPorPrograma*paginaAEncontrar = list_get(
 					listaPaginasPorPrograma, contador);
@@ -564,9 +568,9 @@ char* solicitarBytes(int pid, int pagina, int offset, int cantidad) { //todo ver
 			free(streamUmcSwap);
 			return (paginaADevolver);
 		} else {
-			puts("voy a reemplazar una página!!!!!");//todo
+			puts("voy a reemplazar una página!!!!!"); //todo
 			int frame = reemplazarPagina(pid, pagina, 1);
-			puts("reemplaze una pagina, estás hasta la pija");//todo
+			puts("reemplaze una pagina, estás hasta la pija"); //todo
 			int comienzoDeCadena = frame * marco_Size + offset;
 			int lugarDeLaCadena = 0;
 			while (lugarDeLaCadena < cantidad) {
@@ -602,7 +606,7 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 		paginaEncontrada = FALSE;
 		log_error(umclog, "Segmentation fault, PID: %d", pid);
 	}
-	if (nodoALeer->bitDePresencia == 1 ) {
+	if (nodoALeer->bitDePresencia == 1) {
 		(nodoALeer->bitUso) = 1;
 		nodoALeer->bitModificado = 1;
 		int lugarDeLaCadena = 0;
