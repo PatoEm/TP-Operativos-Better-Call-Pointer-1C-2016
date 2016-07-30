@@ -381,8 +381,8 @@ bool lectoEscritura) {
 		pageToSend.IDPaginaInterno = nodoActual->IDPaginaInterno;
 		pageToSend.numDePag = nodoActual->numDePag;
 		pageToSend.pid = nodoActual->pid;
-		streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA,
-				pageToSend, 1, paginaAEnviar, marco_Size, nodoActual->pid);
+		streamUmcSwap = newStrUmcSwa(UMC_ID, ESCRIBIR_UNA_PAGINA, pageToSend, 1,
+				paginaAEnviar, marco_Size, nodoActual->pid);
 		buffer = serializeUmcSwa(streamUmcSwap);
 		if (!socketSend(socketSwap->ptrSocket, buffer))
 			puts("error al enviar al swap");
@@ -605,85 +605,88 @@ void almacenarBytes(int pid, int pagina, int offset, int tamanio, char*buffer) {
 	if (posicionActualDeNodo == list_size(listaEspacioAsignado)) {
 		paginaEncontrada = FALSE;
 		log_error(umclog, "Segmentation fault, PID: %d", pid);
-	}
-	if (nodoALeer->bitDePresencia == 1) {
-		(nodoALeer->bitUso) = 1;
-		nodoALeer->bitModificado = 1;
-		int lugarDeLaCadena = 0;
-		int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size + offset;
-		while (lugarDeLaCadena < tamanio) {
-			memoriaReal[posicionDeChar] = buffer[lugarDeLaCadena];
-			posicionDeChar++;
-			lugarDeLaCadena++;
-		}
-		log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
-				pagina);
 	} else {
-
-		if (paginasOcupadasPorPid(pid) < marco_x_proc
-				&& paginasContiguasDeUMC(1) != -1) {
-			int contador = 0;
-			paginasPorPrograma*paginaAEncontrar = list_get(
-					listaPaginasPorPrograma, contador);
-			while (paginaAEncontrar->pid != pid) {
-				contador++;
-				paginaAEncontrar = list_get(listaPaginasPorPrograma, contador);
-			}
-			paginaAEncontrar->cantPaginasEnMemoria++;
-			nodoALeer->IDPaginaInterno = paginasContiguasDeUMC(1);
-			bitMap[nodoALeer->IDPaginaInterno] = 1;
-			nodoALeer->bitUso = 1;
+		if (nodoALeer->bitDePresencia == 1) {
+			(nodoALeer->bitUso) = 1;
 			nodoALeer->bitModificado = 1;
-			nodoALeer->bitDePresencia = 1;
-			espacioAsignado pageToSend;
-			pageToSend.numDePag = pagina;
-			StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID,
-			LEER_UNA_PAGINA, pageToSend, 1,
-			NULL, 0, nodoALeer->pid);
-			SocketBuffer*buf = serializeUmcSwa(streamUmcSwap);
-			if (!socketSend(socketSwap->ptrSocket, buf))
-				puts("error al enviar al swap");
-			buf = socketReceive(socketSwap->ptrSocket);
-			StrSwaUmc* streamSwapUmc = unserializeSwaUmc(buf);
-			int inicioLectura = nodoALeer->IDPaginaInterno * marco_Size;
-			int counter = 0;
-			while (counter < marco_Size) {
-				memoriaReal[inicioLectura] = streamSwapUmc->data[counter];
-				counter++;
-				inicioLectura++;
+			int lugarDeLaCadena = 0;
+			int posicionDeChar = (nodoALeer->IDPaginaInterno) * marco_Size
+					+ offset;
+			while (lugarDeLaCadena < tamanio) {
+				memoriaReal[posicionDeChar] = buffer[lugarDeLaCadena];
+				posicionDeChar++;
+				lugarDeLaCadena++;
 			}
-			int comCadena = nodoALeer->IDPaginaInterno * marco_Size + offset;
-			int lugCad = 0;
-			while (lugCad < tamanio) {
-				memoriaReal[comCadena] = buffer[lugCad];
-				comCadena++;
-				lugCad++;
-			}
-			free(streamSwapUmc);
-			free(streamUmcSwap);
 			log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
 					pagina);
 		} else {
 
-			int frame = reemplazarPagina(pid, pagina, 1);
-			int dondeEscribo = frame * marco_Size + offset;
-			int enDondeEstoyDeLoQueMeMandaron = 0;
-			int contador = 0;
-			while (contador < tamanio) {
-				memoriaReal[dondeEscribo] =
-						buffer[enDondeEstoyDeLoQueMeMandaron];
-				dondeEscribo++;
-				enDondeEstoyDeLoQueMeMandaron++;
-				contador++;
+			if (paginasOcupadasPorPid(pid) < marco_x_proc
+					&& paginasContiguasDeUMC(1) != -1) {
+				int contador = 0;
+				paginasPorPrograma*paginaAEncontrar = list_get(
+						listaPaginasPorPrograma, contador);
+				while (paginaAEncontrar->pid != pid) {
+					contador++;
+					paginaAEncontrar = list_get(listaPaginasPorPrograma,
+							contador);
+				}
+				paginaAEncontrar->cantPaginasEnMemoria++;
+				nodoALeer->IDPaginaInterno = paginasContiguasDeUMC(1);
+				bitMap[nodoALeer->IDPaginaInterno] = 1;
+				nodoALeer->bitUso = 1;
+				nodoALeer->bitModificado = 1;
+				nodoALeer->bitDePresencia = 1;
+				espacioAsignado pageToSend;
+				pageToSend.numDePag = pagina;
+				StrUmcSwa*streamUmcSwap = newStrUmcSwa(UMC_ID,
+				LEER_UNA_PAGINA, pageToSend, 1,
+				NULL, 0, nodoALeer->pid);
+				SocketBuffer*buf = serializeUmcSwa(streamUmcSwap);
+				if (!socketSend(socketSwap->ptrSocket, buf))
+					puts("error al enviar al swap");
+				buf = socketReceive(socketSwap->ptrSocket);
+				StrSwaUmc* streamSwapUmc = unserializeSwaUmc(buf);
+				int inicioLectura = nodoALeer->IDPaginaInterno * marco_Size;
+				int counter = 0;
+				while (counter < marco_Size) {
+					memoriaReal[inicioLectura] = streamSwapUmc->data[counter];
+					counter++;
+					inicioLectura++;
+				}
+				int comCadena = nodoALeer->IDPaginaInterno * marco_Size
+						+ offset;
+				int lugCad = 0;
+				while (lugCad < tamanio) {
+					memoriaReal[comCadena] = buffer[lugCad];
+					comCadena++;
+					lugCad++;
+				}
+				free(streamSwapUmc);
+				free(streamUmcSwap);
+				log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d",
+						pid, pagina);
+			} else {
+
+				int frame = reemplazarPagina(pid, pagina, 1);
+				int dondeEscribo = frame * marco_Size + offset;
+				int enDondeEstoyDeLoQueMeMandaron = 0;
+				int contador = 0;
+				while (contador < tamanio) {
+					memoriaReal[dondeEscribo] =
+							buffer[enDondeEstoyDeLoQueMeMandaron];
+					dondeEscribo++;
+					enDondeEstoyDeLoQueMeMandaron++;
+					contador++;
+				}
+				log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d",
+						pid, pagina);
 			}
-			log_info(umclog, "Bytes almacenados por PID: %d, en pagina %d", pid,
-					pagina);
+		}
+		if (tlbHabilitada()) {
+			llevarPaginaATLB(pid, pagina, NULL);
 		}
 	}
-	if (tlbHabilitada()) {
-		llevarPaginaATLB(pid, pagina, NULL);
-	}
-
 }
 
 void finalizarPrograma(int pid) {
