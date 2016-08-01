@@ -10,6 +10,20 @@
 
 #include "nucleo.h"
 
+
+/*
+Este tp fue aprobado con huevos, con ganas, con esfuerzo y mil bardos.
+Todos dimos mucho y perdimos mucho.
+En particular fue un cuatrimestre muy jodido para mi.
+Perdí demasiadas cosas... gente que amaba principalmente, a uno me lo llevo una enfermedad
+y la otra persona simplemente decidio irse cuando mas la necesite.
+Gracias a esa gente que se nos fue en el tp y nos ayudo desde donde estén ahora
+Y a la gente que no nos banco, que nos abandono y nos dejo solos en sus caras forros/as.
+Gracias por esta cursada chicos. Los quiero mucho.
+Att: The Debugger.
+*/
+
+
 char * leerProgramaAnSISOP1(char * direccionArchivo);
 
 // MAIN FUNCHION
